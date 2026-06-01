@@ -15,7 +15,7 @@ export function ProtectedRoute() {
 
   if (loading && !user) {
     return (
-      <div className="flex h-screen items-center justify-center bg-white text-sm font-black uppercase tracking-[0.24em] text-[#085655]">
+      <div className="flex h-screen items-center justify-center bg-white text-sm font-black uppercase tracking-[0.24em] text-secondary">
         Loading session
       </div>
     );

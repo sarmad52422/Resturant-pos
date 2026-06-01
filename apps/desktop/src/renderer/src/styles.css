@@ -1,10 +1,12 @@
+@import "../../../../../packages/shared/src/brand-theme.css";
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 :root {
-  color: #0d1717;
-  background: #ffffff;
+  color: var(--ro-espresso);
+  background: var(--ro-canvas);
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -15,7 +17,7 @@ body {
   margin: 0;
   min-width: 1180px;
   min-height: 100vh;
-  background: #ffffff;
+  background: var(--ro-canvas);
 }
 
 button,

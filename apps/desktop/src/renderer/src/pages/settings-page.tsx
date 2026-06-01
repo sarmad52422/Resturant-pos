@@ -43,10 +43,10 @@ const settingsSchema = z.object({
 type SettingsForm = z.infer<typeof settingsSchema>;
 
 const fieldClass =
-  'mt-2 h-12 w-full rounded-xl border border-[#dcebe9] bg-white px-4 text-sm font-semibold text-[#0d1717] outline-none transition focus:border-[#1ba09c] focus:ring-4 focus:ring-[#1ba09c]/10';
+  'mt-2 h-12 w-full rounded-xl border border-field bg-white px-4 text-sm font-semibold text-espresso outline-none transition focus:border-primary focus:ring-4 focus:ring-primary/10';
 
 const textareaClass =
-  'mt-2 min-h-24 w-full resize-none rounded-xl border border-[#dcebe9] bg-white px-4 py-3 text-sm font-semibold text-[#0d1717] outline-none transition focus:border-[#1ba09c] focus:ring-4 focus:ring-[#1ba09c]/10';
+  'mt-2 min-h-24 w-full resize-none rounded-xl border border-field bg-white px-4 py-3 text-sm font-semibold text-espresso outline-none transition focus:border-primary focus:ring-4 focus:ring-primary/10';
 
 const defaultValues: SettingsForm = {
   businessName: 'RestaurantOS Demo Cafe',
@@ -145,9 +145,9 @@ export function SettingsPage() {
     <form className="h-full overflow-y-auto bg-white p-7" onSubmit={onSubmit}>
       <div className="flex flex-wrap items-start justify-between gap-4">
         <div>
-          <p className="text-sm font-black uppercase tracking-[0.22em] text-[#1ba09c]">Configuration</p>
-          <h1 className="mt-2 text-4xl font-black text-[#0d1717]">Restaurant settings</h1>
-          <p className="mt-3 max-w-2xl text-sm font-semibold text-[#647271]">
+          <p className="text-sm font-black uppercase tracking-[0.22em] text-primary">Configuration</p>
+          <h1 className="mt-2 text-4xl font-black text-espresso">Restaurant settings</h1>
+          <p className="mt-3 max-w-2xl text-sm font-semibold text-muted">
             Control the business profile, taxes, receipts, stock thresholds, kitchen delay alerts, and shift policy.
           </p>
         </div>
@@ -166,8 +166,8 @@ export function SettingsPage() {
       </div>
 
       {settingsQuery.isLoading ? (
-        <Card className="mt-6 flex h-36 items-center justify-center text-sm font-bold text-[#647271]">
-          <Loader2 className="mr-2 animate-spin text-[#1ba09c]" size={18} />
+        <Card className="mt-6 flex h-36 items-center justify-center text-sm font-bold text-muted">
+          <Loader2 className="mr-2 animate-spin text-primary" size={18} />
           Loading settings
         </Card>
       ) : null}
@@ -180,7 +180,7 @@ export function SettingsPage() {
       ) : null}
 
       {updateSettings.isSuccess ? (
-        <Card className="mt-6 flex items-start gap-3 border border-[#c7efed] bg-[#f4fbfa] p-5 text-sm font-bold text-[#085655]">
+        <Card className="mt-6 flex items-start gap-3 border border-accentSoft bg-sage p-5 text-sm font-bold text-secondary">
           <CheckCircle2 size={19} />
           Settings saved and audit logged.
         </Card>
@@ -196,12 +196,12 @@ export function SettingsPage() {
       <div className="mt-6 grid grid-cols-[1.1fr_0.9fr] gap-5">
         <Card className="p-6">
           <div className="flex items-center gap-3">
-            <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-[#e9fbfa] text-[#085655]">
+            <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-mint text-secondary">
               <Store size={21} />
             </span>
             <div>
-              <h2 className="text-xl font-black text-[#0d1717]">Business profile</h2>
-              <p className="text-sm font-semibold text-[#647271]">Shown on receipts, reports, and future branches.</p>
+              <h2 className="text-xl font-black text-espresso">Business profile</h2>
+              <p className="text-sm font-semibold text-muted">Shown on receipts, reports, and future branches.</p>
             </div>
           </div>
 
@@ -227,12 +227,12 @@ export function SettingsPage() {
 
         <Card className="p-6">
           <div className="flex items-center gap-3">
-            <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-[#e9fbfa] text-[#085655]">
+            <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-mint text-secondary">
               <ReceiptText size={21} />
             </span>
             <div>
-              <h2 className="text-xl font-black text-[#0d1717]">Tax and receipt</h2>
-              <p className="text-sm font-semibold text-[#647271]">Defaults used by POS checkout and printed bills.</p>
+              <h2 className="text-xl font-black text-espresso">Tax and receipt</h2>
+              <p className="text-sm font-semibold text-muted">Defaults used by POS checkout and printed bills.</p>
             </div>
           </div>
 
@@ -254,12 +254,12 @@ export function SettingsPage() {
 
         <Card className="p-6">
           <div className="flex items-center gap-3">
-            <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-[#e9fbfa] text-[#085655]">
+            <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-mint text-secondary">
               <SlidersHorizontal size={21} />
             </span>
             <div>
-              <h2 className="text-xl font-black text-[#0d1717]">Operations policy</h2>
-              <p className="text-sm font-semibold text-[#647271]">Controls alerts and cashier shift behavior.</p>
+              <h2 className="text-xl font-black text-espresso">Operations policy</h2>
+              <p className="text-sm font-semibold text-muted">Controls alerts and cashier shift behavior.</p>
             </div>
           </div>
 
@@ -275,10 +275,10 @@ export function SettingsPage() {
           <Toggle label="Require opening cash float for shifts" {...register('shiftFloatRequired')} />
         </Card>
 
-        <Card className="bg-[#085655] p-6 text-white">
-          <p className="text-sm font-black uppercase tracking-[0.2em] text-[#9ee2df]">Phase 4 foundation</p>
+        <Card className="bg-secondary p-6 text-white">
+          <p className="text-sm font-black uppercase tracking-[0.2em] text-deepBright">Phase 4 foundation</p>
           <h2 className="mt-4 text-3xl font-black">Ready for table system</h2>
-          <p className="mt-3 text-sm font-semibold leading-6 text-[#d7f4f2]">
+          <p className="mt-3 text-sm font-semibold leading-6 text-deepFaint">
             These settings become the source for POS receipts, tax math, stock warnings, kitchen alert timers, and shift
             validation. Table and floor layout settings will attach here in the next phase.
           </p>
@@ -298,7 +298,7 @@ interface FieldProps {
 function Field({ children, className, error, label }: FieldProps) {
   return (
     <label className={className}>
-      <span className="text-sm font-black text-[#4d5d5c]">{label}</span>
+      <span className="text-sm font-black text-label">{label}</span>
       {children}
       {error ? <span className="mt-1 block text-xs font-bold text-red-600">{error}</span> : null}
     </label>
@@ -311,10 +311,10 @@ interface ToggleProps extends InputHTMLAttributes<HTMLInputElement> {
 
 function Toggle({ label, ...props }: ToggleProps) {
   return (
-    <label className="mt-5 flex items-center justify-between gap-4 rounded-xl bg-[#f4fbfa] px-4 py-3 text-sm font-black text-[#0d1717]">
+    <label className="mt-5 flex items-center justify-between gap-4 rounded-xl bg-sage px-4 py-3 text-sm font-black text-espresso">
       <span>{label}</span>
       <input
-        className="h-5 w-5 accent-[#1ba09c]"
+        className="h-5 w-5 accent-primary"
         type="checkbox"
         {...props}
       />

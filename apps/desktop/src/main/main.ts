@@ -1,5 +1,6 @@
 import { app, BrowserWindow, ipcMain } from 'electron';
 import { join } from 'node:path';
+import { brandTheme } from '@restaurantos/shared';
 
 if (process.platform === 'linux' && process.env.RESTAURANTOS_ENABLE_GPU !== '1') {
   app.disableHardwareAcceleration();
@@ -14,8 +15,8 @@ function createWindow() {
     height: 960,
     minWidth: 1180,
     minHeight: 760,
-    title: 'RestaurantOS POS',
-    backgroundColor: '#ffffff',
+    title: brandTheme.appName,
+    backgroundColor: brandTheme.colors.canvas,
     frame: false,
     webPreferences: {
       preload: join(__dirname, '../preload/preload.js'),

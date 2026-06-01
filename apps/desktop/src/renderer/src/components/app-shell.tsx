@@ -36,17 +36,17 @@ export function AppShell() {
   };
 
   return (
-    <div className="min-h-screen bg-white pt-9 text-[#0d1717]">
-      <div className="fixed inset-x-0 top-0 z-50 flex h-9 items-center justify-between bg-white px-3 shadow-[0_8px_26px_rgba(8,86,85,0.05)] [-webkit-app-region:drag]">
-        <div className="flex items-center gap-2 text-xs font-black uppercase tracking-wide text-[#085655]">
-          <span className="flex h-5 w-5 items-center justify-center rounded-md bg-[#1ba09c] text-[10px] text-white">
+    <div className="min-h-screen bg-white pt-9 text-espresso">
+      <div className="fixed inset-x-0 top-0 z-50 flex h-9 items-center justify-between bg-white px-3 shadow-[0_8px_26px_rgb(var(--ro-secondary-rgb)/0.05)] [-webkit-app-region:drag]">
+        <div className="flex items-center gap-2 text-xs font-black uppercase tracking-wide text-secondary">
+          <span className="flex h-5 w-5 items-center justify-center rounded-md bg-primary text-[10px] text-white">
             RO
           </span>
           RestaurantOS POS
         </div>
         <div className="flex items-center gap-1 [-webkit-app-region:no-drag]">
           <button
-            className="flex h-7 w-8 items-center justify-center rounded-lg text-[#647271] hover:bg-[#e9fbfa] hover:text-[#085655]"
+            className="flex h-7 w-8 items-center justify-center rounded-lg text-muted hover:bg-mint hover:text-secondary"
             onClick={() => window.restaurantos.window.minimize()}
             aria-label="Minimize"
             title="Minimize (Ctrl+Shift+M)"
@@ -54,7 +54,7 @@ export function AppShell() {
             <Minus size={15} />
           </button>
           <button
-            className="flex h-7 w-8 items-center justify-center rounded-lg text-[#647271] hover:bg-[#e9fbfa] hover:text-[#085655]"
+            className="flex h-7 w-8 items-center justify-center rounded-lg text-muted hover:bg-mint hover:text-secondary"
             onClick={() => window.restaurantos.window.maximize()}
             aria-label="Maximize"
             title="Maximize (Ctrl+Shift+F)"
@@ -62,7 +62,7 @@ export function AppShell() {
             <Square size={13} />
           </button>
           <button
-            className="flex h-7 w-8 items-center justify-center rounded-lg text-[#647271] hover:bg-red-50 hover:text-red-600"
+            className="flex h-7 w-8 items-center justify-center rounded-lg text-muted hover:bg-red-50 hover:text-red-600"
             onClick={() => window.restaurantos.window.close()}
             aria-label="Close"
             title="Close (Ctrl+Shift+Q)"
@@ -72,8 +72,8 @@ export function AppShell() {
         </div>
       </div>
       <div className="flex h-[calc(100vh-2.25rem)] bg-white">
-        <aside className="flex w-28 shrink-0 flex-col items-center bg-white px-4 py-5 shadow-[14px_0_40px_rgba(8,86,85,0.05)]">
-          <div className="mb-7 flex h-14 w-14 items-center justify-center rounded-2xl bg-[#085655] text-lg font-black text-white shadow-[0_18px_40px_rgba(8,86,85,0.16)]">
+        <aside className="flex w-28 shrink-0 flex-col items-center bg-white px-4 py-5 shadow-[14px_0_40px_rgb(var(--ro-secondary-rgb)/0.05)]">
+          <div className="mb-7 flex h-14 w-14 items-center justify-center rounded-2xl bg-secondary text-lg font-black text-white shadow-[0_18px_40px_rgb(var(--ro-secondary-rgb)/0.16)]">
             RO
           </div>
           <nav className="flex w-full flex-1 flex-col gap-2">
@@ -86,8 +86,8 @@ export function AppShell() {
                   [
                     'group flex h-16 w-full flex-col items-center justify-center gap-1 rounded-2xl text-[11px] font-semibold transition',
                     isActive
-                      ? 'bg-[#1ba09c] text-white shadow-[0_14px_28px_rgba(27,160,156,0.26)]'
-                      : 'text-[#647271] hover:bg-[#e9fbfa] hover:text-[#085655]',
+                      ? 'bg-primary text-white shadow-[0_14px_28px_rgb(var(--ro-primary-rgb)/0.26)]'
+                      : 'text-muted hover:bg-mint hover:text-secondary',
                   ].join(' ')
                 }
               >
@@ -97,7 +97,7 @@ export function AppShell() {
             ))}
           </nav>
           <div className="flex w-full flex-col items-center gap-3">
-            <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-[#f4fbfa] text-sm font-black text-[#085655]">
+            <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-sage text-sm font-black text-secondary">
               {user?.name
                 .split(' ')
                 .map((part) => part[0])
@@ -105,7 +105,7 @@ export function AppShell() {
                 .slice(0, 2) ?? <Users size={20} />}
             </div>
             <button
-              className="flex h-11 w-11 items-center justify-center rounded-2xl text-[#647271] hover:bg-red-50 hover:text-red-600"
+              className="flex h-11 w-11 items-center justify-center rounded-2xl text-muted hover:bg-red-50 hover:text-red-600"
               onClick={handleLogout}
               title="Logout"
             >

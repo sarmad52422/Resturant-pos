@@ -12,10 +12,10 @@ export function DashboardPage() {
     <div className="h-full overflow-y-auto p-7">
       <div className="flex items-end justify-between">
         <div>
-          <p className="text-sm font-black uppercase tracking-[0.28em] text-[#7a7f73]">Overview</p>
+          <p className="text-sm font-black uppercase tracking-[0.28em] text-subtle">Overview</p>
           <h1 className="mt-2 text-4xl font-black">Today at a glance</h1>
         </div>
-        <div className="rounded-2xl bg-[#085655] px-5 py-3 text-sm font-semibold text-white">
+        <div className="rounded-2xl bg-secondary px-5 py-3 text-sm font-semibold text-white">
           Live shift
         </div>
       </div>
@@ -37,18 +37,18 @@ export function DashboardPage() {
             {[38, 62, 46, 78, 56, 92, 70, 84].map((height, index) => (
               <div key={index} className="flex flex-1 flex-col items-center gap-3">
                 <div
-                  className="w-full rounded-t-xl bg-[#1ba09c]"
+                  className="w-full rounded-t-xl bg-primary"
                   style={{ height: `${height}%`, opacity: 0.42 + index * 0.06 }}
                 />
-                <span className="text-xs font-bold text-[#7a7f73]">{index + 9}</span>
+                <span className="text-xs font-bold text-subtle">{index + 9}</span>
               </div>
             ))}
           </div>
         </Card>
-        <Card className="min-h-72 bg-[#085655] p-6 text-white">
+        <Card className="min-h-72 bg-secondary p-6 text-white">
           <Badge tone="orange">Kitchen</Badge>
           <h2 className="mt-6 text-3xl font-black">No delays</h2>
-          <p className="mt-3 text-sm font-semibold text-[#c7e8e6]">
+          <p className="mt-3 text-sm font-semibold text-deepSoft">
             Kitchen queue, table status, and delivery counters will stream here.
           </p>
         </Card>

@@ -46,23 +46,23 @@ export function LoginPage() {
 
   return (
     <main className="grid min-h-screen grid-cols-[1.05fr_0.95fr] bg-white">
-      <section className="flex flex-col justify-between bg-[#085655] p-10 text-white">
+      <section className="flex flex-col justify-between bg-secondary p-10 text-white">
         <div className="flex items-center gap-3 text-sm font-black uppercase tracking-[0.28em]">
-          <span className="flex h-10 w-10 items-center justify-center rounded-2xl bg-[#1ba09c] text-base">
+          <span className="flex h-10 w-10 items-center justify-center rounded-2xl bg-primary text-base">
             RO
           </span>
           RestaurantOS
         </div>
         <div>
-          <p className="text-sm font-black uppercase tracking-[0.28em] text-[#aee4e1]">Desktop POS</p>
+          <p className="text-sm font-black uppercase tracking-[0.28em] text-deepBright">Desktop POS</p>
           <h1 className="mt-4 max-w-xl text-6xl font-black leading-[1.02]">
             Premium cashier workflow for busy restaurants.
           </h1>
-          <p className="mt-5 max-w-lg text-lg font-semibold text-[#d7f4f2]">
+          <p className="mt-5 max-w-lg text-lg font-semibold text-deepFaint">
             Secure sign-in protects discounts, refunds, stock changes, reports, and settings.
           </p>
         </div>
-        <div className="grid grid-cols-3 gap-3 text-sm font-bold text-[#d7f4f2]">
+        <div className="grid grid-cols-3 gap-3 text-sm font-bold text-deepFaint">
           <span>Roles</span>
           <span>Permissions</span>
           <span>Audit logs</span>
@@ -72,15 +72,15 @@ export function LoginPage() {
       <section className="flex items-center justify-center p-10">
         <Card className="w-full max-w-md p-7">
           <div>
-            <p className="text-sm font-black uppercase tracking-[0.28em] text-[#1ba09c]">Welcome back</p>
-            <h2 className="mt-2 text-4xl font-black text-[#0d1717]">Sign in</h2>
+            <p className="text-sm font-black uppercase tracking-[0.28em] text-primary">Welcome back</p>
+            <h2 className="mt-2 text-4xl font-black text-espresso">Sign in</h2>
           </div>
 
           <form className="mt-8 space-y-4" onSubmit={handleSubmit(onSubmit)}>
             <label className="block">
-              <span className="text-sm font-black text-[#4d5d5c]">Username</span>
-              <div className="mt-2 flex h-12 items-center gap-3 rounded-2xl bg-[#f4fbfa] px-4">
-                <UserRound size={18} className="text-[#1ba09c]" />
+              <span className="text-sm font-black text-label">Username</span>
+              <div className="mt-2 flex h-12 items-center gap-3 rounded-2xl bg-sage px-4">
+                <UserRound size={18} className="text-primary" />
                 <input
                   className="h-full flex-1 bg-transparent font-semibold outline-none"
                   autoComplete="username"
@@ -93,9 +93,9 @@ export function LoginPage() {
             </label>
 
             <label className="block">
-              <span className="text-sm font-black text-[#4d5d5c]">Password</span>
-              <div className="mt-2 flex h-12 items-center gap-3 rounded-2xl bg-[#f4fbfa] px-4">
-                <LockKeyhole size={18} className="text-[#1ba09c]" />
+              <span className="text-sm font-black text-label">Password</span>
+              <div className="mt-2 flex h-12 items-center gap-3 rounded-2xl bg-sage px-4">
+                <LockKeyhole size={18} className="text-primary" />
                 <input
                   className="h-full flex-1 bg-transparent font-semibold outline-none"
                   type="password"
@@ -120,7 +120,7 @@ export function LoginPage() {
             </Button>
           </form>
 
-          <div className="mt-5 rounded-2xl bg-[#f4fbfa] p-4 text-sm font-semibold text-[#657574]">
+          <div className="mt-5 rounded-2xl bg-sage p-4 text-sm font-semibold text-muted">
             Development seed: username <strong>admin</strong>, password <strong>Admin@12345</strong>.
           </div>
         </Card>

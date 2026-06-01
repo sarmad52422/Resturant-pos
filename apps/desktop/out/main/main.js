@@ -1,6 +1,7 @@
 "use strict";
 const electron = require("electron");
 const node_path = require("node:path");
+const shared = require("@restaurantos/shared");
 if (process.platform === "linux" && process.env.RESTAURANTOS_ENABLE_GPU !== "1") {
   electron.app.disableHardwareAcceleration();
 }
@@ -12,8 +13,8 @@ function createWindow() {
     height: 960,
     minWidth: 1180,
     minHeight: 760,
-    title: "RestaurantOS POS",
-    backgroundColor: "#ffffff",
+    title: shared.brandTheme.appName,
+    backgroundColor: shared.brandTheme.colors.canvas,
     frame: false,
     webPreferences: {
       preload: node_path.join(__dirname, "../preload/preload.js"),

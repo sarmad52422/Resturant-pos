@@ -1,3 +1,5 @@
+export * from './brand-theme';
+
 export const permissions = [
   'order.create',
   'order.send_to_kitchen',

@@ -22830,17 +22830,17 @@ function AppShell() {
     await logout();
     navigate("/login", { replace: true });
   };
-  return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "min-h-screen bg-white pt-9 text-[#0d1717]", children: [
-    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "fixed inset-x-0 top-0 z-50 flex h-9 items-center justify-between bg-white px-3 shadow-[0_8px_26px_rgba(8,86,85,0.05)] [-webkit-app-region:drag]", children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-2 text-xs font-black uppercase tracking-wide text-[#085655]", children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "flex h-5 w-5 items-center justify-center rounded-md bg-[#1ba09c] text-[10px] text-white", children: "RO" }),
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "min-h-screen bg-white pt-9 text-espresso", children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "fixed inset-x-0 top-0 z-50 flex h-9 items-center justify-between bg-white px-3 shadow-[0_8px_26px_rgb(var(--ro-secondary-rgb)/0.05)] [-webkit-app-region:drag]", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-2 text-xs font-black uppercase tracking-wide text-secondary", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "flex h-5 w-5 items-center justify-center rounded-md bg-primary text-[10px] text-white", children: "RO" }),
         "RestaurantOS POS"
       ] }),
       /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-1 [-webkit-app-region:no-drag]", children: [
         /* @__PURE__ */ jsxRuntimeExports.jsx(
           "button",
           {
-            className: "flex h-7 w-8 items-center justify-center rounded-lg text-[#647271] hover:bg-[#e9fbfa] hover:text-[#085655]",
+            className: "flex h-7 w-8 items-center justify-center rounded-lg text-muted hover:bg-mint hover:text-secondary",
             onClick: () => window.restaurantos.window.minimize(),
             "aria-label": "Minimize",
             title: "Minimize (Ctrl+Shift+M)",
@@ -22850,7 +22850,7 @@ function AppShell() {
         /* @__PURE__ */ jsxRuntimeExports.jsx(
           "button",
           {
-            className: "flex h-7 w-8 items-center justify-center rounded-lg text-[#647271] hover:bg-[#e9fbfa] hover:text-[#085655]",
+            className: "flex h-7 w-8 items-center justify-center rounded-lg text-muted hover:bg-mint hover:text-secondary",
             onClick: () => window.restaurantos.window.maximize(),
             "aria-label": "Maximize",
             title: "Maximize (Ctrl+Shift+F)",
@@ -22860,7 +22860,7 @@ function AppShell() {
         /* @__PURE__ */ jsxRuntimeExports.jsx(
           "button",
           {
-            className: "flex h-7 w-8 items-center justify-center rounded-lg text-[#647271] hover:bg-red-50 hover:text-red-600",
+            className: "flex h-7 w-8 items-center justify-center rounded-lg text-muted hover:bg-red-50 hover:text-red-600",
             onClick: () => window.restaurantos.window.close(),
             "aria-label": "Close",
             title: "Close (Ctrl+Shift+Q)",
@@ -22870,8 +22870,8 @@ function AppShell() {
       ] })
     ] }),
     /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex h-[calc(100vh-2.25rem)] bg-white", children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsxs("aside", { className: "flex w-28 shrink-0 flex-col items-center bg-white px-4 py-5 shadow-[14px_0_40px_rgba(8,86,85,0.05)]", children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mb-7 flex h-14 w-14 items-center justify-center rounded-2xl bg-[#085655] text-lg font-black text-white shadow-[0_18px_40px_rgba(8,86,85,0.16)]", children: "RO" }),
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("aside", { className: "flex w-28 shrink-0 flex-col items-center bg-white px-4 py-5 shadow-[14px_0_40px_rgb(var(--ro-secondary-rgb)/0.05)]", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mb-7 flex h-14 w-14 items-center justify-center rounded-2xl bg-secondary text-lg font-black text-white shadow-[0_18px_40px_rgb(var(--ro-secondary-rgb)/0.16)]", children: "RO" }),
         /* @__PURE__ */ jsxRuntimeExports.jsx("nav", { className: "flex w-full flex-1 flex-col gap-2", children: navItems.map((item) => /* @__PURE__ */ jsxRuntimeExports.jsxs(
           NavLink,
           {
@@ -22879,7 +22879,7 @@ function AppShell() {
             end: item.to === "/",
             className: ({ isActive }) => [
               "group flex h-16 w-full flex-col items-center justify-center gap-1 rounded-2xl text-[11px] font-semibold transition",
-              isActive ? "bg-[#1ba09c] text-white shadow-[0_14px_28px_rgba(27,160,156,0.26)]" : "text-[#647271] hover:bg-[#e9fbfa] hover:text-[#085655]"
+              isActive ? "bg-primary text-white shadow-[0_14px_28px_rgb(var(--ro-primary-rgb)/0.26)]" : "text-muted hover:bg-mint hover:text-secondary"
             ].join(" "),
             children: [
               /* @__PURE__ */ jsxRuntimeExports.jsx(item.icon, { size: 21, strokeWidth: 2.2 }),
@@ -22889,11 +22889,11 @@ function AppShell() {
           item.to
         )) }),
         /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex w-full flex-col items-center gap-3", children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex h-11 w-11 items-center justify-center rounded-2xl bg-[#f4fbfa] text-sm font-black text-[#085655]", children: user?.name.split(" ").map((part) => part[0]).join("").slice(0, 2) ?? /* @__PURE__ */ jsxRuntimeExports.jsx(Users, { size: 20 }) }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex h-11 w-11 items-center justify-center rounded-2xl bg-sage text-sm font-black text-secondary", children: user?.name.split(" ").map((part) => part[0]).join("").slice(0, 2) ?? /* @__PURE__ */ jsxRuntimeExports.jsx(Users, { size: 20 }) }),
           /* @__PURE__ */ jsxRuntimeExports.jsx(
             "button",
             {
-              className: "flex h-11 w-11 items-center justify-center rounded-2xl text-[#647271] hover:bg-red-50 hover:text-red-600",
+              className: "flex h-11 w-11 items-center justify-center rounded-2xl text-muted hover:bg-red-50 hover:text-red-600",
               onClick: handleLogout,
               title: "Logout",
               children: /* @__PURE__ */ jsxRuntimeExports.jsx(LogOut, { size: 20 })
@@ -22914,7 +22914,7 @@ function ProtectedRoute() {
   }, [accessToken, loading, refreshProfile, user]);
   if (!accessToken) return /* @__PURE__ */ jsxRuntimeExports.jsx(Navigate, { to: "/login", replace: true });
   if (loading && !user) {
-    return /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex h-screen items-center justify-center bg-white text-sm font-black uppercase tracking-[0.24em] text-[#085655]", children: "Loading session" });
+    return /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex h-screen items-center justify-center bg-white text-sm font-black uppercase tracking-[0.24em] text-secondary", children: "Loading session" });
   }
   return /* @__PURE__ */ jsxRuntimeExports.jsx(Outlet, {});
 }
@@ -25393,11 +25393,11 @@ function cn(...inputs) {
   return twMerge(clsx(inputs));
 }
 const tones = {
-  green: "bg-[#e7f7f6] text-[#085655] ring-[#bde8e5]",
-  orange: "bg-[#e9fbfa] text-[#1ba09c] ring-[#c8efed]",
+  green: "bg-successSoft text-secondary ring-successRing",
+  orange: "bg-mint text-primary ring-accentSoft",
   blue: "bg-sky-50 text-sky-700 ring-sky-200",
   red: "bg-red-50 text-red-700 ring-red-200",
-  gray: "bg-[#f5f7f7] text-[#5e6a69] ring-[#e7eeee]"
+  gray: "bg-slate-50 text-muted ring-slate-100"
 };
 function Badge({ className, tone = "gray", ...props }) {
   return /* @__PURE__ */ jsxRuntimeExports.jsx(
@@ -25413,9 +25413,9 @@ function Badge({ className, tone = "gray", ...props }) {
   );
 }
 const variants = {
-  primary: "bg-[#1ba09c] text-white shadow-[0_10px_24px_rgba(27,160,156,0.26)] hover:bg-[#168f8b] focus-visible:ring-[#1ba09c]",
-  secondary: "bg-white text-[#085655] shadow-[inset_0_0_0_1px_rgba(8,86,85,0.1)] hover:bg-[#f4fbfa]",
-  ghost: "text-[#4d5d5c] hover:bg-[#f4fbfa]",
+  primary: "bg-primary text-white shadow-[0_10px_24px_rgb(var(--ro-primary-rgb)/0.26)] hover:bg-primary-hover focus-visible:ring-primary",
+  secondary: "bg-white text-secondary shadow-[inset_0_0_0_1px_rgb(var(--ro-secondary-rgb)/0.1)] hover:bg-sage",
+  ghost: "text-label hover:bg-sage",
   danger: "bg-red-600 text-white hover:bg-red-700 focus-visible:ring-red-500"
 };
 function Button({ className, variant = "primary", icon, children, ...props }) {
@@ -25440,7 +25440,7 @@ function Card({ className, ...props }) {
     "div",
     {
       className: cn(
-        "rounded-2xl bg-white shadow-[0_22px_60px_rgba(8,86,85,0.08)]",
+        "rounded-2xl bg-white shadow-[0_22px_60px_rgb(var(--ro-secondary-rgb)/0.08)]",
         className
       ),
       ...props
@@ -25449,9 +25449,9 @@ function Card({ className, ...props }) {
 }
 function CustomersPage() {
   return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "h-full overflow-y-auto p-7", children: [
-    /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm font-black uppercase tracking-[0.28em] text-[#7a7f73]", children: "Ledger care" }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm font-black uppercase tracking-[0.28em] text-subtle", children: "Ledger care" }),
     /* @__PURE__ */ jsxRuntimeExports.jsx("h1", { className: "mt-2 text-4xl font-black", children: "Customer credit" }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx(Card, { className: "mt-7 p-6", children: /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-semibold text-[#697064]", children: "Customer profiles, credit limits, balances, and ledger payments." }) })
+    /* @__PURE__ */ jsxRuntimeExports.jsx(Card, { className: "mt-7 p-6", children: /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-semibold text-subtle", children: "Customer profiles, credit limits, balances, and ledger payments." }) })
   ] });
 }
 const metrics = [
@@ -25464,10 +25464,10 @@ function DashboardPage() {
   return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "h-full overflow-y-auto p-7", children: [
     /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-end justify-between", children: [
       /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm font-black uppercase tracking-[0.28em] text-[#7a7f73]", children: "Overview" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm font-black uppercase tracking-[0.28em] text-subtle", children: "Overview" }),
         /* @__PURE__ */ jsxRuntimeExports.jsx("h1", { className: "mt-2 text-4xl font-black", children: "Today at a glance" })
       ] }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "rounded-2xl bg-[#085655] px-5 py-3 text-sm font-semibold text-white", children: "Live shift" })
+      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "rounded-2xl bg-secondary px-5 py-3 text-sm font-semibold text-white", children: "Live shift" })
     ] }),
     /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mt-7 grid grid-cols-4 gap-4", children: metrics.map(([label, value, tone]) => /* @__PURE__ */ jsxRuntimeExports.jsxs(Card, { className: "p-5", children: [
       /* @__PURE__ */ jsxRuntimeExports.jsx(Badge, { tone, children: label }),
@@ -25483,26 +25483,26 @@ function DashboardPage() {
           /* @__PURE__ */ jsxRuntimeExports.jsx(
             "div",
             {
-              className: "w-full rounded-t-xl bg-[#1ba09c]",
+              className: "w-full rounded-t-xl bg-primary",
               style: { height: `${height}%`, opacity: 0.42 + index * 0.06 }
             }
           ),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-xs font-bold text-[#7a7f73]", children: index + 9 })
+          /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-xs font-bold text-subtle", children: index + 9 })
         ] }, index)) })
       ] }),
-      /* @__PURE__ */ jsxRuntimeExports.jsxs(Card, { className: "min-h-72 bg-[#085655] p-6 text-white", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsxs(Card, { className: "min-h-72 bg-secondary p-6 text-white", children: [
         /* @__PURE__ */ jsxRuntimeExports.jsx(Badge, { tone: "orange", children: "Kitchen" }),
         /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "mt-6 text-3xl font-black", children: "No delays" }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mt-3 text-sm font-semibold text-[#c7e8e6]", children: "Kitchen queue, table status, and delivery counters will stream here." })
+        /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mt-3 text-sm font-semibold text-deepSoft", children: "Kitchen queue, table status, and delivery counters will stream here." })
       ] })
     ] })
   ] });
 }
 function InventoryPage() {
   return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "h-full overflow-y-auto p-7", children: [
-    /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm font-black uppercase tracking-[0.28em] text-[#7a7f73]", children: "Stock control" }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm font-black uppercase tracking-[0.28em] text-subtle", children: "Stock control" }),
     /* @__PURE__ */ jsxRuntimeExports.jsx("h1", { className: "mt-2 text-4xl font-black", children: "Inventory" }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx(Card, { className: "mt-7 p-6", children: /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-semibold text-[#697064]", children: "Units, stock batches, purchases, wastage, and transaction-safe stock movement screens." }) })
+    /* @__PURE__ */ jsxRuntimeExports.jsx(Card, { className: "mt-7 p-6", children: /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-semibold text-subtle", children: "Units, stock batches, purchases, wastage, and transaction-safe stock movement screens." }) })
   ] });
 }
 var isCheckBoxInput = (element) => element.type === "checkbox";
@@ -31211,17 +31211,17 @@ function LoginPage() {
     }
   };
   return /* @__PURE__ */ jsxRuntimeExports.jsxs("main", { className: "grid min-h-screen grid-cols-[1.05fr_0.95fr] bg-white", children: [
-    /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { className: "flex flex-col justify-between bg-[#085655] p-10 text-white", children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { className: "flex flex-col justify-between bg-secondary p-10 text-white", children: [
       /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-3 text-sm font-black uppercase tracking-[0.28em]", children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "flex h-10 w-10 items-center justify-center rounded-2xl bg-[#1ba09c] text-base", children: "RO" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "flex h-10 w-10 items-center justify-center rounded-2xl bg-primary text-base", children: "RO" }),
         "RestaurantOS"
       ] }),
       /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm font-black uppercase tracking-[0.28em] text-[#aee4e1]", children: "Desktop POS" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm font-black uppercase tracking-[0.28em] text-deepBright", children: "Desktop POS" }),
         /* @__PURE__ */ jsxRuntimeExports.jsx("h1", { className: "mt-4 max-w-xl text-6xl font-black leading-[1.02]", children: "Premium cashier workflow for busy restaurants." }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mt-5 max-w-lg text-lg font-semibold text-[#d7f4f2]", children: "Secure sign-in protects discounts, refunds, stock changes, reports, and settings." })
+        /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mt-5 max-w-lg text-lg font-semibold text-deepFaint", children: "Secure sign-in protects discounts, refunds, stock changes, reports, and settings." })
       ] }),
-      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "grid grid-cols-3 gap-3 text-sm font-bold text-[#d7f4f2]", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "grid grid-cols-3 gap-3 text-sm font-bold text-deepFaint", children: [
         /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: "Roles" }),
         /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: "Permissions" }),
         /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: "Audit logs" })
@@ -31229,14 +31229,14 @@ function LoginPage() {
     ] }),
     /* @__PURE__ */ jsxRuntimeExports.jsx("section", { className: "flex items-center justify-center p-10", children: /* @__PURE__ */ jsxRuntimeExports.jsxs(Card, { className: "w-full max-w-md p-7", children: [
       /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm font-black uppercase tracking-[0.28em] text-[#1ba09c]", children: "Welcome back" }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "mt-2 text-4xl font-black text-[#0d1717]", children: "Sign in" })
+        /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm font-black uppercase tracking-[0.28em] text-primary", children: "Welcome back" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "mt-2 text-4xl font-black text-espresso", children: "Sign in" })
       ] }),
       /* @__PURE__ */ jsxRuntimeExports.jsxs("form", { className: "mt-8 space-y-4", onSubmit: handleSubmit(onSubmit), children: [
         /* @__PURE__ */ jsxRuntimeExports.jsxs("label", { className: "block", children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-sm font-black text-[#4d5d5c]", children: "Username" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mt-2 flex h-12 items-center gap-3 rounded-2xl bg-[#f4fbfa] px-4", children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx(UserRound, { size: 18, className: "text-[#1ba09c]" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-sm font-black text-label", children: "Username" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mt-2 flex h-12 items-center gap-3 rounded-2xl bg-sage px-4", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx(UserRound, { size: 18, className: "text-primary" }),
             /* @__PURE__ */ jsxRuntimeExports.jsx(
               "input",
               {
@@ -31249,9 +31249,9 @@ function LoginPage() {
           errors.username ? /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "mt-1 block text-xs font-bold text-red-600", children: errors.username.message }) : null
         ] }),
         /* @__PURE__ */ jsxRuntimeExports.jsxs("label", { className: "block", children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-sm font-black text-[#4d5d5c]", children: "Password" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mt-2 flex h-12 items-center gap-3 rounded-2xl bg-[#f4fbfa] px-4", children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx(LockKeyhole, { size: 18, className: "text-[#1ba09c]" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-sm font-black text-label", children: "Password" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mt-2 flex h-12 items-center gap-3 rounded-2xl bg-sage px-4", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx(LockKeyhole, { size: 18, className: "text-primary" }),
             /* @__PURE__ */ jsxRuntimeExports.jsx(
               "input",
               {
@@ -31270,7 +31270,7 @@ function LoginPage() {
         ] }) : null,
         /* @__PURE__ */ jsxRuntimeExports.jsx(Button, { className: "h-14 w-full text-base", disabled: loading, type: "submit", children: loading ? "Signing in..." : "Sign in" })
       ] }),
-      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mt-5 rounded-2xl bg-[#f4fbfa] p-4 text-sm font-semibold text-[#657574]", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mt-5 rounded-2xl bg-sage p-4 text-sm font-semibold text-muted", children: [
         "Development seed: username ",
         /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "admin" }),
         ", password ",
@@ -31282,21 +31282,21 @@ function LoginPage() {
 }
 function MenuPage() {
   return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "h-full overflow-y-auto p-7", children: [
-    /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm font-black uppercase tracking-[0.28em] text-[#7a7f73]", children: "Admin workspace" }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm font-black uppercase tracking-[0.28em] text-subtle", children: "Admin workspace" }),
     /* @__PURE__ */ jsxRuntimeExports.jsx("h1", { className: "mt-2 text-4xl font-black", children: "Menu studio" }),
     /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mt-7 grid grid-cols-[1fr_340px] gap-5", children: [
       /* @__PURE__ */ jsxRuntimeExports.jsxs(Card, { className: "min-h-80 p-6", children: [
         /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "text-xl font-black", children: "Catalog builder" }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mt-3 max-w-2xl font-semibold text-[#697064]", children: "Category, item, variation, modifier, add-on, and recipe builder workflows will live here." }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mt-8 grid grid-cols-3 gap-3", children: ["Categories", "Items", "Recipes"].map((item) => /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "rounded-2xl bg-[#f4fbfa] p-4", children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm font-black text-[#085655]", children: item }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mt-3 max-w-2xl font-semibold text-subtle", children: "Category, item, variation, modifier, add-on, and recipe builder workflows will live here." }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mt-8 grid grid-cols-3 gap-3", children: ["Categories", "Items", "Recipes"].map((item) => /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "rounded-2xl bg-sage p-4", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm font-black text-secondary", children: item }),
           /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mt-5 text-2xl font-black", children: "0" })
         ] }, item)) })
       ] }),
-      /* @__PURE__ */ jsxRuntimeExports.jsxs(Card, { className: "bg-[#1ba09c] p-6 text-white", children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm font-black uppercase tracking-[0.2em] text-[#d7f4f2]", children: "Recipe cost" }),
+      /* @__PURE__ */ jsxRuntimeExports.jsxs(Card, { className: "bg-primary p-6 text-white", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm font-black uppercase tracking-[0.2em] text-deepFaint", children: "Recipe cost" }),
         /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "mt-5 text-3xl font-black", children: "Exact BOM" }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mt-3 font-semibold text-[#e1fbfa]", children: "Every item can map to stock by unit so inventory deduction stays precise." })
+        /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mt-3 font-semibold text-mint", children: "Every item can map to stock by unit so inventory deduction stays precise." })
       ] })
     ] })
   ] });
@@ -31333,19 +31333,19 @@ function PosPage() {
     [cart]
   );
   return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "grid h-full grid-cols-[1fr_430px] gap-5 overflow-hidden bg-white p-5", children: [
-    /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { className: "flex min-w-0 flex-col overflow-hidden rounded-[28px] bg-white px-6 py-5 shadow-[0_28px_70px_rgba(8,86,85,0.08)]", children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { className: "flex min-w-0 flex-col overflow-hidden rounded-[28px] bg-white px-6 py-5 shadow-[0_28px_70px_rgb(var(--ro-secondary-rgb)/0.08)]", children: [
       /* @__PURE__ */ jsxRuntimeExports.jsxs("header", { className: "mb-5 flex items-center justify-between", children: [
         /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm font-black uppercase tracking-[0.28em] text-[#7a7f73]", children: "Cashier terminal" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("h1", { className: "mt-1 text-4xl font-black text-[#0d1717]", children: "Build order" })
+          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm font-black uppercase tracking-[0.28em] text-subtle", children: "Cashier terminal" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("h1", { className: "mt-1 text-4xl font-black text-espresso", children: "Build order" })
         ] }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex rounded-2xl bg-[#f4fbfa] p-1 shadow-sm", children: ["DINE_IN", "TAKEAWAY", "DELIVERY"].map((type) => /* @__PURE__ */ jsxRuntimeExports.jsx(
+        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex rounded-2xl bg-sage p-1 shadow-sm", children: ["DINE_IN", "TAKEAWAY", "DELIVERY"].map((type) => /* @__PURE__ */ jsxRuntimeExports.jsx(
           "button",
           {
             onClick: () => setOrderType(type),
             className: [
               "h-10 rounded-xl px-4 text-sm font-bold transition",
-              orderType === type ? "bg-[#085655] text-white shadow-sm" : "text-[#657574] hover:bg-white"
+              orderType === type ? "bg-secondary text-white shadow-sm" : "text-muted hover:bg-white"
             ].join(" "),
             children: type.replace("_", " ")
           },
@@ -31353,21 +31353,21 @@ function PosPage() {
         )) })
       ] }),
       /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mb-5 grid grid-cols-[1fr_220px] gap-4", children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex h-14 items-center gap-3 rounded-2xl bg-white px-4 shadow-[0_16px_42px_rgba(8,86,85,0.06)]", children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx(Search, { size: 22, className: "text-[#1ba09c]" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex h-14 items-center gap-3 rounded-2xl bg-white px-4 shadow-[0_16px_42px_rgb(var(--ro-secondary-rgb)/0.06)]", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx(Search, { size: 22, className: "text-primary" }),
           /* @__PURE__ */ jsxRuntimeExports.jsx(
             "input",
             {
-              className: "h-full flex-1 bg-transparent text-lg font-semibold outline-none placeholder:text-[#9aa094]",
+              className: "h-full flex-1 bg-transparent text-lg font-semibold outline-none placeholder:text-subtle",
               placeholder: "Search item, SKU, category..."
             }
           ),
           /* @__PURE__ */ jsxRuntimeExports.jsx(Badge, { tone: "orange", children: "F2" })
         ] }),
-        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex h-14 items-center gap-3 rounded-2xl bg-[#085655] px-4 text-white shadow-[0_18px_44px_rgba(8,86,85,0.2)]", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex h-14 items-center gap-3 rounded-2xl bg-secondary px-4 text-white shadow-[0_18px_44px_rgb(var(--ro-secondary-rgb)/0.2)]", children: [
           /* @__PURE__ */ jsxRuntimeExports.jsx(Sparkles, { size: 20, className: "text-white" }),
           /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs font-bold uppercase tracking-[0.18em] text-[#c7e8e6]", children: "Rush mode" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs font-bold uppercase tracking-[0.18em] text-deepSoft", children: "Rush mode" }),
             /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm font-black", children: "Keyboard ready" })
           ] })
         ] })
@@ -31377,7 +31377,7 @@ function PosPage() {
         {
           className: [
             "h-11 rounded-xl px-4 text-sm font-bold transition",
-            index === 0 ? "bg-[#1ba09c] text-white shadow-[0_10px_22px_rgba(27,160,156,0.24)]" : "bg-white text-[#657574] shadow-[inset_0_0_0_1px_rgba(8,86,85,0.08)] hover:bg-[#f4fbfa] hover:text-[#085655]"
+            index === 0 ? "bg-primary text-white shadow-[0_10px_22px_rgb(var(--ro-primary-rgb)/0.24)]" : "bg-white text-muted shadow-[inset_0_0_0_1px_rgb(var(--ro-secondary-rgb)/0.08)] hover:bg-sage hover:text-secondary"
           ].join(" "),
           children: category
         },
@@ -31387,17 +31387,17 @@ function PosPage() {
         "button",
         {
           onClick: () => addLine({ id: item.id, name: item.name, price: item.price, quantity: 1 }),
-          className: "group rounded-2xl bg-white p-4 text-left shadow-[0_14px_38px_rgba(8,86,85,0.07)] transition hover:-translate-y-0.5 hover:shadow-[0_22px_48px_rgba(8,86,85,0.12)]",
+          className: "group rounded-2xl bg-white p-4 text-left shadow-[0_14px_38px_rgb(var(--ro-secondary-rgb)/0.07)] transition hover:-translate-y-0.5 hover:shadow-[0_22px_48px_rgb(var(--ro-secondary-rgb)/0.12)]",
           children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex h-full flex-col justify-between", children: [
             /* @__PURE__ */ jsxRuntimeExports.jsx(Badge, { tone: "blue", children: item.station }),
             /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
-              /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "text-lg font-black text-[#0d1717]", children: item.name }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "text-lg font-black text-espresso", children: item.name }),
               /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mt-3 flex items-end justify-between", children: [
-                /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { className: "text-2xl font-black text-[#085655]", children: [
+                /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { className: "text-2xl font-black text-secondary", children: [
                   "Rs ",
                   item.price
                 ] }),
-                /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "flex h-9 w-9 items-center justify-center rounded-xl bg-[#1ba09c] text-white transition group-hover:scale-105", children: /* @__PURE__ */ jsxRuntimeExports.jsx(Plus, { size: 18 }) })
+                /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "flex h-9 w-9 items-center justify-center rounded-xl bg-primary text-white transition group-hover:scale-105", children: /* @__PURE__ */ jsxRuntimeExports.jsx(Plus, { size: 18 }) })
               ] })
             ] })
           ] })
@@ -31405,19 +31405,19 @@ function PosPage() {
         item.id
       )) })
     ] }),
-    /* @__PURE__ */ jsxRuntimeExports.jsxs("aside", { className: "flex min-h-0 flex-col rounded-[28px] bg-white px-5 py-5 shadow-[0_28px_70px_rgba(8,86,85,0.11)]", children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("aside", { className: "flex min-h-0 flex-col rounded-[28px] bg-white px-5 py-5 shadow-[0_28px_70px_rgb(var(--ro-secondary-rgb)/0.11)]", children: [
       /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mb-4 flex items-center justify-between", children: [
         /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm font-black uppercase tracking-[0.24em] text-[#7a7f73]", children: "Ticket" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm font-black uppercase tracking-[0.24em] text-subtle", children: "Ticket" }),
           /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "mt-1 text-2xl font-black", children: "Order #Draft" })
         ] }),
         /* @__PURE__ */ jsxRuntimeExports.jsx(Badge, { tone: "orange", children: "Shift open" })
       ] }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex-1 space-y-3 overflow-y-auto pr-1", children: cart.length === 0 ? /* @__PURE__ */ jsxRuntimeExports.jsx(Card, { className: "flex h-44 items-center justify-center bg-white p-6 text-center text-sm font-semibold text-[#657574] shadow-[inset_0_0_0_1px_rgba(8,86,85,0.08)]", children: "Add menu items to start a clean, fast cashier order." }) : cart.map((line) => /* @__PURE__ */ jsxRuntimeExports.jsxs(Card, { className: "p-4", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex-1 space-y-3 overflow-y-auto pr-1", children: cart.length === 0 ? /* @__PURE__ */ jsxRuntimeExports.jsx(Card, { className: "flex h-44 items-center justify-center bg-white p-6 text-center text-sm font-semibold text-muted shadow-[inset_0_0_0_1px_rgb(var(--ro-secondary-rgb)/0.08)]", children: "Add menu items to start a clean, fast cashier order." }) : cart.map((line) => /* @__PURE__ */ jsxRuntimeExports.jsxs(Card, { className: "p-4", children: [
         /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-start justify-between gap-3", children: [
           /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
             /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "font-black", children: line.name }),
-            /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { className: "text-sm font-semibold text-[#657574]", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { className: "text-sm font-semibold text-muted", children: [
               "Rs ",
               line.price,
               " each"
@@ -31426,17 +31426,17 @@ function PosPage() {
           /* @__PURE__ */ jsxRuntimeExports.jsx(
             "button",
             {
-              className: "flex h-9 w-9 items-center justify-center rounded-xl text-[#98a095] hover:bg-red-50 hover:text-red-600",
+              className: "flex h-9 w-9 items-center justify-center rounded-xl text-subtle hover:bg-red-50 hover:text-red-600",
               onClick: () => removeLine(line.id),
               children: /* @__PURE__ */ jsxRuntimeExports.jsx(Trash2, { size: 18 })
             }
           )
         ] }),
         /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mt-4 flex items-center justify-between", children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center rounded-xl bg-[#f4fbfa]", children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx("button", { className: "flex h-9 w-9 items-center justify-center text-[#6b7167]", children: /* @__PURE__ */ jsxRuntimeExports.jsx(Minus, { size: 16 }) }),
+          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center rounded-xl bg-sage", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx("button", { className: "flex h-9 w-9 items-center justify-center text-label", children: /* @__PURE__ */ jsxRuntimeExports.jsx(Minus, { size: 16 }) }),
             /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "w-10 text-center font-black", children: line.quantity }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx("button", { className: "flex h-9 w-9 items-center justify-center text-[#1ba09c]", children: /* @__PURE__ */ jsxRuntimeExports.jsx(Plus, { size: 16 }) })
+            /* @__PURE__ */ jsxRuntimeExports.jsx("button", { className: "flex h-9 w-9 items-center justify-center text-primary", children: /* @__PURE__ */ jsxRuntimeExports.jsx(Plus, { size: 16 }) })
           ] }),
           /* @__PURE__ */ jsxRuntimeExports.jsxs("strong", { className: "text-lg", children: [
             "Rs ",
@@ -31444,12 +31444,12 @@ function PosPage() {
           ] })
         ] })
       ] }, line.id)) }),
-      /* @__PURE__ */ jsxRuntimeExports.jsxs(Card, { className: "mt-4 bg-[#f4fbfa] p-4 shadow-none", children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-2 text-sm font-black text-[#085655]", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsxs(Card, { className: "mt-4 bg-sage p-4 shadow-none", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-2 text-sm font-black text-secondary", children: [
           /* @__PURE__ */ jsxRuntimeExports.jsx(Keyboard, { size: 17 }),
           "Shortcut card"
         ] }),
-        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mt-3 grid grid-cols-2 gap-2 text-xs font-bold text-[#657574]", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mt-3 grid grid-cols-2 gap-2 text-xs font-bold text-muted", children: [
           /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: "F2 Search" }),
           /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: "F5 Kitchen" }),
           /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: "F7 Payment" }),
@@ -31458,19 +31458,19 @@ function PosPage() {
           /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: "Ctrl+Shift+Q Close" })
         ] })
       ] }),
-      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mt-4 rounded-2xl bg-[#085655] p-4 text-white", children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex justify-between text-sm font-bold text-[#c7e8e6]", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mt-4 rounded-2xl bg-secondary p-4 text-white", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex justify-between text-sm font-bold text-deepSoft", children: [
           /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: "Subtotal" }),
           /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { children: [
             "Rs ",
             total
           ] })
         ] }),
-        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mt-2 flex justify-between text-sm font-bold text-[#c7e8e6]", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mt-2 flex justify-between text-sm font-bold text-deepSoft", children: [
           /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: "Tax / service" }),
           /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: "Configured" })
         ] }),
-        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mt-4 flex justify-between border-t border-[#27716f] pt-4 text-2xl font-black", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mt-4 flex justify-between border-t border-divider pt-4 text-2xl font-black", children: [
           /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: "Total" }),
           /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { className: "text-white", children: [
             "Rs ",
@@ -31488,9 +31488,9 @@ function PosPage() {
 }
 function ReportsPage() {
   return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "h-full overflow-y-auto p-7", children: [
-    /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm font-black uppercase tracking-[0.28em] text-[#7a7f73]", children: "Insights" }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm font-black uppercase tracking-[0.28em] text-subtle", children: "Insights" }),
     /* @__PURE__ */ jsxRuntimeExports.jsx("h1", { className: "mt-2 text-4xl font-black", children: "Reports" }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx(Card, { className: "mt-7 p-6", children: /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-semibold text-[#697064]", children: "Sales, stock, purchase, credit, supplier payable, shift, and profit estimate reports." }) })
+    /* @__PURE__ */ jsxRuntimeExports.jsx(Card, { className: "mt-7 p-6", children: /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-semibold text-subtle", children: "Sales, stock, purchase, credit, supplier payable, shift, and profit estimate reports." }) })
   ] });
 }
 const settingsSchema = objectType({
@@ -31507,8 +31507,8 @@ const settingsSchema = objectType({
   kitchenDelayMinutes: coerce.number().int().min(1).max(180),
   shiftFloatRequired: booleanType()
 });
-const fieldClass = "mt-2 h-12 w-full rounded-xl border border-[#dcebe9] bg-white px-4 text-sm font-semibold text-[#0d1717] outline-none transition focus:border-[#1ba09c] focus:ring-4 focus:ring-[#1ba09c]/10";
-const textareaClass = "mt-2 min-h-24 w-full resize-none rounded-xl border border-[#dcebe9] bg-white px-4 py-3 text-sm font-semibold text-[#0d1717] outline-none transition focus:border-[#1ba09c] focus:ring-4 focus:ring-[#1ba09c]/10";
+const fieldClass = "mt-2 h-12 w-full rounded-xl border border-field bg-white px-4 text-sm font-semibold text-espresso outline-none transition focus:border-primary focus:ring-4 focus:ring-primary/10";
+const textareaClass = "mt-2 min-h-24 w-full resize-none rounded-xl border border-field bg-white px-4 py-3 text-sm font-semibold text-espresso outline-none transition focus:border-primary focus:ring-4 focus:ring-primary/10";
 const defaultValues = {
   businessName: "RestaurantOS Demo Cafe",
   branchName: "Main Branch",
@@ -31594,9 +31594,9 @@ function SettingsPage() {
   return /* @__PURE__ */ jsxRuntimeExports.jsxs("form", { className: "h-full overflow-y-auto bg-white p-7", onSubmit, children: [
     /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex flex-wrap items-start justify-between gap-4", children: [
       /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm font-black uppercase tracking-[0.22em] text-[#1ba09c]", children: "Configuration" }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx("h1", { className: "mt-2 text-4xl font-black text-[#0d1717]", children: "Restaurant settings" }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mt-3 max-w-2xl text-sm font-semibold text-[#647271]", children: "Control the business profile, taxes, receipts, stock thresholds, kitchen delay alerts, and shift policy." })
+        /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm font-black uppercase tracking-[0.22em] text-primary", children: "Configuration" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("h1", { className: "mt-2 text-4xl font-black text-espresso", children: "Restaurant settings" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mt-3 max-w-2xl text-sm font-semibold text-muted", children: "Control the business profile, taxes, receipts, stock thresholds, kitchen delay alerts, and shift policy." })
       ] }),
       /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-3", children: [
         /* @__PURE__ */ jsxRuntimeExports.jsx(Badge, { tone: canUpdateSettings ? "green" : "orange", children: canUpdateSettings ? "Admin editable" : "View only" }),
@@ -31611,15 +31611,15 @@ function SettingsPage() {
         )
       ] })
     ] }),
-    settingsQuery.isLoading ? /* @__PURE__ */ jsxRuntimeExports.jsxs(Card, { className: "mt-6 flex h-36 items-center justify-center text-sm font-bold text-[#647271]", children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsx(LoaderCircle, { className: "mr-2 animate-spin text-[#1ba09c]", size: 18 }),
+    settingsQuery.isLoading ? /* @__PURE__ */ jsxRuntimeExports.jsxs(Card, { className: "mt-6 flex h-36 items-center justify-center text-sm font-bold text-muted", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx(LoaderCircle, { className: "mr-2 animate-spin text-primary", size: 18 }),
       "Loading settings"
     ] }) : null,
     settingsQuery.isError ? /* @__PURE__ */ jsxRuntimeExports.jsxs(Card, { className: "mt-6 flex items-start gap-3 border border-red-100 bg-red-50 p-5 text-sm font-bold text-red-700", children: [
       /* @__PURE__ */ jsxRuntimeExports.jsx(CircleAlert, { size: 19 }),
       "Settings could not load. Check the API server and your login session."
     ] }) : null,
-    updateSettings.isSuccess ? /* @__PURE__ */ jsxRuntimeExports.jsxs(Card, { className: "mt-6 flex items-start gap-3 border border-[#c7efed] bg-[#f4fbfa] p-5 text-sm font-bold text-[#085655]", children: [
+    updateSettings.isSuccess ? /* @__PURE__ */ jsxRuntimeExports.jsxs(Card, { className: "mt-6 flex items-start gap-3 border border-accentSoft bg-sage p-5 text-sm font-bold text-secondary", children: [
       /* @__PURE__ */ jsxRuntimeExports.jsx(CircleCheck, { size: 19 }),
       "Settings saved and audit logged."
     ] }) : null,
@@ -31630,10 +31630,10 @@ function SettingsPage() {
     /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mt-6 grid grid-cols-[1.1fr_0.9fr] gap-5", children: [
       /* @__PURE__ */ jsxRuntimeExports.jsxs(Card, { className: "p-6", children: [
         /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-3", children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "flex h-11 w-11 items-center justify-center rounded-xl bg-[#e9fbfa] text-[#085655]", children: /* @__PURE__ */ jsxRuntimeExports.jsx(Store, { size: 21 }) }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "flex h-11 w-11 items-center justify-center rounded-xl bg-mint text-secondary", children: /* @__PURE__ */ jsxRuntimeExports.jsx(Store, { size: 21 }) }),
           /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "text-xl font-black text-[#0d1717]", children: "Business profile" }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm font-semibold text-[#647271]", children: "Shown on receipts, reports, and future branches." })
+            /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "text-xl font-black text-espresso", children: "Business profile" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm font-semibold text-muted", children: "Shown on receipts, reports, and future branches." })
           ] })
         ] }),
         /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mt-6 grid grid-cols-2 gap-4", children: [
@@ -31646,10 +31646,10 @@ function SettingsPage() {
       ] }),
       /* @__PURE__ */ jsxRuntimeExports.jsxs(Card, { className: "p-6", children: [
         /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-3", children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "flex h-11 w-11 items-center justify-center rounded-xl bg-[#e9fbfa] text-[#085655]", children: /* @__PURE__ */ jsxRuntimeExports.jsx(ReceiptText, { size: 21 }) }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "flex h-11 w-11 items-center justify-center rounded-xl bg-mint text-secondary", children: /* @__PURE__ */ jsxRuntimeExports.jsx(ReceiptText, { size: 21 }) }),
           /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "text-xl font-black text-[#0d1717]", children: "Tax and receipt" }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm font-semibold text-[#647271]", children: "Defaults used by POS checkout and printed bills." })
+            /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "text-xl font-black text-espresso", children: "Tax and receipt" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm font-semibold text-muted", children: "Defaults used by POS checkout and printed bills." })
           ] })
         ] }),
         /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mt-6 grid grid-cols-2 gap-4", children: [
@@ -31661,10 +31661,10 @@ function SettingsPage() {
       ] }),
       /* @__PURE__ */ jsxRuntimeExports.jsxs(Card, { className: "p-6", children: [
         /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-3", children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "flex h-11 w-11 items-center justify-center rounded-xl bg-[#e9fbfa] text-[#085655]", children: /* @__PURE__ */ jsxRuntimeExports.jsx(SlidersHorizontal, { size: 21 }) }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "flex h-11 w-11 items-center justify-center rounded-xl bg-mint text-secondary", children: /* @__PURE__ */ jsxRuntimeExports.jsx(SlidersHorizontal, { size: 21 }) }),
           /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "text-xl font-black text-[#0d1717]", children: "Operations policy" }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm font-semibold text-[#647271]", children: "Controls alerts and cashier shift behavior." })
+            /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "text-xl font-black text-espresso", children: "Operations policy" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm font-semibold text-muted", children: "Controls alerts and cashier shift behavior." })
           ] })
         ] }),
         /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mt-6 grid grid-cols-2 gap-4", children: [
@@ -31673,28 +31673,28 @@ function SettingsPage() {
         ] }),
         /* @__PURE__ */ jsxRuntimeExports.jsx(Toggle, { label: "Require opening cash float for shifts", ...register("shiftFloatRequired") })
       ] }),
-      /* @__PURE__ */ jsxRuntimeExports.jsxs(Card, { className: "bg-[#085655] p-6 text-white", children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm font-black uppercase tracking-[0.2em] text-[#9ee2df]", children: "Phase 4 foundation" }),
+      /* @__PURE__ */ jsxRuntimeExports.jsxs(Card, { className: "bg-secondary p-6 text-white", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm font-black uppercase tracking-[0.2em] text-deepBright", children: "Phase 4 foundation" }),
         /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "mt-4 text-3xl font-black", children: "Ready for table system" }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mt-3 text-sm font-semibold leading-6 text-[#d7f4f2]", children: "These settings become the source for POS receipts, tax math, stock warnings, kitchen alert timers, and shift validation. Table and floor layout settings will attach here in the next phase." })
+        /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mt-3 text-sm font-semibold leading-6 text-deepFaint", children: "These settings become the source for POS receipts, tax math, stock warnings, kitchen alert timers, and shift validation. Table and floor layout settings will attach here in the next phase." })
       ] })
     ] })
   ] });
 }
 function Field({ children, className, error, label }) {
   return /* @__PURE__ */ jsxRuntimeExports.jsxs("label", { className, children: [
-    /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-sm font-black text-[#4d5d5c]", children: label }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-sm font-black text-label", children: label }),
     children,
     error ? /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "mt-1 block text-xs font-bold text-red-600", children: error }) : null
   ] });
 }
 function Toggle({ label, ...props }) {
-  return /* @__PURE__ */ jsxRuntimeExports.jsxs("label", { className: "mt-5 flex items-center justify-between gap-4 rounded-xl bg-[#f4fbfa] px-4 py-3 text-sm font-black text-[#0d1717]", children: [
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("label", { className: "mt-5 flex items-center justify-between gap-4 rounded-xl bg-sage px-4 py-3 text-sm font-black text-espresso", children: [
     /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: label }),
     /* @__PURE__ */ jsxRuntimeExports.jsx(
       "input",
       {
-        className: "h-5 w-5 accent-[#1ba09c]",
+        className: "h-5 w-5 accent-primary",
         type: "checkbox",
         ...props
       }

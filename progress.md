@@ -176,12 +176,18 @@ Completed:
 - Redesigned the Electron shell with frameless premium chrome, custom window controls, wider modern sidebar, and tighter navigation states.
 - Redesigned the POS order screen with modern category chips, elevated menu cards, dark premium ticket total block, softer order panel, and clearer keyboard/rush affordances.
 - Updated dashboard, admin placeholder pages, shared UI primitives, and kitchen web color treatment to align with the same design language.
-- Replaced the yellow-led palette with the requested teal system: `#1ba09c` primary, `#085655` secondary, and pure white app surfaces.
+- Replaced the yellow-led palette with the requested teal theme variables and pure white app surfaces.
 - Made the app chrome visually borderless while preserving custom close, maximize/restore, and minimize controls.
 - Added Electron keyboard shortcuts for window management: `Ctrl + Shift + M`, `Ctrl + Shift + F`, and `Ctrl + Shift + Q`.
 - Added a POS shortcut card and documented current and planned shortcuts in `README.md`.
+- Centralized brand colors into `packages/shared/src/brand-theme.css` and mapped desktop/kitchen Tailwind colors to shared CSS variables.
+- Added `packages/shared/src/brand-theme.ts` for shell-level brand metadata and colors.
+- Replaced active desktop, kitchen, and shared UI source palette literals with semantic classes such as `primary`, `secondary`, `sage`, `muted`, and `espresso`.
 
 Files changed:
+- `packages/shared/src/brand-theme.css`
+- `packages/shared/src/brand-theme.ts`
+- `packages/shared/src/index.ts`
 - `packages/ui/src/components/button.tsx`
 - `packages/ui/src/components/card.tsx`
 - `packages/ui/src/components/badge.tsx`
@@ -199,6 +205,8 @@ Database changes:
 - None.
 
 Tests:
+- `npm run typecheck --workspaces` passed.
+- `npm run build --workspaces` passed.
 - `npm run typecheck --workspace @restaurantos/desktop` passed.
 - `npm run build --workspace @restaurantos/desktop` passed.
 - `npm run typecheck --workspace @restaurantos/ui` passed.
@@ -211,3 +219,4 @@ Tests:
 Notes:
 - Dribbble and SaaS/POS dashboard references were used for broad visual direction only, not copied.
 - Remaining next UI pass should replace placeholder admin content with real CRUD tables/forms using the new design system.
+- Developer-only branding settings are planned for a later admin/dev phase. The current foundation makes that easier because desktop and kitchen UI already consume theme tokens.

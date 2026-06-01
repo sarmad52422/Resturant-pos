@@ -91,6 +91,23 @@ Seeded setting groups:
 
 The desktop Settings page uses TanStack Query for loading/saving, React Hook Form with Zod validation for edits, and the current permission model to prevent unauthorized saves.
 
+## Brand Theme
+
+The shared theme foundation lives in:
+
+- `packages/shared/src/brand-theme.css` - CSS variables used by desktop and kitchen UI.
+- `packages/shared/src/brand-theme.ts` - TypeScript brand metadata and fixed shell colors.
+
+Desktop and kitchen Tailwind configs map colors to the shared CSS variables, so components should use semantic classes like `bg-primary`, `bg-secondary`, `text-muted`, `bg-sage`, and `text-espresso` instead of hard-coded hex values.
+
+Planned developer-only branding settings:
+
+- App/client display name.
+- App initials and icon assets.
+- Primary/secondary color palette.
+- Receipt/app logo.
+- Theme preset export/import for future clients.
+
 ## Development
 
 ```bash
@@ -163,4 +180,4 @@ Future admin shortcuts will be documented here as modules are implemented.
 
 The desktop app owns cashier workflows and the admin area in one Electron application. The kitchen screen is intentionally separate and only shows live production information needed by chefs and packing staff.
 
-The current visual system uses pure white surfaces, `#1ba09c` as the primary teal, `#085655` as the deep secondary teal, borderless app chrome, moderate rounded corners, dense operational layouts, keyboard-friendly sizing, and clear status colors.
+The current visual system uses pure white surfaces, primary/secondary teal theme variables, borderless app chrome, moderate rounded corners, dense operational layouts, keyboard-friendly sizing, and clear status colors.

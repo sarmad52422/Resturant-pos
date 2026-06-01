@@ -1,0 +1,43 @@
+:root {
+  --ro-app-name: "RestaurantOS POS";
+  --ro-app-initials: "RO";
+
+  --ro-canvas: #ffffff;
+  --ro-canvas-rgb: 255 255 255;
+  --ro-surface: #ffffff;
+  --ro-surface-rgb: 255 255 255;
+  --ro-primary: #1ba09c;
+  --ro-primary-rgb: 27 160 156;
+  --ro-primary-hover: #168f8b;
+  --ro-primary-hover-rgb: 22 143 139;
+  --ro-secondary: #085655;
+  --ro-secondary-rgb: 8 86 85;
+  --ro-espresso: #0d1717;
+  --ro-espresso-rgb: 13 23 23;
+  --ro-mint: #e9fbfa;
+  --ro-mint-rgb: 233 251 250;
+  --ro-sage: #f4fbfa;
+  --ro-sage-rgb: 244 251 250;
+  --ro-muted: #647271;
+  --ro-muted-rgb: 100 114 113;
+  --ro-subtle: #7a7f73;
+  --ro-subtle-rgb: 122 127 115;
+  --ro-label: #4d5d5c;
+  --ro-label-rgb: 77 93 92;
+  --ro-field: #dcebe9;
+  --ro-field-rgb: 220 235 233;
+  --ro-success-soft: #e7f7f6;
+  --ro-success-soft-rgb: 231 247 246;
+  --ro-success-ring: #bde8e5;
+  --ro-success-ring-rgb: 189 232 229;
+  --ro-accent-soft: #c8efed;
+  --ro-accent-soft-rgb: 200 239 237;
+  --ro-deep-soft: #c7e8e6;
+  --ro-deep-soft-rgb: 199 232 230;
+  --ro-deep-faint: #d7f4f2;
+  --ro-deep-faint-rgb: 215 244 242;
+  --ro-deep-bright: #9ee2df;
+  --ro-deep-bright-rgb: 158 226 223;
+  --ro-divider: #27716f;
+  --ro-divider-rgb: 39 113 111;
+}
