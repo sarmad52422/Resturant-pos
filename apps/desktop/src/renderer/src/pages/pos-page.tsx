@@ -1,6 +1,16 @@
 import { useMemo } from 'react';
 import { Badge, Button, Card } from '@restaurantos/ui';
-import { Minus, Plus, Printer, Search, Send, Trash2, WalletCards } from 'lucide-react';
+import {
+  Keyboard,
+  Minus,
+  Plus,
+  Printer,
+  Search,
+  Send,
+  Sparkles,
+  Trash2,
+  WalletCards,
+} from 'lucide-react';
 import { usePosStore } from '../store/use-pos-store';
 
 const categories = ['All', 'Burgers', 'Pizza', 'Juice', 'Coffee', 'Deals', 'Sides'];
@@ -21,23 +31,25 @@ export function PosPage() {
   );
 
   return (
-    <div className="grid h-full grid-cols-[1fr_420px] gap-0 overflow-hidden">
-      <section className="flex min-w-0 flex-col px-7 py-6">
+    <div className="grid h-full grid-cols-[1fr_430px] gap-5 overflow-hidden bg-white p-5">
+      <section className="flex min-w-0 flex-col overflow-hidden rounded-[28px] bg-white px-6 py-5 shadow-[0_28px_70px_rgba(8,86,85,0.08)]">
         <header className="mb-5 flex items-center justify-between">
           <div>
-            <p className="text-sm font-semibold uppercase tracking-wide text-orange-700">
+            <p className="text-sm font-black uppercase tracking-[0.28em] text-[#7a7f73]">
               Cashier terminal
             </p>
-            <h1 className="text-3xl font-black text-espresso">New order</h1>
+            <h1 className="mt-1 text-4xl font-black text-[#0d1717]">Build order</h1>
           </div>
-          <div className="flex rounded-lg border border-orange-100 bg-white p-1 shadow-sm">
+          <div className="flex rounded-2xl bg-[#f4fbfa] p-1 shadow-sm">
             {(['DINE_IN', 'TAKEAWAY', 'DELIVERY'] as const).map((type) => (
               <button
                 key={type}
                 onClick={() => setOrderType(type)}
                 className={[
-                  'h-10 rounded-md px-4 text-sm font-bold transition',
-                  orderType === type ? 'bg-orange-600 text-white' : 'text-stone-600 hover:bg-orange-50',
+                  'h-10 rounded-xl px-4 text-sm font-bold transition',
+                  orderType === type
+                    ? 'bg-[#085655] text-white shadow-sm'
+                    : 'text-[#657574] hover:bg-white',
                 ].join(' ')}
               >
                 {type.replace('_', ' ')}
@@ -46,13 +58,22 @@ export function PosPage() {
           </div>
         </header>
 
-        <div className="mb-5 flex h-14 items-center gap-3 rounded-lg border border-orange-100 bg-white px-4 shadow-sm">
-          <Search size={22} className="text-orange-600" />
-          <input
-            className="h-full flex-1 bg-transparent text-lg font-semibold outline-none placeholder:text-stone-400"
-            placeholder="Search item, SKU, category, shortcut..."
-          />
-          <Badge tone="orange">F2</Badge>
+        <div className="mb-5 grid grid-cols-[1fr_220px] gap-4">
+          <div className="flex h-14 items-center gap-3 rounded-2xl bg-white px-4 shadow-[0_16px_42px_rgba(8,86,85,0.06)]">
+            <Search size={22} className="text-[#1ba09c]" />
+            <input
+              className="h-full flex-1 bg-transparent text-lg font-semibold outline-none placeholder:text-[#9aa094]"
+              placeholder="Search item, SKU, category..."
+            />
+            <Badge tone="orange">F2</Badge>
+          </div>
+          <div className="flex h-14 items-center gap-3 rounded-2xl bg-[#085655] px-4 text-white shadow-[0_18px_44px_rgba(8,86,85,0.2)]">
+            <Sparkles size={20} className="text-white" />
+            <div>
+              <p className="text-xs font-bold uppercase tracking-[0.18em] text-[#c7e8e6]">Rush mode</p>
+              <p className="text-sm font-black">Keyboard ready</p>
+            </div>
+          </div>
         </div>
 
         <div className="mb-5 flex gap-2">
@@ -60,8 +81,10 @@ export function PosPage() {
             <button
               key={category}
               className={[
-                'h-11 rounded-md px-4 text-sm font-bold transition',
-                index === 0 ? 'bg-espresso text-white' : 'bg-white text-stone-600 hover:bg-orange-50',
+                'h-11 rounded-xl px-4 text-sm font-bold transition',
+                index === 0
+                  ? 'bg-[#1ba09c] text-white shadow-[0_10px_22px_rgba(27,160,156,0.24)]'
+                  : 'bg-white text-[#657574] shadow-[inset_0_0_0_1px_rgba(8,86,85,0.08)] hover:bg-[#f4fbfa] hover:text-[#085655]',
               ].join(' ')}
             >
               {category}
@@ -69,18 +92,23 @@ export function PosPage() {
           ))}
         </div>
 
-        <div className="grid flex-1 auto-rows-[150px] grid-cols-3 gap-4 overflow-y-auto pb-6">
+        <div className="grid flex-1 auto-rows-[168px] grid-cols-3 gap-4 overflow-y-auto pb-2">
           {menuItems.map((item) => (
             <button
               key={item.id}
               onClick={() => addLine({ id: item.id, name: item.name, price: item.price, quantity: 1 })}
-              className="group rounded-lg border border-orange-100 bg-white p-4 text-left shadow-sm transition hover:-translate-y-0.5 hover:border-orange-300 hover:shadow-md"
+              className="group rounded-2xl bg-white p-4 text-left shadow-[0_14px_38px_rgba(8,86,85,0.07)] transition hover:-translate-y-0.5 hover:shadow-[0_22px_48px_rgba(8,86,85,0.12)]"
             >
               <div className="flex h-full flex-col justify-between">
                 <Badge tone="blue">{item.station}</Badge>
                 <div>
-                  <h3 className="text-lg font-black text-espresso">{item.name}</h3>
-                  <p className="mt-1 text-2xl font-black text-orange-600">Rs {item.price}</p>
+                  <h3 className="text-lg font-black text-[#0d1717]">{item.name}</h3>
+                  <div className="mt-3 flex items-end justify-between">
+                    <p className="text-2xl font-black text-[#085655]">Rs {item.price}</p>
+                    <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-[#1ba09c] text-white transition group-hover:scale-105">
+                      <Plus size={18} />
+                    </span>
+                  </div>
                 </div>
               </div>
             </button>
@@ -88,19 +116,19 @@ export function PosPage() {
         </div>
       </section>
 
-      <aside className="flex min-h-0 flex-col border-l border-orange-100 bg-white px-5 py-6 shadow-[-12px_0_36px_rgba(120,72,24,0.08)]">
+      <aside className="flex min-h-0 flex-col rounded-[28px] bg-white px-5 py-5 shadow-[0_28px_70px_rgba(8,86,85,0.11)]">
         <div className="mb-4 flex items-center justify-between">
           <div>
-            <p className="text-sm font-semibold text-stone-500">Ticket</p>
-            <h2 className="text-2xl font-black">Order #Draft</h2>
+            <p className="text-sm font-black uppercase tracking-[0.24em] text-[#7a7f73]">Ticket</p>
+            <h2 className="mt-1 text-2xl font-black">Order #Draft</h2>
           </div>
           <Badge tone="orange">Shift open</Badge>
         </div>
 
         <div className="flex-1 space-y-3 overflow-y-auto pr-1">
           {cart.length === 0 ? (
-            <Card className="flex h-56 items-center justify-center p-6 text-center text-sm font-semibold text-stone-500">
-              Add menu items to start a keyboard-friendly order.
+            <Card className="flex h-44 items-center justify-center bg-white p-6 text-center text-sm font-semibold text-[#657574] shadow-[inset_0_0_0_1px_rgba(8,86,85,0.08)]">
+              Add menu items to start a clean, fast cashier order.
             </Card>
           ) : (
             cart.map((line) => (
@@ -108,22 +136,22 @@ export function PosPage() {
                 <div className="flex items-start justify-between gap-3">
                   <div>
                     <h3 className="font-black">{line.name}</h3>
-                    <p className="text-sm font-semibold text-stone-500">Rs {line.price} each</p>
+                    <p className="text-sm font-semibold text-[#657574]">Rs {line.price} each</p>
                   </div>
                   <button
-                    className="flex h-9 w-9 items-center justify-center rounded-md text-stone-400 hover:bg-red-50 hover:text-red-600"
+                    className="flex h-9 w-9 items-center justify-center rounded-xl text-[#98a095] hover:bg-red-50 hover:text-red-600"
                     onClick={() => removeLine(line.id)}
                   >
                     <Trash2 size={18} />
                   </button>
                 </div>
                 <div className="mt-4 flex items-center justify-between">
-                  <div className="flex items-center rounded-md border border-orange-100">
-                    <button className="flex h-9 w-9 items-center justify-center text-stone-500">
+                  <div className="flex items-center rounded-xl bg-[#f4fbfa]">
+                    <button className="flex h-9 w-9 items-center justify-center text-[#6b7167]">
                       <Minus size={16} />
                     </button>
                     <span className="w-10 text-center font-black">{line.quantity}</span>
-                    <button className="flex h-9 w-9 items-center justify-center text-orange-600">
+                    <button className="flex h-9 w-9 items-center justify-center text-[#1ba09c]">
                       <Plus size={16} />
                     </button>
                   </div>
@@ -134,18 +162,33 @@ export function PosPage() {
           )}
         </div>
 
-        <div className="mt-5 rounded-lg bg-cream p-4">
-          <div className="flex justify-between text-sm font-bold text-stone-600">
+        <Card className="mt-4 bg-[#f4fbfa] p-4 shadow-none">
+          <div className="flex items-center gap-2 text-sm font-black text-[#085655]">
+            <Keyboard size={17} />
+            Shortcut card
+          </div>
+          <div className="mt-3 grid grid-cols-2 gap-2 text-xs font-bold text-[#657574]">
+            <span>F2 Search</span>
+            <span>F5 Kitchen</span>
+            <span>F7 Payment</span>
+            <span>Ctrl+Shift+F Max</span>
+            <span>Ctrl+Shift+M Min</span>
+            <span>Ctrl+Shift+Q Close</span>
+          </div>
+        </Card>
+
+        <div className="mt-4 rounded-2xl bg-[#085655] p-4 text-white">
+          <div className="flex justify-between text-sm font-bold text-[#c7e8e6]">
             <span>Subtotal</span>
             <span>Rs {total}</span>
           </div>
-          <div className="mt-2 flex justify-between text-sm font-bold text-stone-600">
+          <div className="mt-2 flex justify-between text-sm font-bold text-[#c7e8e6]">
             <span>Tax / service</span>
             <span>Configured</span>
           </div>
-          <div className="mt-4 flex justify-between border-t border-orange-200 pt-4 text-2xl font-black">
+          <div className="mt-4 flex justify-between border-t border-[#27716f] pt-4 text-2xl font-black">
             <span>Total</span>
-            <span>Rs {total}</span>
+            <span className="text-white">Rs {total}</span>
           </div>
         </div>
 

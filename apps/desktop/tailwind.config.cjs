@@ -8,10 +8,14 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        canvas: '#fffaf3',
-        cream: '#fff7ed',
-        ember: '#ea580c',
-        espresso: '#2c1810',
+        canvas: '#ffffff',
+        cream: '#ffffff',
+        primary: '#1ba09c',
+        secondary: '#085655',
+        mint: '#e9fbfa',
+        sage: '#f4fbfa',
+        forest: '#085655',
+        espresso: '#0d1717',
       },
       fontFamily: {
         sans: ['Inter', 'ui-sans-serif', 'system-ui', 'sans-serif'],

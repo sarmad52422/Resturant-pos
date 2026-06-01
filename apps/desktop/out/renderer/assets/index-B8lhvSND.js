@@ -1,12 +1,12 @@
-function _mergeNamespaces(n, m) {
-  for (var i = 0; i < m.length; i++) {
-    const e = m[i];
+function _mergeNamespaces(n2, m) {
+  for (var i2 = 0; i2 < m.length; i2++) {
+    const e = m[i2];
     if (typeof e !== "string" && !Array.isArray(e)) {
       for (const k in e) {
-        if (k !== "default" && !(k in n)) {
+        if (k !== "default" && !(k in n2)) {
           const d = Object.getOwnPropertyDescriptor(e, k);
           if (d) {
-            Object.defineProperty(n, k, d.get ? d : {
+            Object.defineProperty(n2, k, d.get ? d : {
               enumerable: true,
               get: () => e[k]
             });
@@ -15,7 +15,7 @@ function _mergeNamespaces(n, m) {
       }
     }
   }
-  return Object.freeze(Object.defineProperty(n, Symbol.toStringTag, { value: "Module" }));
+  return Object.freeze(Object.defineProperty(n2, Symbol.toStringTag, { value: "Module" }));
 }
 function getDefaultExportFromCjs(x) {
   return x && x.__esModule && Object.prototype.hasOwnProperty.call(x, "default") ? x["default"] : x;
@@ -36,21 +36,21 @@ function requireReactJsxRuntime_production() {
   if (hasRequiredReactJsxRuntime_production) return reactJsxRuntime_production;
   hasRequiredReactJsxRuntime_production = 1;
   var REACT_ELEMENT_TYPE = Symbol.for("react.transitional.element"), REACT_FRAGMENT_TYPE = Symbol.for("react.fragment");
-  function jsxProd(type, config, maybeKey) {
+  function jsxProd(type, config2, maybeKey) {
     var key = null;
     void 0 !== maybeKey && (key = "" + maybeKey);
-    void 0 !== config.key && (key = "" + config.key);
-    if ("key" in config) {
+    void 0 !== config2.key && (key = "" + config2.key);
+    if ("key" in config2) {
       maybeKey = {};
-      for (var propName in config)
-        "key" !== propName && (maybeKey[propName] = config[propName]);
-    } else maybeKey = config;
-    config = maybeKey.ref;
+      for (var propName in config2)
+        "key" !== propName && (maybeKey[propName] = config2[propName]);
+    } else maybeKey = config2;
+    config2 = maybeKey.ref;
     return {
       $$typeof: REACT_ELEMENT_TYPE,
       type,
       key,
-      ref: void 0 !== config ? config : null,
+      ref: void 0 !== config2 ? config2 : null,
       props: maybeKey
     };
   }
@@ -225,17 +225,17 @@ function requireReact_production() {
     invokeCallback = 0;
     var nextNamePrefix = "" === nameSoFar ? "." : nameSoFar + ":";
     if (isArrayImpl(children))
-      for (var i = 0; i < children.length; i++)
-        nameSoFar = children[i], type = nextNamePrefix + getElementKey(nameSoFar, i), invokeCallback += mapIntoArray(
+      for (var i2 = 0; i2 < children.length; i2++)
+        nameSoFar = children[i2], type = nextNamePrefix + getElementKey(nameSoFar, i2), invokeCallback += mapIntoArray(
           nameSoFar,
           array,
           escapedPrefix,
           type,
           callback
         );
-    else if (i = getIteratorFn(children), "function" === typeof i)
-      for (children = i.call(children), i = 0; !(nameSoFar = children.next()).done; )
-        nameSoFar = nameSoFar.value, type = nextNamePrefix + getElementKey(nameSoFar, i++), invokeCallback += mapIntoArray(
+    else if (i2 = getIteratorFn(children), "function" === typeof i2)
+      for (children = i2.call(children), i2 = 0; !(nameSoFar = children.next()).done; )
+        nameSoFar = nameSoFar.value, type = nextNamePrefix + getElementKey(nameSoFar, i2++), invokeCallback += mapIntoArray(
           nameSoFar,
           array,
           escapedPrefix,
@@ -311,11 +311,11 @@ function requireReact_production() {
       );
     },
     count: function(children) {
-      var n = 0;
+      var n2 = 0;
       mapChildren(children, function() {
-        n++;
+        n2++;
       });
-      return n;
+      return n2;
     },
     toArray: function(children) {
       return mapChildren(children, function(child) {
@@ -353,20 +353,20 @@ function requireReact_production() {
   react_production.cacheSignal = function() {
     return null;
   };
-  react_production.cloneElement = function(element, config, children) {
+  react_production.cloneElement = function(element, config2, children) {
     if (null === element || void 0 === element)
       throw Error(
         "The argument must be a React element, but you passed " + element + "."
       );
     var props = assign({}, element.props), key = element.key;
-    if (null != config)
-      for (propName in void 0 !== config.key && (key = "" + config.key), config)
-        !hasOwnProperty.call(config, propName) || "key" === propName || "__self" === propName || "__source" === propName || "ref" === propName && void 0 === config.ref || (props[propName] = config[propName]);
+    if (null != config2)
+      for (propName in void 0 !== config2.key && (key = "" + config2.key), config2)
+        !hasOwnProperty.call(config2, propName) || "key" === propName || "__self" === propName || "__source" === propName || "ref" === propName && void 0 === config2.ref || (props[propName] = config2[propName]);
     var propName = arguments.length - 2;
     if (1 === propName) props.children = children;
     else if (1 < propName) {
-      for (var childArray = Array(propName), i = 0; i < propName; i++)
-        childArray[i] = arguments[i + 2];
+      for (var childArray = Array(propName), i2 = 0; i2 < propName; i2++)
+        childArray[i2] = arguments[i2 + 2];
       props.children = childArray;
     }
     return ReactElement(element.type, key, props);
@@ -387,16 +387,16 @@ function requireReact_production() {
     };
     return defaultValue;
   };
-  react_production.createElement = function(type, config, children) {
+  react_production.createElement = function(type, config2, children) {
     var propName, props = {}, key = null;
-    if (null != config)
-      for (propName in void 0 !== config.key && (key = "" + config.key), config)
-        hasOwnProperty.call(config, propName) && "key" !== propName && "__self" !== propName && "__source" !== propName && (props[propName] = config[propName]);
+    if (null != config2)
+      for (propName in void 0 !== config2.key && (key = "" + config2.key), config2)
+        hasOwnProperty.call(config2, propName) && "key" !== propName && "__self" !== propName && "__source" !== propName && (props[propName] = config2[propName]);
     var childrenLength = arguments.length - 2;
     if (1 === childrenLength) props.children = children;
     else if (1 < childrenLength) {
-      for (var childArray = Array(childrenLength), i = 0; i < childrenLength; i++)
-        childArray[i] = arguments[i + 2];
+      for (var childArray = Array(childrenLength), i2 = 0; i2 < childrenLength; i2++)
+        childArray[i2] = arguments[i2 + 2];
       props.children = childArray;
     }
     if (type && type.defaultProps)
@@ -566,9 +566,9 @@ function requireScheduler_production() {
       }
       return first;
     }
-    function compare(a, b) {
-      var diff = a.sortIndex - b.sortIndex;
-      return 0 !== diff ? diff : a.id - b.id;
+    function compare(a2, b) {
+      var diff = a2.sortIndex - b.sortIndex;
+      return 0 !== diff ? diff : a2.id - b.id;
     }
     exports.unstable_now = void 0;
     if ("object" === typeof performance && "function" === typeof performance.now) {
@@ -816,8 +816,8 @@ function requireReactDom_production() {
     var url = "https://react.dev/errors/" + code;
     if (1 < arguments.length) {
       url += "?args[]=" + encodeURIComponent(arguments[1]);
-      for (var i = 2; i < arguments.length; i++)
-        url += "&args[]=" + encodeURIComponent(arguments[i]);
+      for (var i2 = 2; i2 < arguments.length; i2++)
+        url += "&args[]=" + encodeURIComponent(arguments[i2]);
     }
     return "Minified React error #" + code + "; visit " + url + " for the full message or use the non-minified dev environment for full errors and additional helpful warnings.";
   }
@@ -942,8 +942,8 @@ function requireReactDom_production() {
   reactDom_production.requestFormReset = function(form) {
     Internals.d.r(form);
   };
-  reactDom_production.unstable_batchedUpdates = function(fn, a) {
-    return fn(a);
+  reactDom_production.unstable_batchedUpdates = function(fn, a2) {
+    return fn(a2);
   };
   reactDom_production.useFormState = function(action, initialState, permalink) {
     return ReactSharedInternals.H.useFormState(action, initialState, permalink);
@@ -992,8 +992,8 @@ function requireReactDomClient_production() {
     var url = "https://react.dev/errors/" + code;
     if (1 < arguments.length) {
       url += "?args[]=" + encodeURIComponent(arguments[1]);
-      for (var i = 2; i < arguments.length; i++)
-        url += "&args[]=" + encodeURIComponent(arguments[i]);
+      for (var i2 = 2; i2 < arguments.length; i2++)
+        url += "&args[]=" + encodeURIComponent(arguments[i2]);
     }
     return "Minified React error #" + code + "; visit " + url + " for the full message or use the non-minified dev environment for full errors and additional helpful warnings.";
   }
@@ -1038,55 +1038,55 @@ function requireReactDomClient_production() {
       if (null === alternate) throw Error(formatProdErrorMessage(188));
       return alternate !== fiber ? null : fiber;
     }
-    for (var a = fiber, b = alternate; ; ) {
-      var parentA = a.return;
+    for (var a2 = fiber, b = alternate; ; ) {
+      var parentA = a2.return;
       if (null === parentA) break;
       var parentB = parentA.alternate;
       if (null === parentB) {
         b = parentA.return;
         if (null !== b) {
-          a = b;
+          a2 = b;
           continue;
         }
         break;
       }
       if (parentA.child === parentB.child) {
         for (parentB = parentA.child; parentB; ) {
-          if (parentB === a) return assertIsMounted(parentA), fiber;
+          if (parentB === a2) return assertIsMounted(parentA), fiber;
           if (parentB === b) return assertIsMounted(parentA), alternate;
           parentB = parentB.sibling;
         }
         throw Error(formatProdErrorMessage(188));
       }
-      if (a.return !== b.return) a = parentA, b = parentB;
+      if (a2.return !== b.return) a2 = parentA, b = parentB;
       else {
         for (var didFindChild = false, child$0 = parentA.child; child$0; ) {
-          if (child$0 === a) {
+          if (child$0 === a2) {
             didFindChild = true;
-            a = parentA;
+            a2 = parentA;
             b = parentB;
             break;
           }
           if (child$0 === b) {
             didFindChild = true;
             b = parentA;
-            a = parentB;
+            a2 = parentB;
             break;
           }
           child$0 = child$0.sibling;
         }
         if (!didFindChild) {
           for (child$0 = parentB.child; child$0; ) {
-            if (child$0 === a) {
+            if (child$0 === a2) {
               didFindChild = true;
-              a = parentB;
+              a2 = parentB;
               b = parentA;
               break;
             }
             if (child$0 === b) {
               didFindChild = true;
               b = parentB;
-              a = parentA;
+              a2 = parentA;
               break;
             }
             child$0 = child$0.sibling;
@@ -1094,10 +1094,10 @@ function requireReactDomClient_production() {
           if (!didFindChild) throw Error(formatProdErrorMessage(189));
         }
       }
-      if (a.alternate !== b) throw Error(formatProdErrorMessage(190));
+      if (a2.alternate !== b) throw Error(formatProdErrorMessage(190));
     }
-    if (3 !== a.tag) throw Error(formatProdErrorMessage(188));
-    return a.stateNode.current === a ? fiber : alternate;
+    if (3 !== a2.tag) throw Error(formatProdErrorMessage(188));
+    return a2.stateNode.current === a2 ? fiber : alternate;
   }
   function findCurrentHostFiberImpl(node) {
     var tag = node.tag;
@@ -1492,7 +1492,7 @@ function requireReactDomClient_production() {
     return lane;
   }
   function createLaneMap(initial) {
-    for (var laneMap = [], i = 0; 31 > i; i++) laneMap.push(initial);
+    for (var laneMap = [], i2 = 0; 31 > i2; i2++) laneMap.push(initial);
     return laneMap;
   }
   function markRootUpdated$1(root2, updateLane) {
@@ -1743,15 +1743,15 @@ function requireReactDomClient_production() {
       valueField
     );
     if (!node.hasOwnProperty(valueField) && "undefined" !== typeof descriptor && "function" === typeof descriptor.get && "function" === typeof descriptor.set) {
-      var get = descriptor.get, set = descriptor.set;
+      var get2 = descriptor.get, set2 = descriptor.set;
       Object.defineProperty(node, valueField, {
         configurable: true,
         get: function() {
-          return get.call(this);
+          return get2.call(this);
         },
         set: function(value) {
           currentValue = "" + value;
-          set.call(this, value);
+          set2.call(this, value);
         }
       });
       Object.defineProperty(node, valueField, {
@@ -1851,20 +1851,20 @@ function requireReactDomClient_production() {
     node = node.options;
     if (multiple) {
       multiple = {};
-      for (var i = 0; i < propValue.length; i++)
-        multiple["$" + propValue[i]] = true;
+      for (var i2 = 0; i2 < propValue.length; i2++)
+        multiple["$" + propValue[i2]] = true;
       for (propValue = 0; propValue < node.length; propValue++)
-        i = multiple.hasOwnProperty("$" + node[propValue].value), node[propValue].selected !== i && (node[propValue].selected = i), i && setDefaultSelected && (node[propValue].defaultSelected = true);
+        i2 = multiple.hasOwnProperty("$" + node[propValue].value), node[propValue].selected !== i2 && (node[propValue].selected = i2), i2 && setDefaultSelected && (node[propValue].defaultSelected = true);
     } else {
       propValue = "" + getToStringValue(propValue);
       multiple = null;
-      for (i = 0; i < node.length; i++) {
-        if (node[i].value === propValue) {
-          node[i].selected = true;
-          setDefaultSelected && (node[i].defaultSelected = true);
+      for (i2 = 0; i2 < node.length; i2++) {
+        if (node[i2].value === propValue) {
+          node[i2].selected = true;
+          setDefaultSelected && (node[i2].defaultSelected = true);
           return;
         }
-        null !== multiple || node[i].disabled || (multiple = node[i]);
+        null !== multiple || node[i2].disabled || (multiple = node[i2]);
       }
       null !== multiple && (multiple.selected = true);
     }
@@ -2089,16 +2089,16 @@ function requireReactDomClient_production() {
     }
   }
   var isInsideEventHandler = false;
-  function batchedUpdates$1(fn, a, b) {
-    if (isInsideEventHandler) return fn(a, b);
+  function batchedUpdates$1(fn, a2, b) {
+    if (isInsideEventHandler) return fn(a2, b);
     isInsideEventHandler = true;
     try {
-      var JSCompiler_inline_result = fn(a);
+      var JSCompiler_inline_result = fn(a2);
       return JSCompiler_inline_result;
     } finally {
       if (isInsideEventHandler = false, null !== restoreTarget || null !== restoreQueue) {
-        if (flushSyncWork$1(), restoreTarget && (a = restoreTarget, fn = restoreQueue, restoreQueue = restoreTarget = null, restoreStateOfTarget(a), fn))
-          for (a = 0; a < fn.length; a++) restoreStateOfTarget(fn[a]);
+        if (flushSyncWork$1(), restoreTarget && (a2 = restoreTarget, fn = restoreQueue, restoreQueue = restoreTarget = null, restoreStateOfTarget(a2), fn))
+          for (a2 = 0; a2 < fn.length; a2++) restoreStateOfTarget(fn[a2]);
       }
     }
   }
@@ -2637,15 +2637,15 @@ function requireReactDomClient_production() {
     console.error(error);
   }, concurrentQueues = [], concurrentQueuesIndex = 0, concurrentlyUpdatedLanes = 0;
   function finishQueueingConcurrentUpdates() {
-    for (var endIndex = concurrentQueuesIndex, i = concurrentlyUpdatedLanes = concurrentQueuesIndex = 0; i < endIndex; ) {
-      var fiber = concurrentQueues[i];
-      concurrentQueues[i++] = null;
-      var queue = concurrentQueues[i];
-      concurrentQueues[i++] = null;
-      var update = concurrentQueues[i];
-      concurrentQueues[i++] = null;
-      var lane = concurrentQueues[i];
-      concurrentQueues[i++] = null;
+    for (var endIndex = concurrentQueuesIndex, i2 = concurrentlyUpdatedLanes = concurrentQueuesIndex = 0; i2 < endIndex; ) {
+      var fiber = concurrentQueues[i2];
+      concurrentQueues[i2++] = null;
+      var queue = concurrentQueues[i2];
+      concurrentQueues[i2++] = null;
+      var update = concurrentQueues[i2];
+      concurrentQueues[i2++] = null;
+      var lane = concurrentQueues[i2];
+      concurrentQueues[i2++] = null;
       if (null !== queue && null !== update) {
         var pending = queue.pending;
         null === pending ? update.next = update : (update.next = pending.next, pending.next = update);
@@ -3043,8 +3043,8 @@ function requireReactDomClient_production() {
         a: for (; null !== list; ) {
           var dependency = list;
           list = fiber;
-          for (var i = 0; i < contexts.length; i++)
-            if (dependency.context === contexts[i]) {
+          for (var i2 = 0; i2 < contexts.length; i2++)
+            if (dependency.context === contexts[i2]) {
               list.lanes |= renderLanes2;
               dependency = list.alternate;
               null !== dependency && (dependency.lanes |= renderLanes2);
@@ -3209,7 +3209,7 @@ function requireReactDomClient_production() {
       currentEntangledListeners = null;
       currentEntangledLane = 0;
       currentEntangledActionThenable = null;
-      for (var i = 0; i < listeners.length; i++) (0, listeners[i])();
+      for (var i2 = 0; i2 < listeners.length; i2++) (0, listeners[i2])();
     }
   }
   function chainThenableValue(thenable, result) {
@@ -3225,7 +3225,7 @@ function requireReactDomClient_production() {
       function() {
         thenableWithOverride.status = "fulfilled";
         thenableWithOverride.value = result;
-        for (var i = 0; i < listeners.length; i++) (0, listeners[i])(result);
+        for (var i2 = 0; i2 < listeners.length; i2++) (0, listeners[i2])(result);
       },
       function(error) {
         thenableWithOverride.status = "rejected";
@@ -4034,8 +4034,8 @@ function requireReactDomClient_production() {
   }
   function areHookInputsEqual(nextDeps, prevDeps) {
     if (null === prevDeps) return false;
-    for (var i = 0; i < prevDeps.length && i < nextDeps.length; i++)
-      if (!objectIs(nextDeps[i], prevDeps[i])) return false;
+    for (var i2 = 0; i2 < prevDeps.length && i2 < nextDeps.length; i2++)
+      if (!objectIs(nextDeps[i2], prevDeps[i2])) return false;
     return true;
   }
   function renderWithHooks(current, workInProgress2, Component, props, secondArg, nextRenderLanes) {
@@ -4469,7 +4469,7 @@ function requireReactDomClient_production() {
   }
   function notifyActionListeners(actionNode) {
     actionNode = actionNode.listeners;
-    for (var i = 0; i < actionNode.length; i++) (0, actionNode[i])();
+    for (var i2 = 0; i2 < actionNode.length; i2++) (0, actionNode[i2])();
   }
   function actionStateReducer(oldState, newState) {
     return newState;
@@ -7627,8 +7627,8 @@ function requireReactDomClient_production() {
   function recursivelyTraverseMutationEffects(root$jscomp$0, parentFiber) {
     var deletions = parentFiber.deletions;
     if (null !== deletions)
-      for (var i = 0; i < deletions.length; i++) {
-        var childToDelete = deletions[i], root2 = root$jscomp$0, returnFiber = parentFiber, parent = returnFiber;
+      for (var i2 = 0; i2 < deletions.length; i2++) {
+        var childToDelete = deletions[i2], root2 = root$jscomp$0, returnFiber = parentFiber, parent = returnFiber;
         a: for (; null !== parent; ) {
           switch (parent.tag) {
             case 27:
@@ -7715,9 +7715,9 @@ function requireReactDomClient_production() {
                         hoistableRoot
                       ).get(flags + (current.href || ""));
                       if (maybeNodes) {
-                        for (var i = 0; i < maybeNodes.length; i++)
-                          if (currentResource = maybeNodes[i], currentResource.getAttribute("href") === (null == current.href || "" === current.href ? null : current.href) && currentResource.getAttribute("rel") === (null == current.rel ? null : current.rel) && currentResource.getAttribute("title") === (null == current.title ? null : current.title) && currentResource.getAttribute("crossorigin") === (null == current.crossOrigin ? null : current.crossOrigin)) {
-                            maybeNodes.splice(i, 1);
+                        for (var i2 = 0; i2 < maybeNodes.length; i2++)
+                          if (currentResource = maybeNodes[i2], currentResource.getAttribute("href") === (null == current.href || "" === current.href ? null : current.href) && currentResource.getAttribute("rel") === (null == current.rel ? null : current.rel) && currentResource.getAttribute("title") === (null == current.title ? null : current.title) && currentResource.getAttribute("crossorigin") === (null == current.crossOrigin ? null : current.crossOrigin)) {
+                            maybeNodes.splice(i2, 1);
                             break b;
                           }
                       }
@@ -7731,9 +7731,9 @@ function requireReactDomClient_production() {
                         "content",
                         hoistableRoot
                       ).get(flags + (current.content || ""))) {
-                        for (i = 0; i < maybeNodes.length; i++)
-                          if (currentResource = maybeNodes[i], currentResource.getAttribute("content") === (null == current.content ? null : "" + current.content) && currentResource.getAttribute("name") === (null == current.name ? null : current.name) && currentResource.getAttribute("property") === (null == current.property ? null : current.property) && currentResource.getAttribute("http-equiv") === (null == current.httpEquiv ? null : current.httpEquiv) && currentResource.getAttribute("charset") === (null == current.charSet ? null : current.charSet)) {
-                            maybeNodes.splice(i, 1);
+                        for (i2 = 0; i2 < maybeNodes.length; i2++)
+                          if (currentResource = maybeNodes[i2], currentResource.getAttribute("content") === (null == current.content ? null : "" + current.content) && currentResource.getAttribute("name") === (null == current.name ? null : current.name) && currentResource.getAttribute("property") === (null == current.property ? null : current.property) && currentResource.getAttribute("http-equiv") === (null == current.httpEquiv ? null : current.httpEquiv) && currentResource.getAttribute("charset") === (null == current.charSet ? null : current.charSet)) {
+                            maybeNodes.splice(i2, 1);
                             break b;
                           }
                       }
@@ -7878,9 +7878,9 @@ function requireReactDomClient_production() {
                   if (currentResource = wasHidden.stateNode, hoistableRoot)
                     maybeNodes = currentResource.style, "function" === typeof maybeNodes.setProperty ? maybeNodes.setProperty("display", "none", "important") : maybeNodes.display = "none";
                   else {
-                    i = wasHidden.stateNode;
+                    i2 = wasHidden.stateNode;
                     var styleProp = wasHidden.memoizedProps.style, display = void 0 !== styleProp && null !== styleProp && styleProp.hasOwnProperty("display") ? styleProp.display : null;
-                    i.style.display = null == display || "boolean" === typeof display ? "" : ("" + display).trim();
+                    i2.style.display = null == display || "boolean" === typeof display ? "" : ("" + display).trim();
                   }
                 } catch (error) {
                   captureCommitPhaseError(wasHidden, wasHidden.return, error);
@@ -8432,8 +8432,8 @@ function requireReactDomClient_production() {
     var deletions = parentFiber.deletions;
     if (0 !== (parentFiber.flags & 16)) {
       if (null !== deletions)
-        for (var i = 0; i < deletions.length; i++) {
-          var childToDelete = deletions[i];
+        for (var i2 = 0; i2 < deletions.length; i2++) {
+          var childToDelete = deletions[i2];
           nextEffect = childToDelete;
           commitPassiveUnmountEffectsInsideOfDeletedTree_begin(
             childToDelete,
@@ -8472,8 +8472,8 @@ function requireReactDomClient_production() {
     var deletions = parentFiber.deletions;
     if (0 !== (parentFiber.flags & 16)) {
       if (null !== deletions)
-        for (var i = 0; i < deletions.length; i++) {
-          var childToDelete = deletions[i];
+        for (var i2 = 0; i2 < deletions.length; i2++) {
+          var childToDelete = deletions[i2];
           nextEffect = childToDelete;
           commitPassiveUnmountEffectsInsideOfDeletedTree_begin(
             childToDelete,
@@ -8492,8 +8492,8 @@ function requireReactDomClient_production() {
           recursivelyTraverseDisconnectPassiveEffects(deletions);
           break;
         case 22:
-          i = deletions.stateNode;
-          i._visibility & 2 && (i._visibility &= -3, recursivelyTraverseDisconnectPassiveEffects(deletions));
+          i2 = deletions.stateNode;
+          i2._visibility & 2 && (i2._visibility &= -3, recursivelyTraverseDisconnectPassiveEffects(deletions));
           break;
         default:
           recursivelyTraverseDisconnectPassiveEffects(deletions);
@@ -8783,8 +8783,8 @@ function requireReactDomClient_production() {
     for (var node = finishedWork; ; ) {
       var tag = node.tag;
       if ((0 === tag || 11 === tag || 15 === tag) && node.flags & 16384 && (tag = node.updateQueue, null !== tag && (tag = tag.stores, null !== tag)))
-        for (var i = 0; i < tag.length; i++) {
-          var check = tag[i], getSnapshot = check.getSnapshot;
+        for (var i2 = 0; i2 < tag.length; i2++) {
+          var check = tag[i2], getSnapshot = check.getSnapshot;
           check = check.value;
           try {
             if (!objectIs(getSnapshot(), check)) return false;
@@ -9344,8 +9344,8 @@ function requireReactDomClient_production() {
         ReactDOMSharedInternals.p = 2;
         ReactSharedInternals.T = null;
         try {
-          for (var onRecoverableError = root2.onRecoverableError, i = 0; i < recoverableErrors.length; i++) {
-            var recoverableError = recoverableErrors[i];
+          for (var onRecoverableError = root2.onRecoverableError, i2 = 0; i2 < recoverableErrors.length; i2++) {
+            var recoverableError = recoverableErrors[i2];
             onRecoverableError(recoverableError.value, {
               componentStack: recoverableError.stack
             });
@@ -9753,8 +9753,8 @@ function requireReactDomClient_production() {
   );
   function processDispatchQueue(dispatchQueue, eventSystemFlags) {
     eventSystemFlags = 0 !== (eventSystemFlags & 4);
-    for (var i = 0; i < dispatchQueue.length; i++) {
-      var _dispatchQueue$i = dispatchQueue[i], event = _dispatchQueue$i.event;
+    for (var i2 = 0; i2 < dispatchQueue.length; i2++) {
+      var _dispatchQueue$i = dispatchQueue[i2], event = _dispatchQueue$i.event;
       _dispatchQueue$i = _dispatchQueue$i.listeners;
       a: {
         var previousInstance = void 0;
@@ -10992,18 +10992,18 @@ function requireReactDomClient_production() {
   }
   function estimateBandwidth() {
     if ("function" === typeof performance.getEntriesByType) {
-      for (var count = 0, bits = 0, resourceEntries = performance.getEntriesByType("resource"), i = 0; i < resourceEntries.length; i++) {
-        var entry = resourceEntries[i], transferSize = entry.transferSize, initiatorType = entry.initiatorType, duration = entry.duration;
+      for (var count = 0, bits = 0, resourceEntries = performance.getEntriesByType("resource"), i2 = 0; i2 < resourceEntries.length; i2++) {
+        var entry = resourceEntries[i2], transferSize = entry.transferSize, initiatorType = entry.initiatorType, duration = entry.duration;
         if (transferSize && duration && isLikelyStaticResource(initiatorType)) {
           initiatorType = 0;
           duration = entry.responseEnd;
-          for (i += 1; i < resourceEntries.length; i++) {
-            var overlapEntry = resourceEntries[i], overlapStartTime = overlapEntry.startTime;
+          for (i2 += 1; i2 < resourceEntries.length; i2++) {
+            var overlapEntry = resourceEntries[i2], overlapStartTime = overlapEntry.startTime;
             if (overlapStartTime > duration) break;
             var overlapTransferSize = overlapEntry.transferSize, overlapInitiatorType = overlapEntry.initiatorType;
             overlapTransferSize && isLikelyStaticResource(overlapInitiatorType) && (overlapEntry = overlapEntry.responseEnd, initiatorType += overlapTransferSize * (overlapEntry < duration ? 1 : (duration - overlapStartTime) / (overlapEntry - overlapStartTime)));
           }
-          --i;
+          --i2;
           bits += 8 * (transferSize + initiatorType) / (entry.duration / 1e3);
           count++;
           if (10 < count) break;
@@ -11611,8 +11611,8 @@ function requireReactDomClient_production() {
   function insertStylesheet(instance, precedence, root2) {
     for (var nodes = root2.querySelectorAll(
       'link[rel="stylesheet"][data-precedence],style[data-precedence]'
-    ), last = nodes.length ? nodes[nodes.length - 1] : null, prior = last, i = 0; i < nodes.length; i++) {
-      var node = nodes[i];
+    ), last = nodes.length ? nodes[nodes.length - 1] : null, prior = last, i2 = 0; i2 < nodes.length; i2++) {
+      var node = nodes[i2];
       if (node.dataset.precedence === precedence) prior = node;
       else if (prior !== last) break;
     }
@@ -11774,8 +11774,8 @@ function requireReactDomClient_production() {
         precedencesByRoot.set(root2, precedences);
         for (var nodes = root2.querySelectorAll(
           "link[data-precedence],style[data-precedence]"
-        ), i = 0; i < nodes.length; i++) {
-          var node = nodes[i];
+        ), i2 = 0; i2 < nodes.length; i2++) {
+          var node = nodes[i2];
           if ("LINK" === node.nodeName || "not all" !== node.getAttribute("media"))
             precedences.set(node.dataset.precedence, node), last = node;
         }
@@ -11783,14 +11783,14 @@ function requireReactDomClient_production() {
       }
       nodes = resource.instance;
       node = nodes.getAttribute("data-precedence");
-      i = precedences.get(node) || last;
-      i === last && precedences.set(null, nodes);
+      i2 = precedences.get(node) || last;
+      i2 === last && precedences.set(null, nodes);
       precedences.set(node, nodes);
       this.count++;
       last = onUnsuspend.bind(this);
       nodes.addEventListener("load", last);
       nodes.addEventListener("error", last);
-      i ? i.parentNode.insertBefore(nodes, i.nextSibling) : (root2 = 9 === root2.nodeType ? root2.head : root2, root2.insertBefore(nodes, root2.firstChild));
+      i2 ? i2.parentNode.insertBefore(nodes, i2.nextSibling) : (root2 = 9 === root2.nodeType ? root2.head : root2, root2.insertBefore(nodes, root2.firstChild));
       resource.state.loading |= 4;
     }
   }
@@ -11869,8 +11869,8 @@ function requireReactDomClient_production() {
   function markRetryLaneImpl(fiber, retryLane) {
     fiber = fiber.memoizedState;
     if (null !== fiber && null !== fiber.dehydrated) {
-      var a = fiber.retryLane;
-      fiber.retryLane = 0 !== a && a < retryLane ? a : retryLane;
+      var a2 = fiber.retryLane;
+      fiber.retryLane = 0 !== a2 && a2 < retryLane ? a2 : retryLane;
     }
   }
   function markRetryLaneIfNotHydrated(fiber, retryLane) {
@@ -12274,14 +12274,14 @@ function requireReactDomClient_production() {
       Scheduler.unstable_NormalPriority,
       function() {
         lastScheduledReplayQueue === formReplayingQueue && (lastScheduledReplayQueue = null);
-        for (var i = 0; i < formReplayingQueue.length; i += 3) {
-          var form = formReplayingQueue[i], submitterOrAction = formReplayingQueue[i + 1], formData = formReplayingQueue[i + 2];
+        for (var i2 = 0; i2 < formReplayingQueue.length; i2 += 3) {
+          var form = formReplayingQueue[i2], submitterOrAction = formReplayingQueue[i2 + 1], formData = formReplayingQueue[i2 + 2];
           if ("function" !== typeof submitterOrAction)
             if (null === findInstanceBlockingTarget(submitterOrAction || form))
               continue;
             else break;
           var formInst = getInstanceFromNode(form);
-          null !== formInst && (formReplayingQueue.splice(i, 3), i -= 3, startHostTransition(
+          null !== formInst && (formReplayingQueue.splice(i2, 3), i2 -= 3, startHostTransition(
             formInst,
             {
               pending: true,
@@ -12305,18 +12305,18 @@ function requireReactDomClient_production() {
     null !== queuedMouse && scheduleCallbackIfUnblocked(queuedMouse, unblocked);
     queuedPointers.forEach(unblock);
     queuedPointerCaptures.forEach(unblock);
-    for (var i = 0; i < queuedExplicitHydrationTargets.length; i++) {
-      var queuedTarget = queuedExplicitHydrationTargets[i];
+    for (var i2 = 0; i2 < queuedExplicitHydrationTargets.length; i2++) {
+      var queuedTarget = queuedExplicitHydrationTargets[i2];
       queuedTarget.blockedOn === unblocked && (queuedTarget.blockedOn = null);
     }
-    for (; 0 < queuedExplicitHydrationTargets.length && (i = queuedExplicitHydrationTargets[0], null === i.blockedOn); )
-      attemptExplicitHydrationTarget(i), null === i.blockedOn && queuedExplicitHydrationTargets.shift();
-    i = (unblocked.ownerDocument || unblocked).$$reactFormReplay;
-    if (null != i)
-      for (queuedTarget = 0; queuedTarget < i.length; queuedTarget += 3) {
-        var form = i[queuedTarget], submitterOrAction = i[queuedTarget + 1], formProps = form[internalPropsKey] || null;
+    for (; 0 < queuedExplicitHydrationTargets.length && (i2 = queuedExplicitHydrationTargets[0], null === i2.blockedOn); )
+      attemptExplicitHydrationTarget(i2), null === i2.blockedOn && queuedExplicitHydrationTargets.shift();
+    i2 = (unblocked.ownerDocument || unblocked).$$reactFormReplay;
+    if (null != i2)
+      for (queuedTarget = 0; queuedTarget < i2.length; queuedTarget += 3) {
+        var form = i2[queuedTarget], submitterOrAction = i2[queuedTarget + 1], formProps = form[internalPropsKey] || null;
         if ("function" === typeof submitterOrAction)
-          formProps || scheduleReplayQueueIfNeeded(i);
+          formProps || scheduleReplayQueueIfNeeded(i2);
         else if (formProps) {
           var action = null;
           if (submitterOrAction && submitterOrAction.hasAttribute("formAction"))
@@ -12326,8 +12326,8 @@ function requireReactDomClient_production() {
               if (null !== findInstanceBlockingTarget(form)) continue;
             }
           else action = formProps.action;
-          "function" === typeof action ? i[queuedTarget + 1] = action : (i.splice(queuedTarget, 3), queuedTarget -= 3);
-          scheduleReplayQueueIfNeeded(i);
+          "function" === typeof action ? i2[queuedTarget + 1] = action : (i2.splice(queuedTarget, 3), queuedTarget -= 3);
+          scheduleReplayQueueIfNeeded(i2);
         }
       }
   }
@@ -12398,9 +12398,9 @@ function requireReactDomClient_production() {
     if (target) {
       var updatePriority = resolveUpdatePriority();
       target = { blockedOn: null, target, priority: updatePriority };
-      for (var i = 0; i < queuedExplicitHydrationTargets.length && 0 !== updatePriority && updatePriority < queuedExplicitHydrationTargets[i].priority; i++) ;
-      queuedExplicitHydrationTargets.splice(i, 0, target);
-      0 === i && attemptExplicitHydrationTarget(target);
+      for (var i2 = 0; i2 < queuedExplicitHydrationTargets.length && 0 !== updatePriority && updatePriority < queuedExplicitHydrationTargets[i2].priority; i2++) ;
+      queuedExplicitHydrationTargets.splice(i2, 0, target);
+      0 === i2 && attemptExplicitHydrationTarget(target);
     }
   };
   var isomorphicReactPackageVersion$jscomp$inline_1840 = React2.version;
@@ -12734,45 +12734,45 @@ function hashQueryKeyByOptions(queryKey, options) {
 function hashKey(queryKey) {
   return JSON.stringify(
     queryKey,
-    (_, val) => isPlainObject$1(val) ? Object.keys(val).sort().reduce((result, key) => {
+    (_, val) => isPlainObject$2(val) ? Object.keys(val).sort().reduce((result, key) => {
       result[key] = val[key];
       return result;
     }, {}) : val
   );
 }
-function partialMatchKey(a, b) {
-  if (a === b) {
+function partialMatchKey(a2, b) {
+  if (a2 === b) {
     return true;
   }
-  if (typeof a !== typeof b) {
+  if (typeof a2 !== typeof b) {
     return false;
   }
-  if (a && b && typeof a === "object" && typeof b === "object") {
-    return Object.keys(b).every((key) => partialMatchKey(a[key], b[key]));
+  if (a2 && b && typeof a2 === "object" && typeof b === "object") {
+    return Object.keys(b).every((key) => partialMatchKey(a2[key], b[key]));
   }
   return false;
 }
 var hasOwn = Object.prototype.hasOwnProperty;
-function replaceEqualDeep(a, b, depth = 0) {
-  if (a === b) {
-    return a;
+function replaceEqualDeep(a2, b, depth = 0) {
+  if (a2 === b) {
+    return a2;
   }
   if (depth > 500) return b;
-  const array = isPlainArray(a) && isPlainArray(b);
-  if (!array && !(isPlainObject$1(a) && isPlainObject$1(b))) return b;
-  const aItems = array ? a : Object.keys(a);
+  const array = isPlainArray(a2) && isPlainArray(b);
+  if (!array && !(isPlainObject$2(a2) && isPlainObject$2(b))) return b;
+  const aItems = array ? a2 : Object.keys(a2);
   const aSize = aItems.length;
   const bItems = array ? b : Object.keys(b);
   const bSize = bItems.length;
   const copy = array ? new Array(bSize) : {};
   let equalItems = 0;
-  for (let i = 0; i < bSize; i++) {
-    const key = array ? i : bItems[i];
-    const aItem = a[key];
+  for (let i2 = 0; i2 < bSize; i2++) {
+    const key = array ? i2 : bItems[i2];
+    const aItem = a2[key];
     const bItem = b[key];
     if (aItem === bItem) {
       copy[key] = aItem;
-      if (array ? i < aSize : hasOwn.call(a, key)) equalItems++;
+      if (array ? i2 < aSize : hasOwn.call(a2, key)) equalItems++;
       continue;
     }
     if (aItem === null || bItem === null || typeof aItem !== "object" || typeof bItem !== "object") {
@@ -12783,16 +12783,27 @@ function replaceEqualDeep(a, b, depth = 0) {
     copy[key] = v;
     if (v === aItem) equalItems++;
   }
-  return aSize === bSize && equalItems === aSize ? a : copy;
+  return aSize === bSize && equalItems === aSize ? a2 : copy;
+}
+function shallowEqualObjects(a2, b) {
+  if (!b || Object.keys(a2).length !== Object.keys(b).length) {
+    return false;
+  }
+  for (const key in a2) {
+    if (a2[key] !== b[key]) {
+      return false;
+    }
+  }
+  return true;
 }
 function isPlainArray(value) {
   return Array.isArray(value) && value.length === Object.keys(value).length;
 }
-function isPlainObject$1(o) {
-  if (!hasObjectPrototype(o)) {
+function isPlainObject$2(o2) {
+  if (!hasObjectPrototype(o2)) {
     return false;
   }
-  const ctor = o.constructor;
+  const ctor = o2.constructor;
   if (ctor === void 0) {
     return true;
   }
@@ -12803,13 +12814,13 @@ function isPlainObject$1(o) {
   if (!prot.hasOwnProperty("isPrototypeOf")) {
     return false;
   }
-  if (Object.getPrototypeOf(o) !== Object.prototype) {
+  if (Object.getPrototypeOf(o2) !== Object.prototype) {
     return false;
   }
   return true;
 }
-function hasObjectPrototype(o) {
-  return Object.prototype.toString.call(o) === "[object Object]";
+function hasObjectPrototype(o2) {
+  return Object.prototype.toString.call(o2) === "[object Object]";
 }
 function sleep(timeout) {
   return new Promise((resolve) => {
@@ -12841,6 +12852,12 @@ function ensureQueryFn(options, fetchOptions) {
     return () => Promise.reject(new Error(`Missing queryFn: '${options.queryHash}'`));
   }
   return options.queryFn;
+}
+function shouldThrowError(throwOnError, params) {
+  if (typeof throwOnError === "function") {
+    return throwOnError(...params);
+  }
+  return !!throwOnError;
 }
 function addConsumeAwareSignal(object, getSignal, onCancelled) {
   let consumed = false;
@@ -13052,7 +13069,7 @@ var CancelledError = class extends Error {
     this.silent = options?.silent;
   }
 };
-function createRetryer(config) {
+function createRetryer(config2) {
   let isRetryCancelled = false;
   let failureCount = 0;
   let continueFn;
@@ -13062,7 +13079,7 @@ function createRetryer(config) {
     if (!isResolved()) {
       const error = new CancelledError(cancelOptions);
       reject(error);
-      config.onCancel?.(error);
+      config2.onCancel?.(error);
     }
   };
   const cancelRetry = () => {
@@ -13071,8 +13088,8 @@ function createRetryer(config) {
   const continueRetry = () => {
     isRetryCancelled = false;
   };
-  const canContinue = () => focusManager.isFocused() && (config.networkMode === "always" || onlineManager.isOnline()) && config.canRun();
-  const canStart = () => canFetch(config.networkMode) && config.canRun();
+  const canContinue = () => focusManager.isFocused() && (config2.networkMode === "always" || onlineManager.isOnline()) && config2.canRun();
+  const canStart = () => canFetch(config2.networkMode) && config2.canRun();
   const resolve = (value) => {
     if (!isResolved()) {
       continueFn?.();
@@ -13092,11 +13109,11 @@ function createRetryer(config) {
           continueResolve(value);
         }
       };
-      config.onPause?.();
+      config2.onPause?.();
     }).then(() => {
       continueFn = void 0;
       if (!isResolved()) {
-        config.onContinue?.();
+        config2.onContinue?.();
       }
     });
   };
@@ -13105,9 +13122,9 @@ function createRetryer(config) {
       return;
     }
     let promiseOrValue;
-    const initialPromise = failureCount === 0 ? config.initialPromise : void 0;
+    const initialPromise = failureCount === 0 ? config2.initialPromise : void 0;
     try {
-      promiseOrValue = initialPromise ?? config.fn();
+      promiseOrValue = initialPromise ?? config2.fn();
     } catch (error) {
       promiseOrValue = Promise.reject(error);
     }
@@ -13115,8 +13132,8 @@ function createRetryer(config) {
       if (isResolved()) {
         return;
       }
-      const retry = config.retry ?? (environmentManager.isServer() ? 0 : 3);
-      const retryDelay = config.retryDelay ?? defaultRetryDelay;
+      const retry = config2.retry ?? (environmentManager.isServer() ? 0 : 3);
+      const retryDelay = config2.retryDelay ?? defaultRetryDelay;
       const delay = typeof retryDelay === "function" ? retryDelay(failureCount, error) : retryDelay;
       const shouldRetry = retry === true || typeof retry === "number" && failureCount < retry || typeof retry === "function" && retry(failureCount, error);
       if (isRetryCancelled || !shouldRetry) {
@@ -13124,7 +13141,7 @@ function createRetryer(config) {
         return;
       }
       failureCount++;
-      config.onFail?.(failureCount, error);
+      config2.onFail?.(failureCount, error);
       sleep(delay).then(() => {
         return canContinue() ? void 0 : pause();
       }).then(() => {
@@ -13291,18 +13308,18 @@ var Query = class extends Removable {
   #retryer;
   #defaultOptions;
   #abortSignalConsumed;
-  constructor(config) {
+  constructor(config2) {
     super();
     this.#abortSignalConsumed = false;
-    this.#defaultOptions = config.defaultOptions;
-    this.setOptions(config.options);
+    this.#defaultOptions = config2.defaultOptions;
+    this.setOptions(config2.options);
     this.observers = [];
-    this.#client = config.client;
+    this.#client = config2.client;
     this.#cache = this.#client.getQueryCache();
-    this.queryKey = config.queryKey;
-    this.queryHash = config.queryHash;
+    this.queryKey = config2.queryKey;
+    this.queryHash = config2.queryHash;
     this.#initialState = getDefaultState$1(this.options);
-    this.state = config.state ?? this.#initialState;
+    this.state = config2.state ?? this.#initialState;
     this.scheduleGc();
   }
   get meta() {
@@ -13706,19 +13723,470 @@ function getDefaultState$1(options) {
     fetchStatus: "idle"
   };
 }
+var QueryObserver = class extends Subscribable {
+  constructor(client2, options) {
+    super();
+    this.options = options;
+    this.#client = client2;
+    this.#selectError = null;
+    this.#currentThenable = pendingThenable();
+    this.bindMethods();
+    this.setOptions(options);
+  }
+  #client;
+  #currentQuery = void 0;
+  #currentQueryInitialState = void 0;
+  #currentResult = void 0;
+  #currentResultState;
+  #currentResultOptions;
+  #currentThenable;
+  #selectError;
+  #selectFn;
+  #selectResult;
+  // This property keeps track of the last query with defined data.
+  // It will be used to pass the previous data and query to the placeholder function between renders.
+  #lastQueryWithDefinedData;
+  #staleTimeoutId;
+  #refetchIntervalId;
+  #currentRefetchInterval;
+  #trackedProps = /* @__PURE__ */ new Set();
+  bindMethods() {
+    this.refetch = this.refetch.bind(this);
+  }
+  onSubscribe() {
+    if (this.listeners.size === 1) {
+      this.#currentQuery.addObserver(this);
+      if (shouldFetchOnMount(this.#currentQuery, this.options)) {
+        this.#executeFetch();
+      } else {
+        this.updateResult();
+      }
+      this.#updateTimers();
+    }
+  }
+  onUnsubscribe() {
+    if (!this.hasListeners()) {
+      this.destroy();
+    }
+  }
+  shouldFetchOnReconnect() {
+    return shouldFetchOn(
+      this.#currentQuery,
+      this.options,
+      this.options.refetchOnReconnect
+    );
+  }
+  shouldFetchOnWindowFocus() {
+    return shouldFetchOn(
+      this.#currentQuery,
+      this.options,
+      this.options.refetchOnWindowFocus
+    );
+  }
+  destroy() {
+    this.listeners = /* @__PURE__ */ new Set();
+    this.#clearStaleTimeout();
+    this.#clearRefetchInterval();
+    this.#currentQuery.removeObserver(this);
+  }
+  setOptions(options) {
+    const prevOptions = this.options;
+    const prevQuery = this.#currentQuery;
+    this.options = this.#client.defaultQueryOptions(options);
+    if (this.options.enabled !== void 0 && typeof this.options.enabled !== "boolean" && typeof this.options.enabled !== "function" && typeof resolveQueryBoolean(this.options.enabled, this.#currentQuery) !== "boolean") {
+      throw new Error(
+        "Expected enabled to be a boolean or a callback that returns a boolean"
+      );
+    }
+    this.#updateQuery();
+    this.#currentQuery.setOptions(this.options);
+    if (prevOptions._defaulted && !shallowEqualObjects(this.options, prevOptions)) {
+      this.#client.getQueryCache().notify({
+        type: "observerOptionsUpdated",
+        query: this.#currentQuery,
+        observer: this
+      });
+    }
+    const mounted = this.hasListeners();
+    if (mounted && shouldFetchOptionally(
+      this.#currentQuery,
+      prevQuery,
+      this.options,
+      prevOptions
+    )) {
+      this.#executeFetch();
+    }
+    this.updateResult();
+    if (mounted && (this.#currentQuery !== prevQuery || resolveQueryBoolean(this.options.enabled, this.#currentQuery) !== resolveQueryBoolean(prevOptions.enabled, this.#currentQuery) || resolveStaleTime(this.options.staleTime, this.#currentQuery) !== resolveStaleTime(prevOptions.staleTime, this.#currentQuery))) {
+      this.#updateStaleTimeout();
+    }
+    const nextRefetchInterval = this.#computeRefetchInterval();
+    if (mounted && (this.#currentQuery !== prevQuery || resolveQueryBoolean(this.options.enabled, this.#currentQuery) !== resolveQueryBoolean(prevOptions.enabled, this.#currentQuery) || nextRefetchInterval !== this.#currentRefetchInterval)) {
+      this.#updateRefetchInterval(nextRefetchInterval);
+    }
+  }
+  getOptimisticResult(options) {
+    const query = this.#client.getQueryCache().build(this.#client, options);
+    const result = this.createResult(query, options);
+    if (shouldAssignObserverCurrentProperties(this, result)) {
+      this.#currentResult = result;
+      this.#currentResultOptions = this.options;
+      this.#currentResultState = this.#currentQuery.state;
+    }
+    return result;
+  }
+  getCurrentResult() {
+    return this.#currentResult;
+  }
+  trackResult(result, onPropTracked) {
+    return new Proxy(result, {
+      get: (target, key) => {
+        this.trackProp(key);
+        onPropTracked?.(key);
+        if (key === "promise") {
+          this.trackProp("data");
+          if (!this.options.experimental_prefetchInRender && this.#currentThenable.status === "pending") {
+            this.#currentThenable.reject(
+              new Error(
+                "experimental_prefetchInRender feature flag is not enabled"
+              )
+            );
+          }
+        }
+        return Reflect.get(target, key);
+      }
+    });
+  }
+  trackProp(key) {
+    this.#trackedProps.add(key);
+  }
+  getCurrentQuery() {
+    return this.#currentQuery;
+  }
+  refetch({ ...options } = {}) {
+    return this.fetch({
+      ...options
+    });
+  }
+  fetchOptimistic(options) {
+    const defaultedOptions = this.#client.defaultQueryOptions(options);
+    const query = this.#client.getQueryCache().build(this.#client, defaultedOptions);
+    return query.fetch().then(() => this.createResult(query, defaultedOptions));
+  }
+  fetch(fetchOptions) {
+    return this.#executeFetch({
+      ...fetchOptions,
+      cancelRefetch: fetchOptions.cancelRefetch ?? true
+    }).then(() => {
+      this.updateResult();
+      return this.#currentResult;
+    });
+  }
+  #executeFetch(fetchOptions) {
+    this.#updateQuery();
+    let promise = this.#currentQuery.fetch(
+      this.options,
+      fetchOptions
+    );
+    if (!fetchOptions?.throwOnError) {
+      promise = promise.catch(noop);
+    }
+    return promise;
+  }
+  #updateStaleTimeout() {
+    this.#clearStaleTimeout();
+    const staleTime = resolveStaleTime(
+      this.options.staleTime,
+      this.#currentQuery
+    );
+    if (environmentManager.isServer() || this.#currentResult.isStale || !isValidTimeout(staleTime)) {
+      return;
+    }
+    const time = timeUntilStale(this.#currentResult.dataUpdatedAt, staleTime);
+    const timeout = time + 1;
+    this.#staleTimeoutId = timeoutManager.setTimeout(() => {
+      if (!this.#currentResult.isStale) {
+        this.updateResult();
+      }
+    }, timeout);
+  }
+  #computeRefetchInterval() {
+    return (typeof this.options.refetchInterval === "function" ? this.options.refetchInterval(this.#currentQuery) : this.options.refetchInterval) ?? false;
+  }
+  #updateRefetchInterval(nextInterval) {
+    this.#clearRefetchInterval();
+    this.#currentRefetchInterval = nextInterval;
+    if (environmentManager.isServer() || resolveQueryBoolean(this.options.enabled, this.#currentQuery) === false || !isValidTimeout(this.#currentRefetchInterval) || this.#currentRefetchInterval === 0) {
+      return;
+    }
+    this.#refetchIntervalId = timeoutManager.setInterval(() => {
+      if (this.options.refetchIntervalInBackground || focusManager.isFocused()) {
+        this.#executeFetch();
+      }
+    }, this.#currentRefetchInterval);
+  }
+  #updateTimers() {
+    this.#updateStaleTimeout();
+    this.#updateRefetchInterval(this.#computeRefetchInterval());
+  }
+  #clearStaleTimeout() {
+    if (this.#staleTimeoutId !== void 0) {
+      timeoutManager.clearTimeout(this.#staleTimeoutId);
+      this.#staleTimeoutId = void 0;
+    }
+  }
+  #clearRefetchInterval() {
+    if (this.#refetchIntervalId !== void 0) {
+      timeoutManager.clearInterval(this.#refetchIntervalId);
+      this.#refetchIntervalId = void 0;
+    }
+  }
+  createResult(query, options) {
+    const prevQuery = this.#currentQuery;
+    const prevOptions = this.options;
+    const prevResult = this.#currentResult;
+    const prevResultState = this.#currentResultState;
+    const prevResultOptions = this.#currentResultOptions;
+    const queryChange = query !== prevQuery;
+    const queryInitialState = queryChange ? query.state : this.#currentQueryInitialState;
+    const { state } = query;
+    let newState = { ...state };
+    let isPlaceholderData = false;
+    let data;
+    if (options._optimisticResults) {
+      const mounted = this.hasListeners();
+      const fetchOnMount = !mounted && shouldFetchOnMount(query, options);
+      const fetchOptionally = mounted && shouldFetchOptionally(query, prevQuery, options, prevOptions);
+      if (fetchOnMount || fetchOptionally) {
+        newState = {
+          ...newState,
+          ...fetchState(state.data, query.options)
+        };
+      }
+      if (options._optimisticResults === "isRestoring") {
+        newState.fetchStatus = "idle";
+      }
+    }
+    let { error, errorUpdatedAt, status } = newState;
+    data = newState.data;
+    let skipSelect = false;
+    if (options.placeholderData !== void 0 && data === void 0 && status === "pending") {
+      let placeholderData;
+      if (prevResult?.isPlaceholderData && options.placeholderData === prevResultOptions?.placeholderData) {
+        placeholderData = prevResult.data;
+        skipSelect = true;
+      } else {
+        placeholderData = typeof options.placeholderData === "function" ? options.placeholderData(
+          this.#lastQueryWithDefinedData?.state.data,
+          this.#lastQueryWithDefinedData
+        ) : options.placeholderData;
+      }
+      if (placeholderData !== void 0) {
+        status = "success";
+        data = replaceData(
+          prevResult?.data,
+          placeholderData,
+          options
+        );
+        isPlaceholderData = true;
+      }
+    }
+    if (options.select && data !== void 0 && !skipSelect) {
+      if (prevResult && data === prevResultState?.data && options.select === this.#selectFn) {
+        data = this.#selectResult;
+      } else {
+        try {
+          this.#selectFn = options.select;
+          data = options.select(data);
+          data = replaceData(prevResult?.data, data, options);
+          this.#selectResult = data;
+          this.#selectError = null;
+        } catch (selectError) {
+          this.#selectError = selectError;
+        }
+      }
+    }
+    if (this.#selectError) {
+      error = this.#selectError;
+      data = this.#selectResult;
+      errorUpdatedAt = Date.now();
+      status = "error";
+    }
+    const isFetching = newState.fetchStatus === "fetching";
+    const isPending = status === "pending";
+    const isError = status === "error";
+    const isLoading = isPending && isFetching;
+    const hasData = data !== void 0;
+    const result = {
+      status,
+      fetchStatus: newState.fetchStatus,
+      isPending,
+      isSuccess: status === "success",
+      isError,
+      isInitialLoading: isLoading,
+      isLoading,
+      data,
+      dataUpdatedAt: newState.dataUpdatedAt,
+      error,
+      errorUpdatedAt,
+      failureCount: newState.fetchFailureCount,
+      failureReason: newState.fetchFailureReason,
+      errorUpdateCount: newState.errorUpdateCount,
+      isFetched: query.isFetched(),
+      isFetchedAfterMount: newState.dataUpdateCount > queryInitialState.dataUpdateCount || newState.errorUpdateCount > queryInitialState.errorUpdateCount,
+      isFetching,
+      isRefetching: isFetching && !isPending,
+      isLoadingError: isError && !hasData,
+      isPaused: newState.fetchStatus === "paused",
+      isPlaceholderData,
+      isRefetchError: isError && hasData,
+      isStale: isStale(query, options),
+      refetch: this.refetch,
+      promise: this.#currentThenable,
+      isEnabled: resolveQueryBoolean(options.enabled, query) !== false
+    };
+    const nextResult = result;
+    if (this.options.experimental_prefetchInRender) {
+      const hasResultData = nextResult.data !== void 0;
+      const isErrorWithoutData = nextResult.status === "error" && !hasResultData;
+      const finalizeThenableIfPossible = (thenable) => {
+        if (isErrorWithoutData) {
+          thenable.reject(nextResult.error);
+        } else if (hasResultData) {
+          thenable.resolve(nextResult.data);
+        }
+      };
+      const recreateThenable = () => {
+        const pending = this.#currentThenable = nextResult.promise = pendingThenable();
+        finalizeThenableIfPossible(pending);
+      };
+      const prevThenable = this.#currentThenable;
+      switch (prevThenable.status) {
+        case "pending":
+          if (query.queryHash === prevQuery.queryHash) {
+            finalizeThenableIfPossible(prevThenable);
+          }
+          break;
+        case "fulfilled":
+          if (isErrorWithoutData || nextResult.data !== prevThenable.value) {
+            recreateThenable();
+          }
+          break;
+        case "rejected":
+          if (!isErrorWithoutData || nextResult.error !== prevThenable.reason) {
+            recreateThenable();
+          }
+          break;
+      }
+    }
+    return nextResult;
+  }
+  updateResult() {
+    const prevResult = this.#currentResult;
+    const nextResult = this.createResult(this.#currentQuery, this.options);
+    this.#currentResultState = this.#currentQuery.state;
+    this.#currentResultOptions = this.options;
+    if (this.#currentResultState.data !== void 0) {
+      this.#lastQueryWithDefinedData = this.#currentQuery;
+    }
+    if (shallowEqualObjects(nextResult, prevResult)) {
+      return;
+    }
+    this.#currentResult = nextResult;
+    const shouldNotifyListeners = () => {
+      if (!prevResult) {
+        return true;
+      }
+      const { notifyOnChangeProps } = this.options;
+      const notifyOnChangePropsValue = typeof notifyOnChangeProps === "function" ? notifyOnChangeProps() : notifyOnChangeProps;
+      if (notifyOnChangePropsValue === "all" || !notifyOnChangePropsValue && !this.#trackedProps.size) {
+        return true;
+      }
+      const includedProps = new Set(
+        notifyOnChangePropsValue ?? this.#trackedProps
+      );
+      if (this.options.throwOnError) {
+        includedProps.add("error");
+      }
+      return Object.keys(this.#currentResult).some((key) => {
+        const typedKey = key;
+        const changed = this.#currentResult[typedKey] !== prevResult[typedKey];
+        return changed && includedProps.has(typedKey);
+      });
+    };
+    this.#notify({ listeners: shouldNotifyListeners() });
+  }
+  #updateQuery() {
+    const query = this.#client.getQueryCache().build(this.#client, this.options);
+    if (query === this.#currentQuery) {
+      return;
+    }
+    const prevQuery = this.#currentQuery;
+    this.#currentQuery = query;
+    this.#currentQueryInitialState = query.state;
+    if (this.hasListeners()) {
+      prevQuery?.removeObserver(this);
+      query.addObserver(this);
+    }
+  }
+  onQueryUpdate() {
+    this.updateResult();
+    if (this.hasListeners()) {
+      this.#updateTimers();
+    }
+  }
+  #notify(notifyOptions) {
+    notifyManager.batch(() => {
+      if (notifyOptions.listeners) {
+        this.listeners.forEach((listener) => {
+          listener(this.#currentResult);
+        });
+      }
+      this.#client.getQueryCache().notify({
+        query: this.#currentQuery,
+        type: "observerResultsUpdated"
+      });
+    });
+  }
+};
+function shouldLoadOnMount(query, options) {
+  return resolveQueryBoolean(options.enabled, query) !== false && query.state.data === void 0 && !(query.state.status === "error" && resolveQueryBoolean(options.retryOnMount, query) === false);
+}
+function shouldFetchOnMount(query, options) {
+  return shouldLoadOnMount(query, options) || query.state.data !== void 0 && shouldFetchOn(query, options, options.refetchOnMount);
+}
+function shouldFetchOn(query, options, field) {
+  if (resolveQueryBoolean(options.enabled, query) !== false && resolveStaleTime(options.staleTime, query) !== "static") {
+    const value = typeof field === "function" ? field(query) : field;
+    return value === "always" || value !== false && isStale(query, options);
+  }
+  return false;
+}
+function shouldFetchOptionally(query, prevQuery, options, prevOptions) {
+  return (query !== prevQuery || resolveQueryBoolean(prevOptions.enabled, query) === false) && (!options.suspense || query.state.status !== "error") && isStale(query, options);
+}
+function isStale(query, options) {
+  return resolveQueryBoolean(options.enabled, query) !== false && query.isStaleByTime(resolveStaleTime(options.staleTime, query));
+}
+function shouldAssignObserverCurrentProperties(observer, optimisticResult) {
+  if (!shallowEqualObjects(observer.getCurrentResult(), optimisticResult)) {
+    return true;
+  }
+  return false;
+}
 var Mutation = class extends Removable {
   #client;
   #observers;
   #mutationCache;
   #retryer;
-  constructor(config) {
+  constructor(config2) {
     super();
-    this.#client = config.client;
-    this.mutationId = config.mutationId;
-    this.#mutationCache = config.mutationCache;
+    this.#client = config2.client;
+    this.mutationId = config2.mutationId;
+    this.#mutationCache = config2.mutationCache;
     this.#observers = [];
-    this.state = config.state || getDefaultState();
-    this.setOptions(config.options);
+    this.state = config2.state || getDefaultState();
+    this.setOptions(config2.options);
     this.scheduleGc();
   }
   setOptions(options) {
@@ -13979,9 +14447,9 @@ function getDefaultState() {
   };
 }
 var MutationCache = class extends Subscribable {
-  constructor(config = {}) {
+  constructor(config2 = {}) {
     super();
-    this.config = config;
+    this.config = config2;
     this.#mutations = /* @__PURE__ */ new Set();
     this.#scopes = /* @__PURE__ */ new Map();
     this.#mutationId = 0;
@@ -14093,10 +14561,141 @@ var MutationCache = class extends Subscribable {
 function scopeFor(mutation) {
   return mutation.options.scope?.id;
 }
-var QueryCache = class extends Subscribable {
-  constructor(config = {}) {
+var MutationObserver = class extends Subscribable {
+  #client;
+  #currentResult = void 0;
+  #currentMutation;
+  #mutateOptions;
+  constructor(client2, options) {
     super();
-    this.config = config;
+    this.#client = client2;
+    this.setOptions(options);
+    this.bindMethods();
+    this.#updateResult();
+  }
+  bindMethods() {
+    this.mutate = this.mutate.bind(this);
+    this.reset = this.reset.bind(this);
+  }
+  setOptions(options) {
+    const prevOptions = this.options;
+    this.options = this.#client.defaultMutationOptions(options);
+    if (!shallowEqualObjects(this.options, prevOptions)) {
+      this.#client.getMutationCache().notify({
+        type: "observerOptionsUpdated",
+        mutation: this.#currentMutation,
+        observer: this
+      });
+    }
+    if (prevOptions?.mutationKey && this.options.mutationKey && hashKey(prevOptions.mutationKey) !== hashKey(this.options.mutationKey)) {
+      this.reset();
+    } else if (this.#currentMutation?.state.status === "pending") {
+      this.#currentMutation.setOptions(this.options);
+    }
+  }
+  onUnsubscribe() {
+    if (!this.hasListeners()) {
+      this.#currentMutation?.removeObserver(this);
+    }
+  }
+  onMutationUpdate(action) {
+    this.#updateResult();
+    this.#notify(action);
+  }
+  getCurrentResult() {
+    return this.#currentResult;
+  }
+  reset() {
+    this.#currentMutation?.removeObserver(this);
+    this.#currentMutation = void 0;
+    this.#updateResult();
+    this.#notify();
+  }
+  mutate(variables, options) {
+    this.#mutateOptions = options;
+    this.#currentMutation?.removeObserver(this);
+    this.#currentMutation = this.#client.getMutationCache().build(this.#client, this.options);
+    this.#currentMutation.addObserver(this);
+    return this.#currentMutation.execute(variables);
+  }
+  #updateResult() {
+    const state = this.#currentMutation?.state ?? getDefaultState();
+    this.#currentResult = {
+      ...state,
+      isPending: state.status === "pending",
+      isSuccess: state.status === "success",
+      isError: state.status === "error",
+      isIdle: state.status === "idle",
+      mutate: this.mutate,
+      reset: this.reset
+    };
+  }
+  #notify(action) {
+    notifyManager.batch(() => {
+      if (this.#mutateOptions && this.hasListeners()) {
+        const variables = this.#currentResult.variables;
+        const onMutateResult = this.#currentResult.context;
+        const context = {
+          client: this.#client,
+          meta: this.options.meta,
+          mutationKey: this.options.mutationKey
+        };
+        if (action?.type === "success") {
+          try {
+            this.#mutateOptions.onSuccess?.(
+              action.data,
+              variables,
+              onMutateResult,
+              context
+            );
+          } catch (e) {
+            void Promise.reject(e);
+          }
+          try {
+            this.#mutateOptions.onSettled?.(
+              action.data,
+              null,
+              variables,
+              onMutateResult,
+              context
+            );
+          } catch (e) {
+            void Promise.reject(e);
+          }
+        } else if (action?.type === "error") {
+          try {
+            this.#mutateOptions.onError?.(
+              action.error,
+              variables,
+              onMutateResult,
+              context
+            );
+          } catch (e) {
+            void Promise.reject(e);
+          }
+          try {
+            this.#mutateOptions.onSettled?.(
+              void 0,
+              action.error,
+              variables,
+              onMutateResult,
+              context
+            );
+          } catch (e) {
+            void Promise.reject(e);
+          }
+        }
+      }
+      this.listeners.forEach((listener) => {
+        listener(this.#currentResult);
+      });
+    });
+  }
+};
+var QueryCache = class extends Subscribable {
+  constructor(config2 = {}) {
+    super();
+    this.config = config2;
     this.#queries = /* @__PURE__ */ new Map();
   }
   #queries;
@@ -14190,10 +14789,10 @@ var QueryClient = class {
   #mountCount;
   #unsubscribeFocus;
   #unsubscribeOnline;
-  constructor(config = {}) {
-    this.#queryCache = config.queryCache || new QueryCache();
-    this.#mutationCache = config.mutationCache || new MutationCache();
-    this.#defaultOptions = config.defaultOptions || {};
+  constructor(config2 = {}) {
+    this.#queryCache = config2.queryCache || new QueryCache();
+    this.#mutationCache = config2.mutationCache || new MutationCache();
+    this.#defaultOptions = config2.defaultOptions || {};
     this.#queryDefaults = /* @__PURE__ */ new Map();
     this.#mutationDefaults = /* @__PURE__ */ new Map();
     this.#mountCount = 0;
@@ -14469,6 +15068,13 @@ var QueryClient = class {
 var QueryClientContext = reactExports.createContext(
   void 0
 );
+var useQueryClient = (queryClient2) => {
+  const client2 = reactExports.useContext(QueryClientContext);
+  if (!client2) {
+    throw new Error("No QueryClient set, use QueryClientProvider to set one");
+  }
+  return client2;
+};
 var QueryClientProvider = ({
   client: client2,
   children
@@ -14481,6 +15087,167 @@ var QueryClientProvider = ({
   }, [client2]);
   return /* @__PURE__ */ jsxRuntimeExports.jsx(QueryClientContext.Provider, { value: client2, children });
 };
+var IsRestoringContext = reactExports.createContext(false);
+var useIsRestoring = () => reactExports.useContext(IsRestoringContext);
+IsRestoringContext.Provider;
+function createValue() {
+  let isReset = false;
+  return {
+    clearReset: () => {
+      isReset = false;
+    },
+    reset: () => {
+      isReset = true;
+    },
+    isReset: () => {
+      return isReset;
+    }
+  };
+}
+var QueryErrorResetBoundaryContext = reactExports.createContext(createValue());
+var useQueryErrorResetBoundary = () => reactExports.useContext(QueryErrorResetBoundaryContext);
+var ensurePreventErrorBoundaryRetry = (options, errorResetBoundary, query) => {
+  const throwOnError = query?.state.error && typeof options.throwOnError === "function" ? shouldThrowError(options.throwOnError, [query.state.error, query]) : options.throwOnError;
+  if (options.suspense || options.experimental_prefetchInRender || throwOnError) {
+    if (!errorResetBoundary.isReset()) {
+      options.retryOnMount = false;
+    }
+  }
+};
+var useClearResetErrorBoundary = (errorResetBoundary) => {
+  reactExports.useEffect(() => {
+    errorResetBoundary.clearReset();
+  }, [errorResetBoundary]);
+};
+var getHasError = ({
+  result,
+  errorResetBoundary,
+  throwOnError,
+  query,
+  suspense
+}) => {
+  return result.isError && !errorResetBoundary.isReset() && !result.isFetching && query && (suspense && result.data === void 0 || shouldThrowError(throwOnError, [result.error, query]));
+};
+var ensureSuspenseTimers = (defaultedOptions) => {
+  if (defaultedOptions.suspense) {
+    const MIN_SUSPENSE_TIME_MS = 1e3;
+    const clamp = (value) => value === "static" ? value : Math.max(value ?? MIN_SUSPENSE_TIME_MS, MIN_SUSPENSE_TIME_MS);
+    const originalStaleTime = defaultedOptions.staleTime;
+    defaultedOptions.staleTime = typeof originalStaleTime === "function" ? (...args) => clamp(originalStaleTime(...args)) : clamp(originalStaleTime);
+    if (typeof defaultedOptions.gcTime === "number") {
+      defaultedOptions.gcTime = Math.max(
+        defaultedOptions.gcTime,
+        MIN_SUSPENSE_TIME_MS
+      );
+    }
+  }
+};
+var willFetch = (result, isRestoring) => result.isLoading && result.isFetching && !isRestoring;
+var shouldSuspend = (defaultedOptions, result) => defaultedOptions?.suspense && result.isPending;
+var fetchOptimistic = (defaultedOptions, observer, errorResetBoundary) => observer.fetchOptimistic(defaultedOptions).catch(() => {
+  errorResetBoundary.clearReset();
+});
+function useBaseQuery(options, Observer, queryClient2) {
+  const isRestoring = useIsRestoring();
+  const errorResetBoundary = useQueryErrorResetBoundary();
+  const client2 = useQueryClient();
+  const defaultedOptions = client2.defaultQueryOptions(options);
+  client2.getDefaultOptions().queries?._experimental_beforeQuery?.(
+    defaultedOptions
+  );
+  const query = client2.getQueryCache().get(defaultedOptions.queryHash);
+  const subscribed = options.subscribed !== false;
+  defaultedOptions._optimisticResults = isRestoring ? "isRestoring" : subscribed ? "optimistic" : void 0;
+  ensureSuspenseTimers(defaultedOptions);
+  ensurePreventErrorBoundaryRetry(defaultedOptions, errorResetBoundary, query);
+  useClearResetErrorBoundary(errorResetBoundary);
+  const isNewCacheEntry = !client2.getQueryCache().get(defaultedOptions.queryHash);
+  const [observer] = reactExports.useState(
+    () => new Observer(
+      client2,
+      defaultedOptions
+    )
+  );
+  const result = observer.getOptimisticResult(defaultedOptions);
+  const shouldSubscribe = !isRestoring && subscribed;
+  reactExports.useSyncExternalStore(
+    reactExports.useCallback(
+      (onStoreChange) => {
+        const unsubscribe = shouldSubscribe ? observer.subscribe(notifyManager.batchCalls(onStoreChange)) : noop;
+        observer.updateResult();
+        return unsubscribe;
+      },
+      [observer, shouldSubscribe]
+    ),
+    () => observer.getCurrentResult(),
+    () => observer.getCurrentResult()
+  );
+  reactExports.useEffect(() => {
+    observer.setOptions(defaultedOptions);
+  }, [defaultedOptions, observer]);
+  if (shouldSuspend(defaultedOptions, result)) {
+    throw fetchOptimistic(defaultedOptions, observer, errorResetBoundary);
+  }
+  if (getHasError({
+    result,
+    errorResetBoundary,
+    throwOnError: defaultedOptions.throwOnError,
+    query,
+    suspense: defaultedOptions.suspense
+  })) {
+    throw result.error;
+  }
+  client2.getDefaultOptions().queries?._experimental_afterQuery?.(
+    defaultedOptions,
+    result
+  );
+  if (defaultedOptions.experimental_prefetchInRender && !environmentManager.isServer() && willFetch(result, isRestoring)) {
+    const promise = isNewCacheEntry ? (
+      // Fetch immediately on render in order to ensure `.promise` is resolved even if the component is unmounted
+      fetchOptimistic(defaultedOptions, observer, errorResetBoundary)
+    ) : (
+      // subscribe to the "cache promise" so that we can finalize the currentThenable once data comes in
+      query?.promise
+    );
+    promise?.catch(noop).finally(() => {
+      observer.updateResult();
+    });
+  }
+  return !defaultedOptions.notifyOnChangeProps ? observer.trackResult(result) : result;
+}
+function useQuery(options, queryClient2) {
+  return useBaseQuery(options, QueryObserver);
+}
+function useMutation(options, queryClient2) {
+  const client2 = useQueryClient();
+  const [observer] = reactExports.useState(
+    () => new MutationObserver(
+      client2,
+      options
+    )
+  );
+  reactExports.useEffect(() => {
+    observer.setOptions(options);
+  }, [observer, options]);
+  const result = reactExports.useSyncExternalStore(
+    reactExports.useCallback(
+      (onStoreChange) => observer.subscribe(notifyManager.batchCalls(onStoreChange)),
+      [observer]
+    ),
+    () => observer.getCurrentResult(),
+    () => observer.getCurrentResult()
+  );
+  const mutate = reactExports.useCallback(
+    (variables, mutateOptions) => {
+      observer.mutate(variables, mutateOptions).catch(noop);
+    },
+    [observer]
+  );
+  if (result.error && shouldThrowError(observer.options.throwOnError, [result.error])) {
+    throw result.error;
+  }
+  return { ...result, mutate, mutateAsync: result.mutate };
+}
 /**
  * react-router v7.16.0
  *
@@ -14691,8 +15458,8 @@ function getUrlBasedHistory(getLocation, createHref2, validateLocation, options 
     },
     push,
     replace: replace2,
-    go(n) {
-      return globalHistory.go(n);
+    go(n2) {
+      return globalHistory.go(n2);
     }
   };
   return history;
@@ -14852,9 +15619,9 @@ function matchRoutesImpl(routes, locationArg, basename, allowPartial, precompute
   let branches = precomputedBranches ?? flattenAndRankRoutes(routes);
   let matches = null;
   let decoded = decodePath(pathname);
-  for (let i = 0; matches == null && i < branches.length; ++i) {
+  for (let i2 = 0; matches == null && i2 < branches.length; ++i2) {
     matches = matchRouteBranch(
-      branches[i],
+      branches[i2],
       decoded,
       allowPartial
     );
@@ -14957,8 +15724,8 @@ function explodeOptionalSegments(path) {
 }
 function rankRouteBranches(branches) {
   branches.sort(
-    (a, b) => a.score !== b.score ? b.score - a.score : compareIndexes(
-      a.routesMeta.map((meta) => meta.childrenIndex),
+    (a2, b) => a2.score !== b.score ? b.score - a2.score : compareIndexes(
+      a2.routesMeta.map((meta) => meta.childrenIndex),
       b.routesMeta.map((meta) => meta.childrenIndex)
     )
   );
@@ -14969,7 +15736,7 @@ var indexRouteValue = 2;
 var emptySegmentValue = 1;
 var staticSegmentValue = 10;
 var splatPenalty = -2;
-var isSplat = (s) => s === "*";
+var isSplat = (s2) => s2 === "*";
 function computeScore(path, index) {
   let segments = path.split("/");
   let initialScore = segments.length;
@@ -14979,19 +15746,19 @@ function computeScore(path, index) {
   if (index) {
     initialScore += indexRouteValue;
   }
-  return segments.filter((s) => !isSplat(s)).reduce(
+  return segments.filter((s2) => !isSplat(s2)).reduce(
     (score, segment) => score + (paramRe.test(segment) ? dynamicSegmentValue : segment === "" ? emptySegmentValue : staticSegmentValue),
     initialScore
   );
 }
-function compareIndexes(a, b) {
-  let siblings = a.length === b.length && a.slice(0, -1).every((n, i) => n === b[i]);
+function compareIndexes(a2, b) {
+  let siblings = a2.length === b.length && a2.slice(0, -1).every((n2, i2) => n2 === b[i2]);
   return siblings ? (
     // If two routes are siblings, we should try to match the earlier sibling
     // first. This allows people to have fine-grained control over the matching
     // behavior by simply putting routes with identical paths in the order they
     // want them tried.
-    a[a.length - 1] - b[b.length - 1]
+    a2[a2.length - 1] - b[b.length - 1]
   ) : (
     // Otherwise, it doesn't really make sense to rank non-siblings by index,
     // so they sort equally.
@@ -15003,9 +15770,9 @@ function matchRouteBranch(branch, pathname, allowPartial = false) {
   let matchedParams = {};
   let matchedPathname = "/";
   let matches = [];
-  for (let i = 0; i < routesMeta.length; ++i) {
-    let meta = routesMeta[i];
-    let end = i === routesMeta.length - 1;
+  for (let i2 = 0; i2 < routesMeta.length; ++i2) {
+    let meta = routesMeta[i2];
+    let end = i2 === routesMeta.length - 1;
     let remainingPathname = matchedPathname === "/" ? pathname : pathname.slice(matchedPathname.length) || "/";
     let match = matchPath(
       { path: meta.relativePath, caseSensitive: meta.caseSensitive, end },
@@ -15312,11 +16079,11 @@ function getRouteInstrumentationUpdates(fns, route) {
       id: route.id,
       index: route.index,
       path: route.path,
-      instrument(i) {
+      instrument(i2) {
         let keys = Object.keys(aggregated);
         for (let key of keys) {
-          if (i[key]) {
-            aggregated[key].push(i[key]);
+          if (i2[key]) {
+            aggregated[key].push(i2[key]);
           }
         }
       }
@@ -15386,11 +16153,11 @@ function instrumentClientSideRouter(router2, fns) {
   };
   fns.forEach(
     (fn) => fn({
-      instrument(i) {
-        let keys = Object.keys(i);
+      instrument(i2) {
+        let keys = Object.keys(i2);
         for (let key of keys) {
-          if (i[key]) {
-            aggregated[key].push(i[key]);
+          if (i2[key]) {
+            aggregated[key].push(i2[key]);
           }
         }
       }
@@ -15519,7 +16286,7 @@ function getReadonlyRequest(request) {
   };
 }
 function getReadonlyContext(context) {
-  if (isPlainObject(context)) {
+  if (isPlainObject$1(context)) {
     let frozen = { ...context };
     Object.freeze(frozen);
     return frozen;
@@ -15530,7 +16297,7 @@ function getReadonlyContext(context) {
   }
 }
 var objectProtoNames = Object.getOwnPropertyNames(Object.prototype).sort().join("\0");
-function isPlainObject(thing) {
+function isPlainObject$1(thing) {
   if (thing === null || typeof thing !== "object") {
     return false;
   }
@@ -15651,7 +16418,7 @@ function createRouter(init) {
       return {
         ..._mapRouteProperties(route),
         ...getRouteInstrumentationUpdates(
-          instrumentations.map((i) => i.route).filter(Boolean),
+          instrumentations.map((i2) => i2.route).filter(Boolean),
           route
         )
       };
@@ -16899,11 +17666,11 @@ function createRouter(init) {
     fetchControllers.delete(key);
     revalidatingFetchers.forEach((r2) => fetchControllers.delete(r2.key));
     let fetcherIsMounted = state.fetchers.has(key);
-    let getRedirectStateWithDoneFetcher = (s) => {
-      if (!fetcherIsMounted) return s;
-      let workingFetchers2 = new Map(s.fetchers);
+    let getRedirectStateWithDoneFetcher = (s2) => {
+      if (!fetcherIsMounted) return s2;
+      let workingFetchers2 = new Map(s2.fetchers);
       workingFetchers2.set(key, getDoneFetcher(actionResult.data));
-      return { ...s, fetchers: workingFetchers2 };
+      return { ...s2, fetchers: workingFetchers2 };
     };
     let redirect2 = findRedirect(loaderResults);
     if (redirect2) {
@@ -17541,8 +18308,8 @@ function createRouter(init) {
       partialMatches = newPartialMatches;
     }
   }
-  function compareMatches(a, b) {
-    return a.length === b.length && a.every((m, i) => m.route.id === b[i].route.id);
+  function compareMatches(a2, b) {
+    return a2.length === b.length && a2.every((m, i2) => m.route.id === b[i2].route.id);
   }
   function _internalSetRoutes(newRoutes) {
     manifest = {};
@@ -17618,7 +18385,7 @@ function createRouter(init) {
   if (init.instrumentations) {
     router2 = instrumentClientSideRouter(
       router2,
-      init.instrumentations.map((i) => i.router).filter(Boolean)
+      init.instrumentations.map((i2) => i2.router).filter(Boolean)
     );
   }
   return router2;
@@ -18057,8 +18824,8 @@ function patchRoutesImpl(routeId, children, dataRoutes, manifest, mapRouteProper
     childrenToPatch.push(...newRoutes);
   }
   if (allowElementMutations && existingChildren.length > 0) {
-    for (let i = 0; i < existingChildren.length; i++) {
-      let { existingRoute, newRoute } = existingChildren[i];
+    for (let i2 = 0; i2 < existingChildren.length; i2++) {
+      let { existingRoute, newRoute } = existingChildren[i2];
       let existingRouteTyped = existingRoute;
       let [newRouteTyped] = convertRoutesToDataRoutes(
         [newRoute],
@@ -18091,7 +18858,7 @@ function isSameRoute(newRoute, existingRoute) {
     return true;
   }
   return newRoute.children?.every(
-    (aChild, i) => existingRoute.children?.some((bChild) => isSameRoute(aChild, bChild))
+    (aChild, i2) => existingRoute.children?.some((bChild) => isSameRoute(aChild, bChild))
   ) ?? false;
 }
 var lazyRoutePropertyCache = /* @__PURE__ */ new WeakMap();
@@ -18252,8 +19019,8 @@ async function defaultDataStrategy(args) {
   let matchesToLoad = args.matches.filter((m) => m.shouldLoad);
   let keyedResults = {};
   let results = await Promise.all(matchesToLoad.map((m) => m.resolve()));
-  results.forEach((result, i) => {
-    keyedResults[matchesToLoad[i].route.id] = result;
+  results.forEach((result, i2) => {
+    keyedResults[matchesToLoad[i2].route.id] = result;
   });
   return keyedResults;
 }
@@ -18975,8 +19742,8 @@ function getInternalRouterError(status, {
 }
 function findRedirect(results) {
   let entries = Object.entries(results);
-  for (let i = entries.length - 1; i >= 0; i--) {
-    let [key, result] = entries[i];
+  for (let i2 = entries.length - 1; i2 >= 0; i2--) {
+    let [key, result] = entries[i2];
     if (isRedirectResult(result)) {
       return { key, result };
     }
@@ -18986,13 +19753,13 @@ function stripHashFromPath(path) {
   let parsedPath = typeof path === "string" ? parsePath(path) : path;
   return createPath({ ...parsedPath, hash: "" });
 }
-function isHashChangeOnly(a, b) {
-  if (a.pathname !== b.pathname || a.search !== b.search) {
+function isHashChangeOnly(a2, b) {
+  if (a2.pathname !== b.pathname || a2.search !== b.search) {
     return false;
   }
-  if (a.hash === "") {
+  if (a2.hash === "") {
     return b.hash !== "";
-  } else if (a.hash === b.hash) {
+  } else if (a2.hash === b.hash) {
     return true;
   } else if (b.hash !== "") {
     return true;
@@ -19340,7 +20107,7 @@ function useLocation() {
   return reactExports.useContext(LocationContext).location;
 }
 var navigateEffectWarning = `You should call navigate() in a React.useEffect(), not when your component is first rendered.`;
-function useIsomorphicLayoutEffect(cb) {
+function useIsomorphicLayoutEffect$1(cb) {
   let isStatic = reactExports.useContext(NavigationContext).static;
   if (!isStatic) {
     reactExports.useLayoutEffect(cb);
@@ -19363,7 +20130,7 @@ function useNavigateUnstable() {
   let { pathname: locationPathname } = useLocation();
   let routePathnamesJson = JSON.stringify(getResolveToMatches(matches));
   let activeRef = reactExports.useRef(false);
-  useIsomorphicLayoutEffect(() => {
+  useIsomorphicLayoutEffect$1(() => {
     activeRef.current = true;
   });
   let navigate = reactExports.useCallback(
@@ -19659,10 +20426,10 @@ function _renderMatches(matches, parentMatches = [], dataRouterOpts) {
   let fallbackIndex = -1;
   if (dataRouterOpts && dataRouterState) {
     renderFallback = dataRouterState.renderFallback;
-    for (let i = 0; i < renderedMatches.length; i++) {
-      let match = renderedMatches[i];
+    for (let i2 = 0; i2 < renderedMatches.length; i2++) {
+      let match = renderedMatches[i2];
       if (match.route.HydrateFallback || match.route.hydrateFallbackElement) {
-        fallbackIndex = i;
+        fallbackIndex = i2;
       }
       if (match.route.id) {
         let { loaderData, errors: errors2 } = dataRouterState;
@@ -19815,7 +20582,7 @@ function useNavigateStable() {
     /* UseNavigateStable */
   );
   let activeRef = reactExports.useRef(false);
-  useIsomorphicLayoutEffect(() => {
+  useIsomorphicLayoutEffect$1(() => {
     activeRef.current = true;
   });
   let navigate = reactExports.useCallback(
@@ -19981,7 +20748,7 @@ function RouterProvider({
         } else {
           reactExports.startTransition(() => {
             if (useTransitions === true) {
-              setOptimisticState((s) => getOptimisticRouterState(s, newState));
+              setOptimisticState((s2) => getOptimisticRouterState(s2, newState));
             }
             setStateImpl(newState);
           });
@@ -20001,10 +20768,10 @@ function RouterProvider({
             nextLocation: viewTransitionOpts.nextLocation
           });
         });
-        let t = router2.window.document.startViewTransition(() => {
+        let t2 = router2.window.document.startViewTransition(() => {
           reactDomFlushSyncImpl(() => setStateImpl(newState));
         });
-        t.finished.finally(() => {
+        t2.finished.finally(() => {
           reactDomFlushSyncImpl(() => {
             setRenderDfd(void 0);
             setTransition(void 0);
@@ -20012,7 +20779,7 @@ function RouterProvider({
             setVtContext({ isTransitioning: false });
           });
         });
-        reactDomFlushSyncImpl(() => setTransition(t));
+        reactDomFlushSyncImpl(() => setTransition(t2));
         return;
       }
       if (transition) {
@@ -20059,7 +20826,7 @@ function RouterProvider({
         } else {
           reactExports.startTransition(() => {
             if (useTransitions === true) {
-              setOptimisticState((s) => getOptimisticRouterState(s, newState));
+              setOptimisticState((s2) => getOptimisticRouterState(s2, newState));
             }
             setStateImpl(newState);
           });
@@ -20102,7 +20869,7 @@ function RouterProvider({
     return {
       createHref: router2.createHref,
       encodeLocation: router2.encodeLocation,
-      go: (n) => router2.navigate(n),
+      go: (n2) => router2.navigate(n2),
       push: (to, state2, opts) => router2.navigate(to, {
         state: state2,
         preventScrollReset: opts?.preventScrollReset
@@ -20176,6 +20943,38 @@ function DataRoutes2({
     isStatic,
     onError
   });
+}
+function Navigate({
+  to,
+  replace: replace2,
+  state,
+  relative
+}) {
+  invariant(
+    useInRouterContext(),
+    // TODO: This error is probably because they somehow have 2 versions of
+    // the router loaded. We can help them understand how to avoid that.
+    `<Navigate> may be used only in the context of a <Router> component.`
+  );
+  let { static: isStatic } = reactExports.useContext(NavigationContext);
+  warning(
+    !isStatic,
+    `<Navigate> must not be used on the initial render in a <StaticRouter>. This is a no-op, but you should modify your code so the <Navigate> is only ever rendered in response to some user interaction or state change.`
+  );
+  let { matches } = reactExports.useContext(RouteContext);
+  let { pathname: locationPathname } = useLocation();
+  let navigate = useNavigate();
+  let path = resolveTo(
+    to,
+    getResolveToMatches(matches),
+    locationPathname,
+    relative === "path"
+  );
+  let jsonPath = JSON.stringify(path);
+  reactExports.useEffect(() => {
+    navigate(JSON.parse(jsonPath), { replace: replace2, state, relative });
+  }, [navigate, jsonPath, relative, replace2, state]);
+  return null;
 }
 function Outlet(props) {
   return useOutlet(props.context);
@@ -20505,12 +21304,12 @@ function sortKeys(obj) {
   return sorted;
 }
 function dedupeLinkDescriptors(descriptors, preloads) {
-  let set = /* @__PURE__ */ new Set();
+  let set2 = /* @__PURE__ */ new Set();
   new Set(preloads);
   return descriptors.reduce((deduped, descriptor) => {
     let key = JSON.stringify(sortKeys(descriptor));
-    if (!set.has(key)) {
-      set.add(key);
+    if (!set2.has(key)) {
+      set2.add(key);
       deduped.push({ key, link: descriptor });
     }
     return deduped;
@@ -21370,9 +22169,47 @@ const ChefHat = createLucideIcon("ChefHat", [
  * This source code is licensed under the ISC license.
  * See the LICENSE file in the root directory of this source tree.
  */
+const CircleAlert = createLucideIcon("CircleAlert", [
+  ["circle", { cx: "12", cy: "12", r: "10", key: "1mglay" }],
+  ["line", { x1: "12", x2: "12", y1: "8", y2: "12", key: "1pkeuh" }],
+  ["line", { x1: "12", x2: "12.01", y1: "16", y2: "16", key: "4dfq90" }]
+]);
+/**
+ * @license lucide-react v0.468.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */
+const CircleCheck = createLucideIcon("CircleCheck", [
+  ["circle", { cx: "12", cy: "12", r: "10", key: "1mglay" }],
+  ["path", { d: "m9 12 2 2 4-4", key: "dzmm74" }]
+]);
+/**
+ * @license lucide-react v0.468.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */
 const CreditCard = createLucideIcon("CreditCard", [
   ["rect", { width: "20", height: "14", x: "2", y: "5", rx: "2", key: "ynyp8z" }],
   ["line", { x1: "2", x2: "22", y1: "10", y2: "10", key: "1b3vmo" }]
+]);
+/**
+ * @license lucide-react v0.468.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */
+const Keyboard = createLucideIcon("Keyboard", [
+  ["path", { d: "M10 8h.01", key: "1r9ogq" }],
+  ["path", { d: "M12 12h.01", key: "1mp3jc" }],
+  ["path", { d: "M14 8h.01", key: "1primd" }],
+  ["path", { d: "M16 12h.01", key: "1l6xoz" }],
+  ["path", { d: "M18 8h.01", key: "emo2bl" }],
+  ["path", { d: "M6 8h.01", key: "x9i8wu" }],
+  ["path", { d: "M7 16h10", key: "wp8him" }],
+  ["path", { d: "M8 12h.01", key: "czm47f" }],
+  ["rect", { width: "20", height: "16", x: "2", y: "4", rx: "2", key: "18n3k1" }]
 ]);
 /**
  * @license lucide-react v0.468.0 - ISC
@@ -21385,6 +22222,37 @@ const LayoutDashboard = createLucideIcon("LayoutDashboard", [
   ["rect", { width: "7", height: "5", x: "14", y: "3", rx: "1", key: "16une8" }],
   ["rect", { width: "7", height: "9", x: "14", y: "12", rx: "1", key: "1hutg5" }],
   ["rect", { width: "7", height: "5", x: "3", y: "16", rx: "1", key: "ldoo1y" }]
+]);
+/**
+ * @license lucide-react v0.468.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */
+const LoaderCircle = createLucideIcon("LoaderCircle", [
+  ["path", { d: "M21 12a9 9 0 1 1-6.219-8.56", key: "13zald" }]
+]);
+/**
+ * @license lucide-react v0.468.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */
+const LockKeyhole = createLucideIcon("LockKeyhole", [
+  ["circle", { cx: "12", cy: "16", r: "1", key: "1au0dj" }],
+  ["rect", { x: "3", y: "10", width: "18", height: "12", rx: "2", key: "6s8ecr" }],
+  ["path", { d: "M7 10V7a5 5 0 0 1 10 0v3", key: "1pqi11" }]
+]);
+/**
+ * @license lucide-react v0.468.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */
+const LogOut = createLucideIcon("LogOut", [
+  ["path", { d: "M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4", key: "1uf3rs" }],
+  ["polyline", { points: "16 17 21 12 16 7", key: "1gabdz" }],
+  ["line", { x1: "21", x2: "9", y1: "12", y2: "12", key: "1uyos4" }]
 ]);
 /**
  * @license lucide-react v0.468.0 - ISC
@@ -21419,6 +22287,38 @@ const Printer = createLucideIcon("Printer", [
   ],
   ["path", { d: "M6 9V3a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v6", key: "1itne7" }],
   ["rect", { x: "6", y: "14", width: "12", height: "8", rx: "1", key: "1ue0tg" }]
+]);
+/**
+ * @license lucide-react v0.468.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */
+const ReceiptText = createLucideIcon("ReceiptText", [
+  [
+    "path",
+    { d: "M4 2v20l2-1 2 1 2-1 2 1 2-1 2 1 2-1 2 1V2l-2 1-2-1-2 1-2-1-2 1-2-1-2 1Z", key: "q3az6g" }
+  ],
+  ["path", { d: "M14 8H8", key: "1l3xfs" }],
+  ["path", { d: "M16 12H8", key: "1fr5h0" }],
+  ["path", { d: "M13 16H8", key: "wsln4y" }]
+]);
+/**
+ * @license lucide-react v0.468.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */
+const Save = createLucideIcon("Save", [
+  [
+    "path",
+    {
+      d: "M15.2 3a2 2 0 0 1 1.4.6l3.8 3.8a2 2 0 0 1 .6 1.4V19a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2z",
+      key: "1c8476"
+    }
+  ],
+  ["path", { d: "M17 21v-7a1 1 0 0 0-1-1H8a1 1 0 0 0-1 1v7", key: "1ydtos" }],
+  ["path", { d: "M7 3v4a1 1 0 0 0 1 1h7", key: "t51u73" }]
 ]);
 /**
  * @license lucide-react v0.468.0 - ISC
@@ -21479,8 +22379,63 @@ const ShoppingBag = createLucideIcon("ShoppingBag", [
  * This source code is licensed under the ISC license.
  * See the LICENSE file in the root directory of this source tree.
  */
+const SlidersHorizontal = createLucideIcon("SlidersHorizontal", [
+  ["line", { x1: "21", x2: "14", y1: "4", y2: "4", key: "obuewd" }],
+  ["line", { x1: "10", x2: "3", y1: "4", y2: "4", key: "1q6298" }],
+  ["line", { x1: "21", x2: "12", y1: "12", y2: "12", key: "1iu8h1" }],
+  ["line", { x1: "8", x2: "3", y1: "12", y2: "12", key: "ntss68" }],
+  ["line", { x1: "21", x2: "16", y1: "20", y2: "20", key: "14d8ph" }],
+  ["line", { x1: "12", x2: "3", y1: "20", y2: "20", key: "m0wm8r" }],
+  ["line", { x1: "14", x2: "14", y1: "2", y2: "6", key: "14e1ph" }],
+  ["line", { x1: "8", x2: "8", y1: "10", y2: "14", key: "1i6ji0" }],
+  ["line", { x1: "16", x2: "16", y1: "18", y2: "22", key: "1lctlv" }]
+]);
+/**
+ * @license lucide-react v0.468.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */
+const Sparkles = createLucideIcon("Sparkles", [
+  [
+    "path",
+    {
+      d: "M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z",
+      key: "4pj2yx"
+    }
+  ],
+  ["path", { d: "M20 3v4", key: "1olli1" }],
+  ["path", { d: "M22 5h-4", key: "1gvqau" }],
+  ["path", { d: "M4 17v2", key: "vumght" }],
+  ["path", { d: "M5 18H3", key: "zchphs" }]
+]);
+/**
+ * @license lucide-react v0.468.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */
 const Square = createLucideIcon("Square", [
   ["rect", { width: "18", height: "18", x: "3", y: "3", rx: "2", key: "afitv7" }]
+]);
+/**
+ * @license lucide-react v0.468.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */
+const Store = createLucideIcon("Store", [
+  ["path", { d: "m2 7 4.41-4.41A2 2 0 0 1 7.83 2h8.34a2 2 0 0 1 1.42.59L22 7", key: "ztvudi" }],
+  ["path", { d: "M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8", key: "1b2hhj" }],
+  ["path", { d: "M15 22v-4a2 2 0 0 0-2-2h-2a2 2 0 0 0-2 2v4", key: "2ebpfo" }],
+  ["path", { d: "M2 7h20", key: "1fcdvo" }],
+  [
+    "path",
+    {
+      d: "M22 7v3a2 2 0 0 1-2 2a2.7 2.7 0 0 1-1.59-.63.7.7 0 0 0-.82 0A2.7 2.7 0 0 1 16 12a2.7 2.7 0 0 1-1.59-.63.7.7 0 0 0-.82 0A2.7 2.7 0 0 1 12 12a2.7 2.7 0 0 1-1.59-.63.7.7 0 0 0-.82 0A2.7 2.7 0 0 1 8 12a2.7 2.7 0 0 1-1.59-.63.7.7 0 0 0-.82 0A2.7 2.7 0 0 1 4 12a2 2 0 0 1-2-2V7",
+      key: "6c3vgh"
+    }
+  ]
 ]);
 /**
  * @license lucide-react v0.468.0 - ISC
@@ -21494,6 +22449,16 @@ const Trash2 = createLucideIcon("Trash2", [
   ["path", { d: "M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2", key: "v07s0e" }],
   ["line", { x1: "10", x2: "10", y1: "11", y2: "17", key: "1uufr5" }],
   ["line", { x1: "14", x2: "14", y1: "11", y2: "17", key: "xtxkd" }]
+]);
+/**
+ * @license lucide-react v0.468.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */
+const UserRound = createLucideIcon("UserRound", [
+  ["circle", { cx: "12", cy: "8", r: "5", key: "1hypcn" }],
+  ["path", { d: "M20 21a8 8 0 0 0-16 0", key: "rfgkzh" }]
 ]);
 /**
  * @license lucide-react v0.468.0 - ISC
@@ -21534,6 +22499,321 @@ const X = createLucideIcon("X", [
   ["path", { d: "M18 6 6 18", key: "1bl5f8" }],
   ["path", { d: "m6 6 12 12", key: "d8bk6v" }]
 ]);
+const createStoreImpl = (createState) => {
+  let state;
+  const listeners = /* @__PURE__ */ new Set();
+  const setState = (partial, replace) => {
+    const nextState = typeof partial === "function" ? partial(state) : partial;
+    if (!Object.is(nextState, state)) {
+      const previousState = state;
+      state = (replace != null ? replace : typeof nextState !== "object" || nextState === null) ? nextState : Object.assign({}, state, nextState);
+      listeners.forEach((listener) => listener(state, previousState));
+    }
+  };
+  const getState = () => state;
+  const getInitialState = () => initialState;
+  const subscribe = (listener) => {
+    listeners.add(listener);
+    return () => listeners.delete(listener);
+  };
+  const api = { setState, getState, getInitialState, subscribe };
+  const initialState = state = createState(setState, getState, api);
+  return api;
+};
+const createStore = ((createState) => createState ? createStoreImpl(createState) : createStoreImpl);
+const identity = (arg) => arg;
+function useStore(api, selector = identity) {
+  const slice = React.useSyncExternalStore(
+    api.subscribe,
+    React.useCallback(() => selector(api.getState()), [api, selector]),
+    React.useCallback(() => selector(api.getInitialState()), [api, selector])
+  );
+  React.useDebugValue(slice);
+  return slice;
+}
+const createImpl = (createState) => {
+  const api = createStore(createState);
+  const useBoundStore = (selector) => useStore(api, selector);
+  Object.assign(useBoundStore, api);
+  return useBoundStore;
+};
+const create = ((createState) => createState ? createImpl(createState) : createImpl);
+function createJSONStorage(getStorage, options) {
+  let storage;
+  try {
+    storage = getStorage();
+  } catch (e) {
+    return;
+  }
+  const persistStorage = {
+    getItem: (name) => {
+      var _a;
+      const parse2 = (str2) => {
+        if (str2 === null) {
+          return null;
+        }
+        return JSON.parse(str2, void 0);
+      };
+      const str = (_a = storage.getItem(name)) != null ? _a : null;
+      if (str instanceof Promise) {
+        return str.then(parse2);
+      }
+      return parse2(str);
+    },
+    setItem: (name, newValue) => storage.setItem(name, JSON.stringify(newValue, void 0)),
+    removeItem: (name) => storage.removeItem(name)
+  };
+  return persistStorage;
+}
+const toThenable = (fn) => (input) => {
+  try {
+    const result = fn(input);
+    if (result instanceof Promise) {
+      return result;
+    }
+    return {
+      then(onFulfilled) {
+        return toThenable(onFulfilled)(result);
+      },
+      catch(_onRejected) {
+        return this;
+      }
+    };
+  } catch (e) {
+    return {
+      then(_onFulfilled) {
+        return this;
+      },
+      catch(onRejected) {
+        return toThenable(onRejected)(e);
+      }
+    };
+  }
+};
+const persistImpl = (config2, baseOptions) => (set2, get2, api) => {
+  let options = {
+    storage: createJSONStorage(() => window.localStorage),
+    partialize: (state) => state,
+    version: 0,
+    merge: (persistedState, currentState) => ({
+      ...currentState,
+      ...persistedState
+    }),
+    ...baseOptions
+  };
+  let hasHydrated = false;
+  let hydrationVersion = 0;
+  const hydrationListeners = /* @__PURE__ */ new Set();
+  const finishHydrationListeners = /* @__PURE__ */ new Set();
+  let storage = options.storage;
+  if (!storage) {
+    return config2(
+      (...args) => {
+        console.warn(
+          `[zustand persist middleware] Unable to update item '${options.name}', the given storage is currently unavailable.`
+        );
+        set2(...args);
+      },
+      get2,
+      api
+    );
+  }
+  const setItem = () => {
+    const state = options.partialize({ ...get2() });
+    return storage.setItem(options.name, {
+      state,
+      version: options.version
+    });
+  };
+  const savedSetState = api.setState;
+  api.setState = (state, replace) => {
+    savedSetState(state, replace);
+    return setItem();
+  };
+  const configResult = config2(
+    (...args) => {
+      set2(...args);
+      return setItem();
+    },
+    get2,
+    api
+  );
+  api.getInitialState = () => configResult;
+  let stateFromStorage;
+  const hydrate = () => {
+    var _a, _b;
+    if (!storage) return;
+    const currentVersion = ++hydrationVersion;
+    hasHydrated = false;
+    hydrationListeners.forEach((cb) => {
+      var _a2;
+      return cb((_a2 = get2()) != null ? _a2 : configResult);
+    });
+    const postRehydrationCallback = ((_b = options.onRehydrateStorage) == null ? void 0 : _b.call(options, (_a = get2()) != null ? _a : configResult)) || void 0;
+    return toThenable(storage.getItem.bind(storage))(options.name).then((deserializedStorageValue) => {
+      if (deserializedStorageValue) {
+        if (typeof deserializedStorageValue.version === "number" && deserializedStorageValue.version !== options.version) {
+          if (options.migrate) {
+            const migration = options.migrate(
+              deserializedStorageValue.state,
+              deserializedStorageValue.version
+            );
+            if (migration instanceof Promise) {
+              return migration.then((result) => [true, result]);
+            }
+            return [true, migration];
+          }
+          console.error(
+            `State loaded from storage couldn't be migrated since no migrate function was provided`
+          );
+        } else {
+          return [false, deserializedStorageValue.state];
+        }
+      }
+      return [false, void 0];
+    }).then((migrationResult) => {
+      var _a2;
+      if (currentVersion !== hydrationVersion) {
+        return;
+      }
+      const [migrated, migratedState] = migrationResult;
+      stateFromStorage = options.merge(
+        migratedState,
+        (_a2 = get2()) != null ? _a2 : configResult
+      );
+      set2(stateFromStorage, true);
+      if (migrated) {
+        return setItem();
+      }
+    }).then(() => {
+      if (currentVersion !== hydrationVersion) {
+        return;
+      }
+      postRehydrationCallback == null ? void 0 : postRehydrationCallback(get2(), void 0);
+      stateFromStorage = get2();
+      hasHydrated = true;
+      finishHydrationListeners.forEach((cb) => cb(stateFromStorage));
+    }).catch((e) => {
+      if (currentVersion !== hydrationVersion) {
+        return;
+      }
+      postRehydrationCallback == null ? void 0 : postRehydrationCallback(void 0, e);
+    });
+  };
+  api.persist = {
+    setOptions: (newOptions) => {
+      options = {
+        ...options,
+        ...newOptions
+      };
+      if (newOptions.storage) {
+        storage = newOptions.storage;
+      }
+    },
+    clearStorage: () => {
+      storage == null ? void 0 : storage.removeItem(options.name);
+    },
+    getOptions: () => options,
+    rehydrate: () => hydrate(),
+    hasHydrated: () => hasHydrated,
+    onHydrate: (cb) => {
+      hydrationListeners.add(cb);
+      return () => {
+        hydrationListeners.delete(cb);
+      };
+    },
+    onFinishHydration: (cb) => {
+      finishHydrationListeners.add(cb);
+      return () => {
+        finishHydrationListeners.delete(cb);
+      };
+    }
+  };
+  if (!options.skipHydration) {
+    hydrate();
+  }
+  return stateFromStorage || configResult;
+};
+const persist = persistImpl;
+const apiUrl = "http://localhost:4300";
+function readStoredToken() {
+  try {
+    const raw = localStorage.getItem("restaurantos-auth");
+    if (!raw) return void 0;
+    const parsed = JSON.parse(raw);
+    return parsed.state?.accessToken;
+  } catch {
+    return void 0;
+  }
+}
+async function apiFetch(path, init, accessToken = readStoredToken()) {
+  const headers = new Headers(init?.headers);
+  headers.set("Content-Type", "application/json");
+  if (accessToken) headers.set("Authorization", `Bearer ${accessToken}`);
+  const response = await fetch(`${apiUrl}${path}`, {
+    headers,
+    ...init
+  });
+  if (!response.ok) {
+    const message = await response.text();
+    throw new Error(message || `RestaurantOS API error ${response.status}`);
+  }
+  return response.json();
+}
+const useAuthStore = create()(
+  persist(
+    (set2, get2) => ({
+      loading: false,
+      login: async (username, password) => {
+        set2({ loading: true });
+        try {
+          const result = await apiFetch(
+            "/auth/login",
+            {
+              method: "POST",
+              body: JSON.stringify({ username, password })
+            },
+            void 0
+          );
+          set2({ accessToken: result.accessToken, user: result.user, loading: false });
+        } catch (error) {
+          set2({ loading: false });
+          throw error;
+        }
+      },
+      refreshProfile: async () => {
+        const { accessToken } = get2();
+        if (!accessToken) return;
+        set2({ loading: true });
+        try {
+          const result = await apiFetch("/auth/me", void 0, accessToken);
+          set2({ user: result.user, loading: false });
+        } catch (error) {
+          set2({ accessToken: void 0, user: void 0, loading: false });
+          throw error;
+        }
+      },
+      logout: async () => {
+        const { accessToken } = get2();
+        try {
+          if (accessToken) {
+            await apiFetch("/auth/logout", { method: "POST" }, accessToken);
+          }
+        } finally {
+          set2({ accessToken: void 0, user: void 0, loading: false });
+        }
+      },
+      hasPermission: (permission) => get2().user?.permissions.includes(permission) ?? false
+    }),
+    {
+      name: "restaurantos-auth",
+      partialize: (state) => ({
+        accessToken: state.accessToken,
+        user: state.user
+      })
+    }
+  )
+);
 const navItems = [
   { to: "/", label: "POS", icon: ShoppingBag },
   { to: "/dashboard", label: "Dashboard", icon: LayoutDashboard },
@@ -21544,53 +22824,62 @@ const navItems = [
   { to: "/settings", label: "Settings", icon: Settings }
 ];
 function AppShell() {
-  return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "min-h-screen bg-canvas pt-9 text-espresso", children: [
-    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "fixed inset-x-0 top-0 z-50 flex h-9 items-center justify-between border-b border-orange-100 bg-white/95 px-3 shadow-sm [-webkit-app-region:drag]", children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-2 text-xs font-black uppercase tracking-wide text-orange-700", children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "flex h-5 w-5 items-center justify-center rounded bg-orange-600 text-[10px] text-white", children: "RO" }),
+  const navigate = useNavigate();
+  const { user, logout } = useAuthStore();
+  const handleLogout = async () => {
+    await logout();
+    navigate("/login", { replace: true });
+  };
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "min-h-screen bg-white pt-9 text-[#0d1717]", children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "fixed inset-x-0 top-0 z-50 flex h-9 items-center justify-between bg-white px-3 shadow-[0_8px_26px_rgba(8,86,85,0.05)] [-webkit-app-region:drag]", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-2 text-xs font-black uppercase tracking-wide text-[#085655]", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "flex h-5 w-5 items-center justify-center rounded-md bg-[#1ba09c] text-[10px] text-white", children: "RO" }),
         "RestaurantOS POS"
       ] }),
       /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-1 [-webkit-app-region:no-drag]", children: [
         /* @__PURE__ */ jsxRuntimeExports.jsx(
           "button",
           {
-            className: "flex h-7 w-8 items-center justify-center rounded text-stone-500 hover:bg-orange-50 hover:text-orange-700",
+            className: "flex h-7 w-8 items-center justify-center rounded-lg text-[#647271] hover:bg-[#e9fbfa] hover:text-[#085655]",
             onClick: () => window.restaurantos.window.minimize(),
             "aria-label": "Minimize",
+            title: "Minimize (Ctrl+Shift+M)",
             children: /* @__PURE__ */ jsxRuntimeExports.jsx(Minus, { size: 15 })
           }
         ),
         /* @__PURE__ */ jsxRuntimeExports.jsx(
           "button",
           {
-            className: "flex h-7 w-8 items-center justify-center rounded text-stone-500 hover:bg-orange-50 hover:text-orange-700",
+            className: "flex h-7 w-8 items-center justify-center rounded-lg text-[#647271] hover:bg-[#e9fbfa] hover:text-[#085655]",
             onClick: () => window.restaurantos.window.maximize(),
             "aria-label": "Maximize",
+            title: "Maximize (Ctrl+Shift+F)",
             children: /* @__PURE__ */ jsxRuntimeExports.jsx(Square, { size: 13 })
           }
         ),
         /* @__PURE__ */ jsxRuntimeExports.jsx(
           "button",
           {
-            className: "flex h-7 w-8 items-center justify-center rounded text-stone-500 hover:bg-red-50 hover:text-red-600",
+            className: "flex h-7 w-8 items-center justify-center rounded-lg text-[#647271] hover:bg-red-50 hover:text-red-600",
             onClick: () => window.restaurantos.window.close(),
             "aria-label": "Close",
+            title: "Close (Ctrl+Shift+Q)",
             children: /* @__PURE__ */ jsxRuntimeExports.jsx(X, { size: 16 })
           }
         )
       ] })
     ] }),
-    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex h-[calc(100vh-2.25rem)] bg-canvas", children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsxs("aside", { className: "flex w-24 shrink-0 flex-col items-center border-r border-orange-100 bg-white/90 px-3 py-5", children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mb-7 flex h-12 w-12 items-center justify-center rounded-lg bg-orange-600 text-lg font-black text-white shadow-sm", children: "RO" }),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex h-[calc(100vh-2.25rem)] bg-white", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("aside", { className: "flex w-28 shrink-0 flex-col items-center bg-white px-4 py-5 shadow-[14px_0_40px_rgba(8,86,85,0.05)]", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mb-7 flex h-14 w-14 items-center justify-center rounded-2xl bg-[#085655] text-lg font-black text-white shadow-[0_18px_40px_rgba(8,86,85,0.16)]", children: "RO" }),
         /* @__PURE__ */ jsxRuntimeExports.jsx("nav", { className: "flex w-full flex-1 flex-col gap-2", children: navItems.map((item) => /* @__PURE__ */ jsxRuntimeExports.jsxs(
           NavLink,
           {
             to: item.to,
             end: item.to === "/",
             className: ({ isActive }) => [
-              "group flex h-16 flex-col items-center justify-center gap-1 rounded-lg text-[11px] font-semibold transition",
-              isActive ? "bg-orange-600 text-white shadow-sm" : "text-stone-500 hover:bg-orange-50 hover:text-orange-700"
+              "group flex h-16 w-full flex-col items-center justify-center gap-1 rounded-2xl text-[11px] font-semibold transition",
+              isActive ? "bg-[#1ba09c] text-white shadow-[0_14px_28px_rgba(27,160,156,0.26)]" : "text-[#647271] hover:bg-[#e9fbfa] hover:text-[#085655]"
             ].join(" "),
             children: [
               /* @__PURE__ */ jsxRuntimeExports.jsx(item.icon, { size: 21, strokeWidth: 2.2 }),
@@ -21599,32 +22888,56 @@ function AppShell() {
           },
           item.to
         )) }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx(Users, { className: "text-stone-400", size: 22 })
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex w-full flex-col items-center gap-3", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex h-11 w-11 items-center justify-center rounded-2xl bg-[#f4fbfa] text-sm font-black text-[#085655]", children: user?.name.split(" ").map((part) => part[0]).join("").slice(0, 2) ?? /* @__PURE__ */ jsxRuntimeExports.jsx(Users, { size: 20 }) }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx(
+            "button",
+            {
+              className: "flex h-11 w-11 items-center justify-center rounded-2xl text-[#647271] hover:bg-red-50 hover:text-red-600",
+              onClick: handleLogout,
+              title: "Logout",
+              children: /* @__PURE__ */ jsxRuntimeExports.jsx(LogOut, { size: 20 })
+            }
+          )
+        ] })
       ] }),
       /* @__PURE__ */ jsxRuntimeExports.jsx("main", { className: "min-w-0 flex-1", children: /* @__PURE__ */ jsxRuntimeExports.jsx(Outlet, {}) })
     ] })
   ] });
 }
-function r(e) {
-  var t, f, n = "";
-  if ("string" == typeof e || "number" == typeof e) n += e;
+function ProtectedRoute() {
+  const { accessToken, user, loading, refreshProfile } = useAuthStore();
+  reactExports.useEffect(() => {
+    if (accessToken && !user && !loading) {
+      void refreshProfile();
+    }
+  }, [accessToken, loading, refreshProfile, user]);
+  if (!accessToken) return /* @__PURE__ */ jsxRuntimeExports.jsx(Navigate, { to: "/login", replace: true });
+  if (loading && !user) {
+    return /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex h-screen items-center justify-center bg-white text-sm font-black uppercase tracking-[0.24em] text-[#085655]", children: "Loading session" });
+  }
+  return /* @__PURE__ */ jsxRuntimeExports.jsx(Outlet, {});
+}
+function r$1(e) {
+  var t2, f, n2 = "";
+  if ("string" == typeof e || "number" == typeof e) n2 += e;
   else if ("object" == typeof e) if (Array.isArray(e)) {
-    var o = e.length;
-    for (t = 0; t < o; t++) e[t] && (f = r(e[t])) && (n && (n += " "), n += f);
-  } else for (f in e) e[f] && (n && (n += " "), n += f);
-  return n;
+    var o2 = e.length;
+    for (t2 = 0; t2 < o2; t2++) e[t2] && (f = r$1(e[t2])) && (n2 && (n2 += " "), n2 += f);
+  } else for (f in e) e[f] && (n2 && (n2 += " "), n2 += f);
+  return n2;
 }
 function clsx() {
-  for (var e, t, f = 0, n = "", o = arguments.length; f < o; f++) (e = arguments[f]) && (t = r(e)) && (n && (n += " "), n += t);
-  return n;
+  for (var e, t2, f = 0, n2 = "", o2 = arguments.length; f < o2; f++) (e = arguments[f]) && (t2 = r$1(e)) && (n2 && (n2 += " "), n2 += t2);
+  return n2;
 }
 const CLASS_PART_SEPARATOR = "-";
-const createClassGroupUtils = (config) => {
-  const classMap = createClassMap(config);
+const createClassGroupUtils = (config2) => {
+  const classMap = createClassMap(config2);
   const {
     conflictingClassGroups,
     conflictingClassGroupModifiers
-  } = config;
+  } = config2;
   const getClassGroupId = (className) => {
     const classParts = className.split(CLASS_PART_SEPARATOR);
     if (classParts[0] === "" && classParts.length !== 1) {
@@ -21672,16 +22985,16 @@ const getGroupIdForArbitraryProperty = (className) => {
     }
   }
 };
-const createClassMap = (config) => {
+const createClassMap = (config2) => {
   const {
     theme,
     prefix
-  } = config;
+  } = config2;
   const classMap = {
     nextPart: /* @__PURE__ */ new Map(),
     validators: []
   };
-  const prefixedClassGroupEntries = getPrefixedClassGroupEntries(Object.entries(config.classGroups), prefix);
+  const prefixedClassGroupEntries = getPrefixedClassGroupEntries(Object.entries(config2.classGroups), prefix);
   prefixedClassGroupEntries.forEach(([classGroupId, classGroup]) => {
     processClassesRecursively(classGroup, classMap, classGroupId, theme);
   });
@@ -21782,11 +23095,11 @@ const createLruCache = (maxCacheSize) => {
   };
 };
 const IMPORTANT_MODIFIER = "!";
-const createParseClassName = (config) => {
+const createParseClassName = (config2) => {
   const {
     separator,
     experimentalParseClassName
-  } = config;
+  } = config2;
   const isSeparatorSingleCharacter = separator.length === 1;
   const firstSeparatorCharacter = separator[0];
   const separatorLength = separator.length;
@@ -21851,10 +23164,10 @@ const sortModifiers = (modifiers) => {
   sortedModifiers.push(...unsortedModifiers.sort());
   return sortedModifiers;
 };
-const createConfigUtils = (config) => ({
-  cache: createLruCache(config.cacheSize),
-  parseClassName: createParseClassName(config),
-  ...createClassGroupUtils(config)
+const createConfigUtils = (config2) => ({
+  cache: createLruCache(config2.cacheSize),
+  parseClassName: createParseClassName(config2),
+  ...createClassGroupUtils(config2)
 });
 const SPLIT_CLASSES_REGEX = /\s+/;
 const mergeClassList = (classList, configUtils) => {
@@ -21896,8 +23209,8 @@ const mergeClassList = (classList, configUtils) => {
     }
     classGroupsInConflict.push(classId);
     const conflictGroups = getConflictingClassGroupIds(classGroupId, hasPostfixModifier);
-    for (let i = 0; i < conflictGroups.length; ++i) {
-      const group = conflictGroups[i];
+    for (let i2 = 0; i2 < conflictGroups.length; ++i2) {
+      const group = conflictGroups[i2];
       classGroupsInConflict.push(modifierId + group);
     }
     result = originalClassName + (result.length > 0 ? " " + result : result);
@@ -21941,8 +23254,8 @@ function createTailwindMerge(createConfigFirst, ...createConfigRest) {
   let cacheSet;
   let functionToCall = initTailwindMerge;
   function initTailwindMerge(classList) {
-    const config = createConfigRest.reduce((previousConfig, createConfigCurrent) => createConfigCurrent(previousConfig), createConfigFirst());
-    configUtils = createConfigUtils(config);
+    const config2 = createConfigRest.reduce((previousConfig, createConfigCurrent) => createConfigCurrent(previousConfig), createConfigFirst());
+    configUtils = createConfigUtils(config2);
     cacheGet = configUtils.cache.get;
     cacheSet = configUtils.cache.set;
     functionToCall = tailwindMerge;
@@ -24080,18 +25393,18 @@ function cn(...inputs) {
   return twMerge(clsx(inputs));
 }
 const tones = {
-  green: "bg-emerald-50 text-emerald-700 ring-emerald-200",
-  orange: "bg-orange-50 text-orange-700 ring-orange-200",
+  green: "bg-[#e7f7f6] text-[#085655] ring-[#bde8e5]",
+  orange: "bg-[#e9fbfa] text-[#1ba09c] ring-[#c8efed]",
   blue: "bg-sky-50 text-sky-700 ring-sky-200",
   red: "bg-red-50 text-red-700 ring-red-200",
-  gray: "bg-stone-100 text-stone-600 ring-stone-200"
+  gray: "bg-[#f5f7f7] text-[#5e6a69] ring-[#e7eeee]"
 };
 function Badge({ className, tone = "gray", ...props }) {
   return /* @__PURE__ */ jsxRuntimeExports.jsx(
     "span",
     {
       className: cn(
-        "inline-flex h-7 items-center rounded-full px-3 text-xs font-semibold ring-1",
+        "inline-flex h-7 items-center rounded-lg px-3 text-xs font-semibold ring-1",
         tones[tone],
         className
       ),
@@ -24100,9 +25413,9 @@ function Badge({ className, tone = "gray", ...props }) {
   );
 }
 const variants = {
-  primary: "bg-orange-600 text-white shadow-sm hover:bg-orange-700 focus-visible:ring-orange-500",
-  secondary: "border border-orange-200 bg-white text-stone-900 hover:border-orange-300 hover:bg-orange-50",
-  ghost: "text-stone-700 hover:bg-orange-50",
+  primary: "bg-[#1ba09c] text-white shadow-[0_10px_24px_rgba(27,160,156,0.26)] hover:bg-[#168f8b] focus-visible:ring-[#1ba09c]",
+  secondary: "bg-white text-[#085655] shadow-[inset_0_0_0_1px_rgba(8,86,85,0.1)] hover:bg-[#f4fbfa]",
+  ghost: "text-[#4d5d5c] hover:bg-[#f4fbfa]",
   danger: "bg-red-600 text-white hover:bg-red-700 focus-visible:ring-red-500"
 };
 function Button({ className, variant = "primary", icon, children, ...props }) {
@@ -24110,7 +25423,7 @@ function Button({ className, variant = "primary", icon, children, ...props }) {
     "button",
     {
       className: cn(
-        "inline-flex h-11 items-center justify-center gap-2 rounded-md px-4 text-sm font-semibold transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50",
+        "inline-flex h-11 items-center justify-center gap-2 rounded-xl px-4 text-sm font-semibold transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50",
         variants[variant],
         className
       ),
@@ -24127,7 +25440,7 @@ function Card({ className, ...props }) {
     "div",
     {
       className: cn(
-        "rounded-lg border border-orange-100 bg-white shadow-[0_16px_40px_rgba(120,72,24,0.08)]",
+        "rounded-2xl bg-white shadow-[0_22px_60px_rgba(8,86,85,0.08)]",
         className
       ),
       ...props
@@ -24135,9 +25448,10 @@ function Card({ className, ...props }) {
   );
 }
 function CustomersPage() {
-  return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "p-7", children: [
-    /* @__PURE__ */ jsxRuntimeExports.jsx("h1", { className: "text-3xl font-black", children: "Customer credit" }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx(Card, { className: "mt-6 p-6", children: /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-semibold text-stone-600", children: "Customer profiles, credit limits, balances, and ledger payments." }) })
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "h-full overflow-y-auto p-7", children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm font-black uppercase tracking-[0.28em] text-[#7a7f73]", children: "Ledger care" }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("h1", { className: "mt-2 text-4xl font-black", children: "Customer credit" }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(Card, { className: "mt-7 p-6", children: /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-semibold text-[#697064]", children: "Customer profiles, credit limits, balances, and ledger payments." }) })
   ] });
 }
 const metrics = [
@@ -24147,70 +25461,5851 @@ const metrics = [
   ["Low stock", "0 items", "red"]
 ];
 function DashboardPage() {
-  return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "p-7", children: [
-    /* @__PURE__ */ jsxRuntimeExports.jsx("h1", { className: "text-3xl font-black", children: "Dashboard" }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mt-6 grid grid-cols-4 gap-4", children: metrics.map(([label, value, tone]) => /* @__PURE__ */ jsxRuntimeExports.jsxs(Card, { className: "p-5", children: [
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "h-full overflow-y-auto p-7", children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-end justify-between", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm font-black uppercase tracking-[0.28em] text-[#7a7f73]", children: "Overview" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("h1", { className: "mt-2 text-4xl font-black", children: "Today at a glance" })
+      ] }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "rounded-2xl bg-[#085655] px-5 py-3 text-sm font-semibold text-white", children: "Live shift" })
+    ] }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mt-7 grid grid-cols-4 gap-4", children: metrics.map(([label, value, tone]) => /* @__PURE__ */ jsxRuntimeExports.jsxs(Card, { className: "p-5", children: [
       /* @__PURE__ */ jsxRuntimeExports.jsx(Badge, { tone, children: label }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mt-6 text-3xl font-black", children: value })
-    ] }, label)) })
+      /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mt-7 text-3xl font-black", children: value })
+    ] }, label)) }),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mt-5 grid grid-cols-[1.4fr_1fr] gap-5", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsxs(Card, { className: "min-h-72 p-6", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center justify-between", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "text-xl font-black", children: "Sales rhythm" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx(Badge, { tone: "green", children: "Realtime" })
+        ] }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mt-8 flex h-44 items-end gap-3", children: [38, 62, 46, 78, 56, 92, 70, 84].map((height, index) => /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex flex-1 flex-col items-center gap-3", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx(
+            "div",
+            {
+              className: "w-full rounded-t-xl bg-[#1ba09c]",
+              style: { height: `${height}%`, opacity: 0.42 + index * 0.06 }
+            }
+          ),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-xs font-bold text-[#7a7f73]", children: index + 9 })
+        ] }, index)) })
+      ] }),
+      /* @__PURE__ */ jsxRuntimeExports.jsxs(Card, { className: "min-h-72 bg-[#085655] p-6 text-white", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx(Badge, { tone: "orange", children: "Kitchen" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "mt-6 text-3xl font-black", children: "No delays" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mt-3 text-sm font-semibold text-[#c7e8e6]", children: "Kitchen queue, table status, and delivery counters will stream here." })
+      ] })
+    ] })
   ] });
 }
 function InventoryPage() {
-  return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "p-7", children: [
-    /* @__PURE__ */ jsxRuntimeExports.jsx("h1", { className: "text-3xl font-black", children: "Inventory" }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx(Card, { className: "mt-6 p-6", children: /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-semibold text-stone-600", children: "Units, stock batches, purchases, wastage, and transaction-safe stock movement screens." }) })
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "h-full overflow-y-auto p-7", children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm font-black uppercase tracking-[0.28em] text-[#7a7f73]", children: "Stock control" }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("h1", { className: "mt-2 text-4xl font-black", children: "Inventory" }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(Card, { className: "mt-7 p-6", children: /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-semibold text-[#697064]", children: "Units, stock batches, purchases, wastage, and transaction-safe stock movement screens." }) })
+  ] });
+}
+var isCheckBoxInput = (element) => element.type === "checkbox";
+var isDateObject = (value) => value instanceof Date;
+var isNullOrUndefined = (value) => value == null;
+const isObjectType = (value) => typeof value === "object";
+var isObject = (value) => !isNullOrUndefined(value) && !Array.isArray(value) && isObjectType(value) && !isDateObject(value);
+var getEventValue = (event) => isObject(event) && event.target ? isCheckBoxInput(event.target) ? event.target.checked : event.target.value : event;
+var isNameInFieldArray = (names, name) => name.split(".").some((part, index, arr) => !isNaN(Number(part)) && names.has(arr.slice(0, index).join(".")));
+var isPlainObject = (tempObject) => {
+  const prototypeCopy = tempObject.constructor && tempObject.constructor.prototype;
+  return isObject(prototypeCopy) && prototypeCopy.hasOwnProperty("isPrototypeOf");
+};
+var isWeb = typeof window !== "undefined" && typeof window.HTMLElement !== "undefined" && typeof document !== "undefined";
+function cloneObject(data) {
+  if (data instanceof Date) {
+    return new Date(data);
+  }
+  const isFileListInstance = typeof FileList !== "undefined" && data instanceof FileList;
+  if (isWeb && (data instanceof Blob || isFileListInstance)) {
+    return data;
+  }
+  const isArray = Array.isArray(data);
+  if (!isArray && !(isObject(data) && isPlainObject(data))) {
+    return data;
+  }
+  const copy = isArray ? [] : Object.create(Object.getPrototypeOf(data));
+  for (const key in data) {
+    if (Object.prototype.hasOwnProperty.call(data, key)) {
+      copy[key] = cloneObject(data[key]);
+    }
+  }
+  return copy;
+}
+const EVENTS = {
+  BLUR: "blur",
+  FOCUS_OUT: "focusout",
+  SUBMIT: "submit",
+  TRIGGER: "trigger",
+  VALID: "valid"
+};
+const VALIDATION_MODE = {
+  onBlur: "onBlur",
+  onChange: "onChange",
+  onSubmit: "onSubmit",
+  onTouched: "onTouched",
+  all: "all"
+};
+const INPUT_VALIDATION_RULES = {
+  max: "max",
+  min: "min",
+  maxLength: "maxLength",
+  minLength: "minLength",
+  pattern: "pattern",
+  required: "required",
+  validate: "validate"
+};
+const FORM_ERROR_TYPE = "form";
+const ROOT_ERROR_TYPE = "root";
+const PROTOTYPE_KEYWORDS = ["__proto__", "constructor", "prototype"];
+var isKey = (value) => /^\w*$/.test(value);
+var isUndefined = (val) => val === void 0;
+var stringToPath = (input) => input.split(/[.[\]'"]/g).filter(Boolean);
+var get = (object, path, defaultValue) => {
+  if (!path || !isObject(object)) {
+    return defaultValue;
+  }
+  const paths = isKey(path) ? [path] : stringToPath(path);
+  if (paths.some((key) => PROTOTYPE_KEYWORDS.includes(key))) {
+    return defaultValue;
+  }
+  const result = paths.reduce((result2, key) => {
+    return isNullOrUndefined(result2) ? void 0 : result2[key];
+  }, object);
+  return isUndefined(result) || result === object ? isUndefined(object[path]) ? defaultValue : object[path] : result;
+};
+var isBoolean = (value) => typeof value === "boolean";
+var isFunction = (value) => typeof value === "function";
+var set = (object, path, value) => {
+  let index = -1;
+  const tempPath = isKey(path) ? [path] : stringToPath(path);
+  const length = tempPath.length;
+  const lastIndex = length - 1;
+  while (++index < length) {
+    const key = tempPath[index];
+    let newValue = value;
+    if (index !== lastIndex) {
+      const objValue = object[key];
+      newValue = isObject(objValue) || Array.isArray(objValue) ? objValue : !isNaN(+tempPath[index + 1]) ? [] : {};
+    }
+    if (PROTOTYPE_KEYWORDS.includes(key)) {
+      return;
+    }
+    object[key] = newValue;
+    object = object[key];
+  }
+};
+const HookFormControlContext = React.createContext(null);
+HookFormControlContext.displayName = "HookFormControlContext";
+var getProxyFormState = (formState, control, localProxyFormState, isRoot = true) => {
+  const result = {};
+  for (const key in formState) {
+    Object.defineProperty(result, key, {
+      get: () => {
+        const _key = key;
+        if (control._proxyFormState[_key] !== VALIDATION_MODE.all) {
+          control._proxyFormState[_key] = !isRoot || VALIDATION_MODE.all;
+        }
+        return formState[_key];
+      }
+    });
+  }
+  return result;
+};
+const useIsomorphicLayoutEffect = isWeb ? React.useLayoutEffect : React.useEffect;
+var isString = (value) => typeof value === "string";
+var generateWatchOutput = (names, _names, formValues, isGlobal, defaultValue) => {
+  if (isString(names)) {
+    isGlobal && _names.watch.add(names);
+    return get(formValues, names, defaultValue);
+  }
+  if (Array.isArray(names)) {
+    return names.map((fieldName) => (isGlobal && _names.watch.add(fieldName), get(formValues, fieldName)));
+  }
+  isGlobal && (_names.watchAll = true);
+  return formValues;
+};
+var isPrimitive = (value) => isNullOrUndefined(value) || !isObjectType(value);
+function deepEqual(object1, object2, visited = /* @__PURE__ */ new WeakSet()) {
+  if (object1 === object2) {
+    return true;
+  }
+  if (isPrimitive(object1) || isPrimitive(object2)) {
+    return Object.is(object1, object2);
+  }
+  if (isDateObject(object1) && isDateObject(object2)) {
+    return Object.is(object1.getTime(), object2.getTime());
+  }
+  const keys1 = Object.keys(object1);
+  const keys2 = Object.keys(object2);
+  if (keys1.length !== keys2.length) {
+    return false;
+  }
+  if (visited.has(object1) || visited.has(object2)) {
+    return true;
+  }
+  visited.add(object1);
+  visited.add(object2);
+  for (const key of keys1) {
+    const val1 = object1[key];
+    if (!(key in object2)) {
+      return false;
+    }
+    if (key !== "ref") {
+      const val2 = object2[key];
+      if (isDateObject(val1) && isDateObject(val2) || (isObject(val1) || Array.isArray(val1)) && (isObject(val2) || Array.isArray(val2)) ? !deepEqual(val1, val2, visited) : !Object.is(val1, val2)) {
+        return false;
+      }
+    }
+  }
+  return true;
+}
+const HookFormContext = React.createContext(null);
+HookFormContext.displayName = "HookFormContext";
+var appendErrors = (name, validateAllFieldCriteria, errors, type, message) => validateAllFieldCriteria ? {
+  ...errors[name],
+  types: {
+    ...errors[name] && errors[name].types ? errors[name].types : {},
+    [type]: message || true
+  }
+} : {};
+var compact = (value) => Array.isArray(value) ? value.filter(Boolean) : [];
+var convertToArrayPayload = (value) => Array.isArray(value) ? value : [value];
+var createSubject = () => {
+  let _observers = [];
+  const next = (value) => {
+    for (const observer of _observers) {
+      observer.next && observer.next(value);
+    }
+  };
+  const subscribe = (observer) => {
+    _observers.push(observer);
+    return {
+      unsubscribe: () => {
+        _observers = _observers.filter((o2) => o2 !== observer);
+      }
+    };
+  };
+  const unsubscribe = () => {
+    _observers = [];
+  };
+  return {
+    get observers() {
+      return _observers;
+    },
+    next,
+    subscribe,
+    unsubscribe
+  };
+};
+function extractFormValues(fieldsState, formValues) {
+  const values = {};
+  for (const key in fieldsState) {
+    if (fieldsState.hasOwnProperty(key)) {
+      const fieldState = fieldsState[key];
+      const fieldValue = formValues[key];
+      if (fieldState && isObject(fieldState) && fieldValue) {
+        const nestedFieldsState = extractFormValues(fieldState, fieldValue);
+        if (isObject(nestedFieldsState)) {
+          values[key] = nestedFieldsState;
+        }
+      } else if (fieldsState[key]) {
+        values[key] = fieldValue;
+      }
+    }
+  }
+  return values;
+}
+var isEmptyObject = (value) => isObject(value) && !Object.keys(value).length;
+var isFileInput = (element) => element.type === "file";
+var isHTMLElement = (value) => {
+  if (!isWeb) {
+    return false;
+  }
+  const owner = value ? value.ownerDocument : 0;
+  return value instanceof (owner && owner.defaultView ? owner.defaultView.HTMLElement : HTMLElement);
+};
+var isMultipleSelect = (element) => element.type === `select-multiple`;
+var isRadioInput = (element) => element.type === "radio";
+var isRadioOrCheckbox = (ref) => isRadioInput(ref) || isCheckBoxInput(ref);
+var live = (ref) => isHTMLElement(ref) && ref.isConnected;
+function baseGet(object, updatePath) {
+  const length = updatePath.slice(0, -1).length;
+  let index = 0;
+  while (index < length) {
+    if (isNullOrUndefined(object)) {
+      object = void 0;
+      break;
+    }
+    object = object[updatePath[index]];
+    index++;
+  }
+  return object;
+}
+function isEmptyArray(obj) {
+  for (const key in obj) {
+    if (obj.hasOwnProperty(key) && !isUndefined(obj[key])) {
+      return false;
+    }
+  }
+  return true;
+}
+function unset(object, path) {
+  if (isString(path) && Object.prototype.hasOwnProperty.call(object, path)) {
+    delete object[path];
+    return object;
+  }
+  const paths = Array.isArray(path) ? path : isKey(path) ? [path] : stringToPath(path);
+  const childObject = paths.length === 1 ? object : baseGet(object, paths);
+  const index = paths.length - 1;
+  const key = paths[index];
+  if (childObject) {
+    delete childObject[key];
+  }
+  if (index !== 0 && (isObject(childObject) && isEmptyObject(childObject) || Array.isArray(childObject) && isEmptyArray(childObject))) {
+    unset(object, paths.slice(0, -1));
+  }
+  return object;
+}
+var objectHasFunction = (data) => {
+  for (const key in data) {
+    if (isFunction(data[key])) {
+      return true;
+    }
+  }
+  return false;
+};
+function isTraversable(value) {
+  return Array.isArray(value) || isObject(value) && !objectHasFunction(value);
+}
+function markFieldsDirty(data, fields = {}) {
+  for (const key in data) {
+    const value = data[key];
+    if (isTraversable(value)) {
+      fields[key] = Array.isArray(value) ? [] : {};
+      markFieldsDirty(value, fields[key]);
+    } else if (!isUndefined(value)) {
+      fields[key] = true;
+    }
+  }
+  return fields;
+}
+function pruneDirtyFields(value) {
+  if (value === false) {
+    return void 0;
+  }
+  if (value === true) {
+    return true;
+  }
+  if (Array.isArray(value)) {
+    const result = value.map((value2) => pruneDirtyFields(value2));
+    return result.some((value2) => value2 !== void 0) ? result : void 0;
+  }
+  if (isObject(value)) {
+    const result = {};
+    for (const key in value) {
+      const pruned = pruneDirtyFields(value[key]);
+      if (!isUndefined(pruned)) {
+        result[key] = pruned;
+      }
+    }
+    return Object.keys(result).length ? result : void 0;
+  }
+  return void 0;
+}
+function getDirtyFields(data, formValues, dirtyFieldsFromValues) {
+  if (!dirtyFieldsFromValues) {
+    dirtyFieldsFromValues = markFieldsDirty(formValues);
+  }
+  for (const key in data) {
+    const value = data[key];
+    if (isTraversable(value)) {
+      if (isUndefined(formValues) || isPrimitive(dirtyFieldsFromValues[key])) {
+        dirtyFieldsFromValues[key] = markFieldsDirty(value, Array.isArray(value) ? [] : {});
+      } else {
+        getDirtyFields(value, isNullOrUndefined(formValues) ? {} : formValues[key], dirtyFieldsFromValues[key]);
+      }
+    } else {
+      const formValue = formValues[key];
+      dirtyFieldsFromValues[key] = !deepEqual(value, formValue);
+    }
+  }
+  return pruneDirtyFields(dirtyFieldsFromValues) || {};
+}
+const defaultResult = {
+  value: false,
+  isValid: false
+};
+const validResult = { value: true, isValid: true };
+var getCheckboxValue = (options) => {
+  if (Array.isArray(options)) {
+    if (options.length > 1) {
+      const values = options.filter((option) => option && option.checked && !option.disabled).map((option) => option.value);
+      return { value: values, isValid: !!values.length };
+    }
+    return options[0].checked && !options[0].disabled ? (
+      // @ts-expect-error expected to work in the browser
+      options[0].attributes && !isUndefined(options[0].attributes.value) ? isUndefined(options[0].value) || options[0].value === "" ? validResult : { value: options[0].value, isValid: true } : validResult
+    ) : defaultResult;
+  }
+  return defaultResult;
+};
+var getFieldValueAs = (value, { valueAsNumber, valueAsDate, setValueAs }) => isUndefined(value) ? value : valueAsNumber ? value === "" ? NaN : value ? +value : value : valueAsDate && isString(value) ? new Date(value) : setValueAs ? setValueAs(value) : value;
+const defaultReturn = {
+  isValid: false,
+  value: null
+};
+var getRadioValue = (options) => Array.isArray(options) ? options.reduce((previous, option) => option && option.checked && !option.disabled ? {
+  isValid: true,
+  value: option.value
+} : previous, defaultReturn) : defaultReturn;
+function getFieldValue(_f) {
+  const ref = _f.ref;
+  if (isFileInput(ref)) {
+    return ref.files;
+  }
+  if (isRadioInput(ref)) {
+    return getRadioValue(_f.refs).value;
+  }
+  if (isMultipleSelect(ref)) {
+    return [...ref.selectedOptions].map(({ value }) => value);
+  }
+  if (isCheckBoxInput(ref)) {
+    return getCheckboxValue(_f.refs).value;
+  }
+  return getFieldValueAs(isUndefined(ref.value) ? _f.ref.value : ref.value, _f);
+}
+var getResolverOptions = (fieldsNames, _fields, criteriaMode, shouldUseNativeValidation) => {
+  const fields = {};
+  for (const name of fieldsNames) {
+    const field = get(_fields, name);
+    field && set(fields, name, field._f);
+  }
+  return {
+    criteriaMode,
+    names: [...fieldsNames],
+    fields,
+    shouldUseNativeValidation
+  };
+};
+var isRegex = (value) => value instanceof RegExp;
+var getRuleValue = (rule) => isUndefined(rule) ? rule : isRegex(rule) ? rule.source : isObject(rule) ? isRegex(rule.value) ? rule.value.source : rule.value : rule;
+var getValidationModes = (mode) => ({
+  isOnSubmit: !mode || mode === VALIDATION_MODE.onSubmit,
+  isOnBlur: mode === VALIDATION_MODE.onBlur,
+  isOnChange: mode === VALIDATION_MODE.onChange,
+  isOnAll: mode === VALIDATION_MODE.all,
+  isOnTouch: mode === VALIDATION_MODE.onTouched
+});
+const ASYNC_FUNCTION = "AsyncFunction";
+var hasPromiseValidation = (fieldReference) => !!fieldReference && !!fieldReference.validate && !!(isFunction(fieldReference.validate) && fieldReference.validate.constructor.name === ASYNC_FUNCTION || isObject(fieldReference.validate) && Object.values(fieldReference.validate).find((validateFunction) => validateFunction.constructor.name === ASYNC_FUNCTION));
+var hasValidation = (options) => options.mount && (options.required || options.min || options.max || options.maxLength || options.minLength || options.pattern || options.validate);
+var isWatched = (name, _names, isBlurEvent) => !isBlurEvent && (_names.watchAll || _names.watch.has(name) || [..._names.watch].some((watchName) => name.startsWith(`${watchName}.`)));
+const iterateFieldsByAction = (fields, action, fieldsNames, abortEarly) => {
+  for (const key of fieldsNames || Object.keys(fields)) {
+    const field = get(fields, key);
+    if (field) {
+      const { _f, ...currentField } = field;
+      if (_f) {
+        if (_f.refs && _f.refs[0] && action(_f.refs[0], key) && !abortEarly) {
+          return true;
+        } else if (_f.ref && action(_f.ref, _f.name) && !abortEarly) {
+          return true;
+        } else {
+          if (iterateFieldsByAction(currentField, action)) {
+            break;
+          }
+        }
+      } else if (isObject(currentField)) {
+        if (iterateFieldsByAction(currentField, action)) {
+          break;
+        }
+      }
+    }
+  }
+  return;
+};
+function schemaErrorLookup(errors, _fields, name) {
+  const error = get(errors, name);
+  if (error || isKey(name)) {
+    return {
+      error,
+      name
+    };
+  }
+  const names = name.split(".");
+  while (names.length) {
+    const fieldName = names.join(".");
+    const field = get(_fields, fieldName);
+    const foundError = get(errors, fieldName);
+    if (field && !Array.isArray(field) && name !== fieldName) {
+      return { name };
+    }
+    if (foundError && foundError.type) {
+      return {
+        name: fieldName,
+        error: foundError
+      };
+    }
+    if (foundError && foundError.root && foundError.root.type) {
+      return {
+        name: `${fieldName}.root`,
+        error: foundError.root
+      };
+    }
+    names.pop();
+  }
+  return {
+    name
+  };
+}
+var shouldRenderFormState = (formStateData, _proxyFormState, updateFormState, isRoot) => {
+  updateFormState(formStateData);
+  const { name, ...formState } = formStateData;
+  return isEmptyObject(formState) || isRoot && Object.keys(formState).length >= Object.keys(_proxyFormState).length || Object.keys(formState).find((key) => _proxyFormState[key] === (!isRoot || VALIDATION_MODE.all));
+};
+var shouldSubscribeByName = (name, signalName, exact) => !name || !signalName || name === signalName || convertToArrayPayload(name).some((currentName) => currentName && (exact ? currentName === signalName : currentName.startsWith(signalName) || signalName.startsWith(currentName)));
+var skipValidation = (isBlurEvent, isTouched, isSubmitted, reValidateMode, mode) => {
+  if (mode.isOnAll) {
+    return false;
+  } else if (!isSubmitted && mode.isOnTouch) {
+    return !(isTouched || isBlurEvent);
+  } else if (isSubmitted ? reValidateMode.isOnBlur : mode.isOnBlur) {
+    return !isBlurEvent;
+  } else if (isSubmitted ? reValidateMode.isOnChange : mode.isOnChange) {
+    return isBlurEvent;
+  }
+  return true;
+};
+var unsetEmptyArray = (ref, name) => !compact(get(ref, name)).length && unset(ref, name);
+var updateFieldArrayRootError = (errors, error, name) => {
+  const existingErrors = get(errors, name);
+  const fieldArrayErrors = Array.isArray(existingErrors) ? existingErrors : [];
+  set(fieldArrayErrors, ROOT_ERROR_TYPE, error[name]);
+  set(errors, name, fieldArrayErrors);
+  return errors;
+};
+function getValidateError(result, ref, type = "validate") {
+  if (isString(result) || Array.isArray(result) && result.every(isString) || isBoolean(result) && !result) {
+    return {
+      type,
+      message: isString(result) ? result : "",
+      ref
+    };
+  }
+}
+var getValueAndMessage = (validationData) => isObject(validationData) && !isRegex(validationData) ? validationData : {
+  value: validationData,
+  message: ""
+};
+var validateField = async (field, disabledFieldNames, formValues, validateAllFieldCriteria, shouldUseNativeValidation, isFieldArray) => {
+  const { ref, refs, required, maxLength, minLength, min, max, pattern, validate, name, valueAsNumber, mount } = field._f;
+  const inputValue = get(formValues, name);
+  if (!mount || disabledFieldNames.has(name)) {
+    return {};
+  }
+  const inputRef = refs ? refs[0] : ref;
+  const setCustomValidity = (message) => {
+    if (shouldUseNativeValidation && inputRef.reportValidity) {
+      inputRef.setCustomValidity(isBoolean(message) ? "" : message || "");
+      inputRef.reportValidity();
+    }
+  };
+  const error = {};
+  const isRadio = isRadioInput(ref);
+  const isCheckBox = isCheckBoxInput(ref);
+  const isRadioOrCheckbox2 = isRadio || isCheckBox;
+  const isEmpty = (valueAsNumber || isFileInput(ref)) && isUndefined(ref.value) && isUndefined(inputValue) || isHTMLElement(ref) && ref.value === "" || inputValue === "" || Array.isArray(inputValue) && !inputValue.length;
+  const appendErrorsCurry = appendErrors.bind(null, name, validateAllFieldCriteria, error);
+  const getMinMaxMessage = (exceedMax, maxLengthMessage, minLengthMessage, maxType = INPUT_VALIDATION_RULES.maxLength, minType = INPUT_VALIDATION_RULES.minLength) => {
+    const message = exceedMax ? maxLengthMessage : minLengthMessage;
+    error[name] = {
+      type: exceedMax ? maxType : minType,
+      message,
+      ref,
+      ...appendErrorsCurry(exceedMax ? maxType : minType, message)
+    };
+  };
+  if (isFieldArray ? !Array.isArray(inputValue) || !inputValue.length : required && (!isRadioOrCheckbox2 && (isEmpty || isNullOrUndefined(inputValue)) || isBoolean(inputValue) && !inputValue || isCheckBox && !getCheckboxValue(refs).isValid || isRadio && !getRadioValue(refs).isValid)) {
+    const { value, message } = isString(required) ? { value: !!required, message: required } : getValueAndMessage(required);
+    if (value) {
+      error[name] = {
+        type: INPUT_VALIDATION_RULES.required,
+        message,
+        ref: inputRef,
+        ...appendErrorsCurry(INPUT_VALIDATION_RULES.required, message)
+      };
+      if (!validateAllFieldCriteria) {
+        setCustomValidity(message);
+        return error;
+      }
+    }
+  }
+  if (!isEmpty && (!isNullOrUndefined(min) || !isNullOrUndefined(max))) {
+    let exceedMax;
+    let exceedMin;
+    const maxOutput = getValueAndMessage(max);
+    const minOutput = getValueAndMessage(min);
+    if (!isNullOrUndefined(inputValue) && !isNaN(inputValue)) {
+      const valueNumber = ref.valueAsNumber || (inputValue ? +inputValue : inputValue);
+      if (!isNullOrUndefined(maxOutput.value)) {
+        exceedMax = valueNumber > maxOutput.value;
+      }
+      if (!isNullOrUndefined(minOutput.value)) {
+        exceedMin = valueNumber < minOutput.value;
+      }
+    } else {
+      const valueDate = ref.valueAsDate || new Date(inputValue);
+      const convertTimeToDate = (time) => /* @__PURE__ */ new Date((/* @__PURE__ */ new Date()).toDateString() + " " + time);
+      const isTime = ref.type == "time";
+      const isWeek = ref.type == "week";
+      if (isString(maxOutput.value) && inputValue) {
+        exceedMax = isTime ? convertTimeToDate(inputValue) > convertTimeToDate(maxOutput.value) : isWeek ? inputValue > maxOutput.value : valueDate > new Date(maxOutput.value);
+      }
+      if (isString(minOutput.value) && inputValue) {
+        exceedMin = isTime ? convertTimeToDate(inputValue) < convertTimeToDate(minOutput.value) : isWeek ? inputValue < minOutput.value : valueDate < new Date(minOutput.value);
+      }
+    }
+    if (exceedMax || exceedMin) {
+      getMinMaxMessage(!!exceedMax, maxOutput.message, minOutput.message, INPUT_VALIDATION_RULES.max, INPUT_VALIDATION_RULES.min);
+      if (!validateAllFieldCriteria) {
+        setCustomValidity(error[name].message);
+        return error;
+      }
+    }
+  }
+  if ((maxLength || minLength) && !isEmpty && (isString(inputValue) || isFieldArray && Array.isArray(inputValue))) {
+    const maxLengthOutput = getValueAndMessage(maxLength);
+    const minLengthOutput = getValueAndMessage(minLength);
+    const exceedMax = !isNullOrUndefined(maxLengthOutput.value) && inputValue.length > +maxLengthOutput.value;
+    const exceedMin = !isNullOrUndefined(minLengthOutput.value) && inputValue.length < +minLengthOutput.value;
+    if (exceedMax || exceedMin) {
+      getMinMaxMessage(exceedMax, maxLengthOutput.message, minLengthOutput.message);
+      if (!validateAllFieldCriteria) {
+        setCustomValidity(error[name].message);
+        return error;
+      }
+    }
+  }
+  if (pattern && !isEmpty && isString(inputValue)) {
+    const { value: patternValue, message } = getValueAndMessage(pattern);
+    if (isRegex(patternValue) && !inputValue.match(patternValue)) {
+      error[name] = {
+        type: INPUT_VALIDATION_RULES.pattern,
+        message,
+        ref,
+        ...appendErrorsCurry(INPUT_VALIDATION_RULES.pattern, message)
+      };
+      if (!validateAllFieldCriteria) {
+        setCustomValidity(message);
+        return error;
+      }
+    }
+  }
+  if (validate) {
+    if (isFunction(validate)) {
+      const result = await validate(inputValue, formValues);
+      const validateError = getValidateError(result, inputRef);
+      if (validateError) {
+        error[name] = {
+          ...validateError,
+          ...appendErrorsCurry(INPUT_VALIDATION_RULES.validate, validateError.message)
+        };
+        if (!validateAllFieldCriteria) {
+          setCustomValidity(validateError.message);
+          return error;
+        }
+      }
+    } else if (isObject(validate)) {
+      let validationResult = {};
+      for (const key in validate) {
+        if (!isEmptyObject(validationResult) && !validateAllFieldCriteria) {
+          break;
+        }
+        const validateError = getValidateError(await validate[key](inputValue, formValues), inputRef, key);
+        if (validateError) {
+          validationResult = {
+            ...validateError,
+            ...appendErrorsCurry(key, validateError.message)
+          };
+          setCustomValidity(validateError.message);
+          if (validateAllFieldCriteria) {
+            error[name] = validationResult;
+          }
+        }
+      }
+      if (!isEmptyObject(validationResult)) {
+        error[name] = {
+          ref: inputRef,
+          ...validationResult
+        };
+        if (!validateAllFieldCriteria) {
+          return error;
+        }
+      }
+    }
+  }
+  setCustomValidity(true);
+  return error;
+};
+const defaultOptions = {
+  mode: VALIDATION_MODE.onSubmit,
+  reValidateMode: VALIDATION_MODE.onChange,
+  shouldFocusError: true
+};
+const DEFAULT_FORM_STATE = {
+  submitCount: 0,
+  isDirty: false,
+  isReady: false,
+  isValidating: false,
+  isSubmitted: false,
+  isSubmitting: false,
+  isSubmitSuccessful: false,
+  isValid: false,
+  touchedFields: {},
+  dirtyFields: {},
+  validatingFields: {}
+};
+function createFormControl(props = {}) {
+  let _options = {
+    ...defaultOptions,
+    ...props
+  };
+  let _formState = {
+    ...cloneObject(DEFAULT_FORM_STATE),
+    isLoading: isFunction(_options.defaultValues),
+    errors: _options.errors || {},
+    disabled: _options.disabled || false
+  };
+  let _fields = {};
+  let _defaultValues = isObject(_options.defaultValues) || isObject(_options.values) ? cloneObject(_options.defaultValues || _options.values) || {} : {};
+  let _formValues = _options.shouldUnregister ? {} : cloneObject(_defaultValues);
+  let _state = {
+    action: false,
+    mount: false,
+    watch: false,
+    keepIsValid: false
+  };
+  let _names = {
+    mount: /* @__PURE__ */ new Set(),
+    disabled: /* @__PURE__ */ new Set(),
+    unMount: /* @__PURE__ */ new Set(),
+    array: /* @__PURE__ */ new Set(),
+    watch: /* @__PURE__ */ new Set(),
+    registerName: /* @__PURE__ */ new Set()
+  };
+  let delayErrorCallback;
+  let timer = 0;
+  const defaultProxyFormState = {
+    isDirty: false,
+    dirtyFields: false,
+    validatingFields: false,
+    touchedFields: false,
+    isValidating: false,
+    isValid: false,
+    errors: false
+  };
+  const _proxyFormState = {
+    ...defaultProxyFormState
+  };
+  let _proxySubscribeFormState = {
+    ..._proxyFormState
+  };
+  const _subjects = {
+    array: createSubject(),
+    state: createSubject()
+  };
+  const shouldDisplayAllAssociatedErrors = _options.criteriaMode === VALIDATION_MODE.all;
+  const debounce = (callback) => (wait) => {
+    clearTimeout(timer);
+    timer = setTimeout(callback, wait);
+  };
+  const _setValid = async (shouldUpdateValid) => {
+    if (_state.keepIsValid) {
+      return;
+    }
+    if (!_options.disabled && (_proxyFormState.isValid || _proxySubscribeFormState.isValid || shouldUpdateValid)) {
+      let isValid2;
+      if (_options.resolver) {
+        isValid2 = isEmptyObject((await _runSchema()).errors);
+        _updateIsValidating();
+      } else {
+        isValid2 = await executeBuiltInValidation({
+          fields: _fields,
+          onlyCheckValid: true,
+          eventType: EVENTS.VALID
+        });
+      }
+      if (isValid2 !== _formState.isValid) {
+        _subjects.state.next({
+          isValid: isValid2
+        });
+      }
+    }
+  };
+  const _updateIsValidating = (names, isValidating) => {
+    if (!_options.disabled && (_proxyFormState.isValidating || _proxyFormState.validatingFields || _proxySubscribeFormState.isValidating || _proxySubscribeFormState.validatingFields)) {
+      (names || Array.from(_names.mount)).forEach((name) => {
+        if (name) {
+          isValidating ? set(_formState.validatingFields, name, isValidating) : unset(_formState.validatingFields, name);
+        }
+      });
+      _subjects.state.next({
+        validatingFields: _formState.validatingFields,
+        isValidating: !isEmptyObject(_formState.validatingFields)
+      });
+    }
+  };
+  const _updateDirtyFields = () => {
+    _formState.dirtyFields = getDirtyFields(_defaultValues, _formValues);
+  };
+  const _setFieldArray = (name, values = [], method, args, shouldSetValues = true, shouldUpdateFieldsAndState = true) => {
+    if (args && method && !_options.disabled) {
+      _state.action = true;
+      if (shouldUpdateFieldsAndState && Array.isArray(get(_fields, name))) {
+        const fieldValues = method(get(_fields, name), args.argA, args.argB);
+        shouldSetValues && set(_fields, name, fieldValues);
+      }
+      if (shouldUpdateFieldsAndState && Array.isArray(get(_formState.errors, name))) {
+        const errors = method(get(_formState.errors, name), args.argA, args.argB);
+        shouldSetValues && set(_formState.errors, name, errors);
+        unsetEmptyArray(_formState.errors, name);
+      }
+      if ((_proxyFormState.touchedFields || _proxySubscribeFormState.touchedFields) && shouldUpdateFieldsAndState && Array.isArray(get(_formState.touchedFields, name))) {
+        const touchedFields = method(get(_formState.touchedFields, name), args.argA, args.argB);
+        shouldSetValues && set(_formState.touchedFields, name, touchedFields);
+      }
+      if (_proxyFormState.dirtyFields || _proxySubscribeFormState.dirtyFields) {
+        _updateDirtyFields();
+      }
+      _subjects.state.next({
+        name,
+        isDirty: _getDirty(name, values),
+        dirtyFields: _formState.dirtyFields,
+        errors: _formState.errors,
+        isValid: _formState.isValid
+      });
+    } else {
+      set(_formValues, name, values);
+    }
+  };
+  const updateErrors = (name, error) => {
+    set(_formState.errors, name, error);
+    _subjects.state.next({
+      errors: _formState.errors
+    });
+  };
+  const _setErrors = (errors) => {
+    _formState.errors = errors;
+    _subjects.state.next({
+      errors: _formState.errors,
+      isValid: false
+    });
+  };
+  const hasExplicitNullIntermediate = (name) => {
+    const segments = isKey(name) ? [name] : stringToPath(name);
+    let formValues = _formValues;
+    let defaultValues2 = _defaultValues;
+    for (let i2 = 0; i2 < segments.length - 1; i2++) {
+      const key = segments[i2];
+      formValues = isNullOrUndefined(formValues) ? formValues : formValues[key];
+      defaultValues2 = isNullOrUndefined(defaultValues2) ? defaultValues2 : defaultValues2[key];
+      if (formValues === null && defaultValues2 !== null) {
+        return true;
+      }
+    }
+    return false;
+  };
+  const updateValidAndValue = (name, shouldSkipSetValueAs, value, ref) => {
+    const field = get(_fields, name);
+    if (field) {
+      if (hasExplicitNullIntermediate(name)) {
+        return;
+      }
+      const wasUnsetInFormValues = isUndefined(get(_formValues, name));
+      const defaultValue = get(_formValues, name, isUndefined(value) ? get(_defaultValues, name) : value);
+      isUndefined(defaultValue) || ref && ref.defaultChecked || shouldSkipSetValueAs ? set(_formValues, name, shouldSkipSetValueAs ? defaultValue : getFieldValue(field._f)) : setFieldValue(name, defaultValue);
+      if (_state.mount && !_state.action) {
+        _setValid();
+        if (wasUnsetInFormValues && _formState.isDirty && (_proxyFormState.isDirty || _proxySubscribeFormState.isDirty)) {
+          const isDirty2 = _getDirty();
+          if (!isDirty2) {
+            _formState.isDirty = false;
+            _subjects.state.next({ ..._formState });
+          }
+        }
+      }
+    }
+  };
+  const updateTouchAndDirty = (name, fieldValue, isBlurEvent, shouldDirty, shouldRender) => {
+    let shouldUpdateField = false;
+    let isPreviousDirty = false;
+    const output = {
+      name
+    };
+    if (!_options.disabled) {
+      if (!isBlurEvent || shouldDirty) {
+        if (_proxyFormState.isDirty || _proxySubscribeFormState.isDirty) {
+          isPreviousDirty = _formState.isDirty;
+          _formState.isDirty = output.isDirty = _getDirty();
+          shouldUpdateField = isPreviousDirty !== output.isDirty;
+        }
+        const isCurrentFieldPristine = deepEqual(get(_defaultValues, name), fieldValue);
+        isPreviousDirty = !!get(_formState.dirtyFields, name);
+        if (isCurrentFieldPristine !== _formState.isDirty) {
+          _formState.dirtyFields = getDirtyFields(_defaultValues, _formValues);
+        } else {
+          isCurrentFieldPristine ? unset(_formState.dirtyFields, name) : set(_formState.dirtyFields, name, true);
+        }
+        output.dirtyFields = _formState.dirtyFields;
+        shouldUpdateField = shouldUpdateField || (_proxyFormState.dirtyFields || _proxySubscribeFormState.dirtyFields) && isPreviousDirty !== !isCurrentFieldPristine;
+      }
+      if (isBlurEvent) {
+        const isPreviousFieldTouched = get(_formState.touchedFields, name);
+        if (!isPreviousFieldTouched) {
+          set(_formState.touchedFields, name, isBlurEvent);
+          output.touchedFields = _formState.touchedFields;
+          shouldUpdateField = shouldUpdateField || (_proxyFormState.touchedFields || _proxySubscribeFormState.touchedFields) && isPreviousFieldTouched !== isBlurEvent;
+        }
+      }
+      shouldUpdateField && shouldRender && _subjects.state.next(output);
+    }
+    return shouldUpdateField ? output : {};
+  };
+  const shouldRenderByError = (name, isValid2, error, fieldState) => {
+    const previousFieldError = get(_formState.errors, name);
+    const shouldUpdateValid = (_proxyFormState.isValid || _proxySubscribeFormState.isValid) && isBoolean(isValid2) && _formState.isValid !== isValid2;
+    if (_options.delayError && error) {
+      delayErrorCallback = debounce(() => updateErrors(name, error));
+      delayErrorCallback(_options.delayError);
+    } else {
+      clearTimeout(timer);
+      delayErrorCallback = null;
+      error ? set(_formState.errors, name, error) : unset(_formState.errors, name);
+    }
+    if ((error ? !deepEqual(previousFieldError, error) : previousFieldError) || !isEmptyObject(fieldState) || shouldUpdateValid) {
+      const updatedFormState = {
+        ...fieldState,
+        ...shouldUpdateValid && isBoolean(isValid2) ? { isValid: isValid2 } : {},
+        errors: _formState.errors,
+        name
+      };
+      _formState = {
+        ..._formState,
+        ...updatedFormState
+      };
+      _subjects.state.next(updatedFormState);
+    }
+  };
+  const _runSchema = async (name) => {
+    _updateIsValidating(name, true);
+    return await _options.resolver(_formValues, _options.context, getResolverOptions(name || _names.mount, _fields, _options.criteriaMode, _options.shouldUseNativeValidation));
+  };
+  const executeSchemaAndUpdateState = async (names) => {
+    const { errors } = await _runSchema(names);
+    _updateIsValidating(names);
+    if (names) {
+      for (const name of names) {
+        const error = get(errors, name);
+        error ? _names.array.has(name) && isObject(error) && !Object.keys(error).some((key) => !Number.isNaN(Number(key))) ? updateFieldArrayRootError(_formState.errors, { [name]: error }, name) : set(_formState.errors, name, error) : unset(_formState.errors, name);
+      }
+    } else {
+      _formState.errors = errors;
+    }
+    return errors;
+  };
+  const validateForm = async ({ name, eventType }) => {
+    if (props.validate) {
+      const result = await props.validate({
+        formValues: _formValues,
+        formState: _formState,
+        name,
+        eventType
+      });
+      if (isObject(result)) {
+        for (const key in result) {
+          const error = result[key];
+          if (error) {
+            setError(`${FORM_ERROR_TYPE}.${key}`, {
+              message: isString(error.message) ? error.message : "",
+              type: error.type || INPUT_VALIDATION_RULES.validate
+            });
+          }
+        }
+      } else if (isString(result) || !result) {
+        setError(FORM_ERROR_TYPE, {
+          message: result || "",
+          type: INPUT_VALIDATION_RULES.validate
+        });
+      } else {
+        clearErrors(FORM_ERROR_TYPE);
+      }
+      return result;
+    }
+    return true;
+  };
+  const executeBuiltInValidation = async ({ fields, onlyCheckValid, name, eventType, context = {
+    valid: true,
+    runRootValidation: false
+  } }) => {
+    if (props.validate) {
+      context.runRootValidation = true;
+      const result = await validateForm({
+        name,
+        eventType
+      });
+      if (!result) {
+        context.valid = false;
+        if (onlyCheckValid) {
+          return context.valid;
+        }
+      }
+    }
+    for (const name2 in fields) {
+      const field = fields[name2];
+      if (field) {
+        const { _f, ...fieldValue } = field;
+        if (_f) {
+          const isFieldArrayRoot = _names.array.has(_f.name);
+          const isPromiseFunction = field._f && hasPromiseValidation(field._f);
+          const shouldTrackIsValidatingState = _proxyFormState.validatingFields || _proxyFormState.isValidating || _proxySubscribeFormState.validatingFields || _proxySubscribeFormState.isValidating;
+          if (isPromiseFunction && shouldTrackIsValidatingState) {
+            _updateIsValidating([_f.name], true);
+          }
+          const fieldError = await validateField(field, _names.disabled, _formValues, shouldDisplayAllAssociatedErrors, _options.shouldUseNativeValidation && !onlyCheckValid, isFieldArrayRoot);
+          if (isPromiseFunction && shouldTrackIsValidatingState) {
+            _updateIsValidating([_f.name]);
+          }
+          if (fieldError[_f.name]) {
+            context.valid = false;
+            if (onlyCheckValid) {
+              break;
+            }
+          }
+          !onlyCheckValid && (get(fieldError, _f.name) ? isFieldArrayRoot ? updateFieldArrayRootError(_formState.errors, fieldError, _f.name) : set(_formState.errors, _f.name, fieldError[_f.name]) : unset(_formState.errors, _f.name));
+          if (props.shouldUseNativeValidation && fieldError[_f.name]) {
+            break;
+          }
+        }
+        !isEmptyObject(fieldValue) && await executeBuiltInValidation({
+          context,
+          onlyCheckValid,
+          fields: fieldValue,
+          name: name2,
+          eventType
+        });
+      }
+    }
+    return context.valid;
+  };
+  const _removeUnmounted = () => {
+    for (const name of _names.unMount) {
+      const field = get(_fields, name);
+      field && (field._f.refs ? field._f.refs.every((ref) => !live(ref)) : !live(field._f.ref)) && unregister(name);
+    }
+    _names.unMount = /* @__PURE__ */ new Set();
+  };
+  const _getDirty = (name, data) => !_options.disabled && (name && data && set(_formValues, name, data), !deepEqual(getValues(), _defaultValues));
+  const _getWatch = (names, defaultValue, isGlobal) => generateWatchOutput(names, _names, {
+    ..._state.mount ? _formValues : isUndefined(defaultValue) ? _defaultValues : isString(names) ? { [names]: defaultValue } : defaultValue
+  }, isGlobal, defaultValue);
+  const _getFieldArray = (name) => compact(get(_state.mount ? _formValues : _defaultValues, name, _options.shouldUnregister ? get(_defaultValues, name, []) : []));
+  const setFieldValue = (name, value, options = {}, skipClone = false) => {
+    const field = get(_fields, name);
+    let fieldValue = value;
+    if (field) {
+      const fieldReference = field._f;
+      if (fieldReference) {
+        !fieldReference.disabled && set(_formValues, name, getFieldValueAs(value, fieldReference));
+        fieldValue = isHTMLElement(fieldReference.ref) && isNullOrUndefined(value) ? "" : value;
+        if (isMultipleSelect(fieldReference.ref)) {
+          [...fieldReference.ref.options].forEach((optionRef) => optionRef.selected = fieldValue.includes(optionRef.value));
+        } else if (fieldReference.refs) {
+          if (isCheckBoxInput(fieldReference.ref)) {
+            fieldReference.refs.forEach((checkboxRef) => {
+              if (!checkboxRef.defaultChecked || !checkboxRef.disabled) {
+                if (Array.isArray(fieldValue)) {
+                  checkboxRef.checked = !!fieldValue.find((data) => data === checkboxRef.value);
+                } else {
+                  checkboxRef.checked = fieldValue === checkboxRef.value || !!fieldValue;
+                }
+              }
+            });
+          } else {
+            fieldReference.refs.forEach((radioRef) => radioRef.checked = radioRef.value === fieldValue);
+          }
+        } else if (isFileInput(fieldReference.ref)) {
+          fieldReference.ref.value = "";
+        } else {
+          fieldReference.ref.value = fieldValue;
+          if (!fieldReference.ref.type) {
+            _subjects.state.next({
+              name,
+              values: skipClone ? _formValues : cloneObject(_formValues)
+            });
+          }
+        }
+      }
+    }
+    (options.shouldDirty || options.shouldTouch) && updateTouchAndDirty(name, fieldValue, options.shouldTouch, options.shouldDirty, true);
+    options.shouldValidate && trigger(name);
+  };
+  const setFieldValues = (name, value, options, skipClone = false) => {
+    for (const fieldKey in value) {
+      if (!value.hasOwnProperty(fieldKey)) {
+        return;
+      }
+      const fieldValue = value[fieldKey];
+      const fieldName = name + "." + fieldKey;
+      const field = get(_fields, fieldName);
+      (_names.array.has(name) || isObject(fieldValue) || field && !field._f) && !isDateObject(fieldValue) ? setFieldValues(fieldName, fieldValue, options, skipClone) : setFieldValue(fieldName, fieldValue, options, skipClone);
+    }
+  };
+  const _setValue = (name, value, options, skipClone) => {
+    const field = get(_fields, name);
+    const isFieldArray = _names.array.has(name);
+    const cloneValue = skipClone ? value : cloneObject(value);
+    const previousValue = get(_formValues, name);
+    const isValueUnchanged = deepEqual(previousValue, cloneValue);
+    if (!isValueUnchanged) {
+      set(_formValues, name, cloneValue);
+    }
+    if (isFieldArray) {
+      _subjects.array.next({
+        name,
+        values: skipClone ? _formValues : cloneObject(_formValues)
+      });
+      if ((_proxyFormState.isDirty || _proxyFormState.dirtyFields || _proxySubscribeFormState.isDirty || _proxySubscribeFormState.dirtyFields) && options.shouldDirty) {
+        _updateDirtyFields();
+        _subjects.state.next({
+          name,
+          dirtyFields: _formState.dirtyFields,
+          isDirty: _getDirty(name, cloneValue)
+        });
+      }
+    } else {
+      const isEmpty = Array.isArray(cloneValue) && !cloneValue.length || isEmptyObject(cloneValue);
+      if (!field || field._f || isNullOrUndefined(cloneValue) || isEmpty) {
+        setFieldValue(name, cloneValue, options, skipClone);
+      } else {
+        setFieldValues(name, cloneValue, options, skipClone);
+      }
+    }
+    if (!isValueUnchanged) {
+      const watched = isWatched(name, _names);
+      const values = skipClone ? _formValues : cloneObject(_formValues);
+      _subjects.state.next({
+        ...watched && _formState,
+        name: _state.mount || watched ? name : void 0,
+        values
+      });
+    }
+  };
+  const setValue = (name, value, options = {}) => _setValue(name, value, options, false);
+  const setValues = (formValues, options = {}) => {
+    const updatedFormValues = isFunction(formValues) ? formValues(_formValues) : formValues;
+    if (!deepEqual(_formValues, updatedFormValues)) {
+      _formValues = {
+        ..._formValues,
+        ...updatedFormValues
+      };
+      for (const fieldName of _names.mount) {
+        _setValue(fieldName, get(updatedFormValues, fieldName), options, true);
+      }
+      _subjects.state.next({
+        ..._formState,
+        name: void 0,
+        type: void 0,
+        values: _formValues
+      });
+      if (options.shouldValidate) {
+        _setValid();
+      }
+    }
+  };
+  const onChange = async (event) => {
+    _state.mount = true;
+    const target = event.target;
+    let name = target.name;
+    let isFieldValueUpdated = true;
+    const field = get(_fields, name);
+    const _updateIsFieldValueUpdated = (fieldValue) => {
+      isFieldValueUpdated = Number.isNaN(fieldValue) || isDateObject(fieldValue) && isNaN(fieldValue.getTime()) || deepEqual(fieldValue, get(_formValues, name, fieldValue));
+    };
+    const validationModeBeforeSubmit = getValidationModes(_options.mode);
+    const validationModeAfterSubmit = getValidationModes(_options.reValidateMode);
+    if (field) {
+      let error;
+      let isValid2;
+      const fieldValue = target.type ? getFieldValue(field._f) : getEventValue(event);
+      const isBlurEvent = event.type === EVENTS.BLUR || event.type === EVENTS.FOCUS_OUT;
+      const shouldSkipValidation = !hasValidation(field._f) && !props.validate && !_options.resolver && !get(_formState.errors, name) && !field._f.deps || skipValidation(isBlurEvent, get(_formState.touchedFields, name), _formState.isSubmitted, validationModeAfterSubmit, validationModeBeforeSubmit);
+      const watched = isWatched(name, _names, isBlurEvent);
+      set(_formValues, name, fieldValue);
+      if (isBlurEvent) {
+        if (!target || !target.readOnly) {
+          field._f.onBlur && field._f.onBlur(event);
+          delayErrorCallback && delayErrorCallback(0);
+        }
+      } else if (field._f.onChange) {
+        field._f.onChange(event);
+      }
+      const fieldState = updateTouchAndDirty(name, fieldValue, isBlurEvent);
+      const shouldRender = !isEmptyObject(fieldState) || watched;
+      !isBlurEvent && _subjects.state.next({
+        name,
+        type: event.type,
+        values: cloneObject(_formValues)
+      });
+      if (shouldSkipValidation) {
+        if (_proxyFormState.isValid || _proxySubscribeFormState.isValid) {
+          if (_options.mode === "onBlur") {
+            if (isBlurEvent) {
+              _setValid();
+            }
+          } else if (!isBlurEvent) {
+            _setValid();
+          }
+        }
+        return shouldRender && _subjects.state.next({ name, ...watched ? {} : fieldState });
+      }
+      if (!_options.resolver && props.validate) {
+        await validateForm({
+          name,
+          eventType: event.type
+        });
+      }
+      !isBlurEvent && watched && _subjects.state.next({ ..._formState });
+      if (_options.resolver) {
+        const { errors } = await _runSchema([name]);
+        _updateIsValidating([name]);
+        _updateIsFieldValueUpdated(fieldValue);
+        if (isFieldValueUpdated) {
+          const previousErrorLookupResult = schemaErrorLookup(_formState.errors, _fields, name);
+          const errorLookupResult = schemaErrorLookup(errors, _fields, previousErrorLookupResult.name || name);
+          error = errorLookupResult.error;
+          name = errorLookupResult.name;
+          isValid2 = isEmptyObject(errors);
+        }
+      } else {
+        _updateIsValidating([name], true);
+        error = (await validateField(field, _names.disabled, _formValues, shouldDisplayAllAssociatedErrors, _options.shouldUseNativeValidation))[name];
+        _updateIsValidating([name]);
+        _updateIsFieldValueUpdated(fieldValue);
+        if (isFieldValueUpdated) {
+          if (error) {
+            isValid2 = false;
+          } else if (_proxyFormState.isValid || _proxySubscribeFormState.isValid) {
+            isValid2 = await executeBuiltInValidation({
+              fields: _fields,
+              onlyCheckValid: true,
+              name,
+              eventType: event.type
+            });
+          }
+        }
+      }
+      if (isFieldValueUpdated) {
+        field._f.deps && (!Array.isArray(field._f.deps) || field._f.deps.length > 0) && trigger(field._f.deps);
+        shouldRenderByError(name, isValid2, error, fieldState);
+      }
+    }
+  };
+  const _focusInput = (ref, key) => {
+    if (get(_formState.errors, key) && ref.focus) {
+      ref.focus();
+      return 1;
+    }
+    return;
+  };
+  const trigger = async (name, options = {}) => {
+    let isValid2;
+    let validationResult;
+    const fieldNames = convertToArrayPayload(name);
+    if (_options.resolver) {
+      const errors = await executeSchemaAndUpdateState(isUndefined(name) ? name : fieldNames);
+      isValid2 = isEmptyObject(errors);
+      validationResult = name ? !fieldNames.some((name2) => get(errors, name2)) : isValid2;
+    } else if (name) {
+      validationResult = (await Promise.all(fieldNames.map(async (fieldName) => {
+        const field = get(_fields, fieldName);
+        return await executeBuiltInValidation({
+          fields: field && field._f ? { [fieldName]: field } : field,
+          eventType: EVENTS.TRIGGER
+        });
+      }))).every(Boolean);
+      !(!validationResult && !_formState.isValid) && _setValid();
+    } else {
+      validationResult = isValid2 = await executeBuiltInValidation({
+        fields: _fields,
+        name,
+        eventType: EVENTS.TRIGGER
+      });
+    }
+    _subjects.state.next({
+      ...!isString(name) || (_proxyFormState.isValid || _proxySubscribeFormState.isValid) && isValid2 !== _formState.isValid ? {} : { name },
+      ..._options.resolver || !name ? { isValid: isValid2 } : {},
+      errors: _formState.errors
+    });
+    options.shouldFocus && !validationResult && iterateFieldsByAction(_fields, _focusInput, name ? fieldNames : _names.mount);
+    return validationResult;
+  };
+  const getValues = (fieldNames, config2) => {
+    let values = {
+      ..._state.mount ? _formValues : _defaultValues
+    };
+    if (config2) {
+      values = extractFormValues(config2.dirtyFields ? _formState.dirtyFields : _formState.touchedFields, values);
+    }
+    return isUndefined(fieldNames) ? values : isString(fieldNames) ? get(values, fieldNames) : fieldNames.map((name) => get(values, name));
+  };
+  const getFieldState = (name, formState) => ({
+    invalid: !!get((formState || _formState).errors, name),
+    isDirty: !!get((formState || _formState).dirtyFields, name),
+    error: get((formState || _formState).errors, name),
+    isValidating: !!get(_formState.validatingFields, name),
+    isTouched: !!get((formState || _formState).touchedFields, name)
+  });
+  const clearErrors = (name) => {
+    const names = name ? convertToArrayPayload(name) : void 0;
+    names === null || names === void 0 ? void 0 : names.forEach((inputName) => unset(_formState.errors, inputName));
+    if (names) {
+      names.forEach((inputName) => {
+        _subjects.state.next({
+          name: inputName,
+          errors: _formState.errors
+        });
+      });
+    } else {
+      _subjects.state.next({
+        errors: {}
+      });
+    }
+  };
+  const setError = (name, error, options) => {
+    const ref = (get(_fields, name, { _f: {} })._f || {}).ref;
+    const currentError = get(_formState.errors, name) || {};
+    const { ref: currentRef, message, type, ...restOfErrorTree } = currentError;
+    set(_formState.errors, name, {
+      ...restOfErrorTree,
+      ...error,
+      ref
+    });
+    _subjects.state.next({
+      name,
+      errors: _formState.errors,
+      isValid: false
+    });
+    options && options.shouldFocus && ref && ref.focus && ref.focus();
+  };
+  const watch = (name, defaultValue) => isFunction(name) ? _subjects.state.subscribe({
+    next: (payload) => "values" in payload && name(payload.values || _getWatch(void 0, defaultValue), payload)
+  }) : _getWatch(name, defaultValue, true);
+  const _subscribe = (props2) => _subjects.state.subscribe({
+    next: (formState) => {
+      if (shouldSubscribeByName(props2.name, formState.name, props2.exact) && shouldRenderFormState(formState, props2.formState || _proxyFormState, _setFormState, props2.reRenderRoot)) {
+        const snapshot = { ..._formValues };
+        props2.callback({
+          values: snapshot,
+          ..._formState,
+          ...formState,
+          defaultValues: _defaultValues
+        });
+      }
+    }
+  }).unsubscribe;
+  const subscribe = (props2) => {
+    _state.mount = true;
+    _proxySubscribeFormState = {
+      ..._proxySubscribeFormState,
+      ...props2.formState
+    };
+    return _subscribe({
+      ...props2,
+      formState: {
+        ...defaultProxyFormState,
+        ...props2.formState
+      }
+    });
+  };
+  const unregister = (name, options = {}) => {
+    for (const fieldName of name ? convertToArrayPayload(name) : _names.mount) {
+      _names.mount.delete(fieldName);
+      _names.array.delete(fieldName);
+      if (!options.keepValue) {
+        unset(_fields, fieldName);
+        unset(_formValues, fieldName);
+      }
+      !options.keepError && unset(_formState.errors, fieldName);
+      !options.keepDirty && unset(_formState.dirtyFields, fieldName);
+      !options.keepTouched && unset(_formState.touchedFields, fieldName);
+      !options.keepIsValidating && unset(_formState.validatingFields, fieldName);
+      !_options.shouldUnregister && !options.keepDefaultValue && unset(_defaultValues, fieldName);
+    }
+    _subjects.state.next({
+      values: cloneObject(_formValues)
+    });
+    _subjects.state.next({
+      ..._formState,
+      ...!options.keepDirty ? {} : { isDirty: _getDirty() }
+    });
+    !options.keepIsValid && _setValid();
+  };
+  const _setDisabledField = ({ disabled, name }) => {
+    if (isBoolean(disabled) && _state.mount || !!disabled || _names.disabled.has(name)) {
+      const wasDisabled = _names.disabled.has(name);
+      const isDisabled = !!disabled;
+      const disabledStateChanged = wasDisabled !== isDisabled;
+      disabled ? _names.disabled.add(name) : _names.disabled.delete(name);
+      disabledStateChanged && _state.mount && !_state.action && _setValid();
+    }
+  };
+  const register = (name, options = {}) => {
+    let field = get(_fields, name);
+    const disabledIsDefined = isBoolean(options.disabled) || isBoolean(_options.disabled);
+    const shouldRevalidateRemount = !_names.registerName.has(name) && field && field._f && !field._f.mount;
+    set(_fields, name, {
+      ...field || {},
+      _f: {
+        ...field && field._f ? field._f : { ref: { name } },
+        name,
+        mount: true,
+        ...options
+      }
+    });
+    _names.mount.add(name);
+    if (field && !shouldRevalidateRemount) {
+      _setDisabledField({
+        disabled: isBoolean(options.disabled) ? options.disabled : _options.disabled,
+        name
+      });
+    } else {
+      updateValidAndValue(name, true, options.value);
+    }
+    return {
+      ...disabledIsDefined ? { disabled: options.disabled || _options.disabled } : {},
+      ..._options.progressive ? {
+        required: !!options.required,
+        min: getRuleValue(options.min),
+        max: getRuleValue(options.max),
+        minLength: getRuleValue(options.minLength),
+        maxLength: getRuleValue(options.maxLength),
+        pattern: getRuleValue(options.pattern)
+      } : {},
+      name,
+      onChange,
+      onBlur: onChange,
+      ref: (ref) => {
+        if (ref) {
+          _names.registerName.add(name);
+          register(name, options);
+          _names.registerName.delete(name);
+          field = get(_fields, name);
+          const fieldRef = isUndefined(ref.value) ? ref.querySelectorAll ? ref.querySelectorAll("input,select,textarea")[0] || ref : ref : ref;
+          const radioOrCheckbox = isRadioOrCheckbox(fieldRef);
+          const refs = field._f.refs || [];
+          if (radioOrCheckbox ? refs.find((option) => option === fieldRef) : fieldRef === field._f.ref) {
+            return;
+          }
+          set(_fields, name, {
+            _f: {
+              ...field._f,
+              ...radioOrCheckbox ? {
+                refs: [
+                  ...refs.filter(live),
+                  fieldRef,
+                  ...Array.isArray(get(_defaultValues, name)) ? [{}] : []
+                ],
+                ref: { type: fieldRef.type, name }
+              } : { ref: fieldRef }
+            }
+          });
+          updateValidAndValue(name, false, void 0, fieldRef);
+        } else {
+          field = get(_fields, name, {});
+          if (field._f) {
+            field._f.mount = false;
+          }
+          (_options.shouldUnregister || options.shouldUnregister) && !(isNameInFieldArray(_names.array, name) && _state.action) && _names.unMount.add(name);
+        }
+      }
+    };
+  };
+  const _focusError = () => _options.shouldFocusError && !_options.shouldUseNativeValidation && iterateFieldsByAction(_fields, _focusInput, _names.mount);
+  const _disableForm = (disabled) => {
+    if (isBoolean(disabled)) {
+      _subjects.state.next({ disabled });
+      iterateFieldsByAction(_fields, (ref, name) => {
+        const currentField = get(_fields, name);
+        if (currentField) {
+          ref.disabled = currentField._f.disabled || disabled;
+          if (Array.isArray(currentField._f.refs)) {
+            currentField._f.refs.forEach((inputRef) => {
+              inputRef.disabled = currentField._f.disabled || disabled;
+            });
+          }
+        }
+      }, 0, false);
+    }
+  };
+  const handleSubmit = (onValid, onInvalid) => async (e) => {
+    let onValidError = void 0;
+    if (e) {
+      e.preventDefault && e.preventDefault();
+      e.persist && e.persist();
+    }
+    let fieldValues = cloneObject(_formValues);
+    _subjects.state.next({
+      isSubmitting: true
+    });
+    if (_options.resolver) {
+      const { errors, values } = await _runSchema();
+      _updateIsValidating();
+      _formState.errors = errors;
+      fieldValues = cloneObject(values);
+    } else {
+      await executeBuiltInValidation({
+        fields: _fields,
+        eventType: EVENTS.SUBMIT
+      });
+    }
+    if (_names.disabled.size) {
+      for (const name of _names.disabled) {
+        unset(fieldValues, name);
+      }
+    }
+    unset(_formState.errors, ROOT_ERROR_TYPE);
+    if (isEmptyObject(_formState.errors)) {
+      _subjects.state.next({
+        errors: {}
+      });
+      try {
+        await onValid(fieldValues, e);
+      } catch (error) {
+        onValidError = error;
+      }
+    } else {
+      if (onInvalid) {
+        await onInvalid({ ..._formState.errors }, e);
+      }
+      _focusError();
+      setTimeout(_focusError);
+    }
+    _subjects.state.next({
+      isSubmitted: true,
+      isSubmitting: false,
+      isSubmitSuccessful: isEmptyObject(_formState.errors) && !onValidError,
+      submitCount: _formState.submitCount + 1,
+      errors: _formState.errors
+    });
+    if (onValidError) {
+      throw onValidError;
+    }
+  };
+  const resetField = (name, options = {}) => {
+    if (get(_fields, name)) {
+      if (isUndefined(options.defaultValue)) {
+        setValue(name, cloneObject(get(_defaultValues, name)));
+      } else {
+        setValue(name, options.defaultValue);
+        set(_defaultValues, name, cloneObject(options.defaultValue));
+      }
+      if (!options.keepTouched) {
+        unset(_formState.touchedFields, name);
+      }
+      if (!options.keepDirty) {
+        unset(_formState.dirtyFields, name);
+        _formState.isDirty = options.defaultValue ? _getDirty(name, cloneObject(get(_defaultValues, name))) : _getDirty();
+      }
+      if (!options.keepError) {
+        unset(_formState.errors, name);
+        _proxyFormState.isValid && _setValid();
+      }
+      _subjects.state.next({ ..._formState });
+    }
+  };
+  const _reset = (formValues, keepStateOptions = {}) => {
+    const updatedValues = formValues ? cloneObject(formValues) : _defaultValues;
+    const cloneUpdatedValues = cloneObject(updatedValues);
+    const isEmptyResetValues = isEmptyObject(formValues);
+    const values = cloneUpdatedValues;
+    if (!keepStateOptions.keepDefaultValues) {
+      _defaultValues = updatedValues;
+    }
+    if (!keepStateOptions.keepValues) {
+      if (keepStateOptions.keepDirtyValues) {
+        const fieldsToCheck = /* @__PURE__ */ new Set([
+          ..._names.mount,
+          ...Object.keys(getDirtyFields(_defaultValues, _formValues))
+        ]);
+        for (const fieldName of Array.from(fieldsToCheck)) {
+          const isDirty2 = get(_formState.dirtyFields, fieldName);
+          const existingValue = get(_formValues, fieldName);
+          const newValue = get(values, fieldName);
+          if (isDirty2 && !isUndefined(existingValue)) {
+            set(values, fieldName, existingValue);
+          } else if (!isDirty2 && !isUndefined(newValue)) {
+            setValue(fieldName, newValue);
+          }
+        }
+      } else {
+        if (isWeb && isUndefined(formValues)) {
+          for (const name of _names.mount) {
+            const field = get(_fields, name);
+            if (field && field._f) {
+              const fieldReference = Array.isArray(field._f.refs) ? field._f.refs[0] : field._f.ref;
+              if (isHTMLElement(fieldReference)) {
+                const form = fieldReference.closest("form");
+                if (form) {
+                  form.reset();
+                  break;
+                }
+              }
+            }
+          }
+        }
+        if (keepStateOptions.keepFieldsRef) {
+          for (const fieldName of _names.mount) {
+            setValue(fieldName, get(values, fieldName));
+          }
+        } else {
+          _fields = {};
+        }
+      }
+      if (_options.shouldUnregister) {
+        _formValues = keepStateOptions.keepDefaultValues ? cloneObject(_defaultValues) : {};
+        if (keepStateOptions.keepFieldsRef) {
+          for (const fieldName of _names.mount) {
+            set(_formValues, fieldName, get(values, fieldName));
+          }
+        }
+      } else {
+        _formValues = cloneObject(values);
+      }
+      _subjects.array.next({
+        values: { ...values }
+      });
+      _subjects.state.next({
+        values: { ...values }
+      });
+    }
+    _names = {
+      mount: keepStateOptions.keepDirtyValues ? _names.mount : /* @__PURE__ */ new Set(),
+      unMount: /* @__PURE__ */ new Set(),
+      array: /* @__PURE__ */ new Set(),
+      registerName: /* @__PURE__ */ new Set(),
+      disabled: /* @__PURE__ */ new Set(),
+      watch: /* @__PURE__ */ new Set(),
+      watchAll: false,
+      focus: ""
+    };
+    _state.mount = !_proxyFormState.isValid || !!keepStateOptions.keepIsValid || !!keepStateOptions.keepDirtyValues || !_options.shouldUnregister && !isEmptyObject(values);
+    _state.watch = !!_options.shouldUnregister;
+    _state.keepIsValid = !!keepStateOptions.keepIsValid;
+    _state.action = false;
+    if (!keepStateOptions.keepErrors) {
+      _formState.errors = {};
+    }
+    _subjects.state.next({
+      submitCount: keepStateOptions.keepSubmitCount ? _formState.submitCount : 0,
+      isDirty: isEmptyResetValues ? false : keepStateOptions.keepDirty ? _formState.isDirty : keepStateOptions.keepValues ? _getDirty() : !!(keepStateOptions.keepDefaultValues && !deepEqual(formValues, _defaultValues)),
+      isSubmitted: keepStateOptions.keepIsSubmitted ? _formState.isSubmitted : false,
+      dirtyFields: isEmptyResetValues ? {} : keepStateOptions.keepDirtyValues ? keepStateOptions.keepDefaultValues && _formValues ? getDirtyFields(_defaultValues, _formValues) : _formState.dirtyFields : keepStateOptions.keepDefaultValues && formValues ? getDirtyFields(_defaultValues, formValues) : keepStateOptions.keepDirty ? _formState.dirtyFields : {},
+      touchedFields: keepStateOptions.keepTouched ? _formState.touchedFields : {},
+      errors: keepStateOptions.keepErrors ? _formState.errors : {},
+      isSubmitSuccessful: keepStateOptions.keepIsSubmitSuccessful ? _formState.isSubmitSuccessful : false,
+      isSubmitting: false,
+      defaultValues: _defaultValues
+    });
+  };
+  const reset = (formValues, keepStateOptions) => _reset(isFunction(formValues) ? formValues(_formValues) : formValues, { ..._options.resetOptions, ...keepStateOptions });
+  const setFocus = (name, options = {}) => {
+    const field = get(_fields, name);
+    const fieldReference = field && field._f;
+    if (fieldReference) {
+      const fieldRef = fieldReference.refs ? fieldReference.refs[0] : fieldReference.ref;
+      if (fieldRef.focus) {
+        setTimeout(() => {
+          fieldRef.focus();
+          options.shouldSelect && isFunction(fieldRef.select) && fieldRef.select();
+        });
+      }
+    }
+  };
+  const _setFormState = (updatedFormState) => {
+    _formState = {
+      ..._formState,
+      ...updatedFormState
+    };
+  };
+  const _resetDefaultValues = () => isFunction(_options.defaultValues) && _options.defaultValues().then((values) => {
+    reset(values, _options.resetOptions);
+    _subjects.state.next({
+      isLoading: false
+    });
+  });
+  const resetDefaultValues = (values, options = {}) => {
+    _defaultValues = cloneObject(values);
+    if (!options.keepDirty) {
+      const newDirtyFields = getDirtyFields(_defaultValues, _formValues);
+      _formState.dirtyFields = newDirtyFields;
+      _formState.isDirty = !isEmptyObject(newDirtyFields);
+    }
+    if (!options.keepIsValid) {
+      _setValid();
+    }
+    _subjects.state.next({
+      ..._formState,
+      defaultValues: _defaultValues
+    });
+  };
+  const methods = {
+    control: {
+      register,
+      unregister,
+      getFieldState,
+      handleSubmit,
+      setError,
+      _subscribe,
+      _runSchema,
+      _updateIsValidating,
+      _focusError,
+      _getWatch,
+      _getDirty,
+      _setValid,
+      _setFieldArray,
+      _setDisabledField,
+      _setErrors,
+      _getFieldArray,
+      _reset,
+      _resetDefaultValues,
+      _removeUnmounted,
+      _disableForm,
+      _subjects,
+      _proxyFormState,
+      get _fields() {
+        return _fields;
+      },
+      get _formValues() {
+        return _formValues;
+      },
+      get _state() {
+        return _state;
+      },
+      set _state(value) {
+        _state = value;
+      },
+      get _defaultValues() {
+        return _defaultValues;
+      },
+      get _names() {
+        return _names;
+      },
+      set _names(value) {
+        _names = value;
+      },
+      get _formState() {
+        return _formState;
+      },
+      get _options() {
+        return _options;
+      },
+      set _options(value) {
+        _options = {
+          ..._options,
+          ...value
+        };
+      }
+    },
+    subscribe,
+    trigger,
+    register,
+    handleSubmit,
+    watch,
+    setValue,
+    setValues,
+    getValues,
+    reset,
+    resetField,
+    resetDefaultValues,
+    clearErrors,
+    unregister,
+    setError,
+    setFocus,
+    getFieldState
+  };
+  return {
+    ...methods,
+    formControl: methods
+  };
+}
+function useForm(props = {}) {
+  const _formControl = React.useRef(void 0);
+  const _values = React.useRef(void 0);
+  const [formState, updateFormState] = React.useState(() => ({
+    ...cloneObject(DEFAULT_FORM_STATE),
+    isLoading: isFunction(props.defaultValues),
+    errors: props.errors || {},
+    disabled: props.disabled || false,
+    defaultValues: isFunction(props.defaultValues) ? void 0 : props.defaultValues
+  }));
+  if (!_formControl.current) {
+    if (props.formControl) {
+      _formControl.current = {
+        ...props.formControl,
+        formState
+      };
+      if (props.defaultValues && !isFunction(props.defaultValues)) {
+        props.formControl.reset(props.defaultValues, props.resetOptions);
+      }
+    } else {
+      const { formControl, ...rest } = createFormControl(props);
+      _formControl.current = {
+        ...rest,
+        formState
+      };
+    }
+  }
+  const control = _formControl.current.control;
+  control._options = props;
+  useIsomorphicLayoutEffect(() => {
+    const sub = control._subscribe({
+      formState: control._proxyFormState,
+      callback: () => updateFormState({
+        ...control._formState,
+        defaultValues: control._defaultValues
+      }),
+      reRenderRoot: true
+    });
+    updateFormState((data) => ({
+      ...data,
+      isReady: true
+    }));
+    control._formState.isReady = true;
+    return sub;
+  }, [control]);
+  React.useEffect(() => control._disableForm(props.disabled), [control, props.disabled]);
+  React.useEffect(() => {
+    if (props.mode) {
+      control._options.mode = props.mode;
+    }
+    if (props.reValidateMode) {
+      control._options.reValidateMode = props.reValidateMode;
+    }
+  }, [control, props.mode, props.reValidateMode]);
+  React.useEffect(() => {
+    if (props.errors) {
+      control._setErrors(props.errors);
+      control._focusError();
+    }
+  }, [control, props.errors]);
+  React.useEffect(() => {
+    props.shouldUnregister && control._subjects.state.next({
+      values: control._getWatch()
+    });
+  }, [control, props.shouldUnregister]);
+  React.useEffect(() => {
+    if (control._proxyFormState.isDirty) {
+      const isDirty2 = control._getDirty();
+      if (isDirty2 !== formState.isDirty) {
+        control._subjects.state.next({
+          isDirty: isDirty2
+        });
+      }
+    }
+  }, [control, formState.isDirty]);
+  React.useEffect(() => {
+    var _a;
+    if (props.values && !deepEqual(props.values, _values.current)) {
+      control._reset(props.values, {
+        keepFieldsRef: true,
+        ...control._options.resetOptions
+      });
+      if (!((_a = control._options.resetOptions) === null || _a === void 0 ? void 0 : _a.keepIsValid)) {
+        control._setValid();
+      }
+      _values.current = props.values;
+      updateFormState((state) => ({ ...state }));
+    } else {
+      control._resetDefaultValues();
+    }
+  }, [control, props.values]);
+  React.useEffect(() => {
+    if (!control._state.mount) {
+      control._setValid();
+      control._state.mount = true;
+    }
+    if (control._state.watch) {
+      control._state.watch = false;
+      control._subjects.state.next({ ...control._formState });
+    }
+    control._removeUnmounted();
+  });
+  _formControl.current.formState = React.useMemo(() => getProxyFormState(formState, control), [control, formState]);
+  return _formControl.current;
+}
+const r = (t2, r2, o2) => {
+  if (t2 && "reportValidity" in t2) {
+    const s2 = get(o2, r2);
+    t2.setCustomValidity(s2 && s2.message || ""), t2.reportValidity();
+  }
+}, o = (e, t2) => {
+  for (const o2 in t2.fields) {
+    const s2 = t2.fields[o2];
+    s2 && s2.ref && "reportValidity" in s2.ref ? r(s2.ref, o2, e) : s2 && s2.refs && s2.refs.forEach((t3) => r(t3, o2, e));
+  }
+}, s$1 = (r2, s2) => {
+  s2.shouldUseNativeValidation && o(r2, s2);
+  const n2 = {};
+  for (const o2 in r2) {
+    const c = get(s2.fields, o2), f = Object.assign(r2[o2] || {}, { ref: c && c.ref });
+    if (i$1(s2.names || Object.keys(r2), o2)) {
+      const r3 = Object.assign({}, get(n2, o2));
+      set(r3, "root", f), set(n2, o2, r3);
+    } else set(n2, o2, f);
+  }
+  return n2;
+}, i$1 = (e, t2) => {
+  const r2 = n(t2).replace(/[.*+?^${}()|\\]/g, "\\$&");
+  return e.some((e2) => n(e2).match(`^${r2}\\.\\d+`));
+};
+function n(e) {
+  return e.replace(/[\[\]]/g, "");
+}
+function $constructor(name, initializer2, params) {
+  function init(inst, def) {
+    var _a;
+    Object.defineProperty(inst, "_zod", {
+      value: inst._zod ?? {},
+      enumerable: false
+    });
+    (_a = inst._zod).traits ?? (_a.traits = /* @__PURE__ */ new Set());
+    inst._zod.traits.add(name);
+    initializer2(inst, def);
+    for (const k in _.prototype) {
+      if (!(k in inst))
+        Object.defineProperty(inst, k, { value: _.prototype[k].bind(inst) });
+    }
+    inst._zod.constr = _;
+    inst._zod.def = def;
+  }
+  const Parent = params?.Parent ?? Object;
+  class Definition extends Parent {
+  }
+  Object.defineProperty(Definition, "name", { value: name });
+  function _(def) {
+    var _a;
+    const inst = params?.Parent ? new Definition() : this;
+    init(inst, def);
+    (_a = inst._zod).deferred ?? (_a.deferred = []);
+    for (const fn of inst._zod.deferred) {
+      fn();
+    }
+    return inst;
+  }
+  Object.defineProperty(_, "init", { value: init });
+  Object.defineProperty(_, Symbol.hasInstance, {
+    value: (inst) => {
+      if (params?.Parent && inst instanceof params.Parent)
+        return true;
+      return inst?._zod?.traits?.has(name);
+    }
+  });
+  Object.defineProperty(_, "name", { value: name });
+  return _;
+}
+class $ZodAsyncError extends Error {
+  constructor() {
+    super(`Encountered Promise during synchronous parse. Use .parseAsync() instead.`);
+  }
+}
+const globalConfig = {};
+function config(newConfig) {
+  return globalConfig;
+}
+function jsonStringifyReplacer(_, value) {
+  if (typeof value === "bigint")
+    return value.toString();
+  return value;
+}
+const captureStackTrace = Error.captureStackTrace ? Error.captureStackTrace : (..._args) => {
+};
+function unwrapMessage(message) {
+  return typeof message === "string" ? message : message?.message;
+}
+function finalizeIssue(iss, ctx, config2) {
+  const full = { ...iss, path: iss.path ?? [] };
+  if (!iss.message) {
+    const message = unwrapMessage(iss.inst?._zod.def?.error?.(iss)) ?? unwrapMessage(ctx?.error?.(iss)) ?? unwrapMessage(config2.customError?.(iss)) ?? unwrapMessage(config2.localeError?.(iss)) ?? "Invalid input";
+    full.message = message;
+  }
+  delete full.inst;
+  delete full.continue;
+  if (!ctx?.reportInput) {
+    delete full.input;
+  }
+  return full;
+}
+const initializer = (inst, def) => {
+  inst.name = "$ZodError";
+  Object.defineProperty(inst, "_zod", {
+    value: inst._zod,
+    enumerable: false
+  });
+  Object.defineProperty(inst, "issues", {
+    value: def,
+    enumerable: false
+  });
+  Object.defineProperty(inst, "message", {
+    get() {
+      return JSON.stringify(def, jsonStringifyReplacer, 2);
+    },
+    enumerable: true
+    // configurable: false,
+  });
+  Object.defineProperty(inst, "toString", {
+    value: () => inst.message,
+    enumerable: false
+  });
+};
+const $ZodError = $constructor("$ZodError", initializer);
+const $ZodRealError = $constructor("$ZodError", initializer, { Parent: Error });
+const _parse = (_Err) => (schema, value, _ctx, _params) => {
+  const ctx = _ctx ? Object.assign(_ctx, { async: false }) : { async: false };
+  const result = schema._zod.run({ value, issues: [] }, ctx);
+  if (result instanceof Promise) {
+    throw new $ZodAsyncError();
+  }
+  if (result.issues.length) {
+    const e = new (_params?.Err ?? _Err)(result.issues.map((iss) => finalizeIssue(iss, ctx, config())));
+    captureStackTrace(e, _params?.callee);
+    throw e;
+  }
+  return result.value;
+};
+const parse = /* @__PURE__ */ _parse($ZodRealError);
+const _parseAsync = (_Err) => async (schema, value, _ctx, params) => {
+  const ctx = _ctx ? Object.assign(_ctx, { async: true }) : { async: true };
+  let result = schema._zod.run({ value, issues: [] }, ctx);
+  if (result instanceof Promise)
+    result = await result;
+  if (result.issues.length) {
+    const e = new (params?.Err ?? _Err)(result.issues.map((iss) => finalizeIssue(iss, ctx, config())));
+    captureStackTrace(e, params?.callee);
+    throw e;
+  }
+  return result.value;
+};
+const parseAsync = /* @__PURE__ */ _parseAsync($ZodRealError);
+function t() {
+  return t = Object.assign ? Object.assign.bind() : function(r2) {
+    for (var e = 1; e < arguments.length; e++) {
+      var n2 = arguments[e];
+      for (var o2 in n2) ({}).hasOwnProperty.call(n2, o2) && (r2[o2] = n2[o2]);
+    }
+    return r2;
+  }, t.apply(null, arguments);
+}
+function s(r2, e) {
+  try {
+    var n2 = r2();
+  } catch (r3) {
+    return e(r3);
+  }
+  return n2 && n2.then ? n2.then(void 0, e) : n2;
+}
+function i(r2, e) {
+  for (var o2 = {}; r2.length; ) {
+    var t2 = r2[0], s2 = t2.code, i2 = t2.message, a2 = t2.path.join(".");
+    if (!o2[a2]) if ("unionErrors" in t2) {
+      var u2 = t2.unionErrors[0].errors[0];
+      o2[a2] = { message: u2.message, type: u2.code };
+    } else o2[a2] = { message: i2, type: s2 };
+    if ("unionErrors" in t2 && t2.unionErrors.forEach(function(e2) {
+      return e2.errors.forEach(function(e3) {
+        return r2.push(e3);
+      });
+    }), e) {
+      var c = o2[a2].types, f = c && c[t2.code];
+      o2[a2] = appendErrors(a2, e, o2, s2, f ? [].concat(f, t2.message) : t2.message);
+    }
+    r2.shift();
+  }
+  return o2;
+}
+function a(r2, e) {
+  for (var o2 = {}, s2 = function() {
+    var s3 = r2[0], i2 = s3.code, a2 = s3.message, u2 = s3.path.join(".");
+    if (!o2[u2]) if ("invalid_union" === s3.code && s3.errors.length > 0) {
+      var c = s3.errors[0][0];
+      o2[u2] = { message: c.message, type: c.code };
+    } else o2[u2] = { message: a2, type: i2 };
+    if ("invalid_union" === s3.code && s3.errors.forEach(function(e2) {
+      return e2.forEach(function(e3) {
+        return r2.push(t({}, e3, { path: [].concat(s3.path, e3.path) }));
+      });
+    }), e) {
+      var f = o2[u2].types, l = f && f[s3.code];
+      o2[u2] = appendErrors(u2, e, o2, i2, l ? [].concat(l, s3.message) : s3.message);
+    }
+    r2.shift();
+  }; r2.length; ) s2();
+  return o2;
+}
+function u(n2, t2, u2) {
+  if (void 0 === u2 && (u2 = {}), (function(r2) {
+    return "_def" in r2 && "object" == typeof r2._def && "typeName" in r2._def;
+  })(n2)) return function(o$1, a2, c) {
+    try {
+      return Promise.resolve(s(function() {
+        return Promise.resolve(n2["sync" === u2.mode ? "parse" : "parseAsync"](o$1, t2)).then(function(e) {
+          return c.shouldUseNativeValidation && o({}, c), { errors: {}, values: u2.raw ? Object.assign({}, o$1) : e };
+        });
+      }, function(r2) {
+        if ((function(r3) {
+          return Array.isArray(null == r3 ? void 0 : r3.issues);
+        })(r2)) return { values: {}, errors: s$1(i(r2.errors, !c.shouldUseNativeValidation && "all" === c.criteriaMode), c) };
+        throw r2;
+      }));
+    } catch (r2) {
+      return Promise.reject(r2);
+    }
+  };
+  if ((function(r2) {
+    return "_zod" in r2 && "object" == typeof r2._zod;
+  })(n2)) return function(i2, c, f) {
+    try {
+      return Promise.resolve(s(function() {
+        return Promise.resolve(("sync" === u2.mode ? parse : parseAsync)(n2, i2, t2)).then(function(e) {
+          return f.shouldUseNativeValidation && o({}, f), { errors: {}, values: u2.raw ? Object.assign({}, i2) : e };
+        });
+      }, function(r2) {
+        if ((function(r3) {
+          return r3 instanceof $ZodError;
+        })(r2)) return { values: {}, errors: s$1(a(r2.issues, !f.shouldUseNativeValidation && "all" === f.criteriaMode), f) };
+        throw r2;
+      }));
+    } catch (r2) {
+      return Promise.reject(r2);
+    }
+  };
+  throw new Error("Invalid input: not a Zod schema");
+}
+var util;
+(function(util2) {
+  util2.assertEqual = (_) => {
+  };
+  function assertIs(_arg) {
+  }
+  util2.assertIs = assertIs;
+  function assertNever(_x) {
+    throw new Error();
+  }
+  util2.assertNever = assertNever;
+  util2.arrayToEnum = (items) => {
+    const obj = {};
+    for (const item of items) {
+      obj[item] = item;
+    }
+    return obj;
+  };
+  util2.getValidEnumValues = (obj) => {
+    const validKeys = util2.objectKeys(obj).filter((k) => typeof obj[obj[k]] !== "number");
+    const filtered = {};
+    for (const k of validKeys) {
+      filtered[k] = obj[k];
+    }
+    return util2.objectValues(filtered);
+  };
+  util2.objectValues = (obj) => {
+    return util2.objectKeys(obj).map(function(e) {
+      return obj[e];
+    });
+  };
+  util2.objectKeys = typeof Object.keys === "function" ? (obj) => Object.keys(obj) : (object) => {
+    const keys = [];
+    for (const key in object) {
+      if (Object.prototype.hasOwnProperty.call(object, key)) {
+        keys.push(key);
+      }
+    }
+    return keys;
+  };
+  util2.find = (arr, checker) => {
+    for (const item of arr) {
+      if (checker(item))
+        return item;
+    }
+    return void 0;
+  };
+  util2.isInteger = typeof Number.isInteger === "function" ? (val) => Number.isInteger(val) : (val) => typeof val === "number" && Number.isFinite(val) && Math.floor(val) === val;
+  function joinValues(array, separator = " | ") {
+    return array.map((val) => typeof val === "string" ? `'${val}'` : val).join(separator);
+  }
+  util2.joinValues = joinValues;
+  util2.jsonStringifyReplacer = (_, value) => {
+    if (typeof value === "bigint") {
+      return value.toString();
+    }
+    return value;
+  };
+})(util || (util = {}));
+var objectUtil;
+(function(objectUtil2) {
+  objectUtil2.mergeShapes = (first, second) => {
+    return {
+      ...first,
+      ...second
+      // second overwrites first
+    };
+  };
+})(objectUtil || (objectUtil = {}));
+const ZodParsedType = util.arrayToEnum([
+  "string",
+  "nan",
+  "number",
+  "integer",
+  "float",
+  "boolean",
+  "date",
+  "bigint",
+  "symbol",
+  "function",
+  "undefined",
+  "null",
+  "array",
+  "object",
+  "unknown",
+  "promise",
+  "void",
+  "never",
+  "map",
+  "set"
+]);
+const getParsedType = (data) => {
+  const t2 = typeof data;
+  switch (t2) {
+    case "undefined":
+      return ZodParsedType.undefined;
+    case "string":
+      return ZodParsedType.string;
+    case "number":
+      return Number.isNaN(data) ? ZodParsedType.nan : ZodParsedType.number;
+    case "boolean":
+      return ZodParsedType.boolean;
+    case "function":
+      return ZodParsedType.function;
+    case "bigint":
+      return ZodParsedType.bigint;
+    case "symbol":
+      return ZodParsedType.symbol;
+    case "object":
+      if (Array.isArray(data)) {
+        return ZodParsedType.array;
+      }
+      if (data === null) {
+        return ZodParsedType.null;
+      }
+      if (data.then && typeof data.then === "function" && data.catch && typeof data.catch === "function") {
+        return ZodParsedType.promise;
+      }
+      if (typeof Map !== "undefined" && data instanceof Map) {
+        return ZodParsedType.map;
+      }
+      if (typeof Set !== "undefined" && data instanceof Set) {
+        return ZodParsedType.set;
+      }
+      if (typeof Date !== "undefined" && data instanceof Date) {
+        return ZodParsedType.date;
+      }
+      return ZodParsedType.object;
+    default:
+      return ZodParsedType.unknown;
+  }
+};
+const ZodIssueCode = util.arrayToEnum([
+  "invalid_type",
+  "invalid_literal",
+  "custom",
+  "invalid_union",
+  "invalid_union_discriminator",
+  "invalid_enum_value",
+  "unrecognized_keys",
+  "invalid_arguments",
+  "invalid_return_type",
+  "invalid_date",
+  "invalid_string",
+  "too_small",
+  "too_big",
+  "invalid_intersection_types",
+  "not_multiple_of",
+  "not_finite"
+]);
+class ZodError extends Error {
+  get errors() {
+    return this.issues;
+  }
+  constructor(issues) {
+    super();
+    this.issues = [];
+    this.addIssue = (sub) => {
+      this.issues = [...this.issues, sub];
+    };
+    this.addIssues = (subs = []) => {
+      this.issues = [...this.issues, ...subs];
+    };
+    const actualProto = new.target.prototype;
+    if (Object.setPrototypeOf) {
+      Object.setPrototypeOf(this, actualProto);
+    } else {
+      this.__proto__ = actualProto;
+    }
+    this.name = "ZodError";
+    this.issues = issues;
+  }
+  format(_mapper) {
+    const mapper = _mapper || function(issue) {
+      return issue.message;
+    };
+    const fieldErrors = { _errors: [] };
+    const processError = (error) => {
+      for (const issue of error.issues) {
+        if (issue.code === "invalid_union") {
+          issue.unionErrors.map(processError);
+        } else if (issue.code === "invalid_return_type") {
+          processError(issue.returnTypeError);
+        } else if (issue.code === "invalid_arguments") {
+          processError(issue.argumentsError);
+        } else if (issue.path.length === 0) {
+          fieldErrors._errors.push(mapper(issue));
+        } else {
+          let curr = fieldErrors;
+          let i2 = 0;
+          while (i2 < issue.path.length) {
+            const el = issue.path[i2];
+            const terminal = i2 === issue.path.length - 1;
+            if (!terminal) {
+              curr[el] = curr[el] || { _errors: [] };
+            } else {
+              curr[el] = curr[el] || { _errors: [] };
+              curr[el]._errors.push(mapper(issue));
+            }
+            curr = curr[el];
+            i2++;
+          }
+        }
+      }
+    };
+    processError(this);
+    return fieldErrors;
+  }
+  static assert(value) {
+    if (!(value instanceof ZodError)) {
+      throw new Error(`Not a ZodError: ${value}`);
+    }
+  }
+  toString() {
+    return this.message;
+  }
+  get message() {
+    return JSON.stringify(this.issues, util.jsonStringifyReplacer, 2);
+  }
+  get isEmpty() {
+    return this.issues.length === 0;
+  }
+  flatten(mapper = (issue) => issue.message) {
+    const fieldErrors = {};
+    const formErrors = [];
+    for (const sub of this.issues) {
+      if (sub.path.length > 0) {
+        const firstEl = sub.path[0];
+        fieldErrors[firstEl] = fieldErrors[firstEl] || [];
+        fieldErrors[firstEl].push(mapper(sub));
+      } else {
+        formErrors.push(mapper(sub));
+      }
+    }
+    return { formErrors, fieldErrors };
+  }
+  get formErrors() {
+    return this.flatten();
+  }
+}
+ZodError.create = (issues) => {
+  const error = new ZodError(issues);
+  return error;
+};
+const errorMap = (issue, _ctx) => {
+  let message;
+  switch (issue.code) {
+    case ZodIssueCode.invalid_type:
+      if (issue.received === ZodParsedType.undefined) {
+        message = "Required";
+      } else {
+        message = `Expected ${issue.expected}, received ${issue.received}`;
+      }
+      break;
+    case ZodIssueCode.invalid_literal:
+      message = `Invalid literal value, expected ${JSON.stringify(issue.expected, util.jsonStringifyReplacer)}`;
+      break;
+    case ZodIssueCode.unrecognized_keys:
+      message = `Unrecognized key(s) in object: ${util.joinValues(issue.keys, ", ")}`;
+      break;
+    case ZodIssueCode.invalid_union:
+      message = `Invalid input`;
+      break;
+    case ZodIssueCode.invalid_union_discriminator:
+      message = `Invalid discriminator value. Expected ${util.joinValues(issue.options)}`;
+      break;
+    case ZodIssueCode.invalid_enum_value:
+      message = `Invalid enum value. Expected ${util.joinValues(issue.options)}, received '${issue.received}'`;
+      break;
+    case ZodIssueCode.invalid_arguments:
+      message = `Invalid function arguments`;
+      break;
+    case ZodIssueCode.invalid_return_type:
+      message = `Invalid function return type`;
+      break;
+    case ZodIssueCode.invalid_date:
+      message = `Invalid date`;
+      break;
+    case ZodIssueCode.invalid_string:
+      if (typeof issue.validation === "object") {
+        if ("includes" in issue.validation) {
+          message = `Invalid input: must include "${issue.validation.includes}"`;
+          if (typeof issue.validation.position === "number") {
+            message = `${message} at one or more positions greater than or equal to ${issue.validation.position}`;
+          }
+        } else if ("startsWith" in issue.validation) {
+          message = `Invalid input: must start with "${issue.validation.startsWith}"`;
+        } else if ("endsWith" in issue.validation) {
+          message = `Invalid input: must end with "${issue.validation.endsWith}"`;
+        } else {
+          util.assertNever(issue.validation);
+        }
+      } else if (issue.validation !== "regex") {
+        message = `Invalid ${issue.validation}`;
+      } else {
+        message = "Invalid";
+      }
+      break;
+    case ZodIssueCode.too_small:
+      if (issue.type === "array")
+        message = `Array must contain ${issue.exact ? "exactly" : issue.inclusive ? `at least` : `more than`} ${issue.minimum} element(s)`;
+      else if (issue.type === "string")
+        message = `String must contain ${issue.exact ? "exactly" : issue.inclusive ? `at least` : `over`} ${issue.minimum} character(s)`;
+      else if (issue.type === "number")
+        message = `Number must be ${issue.exact ? `exactly equal to ` : issue.inclusive ? `greater than or equal to ` : `greater than `}${issue.minimum}`;
+      else if (issue.type === "bigint")
+        message = `Number must be ${issue.exact ? `exactly equal to ` : issue.inclusive ? `greater than or equal to ` : `greater than `}${issue.minimum}`;
+      else if (issue.type === "date")
+        message = `Date must be ${issue.exact ? `exactly equal to ` : issue.inclusive ? `greater than or equal to ` : `greater than `}${new Date(Number(issue.minimum))}`;
+      else
+        message = "Invalid input";
+      break;
+    case ZodIssueCode.too_big:
+      if (issue.type === "array")
+        message = `Array must contain ${issue.exact ? `exactly` : issue.inclusive ? `at most` : `less than`} ${issue.maximum} element(s)`;
+      else if (issue.type === "string")
+        message = `String must contain ${issue.exact ? `exactly` : issue.inclusive ? `at most` : `under`} ${issue.maximum} character(s)`;
+      else if (issue.type === "number")
+        message = `Number must be ${issue.exact ? `exactly` : issue.inclusive ? `less than or equal to` : `less than`} ${issue.maximum}`;
+      else if (issue.type === "bigint")
+        message = `BigInt must be ${issue.exact ? `exactly` : issue.inclusive ? `less than or equal to` : `less than`} ${issue.maximum}`;
+      else if (issue.type === "date")
+        message = `Date must be ${issue.exact ? `exactly` : issue.inclusive ? `smaller than or equal to` : `smaller than`} ${new Date(Number(issue.maximum))}`;
+      else
+        message = "Invalid input";
+      break;
+    case ZodIssueCode.custom:
+      message = `Invalid input`;
+      break;
+    case ZodIssueCode.invalid_intersection_types:
+      message = `Intersection results could not be merged`;
+      break;
+    case ZodIssueCode.not_multiple_of:
+      message = `Number must be a multiple of ${issue.multipleOf}`;
+      break;
+    case ZodIssueCode.not_finite:
+      message = "Number must be finite";
+      break;
+    default:
+      message = _ctx.defaultError;
+      util.assertNever(issue);
+  }
+  return { message };
+};
+let overrideErrorMap = errorMap;
+function getErrorMap() {
+  return overrideErrorMap;
+}
+const makeIssue = (params) => {
+  const { data, path, errorMaps, issueData } = params;
+  const fullPath = [...path, ...issueData.path || []];
+  const fullIssue = {
+    ...issueData,
+    path: fullPath
+  };
+  if (issueData.message !== void 0) {
+    return {
+      ...issueData,
+      path: fullPath,
+      message: issueData.message
+    };
+  }
+  let errorMessage = "";
+  const maps = errorMaps.filter((m) => !!m).slice().reverse();
+  for (const map of maps) {
+    errorMessage = map(fullIssue, { data, defaultError: errorMessage }).message;
+  }
+  return {
+    ...issueData,
+    path: fullPath,
+    message: errorMessage
+  };
+};
+function addIssueToContext(ctx, issueData) {
+  const overrideMap = getErrorMap();
+  const issue = makeIssue({
+    issueData,
+    data: ctx.data,
+    path: ctx.path,
+    errorMaps: [
+      ctx.common.contextualErrorMap,
+      // contextual error map is first priority
+      ctx.schemaErrorMap,
+      // then schema-bound map if available
+      overrideMap,
+      // then global override map
+      overrideMap === errorMap ? void 0 : errorMap
+      // then global default map
+    ].filter((x) => !!x)
+  });
+  ctx.common.issues.push(issue);
+}
+class ParseStatus {
+  constructor() {
+    this.value = "valid";
+  }
+  dirty() {
+    if (this.value === "valid")
+      this.value = "dirty";
+  }
+  abort() {
+    if (this.value !== "aborted")
+      this.value = "aborted";
+  }
+  static mergeArray(status, results) {
+    const arrayValue = [];
+    for (const s2 of results) {
+      if (s2.status === "aborted")
+        return INVALID;
+      if (s2.status === "dirty")
+        status.dirty();
+      arrayValue.push(s2.value);
+    }
+    return { status: status.value, value: arrayValue };
+  }
+  static async mergeObjectAsync(status, pairs) {
+    const syncPairs = [];
+    for (const pair of pairs) {
+      const key = await pair.key;
+      const value = await pair.value;
+      syncPairs.push({
+        key,
+        value
+      });
+    }
+    return ParseStatus.mergeObjectSync(status, syncPairs);
+  }
+  static mergeObjectSync(status, pairs) {
+    const finalObject = {};
+    for (const pair of pairs) {
+      const { key, value } = pair;
+      if (key.status === "aborted")
+        return INVALID;
+      if (value.status === "aborted")
+        return INVALID;
+      if (key.status === "dirty")
+        status.dirty();
+      if (value.status === "dirty")
+        status.dirty();
+      if (key.value !== "__proto__" && (typeof value.value !== "undefined" || pair.alwaysSet)) {
+        finalObject[key.value] = value.value;
+      }
+    }
+    return { status: status.value, value: finalObject };
+  }
+}
+const INVALID = Object.freeze({
+  status: "aborted"
+});
+const DIRTY = (value) => ({ status: "dirty", value });
+const OK = (value) => ({ status: "valid", value });
+const isAborted = (x) => x.status === "aborted";
+const isDirty = (x) => x.status === "dirty";
+const isValid = (x) => x.status === "valid";
+const isAsync = (x) => typeof Promise !== "undefined" && x instanceof Promise;
+var errorUtil;
+(function(errorUtil2) {
+  errorUtil2.errToObj = (message) => typeof message === "string" ? { message } : message || {};
+  errorUtil2.toString = (message) => typeof message === "string" ? message : message?.message;
+})(errorUtil || (errorUtil = {}));
+class ParseInputLazyPath {
+  constructor(parent, value, path, key) {
+    this._cachedPath = [];
+    this.parent = parent;
+    this.data = value;
+    this._path = path;
+    this._key = key;
+  }
+  get path() {
+    if (!this._cachedPath.length) {
+      if (Array.isArray(this._key)) {
+        this._cachedPath.push(...this._path, ...this._key);
+      } else {
+        this._cachedPath.push(...this._path, this._key);
+      }
+    }
+    return this._cachedPath;
+  }
+}
+const handleResult = (ctx, result) => {
+  if (isValid(result)) {
+    return { success: true, data: result.value };
+  } else {
+    if (!ctx.common.issues.length) {
+      throw new Error("Validation failed but no issues detected.");
+    }
+    return {
+      success: false,
+      get error() {
+        if (this._error)
+          return this._error;
+        const error = new ZodError(ctx.common.issues);
+        this._error = error;
+        return this._error;
+      }
+    };
+  }
+};
+function processCreateParams(params) {
+  if (!params)
+    return {};
+  const { errorMap: errorMap2, invalid_type_error, required_error, description } = params;
+  if (errorMap2 && (invalid_type_error || required_error)) {
+    throw new Error(`Can't use "invalid_type_error" or "required_error" in conjunction with custom error map.`);
+  }
+  if (errorMap2)
+    return { errorMap: errorMap2, description };
+  const customMap = (iss, ctx) => {
+    const { message } = params;
+    if (iss.code === "invalid_enum_value") {
+      return { message: message ?? ctx.defaultError };
+    }
+    if (typeof ctx.data === "undefined") {
+      return { message: message ?? required_error ?? ctx.defaultError };
+    }
+    if (iss.code !== "invalid_type")
+      return { message: ctx.defaultError };
+    return { message: message ?? invalid_type_error ?? ctx.defaultError };
+  };
+  return { errorMap: customMap, description };
+}
+class ZodType {
+  get description() {
+    return this._def.description;
+  }
+  _getType(input) {
+    return getParsedType(input.data);
+  }
+  _getOrReturnCtx(input, ctx) {
+    return ctx || {
+      common: input.parent.common,
+      data: input.data,
+      parsedType: getParsedType(input.data),
+      schemaErrorMap: this._def.errorMap,
+      path: input.path,
+      parent: input.parent
+    };
+  }
+  _processInputParams(input) {
+    return {
+      status: new ParseStatus(),
+      ctx: {
+        common: input.parent.common,
+        data: input.data,
+        parsedType: getParsedType(input.data),
+        schemaErrorMap: this._def.errorMap,
+        path: input.path,
+        parent: input.parent
+      }
+    };
+  }
+  _parseSync(input) {
+    const result = this._parse(input);
+    if (isAsync(result)) {
+      throw new Error("Synchronous parse encountered promise.");
+    }
+    return result;
+  }
+  _parseAsync(input) {
+    const result = this._parse(input);
+    return Promise.resolve(result);
+  }
+  parse(data, params) {
+    const result = this.safeParse(data, params);
+    if (result.success)
+      return result.data;
+    throw result.error;
+  }
+  safeParse(data, params) {
+    const ctx = {
+      common: {
+        issues: [],
+        async: params?.async ?? false,
+        contextualErrorMap: params?.errorMap
+      },
+      path: params?.path || [],
+      schemaErrorMap: this._def.errorMap,
+      parent: null,
+      data,
+      parsedType: getParsedType(data)
+    };
+    const result = this._parseSync({ data, path: ctx.path, parent: ctx });
+    return handleResult(ctx, result);
+  }
+  "~validate"(data) {
+    const ctx = {
+      common: {
+        issues: [],
+        async: !!this["~standard"].async
+      },
+      path: [],
+      schemaErrorMap: this._def.errorMap,
+      parent: null,
+      data,
+      parsedType: getParsedType(data)
+    };
+    if (!this["~standard"].async) {
+      try {
+        const result = this._parseSync({ data, path: [], parent: ctx });
+        return isValid(result) ? {
+          value: result.value
+        } : {
+          issues: ctx.common.issues
+        };
+      } catch (err) {
+        if (err?.message?.toLowerCase()?.includes("encountered")) {
+          this["~standard"].async = true;
+        }
+        ctx.common = {
+          issues: [],
+          async: true
+        };
+      }
+    }
+    return this._parseAsync({ data, path: [], parent: ctx }).then((result) => isValid(result) ? {
+      value: result.value
+    } : {
+      issues: ctx.common.issues
+    });
+  }
+  async parseAsync(data, params) {
+    const result = await this.safeParseAsync(data, params);
+    if (result.success)
+      return result.data;
+    throw result.error;
+  }
+  async safeParseAsync(data, params) {
+    const ctx = {
+      common: {
+        issues: [],
+        contextualErrorMap: params?.errorMap,
+        async: true
+      },
+      path: params?.path || [],
+      schemaErrorMap: this._def.errorMap,
+      parent: null,
+      data,
+      parsedType: getParsedType(data)
+    };
+    const maybeAsyncResult = this._parse({ data, path: ctx.path, parent: ctx });
+    const result = await (isAsync(maybeAsyncResult) ? maybeAsyncResult : Promise.resolve(maybeAsyncResult));
+    return handleResult(ctx, result);
+  }
+  refine(check, message) {
+    const getIssueProperties = (val) => {
+      if (typeof message === "string" || typeof message === "undefined") {
+        return { message };
+      } else if (typeof message === "function") {
+        return message(val);
+      } else {
+        return message;
+      }
+    };
+    return this._refinement((val, ctx) => {
+      const result = check(val);
+      const setError = () => ctx.addIssue({
+        code: ZodIssueCode.custom,
+        ...getIssueProperties(val)
+      });
+      if (typeof Promise !== "undefined" && result instanceof Promise) {
+        return result.then((data) => {
+          if (!data) {
+            setError();
+            return false;
+          } else {
+            return true;
+          }
+        });
+      }
+      if (!result) {
+        setError();
+        return false;
+      } else {
+        return true;
+      }
+    });
+  }
+  refinement(check, refinementData) {
+    return this._refinement((val, ctx) => {
+      if (!check(val)) {
+        ctx.addIssue(typeof refinementData === "function" ? refinementData(val, ctx) : refinementData);
+        return false;
+      } else {
+        return true;
+      }
+    });
+  }
+  _refinement(refinement) {
+    return new ZodEffects({
+      schema: this,
+      typeName: ZodFirstPartyTypeKind.ZodEffects,
+      effect: { type: "refinement", refinement }
+    });
+  }
+  superRefine(refinement) {
+    return this._refinement(refinement);
+  }
+  constructor(def) {
+    this.spa = this.safeParseAsync;
+    this._def = def;
+    this.parse = this.parse.bind(this);
+    this.safeParse = this.safeParse.bind(this);
+    this.parseAsync = this.parseAsync.bind(this);
+    this.safeParseAsync = this.safeParseAsync.bind(this);
+    this.spa = this.spa.bind(this);
+    this.refine = this.refine.bind(this);
+    this.refinement = this.refinement.bind(this);
+    this.superRefine = this.superRefine.bind(this);
+    this.optional = this.optional.bind(this);
+    this.nullable = this.nullable.bind(this);
+    this.nullish = this.nullish.bind(this);
+    this.array = this.array.bind(this);
+    this.promise = this.promise.bind(this);
+    this.or = this.or.bind(this);
+    this.and = this.and.bind(this);
+    this.transform = this.transform.bind(this);
+    this.brand = this.brand.bind(this);
+    this.default = this.default.bind(this);
+    this.catch = this.catch.bind(this);
+    this.describe = this.describe.bind(this);
+    this.pipe = this.pipe.bind(this);
+    this.readonly = this.readonly.bind(this);
+    this.isNullable = this.isNullable.bind(this);
+    this.isOptional = this.isOptional.bind(this);
+    this["~standard"] = {
+      version: 1,
+      vendor: "zod",
+      validate: (data) => this["~validate"](data)
+    };
+  }
+  optional() {
+    return ZodOptional.create(this, this._def);
+  }
+  nullable() {
+    return ZodNullable.create(this, this._def);
+  }
+  nullish() {
+    return this.nullable().optional();
+  }
+  array() {
+    return ZodArray.create(this);
+  }
+  promise() {
+    return ZodPromise.create(this, this._def);
+  }
+  or(option) {
+    return ZodUnion.create([this, option], this._def);
+  }
+  and(incoming) {
+    return ZodIntersection.create(this, incoming, this._def);
+  }
+  transform(transform) {
+    return new ZodEffects({
+      ...processCreateParams(this._def),
+      schema: this,
+      typeName: ZodFirstPartyTypeKind.ZodEffects,
+      effect: { type: "transform", transform }
+    });
+  }
+  default(def) {
+    const defaultValueFunc = typeof def === "function" ? def : () => def;
+    return new ZodDefault({
+      ...processCreateParams(this._def),
+      innerType: this,
+      defaultValue: defaultValueFunc,
+      typeName: ZodFirstPartyTypeKind.ZodDefault
+    });
+  }
+  brand() {
+    return new ZodBranded({
+      typeName: ZodFirstPartyTypeKind.ZodBranded,
+      type: this,
+      ...processCreateParams(this._def)
+    });
+  }
+  catch(def) {
+    const catchValueFunc = typeof def === "function" ? def : () => def;
+    return new ZodCatch({
+      ...processCreateParams(this._def),
+      innerType: this,
+      catchValue: catchValueFunc,
+      typeName: ZodFirstPartyTypeKind.ZodCatch
+    });
+  }
+  describe(description) {
+    const This = this.constructor;
+    return new This({
+      ...this._def,
+      description
+    });
+  }
+  pipe(target) {
+    return ZodPipeline.create(this, target);
+  }
+  readonly() {
+    return ZodReadonly.create(this);
+  }
+  isOptional() {
+    return this.safeParse(void 0).success;
+  }
+  isNullable() {
+    return this.safeParse(null).success;
+  }
+}
+const cuidRegex = /^c[^\s-]{8,}$/i;
+const cuid2Regex = /^[0-9a-z]+$/;
+const ulidRegex = /^[0-9A-HJKMNP-TV-Z]{26}$/i;
+const uuidRegex = /^[0-9a-fA-F]{8}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{12}$/i;
+const nanoidRegex = /^[a-z0-9_-]{21}$/i;
+const jwtRegex = /^[A-Za-z0-9-_]+\.[A-Za-z0-9-_]+\.[A-Za-z0-9-_]*$/;
+const durationRegex = /^[-+]?P(?!$)(?:(?:[-+]?\d+Y)|(?:[-+]?\d+[.,]\d+Y$))?(?:(?:[-+]?\d+M)|(?:[-+]?\d+[.,]\d+M$))?(?:(?:[-+]?\d+W)|(?:[-+]?\d+[.,]\d+W$))?(?:(?:[-+]?\d+D)|(?:[-+]?\d+[.,]\d+D$))?(?:T(?=[\d+-])(?:(?:[-+]?\d+H)|(?:[-+]?\d+[.,]\d+H$))?(?:(?:[-+]?\d+M)|(?:[-+]?\d+[.,]\d+M$))?(?:[-+]?\d+(?:[.,]\d+)?S)?)??$/;
+const emailRegex = /^(?!\.)(?!.*\.\.)([A-Z0-9_'+\-\.]*)[A-Z0-9_+-]@([A-Z0-9][A-Z0-9\-]*\.)+[A-Z]{2,}$/i;
+const _emojiRegex = `^(\\p{Extended_Pictographic}|\\p{Emoji_Component})+$`;
+let emojiRegex;
+const ipv4Regex = /^(?:(?:25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9][0-9]|[0-9])\.){3}(?:25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9][0-9]|[0-9])$/;
+const ipv4CidrRegex = /^(?:(?:25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9][0-9]|[0-9])\.){3}(?:25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9][0-9]|[0-9])\/(3[0-2]|[12]?[0-9])$/;
+const ipv6Regex = /^(([0-9a-fA-F]{1,4}:){7,7}[0-9a-fA-F]{1,4}|([0-9a-fA-F]{1,4}:){1,7}:|([0-9a-fA-F]{1,4}:){1,6}:[0-9a-fA-F]{1,4}|([0-9a-fA-F]{1,4}:){1,5}(:[0-9a-fA-F]{1,4}){1,2}|([0-9a-fA-F]{1,4}:){1,4}(:[0-9a-fA-F]{1,4}){1,3}|([0-9a-fA-F]{1,4}:){1,3}(:[0-9a-fA-F]{1,4}){1,4}|([0-9a-fA-F]{1,4}:){1,2}(:[0-9a-fA-F]{1,4}){1,5}|[0-9a-fA-F]{1,4}:((:[0-9a-fA-F]{1,4}){1,6})|:((:[0-9a-fA-F]{1,4}){1,7}|:)|fe80:(:[0-9a-fA-F]{0,4}){0,4}%[0-9a-zA-Z]{1,}|::(ffff(:0{1,4}){0,1}:){0,1}((25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])\.){3,3}(25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])|([0-9a-fA-F]{1,4}:){1,4}:((25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])\.){3,3}(25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9]))$/;
+const ipv6CidrRegex = /^(([0-9a-fA-F]{1,4}:){7,7}[0-9a-fA-F]{1,4}|([0-9a-fA-F]{1,4}:){1,7}:|([0-9a-fA-F]{1,4}:){1,6}:[0-9a-fA-F]{1,4}|([0-9a-fA-F]{1,4}:){1,5}(:[0-9a-fA-F]{1,4}){1,2}|([0-9a-fA-F]{1,4}:){1,4}(:[0-9a-fA-F]{1,4}){1,3}|([0-9a-fA-F]{1,4}:){1,3}(:[0-9a-fA-F]{1,4}){1,4}|([0-9a-fA-F]{1,4}:){1,2}(:[0-9a-fA-F]{1,4}){1,5}|[0-9a-fA-F]{1,4}:((:[0-9a-fA-F]{1,4}){1,6})|:((:[0-9a-fA-F]{1,4}){1,7}|:)|fe80:(:[0-9a-fA-F]{0,4}){0,4}%[0-9a-zA-Z]{1,}|::(ffff(:0{1,4}){0,1}:){0,1}((25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])\.){3,3}(25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])|([0-9a-fA-F]{1,4}:){1,4}:((25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])\.){3,3}(25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9]))\/(12[0-8]|1[01][0-9]|[1-9]?[0-9])$/;
+const base64Regex = /^([0-9a-zA-Z+/]{4})*(([0-9a-zA-Z+/]{2}==)|([0-9a-zA-Z+/]{3}=))?$/;
+const base64urlRegex = /^([0-9a-zA-Z-_]{4})*(([0-9a-zA-Z-_]{2}(==)?)|([0-9a-zA-Z-_]{3}(=)?))?$/;
+const dateRegexSource = `((\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-((0[13578]|1[02])-(0[1-9]|[12]\\d|3[01])|(0[469]|11)-(0[1-9]|[12]\\d|30)|(02)-(0[1-9]|1\\d|2[0-8])))`;
+const dateRegex = new RegExp(`^${dateRegexSource}$`);
+function timeRegexSource(args) {
+  let secondsRegexSource = `[0-5]\\d`;
+  if (args.precision) {
+    secondsRegexSource = `${secondsRegexSource}\\.\\d{${args.precision}}`;
+  } else if (args.precision == null) {
+    secondsRegexSource = `${secondsRegexSource}(\\.\\d+)?`;
+  }
+  const secondsQuantifier = args.precision ? "+" : "?";
+  return `([01]\\d|2[0-3]):[0-5]\\d(:${secondsRegexSource})${secondsQuantifier}`;
+}
+function timeRegex(args) {
+  return new RegExp(`^${timeRegexSource(args)}$`);
+}
+function datetimeRegex(args) {
+  let regex = `${dateRegexSource}T${timeRegexSource(args)}`;
+  const opts = [];
+  opts.push(args.local ? `Z?` : `Z`);
+  if (args.offset)
+    opts.push(`([+-]\\d{2}:?\\d{2})`);
+  regex = `${regex}(${opts.join("|")})`;
+  return new RegExp(`^${regex}$`);
+}
+function isValidIP(ip, version) {
+  if ((version === "v4" || !version) && ipv4Regex.test(ip)) {
+    return true;
+  }
+  if ((version === "v6" || !version) && ipv6Regex.test(ip)) {
+    return true;
+  }
+  return false;
+}
+function isValidJWT(jwt, alg) {
+  if (!jwtRegex.test(jwt))
+    return false;
+  try {
+    const [header] = jwt.split(".");
+    if (!header)
+      return false;
+    const base64 = header.replace(/-/g, "+").replace(/_/g, "/").padEnd(header.length + (4 - header.length % 4) % 4, "=");
+    const decoded = JSON.parse(atob(base64));
+    if (typeof decoded !== "object" || decoded === null)
+      return false;
+    if ("typ" in decoded && decoded?.typ !== "JWT")
+      return false;
+    if (!decoded.alg)
+      return false;
+    if (alg && decoded.alg !== alg)
+      return false;
+    return true;
+  } catch {
+    return false;
+  }
+}
+function isValidCidr(ip, version) {
+  if ((version === "v4" || !version) && ipv4CidrRegex.test(ip)) {
+    return true;
+  }
+  if ((version === "v6" || !version) && ipv6CidrRegex.test(ip)) {
+    return true;
+  }
+  return false;
+}
+class ZodString extends ZodType {
+  _parse(input) {
+    if (this._def.coerce) {
+      input.data = String(input.data);
+    }
+    const parsedType = this._getType(input);
+    if (parsedType !== ZodParsedType.string) {
+      const ctx2 = this._getOrReturnCtx(input);
+      addIssueToContext(ctx2, {
+        code: ZodIssueCode.invalid_type,
+        expected: ZodParsedType.string,
+        received: ctx2.parsedType
+      });
+      return INVALID;
+    }
+    const status = new ParseStatus();
+    let ctx = void 0;
+    for (const check of this._def.checks) {
+      if (check.kind === "min") {
+        if (input.data.length < check.value) {
+          ctx = this._getOrReturnCtx(input, ctx);
+          addIssueToContext(ctx, {
+            code: ZodIssueCode.too_small,
+            minimum: check.value,
+            type: "string",
+            inclusive: true,
+            exact: false,
+            message: check.message
+          });
+          status.dirty();
+        }
+      } else if (check.kind === "max") {
+        if (input.data.length > check.value) {
+          ctx = this._getOrReturnCtx(input, ctx);
+          addIssueToContext(ctx, {
+            code: ZodIssueCode.too_big,
+            maximum: check.value,
+            type: "string",
+            inclusive: true,
+            exact: false,
+            message: check.message
+          });
+          status.dirty();
+        }
+      } else if (check.kind === "length") {
+        const tooBig = input.data.length > check.value;
+        const tooSmall = input.data.length < check.value;
+        if (tooBig || tooSmall) {
+          ctx = this._getOrReturnCtx(input, ctx);
+          if (tooBig) {
+            addIssueToContext(ctx, {
+              code: ZodIssueCode.too_big,
+              maximum: check.value,
+              type: "string",
+              inclusive: true,
+              exact: true,
+              message: check.message
+            });
+          } else if (tooSmall) {
+            addIssueToContext(ctx, {
+              code: ZodIssueCode.too_small,
+              minimum: check.value,
+              type: "string",
+              inclusive: true,
+              exact: true,
+              message: check.message
+            });
+          }
+          status.dirty();
+        }
+      } else if (check.kind === "email") {
+        if (!emailRegex.test(input.data)) {
+          ctx = this._getOrReturnCtx(input, ctx);
+          addIssueToContext(ctx, {
+            validation: "email",
+            code: ZodIssueCode.invalid_string,
+            message: check.message
+          });
+          status.dirty();
+        }
+      } else if (check.kind === "emoji") {
+        if (!emojiRegex) {
+          emojiRegex = new RegExp(_emojiRegex, "u");
+        }
+        if (!emojiRegex.test(input.data)) {
+          ctx = this._getOrReturnCtx(input, ctx);
+          addIssueToContext(ctx, {
+            validation: "emoji",
+            code: ZodIssueCode.invalid_string,
+            message: check.message
+          });
+          status.dirty();
+        }
+      } else if (check.kind === "uuid") {
+        if (!uuidRegex.test(input.data)) {
+          ctx = this._getOrReturnCtx(input, ctx);
+          addIssueToContext(ctx, {
+            validation: "uuid",
+            code: ZodIssueCode.invalid_string,
+            message: check.message
+          });
+          status.dirty();
+        }
+      } else if (check.kind === "nanoid") {
+        if (!nanoidRegex.test(input.data)) {
+          ctx = this._getOrReturnCtx(input, ctx);
+          addIssueToContext(ctx, {
+            validation: "nanoid",
+            code: ZodIssueCode.invalid_string,
+            message: check.message
+          });
+          status.dirty();
+        }
+      } else if (check.kind === "cuid") {
+        if (!cuidRegex.test(input.data)) {
+          ctx = this._getOrReturnCtx(input, ctx);
+          addIssueToContext(ctx, {
+            validation: "cuid",
+            code: ZodIssueCode.invalid_string,
+            message: check.message
+          });
+          status.dirty();
+        }
+      } else if (check.kind === "cuid2") {
+        if (!cuid2Regex.test(input.data)) {
+          ctx = this._getOrReturnCtx(input, ctx);
+          addIssueToContext(ctx, {
+            validation: "cuid2",
+            code: ZodIssueCode.invalid_string,
+            message: check.message
+          });
+          status.dirty();
+        }
+      } else if (check.kind === "ulid") {
+        if (!ulidRegex.test(input.data)) {
+          ctx = this._getOrReturnCtx(input, ctx);
+          addIssueToContext(ctx, {
+            validation: "ulid",
+            code: ZodIssueCode.invalid_string,
+            message: check.message
+          });
+          status.dirty();
+        }
+      } else if (check.kind === "url") {
+        try {
+          new URL(input.data);
+        } catch {
+          ctx = this._getOrReturnCtx(input, ctx);
+          addIssueToContext(ctx, {
+            validation: "url",
+            code: ZodIssueCode.invalid_string,
+            message: check.message
+          });
+          status.dirty();
+        }
+      } else if (check.kind === "regex") {
+        check.regex.lastIndex = 0;
+        const testResult = check.regex.test(input.data);
+        if (!testResult) {
+          ctx = this._getOrReturnCtx(input, ctx);
+          addIssueToContext(ctx, {
+            validation: "regex",
+            code: ZodIssueCode.invalid_string,
+            message: check.message
+          });
+          status.dirty();
+        }
+      } else if (check.kind === "trim") {
+        input.data = input.data.trim();
+      } else if (check.kind === "includes") {
+        if (!input.data.includes(check.value, check.position)) {
+          ctx = this._getOrReturnCtx(input, ctx);
+          addIssueToContext(ctx, {
+            code: ZodIssueCode.invalid_string,
+            validation: { includes: check.value, position: check.position },
+            message: check.message
+          });
+          status.dirty();
+        }
+      } else if (check.kind === "toLowerCase") {
+        input.data = input.data.toLowerCase();
+      } else if (check.kind === "toUpperCase") {
+        input.data = input.data.toUpperCase();
+      } else if (check.kind === "startsWith") {
+        if (!input.data.startsWith(check.value)) {
+          ctx = this._getOrReturnCtx(input, ctx);
+          addIssueToContext(ctx, {
+            code: ZodIssueCode.invalid_string,
+            validation: { startsWith: check.value },
+            message: check.message
+          });
+          status.dirty();
+        }
+      } else if (check.kind === "endsWith") {
+        if (!input.data.endsWith(check.value)) {
+          ctx = this._getOrReturnCtx(input, ctx);
+          addIssueToContext(ctx, {
+            code: ZodIssueCode.invalid_string,
+            validation: { endsWith: check.value },
+            message: check.message
+          });
+          status.dirty();
+        }
+      } else if (check.kind === "datetime") {
+        const regex = datetimeRegex(check);
+        if (!regex.test(input.data)) {
+          ctx = this._getOrReturnCtx(input, ctx);
+          addIssueToContext(ctx, {
+            code: ZodIssueCode.invalid_string,
+            validation: "datetime",
+            message: check.message
+          });
+          status.dirty();
+        }
+      } else if (check.kind === "date") {
+        const regex = dateRegex;
+        if (!regex.test(input.data)) {
+          ctx = this._getOrReturnCtx(input, ctx);
+          addIssueToContext(ctx, {
+            code: ZodIssueCode.invalid_string,
+            validation: "date",
+            message: check.message
+          });
+          status.dirty();
+        }
+      } else if (check.kind === "time") {
+        const regex = timeRegex(check);
+        if (!regex.test(input.data)) {
+          ctx = this._getOrReturnCtx(input, ctx);
+          addIssueToContext(ctx, {
+            code: ZodIssueCode.invalid_string,
+            validation: "time",
+            message: check.message
+          });
+          status.dirty();
+        }
+      } else if (check.kind === "duration") {
+        if (!durationRegex.test(input.data)) {
+          ctx = this._getOrReturnCtx(input, ctx);
+          addIssueToContext(ctx, {
+            validation: "duration",
+            code: ZodIssueCode.invalid_string,
+            message: check.message
+          });
+          status.dirty();
+        }
+      } else if (check.kind === "ip") {
+        if (!isValidIP(input.data, check.version)) {
+          ctx = this._getOrReturnCtx(input, ctx);
+          addIssueToContext(ctx, {
+            validation: "ip",
+            code: ZodIssueCode.invalid_string,
+            message: check.message
+          });
+          status.dirty();
+        }
+      } else if (check.kind === "jwt") {
+        if (!isValidJWT(input.data, check.alg)) {
+          ctx = this._getOrReturnCtx(input, ctx);
+          addIssueToContext(ctx, {
+            validation: "jwt",
+            code: ZodIssueCode.invalid_string,
+            message: check.message
+          });
+          status.dirty();
+        }
+      } else if (check.kind === "cidr") {
+        if (!isValidCidr(input.data, check.version)) {
+          ctx = this._getOrReturnCtx(input, ctx);
+          addIssueToContext(ctx, {
+            validation: "cidr",
+            code: ZodIssueCode.invalid_string,
+            message: check.message
+          });
+          status.dirty();
+        }
+      } else if (check.kind === "base64") {
+        if (!base64Regex.test(input.data)) {
+          ctx = this._getOrReturnCtx(input, ctx);
+          addIssueToContext(ctx, {
+            validation: "base64",
+            code: ZodIssueCode.invalid_string,
+            message: check.message
+          });
+          status.dirty();
+        }
+      } else if (check.kind === "base64url") {
+        if (!base64urlRegex.test(input.data)) {
+          ctx = this._getOrReturnCtx(input, ctx);
+          addIssueToContext(ctx, {
+            validation: "base64url",
+            code: ZodIssueCode.invalid_string,
+            message: check.message
+          });
+          status.dirty();
+        }
+      } else {
+        util.assertNever(check);
+      }
+    }
+    return { status: status.value, value: input.data };
+  }
+  _regex(regex, validation, message) {
+    return this.refinement((data) => regex.test(data), {
+      validation,
+      code: ZodIssueCode.invalid_string,
+      ...errorUtil.errToObj(message)
+    });
+  }
+  _addCheck(check) {
+    return new ZodString({
+      ...this._def,
+      checks: [...this._def.checks, check]
+    });
+  }
+  email(message) {
+    return this._addCheck({ kind: "email", ...errorUtil.errToObj(message) });
+  }
+  url(message) {
+    return this._addCheck({ kind: "url", ...errorUtil.errToObj(message) });
+  }
+  emoji(message) {
+    return this._addCheck({ kind: "emoji", ...errorUtil.errToObj(message) });
+  }
+  uuid(message) {
+    return this._addCheck({ kind: "uuid", ...errorUtil.errToObj(message) });
+  }
+  nanoid(message) {
+    return this._addCheck({ kind: "nanoid", ...errorUtil.errToObj(message) });
+  }
+  cuid(message) {
+    return this._addCheck({ kind: "cuid", ...errorUtil.errToObj(message) });
+  }
+  cuid2(message) {
+    return this._addCheck({ kind: "cuid2", ...errorUtil.errToObj(message) });
+  }
+  ulid(message) {
+    return this._addCheck({ kind: "ulid", ...errorUtil.errToObj(message) });
+  }
+  base64(message) {
+    return this._addCheck({ kind: "base64", ...errorUtil.errToObj(message) });
+  }
+  base64url(message) {
+    return this._addCheck({
+      kind: "base64url",
+      ...errorUtil.errToObj(message)
+    });
+  }
+  jwt(options) {
+    return this._addCheck({ kind: "jwt", ...errorUtil.errToObj(options) });
+  }
+  ip(options) {
+    return this._addCheck({ kind: "ip", ...errorUtil.errToObj(options) });
+  }
+  cidr(options) {
+    return this._addCheck({ kind: "cidr", ...errorUtil.errToObj(options) });
+  }
+  datetime(options) {
+    if (typeof options === "string") {
+      return this._addCheck({
+        kind: "datetime",
+        precision: null,
+        offset: false,
+        local: false,
+        message: options
+      });
+    }
+    return this._addCheck({
+      kind: "datetime",
+      precision: typeof options?.precision === "undefined" ? null : options?.precision,
+      offset: options?.offset ?? false,
+      local: options?.local ?? false,
+      ...errorUtil.errToObj(options?.message)
+    });
+  }
+  date(message) {
+    return this._addCheck({ kind: "date", message });
+  }
+  time(options) {
+    if (typeof options === "string") {
+      return this._addCheck({
+        kind: "time",
+        precision: null,
+        message: options
+      });
+    }
+    return this._addCheck({
+      kind: "time",
+      precision: typeof options?.precision === "undefined" ? null : options?.precision,
+      ...errorUtil.errToObj(options?.message)
+    });
+  }
+  duration(message) {
+    return this._addCheck({ kind: "duration", ...errorUtil.errToObj(message) });
+  }
+  regex(regex, message) {
+    return this._addCheck({
+      kind: "regex",
+      regex,
+      ...errorUtil.errToObj(message)
+    });
+  }
+  includes(value, options) {
+    return this._addCheck({
+      kind: "includes",
+      value,
+      position: options?.position,
+      ...errorUtil.errToObj(options?.message)
+    });
+  }
+  startsWith(value, message) {
+    return this._addCheck({
+      kind: "startsWith",
+      value,
+      ...errorUtil.errToObj(message)
+    });
+  }
+  endsWith(value, message) {
+    return this._addCheck({
+      kind: "endsWith",
+      value,
+      ...errorUtil.errToObj(message)
+    });
+  }
+  min(minLength, message) {
+    return this._addCheck({
+      kind: "min",
+      value: minLength,
+      ...errorUtil.errToObj(message)
+    });
+  }
+  max(maxLength, message) {
+    return this._addCheck({
+      kind: "max",
+      value: maxLength,
+      ...errorUtil.errToObj(message)
+    });
+  }
+  length(len, message) {
+    return this._addCheck({
+      kind: "length",
+      value: len,
+      ...errorUtil.errToObj(message)
+    });
+  }
+  /**
+   * Equivalent to `.min(1)`
+   */
+  nonempty(message) {
+    return this.min(1, errorUtil.errToObj(message));
+  }
+  trim() {
+    return new ZodString({
+      ...this._def,
+      checks: [...this._def.checks, { kind: "trim" }]
+    });
+  }
+  toLowerCase() {
+    return new ZodString({
+      ...this._def,
+      checks: [...this._def.checks, { kind: "toLowerCase" }]
+    });
+  }
+  toUpperCase() {
+    return new ZodString({
+      ...this._def,
+      checks: [...this._def.checks, { kind: "toUpperCase" }]
+    });
+  }
+  get isDatetime() {
+    return !!this._def.checks.find((ch) => ch.kind === "datetime");
+  }
+  get isDate() {
+    return !!this._def.checks.find((ch) => ch.kind === "date");
+  }
+  get isTime() {
+    return !!this._def.checks.find((ch) => ch.kind === "time");
+  }
+  get isDuration() {
+    return !!this._def.checks.find((ch) => ch.kind === "duration");
+  }
+  get isEmail() {
+    return !!this._def.checks.find((ch) => ch.kind === "email");
+  }
+  get isURL() {
+    return !!this._def.checks.find((ch) => ch.kind === "url");
+  }
+  get isEmoji() {
+    return !!this._def.checks.find((ch) => ch.kind === "emoji");
+  }
+  get isUUID() {
+    return !!this._def.checks.find((ch) => ch.kind === "uuid");
+  }
+  get isNANOID() {
+    return !!this._def.checks.find((ch) => ch.kind === "nanoid");
+  }
+  get isCUID() {
+    return !!this._def.checks.find((ch) => ch.kind === "cuid");
+  }
+  get isCUID2() {
+    return !!this._def.checks.find((ch) => ch.kind === "cuid2");
+  }
+  get isULID() {
+    return !!this._def.checks.find((ch) => ch.kind === "ulid");
+  }
+  get isIP() {
+    return !!this._def.checks.find((ch) => ch.kind === "ip");
+  }
+  get isCIDR() {
+    return !!this._def.checks.find((ch) => ch.kind === "cidr");
+  }
+  get isBase64() {
+    return !!this._def.checks.find((ch) => ch.kind === "base64");
+  }
+  get isBase64url() {
+    return !!this._def.checks.find((ch) => ch.kind === "base64url");
+  }
+  get minLength() {
+    let min = null;
+    for (const ch of this._def.checks) {
+      if (ch.kind === "min") {
+        if (min === null || ch.value > min)
+          min = ch.value;
+      }
+    }
+    return min;
+  }
+  get maxLength() {
+    let max = null;
+    for (const ch of this._def.checks) {
+      if (ch.kind === "max") {
+        if (max === null || ch.value < max)
+          max = ch.value;
+      }
+    }
+    return max;
+  }
+}
+ZodString.create = (params) => {
+  return new ZodString({
+    checks: [],
+    typeName: ZodFirstPartyTypeKind.ZodString,
+    coerce: params?.coerce ?? false,
+    ...processCreateParams(params)
+  });
+};
+function floatSafeRemainder(val, step) {
+  const valDecCount = (val.toString().split(".")[1] || "").length;
+  const stepDecCount = (step.toString().split(".")[1] || "").length;
+  const decCount = valDecCount > stepDecCount ? valDecCount : stepDecCount;
+  const valInt = Number.parseInt(val.toFixed(decCount).replace(".", ""));
+  const stepInt = Number.parseInt(step.toFixed(decCount).replace(".", ""));
+  return valInt % stepInt / 10 ** decCount;
+}
+class ZodNumber extends ZodType {
+  constructor() {
+    super(...arguments);
+    this.min = this.gte;
+    this.max = this.lte;
+    this.step = this.multipleOf;
+  }
+  _parse(input) {
+    if (this._def.coerce) {
+      input.data = Number(input.data);
+    }
+    const parsedType = this._getType(input);
+    if (parsedType !== ZodParsedType.number) {
+      const ctx2 = this._getOrReturnCtx(input);
+      addIssueToContext(ctx2, {
+        code: ZodIssueCode.invalid_type,
+        expected: ZodParsedType.number,
+        received: ctx2.parsedType
+      });
+      return INVALID;
+    }
+    let ctx = void 0;
+    const status = new ParseStatus();
+    for (const check of this._def.checks) {
+      if (check.kind === "int") {
+        if (!util.isInteger(input.data)) {
+          ctx = this._getOrReturnCtx(input, ctx);
+          addIssueToContext(ctx, {
+            code: ZodIssueCode.invalid_type,
+            expected: "integer",
+            received: "float",
+            message: check.message
+          });
+          status.dirty();
+        }
+      } else if (check.kind === "min") {
+        const tooSmall = check.inclusive ? input.data < check.value : input.data <= check.value;
+        if (tooSmall) {
+          ctx = this._getOrReturnCtx(input, ctx);
+          addIssueToContext(ctx, {
+            code: ZodIssueCode.too_small,
+            minimum: check.value,
+            type: "number",
+            inclusive: check.inclusive,
+            exact: false,
+            message: check.message
+          });
+          status.dirty();
+        }
+      } else if (check.kind === "max") {
+        const tooBig = check.inclusive ? input.data > check.value : input.data >= check.value;
+        if (tooBig) {
+          ctx = this._getOrReturnCtx(input, ctx);
+          addIssueToContext(ctx, {
+            code: ZodIssueCode.too_big,
+            maximum: check.value,
+            type: "number",
+            inclusive: check.inclusive,
+            exact: false,
+            message: check.message
+          });
+          status.dirty();
+        }
+      } else if (check.kind === "multipleOf") {
+        if (floatSafeRemainder(input.data, check.value) !== 0) {
+          ctx = this._getOrReturnCtx(input, ctx);
+          addIssueToContext(ctx, {
+            code: ZodIssueCode.not_multiple_of,
+            multipleOf: check.value,
+            message: check.message
+          });
+          status.dirty();
+        }
+      } else if (check.kind === "finite") {
+        if (!Number.isFinite(input.data)) {
+          ctx = this._getOrReturnCtx(input, ctx);
+          addIssueToContext(ctx, {
+            code: ZodIssueCode.not_finite,
+            message: check.message
+          });
+          status.dirty();
+        }
+      } else {
+        util.assertNever(check);
+      }
+    }
+    return { status: status.value, value: input.data };
+  }
+  gte(value, message) {
+    return this.setLimit("min", value, true, errorUtil.toString(message));
+  }
+  gt(value, message) {
+    return this.setLimit("min", value, false, errorUtil.toString(message));
+  }
+  lte(value, message) {
+    return this.setLimit("max", value, true, errorUtil.toString(message));
+  }
+  lt(value, message) {
+    return this.setLimit("max", value, false, errorUtil.toString(message));
+  }
+  setLimit(kind, value, inclusive, message) {
+    return new ZodNumber({
+      ...this._def,
+      checks: [
+        ...this._def.checks,
+        {
+          kind,
+          value,
+          inclusive,
+          message: errorUtil.toString(message)
+        }
+      ]
+    });
+  }
+  _addCheck(check) {
+    return new ZodNumber({
+      ...this._def,
+      checks: [...this._def.checks, check]
+    });
+  }
+  int(message) {
+    return this._addCheck({
+      kind: "int",
+      message: errorUtil.toString(message)
+    });
+  }
+  positive(message) {
+    return this._addCheck({
+      kind: "min",
+      value: 0,
+      inclusive: false,
+      message: errorUtil.toString(message)
+    });
+  }
+  negative(message) {
+    return this._addCheck({
+      kind: "max",
+      value: 0,
+      inclusive: false,
+      message: errorUtil.toString(message)
+    });
+  }
+  nonpositive(message) {
+    return this._addCheck({
+      kind: "max",
+      value: 0,
+      inclusive: true,
+      message: errorUtil.toString(message)
+    });
+  }
+  nonnegative(message) {
+    return this._addCheck({
+      kind: "min",
+      value: 0,
+      inclusive: true,
+      message: errorUtil.toString(message)
+    });
+  }
+  multipleOf(value, message) {
+    return this._addCheck({
+      kind: "multipleOf",
+      value,
+      message: errorUtil.toString(message)
+    });
+  }
+  finite(message) {
+    return this._addCheck({
+      kind: "finite",
+      message: errorUtil.toString(message)
+    });
+  }
+  safe(message) {
+    return this._addCheck({
+      kind: "min",
+      inclusive: true,
+      value: Number.MIN_SAFE_INTEGER,
+      message: errorUtil.toString(message)
+    })._addCheck({
+      kind: "max",
+      inclusive: true,
+      value: Number.MAX_SAFE_INTEGER,
+      message: errorUtil.toString(message)
+    });
+  }
+  get minValue() {
+    let min = null;
+    for (const ch of this._def.checks) {
+      if (ch.kind === "min") {
+        if (min === null || ch.value > min)
+          min = ch.value;
+      }
+    }
+    return min;
+  }
+  get maxValue() {
+    let max = null;
+    for (const ch of this._def.checks) {
+      if (ch.kind === "max") {
+        if (max === null || ch.value < max)
+          max = ch.value;
+      }
+    }
+    return max;
+  }
+  get isInt() {
+    return !!this._def.checks.find((ch) => ch.kind === "int" || ch.kind === "multipleOf" && util.isInteger(ch.value));
+  }
+  get isFinite() {
+    let max = null;
+    let min = null;
+    for (const ch of this._def.checks) {
+      if (ch.kind === "finite" || ch.kind === "int" || ch.kind === "multipleOf") {
+        return true;
+      } else if (ch.kind === "min") {
+        if (min === null || ch.value > min)
+          min = ch.value;
+      } else if (ch.kind === "max") {
+        if (max === null || ch.value < max)
+          max = ch.value;
+      }
+    }
+    return Number.isFinite(min) && Number.isFinite(max);
+  }
+}
+ZodNumber.create = (params) => {
+  return new ZodNumber({
+    checks: [],
+    typeName: ZodFirstPartyTypeKind.ZodNumber,
+    coerce: params?.coerce || false,
+    ...processCreateParams(params)
+  });
+};
+class ZodBigInt extends ZodType {
+  constructor() {
+    super(...arguments);
+    this.min = this.gte;
+    this.max = this.lte;
+  }
+  _parse(input) {
+    if (this._def.coerce) {
+      try {
+        input.data = BigInt(input.data);
+      } catch {
+        return this._getInvalidInput(input);
+      }
+    }
+    const parsedType = this._getType(input);
+    if (parsedType !== ZodParsedType.bigint) {
+      return this._getInvalidInput(input);
+    }
+    let ctx = void 0;
+    const status = new ParseStatus();
+    for (const check of this._def.checks) {
+      if (check.kind === "min") {
+        const tooSmall = check.inclusive ? input.data < check.value : input.data <= check.value;
+        if (tooSmall) {
+          ctx = this._getOrReturnCtx(input, ctx);
+          addIssueToContext(ctx, {
+            code: ZodIssueCode.too_small,
+            type: "bigint",
+            minimum: check.value,
+            inclusive: check.inclusive,
+            message: check.message
+          });
+          status.dirty();
+        }
+      } else if (check.kind === "max") {
+        const tooBig = check.inclusive ? input.data > check.value : input.data >= check.value;
+        if (tooBig) {
+          ctx = this._getOrReturnCtx(input, ctx);
+          addIssueToContext(ctx, {
+            code: ZodIssueCode.too_big,
+            type: "bigint",
+            maximum: check.value,
+            inclusive: check.inclusive,
+            message: check.message
+          });
+          status.dirty();
+        }
+      } else if (check.kind === "multipleOf") {
+        if (input.data % check.value !== BigInt(0)) {
+          ctx = this._getOrReturnCtx(input, ctx);
+          addIssueToContext(ctx, {
+            code: ZodIssueCode.not_multiple_of,
+            multipleOf: check.value,
+            message: check.message
+          });
+          status.dirty();
+        }
+      } else {
+        util.assertNever(check);
+      }
+    }
+    return { status: status.value, value: input.data };
+  }
+  _getInvalidInput(input) {
+    const ctx = this._getOrReturnCtx(input);
+    addIssueToContext(ctx, {
+      code: ZodIssueCode.invalid_type,
+      expected: ZodParsedType.bigint,
+      received: ctx.parsedType
+    });
+    return INVALID;
+  }
+  gte(value, message) {
+    return this.setLimit("min", value, true, errorUtil.toString(message));
+  }
+  gt(value, message) {
+    return this.setLimit("min", value, false, errorUtil.toString(message));
+  }
+  lte(value, message) {
+    return this.setLimit("max", value, true, errorUtil.toString(message));
+  }
+  lt(value, message) {
+    return this.setLimit("max", value, false, errorUtil.toString(message));
+  }
+  setLimit(kind, value, inclusive, message) {
+    return new ZodBigInt({
+      ...this._def,
+      checks: [
+        ...this._def.checks,
+        {
+          kind,
+          value,
+          inclusive,
+          message: errorUtil.toString(message)
+        }
+      ]
+    });
+  }
+  _addCheck(check) {
+    return new ZodBigInt({
+      ...this._def,
+      checks: [...this._def.checks, check]
+    });
+  }
+  positive(message) {
+    return this._addCheck({
+      kind: "min",
+      value: BigInt(0),
+      inclusive: false,
+      message: errorUtil.toString(message)
+    });
+  }
+  negative(message) {
+    return this._addCheck({
+      kind: "max",
+      value: BigInt(0),
+      inclusive: false,
+      message: errorUtil.toString(message)
+    });
+  }
+  nonpositive(message) {
+    return this._addCheck({
+      kind: "max",
+      value: BigInt(0),
+      inclusive: true,
+      message: errorUtil.toString(message)
+    });
+  }
+  nonnegative(message) {
+    return this._addCheck({
+      kind: "min",
+      value: BigInt(0),
+      inclusive: true,
+      message: errorUtil.toString(message)
+    });
+  }
+  multipleOf(value, message) {
+    return this._addCheck({
+      kind: "multipleOf",
+      value,
+      message: errorUtil.toString(message)
+    });
+  }
+  get minValue() {
+    let min = null;
+    for (const ch of this._def.checks) {
+      if (ch.kind === "min") {
+        if (min === null || ch.value > min)
+          min = ch.value;
+      }
+    }
+    return min;
+  }
+  get maxValue() {
+    let max = null;
+    for (const ch of this._def.checks) {
+      if (ch.kind === "max") {
+        if (max === null || ch.value < max)
+          max = ch.value;
+      }
+    }
+    return max;
+  }
+}
+ZodBigInt.create = (params) => {
+  return new ZodBigInt({
+    checks: [],
+    typeName: ZodFirstPartyTypeKind.ZodBigInt,
+    coerce: params?.coerce ?? false,
+    ...processCreateParams(params)
+  });
+};
+class ZodBoolean extends ZodType {
+  _parse(input) {
+    if (this._def.coerce) {
+      input.data = Boolean(input.data);
+    }
+    const parsedType = this._getType(input);
+    if (parsedType !== ZodParsedType.boolean) {
+      const ctx = this._getOrReturnCtx(input);
+      addIssueToContext(ctx, {
+        code: ZodIssueCode.invalid_type,
+        expected: ZodParsedType.boolean,
+        received: ctx.parsedType
+      });
+      return INVALID;
+    }
+    return OK(input.data);
+  }
+}
+ZodBoolean.create = (params) => {
+  return new ZodBoolean({
+    typeName: ZodFirstPartyTypeKind.ZodBoolean,
+    coerce: params?.coerce || false,
+    ...processCreateParams(params)
+  });
+};
+class ZodDate extends ZodType {
+  _parse(input) {
+    if (this._def.coerce) {
+      input.data = new Date(input.data);
+    }
+    const parsedType = this._getType(input);
+    if (parsedType !== ZodParsedType.date) {
+      const ctx2 = this._getOrReturnCtx(input);
+      addIssueToContext(ctx2, {
+        code: ZodIssueCode.invalid_type,
+        expected: ZodParsedType.date,
+        received: ctx2.parsedType
+      });
+      return INVALID;
+    }
+    if (Number.isNaN(input.data.getTime())) {
+      const ctx2 = this._getOrReturnCtx(input);
+      addIssueToContext(ctx2, {
+        code: ZodIssueCode.invalid_date
+      });
+      return INVALID;
+    }
+    const status = new ParseStatus();
+    let ctx = void 0;
+    for (const check of this._def.checks) {
+      if (check.kind === "min") {
+        if (input.data.getTime() < check.value) {
+          ctx = this._getOrReturnCtx(input, ctx);
+          addIssueToContext(ctx, {
+            code: ZodIssueCode.too_small,
+            message: check.message,
+            inclusive: true,
+            exact: false,
+            minimum: check.value,
+            type: "date"
+          });
+          status.dirty();
+        }
+      } else if (check.kind === "max") {
+        if (input.data.getTime() > check.value) {
+          ctx = this._getOrReturnCtx(input, ctx);
+          addIssueToContext(ctx, {
+            code: ZodIssueCode.too_big,
+            message: check.message,
+            inclusive: true,
+            exact: false,
+            maximum: check.value,
+            type: "date"
+          });
+          status.dirty();
+        }
+      } else {
+        util.assertNever(check);
+      }
+    }
+    return {
+      status: status.value,
+      value: new Date(input.data.getTime())
+    };
+  }
+  _addCheck(check) {
+    return new ZodDate({
+      ...this._def,
+      checks: [...this._def.checks, check]
+    });
+  }
+  min(minDate, message) {
+    return this._addCheck({
+      kind: "min",
+      value: minDate.getTime(),
+      message: errorUtil.toString(message)
+    });
+  }
+  max(maxDate, message) {
+    return this._addCheck({
+      kind: "max",
+      value: maxDate.getTime(),
+      message: errorUtil.toString(message)
+    });
+  }
+  get minDate() {
+    let min = null;
+    for (const ch of this._def.checks) {
+      if (ch.kind === "min") {
+        if (min === null || ch.value > min)
+          min = ch.value;
+      }
+    }
+    return min != null ? new Date(min) : null;
+  }
+  get maxDate() {
+    let max = null;
+    for (const ch of this._def.checks) {
+      if (ch.kind === "max") {
+        if (max === null || ch.value < max)
+          max = ch.value;
+      }
+    }
+    return max != null ? new Date(max) : null;
+  }
+}
+ZodDate.create = (params) => {
+  return new ZodDate({
+    checks: [],
+    coerce: params?.coerce || false,
+    typeName: ZodFirstPartyTypeKind.ZodDate,
+    ...processCreateParams(params)
+  });
+};
+class ZodSymbol extends ZodType {
+  _parse(input) {
+    const parsedType = this._getType(input);
+    if (parsedType !== ZodParsedType.symbol) {
+      const ctx = this._getOrReturnCtx(input);
+      addIssueToContext(ctx, {
+        code: ZodIssueCode.invalid_type,
+        expected: ZodParsedType.symbol,
+        received: ctx.parsedType
+      });
+      return INVALID;
+    }
+    return OK(input.data);
+  }
+}
+ZodSymbol.create = (params) => {
+  return new ZodSymbol({
+    typeName: ZodFirstPartyTypeKind.ZodSymbol,
+    ...processCreateParams(params)
+  });
+};
+class ZodUndefined extends ZodType {
+  _parse(input) {
+    const parsedType = this._getType(input);
+    if (parsedType !== ZodParsedType.undefined) {
+      const ctx = this._getOrReturnCtx(input);
+      addIssueToContext(ctx, {
+        code: ZodIssueCode.invalid_type,
+        expected: ZodParsedType.undefined,
+        received: ctx.parsedType
+      });
+      return INVALID;
+    }
+    return OK(input.data);
+  }
+}
+ZodUndefined.create = (params) => {
+  return new ZodUndefined({
+    typeName: ZodFirstPartyTypeKind.ZodUndefined,
+    ...processCreateParams(params)
+  });
+};
+class ZodNull extends ZodType {
+  _parse(input) {
+    const parsedType = this._getType(input);
+    if (parsedType !== ZodParsedType.null) {
+      const ctx = this._getOrReturnCtx(input);
+      addIssueToContext(ctx, {
+        code: ZodIssueCode.invalid_type,
+        expected: ZodParsedType.null,
+        received: ctx.parsedType
+      });
+      return INVALID;
+    }
+    return OK(input.data);
+  }
+}
+ZodNull.create = (params) => {
+  return new ZodNull({
+    typeName: ZodFirstPartyTypeKind.ZodNull,
+    ...processCreateParams(params)
+  });
+};
+class ZodAny extends ZodType {
+  constructor() {
+    super(...arguments);
+    this._any = true;
+  }
+  _parse(input) {
+    return OK(input.data);
+  }
+}
+ZodAny.create = (params) => {
+  return new ZodAny({
+    typeName: ZodFirstPartyTypeKind.ZodAny,
+    ...processCreateParams(params)
+  });
+};
+class ZodUnknown extends ZodType {
+  constructor() {
+    super(...arguments);
+    this._unknown = true;
+  }
+  _parse(input) {
+    return OK(input.data);
+  }
+}
+ZodUnknown.create = (params) => {
+  return new ZodUnknown({
+    typeName: ZodFirstPartyTypeKind.ZodUnknown,
+    ...processCreateParams(params)
+  });
+};
+class ZodNever extends ZodType {
+  _parse(input) {
+    const ctx = this._getOrReturnCtx(input);
+    addIssueToContext(ctx, {
+      code: ZodIssueCode.invalid_type,
+      expected: ZodParsedType.never,
+      received: ctx.parsedType
+    });
+    return INVALID;
+  }
+}
+ZodNever.create = (params) => {
+  return new ZodNever({
+    typeName: ZodFirstPartyTypeKind.ZodNever,
+    ...processCreateParams(params)
+  });
+};
+class ZodVoid extends ZodType {
+  _parse(input) {
+    const parsedType = this._getType(input);
+    if (parsedType !== ZodParsedType.undefined) {
+      const ctx = this._getOrReturnCtx(input);
+      addIssueToContext(ctx, {
+        code: ZodIssueCode.invalid_type,
+        expected: ZodParsedType.void,
+        received: ctx.parsedType
+      });
+      return INVALID;
+    }
+    return OK(input.data);
+  }
+}
+ZodVoid.create = (params) => {
+  return new ZodVoid({
+    typeName: ZodFirstPartyTypeKind.ZodVoid,
+    ...processCreateParams(params)
+  });
+};
+class ZodArray extends ZodType {
+  _parse(input) {
+    const { ctx, status } = this._processInputParams(input);
+    const def = this._def;
+    if (ctx.parsedType !== ZodParsedType.array) {
+      addIssueToContext(ctx, {
+        code: ZodIssueCode.invalid_type,
+        expected: ZodParsedType.array,
+        received: ctx.parsedType
+      });
+      return INVALID;
+    }
+    if (def.exactLength !== null) {
+      const tooBig = ctx.data.length > def.exactLength.value;
+      const tooSmall = ctx.data.length < def.exactLength.value;
+      if (tooBig || tooSmall) {
+        addIssueToContext(ctx, {
+          code: tooBig ? ZodIssueCode.too_big : ZodIssueCode.too_small,
+          minimum: tooSmall ? def.exactLength.value : void 0,
+          maximum: tooBig ? def.exactLength.value : void 0,
+          type: "array",
+          inclusive: true,
+          exact: true,
+          message: def.exactLength.message
+        });
+        status.dirty();
+      }
+    }
+    if (def.minLength !== null) {
+      if (ctx.data.length < def.minLength.value) {
+        addIssueToContext(ctx, {
+          code: ZodIssueCode.too_small,
+          minimum: def.minLength.value,
+          type: "array",
+          inclusive: true,
+          exact: false,
+          message: def.minLength.message
+        });
+        status.dirty();
+      }
+    }
+    if (def.maxLength !== null) {
+      if (ctx.data.length > def.maxLength.value) {
+        addIssueToContext(ctx, {
+          code: ZodIssueCode.too_big,
+          maximum: def.maxLength.value,
+          type: "array",
+          inclusive: true,
+          exact: false,
+          message: def.maxLength.message
+        });
+        status.dirty();
+      }
+    }
+    if (ctx.common.async) {
+      return Promise.all([...ctx.data].map((item, i2) => {
+        return def.type._parseAsync(new ParseInputLazyPath(ctx, item, ctx.path, i2));
+      })).then((result2) => {
+        return ParseStatus.mergeArray(status, result2);
+      });
+    }
+    const result = [...ctx.data].map((item, i2) => {
+      return def.type._parseSync(new ParseInputLazyPath(ctx, item, ctx.path, i2));
+    });
+    return ParseStatus.mergeArray(status, result);
+  }
+  get element() {
+    return this._def.type;
+  }
+  min(minLength, message) {
+    return new ZodArray({
+      ...this._def,
+      minLength: { value: minLength, message: errorUtil.toString(message) }
+    });
+  }
+  max(maxLength, message) {
+    return new ZodArray({
+      ...this._def,
+      maxLength: { value: maxLength, message: errorUtil.toString(message) }
+    });
+  }
+  length(len, message) {
+    return new ZodArray({
+      ...this._def,
+      exactLength: { value: len, message: errorUtil.toString(message) }
+    });
+  }
+  nonempty(message) {
+    return this.min(1, message);
+  }
+}
+ZodArray.create = (schema, params) => {
+  return new ZodArray({
+    type: schema,
+    minLength: null,
+    maxLength: null,
+    exactLength: null,
+    typeName: ZodFirstPartyTypeKind.ZodArray,
+    ...processCreateParams(params)
+  });
+};
+function deepPartialify(schema) {
+  if (schema instanceof ZodObject) {
+    const newShape = {};
+    for (const key in schema.shape) {
+      const fieldSchema = schema.shape[key];
+      newShape[key] = ZodOptional.create(deepPartialify(fieldSchema));
+    }
+    return new ZodObject({
+      ...schema._def,
+      shape: () => newShape
+    });
+  } else if (schema instanceof ZodArray) {
+    return new ZodArray({
+      ...schema._def,
+      type: deepPartialify(schema.element)
+    });
+  } else if (schema instanceof ZodOptional) {
+    return ZodOptional.create(deepPartialify(schema.unwrap()));
+  } else if (schema instanceof ZodNullable) {
+    return ZodNullable.create(deepPartialify(schema.unwrap()));
+  } else if (schema instanceof ZodTuple) {
+    return ZodTuple.create(schema.items.map((item) => deepPartialify(item)));
+  } else {
+    return schema;
+  }
+}
+class ZodObject extends ZodType {
+  constructor() {
+    super(...arguments);
+    this._cached = null;
+    this.nonstrict = this.passthrough;
+    this.augment = this.extend;
+  }
+  _getCached() {
+    if (this._cached !== null)
+      return this._cached;
+    const shape = this._def.shape();
+    const keys = util.objectKeys(shape);
+    this._cached = { shape, keys };
+    return this._cached;
+  }
+  _parse(input) {
+    const parsedType = this._getType(input);
+    if (parsedType !== ZodParsedType.object) {
+      const ctx2 = this._getOrReturnCtx(input);
+      addIssueToContext(ctx2, {
+        code: ZodIssueCode.invalid_type,
+        expected: ZodParsedType.object,
+        received: ctx2.parsedType
+      });
+      return INVALID;
+    }
+    const { status, ctx } = this._processInputParams(input);
+    const { shape, keys: shapeKeys } = this._getCached();
+    const extraKeys = [];
+    if (!(this._def.catchall instanceof ZodNever && this._def.unknownKeys === "strip")) {
+      for (const key in ctx.data) {
+        if (!shapeKeys.includes(key)) {
+          extraKeys.push(key);
+        }
+      }
+    }
+    const pairs = [];
+    for (const key of shapeKeys) {
+      const keyValidator = shape[key];
+      const value = ctx.data[key];
+      pairs.push({
+        key: { status: "valid", value: key },
+        value: keyValidator._parse(new ParseInputLazyPath(ctx, value, ctx.path, key)),
+        alwaysSet: key in ctx.data
+      });
+    }
+    if (this._def.catchall instanceof ZodNever) {
+      const unknownKeys = this._def.unknownKeys;
+      if (unknownKeys === "passthrough") {
+        for (const key of extraKeys) {
+          pairs.push({
+            key: { status: "valid", value: key },
+            value: { status: "valid", value: ctx.data[key] }
+          });
+        }
+      } else if (unknownKeys === "strict") {
+        if (extraKeys.length > 0) {
+          addIssueToContext(ctx, {
+            code: ZodIssueCode.unrecognized_keys,
+            keys: extraKeys
+          });
+          status.dirty();
+        }
+      } else if (unknownKeys === "strip") ;
+      else {
+        throw new Error(`Internal ZodObject error: invalid unknownKeys value.`);
+      }
+    } else {
+      const catchall = this._def.catchall;
+      for (const key of extraKeys) {
+        const value = ctx.data[key];
+        pairs.push({
+          key: { status: "valid", value: key },
+          value: catchall._parse(
+            new ParseInputLazyPath(ctx, value, ctx.path, key)
+            //, ctx.child(key), value, getParsedType(value)
+          ),
+          alwaysSet: key in ctx.data
+        });
+      }
+    }
+    if (ctx.common.async) {
+      return Promise.resolve().then(async () => {
+        const syncPairs = [];
+        for (const pair of pairs) {
+          const key = await pair.key;
+          const value = await pair.value;
+          syncPairs.push({
+            key,
+            value,
+            alwaysSet: pair.alwaysSet
+          });
+        }
+        return syncPairs;
+      }).then((syncPairs) => {
+        return ParseStatus.mergeObjectSync(status, syncPairs);
+      });
+    } else {
+      return ParseStatus.mergeObjectSync(status, pairs);
+    }
+  }
+  get shape() {
+    return this._def.shape();
+  }
+  strict(message) {
+    errorUtil.errToObj;
+    return new ZodObject({
+      ...this._def,
+      unknownKeys: "strict",
+      ...message !== void 0 ? {
+        errorMap: (issue, ctx) => {
+          const defaultError = this._def.errorMap?.(issue, ctx).message ?? ctx.defaultError;
+          if (issue.code === "unrecognized_keys")
+            return {
+              message: errorUtil.errToObj(message).message ?? defaultError
+            };
+          return {
+            message: defaultError
+          };
+        }
+      } : {}
+    });
+  }
+  strip() {
+    return new ZodObject({
+      ...this._def,
+      unknownKeys: "strip"
+    });
+  }
+  passthrough() {
+    return new ZodObject({
+      ...this._def,
+      unknownKeys: "passthrough"
+    });
+  }
+  // const AugmentFactory =
+  //   <Def extends ZodObjectDef>(def: Def) =>
+  //   <Augmentation extends ZodRawShape>(
+  //     augmentation: Augmentation
+  //   ): ZodObject<
+  //     extendShape<ReturnType<Def["shape"]>, Augmentation>,
+  //     Def["unknownKeys"],
+  //     Def["catchall"]
+  //   > => {
+  //     return new ZodObject({
+  //       ...def,
+  //       shape: () => ({
+  //         ...def.shape(),
+  //         ...augmentation,
+  //       }),
+  //     }) as any;
+  //   };
+  extend(augmentation) {
+    return new ZodObject({
+      ...this._def,
+      shape: () => ({
+        ...this._def.shape(),
+        ...augmentation
+      })
+    });
+  }
+  /**
+   * Prior to zod@1.0.12 there was a bug in the
+   * inferred type of merged objects. Please
+   * upgrade if you are experiencing issues.
+   */
+  merge(merging) {
+    const merged = new ZodObject({
+      unknownKeys: merging._def.unknownKeys,
+      catchall: merging._def.catchall,
+      shape: () => ({
+        ...this._def.shape(),
+        ...merging._def.shape()
+      }),
+      typeName: ZodFirstPartyTypeKind.ZodObject
+    });
+    return merged;
+  }
+  // merge<
+  //   Incoming extends AnyZodObject,
+  //   Augmentation extends Incoming["shape"],
+  //   NewOutput extends {
+  //     [k in keyof Augmentation | keyof Output]: k extends keyof Augmentation
+  //       ? Augmentation[k]["_output"]
+  //       : k extends keyof Output
+  //       ? Output[k]
+  //       : never;
+  //   },
+  //   NewInput extends {
+  //     [k in keyof Augmentation | keyof Input]: k extends keyof Augmentation
+  //       ? Augmentation[k]["_input"]
+  //       : k extends keyof Input
+  //       ? Input[k]
+  //       : never;
+  //   }
+  // >(
+  //   merging: Incoming
+  // ): ZodObject<
+  //   extendShape<T, ReturnType<Incoming["_def"]["shape"]>>,
+  //   Incoming["_def"]["unknownKeys"],
+  //   Incoming["_def"]["catchall"],
+  //   NewOutput,
+  //   NewInput
+  // > {
+  //   const merged: any = new ZodObject({
+  //     unknownKeys: merging._def.unknownKeys,
+  //     catchall: merging._def.catchall,
+  //     shape: () =>
+  //       objectUtil.mergeShapes(this._def.shape(), merging._def.shape()),
+  //     typeName: ZodFirstPartyTypeKind.ZodObject,
+  //   }) as any;
+  //   return merged;
+  // }
+  setKey(key, schema) {
+    return this.augment({ [key]: schema });
+  }
+  // merge<Incoming extends AnyZodObject>(
+  //   merging: Incoming
+  // ): //ZodObject<T & Incoming["_shape"], UnknownKeys, Catchall> = (merging) => {
+  // ZodObject<
+  //   extendShape<T, ReturnType<Incoming["_def"]["shape"]>>,
+  //   Incoming["_def"]["unknownKeys"],
+  //   Incoming["_def"]["catchall"]
+  // > {
+  //   // const mergedShape = objectUtil.mergeShapes(
+  //   //   this._def.shape(),
+  //   //   merging._def.shape()
+  //   // );
+  //   const merged: any = new ZodObject({
+  //     unknownKeys: merging._def.unknownKeys,
+  //     catchall: merging._def.catchall,
+  //     shape: () =>
+  //       objectUtil.mergeShapes(this._def.shape(), merging._def.shape()),
+  //     typeName: ZodFirstPartyTypeKind.ZodObject,
+  //   }) as any;
+  //   return merged;
+  // }
+  catchall(index) {
+    return new ZodObject({
+      ...this._def,
+      catchall: index
+    });
+  }
+  pick(mask) {
+    const shape = {};
+    for (const key of util.objectKeys(mask)) {
+      if (mask[key] && this.shape[key]) {
+        shape[key] = this.shape[key];
+      }
+    }
+    return new ZodObject({
+      ...this._def,
+      shape: () => shape
+    });
+  }
+  omit(mask) {
+    const shape = {};
+    for (const key of util.objectKeys(this.shape)) {
+      if (!mask[key]) {
+        shape[key] = this.shape[key];
+      }
+    }
+    return new ZodObject({
+      ...this._def,
+      shape: () => shape
+    });
+  }
+  /**
+   * @deprecated
+   */
+  deepPartial() {
+    return deepPartialify(this);
+  }
+  partial(mask) {
+    const newShape = {};
+    for (const key of util.objectKeys(this.shape)) {
+      const fieldSchema = this.shape[key];
+      if (mask && !mask[key]) {
+        newShape[key] = fieldSchema;
+      } else {
+        newShape[key] = fieldSchema.optional();
+      }
+    }
+    return new ZodObject({
+      ...this._def,
+      shape: () => newShape
+    });
+  }
+  required(mask) {
+    const newShape = {};
+    for (const key of util.objectKeys(this.shape)) {
+      if (mask && !mask[key]) {
+        newShape[key] = this.shape[key];
+      } else {
+        const fieldSchema = this.shape[key];
+        let newField = fieldSchema;
+        while (newField instanceof ZodOptional) {
+          newField = newField._def.innerType;
+        }
+        newShape[key] = newField;
+      }
+    }
+    return new ZodObject({
+      ...this._def,
+      shape: () => newShape
+    });
+  }
+  keyof() {
+    return createZodEnum(util.objectKeys(this.shape));
+  }
+}
+ZodObject.create = (shape, params) => {
+  return new ZodObject({
+    shape: () => shape,
+    unknownKeys: "strip",
+    catchall: ZodNever.create(),
+    typeName: ZodFirstPartyTypeKind.ZodObject,
+    ...processCreateParams(params)
+  });
+};
+ZodObject.strictCreate = (shape, params) => {
+  return new ZodObject({
+    shape: () => shape,
+    unknownKeys: "strict",
+    catchall: ZodNever.create(),
+    typeName: ZodFirstPartyTypeKind.ZodObject,
+    ...processCreateParams(params)
+  });
+};
+ZodObject.lazycreate = (shape, params) => {
+  return new ZodObject({
+    shape,
+    unknownKeys: "strip",
+    catchall: ZodNever.create(),
+    typeName: ZodFirstPartyTypeKind.ZodObject,
+    ...processCreateParams(params)
+  });
+};
+class ZodUnion extends ZodType {
+  _parse(input) {
+    const { ctx } = this._processInputParams(input);
+    const options = this._def.options;
+    function handleResults(results) {
+      for (const result of results) {
+        if (result.result.status === "valid") {
+          return result.result;
+        }
+      }
+      for (const result of results) {
+        if (result.result.status === "dirty") {
+          ctx.common.issues.push(...result.ctx.common.issues);
+          return result.result;
+        }
+      }
+      const unionErrors = results.map((result) => new ZodError(result.ctx.common.issues));
+      addIssueToContext(ctx, {
+        code: ZodIssueCode.invalid_union,
+        unionErrors
+      });
+      return INVALID;
+    }
+    if (ctx.common.async) {
+      return Promise.all(options.map(async (option) => {
+        const childCtx = {
+          ...ctx,
+          common: {
+            ...ctx.common,
+            issues: []
+          },
+          parent: null
+        };
+        return {
+          result: await option._parseAsync({
+            data: ctx.data,
+            path: ctx.path,
+            parent: childCtx
+          }),
+          ctx: childCtx
+        };
+      })).then(handleResults);
+    } else {
+      let dirty = void 0;
+      const issues = [];
+      for (const option of options) {
+        const childCtx = {
+          ...ctx,
+          common: {
+            ...ctx.common,
+            issues: []
+          },
+          parent: null
+        };
+        const result = option._parseSync({
+          data: ctx.data,
+          path: ctx.path,
+          parent: childCtx
+        });
+        if (result.status === "valid") {
+          return result;
+        } else if (result.status === "dirty" && !dirty) {
+          dirty = { result, ctx: childCtx };
+        }
+        if (childCtx.common.issues.length) {
+          issues.push(childCtx.common.issues);
+        }
+      }
+      if (dirty) {
+        ctx.common.issues.push(...dirty.ctx.common.issues);
+        return dirty.result;
+      }
+      const unionErrors = issues.map((issues2) => new ZodError(issues2));
+      addIssueToContext(ctx, {
+        code: ZodIssueCode.invalid_union,
+        unionErrors
+      });
+      return INVALID;
+    }
+  }
+  get options() {
+    return this._def.options;
+  }
+}
+ZodUnion.create = (types, params) => {
+  return new ZodUnion({
+    options: types,
+    typeName: ZodFirstPartyTypeKind.ZodUnion,
+    ...processCreateParams(params)
+  });
+};
+function mergeValues(a2, b) {
+  const aType = getParsedType(a2);
+  const bType = getParsedType(b);
+  if (a2 === b) {
+    return { valid: true, data: a2 };
+  } else if (aType === ZodParsedType.object && bType === ZodParsedType.object) {
+    const bKeys = util.objectKeys(b);
+    const sharedKeys = util.objectKeys(a2).filter((key) => bKeys.indexOf(key) !== -1);
+    const newObj = { ...a2, ...b };
+    for (const key of sharedKeys) {
+      const sharedValue = mergeValues(a2[key], b[key]);
+      if (!sharedValue.valid) {
+        return { valid: false };
+      }
+      newObj[key] = sharedValue.data;
+    }
+    return { valid: true, data: newObj };
+  } else if (aType === ZodParsedType.array && bType === ZodParsedType.array) {
+    if (a2.length !== b.length) {
+      return { valid: false };
+    }
+    const newArray = [];
+    for (let index = 0; index < a2.length; index++) {
+      const itemA = a2[index];
+      const itemB = b[index];
+      const sharedValue = mergeValues(itemA, itemB);
+      if (!sharedValue.valid) {
+        return { valid: false };
+      }
+      newArray.push(sharedValue.data);
+    }
+    return { valid: true, data: newArray };
+  } else if (aType === ZodParsedType.date && bType === ZodParsedType.date && +a2 === +b) {
+    return { valid: true, data: a2 };
+  } else {
+    return { valid: false };
+  }
+}
+class ZodIntersection extends ZodType {
+  _parse(input) {
+    const { status, ctx } = this._processInputParams(input);
+    const handleParsed = (parsedLeft, parsedRight) => {
+      if (isAborted(parsedLeft) || isAborted(parsedRight)) {
+        return INVALID;
+      }
+      const merged = mergeValues(parsedLeft.value, parsedRight.value);
+      if (!merged.valid) {
+        addIssueToContext(ctx, {
+          code: ZodIssueCode.invalid_intersection_types
+        });
+        return INVALID;
+      }
+      if (isDirty(parsedLeft) || isDirty(parsedRight)) {
+        status.dirty();
+      }
+      return { status: status.value, value: merged.data };
+    };
+    if (ctx.common.async) {
+      return Promise.all([
+        this._def.left._parseAsync({
+          data: ctx.data,
+          path: ctx.path,
+          parent: ctx
+        }),
+        this._def.right._parseAsync({
+          data: ctx.data,
+          path: ctx.path,
+          parent: ctx
+        })
+      ]).then(([left, right]) => handleParsed(left, right));
+    } else {
+      return handleParsed(this._def.left._parseSync({
+        data: ctx.data,
+        path: ctx.path,
+        parent: ctx
+      }), this._def.right._parseSync({
+        data: ctx.data,
+        path: ctx.path,
+        parent: ctx
+      }));
+    }
+  }
+}
+ZodIntersection.create = (left, right, params) => {
+  return new ZodIntersection({
+    left,
+    right,
+    typeName: ZodFirstPartyTypeKind.ZodIntersection,
+    ...processCreateParams(params)
+  });
+};
+class ZodTuple extends ZodType {
+  _parse(input) {
+    const { status, ctx } = this._processInputParams(input);
+    if (ctx.parsedType !== ZodParsedType.array) {
+      addIssueToContext(ctx, {
+        code: ZodIssueCode.invalid_type,
+        expected: ZodParsedType.array,
+        received: ctx.parsedType
+      });
+      return INVALID;
+    }
+    if (ctx.data.length < this._def.items.length) {
+      addIssueToContext(ctx, {
+        code: ZodIssueCode.too_small,
+        minimum: this._def.items.length,
+        inclusive: true,
+        exact: false,
+        type: "array"
+      });
+      return INVALID;
+    }
+    const rest = this._def.rest;
+    if (!rest && ctx.data.length > this._def.items.length) {
+      addIssueToContext(ctx, {
+        code: ZodIssueCode.too_big,
+        maximum: this._def.items.length,
+        inclusive: true,
+        exact: false,
+        type: "array"
+      });
+      status.dirty();
+    }
+    const items = [...ctx.data].map((item, itemIndex) => {
+      const schema = this._def.items[itemIndex] || this._def.rest;
+      if (!schema)
+        return null;
+      return schema._parse(new ParseInputLazyPath(ctx, item, ctx.path, itemIndex));
+    }).filter((x) => !!x);
+    if (ctx.common.async) {
+      return Promise.all(items).then((results) => {
+        return ParseStatus.mergeArray(status, results);
+      });
+    } else {
+      return ParseStatus.mergeArray(status, items);
+    }
+  }
+  get items() {
+    return this._def.items;
+  }
+  rest(rest) {
+    return new ZodTuple({
+      ...this._def,
+      rest
+    });
+  }
+}
+ZodTuple.create = (schemas, params) => {
+  if (!Array.isArray(schemas)) {
+    throw new Error("You must pass an array of schemas to z.tuple([ ... ])");
+  }
+  return new ZodTuple({
+    items: schemas,
+    typeName: ZodFirstPartyTypeKind.ZodTuple,
+    rest: null,
+    ...processCreateParams(params)
+  });
+};
+class ZodMap extends ZodType {
+  get keySchema() {
+    return this._def.keyType;
+  }
+  get valueSchema() {
+    return this._def.valueType;
+  }
+  _parse(input) {
+    const { status, ctx } = this._processInputParams(input);
+    if (ctx.parsedType !== ZodParsedType.map) {
+      addIssueToContext(ctx, {
+        code: ZodIssueCode.invalid_type,
+        expected: ZodParsedType.map,
+        received: ctx.parsedType
+      });
+      return INVALID;
+    }
+    const keyType = this._def.keyType;
+    const valueType = this._def.valueType;
+    const pairs = [...ctx.data.entries()].map(([key, value], index) => {
+      return {
+        key: keyType._parse(new ParseInputLazyPath(ctx, key, ctx.path, [index, "key"])),
+        value: valueType._parse(new ParseInputLazyPath(ctx, value, ctx.path, [index, "value"]))
+      };
+    });
+    if (ctx.common.async) {
+      const finalMap = /* @__PURE__ */ new Map();
+      return Promise.resolve().then(async () => {
+        for (const pair of pairs) {
+          const key = await pair.key;
+          const value = await pair.value;
+          if (key.status === "aborted" || value.status === "aborted") {
+            return INVALID;
+          }
+          if (key.status === "dirty" || value.status === "dirty") {
+            status.dirty();
+          }
+          finalMap.set(key.value, value.value);
+        }
+        return { status: status.value, value: finalMap };
+      });
+    } else {
+      const finalMap = /* @__PURE__ */ new Map();
+      for (const pair of pairs) {
+        const key = pair.key;
+        const value = pair.value;
+        if (key.status === "aborted" || value.status === "aborted") {
+          return INVALID;
+        }
+        if (key.status === "dirty" || value.status === "dirty") {
+          status.dirty();
+        }
+        finalMap.set(key.value, value.value);
+      }
+      return { status: status.value, value: finalMap };
+    }
+  }
+}
+ZodMap.create = (keyType, valueType, params) => {
+  return new ZodMap({
+    valueType,
+    keyType,
+    typeName: ZodFirstPartyTypeKind.ZodMap,
+    ...processCreateParams(params)
+  });
+};
+class ZodSet extends ZodType {
+  _parse(input) {
+    const { status, ctx } = this._processInputParams(input);
+    if (ctx.parsedType !== ZodParsedType.set) {
+      addIssueToContext(ctx, {
+        code: ZodIssueCode.invalid_type,
+        expected: ZodParsedType.set,
+        received: ctx.parsedType
+      });
+      return INVALID;
+    }
+    const def = this._def;
+    if (def.minSize !== null) {
+      if (ctx.data.size < def.minSize.value) {
+        addIssueToContext(ctx, {
+          code: ZodIssueCode.too_small,
+          minimum: def.minSize.value,
+          type: "set",
+          inclusive: true,
+          exact: false,
+          message: def.minSize.message
+        });
+        status.dirty();
+      }
+    }
+    if (def.maxSize !== null) {
+      if (ctx.data.size > def.maxSize.value) {
+        addIssueToContext(ctx, {
+          code: ZodIssueCode.too_big,
+          maximum: def.maxSize.value,
+          type: "set",
+          inclusive: true,
+          exact: false,
+          message: def.maxSize.message
+        });
+        status.dirty();
+      }
+    }
+    const valueType = this._def.valueType;
+    function finalizeSet(elements2) {
+      const parsedSet = /* @__PURE__ */ new Set();
+      for (const element of elements2) {
+        if (element.status === "aborted")
+          return INVALID;
+        if (element.status === "dirty")
+          status.dirty();
+        parsedSet.add(element.value);
+      }
+      return { status: status.value, value: parsedSet };
+    }
+    const elements = [...ctx.data.values()].map((item, i2) => valueType._parse(new ParseInputLazyPath(ctx, item, ctx.path, i2)));
+    if (ctx.common.async) {
+      return Promise.all(elements).then((elements2) => finalizeSet(elements2));
+    } else {
+      return finalizeSet(elements);
+    }
+  }
+  min(minSize, message) {
+    return new ZodSet({
+      ...this._def,
+      minSize: { value: minSize, message: errorUtil.toString(message) }
+    });
+  }
+  max(maxSize, message) {
+    return new ZodSet({
+      ...this._def,
+      maxSize: { value: maxSize, message: errorUtil.toString(message) }
+    });
+  }
+  size(size, message) {
+    return this.min(size, message).max(size, message);
+  }
+  nonempty(message) {
+    return this.min(1, message);
+  }
+}
+ZodSet.create = (valueType, params) => {
+  return new ZodSet({
+    valueType,
+    minSize: null,
+    maxSize: null,
+    typeName: ZodFirstPartyTypeKind.ZodSet,
+    ...processCreateParams(params)
+  });
+};
+class ZodLazy extends ZodType {
+  get schema() {
+    return this._def.getter();
+  }
+  _parse(input) {
+    const { ctx } = this._processInputParams(input);
+    const lazySchema = this._def.getter();
+    return lazySchema._parse({ data: ctx.data, path: ctx.path, parent: ctx });
+  }
+}
+ZodLazy.create = (getter, params) => {
+  return new ZodLazy({
+    getter,
+    typeName: ZodFirstPartyTypeKind.ZodLazy,
+    ...processCreateParams(params)
+  });
+};
+class ZodLiteral extends ZodType {
+  _parse(input) {
+    if (input.data !== this._def.value) {
+      const ctx = this._getOrReturnCtx(input);
+      addIssueToContext(ctx, {
+        received: ctx.data,
+        code: ZodIssueCode.invalid_literal,
+        expected: this._def.value
+      });
+      return INVALID;
+    }
+    return { status: "valid", value: input.data };
+  }
+  get value() {
+    return this._def.value;
+  }
+}
+ZodLiteral.create = (value, params) => {
+  return new ZodLiteral({
+    value,
+    typeName: ZodFirstPartyTypeKind.ZodLiteral,
+    ...processCreateParams(params)
+  });
+};
+function createZodEnum(values, params) {
+  return new ZodEnum({
+    values,
+    typeName: ZodFirstPartyTypeKind.ZodEnum,
+    ...processCreateParams(params)
+  });
+}
+class ZodEnum extends ZodType {
+  _parse(input) {
+    if (typeof input.data !== "string") {
+      const ctx = this._getOrReturnCtx(input);
+      const expectedValues = this._def.values;
+      addIssueToContext(ctx, {
+        expected: util.joinValues(expectedValues),
+        received: ctx.parsedType,
+        code: ZodIssueCode.invalid_type
+      });
+      return INVALID;
+    }
+    if (!this._cache) {
+      this._cache = new Set(this._def.values);
+    }
+    if (!this._cache.has(input.data)) {
+      const ctx = this._getOrReturnCtx(input);
+      const expectedValues = this._def.values;
+      addIssueToContext(ctx, {
+        received: ctx.data,
+        code: ZodIssueCode.invalid_enum_value,
+        options: expectedValues
+      });
+      return INVALID;
+    }
+    return OK(input.data);
+  }
+  get options() {
+    return this._def.values;
+  }
+  get enum() {
+    const enumValues = {};
+    for (const val of this._def.values) {
+      enumValues[val] = val;
+    }
+    return enumValues;
+  }
+  get Values() {
+    const enumValues = {};
+    for (const val of this._def.values) {
+      enumValues[val] = val;
+    }
+    return enumValues;
+  }
+  get Enum() {
+    const enumValues = {};
+    for (const val of this._def.values) {
+      enumValues[val] = val;
+    }
+    return enumValues;
+  }
+  extract(values, newDef = this._def) {
+    return ZodEnum.create(values, {
+      ...this._def,
+      ...newDef
+    });
+  }
+  exclude(values, newDef = this._def) {
+    return ZodEnum.create(this.options.filter((opt) => !values.includes(opt)), {
+      ...this._def,
+      ...newDef
+    });
+  }
+}
+ZodEnum.create = createZodEnum;
+class ZodNativeEnum extends ZodType {
+  _parse(input) {
+    const nativeEnumValues = util.getValidEnumValues(this._def.values);
+    const ctx = this._getOrReturnCtx(input);
+    if (ctx.parsedType !== ZodParsedType.string && ctx.parsedType !== ZodParsedType.number) {
+      const expectedValues = util.objectValues(nativeEnumValues);
+      addIssueToContext(ctx, {
+        expected: util.joinValues(expectedValues),
+        received: ctx.parsedType,
+        code: ZodIssueCode.invalid_type
+      });
+      return INVALID;
+    }
+    if (!this._cache) {
+      this._cache = new Set(util.getValidEnumValues(this._def.values));
+    }
+    if (!this._cache.has(input.data)) {
+      const expectedValues = util.objectValues(nativeEnumValues);
+      addIssueToContext(ctx, {
+        received: ctx.data,
+        code: ZodIssueCode.invalid_enum_value,
+        options: expectedValues
+      });
+      return INVALID;
+    }
+    return OK(input.data);
+  }
+  get enum() {
+    return this._def.values;
+  }
+}
+ZodNativeEnum.create = (values, params) => {
+  return new ZodNativeEnum({
+    values,
+    typeName: ZodFirstPartyTypeKind.ZodNativeEnum,
+    ...processCreateParams(params)
+  });
+};
+class ZodPromise extends ZodType {
+  unwrap() {
+    return this._def.type;
+  }
+  _parse(input) {
+    const { ctx } = this._processInputParams(input);
+    if (ctx.parsedType !== ZodParsedType.promise && ctx.common.async === false) {
+      addIssueToContext(ctx, {
+        code: ZodIssueCode.invalid_type,
+        expected: ZodParsedType.promise,
+        received: ctx.parsedType
+      });
+      return INVALID;
+    }
+    const promisified = ctx.parsedType === ZodParsedType.promise ? ctx.data : Promise.resolve(ctx.data);
+    return OK(promisified.then((data) => {
+      return this._def.type.parseAsync(data, {
+        path: ctx.path,
+        errorMap: ctx.common.contextualErrorMap
+      });
+    }));
+  }
+}
+ZodPromise.create = (schema, params) => {
+  return new ZodPromise({
+    type: schema,
+    typeName: ZodFirstPartyTypeKind.ZodPromise,
+    ...processCreateParams(params)
+  });
+};
+class ZodEffects extends ZodType {
+  innerType() {
+    return this._def.schema;
+  }
+  sourceType() {
+    return this._def.schema._def.typeName === ZodFirstPartyTypeKind.ZodEffects ? this._def.schema.sourceType() : this._def.schema;
+  }
+  _parse(input) {
+    const { status, ctx } = this._processInputParams(input);
+    const effect = this._def.effect || null;
+    const checkCtx = {
+      addIssue: (arg) => {
+        addIssueToContext(ctx, arg);
+        if (arg.fatal) {
+          status.abort();
+        } else {
+          status.dirty();
+        }
+      },
+      get path() {
+        return ctx.path;
+      }
+    };
+    checkCtx.addIssue = checkCtx.addIssue.bind(checkCtx);
+    if (effect.type === "preprocess") {
+      const processed = effect.transform(ctx.data, checkCtx);
+      if (ctx.common.async) {
+        return Promise.resolve(processed).then(async (processed2) => {
+          if (status.value === "aborted")
+            return INVALID;
+          const result = await this._def.schema._parseAsync({
+            data: processed2,
+            path: ctx.path,
+            parent: ctx
+          });
+          if (result.status === "aborted")
+            return INVALID;
+          if (result.status === "dirty")
+            return DIRTY(result.value);
+          if (status.value === "dirty")
+            return DIRTY(result.value);
+          return result;
+        });
+      } else {
+        if (status.value === "aborted")
+          return INVALID;
+        const result = this._def.schema._parseSync({
+          data: processed,
+          path: ctx.path,
+          parent: ctx
+        });
+        if (result.status === "aborted")
+          return INVALID;
+        if (result.status === "dirty")
+          return DIRTY(result.value);
+        if (status.value === "dirty")
+          return DIRTY(result.value);
+        return result;
+      }
+    }
+    if (effect.type === "refinement") {
+      const executeRefinement = (acc) => {
+        const result = effect.refinement(acc, checkCtx);
+        if (ctx.common.async) {
+          return Promise.resolve(result);
+        }
+        if (result instanceof Promise) {
+          throw new Error("Async refinement encountered during synchronous parse operation. Use .parseAsync instead.");
+        }
+        return acc;
+      };
+      if (ctx.common.async === false) {
+        const inner = this._def.schema._parseSync({
+          data: ctx.data,
+          path: ctx.path,
+          parent: ctx
+        });
+        if (inner.status === "aborted")
+          return INVALID;
+        if (inner.status === "dirty")
+          status.dirty();
+        executeRefinement(inner.value);
+        return { status: status.value, value: inner.value };
+      } else {
+        return this._def.schema._parseAsync({ data: ctx.data, path: ctx.path, parent: ctx }).then((inner) => {
+          if (inner.status === "aborted")
+            return INVALID;
+          if (inner.status === "dirty")
+            status.dirty();
+          return executeRefinement(inner.value).then(() => {
+            return { status: status.value, value: inner.value };
+          });
+        });
+      }
+    }
+    if (effect.type === "transform") {
+      if (ctx.common.async === false) {
+        const base = this._def.schema._parseSync({
+          data: ctx.data,
+          path: ctx.path,
+          parent: ctx
+        });
+        if (!isValid(base))
+          return INVALID;
+        const result = effect.transform(base.value, checkCtx);
+        if (result instanceof Promise) {
+          throw new Error(`Asynchronous transform encountered during synchronous parse operation. Use .parseAsync instead.`);
+        }
+        return { status: status.value, value: result };
+      } else {
+        return this._def.schema._parseAsync({ data: ctx.data, path: ctx.path, parent: ctx }).then((base) => {
+          if (!isValid(base))
+            return INVALID;
+          return Promise.resolve(effect.transform(base.value, checkCtx)).then((result) => ({
+            status: status.value,
+            value: result
+          }));
+        });
+      }
+    }
+    util.assertNever(effect);
+  }
+}
+ZodEffects.create = (schema, effect, params) => {
+  return new ZodEffects({
+    schema,
+    typeName: ZodFirstPartyTypeKind.ZodEffects,
+    effect,
+    ...processCreateParams(params)
+  });
+};
+ZodEffects.createWithPreprocess = (preprocess, schema, params) => {
+  return new ZodEffects({
+    schema,
+    effect: { type: "preprocess", transform: preprocess },
+    typeName: ZodFirstPartyTypeKind.ZodEffects,
+    ...processCreateParams(params)
+  });
+};
+class ZodOptional extends ZodType {
+  _parse(input) {
+    const parsedType = this._getType(input);
+    if (parsedType === ZodParsedType.undefined) {
+      return OK(void 0);
+    }
+    return this._def.innerType._parse(input);
+  }
+  unwrap() {
+    return this._def.innerType;
+  }
+}
+ZodOptional.create = (type, params) => {
+  return new ZodOptional({
+    innerType: type,
+    typeName: ZodFirstPartyTypeKind.ZodOptional,
+    ...processCreateParams(params)
+  });
+};
+class ZodNullable extends ZodType {
+  _parse(input) {
+    const parsedType = this._getType(input);
+    if (parsedType === ZodParsedType.null) {
+      return OK(null);
+    }
+    return this._def.innerType._parse(input);
+  }
+  unwrap() {
+    return this._def.innerType;
+  }
+}
+ZodNullable.create = (type, params) => {
+  return new ZodNullable({
+    innerType: type,
+    typeName: ZodFirstPartyTypeKind.ZodNullable,
+    ...processCreateParams(params)
+  });
+};
+class ZodDefault extends ZodType {
+  _parse(input) {
+    const { ctx } = this._processInputParams(input);
+    let data = ctx.data;
+    if (ctx.parsedType === ZodParsedType.undefined) {
+      data = this._def.defaultValue();
+    }
+    return this._def.innerType._parse({
+      data,
+      path: ctx.path,
+      parent: ctx
+    });
+  }
+  removeDefault() {
+    return this._def.innerType;
+  }
+}
+ZodDefault.create = (type, params) => {
+  return new ZodDefault({
+    innerType: type,
+    typeName: ZodFirstPartyTypeKind.ZodDefault,
+    defaultValue: typeof params.default === "function" ? params.default : () => params.default,
+    ...processCreateParams(params)
+  });
+};
+class ZodCatch extends ZodType {
+  _parse(input) {
+    const { ctx } = this._processInputParams(input);
+    const newCtx = {
+      ...ctx,
+      common: {
+        ...ctx.common,
+        issues: []
+      }
+    };
+    const result = this._def.innerType._parse({
+      data: newCtx.data,
+      path: newCtx.path,
+      parent: {
+        ...newCtx
+      }
+    });
+    if (isAsync(result)) {
+      return result.then((result2) => {
+        return {
+          status: "valid",
+          value: result2.status === "valid" ? result2.value : this._def.catchValue({
+            get error() {
+              return new ZodError(newCtx.common.issues);
+            },
+            input: newCtx.data
+          })
+        };
+      });
+    } else {
+      return {
+        status: "valid",
+        value: result.status === "valid" ? result.value : this._def.catchValue({
+          get error() {
+            return new ZodError(newCtx.common.issues);
+          },
+          input: newCtx.data
+        })
+      };
+    }
+  }
+  removeCatch() {
+    return this._def.innerType;
+  }
+}
+ZodCatch.create = (type, params) => {
+  return new ZodCatch({
+    innerType: type,
+    typeName: ZodFirstPartyTypeKind.ZodCatch,
+    catchValue: typeof params.catch === "function" ? params.catch : () => params.catch,
+    ...processCreateParams(params)
+  });
+};
+class ZodNaN extends ZodType {
+  _parse(input) {
+    const parsedType = this._getType(input);
+    if (parsedType !== ZodParsedType.nan) {
+      const ctx = this._getOrReturnCtx(input);
+      addIssueToContext(ctx, {
+        code: ZodIssueCode.invalid_type,
+        expected: ZodParsedType.nan,
+        received: ctx.parsedType
+      });
+      return INVALID;
+    }
+    return { status: "valid", value: input.data };
+  }
+}
+ZodNaN.create = (params) => {
+  return new ZodNaN({
+    typeName: ZodFirstPartyTypeKind.ZodNaN,
+    ...processCreateParams(params)
+  });
+};
+class ZodBranded extends ZodType {
+  _parse(input) {
+    const { ctx } = this._processInputParams(input);
+    const data = ctx.data;
+    return this._def.type._parse({
+      data,
+      path: ctx.path,
+      parent: ctx
+    });
+  }
+  unwrap() {
+    return this._def.type;
+  }
+}
+class ZodPipeline extends ZodType {
+  _parse(input) {
+    const { status, ctx } = this._processInputParams(input);
+    if (ctx.common.async) {
+      const handleAsync = async () => {
+        const inResult = await this._def.in._parseAsync({
+          data: ctx.data,
+          path: ctx.path,
+          parent: ctx
+        });
+        if (inResult.status === "aborted")
+          return INVALID;
+        if (inResult.status === "dirty") {
+          status.dirty();
+          return DIRTY(inResult.value);
+        } else {
+          return this._def.out._parseAsync({
+            data: inResult.value,
+            path: ctx.path,
+            parent: ctx
+          });
+        }
+      };
+      return handleAsync();
+    } else {
+      const inResult = this._def.in._parseSync({
+        data: ctx.data,
+        path: ctx.path,
+        parent: ctx
+      });
+      if (inResult.status === "aborted")
+        return INVALID;
+      if (inResult.status === "dirty") {
+        status.dirty();
+        return {
+          status: "dirty",
+          value: inResult.value
+        };
+      } else {
+        return this._def.out._parseSync({
+          data: inResult.value,
+          path: ctx.path,
+          parent: ctx
+        });
+      }
+    }
+  }
+  static create(a2, b) {
+    return new ZodPipeline({
+      in: a2,
+      out: b,
+      typeName: ZodFirstPartyTypeKind.ZodPipeline
+    });
+  }
+}
+class ZodReadonly extends ZodType {
+  _parse(input) {
+    const result = this._def.innerType._parse(input);
+    const freeze = (data) => {
+      if (isValid(data)) {
+        data.value = Object.freeze(data.value);
+      }
+      return data;
+    };
+    return isAsync(result) ? result.then((data) => freeze(data)) : freeze(result);
+  }
+  unwrap() {
+    return this._def.innerType;
+  }
+}
+ZodReadonly.create = (type, params) => {
+  return new ZodReadonly({
+    innerType: type,
+    typeName: ZodFirstPartyTypeKind.ZodReadonly,
+    ...processCreateParams(params)
+  });
+};
+var ZodFirstPartyTypeKind;
+(function(ZodFirstPartyTypeKind2) {
+  ZodFirstPartyTypeKind2["ZodString"] = "ZodString";
+  ZodFirstPartyTypeKind2["ZodNumber"] = "ZodNumber";
+  ZodFirstPartyTypeKind2["ZodNaN"] = "ZodNaN";
+  ZodFirstPartyTypeKind2["ZodBigInt"] = "ZodBigInt";
+  ZodFirstPartyTypeKind2["ZodBoolean"] = "ZodBoolean";
+  ZodFirstPartyTypeKind2["ZodDate"] = "ZodDate";
+  ZodFirstPartyTypeKind2["ZodSymbol"] = "ZodSymbol";
+  ZodFirstPartyTypeKind2["ZodUndefined"] = "ZodUndefined";
+  ZodFirstPartyTypeKind2["ZodNull"] = "ZodNull";
+  ZodFirstPartyTypeKind2["ZodAny"] = "ZodAny";
+  ZodFirstPartyTypeKind2["ZodUnknown"] = "ZodUnknown";
+  ZodFirstPartyTypeKind2["ZodNever"] = "ZodNever";
+  ZodFirstPartyTypeKind2["ZodVoid"] = "ZodVoid";
+  ZodFirstPartyTypeKind2["ZodArray"] = "ZodArray";
+  ZodFirstPartyTypeKind2["ZodObject"] = "ZodObject";
+  ZodFirstPartyTypeKind2["ZodUnion"] = "ZodUnion";
+  ZodFirstPartyTypeKind2["ZodDiscriminatedUnion"] = "ZodDiscriminatedUnion";
+  ZodFirstPartyTypeKind2["ZodIntersection"] = "ZodIntersection";
+  ZodFirstPartyTypeKind2["ZodTuple"] = "ZodTuple";
+  ZodFirstPartyTypeKind2["ZodRecord"] = "ZodRecord";
+  ZodFirstPartyTypeKind2["ZodMap"] = "ZodMap";
+  ZodFirstPartyTypeKind2["ZodSet"] = "ZodSet";
+  ZodFirstPartyTypeKind2["ZodFunction"] = "ZodFunction";
+  ZodFirstPartyTypeKind2["ZodLazy"] = "ZodLazy";
+  ZodFirstPartyTypeKind2["ZodLiteral"] = "ZodLiteral";
+  ZodFirstPartyTypeKind2["ZodEnum"] = "ZodEnum";
+  ZodFirstPartyTypeKind2["ZodEffects"] = "ZodEffects";
+  ZodFirstPartyTypeKind2["ZodNativeEnum"] = "ZodNativeEnum";
+  ZodFirstPartyTypeKind2["ZodOptional"] = "ZodOptional";
+  ZodFirstPartyTypeKind2["ZodNullable"] = "ZodNullable";
+  ZodFirstPartyTypeKind2["ZodDefault"] = "ZodDefault";
+  ZodFirstPartyTypeKind2["ZodCatch"] = "ZodCatch";
+  ZodFirstPartyTypeKind2["ZodPromise"] = "ZodPromise";
+  ZodFirstPartyTypeKind2["ZodBranded"] = "ZodBranded";
+  ZodFirstPartyTypeKind2["ZodPipeline"] = "ZodPipeline";
+  ZodFirstPartyTypeKind2["ZodReadonly"] = "ZodReadonly";
+})(ZodFirstPartyTypeKind || (ZodFirstPartyTypeKind = {}));
+const stringType = ZodString.create;
+ZodNumber.create;
+ZodBigInt.create;
+const booleanType = ZodBoolean.create;
+ZodDate.create;
+ZodNever.create;
+ZodArray.create;
+const objectType = ZodObject.create;
+ZodUnion.create;
+ZodIntersection.create;
+ZodTuple.create;
+ZodEnum.create;
+ZodPromise.create;
+ZodOptional.create;
+ZodNullable.create;
+const coerce = {
+  string: ((arg) => ZodString.create({ ...arg, coerce: true })),
+  number: ((arg) => ZodNumber.create({ ...arg, coerce: true })),
+  boolean: ((arg) => ZodBoolean.create({
+    ...arg,
+    coerce: true
+  })),
+  bigint: ((arg) => ZodBigInt.create({ ...arg, coerce: true })),
+  date: ((arg) => ZodDate.create({ ...arg, coerce: true }))
+};
+const loginSchema = objectType({
+  username: stringType().min(1, "Username is required"),
+  password: stringType().min(8, "Password must be at least 8 characters")
+});
+function LoginPage() {
+  const navigate = useNavigate();
+  const { accessToken, login, loading } = useAuthStore();
+  const [error, setError] = reactExports.useState();
+  const {
+    register,
+    handleSubmit,
+    setFocus,
+    formState: { errors }
+  } = useForm({
+    resolver: u(loginSchema),
+    defaultValues: { username: "admin", password: "" }
+  });
+  reactExports.useEffect(() => {
+    setFocus("password");
+  }, [setFocus]);
+  if (accessToken) return /* @__PURE__ */ jsxRuntimeExports.jsx(Navigate, { to: "/", replace: true });
+  const onSubmit = async (values) => {
+    setError(void 0);
+    try {
+      await login(values.username, values.password);
+      navigate("/", { replace: true });
+    } catch {
+      setError("Login failed. Check username, password, and API connection.");
+    }
+  };
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("main", { className: "grid min-h-screen grid-cols-[1.05fr_0.95fr] bg-white", children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { className: "flex flex-col justify-between bg-[#085655] p-10 text-white", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-3 text-sm font-black uppercase tracking-[0.28em]", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "flex h-10 w-10 items-center justify-center rounded-2xl bg-[#1ba09c] text-base", children: "RO" }),
+        "RestaurantOS"
+      ] }),
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm font-black uppercase tracking-[0.28em] text-[#aee4e1]", children: "Desktop POS" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("h1", { className: "mt-4 max-w-xl text-6xl font-black leading-[1.02]", children: "Premium cashier workflow for busy restaurants." }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mt-5 max-w-lg text-lg font-semibold text-[#d7f4f2]", children: "Secure sign-in protects discounts, refunds, stock changes, reports, and settings." })
+      ] }),
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "grid grid-cols-3 gap-3 text-sm font-bold text-[#d7f4f2]", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: "Roles" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: "Permissions" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: "Audit logs" })
+      ] })
+    ] }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("section", { className: "flex items-center justify-center p-10", children: /* @__PURE__ */ jsxRuntimeExports.jsxs(Card, { className: "w-full max-w-md p-7", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm font-black uppercase tracking-[0.28em] text-[#1ba09c]", children: "Welcome back" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "mt-2 text-4xl font-black text-[#0d1717]", children: "Sign in" })
+      ] }),
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("form", { className: "mt-8 space-y-4", onSubmit: handleSubmit(onSubmit), children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("label", { className: "block", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-sm font-black text-[#4d5d5c]", children: "Username" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mt-2 flex h-12 items-center gap-3 rounded-2xl bg-[#f4fbfa] px-4", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx(UserRound, { size: 18, className: "text-[#1ba09c]" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx(
+              "input",
+              {
+                className: "h-full flex-1 bg-transparent font-semibold outline-none",
+                autoComplete: "username",
+                ...register("username")
+              }
+            )
+          ] }),
+          errors.username ? /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "mt-1 block text-xs font-bold text-red-600", children: errors.username.message }) : null
+        ] }),
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("label", { className: "block", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-sm font-black text-[#4d5d5c]", children: "Password" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mt-2 flex h-12 items-center gap-3 rounded-2xl bg-[#f4fbfa] px-4", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx(LockKeyhole, { size: 18, className: "text-[#1ba09c]" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx(
+              "input",
+              {
+                className: "h-full flex-1 bg-transparent font-semibold outline-none",
+                type: "password",
+                autoComplete: "current-password",
+                ...register("password")
+              }
+            )
+          ] }),
+          errors.password ? /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "mt-1 block text-xs font-bold text-red-600", children: errors.password.message }) : null
+        ] }),
+        error ? /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-start gap-2 rounded-2xl bg-red-50 p-3 text-sm font-bold text-red-700", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx(CircleAlert, { size: 18 }),
+          error
+        ] }) : null,
+        /* @__PURE__ */ jsxRuntimeExports.jsx(Button, { className: "h-14 w-full text-base", disabled: loading, type: "submit", children: loading ? "Signing in..." : "Sign in" })
+      ] }),
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mt-5 rounded-2xl bg-[#f4fbfa] p-4 text-sm font-semibold text-[#657574]", children: [
+        "Development seed: username ",
+        /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "admin" }),
+        ", password ",
+        /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "Admin@12345" }),
+        "."
+      ] })
+    ] }) })
   ] });
 }
 function MenuPage() {
-  return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "p-7", children: [
-    /* @__PURE__ */ jsxRuntimeExports.jsx("h1", { className: "text-3xl font-black", children: "Menu management" }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx(Card, { className: "mt-6 p-6", children: /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-semibold text-stone-600", children: "Category, item, variation, modifier, add-on, and recipe builder workflows will live here." }) })
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "h-full overflow-y-auto p-7", children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm font-black uppercase tracking-[0.28em] text-[#7a7f73]", children: "Admin workspace" }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("h1", { className: "mt-2 text-4xl font-black", children: "Menu studio" }),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mt-7 grid grid-cols-[1fr_340px] gap-5", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsxs(Card, { className: "min-h-80 p-6", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "text-xl font-black", children: "Catalog builder" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mt-3 max-w-2xl font-semibold text-[#697064]", children: "Category, item, variation, modifier, add-on, and recipe builder workflows will live here." }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mt-8 grid grid-cols-3 gap-3", children: ["Categories", "Items", "Recipes"].map((item) => /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "rounded-2xl bg-[#f4fbfa] p-4", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm font-black text-[#085655]", children: item }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mt-5 text-2xl font-black", children: "0" })
+        ] }, item)) })
+      ] }),
+      /* @__PURE__ */ jsxRuntimeExports.jsxs(Card, { className: "bg-[#1ba09c] p-6 text-white", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm font-black uppercase tracking-[0.2em] text-[#d7f4f2]", children: "Recipe cost" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "mt-5 text-3xl font-black", children: "Exact BOM" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mt-3 font-semibold text-[#e1fbfa]", children: "Every item can map to stock by unit so inventory deduction stays precise." })
+      ] })
+    ] })
   ] });
 }
-const createStoreImpl = (createState) => {
-  let state;
-  const listeners = /* @__PURE__ */ new Set();
-  const setState = (partial, replace) => {
-    const nextState = typeof partial === "function" ? partial(state) : partial;
-    if (!Object.is(nextState, state)) {
-      const previousState = state;
-      state = (replace != null ? replace : typeof nextState !== "object" || nextState === null) ? nextState : Object.assign({}, state, nextState);
-      listeners.forEach((listener) => listener(state, previousState));
-    }
-  };
-  const getState = () => state;
-  const getInitialState = () => initialState;
-  const subscribe = (listener) => {
-    listeners.add(listener);
-    return () => listeners.delete(listener);
-  };
-  const api = { setState, getState, getInitialState, subscribe };
-  const initialState = state = createState(setState, getState, api);
-  return api;
-};
-const createStore = ((createState) => createState ? createStoreImpl(createState) : createStoreImpl);
-const identity = (arg) => arg;
-function useStore(api, selector = identity) {
-  const slice = React.useSyncExternalStore(
-    api.subscribe,
-    React.useCallback(() => selector(api.getState()), [api, selector]),
-    React.useCallback(() => selector(api.getInitialState()), [api, selector])
-  );
-  React.useDebugValue(slice);
-  return slice;
-}
-const createImpl = (createState) => {
-  const api = createStore(createState);
-  const useBoundStore = (selector) => useStore(api, selector);
-  Object.assign(useBoundStore, api);
-  return useBoundStore;
-};
-const create = ((createState) => createState ? createImpl(createState) : createImpl);
-const usePosStore = create((set) => ({
+const usePosStore = create((set2) => ({
   orderType: "DINE_IN",
   cart: [],
-  setOrderType: (orderType) => set({ orderType }),
-  addLine: (line) => set((state) => {
+  setOrderType: (orderType) => set2({ orderType }),
+  addLine: (line) => set2((state) => {
     const existing = state.cart.find((item) => item.id === line.id);
     if (!existing) return { cart: [...state.cart, line] };
     return {
@@ -24219,8 +31314,8 @@ const usePosStore = create((set) => ({
       )
     };
   }),
-  removeLine: (id) => set((state) => ({ cart: state.cart.filter((item) => item.id !== id) })),
-  clear: () => set({ cart: [] })
+  removeLine: (id) => set2((state) => ({ cart: state.cart.filter((item) => item.id !== id) })),
+  clear: () => set2({ cart: [] })
 }));
 const categories = ["All", "Burgers", "Pizza", "Juice", "Coffee", "Deals", "Sides"];
 const menuItems = [
@@ -24237,60 +31332,72 @@ function PosPage() {
     () => cart.reduce((sum, item) => sum + item.price * item.quantity, 0),
     [cart]
   );
-  return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "grid h-full grid-cols-[1fr_420px] gap-0 overflow-hidden", children: [
-    /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { className: "flex min-w-0 flex-col px-7 py-6", children: [
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "grid h-full grid-cols-[1fr_430px] gap-5 overflow-hidden bg-white p-5", children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { className: "flex min-w-0 flex-col overflow-hidden rounded-[28px] bg-white px-6 py-5 shadow-[0_28px_70px_rgba(8,86,85,0.08)]", children: [
       /* @__PURE__ */ jsxRuntimeExports.jsxs("header", { className: "mb-5 flex items-center justify-between", children: [
         /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm font-semibold uppercase tracking-wide text-orange-700", children: "Cashier terminal" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("h1", { className: "text-3xl font-black text-espresso", children: "New order" })
+          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm font-black uppercase tracking-[0.28em] text-[#7a7f73]", children: "Cashier terminal" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("h1", { className: "mt-1 text-4xl font-black text-[#0d1717]", children: "Build order" })
         ] }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex rounded-lg border border-orange-100 bg-white p-1 shadow-sm", children: ["DINE_IN", "TAKEAWAY", "DELIVERY"].map((type) => /* @__PURE__ */ jsxRuntimeExports.jsx(
+        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex rounded-2xl bg-[#f4fbfa] p-1 shadow-sm", children: ["DINE_IN", "TAKEAWAY", "DELIVERY"].map((type) => /* @__PURE__ */ jsxRuntimeExports.jsx(
           "button",
           {
             onClick: () => setOrderType(type),
             className: [
-              "h-10 rounded-md px-4 text-sm font-bold transition",
-              orderType === type ? "bg-orange-600 text-white" : "text-stone-600 hover:bg-orange-50"
+              "h-10 rounded-xl px-4 text-sm font-bold transition",
+              orderType === type ? "bg-[#085655] text-white shadow-sm" : "text-[#657574] hover:bg-white"
             ].join(" "),
             children: type.replace("_", " ")
           },
           type
         )) })
       ] }),
-      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mb-5 flex h-14 items-center gap-3 rounded-lg border border-orange-100 bg-white px-4 shadow-sm", children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx(Search, { size: 22, className: "text-orange-600" }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx(
-          "input",
-          {
-            className: "h-full flex-1 bg-transparent text-lg font-semibold outline-none placeholder:text-stone-400",
-            placeholder: "Search item, SKU, category, shortcut..."
-          }
-        ),
-        /* @__PURE__ */ jsxRuntimeExports.jsx(Badge, { tone: "orange", children: "F2" })
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mb-5 grid grid-cols-[1fr_220px] gap-4", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex h-14 items-center gap-3 rounded-2xl bg-white px-4 shadow-[0_16px_42px_rgba(8,86,85,0.06)]", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx(Search, { size: 22, className: "text-[#1ba09c]" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx(
+            "input",
+            {
+              className: "h-full flex-1 bg-transparent text-lg font-semibold outline-none placeholder:text-[#9aa094]",
+              placeholder: "Search item, SKU, category..."
+            }
+          ),
+          /* @__PURE__ */ jsxRuntimeExports.jsx(Badge, { tone: "orange", children: "F2" })
+        ] }),
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex h-14 items-center gap-3 rounded-2xl bg-[#085655] px-4 text-white shadow-[0_18px_44px_rgba(8,86,85,0.2)]", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx(Sparkles, { size: 20, className: "text-white" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs font-bold uppercase tracking-[0.18em] text-[#c7e8e6]", children: "Rush mode" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm font-black", children: "Keyboard ready" })
+          ] })
+        ] })
       ] }),
       /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mb-5 flex gap-2", children: categories.map((category, index) => /* @__PURE__ */ jsxRuntimeExports.jsx(
         "button",
         {
           className: [
-            "h-11 rounded-md px-4 text-sm font-bold transition",
-            index === 0 ? "bg-espresso text-white" : "bg-white text-stone-600 hover:bg-orange-50"
+            "h-11 rounded-xl px-4 text-sm font-bold transition",
+            index === 0 ? "bg-[#1ba09c] text-white shadow-[0_10px_22px_rgba(27,160,156,0.24)]" : "bg-white text-[#657574] shadow-[inset_0_0_0_1px_rgba(8,86,85,0.08)] hover:bg-[#f4fbfa] hover:text-[#085655]"
           ].join(" "),
           children: category
         },
         category
       )) }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "grid flex-1 auto-rows-[150px] grid-cols-3 gap-4 overflow-y-auto pb-6", children: menuItems.map((item) => /* @__PURE__ */ jsxRuntimeExports.jsx(
+      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "grid flex-1 auto-rows-[168px] grid-cols-3 gap-4 overflow-y-auto pb-2", children: menuItems.map((item) => /* @__PURE__ */ jsxRuntimeExports.jsx(
         "button",
         {
           onClick: () => addLine({ id: item.id, name: item.name, price: item.price, quantity: 1 }),
-          className: "group rounded-lg border border-orange-100 bg-white p-4 text-left shadow-sm transition hover:-translate-y-0.5 hover:border-orange-300 hover:shadow-md",
+          className: "group rounded-2xl bg-white p-4 text-left shadow-[0_14px_38px_rgba(8,86,85,0.07)] transition hover:-translate-y-0.5 hover:shadow-[0_22px_48px_rgba(8,86,85,0.12)]",
           children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex h-full flex-col justify-between", children: [
             /* @__PURE__ */ jsxRuntimeExports.jsx(Badge, { tone: "blue", children: item.station }),
             /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
-              /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "text-lg font-black text-espresso", children: item.name }),
-              /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { className: "mt-1 text-2xl font-black text-orange-600", children: [
-                "Rs ",
-                item.price
+              /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "text-lg font-black text-[#0d1717]", children: item.name }),
+              /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mt-3 flex items-end justify-between", children: [
+                /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { className: "text-2xl font-black text-[#085655]", children: [
+                  "Rs ",
+                  item.price
+                ] }),
+                /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "flex h-9 w-9 items-center justify-center rounded-xl bg-[#1ba09c] text-white transition group-hover:scale-105", children: /* @__PURE__ */ jsxRuntimeExports.jsx(Plus, { size: 18 }) })
               ] })
             ] })
           ] })
@@ -24298,19 +31405,19 @@ function PosPage() {
         item.id
       )) })
     ] }),
-    /* @__PURE__ */ jsxRuntimeExports.jsxs("aside", { className: "flex min-h-0 flex-col border-l border-orange-100 bg-white px-5 py-6 shadow-[-12px_0_36px_rgba(120,72,24,0.08)]", children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("aside", { className: "flex min-h-0 flex-col rounded-[28px] bg-white px-5 py-5 shadow-[0_28px_70px_rgba(8,86,85,0.11)]", children: [
       /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mb-4 flex items-center justify-between", children: [
         /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm font-semibold text-stone-500", children: "Ticket" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "text-2xl font-black", children: "Order #Draft" })
+          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm font-black uppercase tracking-[0.24em] text-[#7a7f73]", children: "Ticket" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "mt-1 text-2xl font-black", children: "Order #Draft" })
         ] }),
         /* @__PURE__ */ jsxRuntimeExports.jsx(Badge, { tone: "orange", children: "Shift open" })
       ] }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex-1 space-y-3 overflow-y-auto pr-1", children: cart.length === 0 ? /* @__PURE__ */ jsxRuntimeExports.jsx(Card, { className: "flex h-56 items-center justify-center p-6 text-center text-sm font-semibold text-stone-500", children: "Add menu items to start a keyboard-friendly order." }) : cart.map((line) => /* @__PURE__ */ jsxRuntimeExports.jsxs(Card, { className: "p-4", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex-1 space-y-3 overflow-y-auto pr-1", children: cart.length === 0 ? /* @__PURE__ */ jsxRuntimeExports.jsx(Card, { className: "flex h-44 items-center justify-center bg-white p-6 text-center text-sm font-semibold text-[#657574] shadow-[inset_0_0_0_1px_rgba(8,86,85,0.08)]", children: "Add menu items to start a clean, fast cashier order." }) : cart.map((line) => /* @__PURE__ */ jsxRuntimeExports.jsxs(Card, { className: "p-4", children: [
         /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-start justify-between gap-3", children: [
           /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
             /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "font-black", children: line.name }),
-            /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { className: "text-sm font-semibold text-stone-500", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { className: "text-sm font-semibold text-[#657574]", children: [
               "Rs ",
               line.price,
               " each"
@@ -24319,17 +31426,17 @@ function PosPage() {
           /* @__PURE__ */ jsxRuntimeExports.jsx(
             "button",
             {
-              className: "flex h-9 w-9 items-center justify-center rounded-md text-stone-400 hover:bg-red-50 hover:text-red-600",
+              className: "flex h-9 w-9 items-center justify-center rounded-xl text-[#98a095] hover:bg-red-50 hover:text-red-600",
               onClick: () => removeLine(line.id),
               children: /* @__PURE__ */ jsxRuntimeExports.jsx(Trash2, { size: 18 })
             }
           )
         ] }),
         /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mt-4 flex items-center justify-between", children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center rounded-md border border-orange-100", children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx("button", { className: "flex h-9 w-9 items-center justify-center text-stone-500", children: /* @__PURE__ */ jsxRuntimeExports.jsx(Minus, { size: 16 }) }),
+          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center rounded-xl bg-[#f4fbfa]", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx("button", { className: "flex h-9 w-9 items-center justify-center text-[#6b7167]", children: /* @__PURE__ */ jsxRuntimeExports.jsx(Minus, { size: 16 }) }),
             /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "w-10 text-center font-black", children: line.quantity }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx("button", { className: "flex h-9 w-9 items-center justify-center text-orange-600", children: /* @__PURE__ */ jsxRuntimeExports.jsx(Plus, { size: 16 }) })
+            /* @__PURE__ */ jsxRuntimeExports.jsx("button", { className: "flex h-9 w-9 items-center justify-center text-[#1ba09c]", children: /* @__PURE__ */ jsxRuntimeExports.jsx(Plus, { size: 16 }) })
           ] }),
           /* @__PURE__ */ jsxRuntimeExports.jsxs("strong", { className: "text-lg", children: [
             "Rs ",
@@ -24337,21 +31444,35 @@ function PosPage() {
           ] })
         ] })
       ] }, line.id)) }),
-      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mt-5 rounded-lg bg-cream p-4", children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex justify-between text-sm font-bold text-stone-600", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsxs(Card, { className: "mt-4 bg-[#f4fbfa] p-4 shadow-none", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-2 text-sm font-black text-[#085655]", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx(Keyboard, { size: 17 }),
+          "Shortcut card"
+        ] }),
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mt-3 grid grid-cols-2 gap-2 text-xs font-bold text-[#657574]", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: "F2 Search" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: "F5 Kitchen" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: "F7 Payment" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: "Ctrl+Shift+F Max" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: "Ctrl+Shift+M Min" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: "Ctrl+Shift+Q Close" })
+        ] })
+      ] }),
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mt-4 rounded-2xl bg-[#085655] p-4 text-white", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex justify-between text-sm font-bold text-[#c7e8e6]", children: [
           /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: "Subtotal" }),
           /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { children: [
             "Rs ",
             total
           ] })
         ] }),
-        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mt-2 flex justify-between text-sm font-bold text-stone-600", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mt-2 flex justify-between text-sm font-bold text-[#c7e8e6]", children: [
           /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: "Tax / service" }),
           /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: "Configured" })
         ] }),
-        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mt-4 flex justify-between border-t border-orange-200 pt-4 text-2xl font-black", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mt-4 flex justify-between border-t border-[#27716f] pt-4 text-2xl font-black", children: [
           /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: "Total" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { className: "text-white", children: [
             "Rs ",
             total
           ] })
@@ -24366,29 +31487,241 @@ function PosPage() {
   ] });
 }
 function ReportsPage() {
-  return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "p-7", children: [
-    /* @__PURE__ */ jsxRuntimeExports.jsx("h1", { className: "text-3xl font-black", children: "Reports" }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx(Card, { className: "mt-6 p-6", children: /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-semibold text-stone-600", children: "Sales, stock, purchase, credit, supplier payable, shift, and profit estimate reports." }) })
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "h-full overflow-y-auto p-7", children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm font-black uppercase tracking-[0.28em] text-[#7a7f73]", children: "Insights" }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("h1", { className: "mt-2 text-4xl font-black", children: "Reports" }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(Card, { className: "mt-7 p-6", children: /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-semibold text-[#697064]", children: "Sales, stock, purchase, credit, supplier payable, shift, and profit estimate reports." }) })
   ] });
 }
+const settingsSchema = objectType({
+  businessName: stringType().min(2, "Business name is required"),
+  branchName: stringType().min(2, "Branch name is required"),
+  phone: stringType().min(6, "Phone number is required"),
+  address: stringType().min(3, "Address is required"),
+  currency: stringType().min(2, "Currency is required").max(6, "Use a short currency code"),
+  defaultTaxPercent: coerce.number().min(0).max(100),
+  serviceChargePercent: coerce.number().min(0).max(100),
+  receiptFooter: stringType().min(3, "Receipt footer is required"),
+  printCustomerCopy: booleanType(),
+  lowStockThreshold: coerce.number().int().min(0).max(9999),
+  kitchenDelayMinutes: coerce.number().int().min(1).max(180),
+  shiftFloatRequired: booleanType()
+});
+const fieldClass = "mt-2 h-12 w-full rounded-xl border border-[#dcebe9] bg-white px-4 text-sm font-semibold text-[#0d1717] outline-none transition focus:border-[#1ba09c] focus:ring-4 focus:ring-[#1ba09c]/10";
+const textareaClass = "mt-2 min-h-24 w-full resize-none rounded-xl border border-[#dcebe9] bg-white px-4 py-3 text-sm font-semibold text-[#0d1717] outline-none transition focus:border-[#1ba09c] focus:ring-4 focus:ring-[#1ba09c]/10";
+const defaultValues = {
+  businessName: "RestaurantOS Demo Cafe",
+  branchName: "Main Branch",
+  phone: "+92 300 0000000",
+  address: "Main food street",
+  currency: "PKR",
+  defaultTaxPercent: 5,
+  serviceChargePercent: 0,
+  receiptFooter: "Thank you for dining with us.",
+  printCustomerCopy: true,
+  lowStockThreshold: 10,
+  kitchenDelayMinutes: 12,
+  shiftFloatRequired: true
+};
+function getValue(settings, key, fallback) {
+  const setting = settings?.find((item) => item.key === key);
+  return setting?.value === void 0 ? fallback : setting.value;
+}
+function toFormValues(settings) {
+  return {
+    businessName: getValue(settings, "business.name", defaultValues.businessName),
+    branchName: getValue(settings, "business.branch", defaultValues.branchName),
+    phone: getValue(settings, "business.phone", defaultValues.phone),
+    address: getValue(settings, "business.address", defaultValues.address),
+    currency: getValue(settings, "business.currency", defaultValues.currency),
+    defaultTaxPercent: Number(getValue(settings, "tax.defaultPercent", defaultValues.defaultTaxPercent)),
+    serviceChargePercent: Number(getValue(settings, "tax.serviceChargePercent", defaultValues.serviceChargePercent)),
+    receiptFooter: getValue(settings, "receipt.footer", defaultValues.receiptFooter),
+    printCustomerCopy: Boolean(getValue(settings, "receipt.printCustomerCopy", defaultValues.printCustomerCopy)),
+    lowStockThreshold: Number(getValue(settings, "operations.lowStockThreshold", defaultValues.lowStockThreshold)),
+    kitchenDelayMinutes: Number(getValue(settings, "operations.kitchenDelayMinutes", defaultValues.kitchenDelayMinutes)),
+    shiftFloatRequired: Boolean(getValue(settings, "operations.shiftFloatRequired", defaultValues.shiftFloatRequired))
+  };
+}
+function toPayload(values) {
+  return {
+    settings: [
+      { key: "business.name", group: "business", value: values.businessName },
+      { key: "business.branch", group: "business", value: values.branchName },
+      { key: "business.phone", group: "business", value: values.phone },
+      { key: "business.address", group: "business", value: values.address },
+      { key: "business.currency", group: "business", value: values.currency.toUpperCase() },
+      { key: "tax.defaultPercent", group: "tax", value: values.defaultTaxPercent },
+      { key: "tax.serviceChargePercent", group: "tax", value: values.serviceChargePercent },
+      { key: "receipt.footer", group: "receipt", value: values.receiptFooter },
+      { key: "receipt.printCustomerCopy", group: "receipt", value: values.printCustomerCopy },
+      { key: "operations.lowStockThreshold", group: "operations", value: values.lowStockThreshold },
+      { key: "operations.kitchenDelayMinutes", group: "operations", value: values.kitchenDelayMinutes },
+      { key: "operations.shiftFloatRequired", group: "operations", value: values.shiftFloatRequired }
+    ]
+  };
+}
 function SettingsPage() {
-  return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "p-7", children: [
-    /* @__PURE__ */ jsxRuntimeExports.jsx("h1", { className: "text-3xl font-black", children: "Settings" }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx(Card, { className: "mt-6 p-6", children: /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-semibold text-stone-600", children: "Business, tax, receipt, stock policy, shift, shortcut, kitchen delay, table layout, and printer settings." }) })
+  const queryClient2 = useQueryClient();
+  const canUpdateSettings = useAuthStore((state) => state.hasPermission("settings.update"));
+  const settingsQuery = useQuery({
+    queryKey: ["settings"],
+    queryFn: () => apiFetch("/settings")
+  });
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors, isDirty: isDirty2 }
+  } = useForm({
+    resolver: u(settingsSchema),
+    defaultValues
+  });
+  reactExports.useEffect(() => {
+    if (settingsQuery.data) reset(toFormValues(settingsQuery.data));
+  }, [reset, settingsQuery.data]);
+  const updateSettings = useMutation({
+    mutationFn: (values) => apiFetch("/settings", {
+      method: "PATCH",
+      body: JSON.stringify(toPayload(values))
+    }),
+    onSuccess: (records) => {
+      queryClient2.setQueryData(["settings"], records);
+      reset(toFormValues(records));
+    }
+  });
+  const onSubmit = handleSubmit((values) => updateSettings.mutate(values));
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("form", { className: "h-full overflow-y-auto bg-white p-7", onSubmit, children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex flex-wrap items-start justify-between gap-4", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm font-black uppercase tracking-[0.22em] text-[#1ba09c]", children: "Configuration" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("h1", { className: "mt-2 text-4xl font-black text-[#0d1717]", children: "Restaurant settings" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mt-3 max-w-2xl text-sm font-semibold text-[#647271]", children: "Control the business profile, taxes, receipts, stock thresholds, kitchen delay alerts, and shift policy." })
+      ] }),
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-3", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx(Badge, { tone: canUpdateSettings ? "green" : "orange", children: canUpdateSettings ? "Admin editable" : "View only" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx(
+          Button,
+          {
+            type: "submit",
+            icon: updateSettings.isPending ? /* @__PURE__ */ jsxRuntimeExports.jsx(LoaderCircle, { className: "animate-spin", size: 18 }) : /* @__PURE__ */ jsxRuntimeExports.jsx(Save, { size: 18 }),
+            disabled: !canUpdateSettings || !isDirty2 || updateSettings.isPending || settingsQuery.isLoading,
+            children: updateSettings.isPending ? "Saving..." : "Save settings"
+          }
+        )
+      ] })
+    ] }),
+    settingsQuery.isLoading ? /* @__PURE__ */ jsxRuntimeExports.jsxs(Card, { className: "mt-6 flex h-36 items-center justify-center text-sm font-bold text-[#647271]", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx(LoaderCircle, { className: "mr-2 animate-spin text-[#1ba09c]", size: 18 }),
+      "Loading settings"
+    ] }) : null,
+    settingsQuery.isError ? /* @__PURE__ */ jsxRuntimeExports.jsxs(Card, { className: "mt-6 flex items-start gap-3 border border-red-100 bg-red-50 p-5 text-sm font-bold text-red-700", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx(CircleAlert, { size: 19 }),
+      "Settings could not load. Check the API server and your login session."
+    ] }) : null,
+    updateSettings.isSuccess ? /* @__PURE__ */ jsxRuntimeExports.jsxs(Card, { className: "mt-6 flex items-start gap-3 border border-[#c7efed] bg-[#f4fbfa] p-5 text-sm font-bold text-[#085655]", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx(CircleCheck, { size: 19 }),
+      "Settings saved and audit logged."
+    ] }) : null,
+    updateSettings.isError ? /* @__PURE__ */ jsxRuntimeExports.jsxs(Card, { className: "mt-6 flex items-start gap-3 border border-red-100 bg-red-50 p-5 text-sm font-bold text-red-700", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx(CircleAlert, { size: 19 }),
+      "Save failed. Your account needs settings permission and the API must be online."
+    ] }) : null,
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mt-6 grid grid-cols-[1.1fr_0.9fr] gap-5", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsxs(Card, { className: "p-6", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-3", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "flex h-11 w-11 items-center justify-center rounded-xl bg-[#e9fbfa] text-[#085655]", children: /* @__PURE__ */ jsxRuntimeExports.jsx(Store, { size: 21 }) }),
+          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "text-xl font-black text-[#0d1717]", children: "Business profile" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm font-semibold text-[#647271]", children: "Shown on receipts, reports, and future branches." })
+          ] })
+        ] }),
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mt-6 grid grid-cols-2 gap-4", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx(Field, { label: "Business name", error: errors.businessName?.message, children: /* @__PURE__ */ jsxRuntimeExports.jsx("input", { className: fieldClass, ...register("businessName") }) }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx(Field, { label: "Branch", error: errors.branchName?.message, children: /* @__PURE__ */ jsxRuntimeExports.jsx("input", { className: fieldClass, ...register("branchName") }) }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx(Field, { label: "Phone", error: errors.phone?.message, children: /* @__PURE__ */ jsxRuntimeExports.jsx("input", { className: fieldClass, ...register("phone") }) }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx(Field, { label: "Currency", error: errors.currency?.message, children: /* @__PURE__ */ jsxRuntimeExports.jsx("input", { className: fieldClass, ...register("currency") }) })
+        ] }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx(Field, { className: "mt-4", label: "Address", error: errors.address?.message, children: /* @__PURE__ */ jsxRuntimeExports.jsx("textarea", { className: textareaClass, ...register("address") }) })
+      ] }),
+      /* @__PURE__ */ jsxRuntimeExports.jsxs(Card, { className: "p-6", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-3", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "flex h-11 w-11 items-center justify-center rounded-xl bg-[#e9fbfa] text-[#085655]", children: /* @__PURE__ */ jsxRuntimeExports.jsx(ReceiptText, { size: 21 }) }),
+          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "text-xl font-black text-[#0d1717]", children: "Tax and receipt" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm font-semibold text-[#647271]", children: "Defaults used by POS checkout and printed bills." })
+          ] })
+        ] }),
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mt-6 grid grid-cols-2 gap-4", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx(Field, { label: "Tax percent", error: errors.defaultTaxPercent?.message, children: /* @__PURE__ */ jsxRuntimeExports.jsx("input", { className: fieldClass, type: "number", step: "0.01", ...register("defaultTaxPercent") }) }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx(Field, { label: "Service charge", error: errors.serviceChargePercent?.message, children: /* @__PURE__ */ jsxRuntimeExports.jsx("input", { className: fieldClass, type: "number", step: "0.01", ...register("serviceChargePercent") }) })
+        ] }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx(Field, { className: "mt-4", label: "Receipt footer", error: errors.receiptFooter?.message, children: /* @__PURE__ */ jsxRuntimeExports.jsx("textarea", { className: textareaClass, ...register("receiptFooter") }) }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx(Toggle, { label: "Print customer copy by default", ...register("printCustomerCopy") })
+      ] }),
+      /* @__PURE__ */ jsxRuntimeExports.jsxs(Card, { className: "p-6", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-3", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "flex h-11 w-11 items-center justify-center rounded-xl bg-[#e9fbfa] text-[#085655]", children: /* @__PURE__ */ jsxRuntimeExports.jsx(SlidersHorizontal, { size: 21 }) }),
+          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "text-xl font-black text-[#0d1717]", children: "Operations policy" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm font-semibold text-[#647271]", children: "Controls alerts and cashier shift behavior." })
+          ] })
+        ] }),
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mt-6 grid grid-cols-2 gap-4", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx(Field, { label: "Low stock threshold", error: errors.lowStockThreshold?.message, children: /* @__PURE__ */ jsxRuntimeExports.jsx("input", { className: fieldClass, type: "number", ...register("lowStockThreshold") }) }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx(Field, { label: "Kitchen delay minutes", error: errors.kitchenDelayMinutes?.message, children: /* @__PURE__ */ jsxRuntimeExports.jsx("input", { className: fieldClass, type: "number", ...register("kitchenDelayMinutes") }) })
+        ] }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx(Toggle, { label: "Require opening cash float for shifts", ...register("shiftFloatRequired") })
+      ] }),
+      /* @__PURE__ */ jsxRuntimeExports.jsxs(Card, { className: "bg-[#085655] p-6 text-white", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm font-black uppercase tracking-[0.2em] text-[#9ee2df]", children: "Phase 4 foundation" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "mt-4 text-3xl font-black", children: "Ready for table system" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mt-3 text-sm font-semibold leading-6 text-[#d7f4f2]", children: "These settings become the source for POS receipts, tax math, stock warnings, kitchen alert timers, and shift validation. Table and floor layout settings will attach here in the next phase." })
+      ] })
+    ] })
+  ] });
+}
+function Field({ children, className, error, label }) {
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("label", { className, children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-sm font-black text-[#4d5d5c]", children: label }),
+    children,
+    error ? /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "mt-1 block text-xs font-bold text-red-600", children: error }) : null
+  ] });
+}
+function Toggle({ label, ...props }) {
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("label", { className: "mt-5 flex items-center justify-between gap-4 rounded-xl bg-[#f4fbfa] px-4 py-3 text-sm font-black text-[#0d1717]", children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: label }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(
+      "input",
+      {
+        className: "h-5 w-5 accent-[#1ba09c]",
+        type: "checkbox",
+        ...props
+      }
+    )
   ] });
 }
 const router = createBrowserRouter([
   {
+    path: "/login",
+    element: /* @__PURE__ */ jsxRuntimeExports.jsx(LoginPage, {})
+  },
+  {
     path: "/",
-    element: /* @__PURE__ */ jsxRuntimeExports.jsx(AppShell, {}),
+    element: /* @__PURE__ */ jsxRuntimeExports.jsx(ProtectedRoute, {}),
     children: [
-      { index: true, element: /* @__PURE__ */ jsxRuntimeExports.jsx(PosPage, {}) },
-      { path: "dashboard", element: /* @__PURE__ */ jsxRuntimeExports.jsx(DashboardPage, {}) },
-      { path: "menu", element: /* @__PURE__ */ jsxRuntimeExports.jsx(MenuPage, {}) },
-      { path: "inventory", element: /* @__PURE__ */ jsxRuntimeExports.jsx(InventoryPage, {}) },
-      { path: "customers", element: /* @__PURE__ */ jsxRuntimeExports.jsx(CustomersPage, {}) },
-      { path: "reports", element: /* @__PURE__ */ jsxRuntimeExports.jsx(ReportsPage, {}) },
-      { path: "settings", element: /* @__PURE__ */ jsxRuntimeExports.jsx(SettingsPage, {}) }
+      {
+        element: /* @__PURE__ */ jsxRuntimeExports.jsx(AppShell, {}),
+        children: [
+          { index: true, element: /* @__PURE__ */ jsxRuntimeExports.jsx(PosPage, {}) },
+          { path: "dashboard", element: /* @__PURE__ */ jsxRuntimeExports.jsx(DashboardPage, {}) },
+          { path: "menu", element: /* @__PURE__ */ jsxRuntimeExports.jsx(MenuPage, {}) },
+          { path: "inventory", element: /* @__PURE__ */ jsxRuntimeExports.jsx(InventoryPage, {}) },
+          { path: "customers", element: /* @__PURE__ */ jsxRuntimeExports.jsx(CustomersPage, {}) },
+          { path: "reports", element: /* @__PURE__ */ jsxRuntimeExports.jsx(ReportsPage, {}) },
+          { path: "settings", element: /* @__PURE__ */ jsxRuntimeExports.jsx(SettingsPage, {}) }
+        ]
+      }
     ]
   }
 ]);

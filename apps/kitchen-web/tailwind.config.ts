@@ -5,8 +5,11 @@ export default {
   theme: {
     extend: {
       colors: {
-        canvas: '#fffaf3',
-        espresso: '#2c1810',
+        canvas: '#ffffff',
+        cream: '#ffffff',
+        primary: '#1ba09c',
+        forest: '#085655',
+        espresso: '#0d1717',
       },
     },
   },

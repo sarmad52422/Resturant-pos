@@ -1,6 +1,9 @@
-import { Body, Controller, Get, Param, Patch, Post } from '@nestjs/common';
+import { Body, Controller, Get, Param, Patch, Post, UseGuards } from '@nestjs/common';
 import { IsArray, IsEnum, IsOptional, IsString, ValidateNested } from 'class-validator';
 import { Type } from 'class-transformer';
+import { RequirePermissions } from '../../common/decorators/permissions.decorator';
+import { JwtAuthGuard } from '../../common/guards/jwt-auth.guard';
+import { PermissionGuard } from '../../common/guards/permission.guard';
 import { OrdersService } from './orders.service';
 
 enum CreateOrderType {
@@ -35,6 +38,7 @@ class CreateOrderDto {
 }
 
 @Controller('orders')
+@UseGuards(JwtAuthGuard, PermissionGuard)
 export class OrdersController {
   constructor(private readonly ordersService: OrdersService) {}
 
@@ -44,11 +48,13 @@ export class OrdersController {
   }
 
   @Post()
+  @RequirePermissions('order.create')
   create(@Body() dto: CreateOrderDto) {
     return this.ordersService.createDraft(dto);
   }
 
   @Patch(':id/send-to-kitchen')
+  @RequirePermissions('order.send_to_kitchen')
   sendToKitchen(@Param('id') id: string) {
     return this.ordersService.sendToKitchen(id);
   }

@@ -13,7 +13,7 @@ function createWindow() {
     minWidth: 1180,
     minHeight: 760,
     title: "RestaurantOS POS",
-    backgroundColor: "#fffaf3",
+    backgroundColor: "#ffffff",
     frame: false,
     webPreferences: {
       preload: node_path.join(__dirname, "../preload/preload.js"),
@@ -38,6 +38,25 @@ function createWindow() {
   mainWindow.webContents.on("render-process-gone", (_event, details) => {
     console.error("[RestaurantOS] renderer process gone", details);
   });
+  mainWindow.webContents.on("before-input-event", (event, input) => {
+    const key = input.key.toLowerCase();
+    const commandOrControl = input.control || input.meta;
+    const shift = input.shift;
+    if (commandOrControl && shift && key === "m") {
+      mainWindow?.minimize();
+      event.preventDefault();
+      return;
+    }
+    if (commandOrControl && shift && key === "f") {
+      toggleMaximize();
+      event.preventDefault();
+      return;
+    }
+    if (commandOrControl && shift && key === "q") {
+      mainWindow?.close();
+      event.preventDefault();
+    }
+  });
   if (isDev && process.env.ELECTRON_RENDERER_URL) {
     console.info("[RestaurantOS] loading dev renderer", process.env.ELECTRON_RENDERER_URL);
     void mainWindow.loadURL(process.env.ELECTRON_RENDERER_URL);
@@ -49,20 +68,21 @@ function createWindow() {
     void mainWindow.loadFile(node_path.join(__dirname, "../renderer/index.html"));
   }
 }
+function toggleMaximize() {
+  if (!mainWindow) return;
+  if (mainWindow.isMaximized()) {
+    mainWindow.unmaximize();
+    return;
+  }
+  mainWindow.maximize();
+}
 electron.app.whenReady().then(() => {
   electron.ipcMain.handle("restaurantos:terminal", () => ({
     platform: process.platform,
     version: electron.app.getVersion()
   }));
   electron.ipcMain.on("restaurantos:window:minimize", () => mainWindow?.minimize());
-  electron.ipcMain.on("restaurantos:window:maximize", () => {
-    if (!mainWindow) return;
-    if (mainWindow.isMaximized()) {
-      mainWindow.unmaximize();
-      return;
-    }
-    mainWindow.maximize();
-  });
+  electron.ipcMain.on("restaurantos:window:maximize", () => toggleMaximize());
   electron.ipcMain.on("restaurantos:window:close", () => mainWindow?.close());
   createWindow();
   electron.app.on("activate", () => {

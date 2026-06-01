@@ -2,6 +2,7 @@ import { UnauthorizedException } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { Injectable } from '@nestjs/common';
 import * as bcrypt from 'bcryptjs';
+import type { RequestUser } from '../../common/decorators/current-user.decorator';
 import { PrismaService } from '../../prisma/prisma.service';
 
 @Injectable()
@@ -48,13 +49,42 @@ export class AuthService {
 
     return {
       accessToken,
-      user: {
+      user: this.toAuthUser({
         id: user.id,
         username: user.username,
         name: user.name,
+        roleId: user.roleId,
         role: user.role.name,
         permissions,
+      }),
+    };
+  }
+
+  async profile(user: RequestUser) {
+    return { user };
+  }
+
+  async logout(user: RequestUser) {
+    await this.prisma.auditLog.create({
+      data: {
+        action: 'auth.logout',
+        entityType: 'User',
+        entityId: user.id,
+        userId: user.id,
       },
+    });
+
+    return { success: true };
+  }
+
+  private toAuthUser(user: RequestUser) {
+    return {
+      id: user.id,
+      username: user.username,
+      name: user.name,
+      roleId: user.roleId,
+      role: user.role,
+      permissions: user.permissions,
     };
   }
 }

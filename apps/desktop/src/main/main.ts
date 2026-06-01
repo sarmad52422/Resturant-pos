@@ -15,7 +15,7 @@ function createWindow() {
     minWidth: 1180,
     minHeight: 760,
     title: 'RestaurantOS POS',
-    backgroundColor: '#fffaf3',
+    backgroundColor: '#ffffff',
     frame: false,
     webPreferences: {
       preload: join(__dirname, '../preload/preload.js'),
@@ -45,6 +45,29 @@ function createWindow() {
     console.error('[RestaurantOS] renderer process gone', details);
   });
 
+  mainWindow.webContents.on('before-input-event', (event, input) => {
+    const key = input.key.toLowerCase();
+    const commandOrControl = input.control || input.meta;
+    const shift = input.shift;
+
+    if (commandOrControl && shift && key === 'm') {
+      mainWindow?.minimize();
+      event.preventDefault();
+      return;
+    }
+
+    if (commandOrControl && shift && key === 'f') {
+      toggleMaximize();
+      event.preventDefault();
+      return;
+    }
+
+    if (commandOrControl && shift && key === 'q') {
+      mainWindow?.close();
+      event.preventDefault();
+    }
+  });
+
   if (isDev && process.env.ELECTRON_RENDERER_URL) {
     console.info('[RestaurantOS] loading dev renderer', process.env.ELECTRON_RENDERER_URL);
     void mainWindow.loadURL(process.env.ELECTRON_RENDERER_URL);
@@ -57,21 +80,23 @@ function createWindow() {
   }
 }
 
+function toggleMaximize() {
+  if (!mainWindow) return;
+  if (mainWindow.isMaximized()) {
+    mainWindow.unmaximize();
+    return;
+  }
+
+  mainWindow.maximize();
+}
+
 app.whenReady().then(() => {
   ipcMain.handle('restaurantos:terminal', () => ({
     platform: process.platform,
     version: app.getVersion(),
   }));
   ipcMain.on('restaurantos:window:minimize', () => mainWindow?.minimize());
-  ipcMain.on('restaurantos:window:maximize', () => {
-    if (!mainWindow) return;
-    if (mainWindow.isMaximized()) {
-      mainWindow.unmaximize();
-      return;
-    }
-
-    mainWindow.maximize();
-  });
+  ipcMain.on('restaurantos:window:maximize', () => toggleMaximize());
   ipcMain.on('restaurantos:window:close', () => mainWindow?.close());
 
   createWindow();

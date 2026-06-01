@@ -34,6 +34,63 @@ Seeded development login:
 - Username: `admin`
 - Password: `Admin@12345`
 
+## Authentication
+
+The API uses JWT bearer authentication and database-backed role permissions.
+
+Current auth endpoints:
+
+- `POST /auth/login` - Sign in with username and password. Returns `accessToken` and user profile.
+- `GET /auth/me` - Hydrate the current user from a bearer token.
+- `POST /auth/logout` - Records logout in the audit log and returns success.
+
+Use authenticated requests with:
+
+```txt
+Authorization: Bearer <accessToken>
+```
+
+Seeded roles:
+
+- Admin
+- Manager
+- Cashier
+- Waiter
+- Chef
+- Delivery Rider
+- Accountant
+
+Seeded sensitive permissions:
+
+- `order.void`
+- `order.refund`
+- `order.discount.large`
+- `order.edit.completed`
+- `stock.adjust`
+- `ledger.delete`
+- `shift.close.other`
+- `settings.update`
+- `user.manage`
+- `report.view.profit`
+
+The desktop app now opens at the login screen when no saved session exists. Successful login stores the token locally for the desktop session and protected app routes. Logout clears the local session.
+
+## Settings Module
+
+Current settings endpoints:
+
+- `GET /settings` - Returns all restaurant settings for the signed-in user.
+- `PATCH /settings` - Bulk updates settings and writes an audit log. Requires `settings.update`.
+
+Seeded setting groups:
+
+- Business profile: name, branch, phone, address, currency.
+- Tax defaults: default tax percent and service charge percent.
+- Receipt defaults: footer text and customer copy printing.
+- Operations policy: low stock threshold, kitchen delay timer, and opening cash float requirement.
+
+The desktop Settings page uses TanStack Query for loading/saving, React Hook Form with Zod validation for edits, and the current permission model to prevent unauthorized saves.
+
 ## Development
 
 ```bash
@@ -49,8 +106,61 @@ Default ports:
 - Kitchen web: `http://localhost:5174`
 - PostgreSQL: `localhost:5433`
 
+## Desktop Usage
+
+The desktop POS runs as a frameless Electron app. Window controls are inside the custom top bar:
+
+- Minimize button: top-right minus icon.
+- Maximize/restore button: top-right square icon.
+- Close button: top-right X icon.
+
+The POS screen includes a shortcut card in the order panel. It is a compact reference for the cashier during rush hours and will grow as workflows are implemented.
+
+## Shortcuts
+
+Current app window shortcuts:
+
+- `Ctrl + Shift + M` - Minimize the desktop app.
+- `Ctrl + Shift + F` - Maximize or restore the desktop app.
+- `Ctrl + Shift + Q` - Close the desktop app.
+
+On macOS builds these are also handled with `Cmd` in place of `Ctrl`.
+
+Current POS visual shortcut hints:
+
+- `F2` - Focus/search item flow.
+- `F5` - Send to kitchen flow.
+- `F7` - Payment flow.
+
+Planned POS workflow shortcuts:
+
+- `F1` - New order.
+- `F2` - Search item.
+- `F3` - Hold order.
+- `F4` - Recall held order.
+- `F5` - Send to kitchen.
+- `F6` - Print bill.
+- `F7` - Payment.
+- `F8` - Customer credit.
+- `F9` - Discount.
+- `F10` - Table screen.
+- `Ctrl + N` - New customer.
+- `Ctrl + P` - Print receipt.
+- `Ctrl + S` - Save order.
+- `Ctrl + D` - Delivery mode.
+- `Ctrl + T` - Takeaway mode.
+- `Ctrl + I` - Dine-in mode.
+- `Enter` - Select or confirm.
+- `Esc` - Back or cancel.
+- `Delete` - Remove selected item.
+- `+` - Increase quantity.
+- `-` - Decrease quantity.
+- Arrow keys - Navigate grids, tickets, tables, and lists.
+
+Future admin shortcuts will be documented here as modules are implemented.
+
 ## Product Direction
 
 The desktop app owns cashier workflows and the admin area in one Electron application. The kitchen screen is intentionally separate and only shows live production information needed by chefs and packing staff.
 
-The first visual system uses warm white surfaces, restrained orange accents, dense operational layouts, keyboard-friendly sizing, and clear status colors.
+The current visual system uses pure white surfaces, `#1ba09c` as the primary teal, `#085655` as the deep secondary teal, borderless app chrome, moderate rounded corners, dense operational layouts, keyboard-friendly sizing, and clear status colors.

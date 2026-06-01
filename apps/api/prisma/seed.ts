@@ -105,11 +105,28 @@ async function main() {
     });
   }
 
-  await prisma.setting.upsert({
-    where: { key: 'business.name' },
-    update: { value: 'RestaurantOS Demo Cafe' },
-    create: { key: 'business.name', group: 'business', value: 'RestaurantOS Demo Cafe' },
-  });
+  const settings = [
+    ['business.name', 'business', 'RestaurantOS Demo Cafe'],
+    ['business.branch', 'business', 'Main Branch'],
+    ['business.phone', 'business', '+92 300 0000000'],
+    ['business.address', 'business', 'Main food street'],
+    ['business.currency', 'business', 'PKR'],
+    ['tax.defaultPercent', 'tax', 5],
+    ['tax.serviceChargePercent', 'tax', 0],
+    ['receipt.footer', 'receipt', 'Thank you for dining with us.'],
+    ['receipt.printCustomerCopy', 'receipt', true],
+    ['operations.lowStockThreshold', 'operations', 10],
+    ['operations.kitchenDelayMinutes', 'operations', 12],
+    ['operations.shiftFloatRequired', 'operations', true],
+  ] as const;
+
+  for (const [key, group, value] of settings) {
+    await prisma.setting.upsert({
+      where: { key },
+      update: { group, value },
+      create: { key, group, value },
+    });
+  }
 }
 
 main()

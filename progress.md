@@ -80,27 +80,134 @@ Notes:
 
 ## Phase 3 - Authentication, Users, Roles, Permissions
 
-Status: In Progress
+Status: Completed
 
 Completed:
 - Added auth module, login endpoint, password hashing with `bcryptjs`, JWT issuing, seeded admin user, default roles, permissions, and audit log entry on login.
 - Added permission decorator and permission guard foundation.
+- Added JWT strategy that validates bearer tokens against active database users and hydrates role permissions.
+- Added JWT auth guard and current-user decorator.
+- Added protected `/auth/me` endpoint for desktop session hydration.
+- Added protected `/auth/logout` endpoint with audit logging.
+- Protected `settings` routes with JWT auth.
+- Protected order creation and send-to-kitchen routes with JWT auth plus permission checks.
+- Added desktop login screen using React Hook Form and Zod validation.
+- Added persisted desktop auth store, authenticated API helper, protected routes, logout control, and user initials in the app shell.
 
 Files changed:
 - `apps/api/src/modules/auth/**`
+- `apps/api/src/common/decorators/current-user.decorator.ts`
 - `apps/api/src/common/decorators/permissions.decorator.ts`
+- `apps/api/src/common/guards/jwt-auth.guard.ts`
 - `apps/api/src/common/guards/permission.guard.ts`
+- `apps/api/src/modules/orders/orders.controller.ts`
+- `apps/api/src/modules/settings/settings.controller.ts`
 - `apps/api/prisma/seed.ts`
+- `apps/desktop/src/renderer/src/lib/api.ts`
+- `apps/desktop/src/renderer/src/router.tsx`
+- `apps/desktop/src/renderer/src/components/app-shell.tsx`
+- `apps/desktop/src/renderer/src/components/protected-route.tsx`
+- `apps/desktop/src/renderer/src/pages/login-page.tsx`
+- `apps/desktop/src/renderer/src/store/use-auth-store.ts`
+- `README.md`
+- `progress.md`
 
 Database changes:
 - Seeded default roles and permissions.
 - Seeded `admin` user with password `Admin@12345`.
+- Auth login/logout events write to `AuditLog`.
+
+Tests:
+- `npm run typecheck --workspace @restaurantos/api` passed.
+- `npm run build --workspace @restaurantos/api` passed.
+- `npm run typecheck --workspace @restaurantos/desktop` passed.
+- `npm run build --workspace @restaurantos/desktop` passed.
+- `npm audit --audit-level=high` passed with 0 vulnerabilities.
+- `POST /auth/login` smoke test returned a JWT for the seeded admin user.
+- Anonymous `GET /settings` smoke test returned `401`.
+- Authenticated `GET /auth/me` smoke test returned `200`.
+- Authenticated `POST /auth/logout` smoke test returned `201`.
+
+Notes:
+- Desktop auth currently uses local persisted bearer token storage for development. Production hardening should revisit token lifetime, refresh/session policy, and terminal/device binding.
+- Next phase is Phase 4 - Settings Module.
+
+## Phase 4 - Settings Module
+
+Status: Completed
+
+Completed:
+- Added permission-protected bulk settings update endpoint with audit logging.
+- Kept authenticated settings list available for signed-in desktop users.
+- Seeded default business, tax, receipt, and operations settings.
+- Replaced the placeholder Settings screen with a full desktop configuration workspace.
+- Added React Hook Form and Zod validation for business profile, tax/service charge, receipt footer, stock threshold, kitchen delay, and shift float settings.
+- Added TanStack Query loading, saving, cache update, and save/error feedback.
+- Added permission-aware save behavior using the existing `settings.update` permission.
+
+Files changed:
+- `apps/api/src/modules/settings/settings.controller.ts`
+- `apps/api/src/modules/settings/settings.service.ts`
+- `apps/api/prisma/seed.ts`
+- `apps/desktop/src/renderer/src/pages/settings-page.tsx`
+- `README.md`
+- `progress.md`
+
+Database changes:
+- No schema migration required.
+- Seed now upserts expanded default settings for business, tax, receipt, and operations groups.
 
 Tests:
 - `npm run typecheck --workspaces` passed.
 - `npm run build --workspaces` passed.
-- `POST /auth/login` smoke test returned a JWT for the seeded admin user.
+- Seed ran successfully against local Docker PostgreSQL with the expanded settings defaults.
+- Settings API smoke test passed: anonymous `GET /settings` returned `401`, admin login returned `201`, authenticated `GET /settings` returned `200`, and authenticated `PATCH /settings` returned `200`.
 
 Notes:
-- JWT passport strategy, route protection, refresh/session policy, and desktop login screen are still required before Phase 3 can be marked completed.
-- API dev server started at `http://localhost:4300`.
+- The next phase is Phase 5 - Table System UI.
+- Table/floor settings can build on the Phase 4 settings foundation without changing the settings API shape.
+
+## Phase 24 - UI/UX Polish
+
+Status: In Progress
+
+Completed:
+- Reworked the visual system toward a premium Dribbble-style operational UI with pure white surfaces, teal primary/secondary actions, Inter-like bold hierarchy, and softer modern card depth.
+- Redesigned the Electron shell with frameless premium chrome, custom window controls, wider modern sidebar, and tighter navigation states.
+- Redesigned the POS order screen with modern category chips, elevated menu cards, dark premium ticket total block, softer order panel, and clearer keyboard/rush affordances.
+- Updated dashboard, admin placeholder pages, shared UI primitives, and kitchen web color treatment to align with the same design language.
+- Replaced the yellow-led palette with the requested teal system: `#1ba09c` primary, `#085655` secondary, and pure white app surfaces.
+- Made the app chrome visually borderless while preserving custom close, maximize/restore, and minimize controls.
+- Added Electron keyboard shortcuts for window management: `Ctrl + Shift + M`, `Ctrl + Shift + F`, and `Ctrl + Shift + Q`.
+- Added a POS shortcut card and documented current and planned shortcuts in `README.md`.
+
+Files changed:
+- `packages/ui/src/components/button.tsx`
+- `packages/ui/src/components/card.tsx`
+- `packages/ui/src/components/badge.tsx`
+- `apps/desktop/tailwind.config.cjs`
+- `apps/desktop/src/renderer/src/styles.css`
+- `apps/desktop/src/renderer/src/components/app-shell.tsx`
+- `apps/desktop/src/renderer/src/pages/**`
+- `apps/kitchen-web/tailwind.config.ts`
+- `apps/kitchen-web/src/styles.css`
+- `apps/kitchen-web/src/pages/kitchen-page.tsx`
+- `README.md`
+- `progress.md`
+
+Database changes:
+- None.
+
+Tests:
+- `npm run typecheck --workspace @restaurantos/desktop` passed.
+- `npm run build --workspace @restaurantos/desktop` passed.
+- `npm run typecheck --workspace @restaurantos/ui` passed.
+- `npm run typecheck --workspace @restaurantos/kitchen-web` passed.
+- `npm run build --workspace @restaurantos/kitchen-web` passed.
+- `npm audit --audit-level=high` passed with 0 vulnerabilities.
+- `npm run dev:desktop` started and stayed alive; stopped cleanly with `Ctrl+C`.
+- Source scan confirmed old yellow/warm-cream palette tokens were removed from active desktop, kitchen, shared UI, README, and progress files.
+
+Notes:
+- Dribbble and SaaS/POS dashboard references were used for broad visual direction only, not copied.
+- Remaining next UI pass should replace placeholder admin content with real CRUD tables/forms using the new design system.

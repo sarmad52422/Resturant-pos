@@ -61,8 +61,8 @@ export function KitchenPage() {
     <main className="min-h-screen p-6">
       <header className="mb-6 flex items-center justify-between">
         <div>
-          <p className="text-sm font-black uppercase tracking-wide text-orange-700">Kitchen screen</p>
-          <h1 className="text-4xl font-black capitalize text-espresso">{station} station</h1>
+          <p className="text-sm font-black uppercase tracking-[0.28em] text-[#7a7f73]">Kitchen screen</p>
+          <h1 className="mt-2 text-5xl font-black capitalize text-[#0d1717]">{station} station</h1>
         </div>
         <div className="flex items-center gap-3">
           <Badge tone="green">Live</Badge>
@@ -82,16 +82,16 @@ export function KitchenPage() {
               key={ticket.id}
               className={[
                 'p-5',
-                delayed ? 'border-orange-400 bg-orange-50' : 'bg-white',
+                delayed ? 'bg-[#e9fbfa]' : 'bg-white',
               ].join(' ')}
             >
               <div className="flex items-start justify-between gap-4">
                 <div>
                   <div className="flex items-center gap-2">
                     <h2 className="text-3xl font-black">{ticket.orderNumber}</h2>
-                    {delayed ? <Flame className="text-orange-600" size={26} /> : null}
+                    {delayed ? <Flame className="text-[#1ba09c]" size={26} /> : null}
                   </div>
-                  <p className="mt-1 text-lg font-bold text-stone-600">
+                  <p className="mt-1 text-lg font-bold text-[#697064]">
                     {ticket.orderType.replace('_', ' ')} {ticket.tableName ? `- ${ticket.tableName}` : ''}
                   </p>
                 </div>
@@ -105,19 +105,19 @@ export function KitchenPage() {
                 <div>
                   <h3 className="text-2xl font-black">{ticket.itemName}</h3>
                   {ticket.variationName ? (
-                    <p className="text-lg font-bold text-orange-700">{ticket.variationName}</p>
+                    <p className="text-lg font-bold text-[#1ba09c]">{ticket.variationName}</p>
                   ) : null}
                 </div>
               </div>
 
-              <div className="mt-5 space-y-2 text-lg font-bold text-stone-700">
+              <div className="mt-5 space-y-2 text-lg font-bold text-[#4d554d]">
                 {[...ticket.modifiers, ...ticket.addOns].map((line) => (
                   <p key={line}>- {line}</p>
                 ))}
-                {ticket.notes ? <p className="rounded-md bg-white p-3 text-orange-800">{ticket.notes}</p> : null}
+                {ticket.notes ? <p className="rounded-xl bg-[#f4fbfa] p-3 text-[#085655]">{ticket.notes}</p> : null}
               </div>
 
-              <div className="mt-6 flex items-center justify-between border-t border-orange-200 pt-4">
+              <div className="mt-6 flex items-center justify-between pt-4">
                 <span className="inline-flex items-center gap-2 text-lg font-black">
                   <Clock size={22} /> {minutes}m
                 </span>
