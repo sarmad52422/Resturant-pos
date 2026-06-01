@@ -1,0 +1,36 @@
+{
+  "name": "restaurantos-pos",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Production-grade RestaurantOS POS platform with Electron desktop, NestJS API, and kitchen web screen.",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "dev": "npm run dev:api --workspace @restaurantos/api",
+    "dev:api": "npm run dev --workspace @restaurantos/api",
+    "dev:desktop": "npm run dev --workspace @restaurantos/desktop",
+    "dev:kitchen": "npm run dev --workspace @restaurantos/kitchen-web",
+    "build": "npm run build --workspaces",
+    "typecheck": "npm run typecheck --workspaces",
+    "lint": "eslint .",
+    "format": "prettier --write .",
+    "prisma:generate": "npm run prisma:generate --workspace @restaurantos/api",
+    "db:migrate": "npm run db:migrate --workspace @restaurantos/api",
+    "db:seed": "npm run db:seed --workspace @restaurantos/api"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.28.0",
+    "electron": "^39.8.5",
+    "eslint": "^9.28.0",
+    "eslint-config-prettier": "^10.1.5",
+    "prettier": "^3.5.3",
+    "typescript": "^5.8.3",
+    "typescript-eslint": "^8.33.0"
+  },
+  "engines": {
+    "node": ">=22.0.0",
+    "npm": ">=10.0.0"
+  }
+}

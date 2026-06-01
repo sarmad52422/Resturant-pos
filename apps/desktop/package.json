@@ -1,0 +1,62 @@
+{
+  "name": "@restaurantos/desktop",
+  "version": "0.1.0",
+  "private": true,
+  "type": "commonjs",
+  "main": "out/main/main.js",
+  "scripts": {
+    "dev": "node scripts/dev-desktop.cjs",
+    "build": "tsc --noEmit && electron-vite build",
+    "typecheck": "tsc --noEmit",
+    "package": "electron-builder --win --linux"
+  },
+  "dependencies": {
+    "@hookform/resolvers": "^5.0.1",
+    "@restaurantos/shared": "*",
+    "@restaurantos/ui": "*",
+    "@tanstack/react-query": "^5.80.6",
+    "electron-updater": "^6.6.2",
+    "lucide-react": "^0.468.0",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
+    "react-hook-form": "^7.57.0",
+    "react-router-dom": "^7.6.1",
+    "socket.io-client": "^4.8.1",
+    "zod": "^3.25.36",
+    "zustand": "^5.0.5"
+  },
+  "devDependencies": {
+    "@types/node": "^22.15.29",
+    "@types/react": "^19.1.6",
+    "@types/react-dom": "^19.1.5",
+    "@vitejs/plugin-react": "^4.5.0",
+    "autoprefixer": "^10.4.21",
+    "electron": "^39.8.5",
+    "electron-builder": "^26.0.12",
+    "electron-vite": "^3.1.0",
+    "postcss": "^8.5.4",
+    "tailwindcss": "^3.4.17",
+    "typescript": "^5.8.3",
+    "vite": "^6.3.5"
+  },
+  "build": {
+    "appId": "com.restaurantos.pos",
+    "productName": "RestaurantOS POS",
+    "directories": {
+      "output": "release"
+    },
+    "files": [
+      "out/**"
+    ],
+    "win": {
+      "target": "nsis"
+    },
+    "linux": {
+      "target": [
+        "AppImage",
+        "deb"
+      ],
+      "category": "Office"
+    }
+  }
+}
