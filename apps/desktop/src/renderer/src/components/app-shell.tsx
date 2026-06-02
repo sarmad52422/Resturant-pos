@@ -10,6 +10,7 @@ import {
   Users,
   Minus,
   Square,
+  Table2,
   X,
   LogOut,
 } from 'lucide-react';
@@ -22,6 +23,7 @@ const navItems = [
   { to: '/menu', label: 'Menu', icon: ChefHat },
   { to: '/inventory', label: 'Inventory', icon: Boxes },
   { to: '/customers', label: 'Credit', icon: CreditCard },
+  { to: '/tables', label: 'Tables', icon: Table2 },
   { to: '/reports', label: 'Reports', icon: BarChart3 },
   { to: '/settings', label: 'Settings', icon: Settings },
 ];

@@ -17,6 +17,7 @@ const permissions = [
   'menu.manage',
   'customer.manage',
   'inventory.manage',
+  'table.manage',
   'user.manage',
   'report.view.profit',
 ] as const;
@@ -144,6 +145,25 @@ async function main() {
       where: { key },
       update: { group, value },
       create: { key, group, value },
+    });
+  }
+
+  const tables = [
+    ['T1', 'Main Hall', 2, 'FREE', 10],
+    ['T2', 'Main Hall', 4, 'FREE', 20],
+    ['T3', 'Main Hall', 4, 'OCCUPIED', 30],
+    ['T4', 'Main Hall', 6, 'WAITING_FOR_ORDER', 40],
+    ['F1', 'Family Room', 6, 'FREE', 50],
+    ['F2', 'Family Room', 8, 'RESERVED', 60],
+    ['P1', 'Patio', 4, 'FREE', 70],
+    ['P2', 'Patio', 4, 'CLEANING_REQUIRED', 80],
+  ] as const;
+
+  for (const [name, area, capacity, status, displayOrder] of tables) {
+    await prisma.table.upsert({
+      where: { name },
+      update: { area, capacity, status, displayOrder, active: true },
+      create: { name, area, capacity, status, displayOrder, active: true },
     });
   }
 

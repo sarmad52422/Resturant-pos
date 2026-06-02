@@ -112,6 +112,24 @@ Current admin endpoints:
 
 The desktop Menu, Customers, and Inventory pages now use these endpoints for real operational tables, compact create forms, permission-aware editable states, and active/hidden toggles where applicable.
 
+## Table System
+
+Current table endpoints:
+
+- `GET /tables` - Lists active dining areas, tables, current open order, reservation preview, and floor metrics.
+- `POST /tables` - Creates a table. Requires `table.manage`.
+- `PATCH /tables/:id` - Updates table metadata. Requires `table.manage`.
+- `PATCH /tables/:id/status` - Updates table status. Requires `table.manage`.
+- `POST /tables/:id/start-order` - Starts or returns an open dine-in draft order. Requires `order.create`.
+
+Seeded table areas:
+
+- Main Hall
+- Family Room
+- Patio
+
+The desktop Tables page provides area filters, top-down visual table cards with chairs, covers/availability metrics, quick clean/free/reserve controls, dine-in order start, and a compact create-table form.
+
 ## Brand Theme
 
 The shared theme foundation lives in:
@@ -169,6 +187,7 @@ Current POS visual shortcut hints:
 - `F2` - Focus/search item flow.
 - `F5` - Send to kitchen flow.
 - `F7` - Payment flow.
+- `F10` - Open table screen.
 
 Planned POS workflow shortcuts:
 
@@ -194,6 +213,8 @@ Planned POS workflow shortcuts:
 - `+` - Increase quantity.
 - `-` - Decrease quantity.
 - Arrow keys - Navigate grids, tickets, tables, and lists.
+
+Implementation note: POS workflow shortcuts should be wired in a dedicated keyboard workflow phase after the real order, payment, hold/recall, table, and print flows are implemented. Current shortcut labels are UI hints unless listed under current app window shortcuts.
 
 Future admin shortcuts will be documented here as modules are implemented.
 

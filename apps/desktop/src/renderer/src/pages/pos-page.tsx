@@ -1,4 +1,5 @@
 import { useMemo } from 'react';
+import { Link } from 'react-router-dom';
 import { Badge, Button, Card } from '@restaurantos/ui';
 import {
   Keyboard,
@@ -8,6 +9,7 @@ import {
   Search,
   Send,
   Sparkles,
+  Table2,
   Trash2,
   WalletCards,
 } from 'lucide-react';
@@ -163,14 +165,24 @@ export function PosPage() {
         </div>
 
         <Card className="mt-4 bg-sage p-4 shadow-none">
-          <div className="flex items-center gap-2 text-sm font-black text-secondary">
-            <Keyboard size={17} />
-            Shortcut card
+          <div className="flex items-center justify-between gap-3">
+            <div className="flex items-center gap-2 text-sm font-black text-secondary">
+              <Keyboard size={17} />
+              Shortcut card
+            </div>
+            <Link
+              className="inline-flex h-9 items-center gap-2 rounded-xl bg-white px-3 text-xs font-black text-secondary shadow-[inset_0_0_0_1px_rgb(var(--ro-secondary-rgb)/0.08)] hover:bg-mint"
+              to="/tables"
+            >
+              <Table2 size={15} />
+              F10
+            </Link>
           </div>
           <div className="mt-3 grid grid-cols-2 gap-2 text-xs font-bold text-muted">
             <span>F2 Search</span>
             <span>F5 Kitchen</span>
             <span>F7 Payment</span>
+            <span>F10 Tables</span>
             <span>Ctrl+Shift+F Max</span>
             <span>Ctrl+Shift+M Min</span>
             <span>Ctrl+Shift+Q Close</span>

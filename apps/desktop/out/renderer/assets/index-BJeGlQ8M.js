@@ -22114,6 +22114,24 @@ const Archive = createLucideIcon("Archive", [
  * This source code is licensed under the ISC license.
  * See the LICENSE file in the root directory of this source tree.
  */
+const Armchair = createLucideIcon("Armchair", [
+  ["path", { d: "M19 9V6a2 2 0 0 0-2-2H7a2 2 0 0 0-2 2v3", key: "irtipd" }],
+  [
+    "path",
+    {
+      d: "M3 16a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-5a2 2 0 0 0-4 0v1.5a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5V11a2 2 0 0 0-4 0z",
+      key: "1qyhux"
+    }
+  ],
+  ["path", { d: "M5 18v2", key: "ppbyun" }],
+  ["path", { d: "M19 18v2", key: "gy7782" }]
+]);
+/**
+ * @license lucide-react v0.468.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */
 const Boxes = createLucideIcon("Boxes", [
   [
     "path",
@@ -22194,6 +22212,36 @@ const CircleAlert = createLucideIcon("CircleAlert", [
 const CircleCheck = createLucideIcon("CircleCheck", [
   ["circle", { cx: "12", cy: "12", r: "10", key: "1mglay" }],
   ["path", { d: "m9 12 2 2 4-4", key: "dzmm74" }]
+]);
+/**
+ * @license lucide-react v0.468.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */
+const ClipboardList = createLucideIcon("ClipboardList", [
+  ["rect", { width: "8", height: "4", x: "8", y: "2", rx: "1", ry: "1", key: "tgr4d6" }],
+  [
+    "path",
+    {
+      d: "M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2",
+      key: "116196"
+    }
+  ],
+  ["path", { d: "M12 11h4", key: "1jrz19" }],
+  ["path", { d: "M12 16h4", key: "n85exb" }],
+  ["path", { d: "M8 11h.01", key: "1dfujw" }],
+  ["path", { d: "M8 16h.01", key: "18s6g9" }]
+]);
+/**
+ * @license lucide-react v0.468.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */
+const Clock3 = createLucideIcon("Clock3", [
+  ["circle", { cx: "12", cy: "12", r: "10", key: "1mglay" }],
+  ["polyline", { points: "12 6 12 12 16.5 12", key: "1aq6pp" }]
 ]);
 /**
  * @license lucide-react v0.468.0 - ISC
@@ -22484,6 +22532,21 @@ const Store = createLucideIcon("Store", [
  * This source code is licensed under the ISC license.
  * See the LICENSE file in the root directory of this source tree.
  */
+const Table2 = createLucideIcon("Table2", [
+  [
+    "path",
+    {
+      d: "M9 3H5a2 2 0 0 0-2 2v4m6-6h10a2 2 0 0 1 2 2v4M9 3v18m0 0h10a2 2 0 0 0 2-2V9M9 21H5a2 2 0 0 1-2-2V9m0 0h18",
+      key: "gugj83"
+    }
+  ]
+]);
+/**
+ * @license lucide-react v0.468.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */
 const Trash2 = createLucideIcon("Trash2", [
   ["path", { d: "M3 6h18", key: "d0wm0j" }],
   ["path", { d: "M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6", key: "4alrt4" }],
@@ -22510,6 +22573,17 @@ const TrendingDown = createLucideIcon("TrendingDown", [
 const UserRound = createLucideIcon("UserRound", [
   ["circle", { cx: "12", cy: "8", r: "5", key: "1hypcn" }],
   ["path", { d: "M20 21a8 8 0 0 0-16 0", key: "rfgkzh" }]
+]);
+/**
+ * @license lucide-react v0.468.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */
+const UsersRound = createLucideIcon("UsersRound", [
+  ["path", { d: "M18 21a8 8 0 0 0-16 0", key: "3ypg7q" }],
+  ["circle", { cx: "10", cy: "8", r: "5", key: "o932ke" }],
+  ["path", { d: "M22 20c0-3.37-2-6.5-4-8a5 5 0 0 0-.45-8.3", key: "10s06x" }]
 ]);
 /**
  * @license lucide-react v0.468.0 - ISC
@@ -22882,6 +22956,7 @@ const navItems = [
   { to: "/menu", label: "Menu", icon: ChefHat },
   { to: "/inventory", label: "Inventory", icon: Boxes },
   { to: "/customers", label: "Credit", icon: CreditCard },
+  { to: "/tables", label: "Tables", icon: Table2 },
   { to: "/reports", label: "Reports", icon: ChartColumn },
   { to: "/settings", label: "Settings", icon: Settings }
 ];
@@ -25509,7 +25584,7 @@ function Card({ className, ...props }) {
     }
   );
 }
-const fieldClass$3 = "h-11 w-full rounded-xl border border-field bg-white px-3 text-sm font-semibold text-espresso outline-none transition focus:border-primary focus:ring-4 focus:ring-primary/10";
+const fieldClass$4 = "h-11 w-full rounded-xl border border-field bg-white px-3 text-sm font-semibold text-espresso outline-none transition focus:border-primary focus:ring-4 focus:ring-primary/10";
 const money$2 = new Intl.NumberFormat("en-PK", { maximumFractionDigits: 0, style: "currency", currency: "PKR" });
 function CustomersPage() {
   const queryClient2 = useQueryClient();
@@ -25552,9 +25627,9 @@ function CustomersPage() {
       /* @__PURE__ */ jsxRuntimeExports.jsx(Badge, { tone: canManageCustomers ? "green" : "orange", children: canManageCustomers ? "Editable" : "View only" })
     ] }),
     /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mt-6 grid grid-cols-3 gap-4", children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsx(Metric$2, { icon: /* @__PURE__ */ jsxRuntimeExports.jsx(UserRound, { size: 19 }), label: "Customers", value: customersQuery.data?.metrics.totalCustomers ?? 0 }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx(Metric$3, { icon: /* @__PURE__ */ jsxRuntimeExports.jsx(UserRound, { size: 19 }), label: "Customers", value: customersQuery.data?.metrics.totalCustomers ?? 0 }),
       /* @__PURE__ */ jsxRuntimeExports.jsx(
-        Metric$2,
+        Metric$3,
         {
           icon: /* @__PURE__ */ jsxRuntimeExports.jsx(CreditCard, { size: 19 }),
           label: "Credit accounts",
@@ -25562,7 +25637,7 @@ function CustomersPage() {
         }
       ),
       /* @__PURE__ */ jsxRuntimeExports.jsx(
-        Metric$2,
+        Metric$3,
         {
           icon: /* @__PURE__ */ jsxRuntimeExports.jsx(CreditCard, { size: 19 }),
           label: "Receivable",
@@ -25609,7 +25684,7 @@ function CustomersPage() {
           /* @__PURE__ */ jsxRuntimeExports.jsx(
             "input",
             {
-              className: fieldClass$3,
+              className: fieldClass$4,
               disabled: !canManageCustomers,
               placeholder: "Customer name",
               value: name,
@@ -25619,7 +25694,7 @@ function CustomersPage() {
           /* @__PURE__ */ jsxRuntimeExports.jsx(
             "input",
             {
-              className: fieldClass$3,
+              className: fieldClass$4,
               disabled: !canManageCustomers,
               placeholder: "Phone",
               value: phone,
@@ -25629,7 +25704,7 @@ function CustomersPage() {
           /* @__PURE__ */ jsxRuntimeExports.jsx(
             "input",
             {
-              className: fieldClass$3,
+              className: fieldClass$4,
               disabled: !canManageCustomers,
               min: "0",
               placeholder: "Credit limit",
@@ -25653,7 +25728,7 @@ function CustomersPage() {
     ] })
   ] });
 }
-function Metric$2({ icon, label, value }) {
+function Metric$3({ icon, label, value }) {
   return /* @__PURE__ */ jsxRuntimeExports.jsxs(Card, { className: "flex items-center justify-between p-5", children: [
     /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
       /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm font-black text-muted", children: label }),
@@ -25706,7 +25781,7 @@ function DashboardPage() {
     ] })
   ] });
 }
-const fieldClass$2 = "h-11 w-full rounded-xl border border-field bg-white px-3 text-sm font-semibold text-espresso outline-none transition focus:border-primary focus:ring-4 focus:ring-primary/10";
+const fieldClass$3 = "h-11 w-full rounded-xl border border-field bg-white px-3 text-sm font-semibold text-espresso outline-none transition focus:border-primary focus:ring-4 focus:ring-primary/10";
 const money$1 = new Intl.NumberFormat("en-PK", { maximumFractionDigits: 0, style: "currency", currency: "PKR" });
 function InventoryPage() {
   const queryClient2 = useQueryClient();
@@ -25780,9 +25855,9 @@ function InventoryPage() {
       /* @__PURE__ */ jsxRuntimeExports.jsx(Badge, { tone: canManageInventory ? "green" : "orange", children: canManageInventory ? "Editable" : "View only" })
     ] }),
     /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mt-6 grid grid-cols-3 gap-4", children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsx(Metric$1, { icon: /* @__PURE__ */ jsxRuntimeExports.jsx(Archive, { size: 19 }), label: "Active stock items", value: inventoryQuery.data?.metrics.activeItems ?? 0 }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx(Metric$2, { icon: /* @__PURE__ */ jsxRuntimeExports.jsx(Archive, { size: 19 }), label: "Active stock items", value: inventoryQuery.data?.metrics.activeItems ?? 0 }),
       /* @__PURE__ */ jsxRuntimeExports.jsx(
-        Metric$1,
+        Metric$2,
         {
           icon: /* @__PURE__ */ jsxRuntimeExports.jsx(TrendingDown, { size: 19 }),
           label: "Low stock",
@@ -25790,7 +25865,7 @@ function InventoryPage() {
         }
       ),
       /* @__PURE__ */ jsxRuntimeExports.jsx(
-        Metric$1,
+        Metric$2,
         {
           icon: /* @__PURE__ */ jsxRuntimeExports.jsx(PackagePlus, { size: 19 }),
           label: "Stock value",
@@ -25858,7 +25933,7 @@ function InventoryPage() {
           /* @__PURE__ */ jsxRuntimeExports.jsx(
             "input",
             {
-              className: fieldClass$2,
+              className: fieldClass$3,
               disabled: !canManageInventory,
               placeholder: "Item name",
               value: name,
@@ -25868,7 +25943,7 @@ function InventoryPage() {
           /* @__PURE__ */ jsxRuntimeExports.jsx(
             "input",
             {
-              className: fieldClass$2,
+              className: fieldClass$3,
               disabled: !canManageInventory,
               placeholder: "Category",
               value: category,
@@ -25879,7 +25954,7 @@ function InventoryPage() {
             /* @__PURE__ */ jsxRuntimeExports.jsx(
               "input",
               {
-                className: fieldClass$2,
+                className: fieldClass$3,
                 disabled: !canManageInventory,
                 min: "0",
                 placeholder: "On hand",
@@ -25891,7 +25966,7 @@ function InventoryPage() {
             /* @__PURE__ */ jsxRuntimeExports.jsx(
               "input",
               {
-                className: fieldClass$2,
+                className: fieldClass$3,
                 disabled: !canManageInventory,
                 min: "0",
                 placeholder: "Minimum",
@@ -25904,7 +25979,7 @@ function InventoryPage() {
           /* @__PURE__ */ jsxRuntimeExports.jsx(
             "input",
             {
-              className: fieldClass$2,
+              className: fieldClass$3,
               disabled: !canManageInventory,
               min: "0",
               placeholder: "Average cost",
@@ -25917,7 +25992,7 @@ function InventoryPage() {
             /* @__PURE__ */ jsxRuntimeExports.jsx(
               "select",
               {
-                className: fieldClass$2,
+                className: fieldClass$3,
                 disabled: !canManageInventory,
                 value: selectedPurchaseUnitId,
                 onChange: (event) => setPurchaseUnitId(event.target.value),
@@ -25930,7 +26005,7 @@ function InventoryPage() {
             /* @__PURE__ */ jsxRuntimeExports.jsx(
               "select",
               {
-                className: fieldClass$2,
+                className: fieldClass$3,
                 disabled: !canManageInventory,
                 value: selectedUsageUnitId,
                 onChange: (event) => setUsageUnitId(event.target.value),
@@ -25944,7 +26019,7 @@ function InventoryPage() {
           /* @__PURE__ */ jsxRuntimeExports.jsxs(
             "select",
             {
-              className: fieldClass$2,
+              className: fieldClass$3,
               disabled: !canManageInventory,
               value: supplierId,
               onChange: (event) => setSupplierId(event.target.value),
@@ -25969,7 +26044,7 @@ function InventoryPage() {
     ] })
   ] });
 }
-function Metric$1({ icon, label, value }) {
+function Metric$2({ icon, label, value }) {
   return /* @__PURE__ */ jsxRuntimeExports.jsxs(Card, { className: "flex items-center justify-between p-5", children: [
     /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
       /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm font-black text-muted", children: label }),
@@ -31753,7 +31828,7 @@ function LoginPage() {
     ] }) })
   ] });
 }
-const fieldClass$1 = "h-11 w-full rounded-xl border border-field bg-white px-3 text-sm font-semibold text-espresso outline-none transition focus:border-primary focus:ring-4 focus:ring-primary/10";
+const fieldClass$2 = "h-11 w-full rounded-xl border border-field bg-white px-3 text-sm font-semibold text-espresso outline-none transition focus:border-primary focus:ring-4 focus:ring-primary/10";
 const money = new Intl.NumberFormat("en-PK", { maximumFractionDigits: 0, style: "currency", currency: "PKR" });
 function MenuPage() {
   const queryClient2 = useQueryClient();
@@ -31837,10 +31912,10 @@ function MenuPage() {
       /* @__PURE__ */ jsxRuntimeExports.jsx(Badge, { tone: canManageMenu ? "green" : "orange", children: canManageMenu ? "Editable" : "View only" })
     ] }),
     /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mt-6 grid grid-cols-3 gap-4", children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsx(Metric, { icon: /* @__PURE__ */ jsxRuntimeExports.jsx(Boxes, { size: 19 }), label: "Active categories", value: menuQuery.data?.metrics.activeCategories ?? 0 }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx(Metric, { icon: /* @__PURE__ */ jsxRuntimeExports.jsx(Utensils, { size: 19 }), label: "Active items", value: menuQuery.data?.metrics.activeItems ?? 0 }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx(Metric$1, { icon: /* @__PURE__ */ jsxRuntimeExports.jsx(Boxes, { size: 19 }), label: "Active categories", value: menuQuery.data?.metrics.activeCategories ?? 0 }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx(Metric$1, { icon: /* @__PURE__ */ jsxRuntimeExports.jsx(Utensils, { size: 19 }), label: "Active items", value: menuQuery.data?.metrics.activeItems ?? 0 }),
       /* @__PURE__ */ jsxRuntimeExports.jsx(
-        Metric,
+        Metric$1,
         {
           icon: /* @__PURE__ */ jsxRuntimeExports.jsx(CircleCheck, { size: 19 }),
           label: "Recipe linked",
@@ -31904,7 +31979,7 @@ function MenuPage() {
             /* @__PURE__ */ jsxRuntimeExports.jsx(
               "input",
               {
-                className: fieldClass$1,
+                className: fieldClass$2,
                 disabled: !canManageMenu,
                 placeholder: "Category name",
                 value: categoryName,
@@ -31914,7 +31989,7 @@ function MenuPage() {
             /* @__PURE__ */ jsxRuntimeExports.jsxs(
               "select",
               {
-                className: fieldClass$1,
+                className: fieldClass$2,
                 disabled: !canManageMenu,
                 value: categoryStationId,
                 onChange: (event) => setCategoryStationId(event.target.value),
@@ -31942,7 +32017,7 @@ function MenuPage() {
             /* @__PURE__ */ jsxRuntimeExports.jsx(
               "input",
               {
-                className: fieldClass$1,
+                className: fieldClass$2,
                 disabled: !canManageMenu,
                 placeholder: "Item name",
                 value: itemName,
@@ -31953,7 +32028,7 @@ function MenuPage() {
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 "input",
                 {
-                  className: fieldClass$1,
+                  className: fieldClass$2,
                   disabled: !canManageMenu,
                   min: "0",
                   placeholder: "Price",
@@ -31965,7 +32040,7 @@ function MenuPage() {
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 "select",
                 {
-                  className: fieldClass$1,
+                  className: fieldClass$2,
                   disabled: !canManageMenu || categories2.length === 0,
                   value: selectedItemCategoryId,
                   onChange: (event) => setItemCategoryId(event.target.value),
@@ -31976,7 +32051,7 @@ function MenuPage() {
             /* @__PURE__ */ jsxRuntimeExports.jsxs(
               "select",
               {
-                className: fieldClass$1,
+                className: fieldClass$2,
                 disabled: !canManageMenu,
                 value: itemStationId,
                 onChange: (event) => setItemStationId(event.target.value),
@@ -32002,7 +32077,7 @@ function MenuPage() {
     ] })
   ] });
 }
-function Metric({ icon, label, value }) {
+function Metric$1({ icon, label, value }) {
   return /* @__PURE__ */ jsxRuntimeExports.jsxs(Card, { className: "flex items-center justify-between p-5", children: [
     /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
       /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm font-black text-muted", children: label }),
@@ -32167,14 +32242,28 @@ function PosPage() {
         ] })
       ] }, line.id)) }),
       /* @__PURE__ */ jsxRuntimeExports.jsxs(Card, { className: "mt-4 bg-sage p-4 shadow-none", children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-2 text-sm font-black text-secondary", children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx(Keyboard, { size: 17 }),
-          "Shortcut card"
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center justify-between gap-3", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-2 text-sm font-black text-secondary", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx(Keyboard, { size: 17 }),
+            "Shortcut card"
+          ] }),
+          /* @__PURE__ */ jsxRuntimeExports.jsxs(
+            Link,
+            {
+              className: "inline-flex h-9 items-center gap-2 rounded-xl bg-white px-3 text-xs font-black text-secondary shadow-[inset_0_0_0_1px_rgb(var(--ro-secondary-rgb)/0.08)] hover:bg-mint",
+              to: "/tables",
+              children: [
+                /* @__PURE__ */ jsxRuntimeExports.jsx(Table2, { size: 15 }),
+                "F10"
+              ]
+            }
+          )
         ] }),
         /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mt-3 grid grid-cols-2 gap-2 text-xs font-bold text-muted", children: [
           /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: "F2 Search" }),
           /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: "F5 Kitchen" }),
           /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: "F7 Payment" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: "F10 Tables" }),
           /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: "Ctrl+Shift+F Max" }),
           /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: "Ctrl+Shift+M Min" }),
           /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: "Ctrl+Shift+Q Close" })
@@ -32229,7 +32318,7 @@ const settingsSchema = objectType({
   kitchenDelayMinutes: coerce.number().int().min(1).max(180),
   shiftFloatRequired: booleanType()
 });
-const fieldClass = "mt-2 h-12 w-full rounded-xl border border-field bg-white px-4 text-sm font-semibold text-espresso outline-none transition focus:border-primary focus:ring-4 focus:ring-primary/10";
+const fieldClass$1 = "mt-2 h-12 w-full rounded-xl border border-field bg-white px-4 text-sm font-semibold text-espresso outline-none transition focus:border-primary focus:ring-4 focus:ring-primary/10";
 const textareaClass = "mt-2 min-h-24 w-full resize-none rounded-xl border border-field bg-white px-4 py-3 text-sm font-semibold text-espresso outline-none transition focus:border-primary focus:ring-4 focus:ring-primary/10";
 const defaultValues = {
   businessName: "RestaurantOS Demo Cafe",
@@ -32359,10 +32448,10 @@ function SettingsPage() {
           ] })
         ] }),
         /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mt-6 grid grid-cols-2 gap-4", children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx(Field, { label: "Business name", error: errors.businessName?.message, children: /* @__PURE__ */ jsxRuntimeExports.jsx("input", { className: fieldClass, ...register("businessName") }) }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx(Field, { label: "Branch", error: errors.branchName?.message, children: /* @__PURE__ */ jsxRuntimeExports.jsx("input", { className: fieldClass, ...register("branchName") }) }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx(Field, { label: "Phone", error: errors.phone?.message, children: /* @__PURE__ */ jsxRuntimeExports.jsx("input", { className: fieldClass, ...register("phone") }) }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx(Field, { label: "Currency", error: errors.currency?.message, children: /* @__PURE__ */ jsxRuntimeExports.jsx("input", { className: fieldClass, ...register("currency") }) })
+          /* @__PURE__ */ jsxRuntimeExports.jsx(Field, { label: "Business name", error: errors.businessName?.message, children: /* @__PURE__ */ jsxRuntimeExports.jsx("input", { className: fieldClass$1, ...register("businessName") }) }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx(Field, { label: "Branch", error: errors.branchName?.message, children: /* @__PURE__ */ jsxRuntimeExports.jsx("input", { className: fieldClass$1, ...register("branchName") }) }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx(Field, { label: "Phone", error: errors.phone?.message, children: /* @__PURE__ */ jsxRuntimeExports.jsx("input", { className: fieldClass$1, ...register("phone") }) }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx(Field, { label: "Currency", error: errors.currency?.message, children: /* @__PURE__ */ jsxRuntimeExports.jsx("input", { className: fieldClass$1, ...register("currency") }) })
         ] }),
         /* @__PURE__ */ jsxRuntimeExports.jsx(Field, { className: "mt-4", label: "Address", error: errors.address?.message, children: /* @__PURE__ */ jsxRuntimeExports.jsx("textarea", { className: textareaClass, ...register("address") }) })
       ] }),
@@ -32375,8 +32464,8 @@ function SettingsPage() {
           ] })
         ] }),
         /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mt-6 grid grid-cols-2 gap-4", children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx(Field, { label: "Tax percent", error: errors.defaultTaxPercent?.message, children: /* @__PURE__ */ jsxRuntimeExports.jsx("input", { className: fieldClass, type: "number", step: "0.01", ...register("defaultTaxPercent") }) }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx(Field, { label: "Service charge", error: errors.serviceChargePercent?.message, children: /* @__PURE__ */ jsxRuntimeExports.jsx("input", { className: fieldClass, type: "number", step: "0.01", ...register("serviceChargePercent") }) })
+          /* @__PURE__ */ jsxRuntimeExports.jsx(Field, { label: "Tax percent", error: errors.defaultTaxPercent?.message, children: /* @__PURE__ */ jsxRuntimeExports.jsx("input", { className: fieldClass$1, type: "number", step: "0.01", ...register("defaultTaxPercent") }) }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx(Field, { label: "Service charge", error: errors.serviceChargePercent?.message, children: /* @__PURE__ */ jsxRuntimeExports.jsx("input", { className: fieldClass$1, type: "number", step: "0.01", ...register("serviceChargePercent") }) })
         ] }),
         /* @__PURE__ */ jsxRuntimeExports.jsx(Field, { className: "mt-4", label: "Receipt footer", error: errors.receiptFooter?.message, children: /* @__PURE__ */ jsxRuntimeExports.jsx("textarea", { className: textareaClass, ...register("receiptFooter") }) }),
         /* @__PURE__ */ jsxRuntimeExports.jsx(Toggle, { label: "Print customer copy by default", ...register("printCustomerCopy") })
@@ -32390,8 +32479,8 @@ function SettingsPage() {
           ] })
         ] }),
         /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mt-6 grid grid-cols-2 gap-4", children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx(Field, { label: "Low stock threshold", error: errors.lowStockThreshold?.message, children: /* @__PURE__ */ jsxRuntimeExports.jsx("input", { className: fieldClass, type: "number", ...register("lowStockThreshold") }) }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx(Field, { label: "Kitchen delay minutes", error: errors.kitchenDelayMinutes?.message, children: /* @__PURE__ */ jsxRuntimeExports.jsx("input", { className: fieldClass, type: "number", ...register("kitchenDelayMinutes") }) })
+          /* @__PURE__ */ jsxRuntimeExports.jsx(Field, { label: "Low stock threshold", error: errors.lowStockThreshold?.message, children: /* @__PURE__ */ jsxRuntimeExports.jsx("input", { className: fieldClass$1, type: "number", ...register("lowStockThreshold") }) }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx(Field, { label: "Kitchen delay minutes", error: errors.kitchenDelayMinutes?.message, children: /* @__PURE__ */ jsxRuntimeExports.jsx("input", { className: fieldClass$1, type: "number", ...register("kitchenDelayMinutes") }) })
         ] }),
         /* @__PURE__ */ jsxRuntimeExports.jsx(Toggle, { label: "Require opening cash float for shifts", ...register("shiftFloatRequired") })
       ] }),
@@ -32423,6 +32512,429 @@ function Toggle({ label, ...props }) {
     )
   ] });
 }
+const statusLabels = {
+  FREE: "Free",
+  OCCUPIED: "Occupied",
+  RESERVED: "Reserved",
+  WAITING_FOR_ORDER: "Waiting",
+  SENT_TO_KITCHEN: "Kitchen",
+  PREPARING: "Preparing",
+  READY: "Ready",
+  SERVED: "Served",
+  BILL_REQUESTED: "Bill",
+  PAYMENT_PENDING: "Payment",
+  CLEANING_REQUIRED: "Cleaning"
+};
+const busyStatuses = /* @__PURE__ */ new Set([
+  "OCCUPIED",
+  "WAITING_FOR_ORDER",
+  "SENT_TO_KITCHEN",
+  "PREPARING",
+  "READY",
+  "SERVED",
+  "BILL_REQUESTED",
+  "PAYMENT_PENDING"
+]);
+function TableCard({
+  canCreateOrder,
+  canManageTables,
+  loading,
+  onStartOrder,
+  onStatus,
+  table
+}) {
+  const busy = busyStatuses.has(table.status);
+  const canStart = canCreateOrder && !busy && table.status !== "RESERVED";
+  const orderAge = table.currentOrder ? formatOrderAge(table.currentOrder.createdAt) : null;
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs(
+    "div",
+    {
+      className: [
+        "group relative min-h-[306px] overflow-hidden rounded-2xl border p-4 shadow-[0_18px_46px_rgb(var(--ro-secondary-rgb)/0.08)] transition hover:-translate-y-0.5 hover:shadow-[0_24px_56px_rgb(var(--ro-secondary-rgb)/0.12)]",
+        statusSurface(table.status),
+        statusBorder(table.status)
+      ].join(" "),
+      children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: `absolute inset-x-0 top-0 h-1.5 ${statusBar(table.status)}` }),
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-start justify-between gap-3", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs font-black uppercase tracking-[0.18em] text-muted", children: table.area ?? "Main Floor" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "mt-2 text-3xl font-black text-espresso", children: table.name })
+          ] }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx(Badge, { tone: statusTone(table.status), children: statusLabels[table.status] })
+        ] }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx(TableVisual, { capacity: table.capacity, status: table.status }),
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mt-4 grid grid-cols-2 gap-2 text-xs font-black", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "rounded-xl bg-white/80 px-3 py-2 text-label shadow-[inset_0_0_0_1px_rgb(var(--ro-secondary-rgb)/0.06)]", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "block text-[10px] uppercase tracking-[0.16em] text-muted", children: "Covers" }),
+            table.capacity
+          ] }),
+          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "rounded-xl bg-white/80 px-3 py-2 text-label shadow-[inset_0_0_0_1px_rgb(var(--ro-secondary-rgb)/0.06)]", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "block text-[10px] uppercase tracking-[0.16em] text-muted", children: "Order" }),
+            table.currentOrder?.orderNumber ?? "None"
+          ] })
+        ] }),
+        orderAge ? /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mt-3 flex items-center gap-2 rounded-xl bg-white/80 px-3 py-2 text-xs font-black text-secondary shadow-[inset_0_0_0_1px_rgb(var(--ro-secondary-rgb)/0.06)]", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx(Clock3, { size: 14 }),
+          "Open for ",
+          orderAge
+        ] }) : null,
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mt-4 grid grid-cols-2 gap-2", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx(
+            Button,
+            {
+              className: "h-10 px-2",
+              disabled: !canStart || loading,
+              variant: canStart ? "primary" : "secondary",
+              onClick: onStartOrder,
+              children: "Start"
+            }
+          ),
+          /* @__PURE__ */ jsxRuntimeExports.jsx(
+            Button,
+            {
+              className: "h-10 px-2",
+              disabled: !canManageTables || loading,
+              variant: "secondary",
+              onClick: () => onStatus(table.status === "CLEANING_REQUIRED" ? "FREE" : "CLEANING_REQUIRED"),
+              children: "Clean"
+            }
+          )
+        ] }),
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mt-2 grid grid-cols-2 gap-2", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx(
+            "button",
+            {
+              className: "h-8 rounded-lg bg-white text-xs font-black text-secondary shadow-[inset_0_0_0_1px_rgb(var(--ro-secondary-rgb)/0.08)] transition hover:bg-mint disabled:opacity-50",
+              disabled: !canManageTables || loading,
+              onClick: () => onStatus("FREE"),
+              children: "Free"
+            }
+          ),
+          /* @__PURE__ */ jsxRuntimeExports.jsx(
+            "button",
+            {
+              className: "h-8 rounded-lg bg-white text-xs font-black text-secondary shadow-[inset_0_0_0_1px_rgb(var(--ro-secondary-rgb)/0.08)] transition hover:bg-mint disabled:opacity-50",
+              disabled: !canManageTables || loading,
+              onClick: () => onStatus("RESERVED"),
+              children: "Reserve"
+            }
+          )
+        ] })
+      ]
+    }
+  );
+}
+function TableVisual({ capacity, status }) {
+  const chairCount = Math.min(Math.max(capacity, 2), 8);
+  const chairs = Array.from({ length: chairCount });
+  const rectangular = capacity >= 5;
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "relative mx-auto mt-5 h-32 w-44", children: [
+    chairs.map((_, index) => /* @__PURE__ */ jsxRuntimeExports.jsx(
+      ChairSvg,
+      {
+        className: [
+          "absolute h-9 w-9 drop-shadow-sm",
+          chairTone(status),
+          chairPosition(index, chairCount)
+        ].join(" "),
+        strokeClassName: chairStroke()
+      },
+      index
+    )),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(
+      "div",
+      {
+        className: [
+          "absolute left-1/2 top-1/2 flex -translate-x-1/2 -translate-y-1/2 items-center justify-center border-2 text-lg font-black shadow-[0_18px_42px_rgb(var(--ro-secondary-rgb)/0.14)]",
+          rectangular ? "h-[72px] w-28 rounded-2xl" : "h-24 w-24 rounded-full",
+          tableTopColor(status)
+        ].join(" "),
+        children: /* @__PURE__ */ jsxRuntimeExports.jsx(Armchair, { size: 26 })
+      }
+    )
+  ] });
+}
+function ChairSvg({ className, strokeClassName }) {
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("svg", { className, viewBox: "0 0 36 36", "aria-hidden": "true", fill: "none", children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx(
+      "path",
+      {
+        d: "M10 8.5C10 5.46 12.46 3 15.5 3h5C23.54 3 26 5.46 26 8.5V17H10V8.5Z",
+        fill: "currentColor",
+        opacity: "0.95"
+      }
+    ),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(
+      "path",
+      {
+        d: "M7 18.5C7 16.57 8.57 15 10.5 15h15c1.93 0 3.5 1.57 3.5 3.5V23H7v-4.5Z",
+        fill: "currentColor"
+      }
+    ),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("path", { d: "M9 23h3v8H9v-8ZM24 23h3v8h-3v-8Z", fill: "currentColor", opacity: "0.72" }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(
+      "path",
+      {
+        d: "M10 8.5C10 5.46 12.46 3 15.5 3h5C23.54 3 26 5.46 26 8.5V17H10V8.5ZM7 23h22",
+        className: strokeClassName,
+        strokeWidth: "1.5"
+      }
+    )
+  ] });
+}
+function statusTone(status) {
+  if (status === "FREE") return "green";
+  if (status === "RESERVED") return "blue";
+  if (status === "CLEANING_REQUIRED") return "red";
+  if (status === "PAYMENT_PENDING" || status === "BILL_REQUESTED") return "orange";
+  return "gray";
+}
+function statusSurface(status) {
+  if (status === "FREE") return "bg-white";
+  if (status === "RESERVED") return "bg-sky-50";
+  if (status === "CLEANING_REQUIRED") return "bg-red-50";
+  if (status === "PAYMENT_PENDING" || status === "BILL_REQUESTED") return "bg-mint";
+  return "bg-sage";
+}
+function statusBorder(status) {
+  if (status === "FREE") return "border-successRing";
+  if (status === "RESERVED") return "border-sky-200";
+  if (status === "CLEANING_REQUIRED") return "border-red-200";
+  if (status === "PAYMENT_PENDING" || status === "BILL_REQUESTED") return "border-accentSoft";
+  return "border-line";
+}
+function statusBar(status) {
+  if (status === "FREE") return "bg-primary";
+  if (status === "RESERVED") return "bg-sky-500";
+  if (status === "CLEANING_REQUIRED") return "bg-red-500";
+  if (status === "PAYMENT_PENDING" || status === "BILL_REQUESTED") return "bg-amber-500";
+  return "bg-secondary";
+}
+function tableTopColor(status) {
+  if (status === "FREE") return "border-primary bg-white text-secondary";
+  if (status === "RESERVED") return "border-sky-500 bg-white text-sky-700";
+  if (status === "CLEANING_REQUIRED") return "border-red-500 bg-white text-red-700";
+  if (status === "PAYMENT_PENDING" || status === "BILL_REQUESTED") {
+    return "border-amber-500 bg-white text-amber-700";
+  }
+  return "border-secondary bg-secondary text-white";
+}
+function chairTone(status) {
+  if (status === "FREE") return "text-successRing";
+  if (status === "RESERVED") return "text-sky-200";
+  if (status === "CLEANING_REQUIRED") return "text-red-200";
+  if (status === "PAYMENT_PENDING" || status === "BILL_REQUESTED") return "text-amber-200";
+  return "text-deepSoft";
+}
+function chairStroke(_status) {
+  return "stroke-secondary/30";
+}
+function chairPosition(index, count) {
+  if (count <= 2) return ["left-1/2 -top-4 -translate-x-1/2", "-bottom-4 left-1/2 -translate-x-1/2 rotate-180"][index];
+  const positions = [
+    "left-1/2 -top-4 -translate-x-1/2",
+    "-bottom-4 left-1/2 -translate-x-1/2 rotate-180",
+    "left-1 top-1/2 -translate-y-1/2 -rotate-90",
+    "right-1 top-1/2 -translate-y-1/2 rotate-90",
+    "left-7 -top-4",
+    "right-7 -top-4",
+    "-bottom-4 left-7 rotate-180",
+    "-bottom-4 right-7 rotate-180"
+  ];
+  if (count <= 4) return positions[index];
+  return positions[index] ?? positions[0];
+}
+function formatOrderAge(createdAt) {
+  const minutes = Math.max(0, Math.floor((Date.now() - Date.parse(createdAt)) / 6e4));
+  if (minutes < 60) return `${minutes}m`;
+  const hours = Math.floor(minutes / 60);
+  const rest = minutes % 60;
+  return rest ? `${hours}h ${rest}m` : `${hours}h`;
+}
+const fieldClass = "h-11 w-full rounded-xl border border-field bg-white px-3 text-sm font-semibold text-espresso outline-none transition focus:border-primary focus:ring-4 focus:ring-primary/10";
+function TablesPage() {
+  const queryClient2 = useQueryClient();
+  const canManageTables = useAuthStore((state) => state.hasPermission("table.manage"));
+  const canCreateOrder = useAuthStore((state) => state.hasPermission("order.create"));
+  const [selectedArea, setSelectedArea] = reactExports.useState("All");
+  const [tableName, setTableName] = reactExports.useState("");
+  const [tableArea, setTableArea] = reactExports.useState("Main Hall");
+  const [capacity, setCapacity] = reactExports.useState("4");
+  const tablesQuery = useQuery({
+    queryKey: ["tables-floor"],
+    queryFn: () => apiFetch("/tables")
+  });
+  const areas = tablesQuery.data?.areas ?? [];
+  const tables = tablesQuery.data?.tables ?? [];
+  const visibleTables = reactExports.useMemo(
+    () => tables.filter((table) => selectedArea === "All" || (table.area ?? "Main Floor") === selectedArea),
+    [selectedArea, tables]
+  );
+  const refreshTables = () => queryClient2.invalidateQueries({ queryKey: ["tables-floor"] });
+  const createTable = useMutation({
+    mutationFn: () => apiFetch("/tables", {
+      method: "POST",
+      body: JSON.stringify({
+        name: tableName.trim(),
+        area: tableArea.trim() || "Main Floor",
+        capacity: Number(capacity || 1),
+        displayOrder: tables.length * 10 + 10
+      })
+    }),
+    onSuccess: () => {
+      setTableName("");
+      setCapacity("4");
+      void refreshTables();
+    }
+  });
+  const updateStatus = useMutation({
+    mutationFn: ({ table, status }) => apiFetch(`/tables/${table.id}/status`, {
+      method: "PATCH",
+      body: JSON.stringify({ status })
+    }),
+    onSuccess: refreshTables
+  });
+  const startOrder = useMutation({
+    mutationFn: (table) => apiFetch(`/tables/${table.id}/start-order`, {
+      method: "POST"
+    }),
+    onSuccess: refreshTables
+  });
+  function submitTable(event) {
+    event.preventDefault();
+    if (tableName.trim() && Number(capacity) > 0) createTable.mutate();
+  }
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "h-full overflow-y-auto bg-white p-7", children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex flex-wrap items-start justify-between gap-4", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm font-black uppercase tracking-[0.22em] text-primary", children: "Floor control" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("h1", { className: "mt-2 text-4xl font-black text-espresso", children: "Table system" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mt-3 max-w-2xl text-sm font-semibold text-muted", children: "Open dine-in orders, scan table state, manage capacity, and prepare the foundation for merge and transfer." })
+      ] }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx(Badge, { tone: canManageTables ? "green" : "orange", children: canManageTables ? "Editable" : "View only" })
+    ] }),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mt-6 grid grid-cols-4 gap-4", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx(Metric, { icon: /* @__PURE__ */ jsxRuntimeExports.jsx(Armchair, { size: 19 }), label: "Tables", value: tablesQuery.data?.metrics.activeTables ?? 0 }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx(Metric, { icon: /* @__PURE__ */ jsxRuntimeExports.jsx(CircleCheck, { size: 19 }), label: "Free", value: tablesQuery.data?.metrics.freeTables ?? 0 }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx(Metric, { icon: /* @__PURE__ */ jsxRuntimeExports.jsx(ClipboardList, { size: 19 }), label: "Occupied", value: tablesQuery.data?.metrics.occupiedTables ?? 0 }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx(Metric, { icon: /* @__PURE__ */ jsxRuntimeExports.jsx(UsersRound, { size: 19 }), label: "Covers", value: tablesQuery.data?.metrics.totalCovers ?? 0 })
+    ] }),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mt-5 grid grid-cols-[1fr_360px] gap-5", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsxs(Card, { className: "min-h-[620px] p-5", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex flex-wrap items-center justify-between gap-3 border-b border-line pb-5", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "text-xl font-black text-espresso", children: "Floor map" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm font-semibold text-muted", children: "Tap a table card to start or manage dine-in service." })
+          ] }),
+          tablesQuery.isLoading ? /* @__PURE__ */ jsxRuntimeExports.jsx(LoaderCircle, { className: "animate-spin text-primary", size: 20 }) : null
+        ] }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mt-5 flex flex-wrap gap-2", children: ["All", ...areas].map((area) => /* @__PURE__ */ jsxRuntimeExports.jsx(
+          "button",
+          {
+            className: [
+              "h-10 rounded-xl px-4 text-sm font-bold transition",
+              selectedArea === area ? "bg-primary text-white shadow-[0_10px_22px_rgb(var(--ro-primary-rgb)/0.24)]" : "bg-white text-muted shadow-[inset_0_0_0_1px_rgb(var(--ro-secondary-rgb)/0.08)] hover:bg-sage hover:text-secondary"
+            ].join(" "),
+            onClick: () => setSelectedArea(area),
+            children: area
+          },
+          area
+        )) }),
+        tablesQuery.isError ? /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mt-5 rounded-xl bg-red-50 px-4 py-3 text-sm font-bold text-red-700", children: "Tables could not load. Check the API session." }) : null,
+        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mt-5 grid grid-cols-[repeat(auto-fill,minmax(210px,1fr))] gap-5", children: visibleTables.map((table) => /* @__PURE__ */ jsxRuntimeExports.jsx(
+          TableCard,
+          {
+            canCreateOrder,
+            canManageTables,
+            loading: startOrder.isPending || updateStatus.isPending,
+            table,
+            onStartOrder: () => startOrder.mutate(table),
+            onStatus: (status) => updateStatus.mutate({ table, status })
+          },
+          table.id
+        )) })
+      ] }),
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "space-y-5", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsxs(Card, { className: "bg-secondary p-5 text-white", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm font-black uppercase tracking-[0.2em] text-deepBright", children: "Rush workflow" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "mt-4 text-3xl font-black", children: "F10 table screen" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mt-3 text-sm font-semibold leading-6 text-deepFaint", children: "Cashiers can jump from POS to this floor view, open a dine-in order, and return to item entry." })
+        ] }),
+        /* @__PURE__ */ jsxRuntimeExports.jsxs(Card, { className: "p-5", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "text-lg font-black text-espresso", children: "New table" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsxs("form", { className: "mt-4 space-y-3", onSubmit: submitTable, children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx(
+              "input",
+              {
+                className: fieldClass,
+                disabled: !canManageTables,
+                placeholder: "Table name",
+                value: tableName,
+                onChange: (event) => setTableName(event.target.value)
+              }
+            ),
+            /* @__PURE__ */ jsxRuntimeExports.jsx(
+              "input",
+              {
+                className: fieldClass,
+                disabled: !canManageTables,
+                placeholder: "Area",
+                value: tableArea,
+                onChange: (event) => setTableArea(event.target.value)
+              }
+            ),
+            /* @__PURE__ */ jsxRuntimeExports.jsx(
+              "input",
+              {
+                className: fieldClass,
+                disabled: !canManageTables,
+                min: "1",
+                type: "number",
+                value: capacity,
+                onChange: (event) => setCapacity(event.target.value)
+              }
+            ),
+            /* @__PURE__ */ jsxRuntimeExports.jsx(
+              Button,
+              {
+                className: "w-full",
+                disabled: !canManageTables || !tableName.trim() || createTable.isPending,
+                icon: createTable.isPending ? /* @__PURE__ */ jsxRuntimeExports.jsx(LoaderCircle, { className: "animate-spin", size: 17 }) : /* @__PURE__ */ jsxRuntimeExports.jsx(Plus, { size: 17 }),
+                type: "submit",
+                children: "Add table"
+              }
+            )
+          ] })
+        ] }),
+        /* @__PURE__ */ jsxRuntimeExports.jsxs(Card, { className: "p-5", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "text-lg font-black text-espresso", children: "Next table tools" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mt-4 grid grid-cols-2 gap-3 text-sm font-bold text-muted", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx(Planned, { icon: /* @__PURE__ */ jsxRuntimeExports.jsx(Sparkles, { size: 16 }), text: "Merge tables" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx(Planned, { icon: /* @__PURE__ */ jsxRuntimeExports.jsx(Sparkles, { size: 16 }), text: "Transfer order" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx(Planned, { icon: /* @__PURE__ */ jsxRuntimeExports.jsx(Sparkles, { size: 16 }), text: "Reservations" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx(Planned, { icon: /* @__PURE__ */ jsxRuntimeExports.jsx(Sparkles, { size: 16 }), text: "Floor designer" })
+          ] })
+        ] })
+      ] })
+    ] })
+  ] });
+}
+function Metric({ icon, label, value }) {
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs(Card, { className: "flex items-center justify-between p-5", children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm font-black text-muted", children: label }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mt-3 text-3xl font-black text-espresso", children: value })
+    ] }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "flex h-11 w-11 items-center justify-center rounded-xl bg-mint text-secondary", children: icon })
+  ] });
+}
+function Planned({ icon, text }) {
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-2 rounded-xl bg-sage p-3", children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-primary", children: icon }),
+    text
+  ] });
+}
 const router = createBrowserRouter([
   {
     path: "/login",
@@ -32440,6 +32952,7 @@ const router = createBrowserRouter([
           { path: "menu", element: /* @__PURE__ */ jsxRuntimeExports.jsx(MenuPage, {}) },
           { path: "inventory", element: /* @__PURE__ */ jsxRuntimeExports.jsx(InventoryPage, {}) },
           { path: "customers", element: /* @__PURE__ */ jsxRuntimeExports.jsx(CustomersPage, {}) },
+          { path: "tables", element: /* @__PURE__ */ jsxRuntimeExports.jsx(TablesPage, {}) },
           { path: "reports", element: /* @__PURE__ */ jsxRuntimeExports.jsx(ReportsPage, {}) },
           { path: "settings", element: /* @__PURE__ */ jsxRuntimeExports.jsx(SettingsPage, {}) }
         ]

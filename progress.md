@@ -167,6 +167,54 @@ Notes:
 - The next phase is Phase 5 - Table System UI.
 - Table/floor settings can build on the Phase 4 settings foundation without changing the settings API shape.
 
+## Phase 5 - Table System UI
+
+Status: Completed
+
+Completed:
+- Added authenticated table/floor API endpoints for table list, table create/update, status update, and dine-in order start.
+- Added `table.manage` permission and synced it into shared permissions.
+- Seeded demo dining areas and tables for Main Hall, Family Room, and Patio.
+- Added desktop Tables route and sidebar navigation item.
+- Built premium table/floor UI with area filters, floor metrics, table status cards, quick clean/free/reserve actions, and a create-table form.
+- Refined the table UI into clearer top-down floor cards with table shapes, capacity-based chairs, stronger status bars, and order-age visibility.
+- Split the visual table card into a reusable desktop component and replaced generic chair blocks with an offline inline SVG chair shape.
+- Adjusted table-card chair spacing and aligned chair fill/stroke colors with each table status outline for better contrast.
+- Re-tuned round-table chair positions and returned chair colors to the original softer palette with slightly darker fills.
+- Added POS shortcut path to the table screen and documented `F10`.
+- Dine-in table start now creates or returns an open draft order and marks the table as waiting for order.
+
+Files changed:
+- `apps/api/src/app.module.ts`
+- `apps/api/src/modules/tables/**`
+- `apps/api/prisma/seed.ts`
+- `apps/desktop/src/renderer/src/pages/tables-page.tsx`
+- `apps/desktop/src/renderer/src/components/table-card.tsx`
+- `apps/desktop/src/renderer/src/router.tsx`
+- `apps/desktop/src/renderer/src/components/app-shell.tsx`
+- `apps/desktop/src/renderer/src/pages/pos-page.tsx`
+- `packages/shared/src/index.ts`
+- `packages/shared/src/index.js`
+- `README.md`
+- `progress.md`
+
+Database changes:
+- No schema migration required.
+- Seed now upserts table/floor permission and demo tables.
+
+Tests:
+- `npm run typecheck --workspaces` passed.
+- `npm run build --workspaces` passed.
+- `npm run typecheck --workspace @restaurantos/desktop` passed after table card extraction.
+- `npm run build --workspace @restaurantos/desktop` passed after table card extraction.
+- `npm run db:seed` passed against local Docker PostgreSQL.
+- API smoke test passed: admin login returned `201`, authenticated `GET /tables` returned `200`, `POST /tables` returned `201`, `PATCH /tables/:id/status` returned `200`, and `POST /tables/:id/start-order` returned `201`.
+- `npm audit --audit-level=high` passed with 0 vulnerabilities.
+
+Notes:
+- Future table phases should add order transfer, table merge, reservations, waiter assignment, and visual floor designer.
+- POS workflow shortcuts should be implemented in a later keyboard workflow phase after order, payment, hold/recall, table, and print flows are real.
+
 ## Phase 24 - UI/UX Polish
 
 Status: In Progress

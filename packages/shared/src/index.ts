@@ -14,6 +14,7 @@ export const permissions = [
   'menu.manage',
   'customer.manage',
   'inventory.manage',
+  'table.manage',
   'user.manage',
   'report.view.profit',
 ] as const;
