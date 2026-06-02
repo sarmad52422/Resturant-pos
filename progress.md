@@ -220,3 +220,43 @@ Notes:
 - Dribbble and SaaS/POS dashboard references were used for broad visual direction only, not copied.
 - Remaining next UI pass should replace placeholder admin content with real CRUD tables/forms using the new design system.
 - Developer-only branding settings are planned for a later admin/dev phase. The current foundation makes that easier because desktop and kitchen UI already consume theme tokens.
+
+## Phase 25 - Admin CRUD Workspaces
+
+Status: Completed
+
+Completed:
+- Added authenticated menu admin endpoints for catalog summary, category create/update, and menu item create/update.
+- Added authenticated customer endpoints for customer list metrics, customer create, and customer update.
+- Added authenticated inventory endpoints for stock list metrics, units, suppliers, stock item create, and stock item update.
+- Added `menu.manage`, `customer.manage`, and `inventory.manage` permissions and ensured the Admin role receives all permissions on every seed run.
+- Seeded demo categories, menu items, customers, a supplier, and stock items for a useful first-run admin experience.
+- Replaced the desktop Menu, Customers, and Inventory placeholders with real tables, metrics, compact create forms, loading/error states, and permission-aware controls.
+
+Files changed:
+- `apps/api/src/app.module.ts`
+- `apps/api/src/modules/menu/**`
+- `apps/api/src/modules/customers/**`
+- `apps/api/src/modules/inventory/**`
+- `apps/api/prisma/seed.ts`
+- `apps/desktop/src/renderer/src/pages/menu-page.tsx`
+- `apps/desktop/src/renderer/src/pages/customers-page.tsx`
+- `apps/desktop/src/renderer/src/pages/inventory-page.tsx`
+- `README.md`
+- `progress.md`
+
+Database changes:
+- No schema migration required.
+- Seed now upserts admin workspace permissions and demo operational data.
+
+Tests:
+- `npm run typecheck --workspaces` passed.
+- `npm run build --workspaces` passed.
+- Seed ran successfully against local Docker PostgreSQL with the new permissions and demo records.
+- API smoke test passed: admin login returned `201`, authenticated `GET /menu` returned `200`, authenticated `GET /customers` returned `200`, and authenticated `GET /inventory` returned `200`.
+- CRUD write smoke test passed: authenticated `POST /menu/categories`, `POST /menu/items`, `POST /customers`, and `POST /inventory/items` each returned `201`.
+- `npm audit --audit-level=high` passed with 0 vulnerabilities.
+
+Notes:
+- This is the first CRUD admin slice. Recipes, purchases, ledger payments, category/item editing forms, and richer validation workflows remain future specialized phases.
+- Return to Phase 5 - Table System UI after committing this checkpoint.

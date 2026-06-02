@@ -1,4 +1,4 @@
-export * from './brand-theme';
+export * from './brand-theme.js';
 
 export const permissions = [
   'order.create',
@@ -11,6 +11,9 @@ export const permissions = [
   'ledger.delete',
   'shift.close.other',
   'settings.update',
+  'menu.manage',
+  'customer.manage',
+  'inventory.manage',
   'user.manage',
   'report.view.profit',
 ] as const;

@@ -555,6 +555,10 @@ video {
   position: fixed;
 }
 
+.sticky {
+  position: sticky;
+}
+
 .inset-x-0 {
   left: 0px;
   right: 0px;
@@ -570,6 +574,10 @@ video {
 
 .col-span-2 {
   grid-column: span 2 / span 2;
+}
+
+.m-5 {
+  margin: 1.25rem;
 }
 
 .mb-4 {
@@ -692,6 +700,10 @@ video {
   height: 100vh;
 }
 
+.max-h-\[560px\] {
+  max-height: 560px;
+}
+
 .min-h-0 {
   min-height: 0px;
 }
@@ -702,10 +714,6 @@ video {
 
 .min-h-72 {
   min-height: 18rem;
-}
-
-.min-h-80 {
-  min-height: 20rem;
 }
 
 .min-h-screen {
@@ -823,6 +831,10 @@ video {
   grid-template-columns: 1fr 340px;
 }
 
+.grid-cols-\[1fr_360px\] {
+  grid-template-columns: 1fr 360px;
+}
+
 .grid-cols-\[1fr_430px\] {
   grid-template-columns: 1fr 430px;
 }
@@ -887,6 +899,23 @@ video {
   margin-bottom: calc(1rem * var(--tw-space-y-reverse));
 }
 
+.space-y-5 > :not([hidden]) ~ :not([hidden]) {
+  --tw-space-y-reverse: 0;
+  margin-top: calc(1.25rem * calc(1 - var(--tw-space-y-reverse)));
+  margin-bottom: calc(1.25rem * var(--tw-space-y-reverse));
+}
+
+.divide-y > :not([hidden]) ~ :not([hidden]) {
+  --tw-divide-y-reverse: 0;
+  border-top-width: calc(1px * calc(1 - var(--tw-divide-y-reverse)));
+  border-bottom-width: calc(1px * var(--tw-divide-y-reverse));
+}
+
+.divide-line > :not([hidden]) ~ :not([hidden]) {
+  --tw-divide-opacity: 1;
+  border-color: rgb(var(--ro-field-rgb) / var(--tw-divide-opacity, 1));
+}
+
 .overflow-hidden {
   overflow: hidden;
 }
@@ -924,6 +953,10 @@ video {
   border-width: 1px;
 }
 
+.border-b {
+  border-bottom-width: 1px;
+}
+
 .border-t {
   border-top-width: 1px;
 }
@@ -939,6 +972,11 @@ video {
 }
 
 .border-field {
+  --tw-border-opacity: 1;
+  border-color: rgb(var(--ro-field-rgb) / var(--tw-border-opacity, 1));
+}
+
+.border-line {
   --tw-border-opacity: 1;
   border-color: rgb(var(--ro-field-rgb) / var(--tw-border-opacity, 1));
 }
@@ -1055,6 +1093,11 @@ video {
   padding-bottom: 0.75rem;
 }
 
+.py-4 {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+
 .py-5 {
   padding-top: 1.25rem;
   padding-bottom: 1.25rem;
@@ -1082,6 +1125,14 @@ video {
 
 .text-center {
   text-align: center;
+}
+
+.text-right {
+  text-align: right;
+}
+
+.align-middle {
+  vertical-align: middle;
 }
 
 .text-2xl {
@@ -1208,11 +1259,6 @@ video {
 .text-label {
   --tw-text-opacity: 1;
   color: rgb(var(--ro-label-rgb) / var(--tw-text-opacity, 1));
-}
-
-.text-mint {
-  --tw-text-opacity: 1;
-  color: rgb(var(--ro-mint-rgb) / var(--tw-text-opacity, 1));
 }
 
 .text-muted {

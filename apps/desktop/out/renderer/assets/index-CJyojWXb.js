@@ -22103,6 +22103,17 @@ const createLucideIcon = (iconName, iconNode) => {
  * This source code is licensed under the ISC license.
  * See the LICENSE file in the root directory of this source tree.
  */
+const Archive = createLucideIcon("Archive", [
+  ["rect", { width: "20", height: "5", x: "2", y: "3", rx: "1", key: "1wp1u1" }],
+  ["path", { d: "M4 8v11a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8", key: "1s80jp" }],
+  ["path", { d: "M10 12h4", key: "a56b0p" }]
+]);
+/**
+ * @license lucide-react v0.468.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */
 const Boxes = createLucideIcon("Boxes", [
   [
     "path",
@@ -22267,9 +22278,39 @@ const Minus = createLucideIcon("Minus", [["path", { d: "M5 12h14", key: "1ays0h"
  * This source code is licensed under the ISC license.
  * See the LICENSE file in the root directory of this source tree.
  */
+const PackagePlus = createLucideIcon("PackagePlus", [
+  ["path", { d: "M16 16h6", key: "100bgy" }],
+  ["path", { d: "M19 13v6", key: "85cyf1" }],
+  [
+    "path",
+    {
+      d: "M21 10V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l2-1.14",
+      key: "e7tb2h"
+    }
+  ],
+  ["path", { d: "m7.5 4.27 9 5.15", key: "1c824w" }],
+  ["polyline", { points: "3.29 7 12 12 20.71 7", key: "ousv84" }],
+  ["line", { x1: "12", x2: "12", y1: "22", y2: "12", key: "a4e8g8" }]
+]);
+/**
+ * @license lucide-react v0.468.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */
 const Plus = createLucideIcon("Plus", [
   ["path", { d: "M5 12h14", key: "1ays0h" }],
   ["path", { d: "M12 5v14", key: "s699le" }]
+]);
+/**
+ * @license lucide-react v0.468.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */
+const Power = createLucideIcon("Power", [
+  ["path", { d: "M12 2v10", key: "mnfbl" }],
+  ["path", { d: "M18.4 6.6a9 9 0 1 1-12.77.04", key: "obofu9" }]
 ]);
 /**
  * @license lucide-react v0.468.0 - ISC
@@ -22456,6 +22497,16 @@ const Trash2 = createLucideIcon("Trash2", [
  * This source code is licensed under the ISC license.
  * See the LICENSE file in the root directory of this source tree.
  */
+const TrendingDown = createLucideIcon("TrendingDown", [
+  ["polyline", { points: "22 17 13.5 8.5 8.5 13.5 2 7", key: "1r2t7k" }],
+  ["polyline", { points: "16 17 22 17 22 11", key: "11uiuu" }]
+]);
+/**
+ * @license lucide-react v0.468.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */
 const UserRound = createLucideIcon("UserRound", [
   ["circle", { cx: "12", cy: "8", r: "5", key: "1hypcn" }],
   ["path", { d: "M20 21a8 8 0 0 0-16 0", key: "rfgkzh" }]
@@ -22471,6 +22522,17 @@ const Users = createLucideIcon("Users", [
   ["circle", { cx: "9", cy: "7", r: "4", key: "nufk8" }],
   ["path", { d: "M22 21v-2a4 4 0 0 0-3-3.87", key: "kshegd" }],
   ["path", { d: "M16 3.13a4 4 0 0 1 0 7.75", key: "1da9ce" }]
+]);
+/**
+ * @license lucide-react v0.468.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */
+const Utensils = createLucideIcon("Utensils", [
+  ["path", { d: "M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2", key: "cjf0a3" }],
+  ["path", { d: "M7 2v20", key: "1473qp" }],
+  ["path", { d: "M21 15V2a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3Zm0 0v7", key: "j28e5" }]
 ]);
 /**
  * @license lucide-react v0.468.0 - ISC
@@ -25447,11 +25509,157 @@ function Card({ className, ...props }) {
     }
   );
 }
+const fieldClass$3 = "h-11 w-full rounded-xl border border-field bg-white px-3 text-sm font-semibold text-espresso outline-none transition focus:border-primary focus:ring-4 focus:ring-primary/10";
+const money$2 = new Intl.NumberFormat("en-PK", { maximumFractionDigits: 0, style: "currency", currency: "PKR" });
 function CustomersPage() {
-  return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "h-full overflow-y-auto p-7", children: [
-    /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm font-black uppercase tracking-[0.28em] text-subtle", children: "Ledger care" }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx("h1", { className: "mt-2 text-4xl font-black", children: "Customer credit" }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx(Card, { className: "mt-7 p-6", children: /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-semibold text-subtle", children: "Customer profiles, credit limits, balances, and ledger payments." }) })
+  const queryClient2 = useQueryClient();
+  const canManageCustomers = useAuthStore((state) => state.hasPermission("customer.manage"));
+  const [name, setName] = reactExports.useState("");
+  const [phone, setPhone] = reactExports.useState("");
+  const [creditLimit, setCreditLimit] = reactExports.useState("0");
+  const customersQuery = useQuery({
+    queryKey: ["customers"],
+    queryFn: () => apiFetch("/customers")
+  });
+  const createCustomer = useMutation({
+    mutationFn: () => apiFetch("/customers", {
+      method: "POST",
+      body: JSON.stringify({
+        name: name.trim(),
+        phone: phone.trim(),
+        creditLimit: Number(creditLimit || 0),
+        customerType: Number(creditLimit || 0) > 0 ? "CREDIT" : "REGULAR"
+      })
+    }),
+    onSuccess: () => {
+      setName("");
+      setPhone("");
+      setCreditLimit("0");
+      void queryClient2.invalidateQueries({ queryKey: ["customers"] });
+    }
+  });
+  function submitCustomer(event) {
+    event.preventDefault();
+    if (name.trim() && phone.trim()) createCustomer.mutate();
+  }
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "h-full overflow-y-auto bg-white p-7", children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex flex-wrap items-start justify-between gap-4", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm font-black uppercase tracking-[0.22em] text-primary", children: "Ledger care" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("h1", { className: "mt-2 text-4xl font-black text-espresso", children: "Customer credit" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mt-3 max-w-2xl text-sm font-semibold text-muted", children: "Track customer profiles, order counts, credit limits, and outstanding receivables from one cashier-friendly workspace." })
+      ] }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx(Badge, { tone: canManageCustomers ? "green" : "orange", children: canManageCustomers ? "Editable" : "View only" })
+    ] }),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mt-6 grid grid-cols-3 gap-4", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx(Metric$2, { icon: /* @__PURE__ */ jsxRuntimeExports.jsx(UserRound, { size: 19 }), label: "Customers", value: customersQuery.data?.metrics.totalCustomers ?? 0 }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx(
+        Metric$2,
+        {
+          icon: /* @__PURE__ */ jsxRuntimeExports.jsx(CreditCard, { size: 19 }),
+          label: "Credit accounts",
+          value: customersQuery.data?.metrics.creditCustomers ?? 0
+        }
+      ),
+      /* @__PURE__ */ jsxRuntimeExports.jsx(
+        Metric$2,
+        {
+          icon: /* @__PURE__ */ jsxRuntimeExports.jsx(CreditCard, { size: 19 }),
+          label: "Receivable",
+          value: money$2.format(Number(customersQuery.data?.metrics.receivableBalance ?? 0))
+        }
+      )
+    ] }),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mt-5 grid grid-cols-[1fr_340px] gap-5", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsxs(Card, { className: "overflow-hidden", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center justify-between border-b border-line px-6 py-5", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "text-xl font-black text-espresso", children: "Customer ledger list" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm font-semibold text-muted", children: "Current credit exposure and POS order history." })
+          ] }),
+          customersQuery.isLoading ? /* @__PURE__ */ jsxRuntimeExports.jsx(LoaderCircle, { className: "animate-spin text-primary", size: 20 }) : null
+        ] }),
+        customersQuery.isError ? /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "m-5 flex items-center gap-3 rounded-xl bg-red-50 px-4 py-3 text-sm font-bold text-red-700", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx(CircleAlert, { size: 17 }),
+          "Customers could not load. Check the API session."
+        ] }) : null,
+        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "max-h-[560px] overflow-y-auto", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("table", { className: "w-full text-left text-sm", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx("thead", { className: "sticky top-0 bg-sage text-xs font-black uppercase text-muted", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("tr", { children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx("th", { className: "px-6 py-3", children: "Customer" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("th", { className: "px-4 py-3", children: "Type" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("th", { className: "px-4 py-3 text-right", children: "Limit" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("th", { className: "px-4 py-3 text-right", children: "Balance" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("th", { className: "px-6 py-3 text-right", children: "Orders" })
+          ] }) }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("tbody", { className: "divide-y divide-line", children: (customersQuery.data?.customers ?? []).map((customer) => /* @__PURE__ */ jsxRuntimeExports.jsxs("tr", { children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsxs("td", { className: "px-6 py-4", children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-black text-espresso", children: customer.name }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mt-1 text-xs font-semibold text-muted", children: customer.phone })
+            ] }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("td", { className: "px-4 py-4", children: /* @__PURE__ */ jsxRuntimeExports.jsx(Badge, { tone: customer.customerType === "CORPORATE" ? "blue" : "gray", children: customer.customerType }) }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("td", { className: "px-4 py-4 text-right font-bold text-label", children: money$2.format(Number(customer.creditLimit)) }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("td", { className: "px-4 py-4 text-right font-black text-espresso", children: money$2.format(Number(customer.currentBalance)) }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("td", { className: "px-6 py-4 text-right font-bold text-label", children: customer.totalOrders || customer._count.orders })
+          ] }, customer.id)) })
+        ] }) })
+      ] }),
+      /* @__PURE__ */ jsxRuntimeExports.jsxs(Card, { className: "p-5", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "text-lg font-black text-espresso", children: "New customer" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("form", { className: "mt-4 space-y-3", onSubmit: submitCustomer, children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx(
+            "input",
+            {
+              className: fieldClass$3,
+              disabled: !canManageCustomers,
+              placeholder: "Customer name",
+              value: name,
+              onChange: (event) => setName(event.target.value)
+            }
+          ),
+          /* @__PURE__ */ jsxRuntimeExports.jsx(
+            "input",
+            {
+              className: fieldClass$3,
+              disabled: !canManageCustomers,
+              placeholder: "Phone",
+              value: phone,
+              onChange: (event) => setPhone(event.target.value)
+            }
+          ),
+          /* @__PURE__ */ jsxRuntimeExports.jsx(
+            "input",
+            {
+              className: fieldClass$3,
+              disabled: !canManageCustomers,
+              min: "0",
+              placeholder: "Credit limit",
+              type: "number",
+              value: creditLimit,
+              onChange: (event) => setCreditLimit(event.target.value)
+            }
+          ),
+          /* @__PURE__ */ jsxRuntimeExports.jsx(
+            Button,
+            {
+              className: "w-full",
+              disabled: !canManageCustomers || !name.trim() || !phone.trim() || createCustomer.isPending,
+              icon: createCustomer.isPending ? /* @__PURE__ */ jsxRuntimeExports.jsx(LoaderCircle, { className: "animate-spin", size: 17 }) : /* @__PURE__ */ jsxRuntimeExports.jsx(Plus, { size: 17 }),
+              type: "submit",
+              children: "Add customer"
+            }
+          )
+        ] })
+      ] })
+    ] })
+  ] });
+}
+function Metric$2({ icon, label, value }) {
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs(Card, { className: "flex items-center justify-between p-5", children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm font-black text-muted", children: label }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mt-3 text-3xl font-black text-espresso", children: value })
+    ] }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "flex h-11 w-11 items-center justify-center rounded-xl bg-mint text-secondary", children: icon })
   ] });
 }
 const metrics = [
@@ -25498,11 +25706,276 @@ function DashboardPage() {
     ] })
   ] });
 }
+const fieldClass$2 = "h-11 w-full rounded-xl border border-field bg-white px-3 text-sm font-semibold text-espresso outline-none transition focus:border-primary focus:ring-4 focus:ring-primary/10";
+const money$1 = new Intl.NumberFormat("en-PK", { maximumFractionDigits: 0, style: "currency", currency: "PKR" });
 function InventoryPage() {
-  return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "h-full overflow-y-auto p-7", children: [
-    /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm font-black uppercase tracking-[0.28em] text-subtle", children: "Stock control" }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx("h1", { className: "mt-2 text-4xl font-black", children: "Inventory" }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx(Card, { className: "mt-7 p-6", children: /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-semibold text-subtle", children: "Units, stock batches, purchases, wastage, and transaction-safe stock movement screens." }) })
+  const queryClient2 = useQueryClient();
+  const canManageInventory = useAuthStore((state) => state.hasPermission("inventory.manage"));
+  const [name, setName] = reactExports.useState("");
+  const [category, setCategory] = reactExports.useState("");
+  const [currentStock, setCurrentStock] = reactExports.useState("0");
+  const [minimumStockLevel, setMinimumStockLevel] = reactExports.useState("0");
+  const [averageCost, setAverageCost] = reactExports.useState("0");
+  const [purchaseUnitId, setPurchaseUnitId] = reactExports.useState("");
+  const [usageUnitId, setUsageUnitId] = reactExports.useState("");
+  const [supplierId, setSupplierId] = reactExports.useState("");
+  const inventoryQuery = useQuery({
+    queryKey: ["inventory"],
+    queryFn: () => apiFetch("/inventory")
+  });
+  const units = inventoryQuery.data?.units ?? [];
+  const suppliers = inventoryQuery.data?.suppliers ?? [];
+  const defaultUnitId = units.find((unit) => unit.symbol === "pc")?.id ?? units[0]?.id ?? "";
+  const selectedPurchaseUnitId = purchaseUnitId || defaultUnitId;
+  const selectedUsageUnitId = usageUnitId || selectedPurchaseUnitId;
+  const createItem = useMutation({
+    mutationFn: () => apiFetch("/inventory/items", {
+      method: "POST",
+      body: JSON.stringify({
+        name: name.trim(),
+        category: category.trim() || void 0,
+        currentStock: Number(currentStock || 0),
+        minimumStockLevel: Number(minimumStockLevel || 0),
+        averageCost: Number(averageCost || 0),
+        lastPurchaseCost: Number(averageCost || 0),
+        conversionRate: selectedPurchaseUnitId === selectedUsageUnitId ? 1 : 1,
+        purchaseUnitId: selectedPurchaseUnitId,
+        usageUnitId: selectedUsageUnitId,
+        supplierId: supplierId || void 0
+      })
+    }),
+    onSuccess: () => {
+      setName("");
+      setCategory("");
+      setCurrentStock("0");
+      setMinimumStockLevel("0");
+      setAverageCost("0");
+      setPurchaseUnitId("");
+      setUsageUnitId("");
+      setSupplierId("");
+      void queryClient2.invalidateQueries({ queryKey: ["inventory"] });
+    }
+  });
+  const toggleItem = useMutation({
+    mutationFn: (item) => apiFetch(`/inventory/items/${item.id}`, {
+      method: "PATCH",
+      body: JSON.stringify({ active: !item.active })
+    }),
+    onSuccess: () => queryClient2.invalidateQueries({ queryKey: ["inventory"] })
+  });
+  function submitItem(event) {
+    event.preventDefault();
+    if (name.trim() && selectedPurchaseUnitId && selectedUsageUnitId) createItem.mutate();
+  }
+  function unitLabel(id) {
+    return units.find((unit) => unit.id === id)?.symbol ?? "";
+  }
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "h-full overflow-y-auto bg-white p-7", children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex flex-wrap items-start justify-between gap-4", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm font-black uppercase tracking-[0.22em] text-primary", children: "Stock control" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("h1", { className: "mt-2 text-4xl font-black text-espresso", children: "Inventory" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mt-3 max-w-2xl text-sm font-semibold text-muted", children: "Monitor stock levels, low-stock thresholds, valuation, usage units, and active purchasing items." })
+      ] }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx(Badge, { tone: canManageInventory ? "green" : "orange", children: canManageInventory ? "Editable" : "View only" })
+    ] }),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mt-6 grid grid-cols-3 gap-4", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx(Metric$1, { icon: /* @__PURE__ */ jsxRuntimeExports.jsx(Archive, { size: 19 }), label: "Active stock items", value: inventoryQuery.data?.metrics.activeItems ?? 0 }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx(
+        Metric$1,
+        {
+          icon: /* @__PURE__ */ jsxRuntimeExports.jsx(TrendingDown, { size: 19 }),
+          label: "Low stock",
+          value: inventoryQuery.data?.metrics.lowStockItems ?? 0
+        }
+      ),
+      /* @__PURE__ */ jsxRuntimeExports.jsx(
+        Metric$1,
+        {
+          icon: /* @__PURE__ */ jsxRuntimeExports.jsx(PackagePlus, { size: 19 }),
+          label: "Stock value",
+          value: money$1.format(Number(inventoryQuery.data?.metrics.totalStockValue ?? 0))
+        }
+      )
+    ] }),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mt-5 grid grid-cols-[1fr_360px] gap-5", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsxs(Card, { className: "overflow-hidden", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center justify-between border-b border-line px-6 py-5", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "text-xl font-black text-espresso", children: "Stock item master" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm font-semibold text-muted", children: "Current quantity, threshold, cost, and sellability state." })
+          ] }),
+          inventoryQuery.isLoading ? /* @__PURE__ */ jsxRuntimeExports.jsx(LoaderCircle, { className: "animate-spin text-primary", size: 20 }) : null
+        ] }),
+        inventoryQuery.isError ? /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "m-5 flex items-center gap-3 rounded-xl bg-red-50 px-4 py-3 text-sm font-bold text-red-700", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx(CircleAlert, { size: 17 }),
+          "Inventory could not load. Check the API session."
+        ] }) : null,
+        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "max-h-[560px] overflow-y-auto", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("table", { className: "w-full text-left text-sm", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx("thead", { className: "sticky top-0 bg-sage text-xs font-black uppercase text-muted", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("tr", { children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx("th", { className: "px-6 py-3", children: "Item" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("th", { className: "px-4 py-3 text-right", children: "On hand" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("th", { className: "px-4 py-3 text-right", children: "Minimum" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("th", { className: "px-4 py-3 text-right", children: "Avg cost" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("th", { className: "px-6 py-3 text-right", children: "Status" })
+          ] }) }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("tbody", { className: "divide-y divide-line", children: (inventoryQuery.data?.items ?? []).map((item) => {
+            const lowStock = Number(item.currentStock) <= Number(item.minimumStockLevel);
+            return /* @__PURE__ */ jsxRuntimeExports.jsxs("tr", { children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsxs("td", { className: "px-6 py-4", children: [
+                /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-black text-espresso", children: item.name }),
+                /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mt-1 text-xs font-semibold text-muted", children: item.category || "Uncategorized" })
+              ] }),
+              /* @__PURE__ */ jsxRuntimeExports.jsxs("td", { className: "px-4 py-4 text-right font-black text-espresso", children: [
+                Number(item.currentStock).toLocaleString(),
+                " ",
+                unitLabel(item.usageUnitId)
+              ] }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx("td", { className: "px-4 py-4 text-right", children: /* @__PURE__ */ jsxRuntimeExports.jsxs(Badge, { tone: lowStock ? "red" : "gray", children: [
+                Number(item.minimumStockLevel).toLocaleString(),
+                " ",
+                unitLabel(item.usageUnitId)
+              ] }) }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx("td", { className: "px-4 py-4 text-right font-bold text-label", children: money$1.format(Number(item.averageCost)) }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx("td", { className: "px-6 py-4 text-right", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+                Button,
+                {
+                  className: "h-9 px-3",
+                  disabled: !canManageInventory || toggleItem.isPending,
+                  icon: /* @__PURE__ */ jsxRuntimeExports.jsx(Power, { size: 15 }),
+                  variant: item.active ? "secondary" : "ghost",
+                  onClick: () => toggleItem.mutate(item),
+                  children: item.active ? "Active" : "Hidden"
+                }
+              ) })
+            ] }, item.id);
+          }) })
+        ] }) })
+      ] }),
+      /* @__PURE__ */ jsxRuntimeExports.jsxs(Card, { className: "p-5", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "text-lg font-black text-espresso", children: "New stock item" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("form", { className: "mt-4 space-y-3", onSubmit: submitItem, children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx(
+            "input",
+            {
+              className: fieldClass$2,
+              disabled: !canManageInventory,
+              placeholder: "Item name",
+              value: name,
+              onChange: (event) => setName(event.target.value)
+            }
+          ),
+          /* @__PURE__ */ jsxRuntimeExports.jsx(
+            "input",
+            {
+              className: fieldClass$2,
+              disabled: !canManageInventory,
+              placeholder: "Category",
+              value: category,
+              onChange: (event) => setCategory(event.target.value)
+            }
+          ),
+          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "grid grid-cols-2 gap-3", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx(
+              "input",
+              {
+                className: fieldClass$2,
+                disabled: !canManageInventory,
+                min: "0",
+                placeholder: "On hand",
+                type: "number",
+                value: currentStock,
+                onChange: (event) => setCurrentStock(event.target.value)
+              }
+            ),
+            /* @__PURE__ */ jsxRuntimeExports.jsx(
+              "input",
+              {
+                className: fieldClass$2,
+                disabled: !canManageInventory,
+                min: "0",
+                placeholder: "Minimum",
+                type: "number",
+                value: minimumStockLevel,
+                onChange: (event) => setMinimumStockLevel(event.target.value)
+              }
+            )
+          ] }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx(
+            "input",
+            {
+              className: fieldClass$2,
+              disabled: !canManageInventory,
+              min: "0",
+              placeholder: "Average cost",
+              type: "number",
+              value: averageCost,
+              onChange: (event) => setAverageCost(event.target.value)
+            }
+          ),
+          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "grid grid-cols-2 gap-3", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx(
+              "select",
+              {
+                className: fieldClass$2,
+                disabled: !canManageInventory,
+                value: selectedPurchaseUnitId,
+                onChange: (event) => setPurchaseUnitId(event.target.value),
+                children: units.map((unit) => /* @__PURE__ */ jsxRuntimeExports.jsxs("option", { value: unit.id, children: [
+                  "Buy: ",
+                  unit.symbol
+                ] }, unit.id))
+              }
+            ),
+            /* @__PURE__ */ jsxRuntimeExports.jsx(
+              "select",
+              {
+                className: fieldClass$2,
+                disabled: !canManageInventory,
+                value: selectedUsageUnitId,
+                onChange: (event) => setUsageUnitId(event.target.value),
+                children: units.map((unit) => /* @__PURE__ */ jsxRuntimeExports.jsxs("option", { value: unit.id, children: [
+                  "Use: ",
+                  unit.symbol
+                ] }, unit.id))
+              }
+            )
+          ] }),
+          /* @__PURE__ */ jsxRuntimeExports.jsxs(
+            "select",
+            {
+              className: fieldClass$2,
+              disabled: !canManageInventory,
+              value: supplierId,
+              onChange: (event) => setSupplierId(event.target.value),
+              children: [
+                /* @__PURE__ */ jsxRuntimeExports.jsx("option", { value: "", children: "No supplier" }),
+                suppliers.map((supplier) => /* @__PURE__ */ jsxRuntimeExports.jsx("option", { value: supplier.id, children: supplier.name }, supplier.id))
+              ]
+            }
+          ),
+          /* @__PURE__ */ jsxRuntimeExports.jsx(
+            Button,
+            {
+              className: "w-full",
+              disabled: !canManageInventory || !name.trim() || !selectedPurchaseUnitId || createItem.isPending,
+              icon: createItem.isPending ? /* @__PURE__ */ jsxRuntimeExports.jsx(LoaderCircle, { className: "animate-spin", size: 17 }) : /* @__PURE__ */ jsxRuntimeExports.jsx(Plus, { size: 17 }),
+              type: "submit",
+              children: "Add stock item"
+            }
+          )
+        ] })
+      ] })
+    ] })
+  ] });
+}
+function Metric$1({ icon, label, value }) {
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs(Card, { className: "flex items-center justify-between p-5", children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm font-black text-muted", children: label }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mt-3 text-3xl font-black text-espresso", children: value })
+    ] }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "flex h-11 w-11 items-center justify-center rounded-xl bg-mint text-secondary", children: icon })
   ] });
 }
 var isCheckBoxInput = (element) => element.type === "checkbox";
@@ -31280,26 +31753,275 @@ function LoginPage() {
     ] }) })
   ] });
 }
+const fieldClass$1 = "h-11 w-full rounded-xl border border-field bg-white px-3 text-sm font-semibold text-espresso outline-none transition focus:border-primary focus:ring-4 focus:ring-primary/10";
+const money = new Intl.NumberFormat("en-PK", { maximumFractionDigits: 0, style: "currency", currency: "PKR" });
 function MenuPage() {
-  return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "h-full overflow-y-auto p-7", children: [
-    /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm font-black uppercase tracking-[0.28em] text-subtle", children: "Admin workspace" }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx("h1", { className: "mt-2 text-4xl font-black", children: "Menu studio" }),
-    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mt-7 grid grid-cols-[1fr_340px] gap-5", children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsxs(Card, { className: "min-h-80 p-6", children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "text-xl font-black", children: "Catalog builder" }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mt-3 max-w-2xl font-semibold text-subtle", children: "Category, item, variation, modifier, add-on, and recipe builder workflows will live here." }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mt-8 grid grid-cols-3 gap-3", children: ["Categories", "Items", "Recipes"].map((item) => /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "rounded-2xl bg-sage p-4", children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm font-black text-secondary", children: item }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mt-5 text-2xl font-black", children: "0" })
-        ] }, item)) })
+  const queryClient2 = useQueryClient();
+  const canManageMenu = useAuthStore((state) => state.hasPermission("menu.manage"));
+  const [categoryName, setCategoryName] = reactExports.useState("");
+  const [categoryStationId, setCategoryStationId] = reactExports.useState("");
+  const [itemName, setItemName] = reactExports.useState("");
+  const [itemPrice, setItemPrice] = reactExports.useState("");
+  const [itemCategoryId, setItemCategoryId] = reactExports.useState("");
+  const [itemStationId, setItemStationId] = reactExports.useState("");
+  const menuQuery = useQuery({
+    queryKey: ["menu-summary"],
+    queryFn: () => apiFetch("/menu")
+  });
+  const categories2 = menuQuery.data?.categories ?? [];
+  const stations = menuQuery.data?.stations ?? [];
+  const selectedItemCategoryId = itemCategoryId || categories2[0]?.id || "";
+  const categoriesById = reactExports.useMemo(
+    () => new Map(categories2.map((category) => [category.id, category])),
+    [categories2]
+  );
+  const refreshMenu = () => queryClient2.invalidateQueries({ queryKey: ["menu-summary"] });
+  const createCategory = useMutation({
+    mutationFn: () => apiFetch("/menu/categories", {
+      method: "POST",
+      body: JSON.stringify({
+        name: categoryName.trim(),
+        kitchenStationId: categoryStationId || void 0,
+        displayOrder: categories2.length * 10 + 10
+      })
+    }),
+    onSuccess: () => {
+      setCategoryName("");
+      setCategoryStationId("");
+      void refreshMenu();
+    }
+  });
+  const createItem = useMutation({
+    mutationFn: () => apiFetch("/menu/items", {
+      method: "POST",
+      body: JSON.stringify({
+        name: itemName.trim(),
+        basePrice: Number(itemPrice),
+        categoryId: selectedItemCategoryId,
+        kitchenStationId: itemStationId || categoriesById.get(selectedItemCategoryId)?.kitchenStation?.id || void 0,
+        preparationMinutes: 10,
+        recipeRequired: false,
+        taxable: true
+      })
+    }),
+    onSuccess: () => {
+      setItemName("");
+      setItemPrice("");
+      setItemCategoryId("");
+      setItemStationId("");
+      void refreshMenu();
+    }
+  });
+  const toggleItem = useMutation({
+    mutationFn: (item) => apiFetch(`/menu/items/${item.id}`, {
+      method: "PATCH",
+      body: JSON.stringify({ active: !item.active })
+    }),
+    onSuccess: refreshMenu
+  });
+  function submitCategory(event) {
+    event.preventDefault();
+    if (categoryName.trim()) createCategory.mutate();
+  }
+  function submitItem(event) {
+    event.preventDefault();
+    if (itemName.trim() && Number(itemPrice) >= 0 && selectedItemCategoryId) createItem.mutate();
+  }
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "h-full overflow-y-auto bg-white p-7", children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex flex-wrap items-start justify-between gap-4", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm font-black uppercase tracking-[0.22em] text-primary", children: "Admin workspace" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("h1", { className: "mt-2 text-4xl font-black text-espresso", children: "Menu studio" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mt-3 max-w-2xl text-sm font-semibold text-muted", children: "Manage POS categories and sellable items with kitchen routing, pricing, recipe flags, and active status." })
       ] }),
-      /* @__PURE__ */ jsxRuntimeExports.jsxs(Card, { className: "bg-primary p-6 text-white", children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm font-black uppercase tracking-[0.2em] text-deepFaint", children: "Recipe cost" }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "mt-5 text-3xl font-black", children: "Exact BOM" }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mt-3 font-semibold text-mint", children: "Every item can map to stock by unit so inventory deduction stays precise." })
+      /* @__PURE__ */ jsxRuntimeExports.jsx(Badge, { tone: canManageMenu ? "green" : "orange", children: canManageMenu ? "Editable" : "View only" })
+    ] }),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mt-6 grid grid-cols-3 gap-4", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx(Metric, { icon: /* @__PURE__ */ jsxRuntimeExports.jsx(Boxes, { size: 19 }), label: "Active categories", value: menuQuery.data?.metrics.activeCategories ?? 0 }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx(Metric, { icon: /* @__PURE__ */ jsxRuntimeExports.jsx(Utensils, { size: 19 }), label: "Active items", value: menuQuery.data?.metrics.activeItems ?? 0 }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx(
+        Metric,
+        {
+          icon: /* @__PURE__ */ jsxRuntimeExports.jsx(CircleCheck, { size: 19 }),
+          label: "Recipe linked",
+          value: menuQuery.data?.metrics.recipeLinkedItems ?? 0
+        }
+      )
+    ] }),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mt-5 grid grid-cols-[1fr_360px] gap-5", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsxs(Card, { className: "overflow-hidden", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center justify-between border-b border-line px-6 py-5", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "text-xl font-black text-espresso", children: "Catalog items" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm font-semibold text-muted", children: "Kitchen station, recipe readiness, and POS status." })
+          ] }),
+          menuQuery.isLoading ? /* @__PURE__ */ jsxRuntimeExports.jsx(LoaderCircle, { className: "animate-spin text-primary", size: 20 }) : null
+        ] }),
+        menuQuery.isError ? /* @__PURE__ */ jsxRuntimeExports.jsx(InlineState, { tone: "red", text: "Menu data could not load. Check the API session." }) : null,
+        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "max-h-[560px] overflow-y-auto", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("table", { className: "w-full text-left text-sm", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx("thead", { className: "sticky top-0 bg-sage text-xs font-black uppercase text-muted", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("tr", { children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx("th", { className: "px-6 py-3", children: "Item" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("th", { className: "px-4 py-3", children: "Category" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("th", { className: "px-4 py-3", children: "Station" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("th", { className: "px-4 py-3 text-right", children: "Price" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("th", { className: "px-4 py-3 text-right", children: "Prep" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("th", { className: "px-6 py-3 text-right", children: "Status" })
+          ] }) }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("tbody", { className: "divide-y divide-line", children: (menuQuery.data?.items ?? []).map((item) => /* @__PURE__ */ jsxRuntimeExports.jsxs("tr", { className: "align-middle", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsxs("td", { className: "px-6 py-4", children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-black text-espresso", children: item.name }),
+              /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { className: "mt-1 text-xs font-semibold text-muted", children: [
+                item.sku || "No SKU",
+                " · ",
+                item.recipeRequired ? "Recipe required" : "Direct sale"
+              ] })
+            ] }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("td", { className: "px-4 py-4 font-bold text-label", children: item.category.name }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("td", { className: "px-4 py-4 font-bold text-label", children: item.kitchenStation?.name ?? "Front counter" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("td", { className: "px-4 py-4 text-right font-black text-espresso", children: money.format(Number(item.basePrice)) }),
+            /* @__PURE__ */ jsxRuntimeExports.jsxs("td", { className: "px-4 py-4 text-right font-bold text-label", children: [
+              item.preparationMinutes,
+              "m"
+            ] }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("td", { className: "px-6 py-4 text-right", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+              Button,
+              {
+                className: "h-9 px-3",
+                disabled: !canManageMenu || toggleItem.isPending,
+                icon: /* @__PURE__ */ jsxRuntimeExports.jsx(Power, { size: 15 }),
+                variant: item.active ? "secondary" : "ghost",
+                onClick: () => toggleItem.mutate(item),
+                children: item.active ? "Active" : "Hidden"
+              }
+            ) })
+          ] }, item.id)) })
+        ] }) })
+      ] }),
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "space-y-5", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsxs(Card, { className: "p-5", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "text-lg font-black text-espresso", children: "New category" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsxs("form", { className: "mt-4 space-y-3", onSubmit: submitCategory, children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx(
+              "input",
+              {
+                className: fieldClass$1,
+                disabled: !canManageMenu,
+                placeholder: "Category name",
+                value: categoryName,
+                onChange: (event) => setCategoryName(event.target.value)
+              }
+            ),
+            /* @__PURE__ */ jsxRuntimeExports.jsxs(
+              "select",
+              {
+                className: fieldClass$1,
+                disabled: !canManageMenu,
+                value: categoryStationId,
+                onChange: (event) => setCategoryStationId(event.target.value),
+                children: [
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("option", { value: "", children: "No station" }),
+                  stations.map((station) => /* @__PURE__ */ jsxRuntimeExports.jsx("option", { value: station.id, children: station.name }, station.id))
+                ]
+              }
+            ),
+            /* @__PURE__ */ jsxRuntimeExports.jsx(
+              Button,
+              {
+                className: "w-full",
+                disabled: !canManageMenu || !categoryName.trim() || createCategory.isPending,
+                icon: createCategory.isPending ? /* @__PURE__ */ jsxRuntimeExports.jsx(LoaderCircle, { className: "animate-spin", size: 17 }) : /* @__PURE__ */ jsxRuntimeExports.jsx(Plus, { size: 17 }),
+                type: "submit",
+                children: "Add category"
+              }
+            )
+          ] })
+        ] }),
+        /* @__PURE__ */ jsxRuntimeExports.jsxs(Card, { className: "p-5", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "text-lg font-black text-espresso", children: "New item" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsxs("form", { className: "mt-4 space-y-3", onSubmit: submitItem, children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx(
+              "input",
+              {
+                className: fieldClass$1,
+                disabled: !canManageMenu,
+                placeholder: "Item name",
+                value: itemName,
+                onChange: (event) => setItemName(event.target.value)
+              }
+            ),
+            /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "grid grid-cols-2 gap-3", children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsx(
+                "input",
+                {
+                  className: fieldClass$1,
+                  disabled: !canManageMenu,
+                  min: "0",
+                  placeholder: "Price",
+                  type: "number",
+                  value: itemPrice,
+                  onChange: (event) => setItemPrice(event.target.value)
+                }
+              ),
+              /* @__PURE__ */ jsxRuntimeExports.jsx(
+                "select",
+                {
+                  className: fieldClass$1,
+                  disabled: !canManageMenu || categories2.length === 0,
+                  value: selectedItemCategoryId,
+                  onChange: (event) => setItemCategoryId(event.target.value),
+                  children: categories2.map((category) => /* @__PURE__ */ jsxRuntimeExports.jsx("option", { value: category.id, children: category.name }, category.id))
+                }
+              )
+            ] }),
+            /* @__PURE__ */ jsxRuntimeExports.jsxs(
+              "select",
+              {
+                className: fieldClass$1,
+                disabled: !canManageMenu,
+                value: itemStationId,
+                onChange: (event) => setItemStationId(event.target.value),
+                children: [
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("option", { value: "", children: "Use category station" }),
+                  stations.map((station) => /* @__PURE__ */ jsxRuntimeExports.jsx("option", { value: station.id, children: station.name }, station.id))
+                ]
+              }
+            ),
+            /* @__PURE__ */ jsxRuntimeExports.jsx(
+              Button,
+              {
+                className: "w-full",
+                disabled: !canManageMenu || !itemName.trim() || !itemPrice || !selectedItemCategoryId || createItem.isPending,
+                icon: createItem.isPending ? /* @__PURE__ */ jsxRuntimeExports.jsx(LoaderCircle, { className: "animate-spin", size: 17 }) : /* @__PURE__ */ jsxRuntimeExports.jsx(Plus, { size: 17 }),
+                type: "submit",
+                children: "Add item"
+              }
+            )
+          ] })
+        ] })
       ] })
     ] })
   ] });
+}
+function Metric({ icon, label, value }) {
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs(Card, { className: "flex items-center justify-between p-5", children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm font-black text-muted", children: label }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mt-3 text-3xl font-black text-espresso", children: value })
+    ] }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "flex h-11 w-11 items-center justify-center rounded-xl bg-mint text-secondary", children: icon })
+  ] });
+}
+function InlineState({ text, tone }) {
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs(
+    "div",
+    {
+      className: `m-5 flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-bold ${tone === "red" ? "bg-red-50 text-red-700" : "bg-sage text-secondary"}`,
+      children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx(CircleAlert, { size: 17 }),
+        text
+      ]
+    }
+  );
 }
 const usePosStore = create((set2) => ({
   orderType: "DINE_IN",

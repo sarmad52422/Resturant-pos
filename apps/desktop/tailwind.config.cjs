@@ -22,6 +22,7 @@ module.exports = {
         subtle: 'rgb(var(--ro-subtle-rgb) / <alpha-value>)',
         label: 'rgb(var(--ro-label-rgb) / <alpha-value>)',
         field: 'rgb(var(--ro-field-rgb) / <alpha-value>)',
+        line: 'rgb(var(--ro-field-rgb) / <alpha-value>)',
         successSoft: 'rgb(var(--ro-success-soft-rgb) / <alpha-value>)',
         successRing: 'rgb(var(--ro-success-ring-rgb) / <alpha-value>)',
         accentSoft: 'rgb(var(--ro-accent-soft-rgb) / <alpha-value>)',

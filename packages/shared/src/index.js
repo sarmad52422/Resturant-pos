@@ -12,6 +12,9 @@ exports.permissions = [
     'ledger.delete',
     'shift.close.other',
     'settings.update',
+    'menu.manage',
+    'customer.manage',
+    'inventory.manage',
     'user.manage',
     'report.view.profit',
 ];

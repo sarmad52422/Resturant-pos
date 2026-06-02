@@ -1,4 +1,4 @@
-import { PrismaClient } from '@prisma/client';
+import { Prisma, PrismaClient } from '@prisma/client';
 import * as bcrypt from 'bcryptjs';
 
 const prisma = new PrismaClient();
@@ -14,6 +14,9 @@ const permissions = [
   'ledger.delete',
   'shift.close.other',
   'settings.update',
+  'menu.manage',
+  'customer.manage',
+  'inventory.manage',
   'user.manage',
   'report.view.profit',
 ] as const;
@@ -41,7 +44,7 @@ async function main() {
 
   const adminRole = await prisma.role.upsert({
     where: { name: 'Admin' },
-    update: {},
+    update: { description: 'Full RestaurantOS access' },
     create: {
       name: 'Admin',
       description: 'Full RestaurantOS access',
@@ -52,6 +55,22 @@ async function main() {
       },
     },
   });
+
+  for (const permission of permissionRecords) {
+    await prisma.rolePermission.upsert({
+      where: {
+        roleId_permissionId: {
+          roleId: adminRole.id,
+          permissionId: permission.id,
+        },
+      },
+      update: {},
+      create: {
+        roleId: adminRole.id,
+        permissionId: permission.id,
+      },
+    });
+  }
 
   for (const role of defaultRoles.filter((role) => role !== 'Admin')) {
     await prisma.role.upsert({
@@ -126,6 +145,202 @@ async function main() {
       update: { group, value },
       create: { key, group, value },
     });
+  }
+
+  const [burgerStation, pizzaStation, juiceStation] = await Promise.all([
+    prisma.kitchenStation.findUniqueOrThrow({ where: { slug: 'burger' } }),
+    prisma.kitchenStation.findUniqueOrThrow({ where: { slug: 'pizza' } }),
+    prisma.kitchenStation.findUniqueOrThrow({ where: { slug: 'juice' } }),
+  ]);
+
+  const demoCategories = [
+    {
+      name: 'Signature Burgers',
+      description: 'Fast-moving beef and chicken burgers',
+      displayOrder: 10,
+      kitchenStationId: burgerStation.id,
+    },
+    {
+      name: 'Stone Pizzas',
+      description: 'House pizzas with kitchen routing',
+      displayOrder: 20,
+      kitchenStationId: pizzaStation.id,
+    },
+    {
+      name: 'Fresh Juices',
+      description: 'Made-to-order juices and smoothies',
+      displayOrder: 30,
+      kitchenStationId: juiceStation.id,
+    },
+  ];
+
+  const categoryRecords = [];
+  for (const category of demoCategories) {
+    const existing = await prisma.menuCategory.findFirst({ where: { name: category.name } });
+    categoryRecords.push(
+      existing
+        ? await prisma.menuCategory.update({ where: { id: existing.id }, data: category })
+        : await prisma.menuCategory.create({ data: category }),
+    );
+  }
+
+  const categoryByName = new Map(categoryRecords.map((category) => [category.name, category]));
+  const menuItems = [
+    {
+      sku: 'BURG-SMASH',
+      name: 'Smash Beef Burger',
+      shortName: 'Smash Beef',
+      description: 'Double smashed patty, cheese, pickles, and house sauce',
+      categoryId: categoryByName.get('Signature Burgers')!.id,
+      kitchenStationId: burgerStation.id,
+      basePrice: new Prisma.Decimal(950),
+      costEstimate: new Prisma.Decimal(410),
+      preparationMinutes: 12,
+      recipeRequired: true,
+    },
+    {
+      sku: 'PIZ-MARG',
+      name: 'Margherita Pizza',
+      shortName: 'Margherita',
+      description: 'Mozzarella, tomato base, basil, and olive oil',
+      categoryId: categoryByName.get('Stone Pizzas')!.id,
+      kitchenStationId: pizzaStation.id,
+      basePrice: new Prisma.Decimal(1450),
+      costEstimate: new Prisma.Decimal(640),
+      preparationMinutes: 18,
+      recipeRequired: true,
+    },
+    {
+      sku: 'JUI-ORANGE',
+      name: 'Fresh Orange Juice',
+      shortName: 'Orange',
+      description: 'Fresh pressed orange juice',
+      categoryId: categoryByName.get('Fresh Juices')!.id,
+      kitchenStationId: juiceStation.id,
+      basePrice: new Prisma.Decimal(420),
+      costEstimate: new Prisma.Decimal(180),
+      preparationMinutes: 5,
+      recipeRequired: false,
+    },
+  ];
+
+  for (const item of menuItems) {
+    await prisma.menuItem.upsert({
+      where: { sku: item.sku },
+      update: item,
+      create: item,
+    });
+  }
+
+  const demoCustomers = [
+    {
+      name: 'Ayesha Khan',
+      phone: '+92 300 1112233',
+      email: 'ayesha@example.com',
+      customerType: 'REGULAR',
+      creditLimit: new Prisma.Decimal(15000),
+      notes: 'Prefers WhatsApp receipt',
+    },
+    {
+      name: 'Office Catering Account',
+      phone: '+92 300 4445566',
+      email: 'catering@example.com',
+      customerType: 'CORPORATE',
+      creditLimit: new Prisma.Decimal(75000),
+      currentBalance: new Prisma.Decimal(9200),
+      notes: 'Monthly billing customer',
+    },
+  ];
+
+  for (const customer of demoCustomers) {
+    await prisma.customer.upsert({
+      where: { phone: customer.phone },
+      update: customer,
+      create: customer,
+    });
+  }
+
+  const supplier = await prisma.supplier.findFirst({ where: { name: 'Metro Demo Supplier' } });
+  const demoSupplier =
+    supplier ??
+    (await prisma.supplier.create({
+      data: {
+        name: 'Metro Demo Supplier',
+        phone: '+92 300 7778899',
+        contactPerson: 'Purchase Desk',
+        notes: 'Seed supplier for development stock',
+      },
+    }));
+
+  const [kg, gram, liter, milliliter, piece] = await Promise.all([
+    prisma.unit.findUniqueOrThrow({ where: { symbol: 'kg' } }),
+    prisma.unit.findUniqueOrThrow({ where: { symbol: 'g' } }),
+    prisma.unit.findUniqueOrThrow({ where: { symbol: 'L' } }),
+    prisma.unit.findUniqueOrThrow({ where: { symbol: 'ml' } }),
+    prisma.unit.findUniqueOrThrow({ where: { symbol: 'pc' } }),
+  ]);
+
+  const inventoryItems = [
+    {
+      name: 'Beef Patty',
+      category: 'Proteins',
+      purchaseUnitId: kg.id,
+      usageUnitId: gram.id,
+      conversionRate: new Prisma.Decimal(1000),
+      currentStock: new Prisma.Decimal(18.5),
+      minimumStockLevel: new Prisma.Decimal(8),
+      averageCost: new Prisma.Decimal(2200),
+      lastPurchaseCost: new Prisma.Decimal(2300),
+      supplierId: demoSupplier.id,
+      batchTrackingEnabled: true,
+    },
+    {
+      name: 'Mozzarella Cheese',
+      category: 'Dairy',
+      purchaseUnitId: kg.id,
+      usageUnitId: gram.id,
+      conversionRate: new Prisma.Decimal(1000),
+      currentStock: new Prisma.Decimal(6.2),
+      minimumStockLevel: new Prisma.Decimal(7),
+      averageCost: new Prisma.Decimal(1850),
+      lastPurchaseCost: new Prisma.Decimal(1900),
+      supplierId: demoSupplier.id,
+      batchTrackingEnabled: true,
+    },
+    {
+      name: 'Orange Juice Pulp',
+      category: 'Beverage',
+      purchaseUnitId: liter.id,
+      usageUnitId: milliliter.id,
+      conversionRate: new Prisma.Decimal(1000),
+      currentStock: new Prisma.Decimal(24),
+      minimumStockLevel: new Prisma.Decimal(10),
+      averageCost: new Prisma.Decimal(420),
+      lastPurchaseCost: new Prisma.Decimal(430),
+      supplierId: demoSupplier.id,
+      expiryTrackingEnabled: true,
+    },
+    {
+      name: 'Burger Bun',
+      category: 'Bakery',
+      purchaseUnitId: piece.id,
+      usageUnitId: piece.id,
+      conversionRate: new Prisma.Decimal(1),
+      currentStock: new Prisma.Decimal(46),
+      minimumStockLevel: new Prisma.Decimal(25),
+      averageCost: new Prisma.Decimal(45),
+      lastPurchaseCost: new Prisma.Decimal(48),
+      supplierId: demoSupplier.id,
+    },
+  ];
+
+  for (const item of inventoryItems) {
+    const existing = await prisma.inventoryItem.findFirst({ where: { name: item.name } });
+    if (existing) {
+      await prisma.inventoryItem.update({ where: { id: existing.id }, data: item });
+    } else {
+      await prisma.inventoryItem.create({ data: item });
+    }
   }
 }
 

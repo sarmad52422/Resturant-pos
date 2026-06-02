@@ -70,6 +70,9 @@ Seeded sensitive permissions:
 - `ledger.delete`
 - `shift.close.other`
 - `settings.update`
+- `menu.manage`
+- `customer.manage`
+- `inventory.manage`
 - `user.manage`
 - `report.view.profit`
 
@@ -90,6 +93,24 @@ Seeded setting groups:
 - Operations policy: low stock threshold, kitchen delay timer, and opening cash float requirement.
 
 The desktop Settings page uses TanStack Query for loading/saving, React Hook Form with Zod validation for edits, and the current permission model to prevent unauthorized saves.
+
+## Admin Workspaces
+
+Current admin endpoints:
+
+- `GET /menu` - Lists menu categories, menu items, kitchen stations, and catalog metrics.
+- `POST /menu/categories` - Creates a menu category. Requires `menu.manage`.
+- `PATCH /menu/categories/:id` - Updates a menu category. Requires `menu.manage`.
+- `POST /menu/items` - Creates a menu item. Requires `menu.manage`.
+- `PATCH /menu/items/:id` - Updates a menu item. Requires `menu.manage`.
+- `GET /customers` - Lists customers with credit and order metrics.
+- `POST /customers` - Creates a customer profile. Requires `customer.manage`.
+- `PATCH /customers/:id` - Updates a customer profile. Requires `customer.manage`.
+- `GET /inventory` - Lists stock items, units, suppliers, and stock metrics.
+- `POST /inventory/items` - Creates a stock item. Requires `inventory.manage`.
+- `PATCH /inventory/items/:id` - Updates a stock item. Requires `inventory.manage`.
+
+The desktop Menu, Customers, and Inventory pages now use these endpoints for real operational tables, compact create forms, permission-aware editable states, and active/hidden toggles where applicable.
 
 ## Brand Theme
 
