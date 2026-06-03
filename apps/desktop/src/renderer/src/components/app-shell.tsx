@@ -3,6 +3,7 @@ import {
   BarChart3,
   Boxes,
   ChefHat,
+  CircleHelp,
   CreditCard,
   LayoutDashboard,
   Settings,
@@ -30,6 +31,7 @@ const navItems = [
   { to: '/shifts', label: 'Shifts', icon: Clock3 },
   { to: '/reports', label: 'Reports', icon: BarChart3 },
   { to: '/settings', label: 'Settings', icon: Settings },
+  { to: '/help', label: 'Help', icon: CircleHelp },
 ];
 
 export function AppShell() {

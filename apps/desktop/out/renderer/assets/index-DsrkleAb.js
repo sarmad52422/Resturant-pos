@@ -22206,6 +22206,13 @@ const ChartColumn = createLucideIcon("ChartColumn", [
  * This source code is licensed under the ISC license.
  * See the LICENSE file in the root directory of this source tree.
  */
+const Check = createLucideIcon("Check", [["path", { d: "M20 6 9 17l-5-5", key: "1gmf2c" }]]);
+/**
+ * @license lucide-react v0.468.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */
 const ChefHat = createLucideIcon("ChefHat", [
   [
     "path",
@@ -22236,6 +22243,17 @@ const CircleAlert = createLucideIcon("CircleAlert", [
 const CircleCheck = createLucideIcon("CircleCheck", [
   ["circle", { cx: "12", cy: "12", r: "10", key: "1mglay" }],
   ["path", { d: "m9 12 2 2 4-4", key: "dzmm74" }]
+]);
+/**
+ * @license lucide-react v0.468.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */
+const CircleHelp = createLucideIcon("CircleHelp", [
+  ["circle", { cx: "12", cy: "12", r: "10", key: "1mglay" }],
+  ["path", { d: "M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3", key: "1u773s" }],
+  ["path", { d: "M12 17h.01", key: "p32p05" }]
 ]);
 /**
  * @license lucide-react v0.468.0 - ISC
@@ -22347,6 +22365,23 @@ const LayoutDashboard = createLucideIcon("LayoutDashboard", [
  * This source code is licensed under the ISC license.
  * See the LICENSE file in the root directory of this source tree.
  */
+const Lightbulb = createLucideIcon("Lightbulb", [
+  [
+    "path",
+    {
+      d: "M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5",
+      key: "1gvzjb"
+    }
+  ],
+  ["path", { d: "M9 18h6", key: "x1upvd" }],
+  ["path", { d: "M10 22h4", key: "ceow96" }]
+]);
+/**
+ * @license lucide-react v0.468.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */
 const LoaderCircle = createLucideIcon("LoaderCircle", [
   ["path", { d: "M21 12a9 9 0 1 1-6.219-8.56", key: "13zald" }]
 ]);
@@ -22379,6 +22414,17 @@ const LogOut = createLucideIcon("LogOut", [
  * See the LICENSE file in the root directory of this source tree.
  */
 const Minus = createLucideIcon("Minus", [["path", { d: "M5 12h14", key: "1ays0h" }]]);
+/**
+ * @license lucide-react v0.468.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */
+const Monitor = createLucideIcon("Monitor", [
+  ["rect", { width: "20", height: "14", x: "2", y: "3", rx: "2", key: "48i651" }],
+  ["line", { x1: "8", x2: "16", y1: "21", y2: "21", key: "1svkeh" }],
+  ["line", { x1: "12", x2: "12", y1: "17", y2: "21", key: "vw1qmm" }]
+]);
 /**
  * @license lucide-react v0.468.0 - ISC
  *
@@ -23113,7 +23159,8 @@ const navItems = [
   { to: "/users", label: "Staff", icon: UserCog },
   { to: "/shifts", label: "Shifts", icon: Clock3 },
   { to: "/reports", label: "Reports", icon: ChartColumn },
-  { to: "/settings", label: "Settings", icon: Settings }
+  { to: "/settings", label: "Settings", icon: Settings },
+  { to: "/help", label: "Help", icon: CircleHelp }
 ];
 function AppShell() {
   const navigate = useNavigate();
@@ -26001,6 +26048,81 @@ function DashboardPage() {
         /* @__PURE__ */ jsxRuntimeExports.jsx(Badge, { tone: "orange", children: "Kitchen" }),
         /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "mt-6 text-3xl font-black", children: "No delays" }),
         /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mt-3 text-sm font-semibold text-deepSoft", children: "Kitchen queue, table status, and delivery counters will stream here." })
+      ] })
+    ] })
+  ] });
+}
+const shortcutGroups = [
+  {
+    title: "App window",
+    icon: Monitor,
+    items: [
+      ["Ctrl + Shift + M", "Minimize the desktop app"],
+      ["Ctrl + Shift + F", "Maximize or restore the desktop app"],
+      ["Ctrl + Shift + Q", "Close the desktop app"]
+    ]
+  },
+  {
+    title: "Cashier POS",
+    icon: ShoppingBag,
+    items: [
+      ["F2", "Focus and select item search"],
+      ["Enter", "Preview the first visible item when search is focused"],
+      ["Alt + 1..9", "Preview the numbered visible item"],
+      ["Shift + 1..9", "Preview the numbered item while search is focused"],
+      ["Ctrl + 1..9", "Preview the numbered visible item"],
+      ["Enter", "Confirm the item preview popup"],
+      ["F5", "Send the cart/order to kitchen"],
+      ["F6", "Open receipt preview"],
+      ["Ctrl + P", "Open receipt preview"],
+      ["P", "Print when receipt preview is open"],
+      ["F7", "Open payment popup"],
+      ["F10", "Open table screen"],
+      ["Esc", "Close open POS popups"],
+      ["Ctrl + D", "Delivery mode"],
+      ["Ctrl + T", "Takeaway mode"],
+      ["Ctrl + I", "Dine-in mode"]
+    ]
+  }
+];
+const tips = [
+  "Use F2, type a few letters, then press Enter to preview the first result.",
+  "Use Alt plus the number badge when multiple search results are visible.",
+  "Receipt printing opens a preview first so the cashier can check the bill.",
+  "Save printer details in Settings > Terminal hardware before rush hours.",
+  "Keep payment and print popups closed when using item quick-add shortcuts.",
+  "Table shortcuts and selected-line quantity controls will become safer after selected state is added."
+];
+function HelpPage() {
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "h-full overflow-y-auto bg-white p-7", children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex flex-wrap items-start justify-between gap-4", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm font-black uppercase tracking-[0.22em] text-primary", children: "Help center" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("h1", { className: "mt-2 text-4xl font-black text-espresso", children: "Shortcuts and tips" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mt-3 max-w-2xl text-sm font-semibold text-muted", children: "A single place for cashier keys, window controls, and practical operating notes." })
+      ] }),
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex h-12 items-center gap-3 rounded-2xl bg-sage px-4 text-sm font-black text-secondary", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx(Keyboard, { size: 19 }),
+        "Keyboard-first POS"
+      ] })
+    ] }),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mt-6 grid grid-cols-[1.1fr_0.9fr] gap-5", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "space-y-5", children: shortcutGroups.map((group) => /* @__PURE__ */ jsxRuntimeExports.jsxs(Card, { className: "p-6", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-3", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "flex h-11 w-11 items-center justify-center rounded-xl bg-mint text-secondary", children: /* @__PURE__ */ jsxRuntimeExports.jsx(group.icon, { size: 21 }) }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "text-xl font-black text-espresso", children: group.title })
+        ] }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mt-5 divide-y divide-line", children: group.items.map(([keys, action]) => /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "grid grid-cols-[170px_1fr] gap-4 py-3", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "inline-flex min-h-9 items-center rounded-xl bg-sage px-3 text-sm font-black text-secondary", children: keys }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "flex items-center text-sm font-semibold text-label", children: action })
+        ] }, `${group.title}-${keys}-${action}`)) })
+      ] }, group.title)) }),
+      /* @__PURE__ */ jsxRuntimeExports.jsxs(Card, { className: "p-6", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-3", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "flex h-11 w-11 items-center justify-center rounded-xl bg-mint text-secondary", children: /* @__PURE__ */ jsxRuntimeExports.jsx(Lightbulb, { size: 21 }) }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "text-xl font-black text-espresso", children: "Helpful tips" })
+        ] }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mt-5 space-y-3", children: tips.map((tip) => /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "rounded-2xl bg-sage px-4 py-3 text-sm font-bold leading-6 text-label", children: tip }, tip)) })
       ] })
     ] })
   ] });
@@ -33512,6 +33634,28 @@ const money$1 = new Intl.NumberFormat("en-PK", {
   style: "currency"
 });
 const fieldClass$4 = "h-11 w-full rounded-xl border border-field bg-white px-3 text-sm font-semibold text-espresso outline-none transition focus:border-primary focus:ring-4 focus:ring-primary/10";
+function QuickAddConfirmModal({
+  item,
+  number,
+  open,
+  onClose,
+  onConfirm
+}) {
+  return /* @__PURE__ */ jsxRuntimeExports.jsx(ActionModal, { description: "Confirm the menu item before adding it to the ticket.", open, title: "Add item", widthClass: "max-w-md", onClose, children: item ? /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "space-y-4", children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "rounded-2xl bg-sage p-5", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-start justify-between gap-4", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx(Badge, { tone: "blue", children: item.kitchenStation?.name ?? item.category.name }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "mt-4 text-2xl font-black text-espresso", children: item.shortName || item.name }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mt-2 text-sm font-bold text-muted", children: item.category.name })
+        ] }),
+        number ? /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "flex h-11 min-w-11 items-center justify-center rounded-xl bg-secondary px-3 text-lg font-black text-white", children: number }) : null
+      ] }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mt-5 text-3xl font-black text-secondary", children: money$1.format(Number(item.basePrice)) })
+    ] }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(Button, { className: "w-full", icon: /* @__PURE__ */ jsxRuntimeExports.jsx(Check, { size: 17 }), type: "button", onClick: onConfirm, children: "Add item" })
+  ] }) : null });
+}
 function PaymentModal({
   amount,
   error,
@@ -33727,8 +33871,147 @@ function readPrintMode(settings, key, fallback) {
   const value = readSetting(settings, key, fallback);
   return value === "network" || value === "device" || value === "os" ? value : fallback;
 }
+function usePosShortcuts({
+  canOpenPayment,
+  canOpenPrint,
+  canPrintReceipt,
+  canSendToKitchen,
+  printOpen,
+  quickAddConfirmOpen,
+  quickAddCount,
+  quickAddEnabled,
+  searchInputRef,
+  sendToKitchen,
+  setOrderType,
+  onClosePayment,
+  onClosePrint,
+  onConfirmQuickAdd,
+  onNavigateTables,
+  onOpenPayment,
+  onOpenPrint,
+  onPrintReceipt,
+  onQuickAddItem
+}) {
+  reactExports.useEffect(() => {
+    function handleKeyDown(event) {
+      const key = event.key.toLowerCase();
+      const isCtrlOrMeta = event.ctrlKey || event.metaKey;
+      const editableTarget = isEditableTarget(event.target);
+      const searchFocused = event.target === searchInputRef.current;
+      const quickAddIndex = getQuickAddIndex(event);
+      const quickAddAllowedTarget = !editableTarget || searchFocused;
+      const quickAddModifier = event.altKey || isCtrlOrMeta || event.shiftKey && searchFocused;
+      if (quickAddConfirmOpen && event.key === "Enter") {
+        event.preventDefault();
+        onConfirmQuickAdd();
+        return;
+      }
+      if (quickAddEnabled && quickAddAllowedTarget && quickAddIndex !== void 0 && quickAddIndex < quickAddCount && quickAddModifier) {
+        event.preventDefault();
+        onQuickAddItem(quickAddIndex);
+        return;
+      }
+      if (searchFocused && event.key === "Enter" && quickAddCount > 0) {
+        event.preventDefault();
+        onQuickAddItem(0);
+        return;
+      }
+      if (event.key === "Escape") {
+        event.preventDefault();
+        onClosePayment();
+        onClosePrint();
+        return;
+      }
+      if (event.key === "F2") {
+        event.preventDefault();
+        searchInputRef.current?.focus();
+        searchInputRef.current?.select();
+        return;
+      }
+      if (event.key === "F5") {
+        event.preventDefault();
+        if (canSendToKitchen) sendToKitchen();
+        return;
+      }
+      if (event.key === "F6" || isCtrlOrMeta && key === "p") {
+        event.preventDefault();
+        if (canOpenPrint) onOpenPrint();
+        return;
+      }
+      if (event.key === "F7") {
+        event.preventDefault();
+        if (canOpenPayment) onOpenPayment();
+        return;
+      }
+      if (event.key === "F10") {
+        event.preventDefault();
+        onNavigateTables();
+        return;
+      }
+      if (isCtrlOrMeta && key === "d") {
+        event.preventDefault();
+        setOrderType("DELIVERY");
+        return;
+      }
+      if (isCtrlOrMeta && key === "t") {
+        event.preventDefault();
+        setOrderType("TAKEAWAY");
+        return;
+      }
+      if (isCtrlOrMeta && key === "i") {
+        event.preventDefault();
+        setOrderType("DINE_IN");
+        return;
+      }
+      if (!editableTarget && printOpen && key === "p" && !event.altKey && !isCtrlOrMeta && !event.shiftKey) {
+        event.preventDefault();
+        if (canPrintReceipt) onPrintReceipt();
+      }
+    }
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [
+    canOpenPayment,
+    canOpenPrint,
+    canPrintReceipt,
+    canSendToKitchen,
+    printOpen,
+    quickAddConfirmOpen,
+    quickAddCount,
+    quickAddEnabled,
+    searchInputRef,
+    sendToKitchen,
+    setOrderType,
+    onClosePayment,
+    onClosePrint,
+    onConfirmQuickAdd,
+    onNavigateTables,
+    onOpenPayment,
+    onOpenPrint,
+    onPrintReceipt,
+    onQuickAddItem
+  ]);
+}
+function isEditableTarget(target) {
+  if (!(target instanceof HTMLElement)) return false;
+  const tagName = target.tagName.toLowerCase();
+  return tagName === "input" || tagName === "select" || tagName === "textarea" || target.isContentEditable;
+}
+function getQuickAddIndex(event) {
+  if (event.code.startsWith("Digit")) {
+    const digit = Number(event.code.replace("Digit", ""));
+    return digit >= 1 && digit <= 9 ? digit - 1 : void 0;
+  }
+  if (event.code.startsWith("Numpad")) {
+    const digit = Number(event.code.replace("Numpad", ""));
+    return digit >= 1 && digit <= 9 ? digit - 1 : void 0;
+  }
+  return void 0;
+}
 function PosPage() {
+  const navigate = useNavigate();
   const { cart, addLine, changeQuantity, removeLine, clear, orderType, setOrderType } = usePosStore();
+  const searchInputRef = reactExports.useRef(null);
   const [selectedCategoryId, setSelectedCategoryId] = reactExports.useState("all");
   const [searchText, setSearchText] = reactExports.useState("");
   const [paymentOpen, setPaymentOpen] = reactExports.useState(false);
@@ -33745,6 +34028,7 @@ function PosPage() {
   const [printerDefaultsApplied, setPrinterDefaultsApplied] = reactExports.useState(false);
   const [lastOrder, setLastOrder] = reactExports.useState();
   const [lastReceiptLines, setLastReceiptLines] = reactExports.useState([]);
+  const [quickAddIndex, setQuickAddIndex] = reactExports.useState();
   const catalogQuery = useQuery({
     queryKey: ["pos-catalog"],
     queryFn: () => apiFetch("/menu/pos")
@@ -33773,6 +34057,8 @@ function PosPage() {
     const matchesSearch = !search || item.name.toLowerCase().includes(search) || item.category.name.toLowerCase().includes(search) || item.kitchenStation?.name.toLowerCase().includes(search);
     return matchesCategory && matchesSearch;
   });
+  const quickAddItems = filteredItems.slice(0, 9);
+  const quickAddItem = quickAddIndex === void 0 ? void 0 : quickAddItems[quickAddIndex];
   reactExports.useEffect(() => {
     if (!settingsQuery.data || printerDefaultsApplied) return;
     setPrintMode(readPrintMode(settingsQuery.data, "terminal.receiptPrinterMode", "os"));
@@ -33861,6 +34147,11 @@ function PosPage() {
       printMode === "network" ? { host: printerHost.trim(), port: Number(printerPort || 9100) } : { devicePath: printerDevicePath.trim() }
     )
   });
+  const canOpenPrint = cart.length > 0 || Boolean(lastOrder);
+  const hasPrinterTarget = printMode === "os" || printMode === "network" && Boolean(printerHost.trim()) || printMode === "device" && Boolean(printerDevicePath.trim());
+  const canPrintReceipt = canOpenPrint && hasPrinterTarget && !printReceipt.isPending;
+  const canOpenPayment = cart.length > 0 && !payOrder.isPending;
+  const canSendToKitchen = cart.length > 0 && !sendToKitchen.isPending;
   function addMenuItem(item) {
     addLine({
       id: item.id,
@@ -33869,10 +34160,20 @@ function PosPage() {
       quantity: 1
     });
   }
+  const addQuickItem = reactExports.useCallback((index) => {
+    if (quickAddItems[index]) setQuickAddIndex(index);
+  }, [quickAddItems]);
+  const confirmQuickAdd = reactExports.useCallback(() => {
+    if (quickAddItem) addMenuItem(quickAddItem);
+    setQuickAddIndex(void 0);
+  }, [quickAddItem]);
   function openPayment() {
     setPaymentAmount(String(total));
     setPaymentOpen(true);
   }
+  const printReceiptNow = reactExports.useCallback(() => {
+    if (canPrintReceipt) printReceipt.mutate();
+  }, [canPrintReceipt, printReceipt]);
   function submitPayment(event) {
     event.preventDefault();
     if (cart.length > 0 && Number(paymentAmount || 0) > 0 && Number(paymentAmount || 0) <= total) {
@@ -33881,8 +34182,32 @@ function PosPage() {
   }
   function submitPrint(event) {
     event.preventDefault();
-    if (cart.length > 0 || lastOrder) printReceipt.mutate();
+    printReceiptNow();
   }
+  usePosShortcuts({
+    canOpenPayment,
+    canOpenPrint,
+    canPrintReceipt,
+    canSendToKitchen,
+    printOpen,
+    quickAddConfirmOpen: Boolean(quickAddItem),
+    quickAddCount: quickAddItems.length,
+    quickAddEnabled: !paymentOpen && !printOpen && !quickAddItem,
+    searchInputRef,
+    sendToKitchen: () => sendToKitchen.mutate(),
+    setOrderType,
+    onClosePayment: () => setPaymentOpen(false),
+    onClosePrint: () => {
+      setPrintOpen(false);
+      setQuickAddIndex(void 0);
+    },
+    onConfirmQuickAdd: confirmQuickAdd,
+    onNavigateTables: () => navigate("/tables"),
+    onOpenPayment: openPayment,
+    onOpenPrint: () => setPrintOpen(true),
+    onPrintReceipt: printReceiptNow,
+    onQuickAddItem: addQuickItem
+  });
   return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "grid h-full grid-cols-[1fr_430px] gap-5 overflow-hidden bg-white p-5", children: [
     /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { className: "flex min-w-0 flex-col overflow-hidden rounded-[28px] bg-white px-6 py-5 shadow-[0_28px_70px_rgb(var(--ro-secondary-rgb)/0.08)]", children: [
       /* @__PURE__ */ jsxRuntimeExports.jsxs("header", { className: "mb-5 flex items-center justify-between", children: [
@@ -33911,6 +34236,7 @@ function PosPage() {
             /* @__PURE__ */ jsxRuntimeExports.jsx(
               "input",
               {
+                ref: searchInputRef,
                 className: "h-full flex-1 bg-transparent text-lg font-semibold outline-none",
                 value: searchText,
                 onChange: (event) => setSearchText(event.target.value)
@@ -33961,21 +34287,24 @@ function PosPage() {
           /* @__PURE__ */ jsxRuntimeExports.jsx(LoaderCircle, { className: "animate-spin text-primary", size: 18 }),
           "Loading menu"
         ] }) : null,
-        filteredItems.map((item) => /* @__PURE__ */ jsxRuntimeExports.jsx(
+        filteredItems.map((item, index) => /* @__PURE__ */ jsxRuntimeExports.jsxs(
           "button",
           {
-            className: "group rounded-2xl bg-white p-4 text-left shadow-[0_14px_38px_rgb(var(--ro-secondary-rgb)/0.07)] transition hover:-translate-y-0.5 hover:shadow-[0_22px_48px_rgb(var(--ro-secondary-rgb)/0.12)]",
+            className: "group relative rounded-2xl bg-white p-4 text-left shadow-[0_14px_38px_rgb(var(--ro-secondary-rgb)/0.07)] transition hover:-translate-y-0.5 hover:shadow-[0_22px_48px_rgb(var(--ro-secondary-rgb)/0.12)]",
             onClick: () => addMenuItem(item),
-            children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex h-full flex-col justify-between", children: [
-              /* @__PURE__ */ jsxRuntimeExports.jsx(Badge, { tone: "blue", children: item.kitchenStation?.name ?? item.category.name }),
-              /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
-                /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "text-lg font-black text-espresso", children: item.shortName || item.name }),
-                /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mt-3 flex items-end justify-between", children: [
-                  /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-2xl font-black text-secondary", children: money$1.format(Number(item.basePrice)) }),
-                  /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "flex h-9 w-9 items-center justify-center rounded-xl bg-primary text-white transition group-hover:scale-105", children: /* @__PURE__ */ jsxRuntimeExports.jsx(Plus, { size: 18 }) })
+            children: [
+              index < 9 ? /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "absolute right-3 top-3 flex h-7 min-w-7 items-center justify-center rounded-lg bg-secondary px-2 text-xs font-black text-white", children: index + 1 }) : null,
+              /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex h-full flex-col justify-between", children: [
+                /* @__PURE__ */ jsxRuntimeExports.jsx(Badge, { tone: "blue", children: item.kitchenStation?.name ?? item.category.name }),
+                /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "text-lg font-black text-espresso", children: item.shortName || item.name }),
+                  /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mt-3 flex items-end justify-between", children: [
+                    /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-2xl font-black text-secondary", children: money$1.format(Number(item.basePrice)) }),
+                    /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "flex h-9 w-9 items-center justify-center rounded-xl bg-primary text-white transition group-hover:scale-105", children: /* @__PURE__ */ jsxRuntimeExports.jsx(Plus, { size: 18 }) })
+                  ] })
                 ] })
               ] })
-            ] })
+            ]
           },
           item.id
         ))
@@ -34016,36 +34345,6 @@ function PosPage() {
           /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { className: "text-lg", children: money$1.format(line.price * line.quantity) })
         ] })
       ] }, line.id)) }),
-      /* @__PURE__ */ jsxRuntimeExports.jsxs(Card, { className: "mt-4 bg-sage p-4 shadow-none", children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center justify-between gap-3", children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-2 text-sm font-black text-secondary", children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx(Keyboard, { size: 17 }),
-            "Shortcut card"
-          ] }),
-          /* @__PURE__ */ jsxRuntimeExports.jsxs(
-            Link,
-            {
-              className: "inline-flex h-9 items-center gap-2 rounded-xl bg-white px-3 text-xs font-black text-secondary shadow-[inset_0_0_0_1px_rgb(var(--ro-secondary-rgb)/0.08)] hover:bg-mint",
-              to: "/tables",
-              children: [
-                /* @__PURE__ */ jsxRuntimeExports.jsx(Table2, { size: 15 }),
-                "F10"
-              ]
-            }
-          )
-        ] }),
-        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mt-3 grid grid-cols-2 gap-2 text-xs font-bold text-muted", children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: "F2 Search" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: "F5 Kitchen" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: "F6 Print preview" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: "F7 Payment" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: "P Print preview" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: "F10 Tables" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: "Ctrl+Shift+F Max" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: "Ctrl+Shift+M Min" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: "Ctrl+Shift+Q Close" })
-        ] })
-      ] }),
       /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mt-4 rounded-2xl bg-secondary p-4 text-white", children: [
         /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex justify-between text-sm font-bold text-deepSoft", children: [
           /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: "Subtotal" }),
@@ -34081,6 +34380,16 @@ function PosPage() {
         onMethodChange: setPaymentMethod,
         onReferenceChange: setPaymentReference,
         onSubmit: submitPayment
+      }
+    ),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(
+      QuickAddConfirmModal,
+      {
+        item: quickAddItem,
+        number: quickAddIndex === void 0 ? void 0 : quickAddIndex + 1,
+        open: Boolean(quickAddItem),
+        onClose: () => setQuickAddIndex(void 0),
+        onConfirm: confirmQuickAdd
       }
     ),
     /* @__PURE__ */ jsxRuntimeExports.jsx(
@@ -35528,7 +35837,8 @@ const router = createBrowserRouter([
           { path: "users", element: /* @__PURE__ */ jsxRuntimeExports.jsx(UsersPage, {}) },
           { path: "shifts", element: /* @__PURE__ */ jsxRuntimeExports.jsx(ShiftsPage, {}) },
           { path: "reports", element: /* @__PURE__ */ jsxRuntimeExports.jsx(ReportsPage, {}) },
-          { path: "settings", element: /* @__PURE__ */ jsxRuntimeExports.jsx(SettingsPage, {}) }
+          { path: "settings", element: /* @__PURE__ */ jsxRuntimeExports.jsx(SettingsPage, {}) },
+          { path: "help", element: /* @__PURE__ */ jsxRuntimeExports.jsx(HelpPage, {}) }
         ]
       }
     ]

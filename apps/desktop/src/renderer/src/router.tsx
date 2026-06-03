@@ -3,6 +3,7 @@ import { AppShell } from './components/app-shell';
 import { ProtectedRoute } from './components/protected-route';
 import { CustomersPage } from './pages/customers';
 import { DashboardPage } from './pages/dashboard';
+import { HelpPage } from './pages/help';
 import { InventoryPage } from './pages/inventory';
 import { LoginPage } from './pages/login';
 import { MenuPage } from './pages/menu';
@@ -35,6 +36,7 @@ export const router = createBrowserRouter([
           { path: 'shifts', element: <ShiftsPage /> },
           { path: 'reports', element: <ReportsPage /> },
           { path: 'settings', element: <SettingsPage /> },
+          { path: 'help', element: <HelpPage /> },
         ],
       },
     ],

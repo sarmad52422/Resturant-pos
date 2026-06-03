@@ -1,10 +1,9 @@
 import { useMutation, useQuery } from '@tanstack/react-query';
-import { useEffect, useMemo, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Badge, Button, Card } from '@restaurantos/ui';
 import {
   AlertCircle,
-  Keyboard,
   Loader2,
   Minus,
   Plus,
@@ -12,21 +11,23 @@ import {
   Search,
   Send,
   Sparkles,
-  Table2,
   Trash2,
   WalletCards,
 } from 'lucide-react';
 import { apiFetch } from '../../lib/api';
 import type { FormSubmitEvent } from '../../lib/events';
 import { usePosStore } from '../../store/use-pos-store';
-import { PaymentModal, PrintReceiptModal } from './components';
+import { PaymentModal, PrintReceiptModal, QuickAddConfirmModal } from './components';
 import { money } from './formatting';
 import type { PaymentMethod, PosCatalogResponse, PosMenuItem, PosOrder, PrinterInfo, PrintMode, ReceiptLine, SettingRecord } from './interfaces';
 import { buildReceiptHtml, buildReceiptText } from './receipt';
 import { readPrintMode, readSetting } from './settings';
+import { usePosShortcuts } from './shortcuts';
 
 export function PosPage() {
+  const navigate = useNavigate();
   const { cart, addLine, changeQuantity, removeLine, clear, orderType, setOrderType } = usePosStore();
+  const searchInputRef = useRef<HTMLInputElement>(null);
   const [selectedCategoryId, setSelectedCategoryId] = useState('all');
   const [searchText, setSearchText] = useState('');
   const [paymentOpen, setPaymentOpen] = useState(false);
@@ -43,6 +44,7 @@ export function PosPage() {
   const [printerDefaultsApplied, setPrinterDefaultsApplied] = useState(false);
   const [lastOrder, setLastOrder] = useState<PosOrder | undefined>();
   const [lastReceiptLines, setLastReceiptLines] = useState<ReceiptLine[]>([]);
+  const [quickAddIndex, setQuickAddIndex] = useState<number | undefined>();
 
   const catalogQuery = useQuery({
     queryKey: ['pos-catalog'],
@@ -79,6 +81,8 @@ export function PosPage() {
       item.kitchenStation?.name.toLowerCase().includes(search);
     return matchesCategory && matchesSearch;
   });
+  const quickAddItems = filteredItems.slice(0, 9);
+  const quickAddItem = quickAddIndex === undefined ? undefined : quickAddItems[quickAddIndex];
 
   useEffect(() => {
     if (!settingsQuery.data || printerDefaultsApplied) return;
@@ -178,6 +182,14 @@ export function PosPage() {
       ),
   });
 
+  const canOpenPrint = cart.length > 0 || Boolean(lastOrder);
+  const hasPrinterTarget = printMode === 'os' ||
+    (printMode === 'network' && Boolean(printerHost.trim())) ||
+    (printMode === 'device' && Boolean(printerDevicePath.trim()));
+  const canPrintReceipt = canOpenPrint && hasPrinterTarget && !printReceipt.isPending;
+  const canOpenPayment = cart.length > 0 && !payOrder.isPending;
+  const canSendToKitchen = cart.length > 0 && !sendToKitchen.isPending;
+
   function addMenuItem(item: PosMenuItem) {
     addLine({
       id: item.id,
@@ -187,10 +199,23 @@ export function PosPage() {
     });
   }
 
+  const addQuickItem = useCallback((index: number) => {
+    if (quickAddItems[index]) setQuickAddIndex(index);
+  }, [quickAddItems]);
+
+  const confirmQuickAdd = useCallback(() => {
+    if (quickAddItem) addMenuItem(quickAddItem);
+    setQuickAddIndex(undefined);
+  }, [quickAddItem]);
+
   function openPayment() {
     setPaymentAmount(String(total));
     setPaymentOpen(true);
   }
+
+  const printReceiptNow = useCallback(() => {
+    if (canPrintReceipt) printReceipt.mutate();
+  }, [canPrintReceipt, printReceipt]);
 
   function submitPayment(event: FormSubmitEvent) {
     event.preventDefault();
@@ -201,8 +226,30 @@ export function PosPage() {
 
   function submitPrint(event: FormSubmitEvent) {
     event.preventDefault();
-    if (cart.length > 0 || lastOrder) printReceipt.mutate();
+    printReceiptNow();
   }
+
+  usePosShortcuts({
+    canOpenPayment,
+    canOpenPrint,
+    canPrintReceipt,
+    canSendToKitchen,
+    printOpen,
+    quickAddConfirmOpen: Boolean(quickAddItem),
+    quickAddCount: quickAddItems.length,
+    quickAddEnabled: !paymentOpen && !printOpen && !quickAddItem,
+    searchInputRef,
+    sendToKitchen: () => sendToKitchen.mutate(),
+    setOrderType,
+    onClosePayment: () => setPaymentOpen(false),
+    onClosePrint: () => { setPrintOpen(false); setQuickAddIndex(undefined); },
+    onConfirmQuickAdd: confirmQuickAdd,
+    onNavigateTables: () => navigate('/tables'),
+    onOpenPayment: openPayment,
+    onOpenPrint: () => setPrintOpen(true),
+    onPrintReceipt: printReceiptNow,
+    onQuickAddItem: addQuickItem,
+  });
 
   return (
     <div className="grid h-full grid-cols-[1fr_430px] gap-5 overflow-hidden bg-white p-5">
@@ -234,6 +281,7 @@ export function PosPage() {
             <div className="mt-1 flex h-8 items-center gap-3">
               <Search size={22} className="text-primary" />
               <input
+                ref={searchInputRef}
                 className="h-full flex-1 bg-transparent text-lg font-semibold outline-none"
                 value={searchText}
                 onChange={(event) => setSearchText(event.target.value)}
@@ -292,12 +340,17 @@ export function PosPage() {
               Loading menu
             </Card>
           ) : null}
-          {filteredItems.map((item) => (
+          {filteredItems.map((item, index) => (
             <button
               key={item.id}
-              className="group rounded-2xl bg-white p-4 text-left shadow-[0_14px_38px_rgb(var(--ro-secondary-rgb)/0.07)] transition hover:-translate-y-0.5 hover:shadow-[0_22px_48px_rgb(var(--ro-secondary-rgb)/0.12)]"
+              className="group relative rounded-2xl bg-white p-4 text-left shadow-[0_14px_38px_rgb(var(--ro-secondary-rgb)/0.07)] transition hover:-translate-y-0.5 hover:shadow-[0_22px_48px_rgb(var(--ro-secondary-rgb)/0.12)]"
               onClick={() => addMenuItem(item)}
             >
+              {index < 9 ? (
+                <span className="absolute right-3 top-3 flex h-7 min-w-7 items-center justify-center rounded-lg bg-secondary px-2 text-xs font-black text-white">
+                  {index + 1}
+                </span>
+              ) : null}
               <div className="flex h-full flex-col justify-between">
                 <Badge tone="blue">{item.kitchenStation?.name ?? item.category.name}</Badge>
                 <div>
@@ -363,33 +416,6 @@ export function PosPage() {
           )}
         </div>
 
-        <Card className="mt-4 bg-sage p-4 shadow-none">
-          <div className="flex items-center justify-between gap-3">
-            <div className="flex items-center gap-2 text-sm font-black text-secondary">
-              <Keyboard size={17} />
-              Shortcut card
-            </div>
-            <Link
-              className="inline-flex h-9 items-center gap-2 rounded-xl bg-white px-3 text-xs font-black text-secondary shadow-[inset_0_0_0_1px_rgb(var(--ro-secondary-rgb)/0.08)] hover:bg-mint"
-              to="/tables"
-            >
-              <Table2 size={15} />
-              F10
-            </Link>
-          </div>
-          <div className="mt-3 grid grid-cols-2 gap-2 text-xs font-bold text-muted">
-            <span>F2 Search</span>
-            <span>F5 Kitchen</span>
-            <span>F6 Print preview</span>
-            <span>F7 Payment</span>
-            <span>P Print preview</span>
-            <span>F10 Tables</span>
-            <span>Ctrl+Shift+F Max</span>
-            <span>Ctrl+Shift+M Min</span>
-            <span>Ctrl+Shift+Q Close</span>
-          </div>
-        </Card>
-
         <div className="mt-4 rounded-2xl bg-secondary p-4 text-white">
           <div className="flex justify-between text-sm font-bold text-deepSoft">
             <span>Subtotal</span>
@@ -431,6 +457,14 @@ export function PosPage() {
         onMethodChange={setPaymentMethod}
         onReferenceChange={setPaymentReference}
         onSubmit={submitPayment}
+      />
+
+      <QuickAddConfirmModal
+        item={quickAddItem}
+        number={quickAddIndex === undefined ? undefined : quickAddIndex + 1}
+        open={Boolean(quickAddItem)}
+        onClose={() => setQuickAddIndex(undefined)}
+        onConfirm={confirmQuickAdd}
       />
 
       <PrintReceiptModal

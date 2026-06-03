@@ -691,3 +691,90 @@ Tests:
 
 Notes:
 - Existing older desktop files still above 500 lines: `apps/desktop/src/renderer/src/pages/inventory/index.tsx` and `apps/desktop/src/renderer/src/pages/menu/index.tsx`. These should be split when we next touch those modules.
+
+## Phase 14 - POS Keyboard Workflow
+
+Status: Completed
+
+Completed:
+- Added a modular `usePosShortcuts` hook for cashier POS keyboard handling.
+- Wired `F2` to focus and select the item search box.
+- Wired `F5` to send the current cart/order to kitchen when available.
+- Wired `F6` and `Ctrl + P` to open receipt preview before printing.
+- Wired `F7` to open the payment popup when a cart exists.
+- Wired `F10` to navigate to the table screen.
+- Wired `P` to print only when the receipt preview is open and the cashier is not typing in a field.
+- Wired `Esc` to close POS popups.
+- Wired `Ctrl + D`, `Ctrl + T`, and `Ctrl + I` for delivery, takeaway, and dine-in order modes.
+- Moved the POS shortcut card into `apps/desktop/src/renderer/src/pages/pos/components.tsx` to keep the page file under 500 lines.
+- Updated `README.md` with current implemented POS keyboard shortcuts and remaining planned shortcuts.
+
+Files changed:
+- `apps/desktop/src/renderer/src/pages/pos/index.tsx`
+- `apps/desktop/src/renderer/src/pages/pos/components.tsx`
+- `apps/desktop/src/renderer/src/pages/pos/shortcuts.ts`
+- `apps/desktop/src/renderer/src/store/use-pos-store.ts`
+- `README.md`
+- `progress.md`
+
+Tests:
+- `npm run typecheck --workspace @restaurantos/desktop` passed.
+- `npm run build --workspaces` passed.
+- `npm audit --audit-level=high` passed with 0 vulnerabilities.
+
+Notes:
+- `F1`, hold/recall, discount, selected-line `+/-`, delete selected item, enter confirm, and arrow-key navigation remain planned until those workflows have explicit selected state and confirmation behavior.
+
+## POS Search Quick Add
+
+Status: Completed
+
+Completed:
+- Added numbered badges to the first nine visible POS menu items after category/search filtering.
+- Added quick-add shortcut handling for numbered visible menu items.
+- Wired `Alt + 1..9` as the primary item preview shortcut.
+- Wired `Shift + 1..9` while search is focused for fast cashier item preview after pressing `F2`.
+- Wired `Ctrl + 1..9` as an additional item preview path.
+- Wired `Enter` from the search box to preview the first visible item.
+- Updated the Help section and `README.md` with the quick-add behavior.
+
+Files changed:
+- `apps/desktop/src/renderer/src/pages/pos/index.tsx`
+- `apps/desktop/src/renderer/src/pages/pos/components.tsx`
+- `apps/desktop/src/renderer/src/pages/pos/shortcuts.ts`
+- `README.md`
+- `progress.md`
+
+Tests:
+- `npm run typecheck --workspace @restaurantos/desktop` passed.
+- `npm run build --workspaces` passed.
+- `npm audit --audit-level=high` passed with 0 vulnerabilities.
+
+## POS Help Section and Quick-Add Confirmation
+
+Status: Completed
+
+Completed:
+- Removed the POS shortcut card from the ticket panel.
+- Added a dedicated Help sidebar section for app shortcuts and useful cashier tips.
+- Added `apps/desktop/src/renderer/src/pages/help/index.tsx`.
+- Changed numbered POS item shortcuts from instant add to visual confirmation popup.
+- Pressing `Alt + 1..9`, `Shift + 1..9` while search is focused, or `Ctrl + 1..9` now previews the matching numbered item.
+- Pressing `Enter` while the item preview popup is open adds the item to the ticket.
+- Pressing `Enter` while search is focused previews the first visible item.
+- Kept quick-add disabled while payment or print popups are open.
+
+Files changed:
+- `apps/desktop/src/renderer/src/components/app-shell.tsx`
+- `apps/desktop/src/renderer/src/pages/help/index.tsx`
+- `apps/desktop/src/renderer/src/pages/pos/components.tsx`
+- `apps/desktop/src/renderer/src/pages/pos/index.tsx`
+- `apps/desktop/src/renderer/src/pages/pos/shortcuts.ts`
+- `apps/desktop/src/renderer/src/router.tsx`
+- `README.md`
+- `progress.md`
+
+Tests:
+- `npm run typecheck --workspace @restaurantos/desktop` passed.
+- `npm run build --workspaces` passed.
+- `npm audit --audit-level=high` passed with 0 vulnerabilities.

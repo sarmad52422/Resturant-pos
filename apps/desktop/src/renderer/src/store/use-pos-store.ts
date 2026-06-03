@@ -18,6 +18,8 @@ interface PosState {
   clear: () => void;
 }
 
+export type OrderType = PosState['orderType'];
+
 export const usePosStore = create<PosState>((set) => ({
   orderType: 'DINE_IN',
   cart: [],

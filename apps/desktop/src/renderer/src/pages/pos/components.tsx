@@ -1,10 +1,10 @@
 import { Badge, Button } from '@restaurantos/ui';
-import { Loader2, Printer, WalletCards } from 'lucide-react';
+import { Check, Loader2, Printer, WalletCards } from 'lucide-react';
 import { ActionModal } from '../../components/action-modal';
 import { FormField } from '../../components/form-field';
 import type { FormSubmitEvent } from '../../lib/events';
 import { money } from './formatting';
-import type { PaymentMethod, PrinterInfo, PrintMode } from './interfaces';
+import type { PaymentMethod, PosMenuItem, PrinterInfo, PrintMode } from './interfaces';
 
 const fieldClass =
   'h-11 w-full rounded-xl border border-field bg-white px-3 text-sm font-semibold text-espresso outline-none transition focus:border-primary focus:ring-4 focus:ring-primary/10';
@@ -22,6 +22,49 @@ interface PaymentModalProps {
   pending: boolean;
   reference: string;
   total: number;
+}
+
+interface QuickAddConfirmModalProps {
+  item?: PosMenuItem;
+  number?: number;
+  open: boolean;
+  onClose: () => void;
+  onConfirm: () => void;
+}
+
+export function QuickAddConfirmModal({
+  item,
+  number,
+  open,
+  onClose,
+  onConfirm,
+}: QuickAddConfirmModalProps) {
+  return (
+    <ActionModal description="Confirm the menu item before adding it to the ticket." open={open} title="Add item" widthClass="max-w-md" onClose={onClose}>
+      {item ? (
+        <div className="space-y-4">
+          <div className="rounded-2xl bg-sage p-5">
+            <div className="flex items-start justify-between gap-4">
+              <div>
+                <Badge tone="blue">{item.kitchenStation?.name ?? item.category.name}</Badge>
+                <h3 className="mt-4 text-2xl font-black text-espresso">{item.shortName || item.name}</h3>
+                <p className="mt-2 text-sm font-bold text-muted">{item.category.name}</p>
+              </div>
+              {number ? (
+                <span className="flex h-11 min-w-11 items-center justify-center rounded-xl bg-secondary px-3 text-lg font-black text-white">
+                  {number}
+                </span>
+              ) : null}
+            </div>
+            <p className="mt-5 text-3xl font-black text-secondary">{money.format(Number(item.basePrice))}</p>
+          </div>
+          <Button className="w-full" icon={<Check size={17} />} type="button" onClick={onConfirm}>
+            Add item
+          </Button>
+        </div>
+      ) : null}
+    </ActionModal>
+  );
 }
 
 export function PaymentModal({

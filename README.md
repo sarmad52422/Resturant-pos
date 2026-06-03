@@ -231,7 +231,7 @@ The desktop POS runs as a frameless Electron app. Window controls are inside the
 - Maximize/restore button: top-right square icon.
 - Close button: top-right X icon.
 
-The POS screen includes a shortcut card in the order panel. It is a compact reference for the cashier during rush hours and will grow as workflows are implemented.
+The Help section stores app shortcuts and practical cashier tips in one place. The POS screen keeps the ticket panel focused on the active order.
 
 ## Shortcuts
 
@@ -243,42 +243,40 @@ Current app window shortcuts:
 
 On macOS builds these are also handled with `Cmd` in place of `Ctrl`.
 
-Current POS visual shortcut hints:
+Current POS keyboard shortcuts:
 
-- `F2` - Focus/search item flow.
-- `F5` - Send to kitchen flow.
+- `F2` - Focus and select the item search box.
+- `Enter` - Preview the first visible item while the search box is focused.
+- `Alt + 1..9` - Preview the matching numbered visible menu item.
+- `Shift + 1..9` - Preview the matching numbered visible menu item while search is focused.
+- `Ctrl + 1..9` - Preview the matching numbered visible menu item.
+- `Enter` - Add the item when the item preview popup is open.
+- `F5` - Send the current cart/order to kitchen.
 - `F6` - Open receipt preview before printing.
-- `F7` - Payment flow.
-- `P` - Print from the receipt preview.
+- `F7` - Open payment popup.
 - `F10` - Open table screen.
+- `Ctrl + P` - Open receipt preview before printing.
+- `P` - Print from the receipt preview when the preview is open and the cashier is not typing in a field.
+- `Esc` - Close open POS popups.
+- `Ctrl + D` - Switch order type to delivery.
+- `Ctrl + T` - Switch order type to takeaway.
+- `Ctrl + I` - Switch order type to dine-in.
 
 Planned POS workflow shortcuts:
 
 - `F1` - New order.
-- `F2` - Search item.
 - `F3` - Hold order.
 - `F4` - Recall held order.
-- `F5` - Send to kitchen.
-- `F6` - Open receipt preview.
-- `F7` - Open payment popup.
 - `F8` - Customer credit.
 - `F9` - Discount.
-- `F10` - Table screen.
 - `Ctrl + N` - New customer.
-- `P` - Print receipt when the receipt preview is open.
-- `Ctrl + P` - Open receipt preview from the POS.
 - `Ctrl + S` - Save order.
-- `Ctrl + D` - Delivery mode.
-- `Ctrl + T` - Takeaway mode.
-- `Ctrl + I` - Dine-in mode.
-- `Enter` - Select or confirm.
-- `Esc` - Back or cancel.
 - `Delete` - Remove selected item.
 - `+` - Increase quantity.
 - `-` - Decrease quantity.
 - Arrow keys - Navigate grids, tickets, tables, and lists.
 
-Implementation note: POS workflow shortcuts should be wired in a dedicated keyboard workflow phase after the real order, payment, hold/recall, table, and print flows are implemented. Printing should always open the receipt preview first; the cashier can then press `P` from the preview to print. Current shortcut labels are UI hints unless listed under current app window shortcuts.
+Implementation note: risky shortcuts such as new order, hold/recall, discounts, selected-line quantity changes, and arrow-key navigation should be wired when those flows have explicit selected state and confirmation behavior. Printing always opens the receipt preview first; the cashier can then press `P` from the preview to print.
 
 Future admin shortcuts will be documented here as modules are implemented.
 
