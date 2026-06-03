@@ -13,6 +13,7 @@ import {
   Table2,
   X,
   LogOut,
+  UserCog,
 } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { useAuthStore } from '../store/use-auth-store';
@@ -24,6 +25,7 @@ const navItems = [
   { to: '/inventory', label: 'Inventory', icon: Boxes },
   { to: '/customers', label: 'Credit', icon: CreditCard },
   { to: '/tables', label: 'Tables', icon: Table2 },
+  { to: '/users', label: 'Staff', icon: UserCog },
   { to: '/reports', label: 'Reports', icon: BarChart3 },
   { to: '/settings', label: 'Settings', icon: Settings },
 ];
@@ -74,11 +76,11 @@ export function AppShell() {
         </div>
       </div>
       <div className="flex h-[calc(100vh-2.25rem)] bg-white">
-        <aside className="flex w-28 shrink-0 flex-col items-center bg-white px-4 py-5 shadow-[14px_0_40px_rgb(var(--ro-secondary-rgb)/0.05)]">
-          <div className="mb-7 flex h-14 w-14 items-center justify-center rounded-2xl bg-secondary text-lg font-black text-white shadow-[0_18px_40px_rgb(var(--ro-secondary-rgb)/0.16)]">
+        <aside className="flex w-28 shrink-0 flex-col items-center bg-white px-4 py-4 shadow-[14px_0_40px_rgb(var(--ro-secondary-rgb)/0.05)]">
+          <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-2xl bg-secondary text-lg font-black text-white shadow-[0_18px_40px_rgb(var(--ro-secondary-rgb)/0.16)]">
             RO
           </div>
-          <nav className="flex w-full flex-1 flex-col gap-2">
+          <nav className="flex w-full flex-1 flex-col gap-1 overflow-y-auto pr-1">
             {navItems.map((item) => (
               <NavLink
                 key={item.to}
@@ -86,7 +88,7 @@ export function AppShell() {
                 end={item.to === '/'}
                 className={({ isActive }) =>
                   [
-                    'group flex h-16 w-full flex-col items-center justify-center gap-1 rounded-2xl text-[11px] font-semibold transition',
+                    'group flex h-14 w-full shrink-0 flex-col items-center justify-center gap-1 rounded-2xl text-[11px] font-semibold transition',
                     isActive
                       ? 'bg-primary text-white shadow-[0_14px_28px_rgb(var(--ro-primary-rgb)/0.26)]'
                       : 'text-muted hover:bg-mint hover:text-secondary',
@@ -98,7 +100,7 @@ export function AppShell() {
               </NavLink>
             ))}
           </nav>
-          <div className="flex w-full flex-col items-center gap-3">
+          <div className="mt-3 flex w-full flex-col items-center gap-3">
             <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-sage text-sm font-black text-secondary">
               {user?.name
                 .split(' ')

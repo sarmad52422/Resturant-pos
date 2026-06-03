@@ -10,6 +10,7 @@ import { PosPage } from './pages/pos';
 import { ReportsPage } from './pages/reports';
 import { SettingsPage } from './pages/settings';
 import { TablesPage } from './pages/tables';
+import { UsersPage } from './pages/users';
 
 export const router = createBrowserRouter([
   {
@@ -29,6 +30,7 @@ export const router = createBrowserRouter([
           { path: 'inventory', element: <InventoryPage /> },
           { path: 'customers', element: <CustomersPage /> },
           { path: 'tables', element: <TablesPage /> },
+          { path: 'users', element: <UsersPage /> },
           { path: 'reports', element: <ReportsPage /> },
           { path: 'settings', element: <SettingsPage /> },
         ],

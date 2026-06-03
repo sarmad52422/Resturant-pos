@@ -22278,6 +22278,22 @@ const HandCoins = createLucideIcon("HandCoins", [
  * This source code is licensed under the ISC license.
  * See the LICENSE file in the root directory of this source tree.
  */
+const KeyRound = createLucideIcon("KeyRound", [
+  [
+    "path",
+    {
+      d: "M2.586 17.414A2 2 0 0 0 2 18.828V21a1 1 0 0 0 1 1h3a1 1 0 0 0 1-1v-1a1 1 0 0 1 1-1h1a1 1 0 0 0 1-1v-1a1 1 0 0 1 1-1h.172a2 2 0 0 0 1.414-.586l.814-.814a6.5 6.5 0 1 0-4-4z",
+      key: "1s6t7t"
+    }
+  ],
+  ["circle", { cx: "16.5", cy: "7.5", r: ".5", fill: "currentColor", key: "w0ekpg" }]
+]);
+/**
+ * @license lucide-react v0.468.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */
 const Keyboard = createLucideIcon("Keyboard", [
   ["path", { d: "M10 8h.01", key: "1r9ogq" }],
   ["path", { d: "M12 12h.01", key: "1mp3jc" }],
@@ -22476,6 +22492,22 @@ const Settings = createLucideIcon("Settings", [
  * This source code is licensed under the ISC license.
  * See the LICENSE file in the root directory of this source tree.
  */
+const ShieldCheck = createLucideIcon("ShieldCheck", [
+  [
+    "path",
+    {
+      d: "M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z",
+      key: "oel41y"
+    }
+  ],
+  ["path", { d: "m9 12 2 2 4-4", key: "dzmm74" }]
+]);
+/**
+ * @license lucide-react v0.468.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */
 const ShoppingBag = createLucideIcon("ShoppingBag", [
   ["path", { d: "M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z", key: "hou9p0" }],
   ["path", { d: "M3 6h18", key: "d0wm0j" }],
@@ -22601,6 +22633,37 @@ const Truck = createLucideIcon("Truck", [
   ],
   ["circle", { cx: "17", cy: "18", r: "2", key: "332jqn" }],
   ["circle", { cx: "7", cy: "18", r: "2", key: "19iecd" }]
+]);
+/**
+ * @license lucide-react v0.468.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */
+const UserCog = createLucideIcon("UserCog", [
+  ["circle", { cx: "18", cy: "15", r: "3", key: "gjjjvw" }],
+  ["circle", { cx: "9", cy: "7", r: "4", key: "nufk8" }],
+  ["path", { d: "M10 15H6a4 4 0 0 0-4 4v2", key: "1nfge6" }],
+  ["path", { d: "m21.7 16.4-.9-.3", key: "12j9ji" }],
+  ["path", { d: "m15.2 13.9-.9-.3", key: "1fdjdi" }],
+  ["path", { d: "m16.6 18.7.3-.9", key: "heedtr" }],
+  ["path", { d: "m19.1 12.2.3-.9", key: "1af3ki" }],
+  ["path", { d: "m19.6 18.7-.4-1", key: "1x9vze" }],
+  ["path", { d: "m16.8 12.3-.4-1", key: "vqeiwj" }],
+  ["path", { d: "m14.3 16.6 1-.4", key: "1qlj63" }],
+  ["path", { d: "m20.7 13.8 1-.4", key: "1v5t8k" }]
+]);
+/**
+ * @license lucide-react v0.468.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */
+const UserPlus = createLucideIcon("UserPlus", [
+  ["path", { d: "M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2", key: "1yyitq" }],
+  ["circle", { cx: "9", cy: "7", r: "4", key: "nufk8" }],
+  ["line", { x1: "19", x2: "19", y1: "8", y2: "14", key: "1bvyxn" }],
+  ["line", { x1: "22", x2: "16", y1: "11", y2: "11", key: "1shjgl" }]
 ]);
 /**
  * @license lucide-react v0.468.0 - ISC
@@ -22995,6 +23058,7 @@ const navItems = [
   { to: "/inventory", label: "Inventory", icon: Boxes },
   { to: "/customers", label: "Credit", icon: CreditCard },
   { to: "/tables", label: "Tables", icon: Table2 },
+  { to: "/users", label: "Staff", icon: UserCog },
   { to: "/reports", label: "Reports", icon: ChartColumn },
   { to: "/settings", label: "Settings", icon: Settings }
 ];
@@ -23045,15 +23109,15 @@ function AppShell() {
       ] })
     ] }),
     /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex h-[calc(100vh-2.25rem)] bg-white", children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsxs("aside", { className: "flex w-28 shrink-0 flex-col items-center bg-white px-4 py-5 shadow-[14px_0_40px_rgb(var(--ro-secondary-rgb)/0.05)]", children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mb-7 flex h-14 w-14 items-center justify-center rounded-2xl bg-secondary text-lg font-black text-white shadow-[0_18px_40px_rgb(var(--ro-secondary-rgb)/0.16)]", children: "RO" }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx("nav", { className: "flex w-full flex-1 flex-col gap-2", children: navItems.map((item) => /* @__PURE__ */ jsxRuntimeExports.jsxs(
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("aside", { className: "flex w-28 shrink-0 flex-col items-center bg-white px-4 py-4 shadow-[14px_0_40px_rgb(var(--ro-secondary-rgb)/0.05)]", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mb-5 flex h-12 w-12 items-center justify-center rounded-2xl bg-secondary text-lg font-black text-white shadow-[0_18px_40px_rgb(var(--ro-secondary-rgb)/0.16)]", children: "RO" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("nav", { className: "flex w-full flex-1 flex-col gap-1 overflow-y-auto pr-1", children: navItems.map((item) => /* @__PURE__ */ jsxRuntimeExports.jsxs(
           NavLink,
           {
             to: item.to,
             end: item.to === "/",
             className: ({ isActive }) => [
-              "group flex h-16 w-full flex-col items-center justify-center gap-1 rounded-2xl text-[11px] font-semibold transition",
+              "group flex h-14 w-full shrink-0 flex-col items-center justify-center gap-1 rounded-2xl text-[11px] font-semibold transition",
               isActive ? "bg-primary text-white shadow-[0_14px_28px_rgb(var(--ro-primary-rgb)/0.26)]" : "text-muted hover:bg-mint hover:text-secondary"
             ].join(" "),
             children: [
@@ -23063,7 +23127,7 @@ function AppShell() {
           },
           item.to
         )) }),
-        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex w-full flex-col items-center gap-3", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mt-3 flex w-full flex-col items-center gap-3", children: [
           /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex h-11 w-11 items-center justify-center rounded-2xl bg-sage text-sm font-black text-secondary", children: user?.name.split(" ").map((part) => part[0]).join("").slice(0, 2) ?? /* @__PURE__ */ jsxRuntimeExports.jsx(Users, { size: 20 }) }),
           /* @__PURE__ */ jsxRuntimeExports.jsx(
             "button",
@@ -25678,7 +25742,7 @@ function ActionModal({
     )
   ] });
 }
-const fieldClass$4 = "h-11 w-full rounded-xl border border-field bg-white px-3 text-sm font-semibold text-espresso outline-none transition focus:border-primary focus:ring-4 focus:ring-primary/10";
+const fieldClass$5 = "h-11 w-full rounded-xl border border-field bg-white px-3 text-sm font-semibold text-espresso outline-none transition focus:border-primary focus:ring-4 focus:ring-primary/10";
 const money$2 = new Intl.NumberFormat("en-PK", { maximumFractionDigits: 0, style: "currency", currency: "PKR" });
 function CustomersPage() {
   const queryClient2 = useQueryClient();
@@ -25726,9 +25790,9 @@ function CustomersPage() {
       ] })
     ] }),
     /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mt-6 grid grid-cols-3 gap-4", children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsx(Metric$3, { icon: /* @__PURE__ */ jsxRuntimeExports.jsx(UserRound, { size: 19 }), label: "Customers", value: customersQuery.data?.metrics.totalCustomers ?? 0 }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx(Metric$4, { icon: /* @__PURE__ */ jsxRuntimeExports.jsx(UserRound, { size: 19 }), label: "Customers", value: customersQuery.data?.metrics.totalCustomers ?? 0 }),
       /* @__PURE__ */ jsxRuntimeExports.jsx(
-        Metric$3,
+        Metric$4,
         {
           icon: /* @__PURE__ */ jsxRuntimeExports.jsx(CreditCard, { size: 19 }),
           label: "Credit accounts",
@@ -25736,7 +25800,7 @@ function CustomersPage() {
         }
       ),
       /* @__PURE__ */ jsxRuntimeExports.jsx(
-        Metric$3,
+        Metric$4,
         {
           icon: /* @__PURE__ */ jsxRuntimeExports.jsx(CreditCard, { size: 19 }),
           label: "Receivable",
@@ -25787,7 +25851,7 @@ function CustomersPage() {
           /* @__PURE__ */ jsxRuntimeExports.jsx(
             "input",
             {
-              className: fieldClass$4,
+              className: fieldClass$5,
               disabled: !canManageCustomers,
               placeholder: "Customer name",
               value: name,
@@ -25797,7 +25861,7 @@ function CustomersPage() {
           /* @__PURE__ */ jsxRuntimeExports.jsx(
             "input",
             {
-              className: fieldClass$4,
+              className: fieldClass$5,
               disabled: !canManageCustomers,
               placeholder: "Phone",
               value: phone,
@@ -25807,7 +25871,7 @@ function CustomersPage() {
           /* @__PURE__ */ jsxRuntimeExports.jsx(
             "input",
             {
-              className: fieldClass$4,
+              className: fieldClass$5,
               disabled: !canManageCustomers,
               min: "0",
               placeholder: "Credit limit",
@@ -25831,7 +25895,7 @@ function CustomersPage() {
     )
   ] });
 }
-function Metric$3({ icon, label, value }) {
+function Metric$4({ icon, label, value }) {
   return /* @__PURE__ */ jsxRuntimeExports.jsxs(Card, { className: "flex items-center justify-between p-5", children: [
     /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
       /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm font-black text-muted", children: label }),
@@ -25884,7 +25948,7 @@ function DashboardPage() {
     ] })
   ] });
 }
-const fieldClass$3 = "h-11 w-full rounded-xl border border-field bg-white px-3 text-sm font-semibold text-espresso outline-none transition focus:border-primary focus:ring-4 focus:ring-primary/10";
+const fieldClass$4 = "h-11 w-full rounded-xl border border-field bg-white px-3 text-sm font-semibold text-espresso outline-none transition focus:border-primary focus:ring-4 focus:ring-primary/10";
 const money$1 = new Intl.NumberFormat("en-PK", { maximumFractionDigits: 0, style: "currency", currency: "PKR" });
 const today = (/* @__PURE__ */ new Date()).toISOString().slice(0, 10);
 function InventoryPage() {
@@ -26164,9 +26228,9 @@ function InventoryPage() {
       ] })
     ] }),
     /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mt-6 grid grid-cols-4 gap-4", children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsx(Metric$2, { icon: /* @__PURE__ */ jsxRuntimeExports.jsx(Archive, { size: 19 }), label: "Active stock items", value: inventoryQuery.data?.metrics.activeItems ?? 0 }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx(Metric$3, { icon: /* @__PURE__ */ jsxRuntimeExports.jsx(Archive, { size: 19 }), label: "Active stock items", value: inventoryQuery.data?.metrics.activeItems ?? 0 }),
       /* @__PURE__ */ jsxRuntimeExports.jsx(
-        Metric$2,
+        Metric$3,
         {
           icon: /* @__PURE__ */ jsxRuntimeExports.jsx(TrendingDown, { size: 19 }),
           label: "Low stock",
@@ -26174,14 +26238,14 @@ function InventoryPage() {
         }
       ),
       /* @__PURE__ */ jsxRuntimeExports.jsx(
-        Metric$2,
+        Metric$3,
         {
           icon: /* @__PURE__ */ jsxRuntimeExports.jsx(PackagePlus, { size: 19 }),
           label: "Stock value",
           value: money$1.format(Number(inventoryQuery.data?.metrics.totalStockValue ?? 0))
         }
       ),
-      /* @__PURE__ */ jsxRuntimeExports.jsx(Metric$2, { icon: /* @__PURE__ */ jsxRuntimeExports.jsx(WalletCards, { size: 19 }), label: "Supplier payable", value: money$1.format(supplierPayableTotal) })
+      /* @__PURE__ */ jsxRuntimeExports.jsx(Metric$3, { icon: /* @__PURE__ */ jsxRuntimeExports.jsx(WalletCards, { size: 19 }), label: "Supplier payable", value: money$1.format(supplierPayableTotal) })
     ] }),
     /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mt-5", children: /* @__PURE__ */ jsxRuntimeExports.jsxs(Card, { className: "overflow-hidden", children: [
       /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center justify-between border-b border-line px-6 py-5", children: [
@@ -26338,7 +26402,7 @@ function InventoryPage() {
           /* @__PURE__ */ jsxRuntimeExports.jsx(
             "input",
             {
-              className: fieldClass$3,
+              className: fieldClass$4,
               disabled: !canManageInventory,
               placeholder: "Item name",
               value: name,
@@ -26348,7 +26412,7 @@ function InventoryPage() {
           /* @__PURE__ */ jsxRuntimeExports.jsx(
             "input",
             {
-              className: fieldClass$3,
+              className: fieldClass$4,
               disabled: !canManageInventory,
               placeholder: "Category",
               value: category,
@@ -26359,7 +26423,7 @@ function InventoryPage() {
             /* @__PURE__ */ jsxRuntimeExports.jsx(
               "input",
               {
-                className: fieldClass$3,
+                className: fieldClass$4,
                 disabled: !canManageInventory,
                 min: "0",
                 placeholder: "On hand",
@@ -26371,7 +26435,7 @@ function InventoryPage() {
             /* @__PURE__ */ jsxRuntimeExports.jsx(
               "input",
               {
-                className: fieldClass$3,
+                className: fieldClass$4,
                 disabled: !canManageInventory,
                 min: "0",
                 placeholder: "Minimum",
@@ -26384,7 +26448,7 @@ function InventoryPage() {
           /* @__PURE__ */ jsxRuntimeExports.jsx(
             "input",
             {
-              className: fieldClass$3,
+              className: fieldClass$4,
               disabled: !canManageInventory,
               min: "0",
               placeholder: "Average cost",
@@ -26397,7 +26461,7 @@ function InventoryPage() {
             /* @__PURE__ */ jsxRuntimeExports.jsx(
               "select",
               {
-                className: fieldClass$3,
+                className: fieldClass$4,
                 disabled: !canManageInventory,
                 value: selectedPurchaseUnitId,
                 onChange: (event) => setPurchaseUnitId(event.target.value),
@@ -26410,7 +26474,7 @@ function InventoryPage() {
             /* @__PURE__ */ jsxRuntimeExports.jsx(
               "select",
               {
-                className: fieldClass$3,
+                className: fieldClass$4,
                 disabled: !canManageInventory,
                 value: selectedUsageUnitId,
                 onChange: (event) => setUsageUnitId(event.target.value),
@@ -26424,7 +26488,7 @@ function InventoryPage() {
           /* @__PURE__ */ jsxRuntimeExports.jsxs(
             "select",
             {
-              className: fieldClass$3,
+              className: fieldClass$4,
               disabled: !canManageInventory,
               value: supplierId,
               onChange: (event) => setSupplierId(event.target.value),
@@ -26458,7 +26522,7 @@ function InventoryPage() {
           /* @__PURE__ */ jsxRuntimeExports.jsx(
             "input",
             {
-              className: fieldClass$3,
+              className: fieldClass$4,
               disabled: !canManageInventory,
               placeholder: "Supplier name",
               value: supplierName,
@@ -26469,7 +26533,7 @@ function InventoryPage() {
             /* @__PURE__ */ jsxRuntimeExports.jsx(
               "input",
               {
-                className: fieldClass$3,
+                className: fieldClass$4,
                 disabled: !canManageInventory,
                 placeholder: "Contact person",
                 value: supplierContactPerson,
@@ -26479,7 +26543,7 @@ function InventoryPage() {
             /* @__PURE__ */ jsxRuntimeExports.jsx(
               "input",
               {
-                className: fieldClass$3,
+                className: fieldClass$4,
                 disabled: !canManageInventory,
                 placeholder: "Phone",
                 value: supplierPhone,
@@ -26490,7 +26554,7 @@ function InventoryPage() {
           /* @__PURE__ */ jsxRuntimeExports.jsx(
             "input",
             {
-              className: fieldClass$3,
+              className: fieldClass$4,
               disabled: !canManageInventory,
               placeholder: "Address",
               value: supplierAddress,
@@ -26500,7 +26564,7 @@ function InventoryPage() {
           /* @__PURE__ */ jsxRuntimeExports.jsx(
             "input",
             {
-              className: fieldClass$3,
+              className: fieldClass$4,
               disabled: !canManageInventory,
               min: "0",
               placeholder: "Opening payable",
@@ -26512,7 +26576,7 @@ function InventoryPage() {
           /* @__PURE__ */ jsxRuntimeExports.jsx(
             "textarea",
             {
-              className: `${fieldClass$3} min-h-24 py-3`,
+              className: `${fieldClass$4} min-h-24 py-3`,
               disabled: !canManageInventory,
               placeholder: "Notes",
               value: supplierNotes,
@@ -26544,7 +26608,7 @@ function InventoryPage() {
           /* @__PURE__ */ jsxRuntimeExports.jsx(
             "select",
             {
-              className: fieldClass$3,
+              className: fieldClass$4,
               disabled: !canManageInventory,
               value: selectedPaymentSupplierId,
               onChange: (event) => setPaymentSupplierId(event.target.value),
@@ -26563,7 +26627,7 @@ function InventoryPage() {
             /* @__PURE__ */ jsxRuntimeExports.jsx(
               "input",
               {
-                className: fieldClass$3,
+                className: fieldClass$4,
                 disabled: !canManageInventory,
                 max: selectedPaymentSupplier?.currentPayable ?? void 0,
                 min: "0.01",
@@ -26577,7 +26641,7 @@ function InventoryPage() {
             /* @__PURE__ */ jsxRuntimeExports.jsxs(
               "select",
               {
-                className: fieldClass$3,
+                className: fieldClass$4,
                 disabled: !canManageInventory,
                 value: supplierPaymentMethod,
                 onChange: (event) => setSupplierPaymentMethod(event.target.value),
@@ -26594,7 +26658,7 @@ function InventoryPage() {
           /* @__PURE__ */ jsxRuntimeExports.jsx(
             "input",
             {
-              className: fieldClass$3,
+              className: fieldClass$4,
               disabled: !canManageInventory,
               placeholder: "Reference",
               value: supplierPaymentReference,
@@ -26604,7 +26668,7 @@ function InventoryPage() {
           /* @__PURE__ */ jsxRuntimeExports.jsx(
             "textarea",
             {
-              className: `${fieldClass$3} min-h-24 py-3`,
+              className: `${fieldClass$4} min-h-24 py-3`,
               disabled: !canManageInventory,
               placeholder: "Notes",
               value: supplierPaymentNotes,
@@ -26638,7 +26702,7 @@ function InventoryPage() {
             /* @__PURE__ */ jsxRuntimeExports.jsx(
               "select",
               {
-                className: fieldClass$3,
+                className: fieldClass$4,
                 disabled: !canManageInventory,
                 value: selectedPurchaseSupplierId,
                 onChange: (event) => setPurchaseSupplierId(event.target.value),
@@ -26648,7 +26712,7 @@ function InventoryPage() {
             /* @__PURE__ */ jsxRuntimeExports.jsx(
               "input",
               {
-                className: fieldClass$3,
+                className: fieldClass$4,
                 disabled: !canManageInventory,
                 placeholder: "Invoice",
                 value: invoiceNumber,
@@ -26658,7 +26722,7 @@ function InventoryPage() {
             /* @__PURE__ */ jsxRuntimeExports.jsx(
               "input",
               {
-                className: fieldClass$3,
+                className: fieldClass$4,
                 disabled: !canManageInventory,
                 type: "date",
                 value: purchaseDate,
@@ -26668,7 +26732,7 @@ function InventoryPage() {
             /* @__PURE__ */ jsxRuntimeExports.jsxs(
               "select",
               {
-                className: fieldClass$3,
+                className: fieldClass$4,
                 disabled: !canManageInventory,
                 value: paymentMethod,
                 onChange: (event) => setPaymentMethod(event.target.value),
@@ -26702,7 +26766,7 @@ function InventoryPage() {
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 "select",
                 {
-                  className: fieldClass$3,
+                  className: fieldClass$4,
                   disabled: !canManageInventory,
                   value: row.inventoryItemId,
                   onChange: (event) => updatePurchaseRow(row.id, { inventoryItemId: event.target.value }),
@@ -26712,7 +26776,7 @@ function InventoryPage() {
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 "input",
                 {
-                  className: fieldClass$3,
+                  className: fieldClass$4,
                   disabled: !canManageInventory,
                   min: "0.0001",
                   step: "0.0001",
@@ -26724,7 +26788,7 @@ function InventoryPage() {
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 "select",
                 {
-                  className: fieldClass$3,
+                  className: fieldClass$4,
                   disabled: !canManageInventory,
                   value: row.unitId,
                   onChange: (event) => updatePurchaseRow(row.id, { unitId: event.target.value }),
@@ -26734,7 +26798,7 @@ function InventoryPage() {
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 "input",
                 {
-                  className: fieldClass$3,
+                  className: fieldClass$4,
                   disabled: !canManageInventory,
                   min: "0",
                   step: "0.01",
@@ -26764,7 +26828,7 @@ function InventoryPage() {
             /* @__PURE__ */ jsxRuntimeExports.jsx(
               "input",
               {
-                className: fieldClass$3,
+                className: fieldClass$4,
                 disabled: !canManageInventory,
                 min: "0",
                 placeholder: "Paid",
@@ -26807,7 +26871,7 @@ function defaultPurchaseRow(items) {
     unitId: item?.purchaseUnitId ?? ""
   };
 }
-function Metric$2({ icon, label, value }) {
+function Metric$3({ icon, label, value }) {
   return /* @__PURE__ */ jsxRuntimeExports.jsxs(Card, { className: "flex items-center justify-between p-5", children: [
     /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
       /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm font-black text-muted", children: label }),
@@ -32833,7 +32897,7 @@ function LoginPage() {
     ] }) })
   ] });
 }
-function Metric$1({ icon, label, value }) {
+function Metric$2({ icon, label, value }) {
   return /* @__PURE__ */ jsxRuntimeExports.jsxs(Card, { className: "flex items-center justify-between p-5", children: [
     /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
       /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm font-black text-muted", children: label }),
@@ -32866,7 +32930,7 @@ const recipeSchema = objectType({
   menuItemId: stringType().min(1, "Choose menu item"),
   name: stringType().min(2, "Recipe name is required").max(120)
 });
-const fieldClass$2 = "h-11 w-full rounded-xl border border-field bg-white px-3 text-sm font-semibold text-espresso outline-none transition focus:border-primary focus:ring-4 focus:ring-primary/10";
+const fieldClass$3 = "h-11 w-full rounded-xl border border-field bg-white px-3 text-sm font-semibold text-espresso outline-none transition focus:border-primary focus:ring-4 focus:ring-primary/10";
 const compactFieldClass = "h-10 w-full rounded-xl border border-field bg-white px-3 text-xs font-bold text-espresso outline-none transition focus:border-primary focus:ring-4 focus:ring-primary/10";
 function defaultRecipeForm(menuItem, inventoryItem) {
   return {
@@ -33045,19 +33109,19 @@ function MenuPage() {
       ] })
     ] }),
     /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mt-6 grid grid-cols-5 gap-4", children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsx(Metric$1, { icon: /* @__PURE__ */ jsxRuntimeExports.jsx(Boxes, { size: 19 }), label: "Active categories", value: menuQuery.data?.metrics.activeCategories ?? 0 }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx(Metric$1, { icon: /* @__PURE__ */ jsxRuntimeExports.jsx(Utensils, { size: 19 }), label: "Active items", value: menuQuery.data?.metrics.activeItems ?? 0 }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx(Metric$2, { icon: /* @__PURE__ */ jsxRuntimeExports.jsx(Boxes, { size: 19 }), label: "Active categories", value: menuQuery.data?.metrics.activeCategories ?? 0 }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx(Metric$2, { icon: /* @__PURE__ */ jsxRuntimeExports.jsx(Utensils, { size: 19 }), label: "Active items", value: menuQuery.data?.metrics.activeItems ?? 0 }),
       /* @__PURE__ */ jsxRuntimeExports.jsx(
-        Metric$1,
+        Metric$2,
         {
           icon: /* @__PURE__ */ jsxRuntimeExports.jsx(CircleCheck, { size: 19 }),
           label: "Recipe linked",
           value: recipeQuery.data?.metrics.recipeLinkedItems ?? menuQuery.data?.metrics.recipeLinkedItems ?? 0
         }
       ),
-      /* @__PURE__ */ jsxRuntimeExports.jsx(Metric$1, { icon: /* @__PURE__ */ jsxRuntimeExports.jsx(ChefHat, { size: 19 }), label: "Active recipes", value: recipeQuery.data?.metrics.activeRecipes ?? 0 }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx(Metric$2, { icon: /* @__PURE__ */ jsxRuntimeExports.jsx(ChefHat, { size: 19 }), label: "Active recipes", value: recipeQuery.data?.metrics.activeRecipes ?? 0 }),
       /* @__PURE__ */ jsxRuntimeExports.jsx(
-        Metric$1,
+        Metric$2,
         {
           icon: /* @__PURE__ */ jsxRuntimeExports.jsx(CircleAlert, { size: 19 }),
           label: "Missing recipes",
@@ -33164,7 +33228,7 @@ function MenuPage() {
           /* @__PURE__ */ jsxRuntimeExports.jsx(
             "input",
             {
-              className: fieldClass$2,
+              className: fieldClass$3,
               disabled: !canManageMenu,
               placeholder: "Category name",
               value: categoryName,
@@ -33174,7 +33238,7 @@ function MenuPage() {
           /* @__PURE__ */ jsxRuntimeExports.jsxs(
             "select",
             {
-              className: fieldClass$2,
+              className: fieldClass$3,
               disabled: !canManageMenu,
               value: categoryStationId,
               onChange: (event) => setCategoryStationId(event.target.value),
@@ -33208,7 +33272,7 @@ function MenuPage() {
           /* @__PURE__ */ jsxRuntimeExports.jsx(
             "input",
             {
-              className: fieldClass$2,
+              className: fieldClass$3,
               disabled: !canManageMenu,
               placeholder: "Item name",
               value: itemName,
@@ -33219,7 +33283,7 @@ function MenuPage() {
             /* @__PURE__ */ jsxRuntimeExports.jsx(
               "input",
               {
-                className: fieldClass$2,
+                className: fieldClass$3,
                 disabled: !canManageMenu,
                 min: "0",
                 placeholder: "Price",
@@ -33231,7 +33295,7 @@ function MenuPage() {
             /* @__PURE__ */ jsxRuntimeExports.jsx(
               "select",
               {
-                className: fieldClass$2,
+                className: fieldClass$3,
                 disabled: !canManageMenu || categories2.length === 0,
                 value: selectedItemCategoryId,
                 onChange: (event) => setItemCategoryId(event.target.value),
@@ -33242,7 +33306,7 @@ function MenuPage() {
           /* @__PURE__ */ jsxRuntimeExports.jsxs(
             "select",
             {
-              className: fieldClass$2,
+              className: fieldClass$3,
               disabled: !canManageMenu,
               value: itemStationId,
               onChange: (event) => setItemStationId(event.target.value),
@@ -33279,7 +33343,7 @@ function MenuPage() {
             /* @__PURE__ */ jsxRuntimeExports.jsx(
               "select",
               {
-                className: fieldClass$2,
+                className: fieldClass$3,
                 disabled: !canManageRecipes || recipeItems.length === 0,
                 ...register("menuItemId", {
                   onChange: (event) => {
@@ -33294,7 +33358,7 @@ function MenuPage() {
             /* @__PURE__ */ jsxRuntimeExports.jsx(
               "input",
               {
-                className: fieldClass$2,
+                className: fieldClass$3,
                 disabled: !canManageRecipes,
                 placeholder: "Recipe name",
                 ...register("name")
@@ -33606,7 +33670,7 @@ const settingsSchema = objectType({
   kitchenDelayMinutes: coerce.number().int().min(1).max(180),
   shiftFloatRequired: booleanType()
 });
-const fieldClass$1 = "mt-2 h-12 w-full rounded-xl border border-field bg-white px-4 text-sm font-semibold text-espresso outline-none transition focus:border-primary focus:ring-4 focus:ring-primary/10";
+const fieldClass$2 = "mt-2 h-12 w-full rounded-xl border border-field bg-white px-4 text-sm font-semibold text-espresso outline-none transition focus:border-primary focus:ring-4 focus:ring-primary/10";
 const textareaClass = "mt-2 min-h-24 w-full resize-none rounded-xl border border-field bg-white px-4 py-3 text-sm font-semibold text-espresso outline-none transition focus:border-primary focus:ring-4 focus:ring-primary/10";
 const defaultValues = {
   businessName: "RestaurantOS Demo Cafe",
@@ -33736,10 +33800,10 @@ function SettingsPage() {
           ] })
         ] }),
         /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mt-6 grid grid-cols-2 gap-4", children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx(Field, { label: "Business name", error: errors.businessName?.message, children: /* @__PURE__ */ jsxRuntimeExports.jsx("input", { className: fieldClass$1, ...register("businessName") }) }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx(Field, { label: "Branch", error: errors.branchName?.message, children: /* @__PURE__ */ jsxRuntimeExports.jsx("input", { className: fieldClass$1, ...register("branchName") }) }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx(Field, { label: "Phone", error: errors.phone?.message, children: /* @__PURE__ */ jsxRuntimeExports.jsx("input", { className: fieldClass$1, ...register("phone") }) }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx(Field, { label: "Currency", error: errors.currency?.message, children: /* @__PURE__ */ jsxRuntimeExports.jsx("input", { className: fieldClass$1, ...register("currency") }) })
+          /* @__PURE__ */ jsxRuntimeExports.jsx(Field, { label: "Business name", error: errors.businessName?.message, children: /* @__PURE__ */ jsxRuntimeExports.jsx("input", { className: fieldClass$2, ...register("businessName") }) }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx(Field, { label: "Branch", error: errors.branchName?.message, children: /* @__PURE__ */ jsxRuntimeExports.jsx("input", { className: fieldClass$2, ...register("branchName") }) }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx(Field, { label: "Phone", error: errors.phone?.message, children: /* @__PURE__ */ jsxRuntimeExports.jsx("input", { className: fieldClass$2, ...register("phone") }) }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx(Field, { label: "Currency", error: errors.currency?.message, children: /* @__PURE__ */ jsxRuntimeExports.jsx("input", { className: fieldClass$2, ...register("currency") }) })
         ] }),
         /* @__PURE__ */ jsxRuntimeExports.jsx(Field, { className: "mt-4", label: "Address", error: errors.address?.message, children: /* @__PURE__ */ jsxRuntimeExports.jsx("textarea", { className: textareaClass, ...register("address") }) })
       ] }),
@@ -33752,8 +33816,8 @@ function SettingsPage() {
           ] })
         ] }),
         /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mt-6 grid grid-cols-2 gap-4", children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx(Field, { label: "Tax percent", error: errors.defaultTaxPercent?.message, children: /* @__PURE__ */ jsxRuntimeExports.jsx("input", { className: fieldClass$1, type: "number", step: "0.01", ...register("defaultTaxPercent") }) }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx(Field, { label: "Service charge", error: errors.serviceChargePercent?.message, children: /* @__PURE__ */ jsxRuntimeExports.jsx("input", { className: fieldClass$1, type: "number", step: "0.01", ...register("serviceChargePercent") }) })
+          /* @__PURE__ */ jsxRuntimeExports.jsx(Field, { label: "Tax percent", error: errors.defaultTaxPercent?.message, children: /* @__PURE__ */ jsxRuntimeExports.jsx("input", { className: fieldClass$2, type: "number", step: "0.01", ...register("defaultTaxPercent") }) }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx(Field, { label: "Service charge", error: errors.serviceChargePercent?.message, children: /* @__PURE__ */ jsxRuntimeExports.jsx("input", { className: fieldClass$2, type: "number", step: "0.01", ...register("serviceChargePercent") }) })
         ] }),
         /* @__PURE__ */ jsxRuntimeExports.jsx(Field, { className: "mt-4", label: "Receipt footer", error: errors.receiptFooter?.message, children: /* @__PURE__ */ jsxRuntimeExports.jsx("textarea", { className: textareaClass, ...register("receiptFooter") }) }),
         /* @__PURE__ */ jsxRuntimeExports.jsx(Toggle, { label: "Print customer copy by default", ...register("printCustomerCopy") })
@@ -33767,8 +33831,8 @@ function SettingsPage() {
           ] })
         ] }),
         /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mt-6 grid grid-cols-2 gap-4", children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx(Field, { label: "Low stock threshold", error: errors.lowStockThreshold?.message, children: /* @__PURE__ */ jsxRuntimeExports.jsx("input", { className: fieldClass$1, type: "number", ...register("lowStockThreshold") }) }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx(Field, { label: "Kitchen delay minutes", error: errors.kitchenDelayMinutes?.message, children: /* @__PURE__ */ jsxRuntimeExports.jsx("input", { className: fieldClass$1, type: "number", ...register("kitchenDelayMinutes") }) })
+          /* @__PURE__ */ jsxRuntimeExports.jsx(Field, { label: "Low stock threshold", error: errors.lowStockThreshold?.message, children: /* @__PURE__ */ jsxRuntimeExports.jsx("input", { className: fieldClass$2, type: "number", ...register("lowStockThreshold") }) }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx(Field, { label: "Kitchen delay minutes", error: errors.kitchenDelayMinutes?.message, children: /* @__PURE__ */ jsxRuntimeExports.jsx("input", { className: fieldClass$2, type: "number", ...register("kitchenDelayMinutes") }) })
         ] }),
         /* @__PURE__ */ jsxRuntimeExports.jsx(Toggle, { label: "Require opening cash float for shifts", ...register("shiftFloatRequired") })
       ] }),
@@ -34040,7 +34104,7 @@ function formatOrderAge(createdAt) {
   const rest = minutes % 60;
   return rest ? `${hours}h ${rest}m` : `${hours}h`;
 }
-const fieldClass = "h-11 w-full rounded-xl border border-field bg-white px-3 text-sm font-semibold text-espresso outline-none transition focus:border-primary focus:ring-4 focus:ring-primary/10";
+const fieldClass$1 = "h-11 w-full rounded-xl border border-field bg-white px-3 text-sm font-semibold text-espresso outline-none transition focus:border-primary focus:ring-4 focus:ring-primary/10";
 function TablesPage() {
   const queryClient2 = useQueryClient();
   const canManageTables = useAuthStore((state) => state.hasPermission("table.manage"));
@@ -34108,10 +34172,10 @@ function TablesPage() {
       ] })
     ] }),
     /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mt-6 grid grid-cols-4 gap-4", children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsx(Metric, { icon: /* @__PURE__ */ jsxRuntimeExports.jsx(Armchair, { size: 19 }), label: "Tables", value: tablesQuery.data?.metrics.activeTables ?? 0 }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx(Metric, { icon: /* @__PURE__ */ jsxRuntimeExports.jsx(CircleCheck, { size: 19 }), label: "Free", value: tablesQuery.data?.metrics.freeTables ?? 0 }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx(Metric, { icon: /* @__PURE__ */ jsxRuntimeExports.jsx(ClipboardList, { size: 19 }), label: "Occupied", value: tablesQuery.data?.metrics.occupiedTables ?? 0 }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx(Metric, { icon: /* @__PURE__ */ jsxRuntimeExports.jsx(UsersRound, { size: 19 }), label: "Covers", value: tablesQuery.data?.metrics.totalCovers ?? 0 })
+      /* @__PURE__ */ jsxRuntimeExports.jsx(Metric$1, { icon: /* @__PURE__ */ jsxRuntimeExports.jsx(Armchair, { size: 19 }), label: "Tables", value: tablesQuery.data?.metrics.activeTables ?? 0 }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx(Metric$1, { icon: /* @__PURE__ */ jsxRuntimeExports.jsx(CircleCheck, { size: 19 }), label: "Free", value: tablesQuery.data?.metrics.freeTables ?? 0 }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx(Metric$1, { icon: /* @__PURE__ */ jsxRuntimeExports.jsx(ClipboardList, { size: 19 }), label: "Occupied", value: tablesQuery.data?.metrics.occupiedTables ?? 0 }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx(Metric$1, { icon: /* @__PURE__ */ jsxRuntimeExports.jsx(UsersRound, { size: 19 }), label: "Covers", value: tablesQuery.data?.metrics.totalCovers ?? 0 })
     ] }),
     /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mt-5", children: /* @__PURE__ */ jsxRuntimeExports.jsxs(Card, { className: "min-h-[620px] p-5", children: [
       /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex flex-wrap items-center justify-between gap-3 border-b border-line pb-5", children: [
@@ -34174,7 +34238,7 @@ function TablesPage() {
           /* @__PURE__ */ jsxRuntimeExports.jsx(
             "input",
             {
-              className: fieldClass,
+              className: fieldClass$1,
               disabled: !canManageTables,
               placeholder: "Table name",
               value: tableName,
@@ -34184,7 +34248,7 @@ function TablesPage() {
           /* @__PURE__ */ jsxRuntimeExports.jsx(
             "input",
             {
-              className: fieldClass,
+              className: fieldClass$1,
               disabled: !canManageTables,
               placeholder: "Area",
               value: tableArea,
@@ -34194,7 +34258,7 @@ function TablesPage() {
           /* @__PURE__ */ jsxRuntimeExports.jsx(
             "input",
             {
-              className: fieldClass,
+              className: fieldClass$1,
               disabled: !canManageTables,
               min: "1",
               type: "number",
@@ -34217,7 +34281,7 @@ function TablesPage() {
     )
   ] });
 }
-function Metric({ icon, label, value }) {
+function Metric$1({ icon, label, value }) {
   return /* @__PURE__ */ jsxRuntimeExports.jsxs(Card, { className: "flex items-center justify-between p-5", children: [
     /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
       /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm font-black text-muted", children: label }),
@@ -34230,6 +34294,396 @@ function Planned({ icon, text }) {
   return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-2 rounded-xl bg-sage p-3", children: [
     /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-primary", children: icon }),
     text
+  ] });
+}
+const fieldClass = "h-11 w-full rounded-xl border border-field bg-white px-3 text-sm font-semibold text-espresso outline-none transition focus:border-primary focus:ring-4 focus:ring-primary/10";
+function UsersPage() {
+  const queryClient2 = useQueryClient();
+  const currentUser = useAuthStore((state) => state.user);
+  const canManageUsers = useAuthStore((state) => state.hasPermission("user.manage"));
+  const [userOpen, setUserOpen] = reactExports.useState(false);
+  const [name, setName] = reactExports.useState("");
+  const [username, setUsername] = reactExports.useState("");
+  const [phone, setPhone] = reactExports.useState("");
+  const [password, setPassword] = reactExports.useState("");
+  const [roleId, setRoleId] = reactExports.useState("");
+  const [passwordOpen, setPasswordOpen] = reactExports.useState(false);
+  const [passwordUserId, setPasswordUserId] = reactExports.useState("");
+  const [newPassword, setNewPassword] = reactExports.useState("");
+  const [roleOpen, setRoleOpen] = reactExports.useState(false);
+  const [editingRoleId, setEditingRoleId] = reactExports.useState("");
+  const [roleName, setRoleName] = reactExports.useState("");
+  const [roleDescription, setRoleDescription] = reactExports.useState("");
+  const [rolePermissionIds, setRolePermissionIds] = reactExports.useState([]);
+  const usersQuery = useQuery({
+    queryKey: ["users"],
+    queryFn: () => apiFetch("/users")
+  });
+  const users = usersQuery.data?.users ?? [];
+  const roles = usersQuery.data?.roles ?? [];
+  const permissions = usersQuery.data?.permissions ?? [];
+  const selectedRoleId = roleId || roles[0]?.id || "";
+  const selectedPasswordUser = users.find((user) => user.id === passwordUserId);
+  const groupedPermissions = reactExports.useMemo(() => {
+    return permissions.reduce((groups, permission) => {
+      const group = permission.code.split(".")[0] ?? "general";
+      groups[group] = [...groups[group] ?? [], permission];
+      return groups;
+    }, {});
+  }, [permissions]);
+  const createUser = useMutation({
+    mutationFn: () => apiFetch("/users", {
+      method: "POST",
+      body: JSON.stringify({
+        name: name.trim(),
+        username: username.trim(),
+        phone: phone.trim() || void 0,
+        password,
+        roleId: selectedRoleId,
+        active: true
+      })
+    }),
+    onSuccess: () => {
+      setName("");
+      setUsername("");
+      setPhone("");
+      setPassword("");
+      setRoleId("");
+      setUserOpen(false);
+      void queryClient2.invalidateQueries({ queryKey: ["users"] });
+    }
+  });
+  const updateUser = useMutation({
+    mutationFn: ({ id, patch }) => apiFetch(`/users/${id}`, {
+      method: "PATCH",
+      body: JSON.stringify(patch)
+    }),
+    onSuccess: () => queryClient2.invalidateQueries({ queryKey: ["users"] })
+  });
+  const updatePassword = useMutation({
+    mutationFn: () => apiFetch(`/users/${passwordUserId}/password`, {
+      method: "PATCH",
+      body: JSON.stringify({ password: newPassword })
+    }),
+    onSuccess: () => {
+      setPasswordUserId("");
+      setNewPassword("");
+      setPasswordOpen(false);
+      void queryClient2.invalidateQueries({ queryKey: ["users"] });
+    }
+  });
+  const saveRole = useMutation({
+    mutationFn: () => apiFetch(editingRoleId ? `/users/roles/${editingRoleId}` : "/users/roles", {
+      method: editingRoleId ? "PATCH" : "POST",
+      body: JSON.stringify({
+        name: roleName.trim(),
+        description: roleDescription.trim() || void 0,
+        permissionIds: rolePermissionIds
+      })
+    }),
+    onSuccess: () => {
+      resetRoleForm();
+      void queryClient2.invalidateQueries({ queryKey: ["users"] });
+    }
+  });
+  function submitUser(event) {
+    event.preventDefault();
+    if (name.trim() && username.trim() && password.length >= 8 && selectedRoleId) createUser.mutate();
+  }
+  function openPassword(user) {
+    setPasswordUserId(user.id);
+    setNewPassword("");
+    setPasswordOpen(true);
+  }
+  function submitPassword(event) {
+    event.preventDefault();
+    if (passwordUserId && newPassword.length >= 8) updatePassword.mutate();
+  }
+  function openRole(role) {
+    setEditingRoleId(role?.id ?? "");
+    setRoleName(role?.name ?? "");
+    setRoleDescription(role?.description ?? "");
+    setRolePermissionIds(role?.permissions.map((entry) => entry.permission.id) ?? []);
+    setRoleOpen(true);
+  }
+  function resetRoleForm() {
+    setEditingRoleId("");
+    setRoleName("");
+    setRoleDescription("");
+    setRolePermissionIds([]);
+    setRoleOpen(false);
+  }
+  function togglePermission(permissionId) {
+    setRolePermissionIds(
+      (ids) => ids.includes(permissionId) ? ids.filter((id) => id !== permissionId) : [...ids, permissionId]
+    );
+  }
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "h-full overflow-y-auto bg-white p-7", children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex flex-wrap items-start justify-between gap-4", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm font-black uppercase tracking-[0.22em] text-primary", children: "Access control" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("h1", { className: "mt-2 text-4xl font-black text-espresso", children: "Staff & roles" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mt-3 max-w-2xl text-sm font-semibold text-muted", children: "Create staff logins, assign roles, and keep permissions controlled from the desktop app." })
+      ] }),
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-3", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx(Badge, { tone: canManageUsers ? "green" : "orange", children: canManageUsers ? "Editable" : "View only" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx(Button, { disabled: !canManageUsers, icon: /* @__PURE__ */ jsxRuntimeExports.jsx(ShieldCheck, { size: 17 }), variant: "secondary", onClick: () => openRole(), children: "New role" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx(Button, { disabled: !canManageUsers || roles.length === 0, icon: /* @__PURE__ */ jsxRuntimeExports.jsx(UserPlus, { size: 17 }), onClick: () => setUserOpen(true), children: "New staff" })
+      ] })
+    ] }),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mt-6 grid grid-cols-4 gap-4", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx(Metric, { icon: /* @__PURE__ */ jsxRuntimeExports.jsx(Users, { size: 19 }), label: "Active users", value: usersQuery.data?.metrics.activeUsers ?? 0 }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx(Metric, { icon: /* @__PURE__ */ jsxRuntimeExports.jsx(Power, { size: 19 }), label: "Inactive users", value: usersQuery.data?.metrics.inactiveUsers ?? 0 }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx(Metric, { icon: /* @__PURE__ */ jsxRuntimeExports.jsx(ShieldCheck, { size: 19 }), label: "Roles", value: usersQuery.data?.metrics.roles ?? 0 }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx(Metric, { icon: /* @__PURE__ */ jsxRuntimeExports.jsx(UserCog, { size: 19 }), label: "Permissions", value: usersQuery.data?.metrics.permissions ?? 0 })
+    ] }),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs(Card, { className: "mt-5 overflow-hidden", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center justify-between border-b border-line px-6 py-5", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "text-xl font-black text-espresso", children: "Staff logins" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm font-semibold text-muted", children: "Desktop access, role assignment, and active state." })
+        ] }),
+        usersQuery.isLoading ? /* @__PURE__ */ jsxRuntimeExports.jsx(LoaderCircle, { className: "animate-spin text-primary", size: 20 }) : null
+      ] }),
+      usersQuery.isError ? /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "m-5 flex items-center gap-3 rounded-xl bg-red-50 px-4 py-3 text-sm font-bold text-red-700", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx(CircleAlert, { size: 17 }),
+        "Users could not load. Check the API session."
+      ] }) : null,
+      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "max-h-[520px] overflow-y-auto", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("table", { className: "w-full text-left text-sm", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("thead", { className: "sticky top-0 bg-sage text-xs font-black uppercase text-muted", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("tr", { children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx("th", { className: "px-6 py-3", children: "Staff" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("th", { className: "px-4 py-3", children: "Username" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("th", { className: "px-4 py-3", children: "Role" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("th", { className: "px-4 py-3", children: "Permissions" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("th", { className: "px-6 py-3 text-right", children: "Actions" })
+        ] }) }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("tbody", { className: "divide-y divide-line", children: users.map((user) => {
+          const isCurrentUser = user.id === currentUser?.id;
+          return /* @__PURE__ */ jsxRuntimeExports.jsxs("tr", { children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsxs("td", { className: "px-6 py-4", children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-black text-espresso", children: user.name }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mt-1 text-xs font-semibold text-muted", children: user.staff?.phone || "No phone" })
+            ] }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("td", { className: "px-4 py-4 font-bold text-label", children: user.username }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("td", { className: "px-4 py-4", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+              "select",
+              {
+                className: fieldClass,
+                disabled: !canManageUsers || updateUser.isPending,
+                value: user.roleId,
+                onChange: (event) => updateUser.mutate({ id: user.id, patch: { roleId: event.target.value } }),
+                children: roles.map((role) => /* @__PURE__ */ jsxRuntimeExports.jsx("option", { value: role.id, children: role.name }, role.id))
+              }
+            ) }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("td", { className: "px-4 py-4", children: /* @__PURE__ */ jsxRuntimeExports.jsxs(Badge, { tone: user.active ? "green" : "gray", children: [
+              user.role.permissions.length,
+              " permissions"
+            ] }) }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("td", { className: "px-6 py-4", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex justify-end gap-2", children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsx(
+                Button,
+                {
+                  className: "h-9 px-3",
+                  disabled: !canManageUsers,
+                  icon: /* @__PURE__ */ jsxRuntimeExports.jsx(KeyRound, { size: 15 }),
+                  variant: "secondary",
+                  onClick: () => openPassword(user),
+                  children: "Password"
+                }
+              ),
+              /* @__PURE__ */ jsxRuntimeExports.jsx(
+                Button,
+                {
+                  className: "h-9 px-3",
+                  disabled: !canManageUsers || isCurrentUser || updateUser.isPending,
+                  icon: /* @__PURE__ */ jsxRuntimeExports.jsx(Power, { size: 15 }),
+                  variant: user.active ? "secondary" : "ghost",
+                  onClick: () => updateUser.mutate({ id: user.id, patch: { active: !user.active } }),
+                  children: user.active ? "Active" : "Inactive"
+                }
+              )
+            ] }) })
+          ] }, user.id);
+        }) })
+      ] }) })
+    ] }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mt-5 grid grid-cols-2 gap-4", children: roles.map((role) => /* @__PURE__ */ jsxRuntimeExports.jsxs(Card, { className: "p-5", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-start justify-between gap-4", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-lg font-black text-espresso", children: role.name }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mt-1 text-sm font-semibold text-muted", children: role.description || "Operational role" })
+        ] }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx(
+          Button,
+          {
+            className: "h-9 px-3",
+            disabled: !canManageUsers,
+            icon: /* @__PURE__ */ jsxRuntimeExports.jsx(ShieldCheck, { size: 15 }),
+            variant: "secondary",
+            onClick: () => openRole(role),
+            children: "Edit"
+          }
+        )
+      ] }),
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mt-4 flex flex-wrap gap-2", children: [
+        role.permissions.slice(0, 8).map((entry) => /* @__PURE__ */ jsxRuntimeExports.jsx(Badge, { tone: "gray", children: entry.permission.code }, entry.permission.id)),
+        role.permissions.length > 8 ? /* @__PURE__ */ jsxRuntimeExports.jsxs(Badge, { tone: "orange", children: [
+          "+",
+          role.permissions.length - 8
+        ] }) : null
+      ] }),
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { className: "mt-4 text-xs font-black uppercase tracking-[0.14em] text-muted", children: [
+        role._count?.users ?? 0,
+        " assigned users"
+      ] })
+    ] }, role.id)) }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(
+      ActionModal,
+      {
+        description: "Create a staff login and attach it to the matching staff profile.",
+        open: userOpen,
+        title: "New staff",
+        onClose: () => setUserOpen(false),
+        children: /* @__PURE__ */ jsxRuntimeExports.jsxs("form", { className: "space-y-3", onSubmit: submitUser, children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx("input", { className: fieldClass, disabled: !canManageUsers, placeholder: "Full name", value: name, onChange: (event) => setName(event.target.value) }),
+          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "grid grid-cols-2 gap-3", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx(
+              "input",
+              {
+                className: fieldClass,
+                disabled: !canManageUsers,
+                placeholder: "Username",
+                value: username,
+                onChange: (event) => setUsername(event.target.value)
+              }
+            ),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("input", { className: fieldClass, disabled: !canManageUsers, placeholder: "Phone", value: phone, onChange: (event) => setPhone(event.target.value) })
+          ] }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx(
+            "input",
+            {
+              className: fieldClass,
+              disabled: !canManageUsers,
+              minLength: 8,
+              placeholder: "Temporary password",
+              type: "password",
+              value: password,
+              onChange: (event) => setPassword(event.target.value)
+            }
+          ),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("select", { className: fieldClass, disabled: !canManageUsers, value: selectedRoleId, onChange: (event) => setRoleId(event.target.value), children: roles.map((role) => /* @__PURE__ */ jsxRuntimeExports.jsx("option", { value: role.id, children: role.name }, role.id)) }),
+          createUser.isError ? /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "rounded-xl bg-red-50 px-4 py-3 text-sm font-bold text-red-700", children: "Staff save failed. Check username, password, and role." }) : null,
+          /* @__PURE__ */ jsxRuntimeExports.jsx(
+            Button,
+            {
+              className: "w-full",
+              disabled: !canManageUsers || !name.trim() || !username.trim() || password.length < 8 || !selectedRoleId || createUser.isPending,
+              icon: createUser.isPending ? /* @__PURE__ */ jsxRuntimeExports.jsx(LoaderCircle, { className: "animate-spin", size: 17 }) : /* @__PURE__ */ jsxRuntimeExports.jsx(UserPlus, { size: 17 }),
+              type: "submit",
+              children: "Add staff"
+            }
+          )
+        ] })
+      }
+    ),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(
+      ActionModal,
+      {
+        description: `Set a new password for ${selectedPasswordUser?.name ?? "staff user"}.`,
+        open: passwordOpen,
+        title: "Update password",
+        onClose: () => setPasswordOpen(false),
+        children: /* @__PURE__ */ jsxRuntimeExports.jsxs("form", { className: "space-y-3", onSubmit: submitPassword, children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx(
+            "input",
+            {
+              className: fieldClass,
+              disabled: !canManageUsers,
+              minLength: 8,
+              placeholder: "New password",
+              type: "password",
+              value: newPassword,
+              onChange: (event) => setNewPassword(event.target.value)
+            }
+          ),
+          updatePassword.isError ? /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "rounded-xl bg-red-50 px-4 py-3 text-sm font-bold text-red-700", children: "Password update failed. Use at least 8 characters." }) : null,
+          /* @__PURE__ */ jsxRuntimeExports.jsx(
+            Button,
+            {
+              className: "w-full",
+              disabled: !canManageUsers || newPassword.length < 8 || updatePassword.isPending,
+              icon: updatePassword.isPending ? /* @__PURE__ */ jsxRuntimeExports.jsx(LoaderCircle, { className: "animate-spin", size: 17 }) : /* @__PURE__ */ jsxRuntimeExports.jsx(KeyRound, { size: 17 }),
+              type: "submit",
+              children: "Update password"
+            }
+          )
+        ] })
+      }
+    ),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(
+      ActionModal,
+      {
+        description: "Choose the permissions this role should grant to assigned staff users.",
+        open: roleOpen,
+        title: editingRoleId ? "Edit role" : "New role",
+        widthClass: "max-w-4xl",
+        onClose: resetRoleForm,
+        children: /* @__PURE__ */ jsxRuntimeExports.jsxs("form", { className: "space-y-4", onSubmit: (event) => {
+          event.preventDefault();
+          if (roleName.trim() && rolePermissionIds.length) saveRole.mutate();
+        }, children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "grid grid-cols-[220px_1fr] gap-3", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx("input", { className: fieldClass, disabled: !canManageUsers, placeholder: "Role name", value: roleName, onChange: (event) => setRoleName(event.target.value) }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx(
+              "input",
+              {
+                className: fieldClass,
+                disabled: !canManageUsers,
+                placeholder: "Description",
+                value: roleDescription,
+                onChange: (event) => setRoleDescription(event.target.value)
+              }
+            )
+          ] }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "grid grid-cols-2 gap-4", children: Object.entries(groupedPermissions).map(([group, groupPermissions]) => /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "rounded-2xl border border-line bg-sage p-4", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs font-black uppercase tracking-[0.16em] text-muted", children: group }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mt-3 grid gap-2", children: groupPermissions.map((permission) => /* @__PURE__ */ jsxRuntimeExports.jsxs("label", { className: "flex items-center gap-2 rounded-xl bg-white px-3 py-2 text-sm font-bold text-label", children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsx(
+                "input",
+                {
+                  checked: rolePermissionIds.includes(permission.id),
+                  className: "h-4 w-4 accent-primary",
+                  disabled: !canManageUsers,
+                  type: "checkbox",
+                  onChange: () => togglePermission(permission.id)
+                }
+              ),
+              permission.code
+            ] }, permission.id)) })
+          ] }, group)) }),
+          saveRole.isError ? /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "rounded-xl bg-red-50 px-4 py-3 text-sm font-bold text-red-700", children: "Role save failed. Keep at least one permission and avoid removing your own user access." }) : null,
+          /* @__PURE__ */ jsxRuntimeExports.jsx(
+            Button,
+            {
+              className: "w-full",
+              disabled: !canManageUsers || !roleName.trim() || rolePermissionIds.length === 0 || saveRole.isPending,
+              icon: saveRole.isPending ? /* @__PURE__ */ jsxRuntimeExports.jsx(LoaderCircle, { className: "animate-spin", size: 17 }) : /* @__PURE__ */ jsxRuntimeExports.jsx(ShieldCheck, { size: 17 }),
+              type: "submit",
+              children: "Save role"
+            }
+          )
+        ] })
+      }
+    )
+  ] });
+}
+function Metric({ icon, label, value }) {
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs(Card, { className: "flex items-center justify-between p-5", children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm font-black text-muted", children: label }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mt-3 text-3xl font-black text-espresso", children: value })
+    ] }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "flex h-11 w-11 items-center justify-center rounded-xl bg-mint text-secondary", children: icon })
   ] });
 }
 const router = createBrowserRouter([
@@ -34250,6 +34704,7 @@ const router = createBrowserRouter([
           { path: "inventory", element: /* @__PURE__ */ jsxRuntimeExports.jsx(InventoryPage, {}) },
           { path: "customers", element: /* @__PURE__ */ jsxRuntimeExports.jsx(CustomersPage, {}) },
           { path: "tables", element: /* @__PURE__ */ jsxRuntimeExports.jsx(TablesPage, {}) },
+          { path: "users", element: /* @__PURE__ */ jsxRuntimeExports.jsx(UsersPage, {}) },
           { path: "reports", element: /* @__PURE__ */ jsxRuntimeExports.jsx(ReportsPage, {}) },
           { path: "settings", element: /* @__PURE__ */ jsxRuntimeExports.jsx(SettingsPage, {}) }
         ]

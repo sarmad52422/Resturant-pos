@@ -100,6 +100,12 @@ The desktop Settings page uses TanStack Query for loading/saving, React Hook For
 
 Current admin endpoints:
 
+- `GET /users` - Lists staff users, roles, permissions, and access metrics. Requires `user.manage`.
+- `POST /users` - Creates a staff login and linked staff profile. Requires `user.manage`.
+- `PATCH /users/:id` - Updates staff login active state, role, username, name, or phone. Requires `user.manage`.
+- `PATCH /users/:id/password` - Sets a new staff password. Requires `user.manage`.
+- `POST /users/roles` - Creates a role with selected permissions. Requires `user.manage`.
+- `PATCH /users/roles/:id` - Updates role details and permission assignment. Requires `user.manage`.
 - `GET /menu` - Lists menu categories, menu items, kitchen stations, and catalog metrics.
 - `POST /menu/categories` - Creates a menu category. Requires `menu.manage`.
 - `PATCH /menu/categories/:id` - Updates a menu category. Requires `menu.manage`.
@@ -121,7 +127,9 @@ Current admin endpoints:
 - `PATCH /inventory/suppliers/:id` - Updates supplier contact details. Requires `inventory.manage`.
 - `POST /inventory/suppliers/:id/payments` - Records a supplier payment and reduces payable. Requires `inventory.manage`.
 
-The desktop Menu, Customers, and Inventory pages now use these endpoints for real operational tables, compact create forms, permission-aware editable states, and active/hidden toggles where applicable.
+The desktop Staff, Menu, Customers, and Inventory pages now use these endpoints for real operational tables, compact popup forms, permission-aware editable states, and active/hidden toggles where applicable.
+
+The Staff page includes staff login creation, role assignment, active/inactive controls, password reset, and role permission editing. The API blocks self-deactivation and prevents removing `user.manage` from your own active role.
 
 The Inventory page includes a purchase receiving popup. Receiving stock creates `PURCHASE` stock movements, updates current stock, updates last purchase cost, recalculates weighted average cost, and increases supplier payable for any unpaid balance.
 
@@ -245,6 +253,9 @@ Future admin shortcuts will be documented here as modules are implemented.
 
 Planned admin modal shortcuts:
 
+- Open new staff popup.
+- Open new role popup.
+- Open staff password popup.
 - Open new menu item popup.
 - Open new recipe popup.
 - Open new stock item popup.

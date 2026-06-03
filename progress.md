@@ -432,3 +432,39 @@ Tests:
 - Runtime smoke test passed: admin login returned `201`, `POST /inventory/suppliers` created a temporary supplier with `5000` opening payable, `POST /inventory/suppliers/:id/payments` recorded a `1200` payment, `GET /inventory/suppliers` showed `3800` current payable and two ledger rows.
 - Smoke test cleaned up the temporary supplier and supplier ledger rows.
 - `npm run build --workspaces` passed.
+
+## Phase 9 - Staff, Roles, and Permissions
+
+Status: Completed
+
+Completed:
+- Added a `UsersModule` API module for staff access control.
+- Added staff/user API support with `GET /users`, `POST /users`, `PATCH /users/:id`, and `PATCH /users/:id/password`.
+- Added role API support with `POST /users/roles` and `PATCH /users/roles/:id`.
+- Added validation for staff names, usernames, passwords, phone values, role assignment, and permission selections.
+- Added staff profile creation/sync when staff logins are created or updated.
+- Added audit logs for user create/update, password update, role create, and role update.
+- Added safety checks to block self-deactivation and prevent removing `user.manage` from the signed-in user's active role.
+- Added desktop Staff route and sidebar navigation item.
+- Added Staff & Roles desktop page with metrics, staff login table, role assignment controls, password popup, new staff popup, role cards, and role permission editor popup.
+- Made the desktop sidebar denser and scroll-safe for the expanded module list.
+
+Files changed:
+- `apps/api/src/app.module.ts`
+- `apps/api/src/modules/users/**`
+- `apps/desktop/src/renderer/src/components/app-shell.tsx`
+- `apps/desktop/src/renderer/src/pages/users/**`
+- `apps/desktop/src/renderer/src/router.tsx`
+- `README.md`
+- `progress.md`
+
+Database changes:
+- No schema migration required; the existing `User`, `Staff`, `Role`, `Permission`, `RolePermission`, and `AuditLog` tables support the workflow.
+
+Tests:
+- `npm run typecheck --workspace @restaurantos/api` passed.
+- `npm run typecheck --workspaces` passed.
+- Runtime smoke test passed: admin login returned `201`, `GET /users` returned seeded roles/permissions, `POST /users` created a temporary staff login, `PATCH /users/:id/password` reset its password, `PATCH /users/:id` deactivated it, `POST /users/roles` created a temporary role, and `PATCH /users/roles/:id` updated its permissions.
+- Smoke test cleaned up the temporary staff login, staff profile, role, role permissions, and related audit logs.
+- `npm run build --workspaces` passed.
+- `npm audit --audit-level=high` passed with 0 vulnerabilities.

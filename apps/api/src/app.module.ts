@@ -9,6 +9,7 @@ import { OrdersModule } from './modules/orders/orders.module';
 import { PrismaModule } from './prisma/prisma.module';
 import { SettingsModule } from './modules/settings/settings.module';
 import { TablesModule } from './modules/tables/tables.module';
+import { UsersModule } from './modules/users/users.module';
 
 @Module({
   imports: [
@@ -20,6 +21,7 @@ import { TablesModule } from './modules/tables/tables.module';
     OrdersModule,
     InventoryModule,
     TablesModule,
+    UsersModule,
     KitchenModule,
     SettingsModule,
   ],
