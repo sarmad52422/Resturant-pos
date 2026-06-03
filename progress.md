@@ -349,8 +349,10 @@ Status: Completed
 Completed:
 - Moved desktop renderer pages into page-owned folders with `index.tsx` entry files.
 - Updated router imports to use folder entries such as `./pages/menu` and `./pages/tables`.
-- Split the large Menu page into local `types.ts`, `recipe-form-model.ts`, and `components.tsx` support files.
+- Split the large Menu page into local `interfaces.ts`, `recipe-form-model.ts`, and `components.tsx` support files.
 - Kept small pages simple with one `index.tsx` to avoid unnecessary file noise.
+- Moved page data contracts into page-local `interfaces.ts` files for Menu, Inventory, Customers, Tables, and Settings.
+- Replaced deprecated React `FormEvent` usage with a shared `FormSubmitEvent` alias based on `SyntheticEvent<HTMLFormElement, SubmitEvent>`.
 
 Tests:
 - `npm run typecheck --workspace @restaurantos/desktop` passed.
@@ -373,3 +375,29 @@ Completed:
 Tests:
 - `npm run typecheck --workspace @restaurantos/desktop` passed.
 - `npm run build --workspace @restaurantos/desktop` passed.
+
+## Phase 7 - Purchases and Stock Receiving
+
+Status: Completed
+
+Completed:
+- Added purchase receiving API support with `GET /inventory/purchases` and `POST /inventory/purchases`.
+- Added purchase DTO validation for supplier, invoice, purchase date, payment method, paid amount, and purchase item rows.
+- Added transactional purchase creation with purchase items, `PURCHASE` stock movements, stock increments, last purchase cost updates, weighted average cost recalculation, and supplier payable updates.
+- Added supplier ledger entry creation for unpaid purchase balances.
+- Added desktop Inventory purchase history table.
+- Added desktop Receive Stock popup with supplier, invoice, date, payment method, paid amount, multi-row stock item entry, and running totals.
+
+Files changed:
+- `apps/api/src/modules/inventory/inventory.controller.ts`
+- `apps/api/src/modules/inventory/inventory.service.ts`
+- `apps/desktop/src/renderer/src/pages/inventory/index.tsx`
+- `README.md`
+- `progress.md`
+
+Tests:
+- `npm run typecheck --workspaces` passed.
+- `npm run build --workspaces` passed.
+- Runtime smoke test passed: admin login returned `201`, `POST /inventory/purchases` created a temporary purchase, stock increased by `1`, supplier payable increased by `1500`, and one `PURCHASE` stock movement was created.
+- Smoke test cleaned up the temporary purchase, stock movement, supplier ledger entry, and restored touched stock/supplier balances.
+- `npm audit --audit-level=high` passed with 0 vulnerabilities.

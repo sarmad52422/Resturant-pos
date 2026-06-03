@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import type { InventoryItem, MenuItem } from './types';
+import type { InventoryItem, MenuItem } from './interfaces';
 
 export const recipeSchema = z.object({
   active: z.boolean(),

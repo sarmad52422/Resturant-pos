@@ -8,24 +8,15 @@ import {
   Sparkles,
   UsersRound,
 } from 'lucide-react';
-import type { FormEvent, ReactNode } from 'react';
+import type { ReactNode } from 'react';
 import { useMemo, useState } from 'react';
 import { Badge, Button, Card } from '@restaurantos/ui';
 import { ActionModal } from '../../components/action-modal';
 import { TableCard, type CurrentOrder, type RestaurantTable, type TableStatus } from '../../components/table-card';
 import { apiFetch } from '../../lib/api';
+import type { FormSubmitEvent } from '../../lib/events';
 import { useAuthStore } from '../../store/use-auth-store';
-
-interface TablesResponse {
-  areas: string[];
-  tables: RestaurantTable[];
-  metrics: {
-    activeTables: number;
-    freeTables: number;
-    occupiedTables: number;
-    totalCovers: number;
-  };
-}
+import type { TablesResponse } from './interfaces';
 
 const fieldClass =
   'h-11 w-full rounded-xl border border-field bg-white px-3 text-sm font-semibold text-espresso outline-none transition focus:border-primary focus:ring-4 focus:ring-primary/10';
@@ -90,7 +81,7 @@ export function TablesPage() {
     onSuccess: refreshTables,
   });
 
-  function submitTable(event: FormEvent) {
+  function submitTable(event: FormSubmitEvent) {
     event.preventDefault();
     if (tableName.trim() && Number(capacity) > 0) createTable.mutate();
   }

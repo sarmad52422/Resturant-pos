@@ -18,6 +18,22 @@ interface InventoryItemInput {
   usageUnitId: string;
 }
 
+interface PurchaseItemInput {
+  inventoryItemId: string;
+  quantity: number;
+  unitCost: number;
+  unitId: string;
+}
+
+interface PurchaseInput {
+  invoiceNumber?: string;
+  items: PurchaseItemInput[];
+  paidAmount: number;
+  paymentMethod: 'CASH' | 'CARD' | 'BANK_TRANSFER' | 'JAZZCASH_EASYPAISA' | 'ONLINE' | 'CUSTOMER_CREDIT';
+  purchaseDate: string;
+  supplierId: string;
+}
+
 @Injectable()
 export class InventoryService {
   constructor(private readonly prisma: PrismaService) {}
@@ -50,6 +66,23 @@ export class InventoryService {
     };
   }
 
+  listPurchases() {
+    return this.prisma.purchase.findMany({
+      include: {
+        supplier: true,
+        items: {
+          include: {
+            inventoryItem: true,
+            unit: true,
+          },
+          orderBy: { inventoryItem: { name: 'asc' } },
+        },
+      },
+      orderBy: { createdAt: 'desc' },
+      take: 80,
+    });
+  }
+
   createItem(input: InventoryItemInput) {
     return this.prisma.inventoryItem.create({
       data: this.toInventoryData(input) as Prisma.InventoryItemUncheckedCreateInput,
@@ -60,6 +93,108 @@ export class InventoryService {
     return this.prisma.inventoryItem.update({
       where: { id },
       data: this.toInventoryData(input) as Prisma.InventoryItemUncheckedUpdateInput,
+    });
+  }
+
+  async createPurchase(input: PurchaseInput) {
+    if (!input.items.length) throw new BadRequestException('Purchase must include at least one item');
+
+    return this.prisma.$transaction(async (tx) => {
+      const items = input.items.map((item) => ({
+        inventoryItemId: item.inventoryItemId,
+        quantity: new Prisma.Decimal(item.quantity),
+        unitCost: new Prisma.Decimal(item.unitCost),
+        unitId: item.unitId,
+      }));
+      const totalCost = items.reduce((total, item) => total.add(item.quantity.mul(item.unitCost)), new Prisma.Decimal(0));
+      const paidAmount = new Prisma.Decimal(input.paidAmount);
+      if (paidAmount.gt(totalCost)) throw new BadRequestException('Paid amount cannot exceed total purchase cost');
+
+      const remainingAmount = totalCost.sub(paidAmount);
+      const purchase = await tx.purchase.create({
+        data: {
+          supplierId: input.supplierId,
+          invoiceNumber: input.invoiceNumber || undefined,
+          purchaseDate: new Date(input.purchaseDate),
+          totalCost,
+          paidAmount,
+          remainingAmount,
+          paymentMethod: input.paymentMethod,
+          items: {
+            create: items.map((item) => ({
+              inventoryItemId: item.inventoryItemId,
+              quantity: item.quantity,
+              unitId: item.unitId,
+              unitCost: item.unitCost,
+              totalCost: item.quantity.mul(item.unitCost),
+            })),
+          },
+        },
+      });
+
+      for (const item of items) {
+        const inventoryItem = await tx.inventoryItem.findUnique({
+          where: { id: item.inventoryItemId },
+        });
+        if (!inventoryItem) throw new BadRequestException('Inventory item not found');
+
+        const stockQuantityIn = this.toStockQuantity(item.quantity, item.unitId, inventoryItem);
+        const currentStockValue = inventoryItem.currentStock.mul(inventoryItem.averageCost);
+        const receivedStockValue = item.quantity.mul(item.unitCost);
+        const newStock = inventoryItem.currentStock.add(stockQuantityIn);
+        const averageCost = newStock.equals(0)
+          ? item.unitCost
+          : currentStockValue.add(receivedStockValue).div(newStock);
+
+        await tx.stockMovement.create({
+          data: {
+            inventoryItemId: item.inventoryItemId,
+            quantityIn: item.quantity,
+            quantityOut: new Prisma.Decimal(0),
+            unitId: item.unitId,
+            reason: 'PURCHASE',
+            referenceType: 'Purchase',
+            referenceId: purchase.id,
+          },
+        });
+
+        await tx.inventoryItem.update({
+          where: { id: item.inventoryItemId },
+          data: {
+            averageCost,
+            currentStock: { increment: stockQuantityIn },
+            lastPurchaseCost: item.unitCost,
+            supplierId: input.supplierId,
+          },
+        });
+      }
+
+      const supplier = await tx.supplier.update({
+        where: { id: input.supplierId },
+        data: { currentPayable: { increment: remainingAmount } },
+      });
+
+      if (remainingAmount.gt(0)) {
+        await tx.supplierLedger.create({
+          data: {
+            supplierId: input.supplierId,
+            debit: new Prisma.Decimal(0),
+            credit: remainingAmount,
+            balance: supplier.currentPayable,
+            paymentMethod: input.paymentMethod,
+            reference: purchase.invoiceNumber ?? purchase.id,
+            notes: 'Purchase payable created',
+          },
+        });
+      }
+
+      return tx.purchase.findUniqueOrThrow({
+        where: { id: purchase.id },
+        include: {
+          supplier: true,
+          items: { include: { inventoryItem: true, unit: true } },
+        },
+      });
     });
   }
 
@@ -152,5 +287,21 @@ export class InventoryService {
       supplierId: input.supplierId,
       usageUnitId: input.usageUnitId,
     };
+  }
+
+  private toStockQuantity(
+    quantity: Prisma.Decimal,
+    unitId: string,
+    inventoryItem: {
+      conversionRate: Prisma.Decimal;
+      purchaseUnitId: string;
+      usageUnitId: string;
+    },
+  ) {
+    if (unitId === inventoryItem.purchaseUnitId) return quantity;
+    if (unitId === inventoryItem.usageUnitId && !inventoryItem.conversionRate.equals(0)) {
+      return quantity.div(inventoryItem.conversionRate);
+    }
+    return quantity;
   }
 }

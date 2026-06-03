@@ -11,15 +11,16 @@ import {
   Trash2,
   Utensils,
 } from 'lucide-react';
-import { FormEvent, useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { useFieldArray, useForm } from 'react-hook-form';
 import { Badge, Button, Card } from '@restaurantos/ui';
 import { ActionModal } from '../../components/action-modal';
 import { apiFetch } from '../../lib/api';
+import type { FormSubmitEvent } from '../../lib/events';
 import { useAuthStore } from '../../store/use-auth-store';
 import { InlineState, Metric } from './components';
 import { compactFieldClass, defaultRecipeForm, fieldClass, recipeSchema, type RecipeForm } from './recipe-form-model';
-import type { MenuCategory, MenuItem, MenuSummary, Recipe, RecipeBuilderSummary } from './types';
+import type { MenuCategory, MenuItem, MenuSummary, Recipe, RecipeBuilderSummary } from './interfaces';
 
 const money = new Intl.NumberFormat('en-PK', { maximumFractionDigits: 0, style: 'currency', currency: 'PKR' });
 type MenuActionModal = 'category' | 'item' | 'recipe' | null;
@@ -157,12 +158,12 @@ export function MenuPage() {
     onSuccess: refreshMenu,
   });
 
-  function submitCategory(event: FormEvent) {
+  function submitCategory(event: FormSubmitEvent) {
     event.preventDefault();
     if (categoryName.trim()) createCategory.mutate();
   }
 
-  function submitItem(event: FormEvent) {
+  function submitItem(event: FormSubmitEvent) {
     event.preventDefault();
     if (itemName.trim() && Number(itemPrice) >= 0 && selectedItemCategoryId) createItem.mutate();
   }

@@ -9,21 +9,13 @@ import {
   SlidersHorizontal,
   Store,
 } from 'lucide-react';
-import type { InputHTMLAttributes, ReactNode } from 'react';
 import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { Badge, Button, Card } from '@restaurantos/ui';
 import { apiFetch } from '../../lib/api';
 import { useAuthStore } from '../../store/use-auth-store';
-
-interface SettingRecord {
-  id: string;
-  key: string;
-  group: string;
-  value: unknown;
-  updatedAt: string;
-}
+import type { FieldProps, SettingRecord, ToggleProps } from './interfaces';
 
 const settingsSchema = z.object({
   businessName: z.string().min(2, 'Business name is required'),
@@ -288,13 +280,6 @@ export function SettingsPage() {
   );
 }
 
-interface FieldProps {
-  children: ReactNode;
-  className?: string;
-  error?: string;
-  label: string;
-}
-
 function Field({ children, className, error, label }: FieldProps) {
   return (
     <label className={className}>
@@ -303,10 +288,6 @@ function Field({ children, className, error, label }: FieldProps) {
       {error ? <span className="mt-1 block text-xs font-bold text-red-600">{error}</span> : null}
     </label>
   );
-}
-
-interface ToggleProps extends InputHTMLAttributes<HTMLInputElement> {
-  label: string;
 }
 
 function Toggle({ label, ...props }: ToggleProps) {

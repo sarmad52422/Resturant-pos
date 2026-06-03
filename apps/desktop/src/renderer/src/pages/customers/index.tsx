@@ -1,31 +1,13 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { AlertCircle, CreditCard, Loader2, Plus, UserRound } from 'lucide-react';
-import { FormEvent, useState } from 'react';
+import { useState } from 'react';
+import type { ReactNode } from 'react';
 import { Badge, Button, Card } from '@restaurantos/ui';
 import { ActionModal } from '../../components/action-modal';
 import { apiFetch } from '../../lib/api';
+import type { FormSubmitEvent } from '../../lib/events';
 import { useAuthStore } from '../../store/use-auth-store';
-
-interface Customer {
-  id: string;
-  creditLimit: string;
-  currentBalance: string;
-  customerType: string;
-  email?: string;
-  name: string;
-  phone: string;
-  totalOrders: number;
-  _count: { ledgers: number; orders: number };
-}
-
-interface CustomersResponse {
-  customers: Customer[];
-  metrics: {
-    creditCustomers: number;
-    receivableBalance: string;
-    totalCustomers: number;
-  };
-}
+import type { Customer, CustomersResponse } from './interfaces';
 
 const fieldClass =
   'h-11 w-full rounded-xl border border-field bg-white px-3 text-sm font-semibold text-espresso outline-none transition focus:border-primary focus:ring-4 focus:ring-primary/10';
@@ -65,7 +47,7 @@ export function CustomersPage() {
     },
   });
 
-  function submitCustomer(event: FormEvent) {
+  function submitCustomer(event: FormSubmitEvent) {
     event.preventDefault();
     if (name.trim() && phone.trim()) createCustomer.mutate();
   }
@@ -206,7 +188,7 @@ export function CustomersPage() {
   );
 }
 
-function Metric({ icon, label, value }: { icon: React.ReactNode; label: string; value: number | string }) {
+function Metric({ icon, label, value }: { icon: ReactNode; label: string; value: number | string }) {
   return (
     <Card className="flex items-center justify-between p-5">
       <div>

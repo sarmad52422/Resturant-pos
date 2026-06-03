@@ -1,5 +1,21 @@
 import { Body, Controller, Get, Param, Patch, Post, UseGuards } from '@nestjs/common';
-import { IsBoolean, IsNumber, IsOptional, IsString, Max, MaxLength, Min, MinLength } from 'class-validator';
+import { PaymentMethod } from '@prisma/client';
+import { Type } from 'class-transformer';
+import {
+  ArrayMinSize,
+  IsArray,
+  IsBoolean,
+  IsEnum,
+  IsISO8601,
+  IsNumber,
+  IsOptional,
+  IsString,
+  Max,
+  MaxLength,
+  Min,
+  MinLength,
+  ValidateNested,
+} from 'class-validator';
 import { RequirePermissions } from '../../common/decorators/permissions.decorator';
 import { JwtAuthGuard } from '../../common/guards/jwt-auth.guard';
 import { PermissionGuard } from '../../common/guards/permission.guard';
@@ -136,6 +152,51 @@ class UpdateInventoryItemDto {
   usageUnitId?: string;
 }
 
+class PurchaseItemDto {
+  @IsString()
+  inventoryItemId!: string;
+
+  @IsNumber()
+  @Min(0.0001)
+  @Max(999999)
+  quantity!: number;
+
+  @IsString()
+  unitId!: string;
+
+  @IsNumber()
+  @Min(0)
+  @Max(999999)
+  unitCost!: number;
+}
+
+class CreatePurchaseDto {
+  @IsArray()
+  @ArrayMinSize(1)
+  @ValidateNested({ each: true })
+  @Type(() => PurchaseItemDto)
+  items!: PurchaseItemDto[];
+
+  @IsOptional()
+  @IsString()
+  @MaxLength(60)
+  invoiceNumber?: string;
+
+  @IsNumber()
+  @Min(0)
+  @Max(999999999)
+  paidAmount!: number;
+
+  @IsEnum(PaymentMethod)
+  paymentMethod!: PaymentMethod;
+
+  @IsISO8601()
+  purchaseDate!: string;
+
+  @IsString()
+  supplierId!: string;
+}
+
 @Controller('inventory')
 @UseGuards(JwtAuthGuard, PermissionGuard)
 export class InventoryController {
@@ -144,6 +205,11 @@ export class InventoryController {
   @Get()
   list() {
     return this.inventoryService.list();
+  }
+
+  @Get('purchases')
+  purchases() {
+    return this.inventoryService.listPurchases();
   }
 
   @Post('items')
@@ -156,5 +222,11 @@ export class InventoryController {
   @RequirePermissions('inventory.manage')
   updateItem(@Param('id') id: string, @Body() dto: UpdateInventoryItemDto) {
     return this.inventoryService.updateItem(id, dto);
+  }
+
+  @Post('purchases')
+  @RequirePermissions('inventory.manage')
+  createPurchase(@Body() dto: CreatePurchaseDto) {
+    return this.inventoryService.createPurchase(dto);
   }
 }

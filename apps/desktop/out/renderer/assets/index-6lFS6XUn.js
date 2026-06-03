@@ -25848,6 +25848,7 @@ function DashboardPage() {
 }
 const fieldClass$3 = "h-11 w-full rounded-xl border border-field bg-white px-3 text-sm font-semibold text-espresso outline-none transition focus:border-primary focus:ring-4 focus:ring-primary/10";
 const money$1 = new Intl.NumberFormat("en-PK", { maximumFractionDigits: 0, style: "currency", currency: "PKR" });
+const today = (/* @__PURE__ */ new Date()).toISOString().slice(0, 10);
 function InventoryPage() {
   const queryClient2 = useQueryClient();
   const canManageInventory = useAuthStore((state) => state.hasPermission("inventory.manage"));
@@ -25860,15 +25861,32 @@ function InventoryPage() {
   const [usageUnitId, setUsageUnitId] = reactExports.useState("");
   const [supplierId, setSupplierId] = reactExports.useState("");
   const [createOpen, setCreateOpen] = reactExports.useState(false);
+  const [purchaseOpen, setPurchaseOpen] = reactExports.useState(false);
+  const [invoiceNumber, setInvoiceNumber] = reactExports.useState("");
+  const [paidAmount, setPaidAmount] = reactExports.useState("0");
+  const [paymentMethod, setPaymentMethod] = reactExports.useState("CASH");
+  const [purchaseDate, setPurchaseDate] = reactExports.useState(today);
+  const [purchaseSupplierId, setPurchaseSupplierId] = reactExports.useState("");
+  const [purchaseRows, setPurchaseRows] = reactExports.useState([]);
   const inventoryQuery = useQuery({
     queryKey: ["inventory"],
     queryFn: () => apiFetch("/inventory")
   });
+  const purchasesQuery = useQuery({
+    queryKey: ["inventory-purchases"],
+    queryFn: () => apiFetch("/inventory/purchases")
+  });
   const units = inventoryQuery.data?.units ?? [];
   const suppliers = inventoryQuery.data?.suppliers ?? [];
+  const inventoryItems = inventoryQuery.data?.items ?? [];
   const defaultUnitId = units.find((unit) => unit.symbol === "pc")?.id ?? units[0]?.id ?? "";
   const selectedPurchaseUnitId = purchaseUnitId || defaultUnitId;
   const selectedUsageUnitId = usageUnitId || selectedPurchaseUnitId;
+  const selectedPurchaseSupplierId = purchaseSupplierId || suppliers[0]?.id || "";
+  const purchaseTotal = purchaseRows.reduce(
+    (total, row) => total + Number(row.quantity || 0) * Number(row.unitCost || 0),
+    0
+  );
   const createItem = useMutation({
     mutationFn: () => apiFetch("/inventory/items", {
       method: "POST",
@@ -25898,6 +25916,35 @@ function InventoryPage() {
       void queryClient2.invalidateQueries({ queryKey: ["inventory"] });
     }
   });
+  const createPurchase = useMutation({
+    mutationFn: () => apiFetch("/inventory/purchases", {
+      method: "POST",
+      body: JSON.stringify({
+        supplierId: selectedPurchaseSupplierId,
+        invoiceNumber: invoiceNumber.trim() || void 0,
+        purchaseDate,
+        paidAmount: Number(paidAmount || 0),
+        paymentMethod,
+        items: purchaseRows.map((row) => ({
+          inventoryItemId: row.inventoryItemId,
+          quantity: Number(row.quantity || 0),
+          unitId: row.unitId,
+          unitCost: Number(row.unitCost || 0)
+        }))
+      })
+    }),
+    onSuccess: () => {
+      setInvoiceNumber("");
+      setPaidAmount("0");
+      setPaymentMethod("CASH");
+      setPurchaseDate(today);
+      setPurchaseSupplierId("");
+      setPurchaseRows(defaultPurchaseRows(inventoryItems));
+      setPurchaseOpen(false);
+      void queryClient2.invalidateQueries({ queryKey: ["inventory"] });
+      void queryClient2.invalidateQueries({ queryKey: ["inventory-purchases"] });
+    }
+  });
   const toggleItem = useMutation({
     mutationFn: (item) => apiFetch(`/inventory/items/${item.id}`, {
       method: "PATCH",
@@ -25908,6 +25955,38 @@ function InventoryPage() {
   function submitItem(event) {
     event.preventDefault();
     if (name.trim() && selectedPurchaseUnitId && selectedUsageUnitId) createItem.mutate();
+  }
+  function openPurchase() {
+    setPurchaseRows((rows) => rows.length ? rows : defaultPurchaseRows(inventoryItems));
+    setPurchaseOpen(true);
+  }
+  function appendPurchaseRow() {
+    setPurchaseRows((rows) => [...rows, defaultPurchaseRow(inventoryItems)]);
+  }
+  function updatePurchaseRow(id, patch) {
+    setPurchaseRows(
+      (rows) => rows.map((row) => {
+        if (row.id !== id) return row;
+        const next = { ...row, ...patch };
+        if (patch.inventoryItemId) {
+          const item = inventoryItems.find((entry) => entry.id === patch.inventoryItemId);
+          next.unitId = item?.purchaseUnitId ?? row.unitId;
+        }
+        return next;
+      })
+    );
+  }
+  function removePurchaseRow(id) {
+    setPurchaseRows((rows) => rows.filter((row) => row.id !== id));
+  }
+  function submitPurchase(event) {
+    event.preventDefault();
+    const validRows = purchaseRows.filter(
+      (row) => row.inventoryItemId && row.unitId && Number(row.quantity) > 0 && Number(row.unitCost) >= 0
+    );
+    if (selectedPurchaseSupplierId && validRows.length && Number(paidAmount || 0) <= purchaseTotal) {
+      createPurchase.mutate();
+    }
   }
   function unitLabel(id) {
     return units.find((unit) => unit.id === id)?.symbol ?? "";
@@ -25928,6 +26007,15 @@ function InventoryPage() {
             icon: /* @__PURE__ */ jsxRuntimeExports.jsx(Plus, { size: 17 }),
             onClick: () => setCreateOpen(true),
             children: "New stock item"
+          }
+        ),
+        /* @__PURE__ */ jsxRuntimeExports.jsx(
+          Button,
+          {
+            disabled: !canManageInventory || inventoryItems.length === 0 || suppliers.length === 0,
+            icon: /* @__PURE__ */ jsxRuntimeExports.jsx(ReceiptText, { size: 17 }),
+            onClick: openPurchase,
+            children: "Receive stock"
           }
         )
       ] })
@@ -26004,6 +26092,38 @@ function InventoryPage() {
         }) })
       ] }) })
     ] }) }),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs(Card, { className: "mt-5 overflow-hidden", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center justify-between border-b border-line px-6 py-5", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "text-xl font-black text-espresso", children: "Purchase history" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm font-semibold text-muted", children: "Recent receiving entries, paid amount, and supplier balance." })
+        ] }),
+        purchasesQuery.isLoading ? /* @__PURE__ */ jsxRuntimeExports.jsx(LoaderCircle, { className: "animate-spin text-primary", size: 20 }) : null
+      ] }),
+      purchasesQuery.isError ? /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "m-5 flex items-center gap-3 rounded-xl bg-red-50 px-4 py-3 text-sm font-bold text-red-700", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx(CircleAlert, { size: 17 }),
+        "Purchases could not load. Check the API session."
+      ] }) : null,
+      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "max-h-[360px] overflow-y-auto", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("table", { className: "w-full text-left text-sm", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("thead", { className: "sticky top-0 bg-sage text-xs font-black uppercase text-muted", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("tr", { children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx("th", { className: "px-6 py-3", children: "Invoice" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("th", { className: "px-4 py-3", children: "Supplier" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("th", { className: "px-4 py-3 text-right", children: "Items" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("th", { className: "px-4 py-3 text-right", children: "Paid" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("th", { className: "px-6 py-3 text-right", children: "Remaining" })
+        ] }) }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("tbody", { className: "divide-y divide-line", children: (purchasesQuery.data ?? []).map((purchase) => /* @__PURE__ */ jsxRuntimeExports.jsxs("tr", { children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsxs("td", { className: "px-6 py-4", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-black text-espresso", children: purchase.invoiceNumber || "No invoice" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mt-1 text-xs font-semibold text-muted", children: new Date(purchase.purchaseDate).toLocaleDateString() })
+          ] }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("td", { className: "px-4 py-4 font-bold text-label", children: purchase.supplier.name }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("td", { className: "px-4 py-4 text-right font-bold text-label", children: purchase.items.length }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("td", { className: "px-4 py-4 text-right font-black text-secondary", children: money$1.format(Number(purchase.paidAmount)) }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("td", { className: "px-6 py-4 text-right font-black text-espresso", children: money$1.format(Number(purchase.remainingAmount)) })
+        ] }, purchase.id)) })
+      ] }) })
+    ] }),
     /* @__PURE__ */ jsxRuntimeExports.jsx(
       ActionModal,
       {
@@ -26011,7 +26131,7 @@ function InventoryPage() {
         open: createOpen,
         title: "New stock item",
         onClose: () => setCreateOpen(false),
-        children: /* @__PURE__ */ jsxRuntimeExports.jsxs("form", { className: "mt-4 space-y-3", onSubmit: submitItem, children: [
+        children: /* @__PURE__ */ jsxRuntimeExports.jsxs("form", { className: "space-y-3", onSubmit: submitItem, children: [
           /* @__PURE__ */ jsxRuntimeExports.jsx(
             "input",
             {
@@ -26123,8 +26243,188 @@ function InventoryPage() {
           )
         ] })
       }
+    ),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(
+      ActionModal,
+      {
+        description: "Receive purchased stock, update average cost, and create supplier payable for any unpaid amount.",
+        open: purchaseOpen,
+        title: "Receive stock",
+        widthClass: "max-w-4xl",
+        onClose: () => setPurchaseOpen(false),
+        children: /* @__PURE__ */ jsxRuntimeExports.jsxs("form", { className: "space-y-4", onSubmit: submitPurchase, children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "grid grid-cols-4 gap-3", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx(
+              "select",
+              {
+                className: fieldClass$3,
+                disabled: !canManageInventory,
+                value: selectedPurchaseSupplierId,
+                onChange: (event) => setPurchaseSupplierId(event.target.value),
+                children: suppliers.map((supplier) => /* @__PURE__ */ jsxRuntimeExports.jsx("option", { value: supplier.id, children: supplier.name }, supplier.id))
+              }
+            ),
+            /* @__PURE__ */ jsxRuntimeExports.jsx(
+              "input",
+              {
+                className: fieldClass$3,
+                disabled: !canManageInventory,
+                placeholder: "Invoice",
+                value: invoiceNumber,
+                onChange: (event) => setInvoiceNumber(event.target.value)
+              }
+            ),
+            /* @__PURE__ */ jsxRuntimeExports.jsx(
+              "input",
+              {
+                className: fieldClass$3,
+                disabled: !canManageInventory,
+                type: "date",
+                value: purchaseDate,
+                onChange: (event) => setPurchaseDate(event.target.value)
+              }
+            ),
+            /* @__PURE__ */ jsxRuntimeExports.jsxs(
+              "select",
+              {
+                className: fieldClass$3,
+                disabled: !canManageInventory,
+                value: paymentMethod,
+                onChange: (event) => setPaymentMethod(event.target.value),
+                children: [
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("option", { value: "CASH", children: "Cash" }),
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("option", { value: "CARD", children: "Card" }),
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("option", { value: "BANK_TRANSFER", children: "Bank transfer" }),
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("option", { value: "JAZZCASH_EASYPAISA", children: "Wallet" }),
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("option", { value: "ONLINE", children: "Online" })
+                ]
+              }
+            )
+          ] }),
+          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "space-y-3", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center justify-between", children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs font-black uppercase tracking-[0.16em] text-muted", children: "Received items" }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx(
+                Button,
+                {
+                  className: "h-9 px-3",
+                  disabled: !canManageInventory || inventoryItems.length === 0,
+                  icon: /* @__PURE__ */ jsxRuntimeExports.jsx(Plus, { size: 15 }),
+                  type: "button",
+                  variant: "secondary",
+                  onClick: appendPurchaseRow,
+                  children: "Row"
+                }
+              )
+            ] }),
+            purchaseRows.map((row) => /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "grid grid-cols-[1fr_100px_90px_110px_40px] gap-2", children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsx(
+                "select",
+                {
+                  className: fieldClass$3,
+                  disabled: !canManageInventory,
+                  value: row.inventoryItemId,
+                  onChange: (event) => updatePurchaseRow(row.id, { inventoryItemId: event.target.value }),
+                  children: inventoryItems.map((item) => /* @__PURE__ */ jsxRuntimeExports.jsx("option", { value: item.id, children: item.name }, item.id))
+                }
+              ),
+              /* @__PURE__ */ jsxRuntimeExports.jsx(
+                "input",
+                {
+                  className: fieldClass$3,
+                  disabled: !canManageInventory,
+                  min: "0.0001",
+                  step: "0.0001",
+                  type: "number",
+                  value: row.quantity,
+                  onChange: (event) => updatePurchaseRow(row.id, { quantity: event.target.value })
+                }
+              ),
+              /* @__PURE__ */ jsxRuntimeExports.jsx(
+                "select",
+                {
+                  className: fieldClass$3,
+                  disabled: !canManageInventory,
+                  value: row.unitId,
+                  onChange: (event) => updatePurchaseRow(row.id, { unitId: event.target.value }),
+                  children: units.map((unit) => /* @__PURE__ */ jsxRuntimeExports.jsx("option", { value: unit.id, children: unit.symbol }, unit.id))
+                }
+              ),
+              /* @__PURE__ */ jsxRuntimeExports.jsx(
+                "input",
+                {
+                  className: fieldClass$3,
+                  disabled: !canManageInventory,
+                  min: "0",
+                  step: "0.01",
+                  type: "number",
+                  value: row.unitCost,
+                  onChange: (event) => updatePurchaseRow(row.id, { unitCost: event.target.value })
+                }
+              ),
+              /* @__PURE__ */ jsxRuntimeExports.jsx(
+                Button,
+                {
+                  className: "h-11 w-10 px-0",
+                  disabled: !canManageInventory || purchaseRows.length === 1,
+                  icon: /* @__PURE__ */ jsxRuntimeExports.jsx(Trash2, { size: 15 }),
+                  type: "button",
+                  variant: "ghost",
+                  onClick: () => removePurchaseRow(row.id)
+                }
+              )
+            ] }, row.id))
+          ] }),
+          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "grid grid-cols-[1fr_180px_180px] gap-3 rounded-2xl bg-sage p-4", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs font-black uppercase text-muted", children: "Purchase total" }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mt-1 text-2xl font-black text-espresso", children: money$1.format(purchaseTotal) })
+            ] }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx(
+              "input",
+              {
+                className: fieldClass$3,
+                disabled: !canManageInventory,
+                min: "0",
+                placeholder: "Paid",
+                type: "number",
+                value: paidAmount,
+                onChange: (event) => setPaidAmount(event.target.value)
+              }
+            ),
+            /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs font-black uppercase text-muted", children: "Remaining" }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mt-2 text-xl font-black text-secondary", children: money$1.format(Math.max(0, purchaseTotal - Number(paidAmount || 0))) })
+            ] })
+          ] }),
+          createPurchase.isError ? /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "rounded-xl bg-red-50 px-4 py-3 text-sm font-bold text-red-700", children: "Purchase save failed. Check supplier, rows, and paid amount." }) : null,
+          /* @__PURE__ */ jsxRuntimeExports.jsx(
+            Button,
+            {
+              className: "w-full",
+              disabled: !canManageInventory || !selectedPurchaseSupplierId || purchaseRows.length === 0 || purchaseTotal <= 0 || Number(paidAmount || 0) > purchaseTotal || createPurchase.isPending,
+              icon: createPurchase.isPending ? /* @__PURE__ */ jsxRuntimeExports.jsx(LoaderCircle, { className: "animate-spin", size: 17 }) : /* @__PURE__ */ jsxRuntimeExports.jsx(ReceiptText, { size: 17 }),
+              type: "submit",
+              children: "Receive purchase"
+            }
+          )
+        ] })
+      }
     )
   ] });
+}
+function defaultPurchaseRows(items) {
+  return [defaultPurchaseRow(items)];
+}
+function defaultPurchaseRow(items) {
+  const item = items[0];
+  return {
+    id: globalThis.crypto?.randomUUID?.() ?? String(Date.now()),
+    inventoryItemId: item?.id ?? "",
+    quantity: "1",
+    unitCost: item?.averageCost ?? "0",
+    unitId: item?.purchaseUnitId ?? ""
+  };
 }
 function Metric$2({ icon, label, value }) {
   return /* @__PURE__ */ jsxRuntimeExports.jsxs(Card, { className: "flex items-center justify-between p-5", children: [
