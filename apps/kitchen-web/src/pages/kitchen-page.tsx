@@ -45,9 +45,13 @@ export function KitchenPage() {
     kitchenSocket.on('order.sent_to_kitchen', (ticket: KitchenTicketItemView) => {
       setTickets((current) => [ticket, ...current]);
     });
+    kitchenSocket.on('order.item_cancelled', (ticket: { id: string }) => {
+      setTickets((current) => current.filter((item) => item.id !== ticket.id));
+    });
 
     return () => {
       kitchenSocket.off('order.sent_to_kitchen');
+      kitchenSocket.off('order.item_cancelled');
       kitchenSocket.disconnect();
     };
   }, [station]);

@@ -1,10 +1,10 @@
-import { Badge, Button } from '@restaurantos/ui';
-import { Check, Loader2, Printer, WalletCards } from 'lucide-react';
+import { Badge, Button, Card } from '@restaurantos/ui';
+import { Check, Loader2, Minus, Plus, Printer, Send, Trash2, WalletCards, XCircle } from 'lucide-react';
 import { ActionModal } from '../../components/action-modal';
 import { FormField } from '../../components/form-field';
 import type { FormSubmitEvent } from '../../lib/events';
 import { money } from './formatting';
-import type { PaymentMethod, PosMenuItem, PrinterInfo, PrintMode } from './interfaces';
+import type { PaymentMethod, PosMenuItem, PosOrder, PrinterInfo, PrintMode } from './interfaces';
 
 const fieldClass =
   'h-11 w-full rounded-xl border border-field bg-white px-3 text-sm font-semibold text-espresso outline-none transition focus:border-primary focus:ring-4 focus:ring-primary/10';
@@ -22,6 +22,27 @@ interface PaymentModalProps {
   pending: boolean;
   reference: string;
   total: number;
+}
+
+interface TicketLine {
+  id: string;
+  name: string;
+  price: number;
+  quantity: number;
+}
+
+interface PosTicketPanelProps {
+  cart: TicketLine[];
+  kitchenPending: boolean;
+  lastOrder?: PosOrder;
+  paymentPending: boolean;
+  total: number;
+  onChangeQuantity: (id: string, delta: number) => void;
+  onCorrectItem: (line: TicketLine) => void;
+  onOpenPayment: () => void;
+  onOpenPrint: () => void;
+  onSendToKitchen: () => void;
+  onVoidOrder: () => void;
 }
 
 interface QuickAddConfirmModalProps {
@@ -63,6 +84,152 @@ export function QuickAddConfirmModal({
           </Button>
         </div>
       ) : null}
+    </ActionModal>
+  );
+}
+
+export function PosTicketPanel({
+  cart,
+  kitchenPending,
+  lastOrder,
+  paymentPending,
+  total,
+  onChangeQuantity,
+  onCorrectItem,
+  onOpenPayment,
+  onOpenPrint,
+  onSendToKitchen,
+  onVoidOrder,
+}: PosTicketPanelProps) {
+  const correctionDisabled = lastOrder?.status === 'COMPLETED' || lastOrder?.status === 'CANCELLED' || lastOrder?.status === 'VOIDED';
+
+  return (
+    <aside className="flex min-h-0 flex-col rounded-[28px] bg-white px-5 py-5 shadow-[0_28px_70px_rgb(var(--ro-secondary-rgb)/0.11)]">
+      <div className="mb-4 flex items-center justify-between">
+        <div>
+          <p className="text-sm font-black uppercase tracking-[0.24em] text-subtle">Ticket</p>
+          <h2 className="mt-1 text-2xl font-black">{lastOrder ? `Order #${lastOrder.orderNumber}` : 'Order #Draft'}</h2>
+        </div>
+        <Badge tone={lastOrder?.status === 'COMPLETED' ? 'green' : 'orange'}>
+          {lastOrder?.status === 'COMPLETED' ? 'Paid' : 'Open'}
+        </Badge>
+      </div>
+
+      <div className="flex-1 space-y-3 overflow-y-auto pr-1">
+        {cart.length === 0 ? (
+          <Card className="flex h-44 items-center justify-center bg-white p-6 text-center text-sm font-semibold text-muted shadow-[inset_0_0_0_1px_rgb(var(--ro-secondary-rgb)/0.08)]">
+            Add menu items to start an order.
+          </Card>
+        ) : (
+          cart.map((line) => (
+            <Card key={line.id} className="p-4">
+              <div className="flex items-start justify-between gap-3">
+                <div>
+                  <h3 className="font-black">{line.name}</h3>
+                  <p className="text-sm font-semibold text-muted">{money.format(line.price)} each</p>
+                </div>
+                <button
+                  className="flex h-9 w-9 items-center justify-center rounded-xl text-subtle hover:bg-red-50 hover:text-red-600"
+                  onClick={() => onCorrectItem(line)}
+                >
+                  <Trash2 size={18} />
+                </button>
+              </div>
+              <div className="mt-4 flex items-center justify-between">
+                <div className="flex items-center rounded-xl bg-sage">
+                  <button className="flex h-9 w-9 items-center justify-center text-label" onClick={() => onChangeQuantity(line.id, -1)}>
+                    <Minus size={16} />
+                  </button>
+                  <span className="w-10 text-center font-black">{line.quantity}</span>
+                  <button className="flex h-9 w-9 items-center justify-center text-primary" onClick={() => onChangeQuantity(line.id, 1)}>
+                    <Plus size={16} />
+                  </button>
+                </div>
+                <strong className="text-lg">{money.format(line.price * line.quantity)}</strong>
+              </div>
+            </Card>
+          ))
+        )}
+      </div>
+
+      <div className="mt-4 rounded-2xl bg-secondary p-4 text-white">
+        <div className="flex justify-between text-sm font-bold text-deepSoft">
+          <span>Subtotal</span>
+          <span>{money.format(total)}</span>
+        </div>
+        <div className="mt-2 flex justify-between text-sm font-bold text-deepSoft">
+          <span>Tax / service</span>
+          <span>{money.format(0)}</span>
+        </div>
+        <div className="mt-4 flex justify-between border-t border-divider pt-4 text-2xl font-black">
+          <span>Total</span>
+          <span className="text-white">{money.format(total)}</span>
+        </div>
+      </div>
+
+      {lastOrder && !correctionDisabled ? (
+        <Button className="mt-3 w-full" icon={<XCircle size={17} />} type="button" variant="secondary" onClick={onVoidOrder}>
+          Void order
+        </Button>
+      ) : null}
+
+      <div className="mt-4 grid grid-cols-2 gap-3">
+        <Button disabled={cart.length === 0 && !lastOrder} icon={<Printer size={18} />} variant="secondary" onClick={onOpenPrint}>
+          Print
+        </Button>
+        <Button disabled={cart.length === 0 || kitchenPending} icon={kitchenPending ? <Loader2 className="animate-spin" size={18} /> : <Send size={18} />} variant="secondary" onClick={onSendToKitchen}>
+          Kitchen
+        </Button>
+        <Button className="col-span-2 h-14 text-base" disabled={cart.length === 0 || paymentPending} icon={<WalletCards size={20} />} onClick={onOpenPayment}>
+          Payment F7
+        </Button>
+      </div>
+    </aside>
+  );
+}
+
+interface CorrectionModalProps {
+  error: boolean;
+  open: boolean;
+  pending: boolean;
+  reason: string;
+  targetLabel: string;
+  title: string;
+  onClose: () => void;
+  onReasonChange: (value: string) => void;
+  onSubmit: (event: FormSubmitEvent) => void;
+}
+
+export function CorrectionModal({
+  error,
+  open,
+  pending,
+  reason,
+  targetLabel,
+  title,
+  onClose,
+  onReasonChange,
+  onSubmit,
+}: CorrectionModalProps) {
+  return (
+    <ActionModal description="A reason is saved in the audit log." open={open} title={title} widthClass="max-w-md" onClose={onClose}>
+      <form className="space-y-4" onSubmit={onSubmit}>
+        <div className="rounded-2xl bg-sage p-4">
+          <p className="text-xs font-black uppercase tracking-[0.14em] text-muted">Correction target</p>
+          <p className="mt-2 text-lg font-black text-espresso">{targetLabel}</p>
+        </div>
+        <FormField label="Reason">
+          <textarea
+            className="min-h-24 w-full resize-none rounded-xl border border-field bg-white px-3 py-3 text-sm font-semibold text-espresso outline-none transition focus:border-primary focus:ring-4 focus:ring-primary/10"
+            value={reason}
+            onChange={(event) => onReasonChange(event.target.value)}
+          />
+        </FormField>
+        {error ? <div className="rounded-xl bg-red-50 px-4 py-3 text-sm font-bold text-red-700">Correction failed. Check permission and order status.</div> : null}
+        <Button className="w-full" disabled={reason.trim().length < 3 || pending} icon={pending ? <Loader2 className="animate-spin" size={17} /> : <XCircle size={17} />} type="submit">
+          Save correction
+        </Button>
+      </form>
     </ActionModal>
   );
 }

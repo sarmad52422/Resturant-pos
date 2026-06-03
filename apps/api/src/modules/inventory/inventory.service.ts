@@ -381,6 +381,78 @@ export class InventoryService {
     }
   }
 
+  async restoreSaleDeduction(
+    tx: Prisma.TransactionClient,
+    orderItemId: string,
+    createdByUserId?: string,
+  ) {
+    const orderItem = await tx.orderItem.findUnique({
+      where: { id: orderItemId },
+      include: {
+        menuItem: {
+          include: {
+            recipes: {
+              include: { ingredients: { include: { inventoryItem: true } } },
+            },
+          },
+        },
+        variation: {
+          include: {
+            recipes: {
+              include: { ingredients: { include: { inventoryItem: true } } },
+            },
+          },
+        },
+      },
+    });
+
+    if (!orderItem) throw new BadRequestException('Order item not found');
+
+    const existingRestore = await tx.stockMovement.count({
+      where: {
+        reason: 'ORDER_CANCELLATION_RESTORE',
+        referenceType: 'OrderItem',
+        referenceId: orderItem.id,
+      },
+    });
+    if (existingRestore > 0) return;
+
+    const existingDeduction = await tx.stockMovement.count({
+      where: {
+        reason: 'SALE_DEDUCTION',
+        referenceType: 'OrderItem',
+        referenceId: orderItem.id,
+      },
+    });
+    if (existingDeduction === 0) return;
+
+    const recipe = orderItem.variation?.recipes[0] ?? orderItem.menuItem.recipes[0];
+    if (!recipe) return;
+
+    for (const ingredient of recipe.ingredients) {
+      const quantityIn = ingredient.quantity.mul(orderItem.quantity);
+      const stockQuantityIn = this.toStockQuantity(quantityIn, ingredient.unitId, ingredient.inventoryItem);
+
+      await tx.stockMovement.create({
+        data: {
+          inventoryItemId: ingredient.inventoryItemId,
+          quantityIn,
+          quantityOut: new Prisma.Decimal(0),
+          unitId: ingredient.unitId,
+          reason: 'ORDER_CANCELLATION_RESTORE',
+          referenceType: 'OrderItem',
+          referenceId: orderItem.id,
+          createdByUserId,
+        },
+      });
+
+      await tx.inventoryItem.update({
+        where: { id: ingredient.inventoryItemId },
+        data: { currentStock: { increment: stockQuantityIn } },
+      });
+    }
+  }
+
   private toInventoryData(
     input: Partial<InventoryItemInput>,
   ): Prisma.InventoryItemUncheckedCreateInput | Prisma.InventoryItemUncheckedUpdateInput {

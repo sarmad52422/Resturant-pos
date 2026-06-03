@@ -49,4 +49,9 @@ export class KitchenGateway implements OnGatewayConnection {
     this.server.to('station:all').emit('order.sent_to_kitchen', ticket);
     this.server.to(`station:${ticket.stationSlug}`).emit('order.sent_to_kitchen', ticket);
   }
+
+  emitOrderItemCancelled(body: { id: string; orderNumber: string; stationSlug?: string }) {
+    this.server.to('station:all').emit('order.item_cancelled', body);
+    if (body.stationSlug) this.server.to(`station:${body.stationSlug}`).emit('order.item_cancelled', body);
+  }
 }

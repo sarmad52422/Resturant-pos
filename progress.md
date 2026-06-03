@@ -778,3 +778,100 @@ Tests:
 - `npm run typecheck --workspace @restaurantos/desktop` passed.
 - `npm run build --workspaces` passed.
 - `npm audit --audit-level=high` passed with 0 vulnerabilities.
+
+## Phase 15 - Order Correction and Void Flow
+
+Status: Completed
+
+Completed:
+- Added `PATCH /orders/:id/void` for cancelling or voiding unpaid orders with a required reason.
+- Added `PATCH /orders/:id/items/:itemId/void` for voiding one unpaid order item with a required reason.
+- Added audit logs for order and item correction actions.
+- Added recipe stock restore movements for voided sent-to-kitchen items using `ORDER_CANCELLATION_RESTORE`.
+- Updated kitchen ticket/item rows to `CANCELLED` when an order or item is voided.
+- Added a kitchen websocket cancellation event and removed cancelled items from the kitchen screen.
+- Added POS correction popup for created orders/items with reason capture.
+- Kept local cart mistakes simple: before an order exists, the trash button removes the cart line immediately.
+- Added a Void order button for unpaid active orders.
+- Documented correction endpoints and cashier tips.
+
+Files changed:
+- `apps/api/src/modules/inventory/inventory.service.ts`
+- `apps/api/src/modules/kitchen/kitchen.gateway.ts`
+- `apps/api/src/modules/orders/orders.controller.ts`
+- `apps/api/src/modules/orders/orders.service.ts`
+- `apps/desktop/src/renderer/src/pages/help/index.tsx`
+- `apps/desktop/src/renderer/src/pages/pos/components.tsx`
+- `apps/desktop/src/renderer/src/pages/pos/index.tsx`
+- `apps/desktop/src/renderer/src/pages/pos/interfaces.ts`
+- `apps/kitchen-web/src/pages/kitchen-page.tsx`
+- `README.md`
+- `progress.md`
+
+Database changes:
+- No schema migration required; existing order statuses, item statuses, stock movement reasons, and audit logs support this phase.
+
+Tests:
+- `npm run typecheck --workspace @restaurantos/api` passed.
+- `npm run typecheck --workspace @restaurantos/desktop` passed.
+- `npm run typecheck --workspace @restaurantos/kitchen-web` passed.
+- `npm run build --workspaces` passed.
+- `npm audit --audit-level=high` passed with 0 vulnerabilities.
+
+Notes:
+- Paid/completed orders are intentionally blocked from this flow. They need a separate refund flow.
+
+## Planned Next Phases
+
+Status: Planned
+
+Recommended sequence:
+
+### Phase 16 - Orders History and Order Lookup
+
+Goal:
+- Make created orders visible and searchable after they leave the active POS ticket.
+
+Scope:
+- Add a desktop Orders section in the sidebar.
+- Show today's orders first.
+- Filter by status: draft, sent to kitchen, payment pending, completed, cancelled, and voided.
+- Search by order number.
+- Open order detail with items, payment state, table/customer/delivery context, and correction status.
+- Reprint bill or receipt from order detail.
+- Use the Phase 15 correction endpoints from order detail for unpaid orders/items.
+- Keep paid/completed order corrections blocked until refund flow exists.
+
+Reason:
+- Phase 15 added correction APIs and POS correction UI, but cashiers still need a proper place to find already-created orders later.
+
+### Phase 17 - Dine-In Table Selection in POS
+
+Goal:
+- Make dine-in orders table-aware before send/payment.
+
+Scope:
+- When `DINE_IN` is selected, require table selection before kitchen send or payment.
+- Show free tables in a fast picker from the POS.
+- Link selected table to the order.
+- Show selected table on the POS ticket, receipt, order detail, and kitchen ticket.
+- Update table status through the order lifecycle.
+- Allow manager override later if a dine-in order truly has no table.
+
+Reason:
+- Dine-in payment without a table makes floor operations and later corrections hard to track.
+
+### Phase 18 - Delivery Assignment
+
+Goal:
+- Make delivery orders rider-aware without slowing takeaway or dine-in orders.
+
+Scope:
+- When `DELIVERY` is selected, show an optional delivery rider dropdown.
+- Display the rider's saved phone number after selection.
+- Allow cashier to override delivery phone/address for that order.
+- Store delivery context on the order for future dispatch and settlement workflows.
+- Keep `TAKEAWAY` simple: no table and no rider required.
+
+Reason:
+- Delivery needs separate rider/contact context, while takeaway should remain a quick bill-and-print flow.

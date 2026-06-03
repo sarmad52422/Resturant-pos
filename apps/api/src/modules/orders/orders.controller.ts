@@ -60,6 +60,11 @@ class PaymentDto {
   reference?: string;
 }
 
+class VoidOrderDto {
+  @IsString()
+  reason!: string;
+}
+
 @Controller('orders')
 @UseGuards(JwtAuthGuard, PermissionGuard)
 export class OrdersController {
@@ -86,5 +91,22 @@ export class OrdersController {
   @RequirePermissions('order.create')
   pay(@Param('id') id: string, @Body() dto: PaymentDto) {
     return this.ordersService.recordPayment(id, dto);
+  }
+
+  @Patch(':id/void')
+  @RequirePermissions('order.void')
+  void(@Param('id') id: string, @Body() dto: VoidOrderDto, @CurrentUser() user: RequestUser) {
+    return this.ordersService.voidOrder(id, dto, user.id);
+  }
+
+  @Patch(':id/items/:itemId/void')
+  @RequirePermissions('order.void')
+  voidItem(
+    @Param('id') id: string,
+    @Param('itemId') itemId: string,
+    @Body() dto: VoidOrderDto,
+    @CurrentUser() user: RequestUser,
+  ) {
+    return this.ordersService.voidOrderItem(id, itemId, dto, user.id);
   }
 }

@@ -1,28 +1,21 @@
 import { useMutation, useQuery } from '@tanstack/react-query';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Badge, Button, Card } from '@restaurantos/ui';
-import {
-  AlertCircle,
-  Loader2,
-  Minus,
-  Plus,
-  Printer,
-  Search,
-  Send,
-  Sparkles,
-  Trash2,
-  WalletCards,
-} from 'lucide-react';
+import { Badge, Card } from '@restaurantos/ui';
+import { AlertCircle, Loader2, Plus, Search, Sparkles } from 'lucide-react';
 import { apiFetch } from '../../lib/api';
 import type { FormSubmitEvent } from '../../lib/events';
 import { usePosStore } from '../../store/use-pos-store';
-import { PaymentModal, PrintReceiptModal, QuickAddConfirmModal } from './components';
+import { CorrectionModal, PaymentModal, PosTicketPanel, PrintReceiptModal, QuickAddConfirmModal } from './components';
 import { money } from './formatting';
 import type { PaymentMethod, PosCatalogResponse, PosMenuItem, PosOrder, PrinterInfo, PrintMode, ReceiptLine, SettingRecord } from './interfaces';
 import { buildReceiptHtml, buildReceiptText } from './receipt';
 import { readPrintMode, readSetting } from './settings';
 import { usePosShortcuts } from './shortcuts';
+
+type CorrectionTarget =
+  | { type: 'order'; label: string }
+  | { type: 'item'; cartLineId: string; label: string };
 
 export function PosPage() {
   const navigate = useNavigate();
@@ -45,6 +38,8 @@ export function PosPage() {
   const [lastOrder, setLastOrder] = useState<PosOrder | undefined>();
   const [lastReceiptLines, setLastReceiptLines] = useState<ReceiptLine[]>([]);
   const [quickAddIndex, setQuickAddIndex] = useState<number | undefined>();
+  const [correctionTarget, setCorrectionTarget] = useState<CorrectionTarget | undefined>();
+  const [correctionReason, setCorrectionReason] = useState('');
 
   const catalogQuery = useQuery({
     queryKey: ['pos-catalog'],
@@ -74,8 +69,7 @@ export function PosPage() {
   const filteredItems = menuItems.filter((item) => {
     const matchesCategory = selectedCategoryId === 'all' || item.categoryId === selectedCategoryId;
     const search = searchText.trim().toLowerCase();
-    const matchesSearch =
-      !search ||
+    const matchesSearch = !search ||
       item.name.toLowerCase().includes(search) ||
       item.category.name.toLowerCase().includes(search) ||
       item.kitchenStation?.name.toLowerCase().includes(search);
@@ -182,10 +176,41 @@ export function PosPage() {
       ),
   });
 
+  const voidOrder = useMutation({
+    mutationFn: () =>
+      apiFetch<PosOrder>(`/orders/${lastOrder?.id}/void`, {
+        method: 'PATCH',
+        body: JSON.stringify({ reason: correctionReason.trim() }),
+      }),
+    onSuccess: (order) => {
+      setLastOrder(order);
+      setLastReceiptLines([]);
+      setCorrectionTarget(undefined);
+      setCorrectionReason('');
+      clear();
+    },
+  });
+
+  const voidOrderItem = useMutation({
+    mutationFn: ({ itemId }: { itemId: string }) =>
+      apiFetch<PosOrder>(`/orders/${lastOrder?.id}/items/${itemId}/void`, {
+        method: 'PATCH',
+        body: JSON.stringify({ reason: correctionReason.trim() }),
+      }),
+    onSuccess: (order) => {
+      const cartLineId = correctionTarget?.type === 'item' ? correctionTarget.cartLineId : undefined;
+      setLastOrder(order);
+      if (cartLineId) {
+        removeLine(cartLineId);
+        setLastReceiptLines((lines) => lines.filter((line) => line.id !== cartLineId));
+      }
+      setCorrectionTarget(undefined);
+      setCorrectionReason('');
+    },
+  });
+
   const canOpenPrint = cart.length > 0 || Boolean(lastOrder);
-  const hasPrinterTarget = printMode === 'os' ||
-    (printMode === 'network' && Boolean(printerHost.trim())) ||
-    (printMode === 'device' && Boolean(printerDevicePath.trim()));
+  const hasPrinterTarget = printMode === 'os' || (printMode === 'network' && Boolean(printerHost.trim())) || (printMode === 'device' && Boolean(printerDevicePath.trim()));
   const canPrintReceipt = canOpenPrint && hasPrinterTarget && !printReceipt.isPending;
   const canOpenPayment = cart.length > 0 && !payOrder.isPending;
   const canSendToKitchen = cart.length > 0 && !sendToKitchen.isPending;
@@ -211,6 +236,32 @@ export function PosPage() {
   function openPayment() {
     setPaymentAmount(String(total));
     setPaymentOpen(true);
+  }
+
+  function openItemCorrection(line: ReceiptLine) {
+    if (!lastOrder) {
+      removeLine(line.id);
+      return;
+    }
+    setCorrectionReason('');
+    setCorrectionTarget({ type: 'item', cartLineId: line.id, label: line.name });
+  }
+
+  function submitCorrection(event: FormSubmitEvent) {
+    event.preventDefault();
+    if (!correctionTarget || correctionReason.trim().length < 3) return;
+    if (correctionTarget.type === 'order') {
+      voidOrder.mutate();
+      return;
+    }
+
+    const orderItem = lastOrder?.items?.find((item) => item.menuItemId === correctionTarget.cartLineId && item.status !== 'CANCELLED');
+    if (!orderItem) {
+      removeLine(correctionTarget.cartLineId);
+      setCorrectionTarget(undefined);
+      return;
+    }
+    voidOrderItem.mutate({ itemId: orderItem.id });
   }
 
   const printReceiptNow = useCallback(() => {
@@ -368,81 +419,19 @@ export function PosPage() {
         </div>
       </section>
 
-      <aside className="flex min-h-0 flex-col rounded-[28px] bg-white px-5 py-5 shadow-[0_28px_70px_rgb(var(--ro-secondary-rgb)/0.11)]">
-        <div className="mb-4 flex items-center justify-between">
-          <div>
-            <p className="text-sm font-black uppercase tracking-[0.24em] text-subtle">Ticket</p>
-            <h2 className="mt-1 text-2xl font-black">{lastOrder ? `Order #${lastOrder.orderNumber}` : 'Order #Draft'}</h2>
-          </div>
-          <Badge tone={lastOrder?.status === 'COMPLETED' ? 'green' : 'orange'}>
-            {lastOrder?.status === 'COMPLETED' ? 'Paid' : 'Open'}
-          </Badge>
-        </div>
-
-        <div className="flex-1 space-y-3 overflow-y-auto pr-1">
-          {cart.length === 0 ? (
-            <Card className="flex h-44 items-center justify-center bg-white p-6 text-center text-sm font-semibold text-muted shadow-[inset_0_0_0_1px_rgb(var(--ro-secondary-rgb)/0.08)]">
-              Add menu items to start an order.
-            </Card>
-          ) : (
-            cart.map((line) => (
-              <Card key={line.id} className="p-4">
-                <div className="flex items-start justify-between gap-3">
-                  <div>
-                    <h3 className="font-black">{line.name}</h3>
-                    <p className="text-sm font-semibold text-muted">{money.format(line.price)} each</p>
-                  </div>
-                  <button
-                    className="flex h-9 w-9 items-center justify-center rounded-xl text-subtle hover:bg-red-50 hover:text-red-600"
-                    onClick={() => removeLine(line.id)}
-                  >
-                    <Trash2 size={18} />
-                  </button>
-                </div>
-                <div className="mt-4 flex items-center justify-between">
-                  <div className="flex items-center rounded-xl bg-sage">
-                    <button className="flex h-9 w-9 items-center justify-center text-label" onClick={() => changeQuantity(line.id, -1)}>
-                      <Minus size={16} />
-                    </button>
-                    <span className="w-10 text-center font-black">{line.quantity}</span>
-                    <button className="flex h-9 w-9 items-center justify-center text-primary" onClick={() => changeQuantity(line.id, 1)}>
-                      <Plus size={16} />
-                    </button>
-                  </div>
-                  <strong className="text-lg">{money.format(line.price * line.quantity)}</strong>
-                </div>
-              </Card>
-            ))
-          )}
-        </div>
-
-        <div className="mt-4 rounded-2xl bg-secondary p-4 text-white">
-          <div className="flex justify-between text-sm font-bold text-deepSoft">
-            <span>Subtotal</span>
-            <span>{money.format(total)}</span>
-          </div>
-          <div className="mt-2 flex justify-between text-sm font-bold text-deepSoft">
-            <span>Tax / service</span>
-            <span>{money.format(0)}</span>
-          </div>
-          <div className="mt-4 flex justify-between border-t border-divider pt-4 text-2xl font-black">
-            <span>Total</span>
-            <span className="text-white">{money.format(total)}</span>
-          </div>
-        </div>
-
-        <div className="mt-4 grid grid-cols-2 gap-3">
-          <Button disabled={cart.length === 0 && !lastOrder} icon={<Printer size={18} />} variant="secondary" onClick={() => setPrintOpen(true)}>
-            Print
-          </Button>
-          <Button disabled={cart.length === 0 || sendToKitchen.isPending} icon={sendToKitchen.isPending ? <Loader2 className="animate-spin" size={18} /> : <Send size={18} />} variant="secondary" onClick={() => sendToKitchen.mutate()}>
-            Kitchen
-          </Button>
-          <Button className="col-span-2 h-14 text-base" disabled={cart.length === 0 || payOrder.isPending} icon={<WalletCards size={20} />} onClick={openPayment}>
-            Payment F7
-          </Button>
-        </div>
-      </aside>
+      <PosTicketPanel
+        cart={cart}
+        kitchenPending={sendToKitchen.isPending}
+        lastOrder={lastOrder}
+        paymentPending={payOrder.isPending}
+        total={total}
+        onChangeQuantity={changeQuantity}
+        onCorrectItem={openItemCorrection}
+        onOpenPayment={openPayment}
+        onOpenPrint={() => setPrintOpen(true)}
+        onSendToKitchen={() => sendToKitchen.mutate()}
+        onVoidOrder={() => lastOrder && (setCorrectionReason(''), setCorrectionTarget({ type: 'order', label: `Order #${lastOrder.orderNumber}` }))}
+      />
 
       <PaymentModal
         amount={paymentAmount}
@@ -465,6 +454,18 @@ export function PosPage() {
         open={Boolean(quickAddItem)}
         onClose={() => setQuickAddIndex(undefined)}
         onConfirm={confirmQuickAdd}
+      />
+
+      <CorrectionModal
+        error={voidOrder.isError || voidOrderItem.isError}
+        open={Boolean(correctionTarget)}
+        pending={voidOrder.isPending || voidOrderItem.isPending}
+        reason={correctionReason}
+        targetLabel={correctionTarget?.label ?? ''}
+        title={correctionTarget?.type === 'order' ? 'Void order' : 'Void item'}
+        onClose={() => setCorrectionTarget(undefined)}
+        onReasonChange={setCorrectionReason}
+        onSubmit={submitCorrection}
       />
 
       <PrintReceiptModal

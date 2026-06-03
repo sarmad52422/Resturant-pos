@@ -39,6 +39,8 @@ const tips = [
   'Use F2, type a few letters, then press Enter to preview the first result.',
   'Use Alt plus the number badge when multiple search results are visible.',
   'Receipt printing opens a preview first so the cashier can check the bill.',
+  'Use the trash button to fix cart mistakes before sending the order.',
+  'After an order exists, corrections need a reason and are saved in the audit log.',
   'Save printer details in Settings > Terminal hardware before rush hours.',
   'Keep payment and print popups closed when using item quick-add shortcuts.',
   'Table shortcuts and selected-line quantity controls will become safer after selected state is added.',

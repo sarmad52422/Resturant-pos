@@ -22261,6 +22261,17 @@ const CircleHelp = createLucideIcon("CircleHelp", [
  * This source code is licensed under the ISC license.
  * See the LICENSE file in the root directory of this source tree.
  */
+const CircleX = createLucideIcon("CircleX", [
+  ["circle", { cx: "12", cy: "12", r: "10", key: "1mglay" }],
+  ["path", { d: "m15 9-6 6", key: "1uzhvr" }],
+  ["path", { d: "m9 9 6 6", key: "z0biqf" }]
+]);
+/**
+ * @license lucide-react v0.468.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */
 const ClipboardList = createLucideIcon("ClipboardList", [
   ["rect", { width: "8", height: "4", x: "8", y: "2", rx: "1", ry: "1", key: "tgr4d6" }],
   [
@@ -26089,6 +26100,8 @@ const tips = [
   "Use F2, type a few letters, then press Enter to preview the first result.",
   "Use Alt plus the number badge when multiple search results are visible.",
   "Receipt printing opens a preview first so the cashier can check the bill.",
+  "Use the trash button to fix cart mistakes before sending the order.",
+  "After an order exists, corrections need a reason and are saved in the audit log.",
   "Save printer details in Settings > Terminal hardware before rush hours.",
   "Keep payment and print popups closed when using item quick-add shortcuts.",
   "Table shortcuts and selected-line quantity controls will become safer after selected state is added."
@@ -33656,6 +33669,105 @@ function QuickAddConfirmModal({
     /* @__PURE__ */ jsxRuntimeExports.jsx(Button, { className: "w-full", icon: /* @__PURE__ */ jsxRuntimeExports.jsx(Check, { size: 17 }), type: "button", onClick: onConfirm, children: "Add item" })
   ] }) : null });
 }
+function PosTicketPanel({
+  cart,
+  kitchenPending,
+  lastOrder,
+  paymentPending,
+  total,
+  onChangeQuantity,
+  onCorrectItem,
+  onOpenPayment,
+  onOpenPrint,
+  onSendToKitchen,
+  onVoidOrder
+}) {
+  const correctionDisabled = lastOrder?.status === "COMPLETED" || lastOrder?.status === "CANCELLED" || lastOrder?.status === "VOIDED";
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("aside", { className: "flex min-h-0 flex-col rounded-[28px] bg-white px-5 py-5 shadow-[0_28px_70px_rgb(var(--ro-secondary-rgb)/0.11)]", children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mb-4 flex items-center justify-between", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm font-black uppercase tracking-[0.24em] text-subtle", children: "Ticket" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "mt-1 text-2xl font-black", children: lastOrder ? `Order #${lastOrder.orderNumber}` : "Order #Draft" })
+      ] }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx(Badge, { tone: lastOrder?.status === "COMPLETED" ? "green" : "orange", children: lastOrder?.status === "COMPLETED" ? "Paid" : "Open" })
+    ] }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex-1 space-y-3 overflow-y-auto pr-1", children: cart.length === 0 ? /* @__PURE__ */ jsxRuntimeExports.jsx(Card, { className: "flex h-44 items-center justify-center bg-white p-6 text-center text-sm font-semibold text-muted shadow-[inset_0_0_0_1px_rgb(var(--ro-secondary-rgb)/0.08)]", children: "Add menu items to start an order." }) : cart.map((line) => /* @__PURE__ */ jsxRuntimeExports.jsxs(Card, { className: "p-4", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-start justify-between gap-3", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "font-black", children: line.name }),
+          /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { className: "text-sm font-semibold text-muted", children: [
+            money$1.format(line.price),
+            " each"
+          ] })
+        ] }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx(
+          "button",
+          {
+            className: "flex h-9 w-9 items-center justify-center rounded-xl text-subtle hover:bg-red-50 hover:text-red-600",
+            onClick: () => onCorrectItem(line),
+            children: /* @__PURE__ */ jsxRuntimeExports.jsx(Trash2, { size: 18 })
+          }
+        )
+      ] }),
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mt-4 flex items-center justify-between", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center rounded-xl bg-sage", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx("button", { className: "flex h-9 w-9 items-center justify-center text-label", onClick: () => onChangeQuantity(line.id, -1), children: /* @__PURE__ */ jsxRuntimeExports.jsx(Minus, { size: 16 }) }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "w-10 text-center font-black", children: line.quantity }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("button", { className: "flex h-9 w-9 items-center justify-center text-primary", onClick: () => onChangeQuantity(line.id, 1), children: /* @__PURE__ */ jsxRuntimeExports.jsx(Plus, { size: 16 }) })
+        ] }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { className: "text-lg", children: money$1.format(line.price * line.quantity) })
+      ] })
+    ] }, line.id)) }),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mt-4 rounded-2xl bg-secondary p-4 text-white", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex justify-between text-sm font-bold text-deepSoft", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: "Subtotal" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: money$1.format(total) })
+      ] }),
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mt-2 flex justify-between text-sm font-bold text-deepSoft", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: "Tax / service" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: money$1.format(0) })
+      ] }),
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mt-4 flex justify-between border-t border-divider pt-4 text-2xl font-black", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: "Total" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-white", children: money$1.format(total) })
+      ] })
+    ] }),
+    lastOrder && !correctionDisabled ? /* @__PURE__ */ jsxRuntimeExports.jsx(Button, { className: "mt-3 w-full", icon: /* @__PURE__ */ jsxRuntimeExports.jsx(CircleX, { size: 17 }), type: "button", variant: "secondary", onClick: onVoidOrder, children: "Void order" }) : null,
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mt-4 grid grid-cols-2 gap-3", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx(Button, { disabled: cart.length === 0 && !lastOrder, icon: /* @__PURE__ */ jsxRuntimeExports.jsx(Printer, { size: 18 }), variant: "secondary", onClick: onOpenPrint, children: "Print" }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx(Button, { disabled: cart.length === 0 || kitchenPending, icon: kitchenPending ? /* @__PURE__ */ jsxRuntimeExports.jsx(LoaderCircle, { className: "animate-spin", size: 18 }) : /* @__PURE__ */ jsxRuntimeExports.jsx(Send, { size: 18 }), variant: "secondary", onClick: onSendToKitchen, children: "Kitchen" }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx(Button, { className: "col-span-2 h-14 text-base", disabled: cart.length === 0 || paymentPending, icon: /* @__PURE__ */ jsxRuntimeExports.jsx(WalletCards, { size: 20 }), onClick: onOpenPayment, children: "Payment F7" })
+    ] })
+  ] });
+}
+function CorrectionModal({
+  error,
+  open,
+  pending,
+  reason,
+  targetLabel,
+  title,
+  onClose,
+  onReasonChange,
+  onSubmit
+}) {
+  return /* @__PURE__ */ jsxRuntimeExports.jsx(ActionModal, { description: "A reason is saved in the audit log.", open, title, widthClass: "max-w-md", onClose, children: /* @__PURE__ */ jsxRuntimeExports.jsxs("form", { className: "space-y-4", onSubmit, children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "rounded-2xl bg-sage p-4", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs font-black uppercase tracking-[0.14em] text-muted", children: "Correction target" }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mt-2 text-lg font-black text-espresso", children: targetLabel })
+    ] }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(FormField, { label: "Reason", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+      "textarea",
+      {
+        className: "min-h-24 w-full resize-none rounded-xl border border-field bg-white px-3 py-3 text-sm font-semibold text-espresso outline-none transition focus:border-primary focus:ring-4 focus:ring-primary/10",
+        value: reason,
+        onChange: (event) => onReasonChange(event.target.value)
+      }
+    ) }),
+    error ? /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "rounded-xl bg-red-50 px-4 py-3 text-sm font-bold text-red-700", children: "Correction failed. Check permission and order status." }) : null,
+    /* @__PURE__ */ jsxRuntimeExports.jsx(Button, { className: "w-full", disabled: reason.trim().length < 3 || pending, icon: pending ? /* @__PURE__ */ jsxRuntimeExports.jsx(LoaderCircle, { className: "animate-spin", size: 17 }) : /* @__PURE__ */ jsxRuntimeExports.jsx(CircleX, { size: 17 }), type: "submit", children: "Save correction" })
+  ] }) });
+}
 function PaymentModal({
   amount,
   error,
@@ -34029,6 +34141,8 @@ function PosPage() {
   const [lastOrder, setLastOrder] = reactExports.useState();
   const [lastReceiptLines, setLastReceiptLines] = reactExports.useState([]);
   const [quickAddIndex, setQuickAddIndex] = reactExports.useState();
+  const [correctionTarget, setCorrectionTarget] = reactExports.useState();
+  const [correctionReason, setCorrectionReason] = reactExports.useState("");
   const catalogQuery = useQuery({
     queryKey: ["pos-catalog"],
     queryFn: () => apiFetch("/menu/pos")
@@ -34147,6 +34261,35 @@ function PosPage() {
       printMode === "network" ? { host: printerHost.trim(), port: Number(printerPort || 9100) } : { devicePath: printerDevicePath.trim() }
     )
   });
+  const voidOrder = useMutation({
+    mutationFn: () => apiFetch(`/orders/${lastOrder?.id}/void`, {
+      method: "PATCH",
+      body: JSON.stringify({ reason: correctionReason.trim() })
+    }),
+    onSuccess: (order) => {
+      setLastOrder(order);
+      setLastReceiptLines([]);
+      setCorrectionTarget(void 0);
+      setCorrectionReason("");
+      clear();
+    }
+  });
+  const voidOrderItem = useMutation({
+    mutationFn: ({ itemId }) => apiFetch(`/orders/${lastOrder?.id}/items/${itemId}/void`, {
+      method: "PATCH",
+      body: JSON.stringify({ reason: correctionReason.trim() })
+    }),
+    onSuccess: (order) => {
+      const cartLineId = correctionTarget?.type === "item" ? correctionTarget.cartLineId : void 0;
+      setLastOrder(order);
+      if (cartLineId) {
+        removeLine(cartLineId);
+        setLastReceiptLines((lines) => lines.filter((line) => line.id !== cartLineId));
+      }
+      setCorrectionTarget(void 0);
+      setCorrectionReason("");
+    }
+  });
   const canOpenPrint = cart.length > 0 || Boolean(lastOrder);
   const hasPrinterTarget = printMode === "os" || printMode === "network" && Boolean(printerHost.trim()) || printMode === "device" && Boolean(printerDevicePath.trim());
   const canPrintReceipt = canOpenPrint && hasPrinterTarget && !printReceipt.isPending;
@@ -34170,6 +34313,29 @@ function PosPage() {
   function openPayment() {
     setPaymentAmount(String(total));
     setPaymentOpen(true);
+  }
+  function openItemCorrection(line) {
+    if (!lastOrder) {
+      removeLine(line.id);
+      return;
+    }
+    setCorrectionReason("");
+    setCorrectionTarget({ type: "item", cartLineId: line.id, label: line.name });
+  }
+  function submitCorrection(event) {
+    event.preventDefault();
+    if (!correctionTarget || correctionReason.trim().length < 3) return;
+    if (correctionTarget.type === "order") {
+      voidOrder.mutate();
+      return;
+    }
+    const orderItem = lastOrder?.items?.find((item) => item.menuItemId === correctionTarget.cartLineId && item.status !== "CANCELLED");
+    if (!orderItem) {
+      removeLine(correctionTarget.cartLineId);
+      setCorrectionTarget(void 0);
+      return;
+    }
+    voidOrderItem.mutate({ itemId: orderItem.id });
   }
   const printReceiptNow = reactExports.useCallback(() => {
     if (canPrintReceipt) printReceipt.mutate();
@@ -34310,61 +34476,22 @@ function PosPage() {
         ))
       ] })
     ] }),
-    /* @__PURE__ */ jsxRuntimeExports.jsxs("aside", { className: "flex min-h-0 flex-col rounded-[28px] bg-white px-5 py-5 shadow-[0_28px_70px_rgb(var(--ro-secondary-rgb)/0.11)]", children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mb-4 flex items-center justify-between", children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm font-black uppercase tracking-[0.24em] text-subtle", children: "Ticket" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "mt-1 text-2xl font-black", children: lastOrder ? `Order #${lastOrder.orderNumber}` : "Order #Draft" })
-        ] }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx(Badge, { tone: lastOrder?.status === "COMPLETED" ? "green" : "orange", children: lastOrder?.status === "COMPLETED" ? "Paid" : "Open" })
-      ] }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex-1 space-y-3 overflow-y-auto pr-1", children: cart.length === 0 ? /* @__PURE__ */ jsxRuntimeExports.jsx(Card, { className: "flex h-44 items-center justify-center bg-white p-6 text-center text-sm font-semibold text-muted shadow-[inset_0_0_0_1px_rgb(var(--ro-secondary-rgb)/0.08)]", children: "Add menu items to start an order." }) : cart.map((line) => /* @__PURE__ */ jsxRuntimeExports.jsxs(Card, { className: "p-4", children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-start justify-between gap-3", children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "font-black", children: line.name }),
-            /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { className: "text-sm font-semibold text-muted", children: [
-              money$1.format(line.price),
-              " each"
-            ] })
-          ] }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx(
-            "button",
-            {
-              className: "flex h-9 w-9 items-center justify-center rounded-xl text-subtle hover:bg-red-50 hover:text-red-600",
-              onClick: () => removeLine(line.id),
-              children: /* @__PURE__ */ jsxRuntimeExports.jsx(Trash2, { size: 18 })
-            }
-          )
-        ] }),
-        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mt-4 flex items-center justify-between", children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center rounded-xl bg-sage", children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx("button", { className: "flex h-9 w-9 items-center justify-center text-label", onClick: () => changeQuantity(line.id, -1), children: /* @__PURE__ */ jsxRuntimeExports.jsx(Minus, { size: 16 }) }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "w-10 text-center font-black", children: line.quantity }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx("button", { className: "flex h-9 w-9 items-center justify-center text-primary", onClick: () => changeQuantity(line.id, 1), children: /* @__PURE__ */ jsxRuntimeExports.jsx(Plus, { size: 16 }) })
-          ] }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { className: "text-lg", children: money$1.format(line.price * line.quantity) })
-        ] })
-      ] }, line.id)) }),
-      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mt-4 rounded-2xl bg-secondary p-4 text-white", children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex justify-between text-sm font-bold text-deepSoft", children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: "Subtotal" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: money$1.format(total) })
-        ] }),
-        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mt-2 flex justify-between text-sm font-bold text-deepSoft", children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: "Tax / service" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: money$1.format(0) })
-        ] }),
-        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mt-4 flex justify-between border-t border-divider pt-4 text-2xl font-black", children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: "Total" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-white", children: money$1.format(total) })
-        ] })
-      ] }),
-      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mt-4 grid grid-cols-2 gap-3", children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx(Button, { disabled: cart.length === 0 && !lastOrder, icon: /* @__PURE__ */ jsxRuntimeExports.jsx(Printer, { size: 18 }), variant: "secondary", onClick: () => setPrintOpen(true), children: "Print" }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx(Button, { disabled: cart.length === 0 || sendToKitchen.isPending, icon: sendToKitchen.isPending ? /* @__PURE__ */ jsxRuntimeExports.jsx(LoaderCircle, { className: "animate-spin", size: 18 }) : /* @__PURE__ */ jsxRuntimeExports.jsx(Send, { size: 18 }), variant: "secondary", onClick: () => sendToKitchen.mutate(), children: "Kitchen" }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx(Button, { className: "col-span-2 h-14 text-base", disabled: cart.length === 0 || payOrder.isPending, icon: /* @__PURE__ */ jsxRuntimeExports.jsx(WalletCards, { size: 20 }), onClick: openPayment, children: "Payment F7" })
-      ] })
-    ] }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(
+      PosTicketPanel,
+      {
+        cart,
+        kitchenPending: sendToKitchen.isPending,
+        lastOrder,
+        paymentPending: payOrder.isPending,
+        total,
+        onChangeQuantity: changeQuantity,
+        onCorrectItem: openItemCorrection,
+        onOpenPayment: openPayment,
+        onOpenPrint: () => setPrintOpen(true),
+        onSendToKitchen: () => sendToKitchen.mutate(),
+        onVoidOrder: () => lastOrder && (setCorrectionReason(""), setCorrectionTarget({ type: "order", label: `Order #${lastOrder.orderNumber}` }))
+      }
+    ),
     /* @__PURE__ */ jsxRuntimeExports.jsx(
       PaymentModal,
       {
@@ -34390,6 +34517,20 @@ function PosPage() {
         open: Boolean(quickAddItem),
         onClose: () => setQuickAddIndex(void 0),
         onConfirm: confirmQuickAdd
+      }
+    ),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(
+      CorrectionModal,
+      {
+        error: voidOrder.isError || voidOrderItem.isError,
+        open: Boolean(correctionTarget),
+        pending: voidOrder.isPending || voidOrderItem.isPending,
+        reason: correctionReason,
+        targetLabel: correctionTarget?.label ?? "",
+        title: correctionTarget?.type === "order" ? "Void order" : "Void item",
+        onClose: () => setCorrectionTarget(void 0),
+        onReasonChange: setCorrectionReason,
+        onSubmit: submitCorrection
       }
     ),
     /* @__PURE__ */ jsxRuntimeExports.jsx(

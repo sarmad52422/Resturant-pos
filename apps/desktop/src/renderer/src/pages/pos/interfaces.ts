@@ -24,6 +24,7 @@ export type PaymentMethod = 'CASH' | 'CARD' | 'BANK_TRANSFER' | 'JAZZCASH_EASYPA
 export type PrintMode = 'os' | 'network' | 'device';
 
 export interface ReceiptLine {
+  id: string;
   name: string;
   price: number;
   quantity: number;
@@ -42,10 +43,23 @@ export interface OrderPayment {
   reference?: string;
 }
 
+export interface PosOrderItem {
+  id: string;
+  menuItemId: string;
+  menuItem?: {
+    name: string;
+  };
+  quantity: string;
+  status: string;
+  totalPrice: string;
+  unitPrice: string;
+}
+
 export interface PosOrder {
   completedAt?: string;
   grandTotal: string;
   id: string;
+  items?: PosOrderItem[];
   orderNumber: string;
   paidAt?: string;
   payments: OrderPayment[];

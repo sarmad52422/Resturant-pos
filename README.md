@@ -121,6 +121,8 @@ Current admin endpoints:
 - `POST /orders` - Creates a priced draft order from active menu items. Requires `order.create`.
 - `PATCH /orders/:id/send-to-kitchen` - Sends order items to kitchen and deducts recipe stock. Requires `order.send_to_kitchen`.
 - `POST /orders/:id/payments` - Records a payment and completes the order when fully paid. Requires `order.create`.
+- `PATCH /orders/:id/void` - Cancels or voids an unpaid order with a required reason. Requires `order.void`.
+- `PATCH /orders/:id/items/:itemId/void` - Voids one unpaid order item with a required reason. Requires `order.void`.
 - `GET /menu` - Lists menu categories, menu items, kitchen stations, and catalog metrics.
 - `POST /menu/categories` - Creates a menu category. Requires `menu.manage`.
 - `PATCH /menu/categories/:id` - Updates a menu category. Requires `menu.manage`.
@@ -145,6 +147,8 @@ Current admin endpoints:
 The desktop Staff, Menu, Customers, and Inventory pages now use these endpoints for real operational tables, compact popup forms, permission-aware editable states, and active/hidden toggles where applicable.
 
 The Staff page includes staff login creation, role assignment, active/inactive controls, password reset, and role permission editing. The API blocks self-deactivation and prevents removing `user.manage` from your own active role.
+
+The POS correction flow lets cashiers remove local cart lines before an order is created. Once an order exists, voiding an item or the full order requires a reason, writes an audit log, restores recipe stock for already-sent kitchen items, and removes cancelled kitchen tickets from the kitchen screen.
 
 The Shift page includes opening cash, live payment buckets, close drawer workflow, counted cash, expenses, expected cash, and difference tracking. Shift totals read `OrderPayment` records between shift open and close times so the later payment workflow can feed the same screen.
 
