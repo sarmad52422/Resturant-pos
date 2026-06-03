@@ -34,7 +34,12 @@ export function PosPage() {
   const [paymentMethod, setPaymentMethod] = useState<PaymentMethod>('CASH');
   const [paymentAmount, setPaymentAmount] = useState('');
   const [paymentReference, setPaymentReference] = useState('');
+  const [printMode, setPrintMode] = useState<'os' | 'network' | 'device'>('os');
   const [selectedPrinterName, setSelectedPrinterName] = useState('');
+  const [printerHost, setPrinterHost] = useState('');
+  const [printerPort, setPrinterPort] = useState('9100');
+  const [printerDevicePath, setPrinterDevicePath] = useState('');
+  const [openDrawerAfterPrint, setOpenDrawerAfterPrint] = useState(false);
   const [lastOrder, setLastOrder] = useState<PosOrder | undefined>();
   const [lastReceiptLines, setLastReceiptLines] = useState<Array<{ name: string; price: number; quantity: number }>>([]);
 
@@ -49,6 +54,13 @@ export function PosPage() {
   });
 
   const total = useMemo(() => cart.reduce((sum, item) => sum + item.price * item.quantity, 0), [cart]);
+  const receiptPreviewLines = cart.length ? cart : lastReceiptLines;
+  const receiptPreviewTotal = receiptPreviewLines.reduce((sum, line) => sum + line.price * line.quantity, 0);
+  const receiptPreviewText = buildReceiptText(
+    { grandTotal: String(receiptPreviewTotal || total), orderNumber: lastOrder?.orderNumber ?? 'Draft' },
+    receiptPreviewLines,
+    receiptPreviewTotal || total,
+  );
   const categories = catalogQuery.data?.categories ?? [];
   const menuItems = catalogQuery.data?.items ?? [];
   const filteredItems = menuItems.filter((item) => {
@@ -115,6 +127,21 @@ export function PosPage() {
       const order = lastOrder ?? (await createOrder.mutateAsync());
       const receiptLines = cart.length ? cart : lastReceiptLines;
       const receiptTotal = receiptLines.reduce((sum, line) => sum + line.price * line.quantity, 0);
+      if (printMode === 'network') {
+        return window.restaurantos.printers.printEscPos({
+          host: printerHost.trim(),
+          port: Number(printerPort || 9100),
+          text: buildReceiptText(order, receiptLines, receiptTotal || total),
+          openDrawer: openDrawerAfterPrint,
+        });
+      }
+      if (printMode === 'device') {
+        return window.restaurantos.printers.printEscPos({
+          devicePath: printerDevicePath.trim(),
+          text: buildReceiptText(order, receiptLines, receiptTotal || total),
+          openDrawer: openDrawerAfterPrint,
+        });
+      }
       const html = buildReceiptHtml(order, receiptLines, receiptTotal || total);
       return window.restaurantos.printers.printReceipt({
         html,
@@ -123,6 +150,15 @@ export function PosPage() {
       });
     },
     onSuccess: () => setPrintOpen(false),
+  });
+
+  const kickDrawer = useMutation({
+    mutationFn: () =>
+      window.restaurantos.cashDrawer.kick(
+        printMode === 'network'
+          ? { host: printerHost.trim(), port: Number(printerPort || 9100) }
+          : { devicePath: printerDevicePath.trim() },
+      ),
   });
 
   function addMenuItem(item: PosMenuItem) {
@@ -327,7 +363,9 @@ export function PosPage() {
           <div className="mt-3 grid grid-cols-2 gap-2 text-xs font-bold text-muted">
             <span>F2 Search</span>
             <span>F5 Kitchen</span>
+            <span>F6 Print preview</span>
             <span>F7 Payment</span>
+            <span>P Print preview</span>
             <span>F10 Tables</span>
             <span>Ctrl+Shift+F Max</span>
             <span>Ctrl+Shift+M Min</span>
@@ -419,31 +457,128 @@ export function PosPage() {
         </form>
       </ActionModal>
 
-      <ActionModal description="Choose a printer installed on this computer." open={printOpen} title="Print receipt" onClose={() => setPrintOpen(false)}>
+      <ActionModal description="Choose how this receipt printer is connected." open={printOpen} title="Print receipt" onClose={() => setPrintOpen(false)}>
         <form className="space-y-3" onSubmit={submitPrint}>
-          <FormField label="Printer">
+          <div className="rounded-2xl border border-line bg-sage p-4">
+            <div className="mb-3 flex items-center justify-between gap-3">
+              <div>
+                <p className="text-xs font-black uppercase tracking-[0.14em] text-muted">Receipt preview</p>
+                <p className="mt-1 text-sm font-bold text-label">Check before printing.</p>
+              </div>
+              <Badge tone="orange">P Print</Badge>
+            </div>
+            <pre className="max-h-64 overflow-y-auto whitespace-pre-wrap rounded-xl bg-white p-4 font-mono text-xs font-semibold leading-5 text-espresso shadow-[inset_0_0_0_1px_rgb(var(--ro-secondary-rgb)/0.08)]">
+              {receiptPreviewText}
+            </pre>
+          </div>
+
+          <FormField label="Printer type">
             <select
               className="h-11 w-full rounded-xl border border-field bg-white px-3 text-sm font-semibold text-espresso outline-none transition focus:border-primary focus:ring-4 focus:ring-primary/10"
-              value={selectedPrinterName}
-              onChange={(event) => setSelectedPrinterName(event.target.value)}
+              value={printMode}
+              onChange={(event) => setPrintMode(event.target.value as 'os' | 'network' | 'device')}
             >
-              <option value="">Default printer</option>
-              {(printersQuery.data ?? []).map((printer) => (
-                <option key={printer.name} value={printer.name}>
-                  {printer.displayName || printer.name}
-                  {printer.isDefault ? ' (Default)' : ''}
-                </option>
-              ))}
+              <option value="os">Installed printer</option>
+              <option value="network">Network ESC/POS</option>
+              <option value="device">USB/Bluetooth device path</option>
             </select>
           </FormField>
+
+          {printMode === 'os' ? (
+            <FormField label="Installed printer">
+              <select
+                className="h-11 w-full rounded-xl border border-field bg-white px-3 text-sm font-semibold text-espresso outline-none transition focus:border-primary focus:ring-4 focus:ring-primary/10"
+                value={selectedPrinterName}
+                onChange={(event) => setSelectedPrinterName(event.target.value)}
+              >
+                <option value="">Default printer</option>
+                {(printersQuery.data ?? []).map((printer) => (
+                  <option key={printer.name} value={printer.name}>
+                    {printer.displayName || printer.name}
+                    {printer.isDefault ? ' (Default)' : ''}
+                  </option>
+                ))}
+              </select>
+            </FormField>
+          ) : null}
+
+          {printMode === 'network' ? (
+            <div className="grid grid-cols-[1fr_120px] gap-3">
+              <FormField label="Printer IP address">
+                <input
+                  className="h-11 w-full rounded-xl border border-field bg-white px-3 text-sm font-semibold text-espresso outline-none transition focus:border-primary focus:ring-4 focus:ring-primary/10"
+                  value={printerHost}
+                  onChange={(event) => setPrinterHost(event.target.value)}
+                />
+              </FormField>
+              <FormField label="Port">
+                <input
+                  className="h-11 w-full rounded-xl border border-field bg-white px-3 text-sm font-semibold text-espresso outline-none transition focus:border-primary focus:ring-4 focus:ring-primary/10"
+                  min="1"
+                  type="number"
+                  value={printerPort}
+                  onChange={(event) => setPrinterPort(event.target.value)}
+                />
+              </FormField>
+            </div>
+          ) : null}
+
+          {printMode === 'device' ? (
+            <FormField label="Device path" hint="Examples: /dev/usb/lp0, /dev/rfcomm0, COM5, or a shared printer path.">
+              <input
+                className="h-11 w-full rounded-xl border border-field bg-white px-3 text-sm font-semibold text-espresso outline-none transition focus:border-primary focus:ring-4 focus:ring-primary/10"
+                value={printerDevicePath}
+                onChange={(event) => setPrinterDevicePath(event.target.value)}
+              />
+            </FormField>
+          ) : null}
+
+          {printMode !== 'os' ? (
+            <label className="flex items-center gap-3 rounded-2xl bg-sage px-4 py-3 text-sm font-bold text-label">
+              <input
+                checked={openDrawerAfterPrint}
+                className="h-4 w-4 accent-primary"
+                type="checkbox"
+                onChange={(event) => setOpenDrawerAfterPrint(event.target.checked)}
+              />
+              Open cash drawer after print
+            </label>
+          ) : null}
+
           {printReceipt.isError ? (
             <div className="rounded-xl bg-red-50 px-4 py-3 text-sm font-bold text-red-700">
               Print failed. Check printer setup.
             </div>
           ) : null}
+          {kickDrawer.isError ? (
+            <div className="rounded-xl bg-red-50 px-4 py-3 text-sm font-bold text-red-700">
+              Drawer did not open. Check printer connection.
+            </div>
+          ) : null}
+          {printMode !== 'os' ? (
+            <Button
+              className="w-full"
+              disabled={
+                kickDrawer.isPending ||
+                (printMode === 'network' && !printerHost.trim()) ||
+                (printMode === 'device' && !printerDevicePath.trim())
+              }
+              icon={kickDrawer.isPending ? <Loader2 className="animate-spin" size={17} /> : <WalletCards size={17} />}
+              type="button"
+              variant="secondary"
+              onClick={() => kickDrawer.mutate()}
+            >
+              Open cash drawer
+            </Button>
+          ) : null}
           <Button
             className="w-full"
-            disabled={printReceipt.isPending || (cart.length === 0 && !lastOrder)}
+            disabled={
+              printReceipt.isPending ||
+              (cart.length === 0 && !lastOrder) ||
+              (printMode === 'network' && !printerHost.trim()) ||
+              (printMode === 'device' && !printerDevicePath.trim())
+            }
             icon={printReceipt.isPending ? <Loader2 className="animate-spin" size={17} /> : <Printer size={17} />}
             type="submit"
           >
@@ -496,6 +631,30 @@ function buildReceiptHtml(order: PosOrder, cart: Array<{ name: string; price: nu
       </body>
     </html>
   `;
+}
+
+function buildReceiptText(
+  order: Pick<PosOrder, 'grandTotal' | 'orderNumber'>,
+  cart: Array<{ name: string; price: number; quantity: number }>,
+  total: number,
+) {
+  const rows = cart
+    .map((line) => {
+      const left = `${line.name} x ${line.quantity}`;
+      const right = money.format(line.price * line.quantity);
+      return `${left.padEnd(Math.max(1, 32 - right.length), ' ')}${right}`;
+    })
+    .join('\n');
+
+  return [
+    `Order ${order.orderNumber}`,
+    '------------------------------',
+    rows,
+    '------------------------------',
+    `Total ${money.format(total || Number(order.grandTotal))}`,
+    '',
+    'Thank you',
+  ].join('\n');
 }
 
 function escapeHtml(value: string) {

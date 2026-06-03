@@ -1,5 +1,7 @@
 "use strict";
 const electron = require("electron");
+const promises = require("node:fs/promises");
+const node_net = require("node:net");
 const node_path = require("node:path");
 const shared = require("@restaurantos/shared");
 if (process.platform === "linux" && process.env.RESTAURANTOS_ENABLE_GPU !== "1") {
@@ -111,6 +113,70 @@ async function printReceipt({ html, printerName, silent = true }) {
     printWindow.close();
   }
 }
+async function printEscPos({ text, openDrawer = false, ...target }) {
+  await writeRawPrinterBytes(target, buildEscPosReceipt(text, openDrawer));
+  return { success: true };
+}
+async function kickCashDrawer(target) {
+  await writeRawPrinterBytes(target, cashDrawerPulse());
+  return { success: true };
+}
+async function writeRawPrinterBytes(target, payload) {
+  if (target.host) {
+    await writeNetworkPrinter(target.host, target.port ?? 9100, payload);
+    return;
+  }
+  if (target.devicePath) {
+    await promises.writeFile(target.devicePath, payload);
+    return;
+  }
+  throw new Error("Printer host or device path is required");
+}
+async function writeNetworkPrinter(host, port, payload) {
+  await new Promise((resolve, reject) => {
+    const socket = new node_net.Socket();
+    socket.setTimeout(5e3);
+    socket.once("error", reject);
+    socket.once("timeout", () => {
+      socket.destroy();
+      reject(new Error("Printer connection timed out"));
+    });
+    socket.connect(port, host, () => {
+      socket.write(payload, (error) => {
+        if (error) {
+          reject(error);
+          return;
+        }
+        socket.end();
+      });
+    });
+    socket.once("close", (hadError) => {
+      if (!hadError) resolve();
+    });
+  });
+}
+function buildEscPosReceipt(text, openDrawer) {
+  const commands = [
+    Buffer.from([27, 64]),
+    // Initialize printer
+    Buffer.from([27, 97, 1]),
+    // Center
+    Buffer.from("RestaurantOS\n", "utf8"),
+    Buffer.from([27, 97, 0]),
+    // Left
+    Buffer.from(`${text}
+
+
+`, "utf8"),
+    openDrawer ? cashDrawerPulse() : Buffer.alloc(0),
+    Buffer.from([29, 86, 66, 0])
+    // Partial cut
+  ];
+  return Buffer.concat(commands);
+}
+function cashDrawerPulse() {
+  return Buffer.from([27, 112, 0, 25, 250]);
+}
 electron.app.whenReady().then(() => {
   electron.ipcMain.handle("restaurantos:terminal", () => ({
     platform: process.platform,
@@ -118,6 +184,8 @@ electron.app.whenReady().then(() => {
   }));
   electron.ipcMain.handle("restaurantos:printers:list", async () => mainWindow?.webContents.getPrintersAsync() ?? []);
   electron.ipcMain.handle("restaurantos:printers:print-receipt", async (_event, input) => printReceipt(input));
+  electron.ipcMain.handle("restaurantos:printers:print-escpos", async (_event, input) => printEscPos(input));
+  electron.ipcMain.handle("restaurantos:cash-drawer:kick", async (_event, input) => kickCashDrawer(input));
   electron.ipcMain.on("restaurantos:window:minimize", () => mainWindow?.minimize());
   electron.ipcMain.on("restaurantos:window:maximize", () => toggleMaximize());
   electron.ipcMain.on("restaurantos:window:close", () => mainWindow?.close());

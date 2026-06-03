@@ -33516,7 +33516,12 @@ function PosPage() {
   const [paymentMethod, setPaymentMethod] = reactExports.useState("CASH");
   const [paymentAmount, setPaymentAmount] = reactExports.useState("");
   const [paymentReference, setPaymentReference] = reactExports.useState("");
+  const [printMode, setPrintMode] = reactExports.useState("os");
   const [selectedPrinterName, setSelectedPrinterName] = reactExports.useState("");
+  const [printerHost, setPrinterHost] = reactExports.useState("");
+  const [printerPort, setPrinterPort] = reactExports.useState("9100");
+  const [printerDevicePath, setPrinterDevicePath] = reactExports.useState("");
+  const [openDrawerAfterPrint, setOpenDrawerAfterPrint] = reactExports.useState(false);
   const [lastOrder, setLastOrder] = reactExports.useState();
   const [lastReceiptLines, setLastReceiptLines] = reactExports.useState([]);
   const catalogQuery = useQuery({
@@ -33528,6 +33533,13 @@ function PosPage() {
     queryFn: () => window.restaurantos.printers.list()
   });
   const total = reactExports.useMemo(() => cart.reduce((sum, item) => sum + item.price * item.quantity, 0), [cart]);
+  const receiptPreviewLines = cart.length ? cart : lastReceiptLines;
+  const receiptPreviewTotal = receiptPreviewLines.reduce((sum, line) => sum + line.price * line.quantity, 0);
+  const receiptPreviewText = buildReceiptText(
+    { grandTotal: String(receiptPreviewTotal || total), orderNumber: lastOrder?.orderNumber ?? "Draft" },
+    receiptPreviewLines,
+    receiptPreviewTotal || total
+  );
   const categories = catalogQuery.data?.categories ?? [];
   const menuItems = catalogQuery.data?.items ?? [];
   const filteredItems = menuItems.filter((item) => {
@@ -33585,6 +33597,21 @@ function PosPage() {
       const order = lastOrder ?? await createOrder.mutateAsync();
       const receiptLines = cart.length ? cart : lastReceiptLines;
       const receiptTotal = receiptLines.reduce((sum, line) => sum + line.price * line.quantity, 0);
+      if (printMode === "network") {
+        return window.restaurantos.printers.printEscPos({
+          host: printerHost.trim(),
+          port: Number(printerPort || 9100),
+          text: buildReceiptText(order, receiptLines, receiptTotal || total),
+          openDrawer: openDrawerAfterPrint
+        });
+      }
+      if (printMode === "device") {
+        return window.restaurantos.printers.printEscPos({
+          devicePath: printerDevicePath.trim(),
+          text: buildReceiptText(order, receiptLines, receiptTotal || total),
+          openDrawer: openDrawerAfterPrint
+        });
+      }
       const html = buildReceiptHtml(order, receiptLines, receiptTotal || total);
       return window.restaurantos.printers.printReceipt({
         html,
@@ -33593,6 +33620,11 @@ function PosPage() {
       });
     },
     onSuccess: () => setPrintOpen(false)
+  });
+  const kickDrawer = useMutation({
+    mutationFn: () => window.restaurantos.cashDrawer.kick(
+      printMode === "network" ? { host: printerHost.trim(), port: Number(printerPort || 9100) } : { devicePath: printerDevicePath.trim() }
+    )
   });
   function addMenuItem(item) {
     addLine({
@@ -33770,7 +33802,9 @@ function PosPage() {
         /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mt-3 grid grid-cols-2 gap-2 text-xs font-bold text-muted", children: [
           /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: "F2 Search" }),
           /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: "F5 Kitchen" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: "F6 Print preview" }),
           /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: "F7 Payment" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: "P Print preview" }),
           /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: "F10 Tables" }),
           /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: "Ctrl+Shift+F Max" }),
           /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: "Ctrl+Shift+M Min" }),
@@ -33852,8 +33886,31 @@ function PosPage() {
         }
       )
     ] }) }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx(ActionModal, { description: "Choose a printer installed on this computer.", open: printOpen, title: "Print receipt", onClose: () => setPrintOpen(false), children: /* @__PURE__ */ jsxRuntimeExports.jsxs("form", { className: "space-y-3", onSubmit: submitPrint, children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsx(FormField, { label: "Printer", children: /* @__PURE__ */ jsxRuntimeExports.jsxs(
+    /* @__PURE__ */ jsxRuntimeExports.jsx(ActionModal, { description: "Choose how this receipt printer is connected.", open: printOpen, title: "Print receipt", onClose: () => setPrintOpen(false), children: /* @__PURE__ */ jsxRuntimeExports.jsxs("form", { className: "space-y-3", onSubmit: submitPrint, children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "rounded-2xl border border-line bg-sage p-4", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mb-3 flex items-center justify-between gap-3", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs font-black uppercase tracking-[0.14em] text-muted", children: "Receipt preview" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mt-1 text-sm font-bold text-label", children: "Check before printing." })
+          ] }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx(Badge, { tone: "orange", children: "P Print" })
+        ] }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("pre", { className: "max-h-64 overflow-y-auto whitespace-pre-wrap rounded-xl bg-white p-4 font-mono text-xs font-semibold leading-5 text-espresso shadow-[inset_0_0_0_1px_rgb(var(--ro-secondary-rgb)/0.08)]", children: receiptPreviewText })
+      ] }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx(FormField, { label: "Printer type", children: /* @__PURE__ */ jsxRuntimeExports.jsxs(
+        "select",
+        {
+          className: "h-11 w-full rounded-xl border border-field bg-white px-3 text-sm font-semibold text-espresso outline-none transition focus:border-primary focus:ring-4 focus:ring-primary/10",
+          value: printMode,
+          onChange: (event) => setPrintMode(event.target.value),
+          children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx("option", { value: "os", children: "Installed printer" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("option", { value: "network", children: "Network ESC/POS" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("option", { value: "device", children: "USB/Bluetooth device path" })
+          ]
+        }
+      ) }),
+      printMode === "os" ? /* @__PURE__ */ jsxRuntimeExports.jsx(FormField, { label: "Installed printer", children: /* @__PURE__ */ jsxRuntimeExports.jsxs(
         "select",
         {
           className: "h-11 w-full rounded-xl border border-field bg-white px-3 text-sm font-semibold text-espresso outline-none transition focus:border-primary focus:ring-4 focus:ring-primary/10",
@@ -33867,13 +33924,66 @@ function PosPage() {
             ] }, printer.name))
           ]
         }
-      ) }),
+      ) }) : null,
+      printMode === "network" ? /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "grid grid-cols-[1fr_120px] gap-3", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx(FormField, { label: "Printer IP address", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+          "input",
+          {
+            className: "h-11 w-full rounded-xl border border-field bg-white px-3 text-sm font-semibold text-espresso outline-none transition focus:border-primary focus:ring-4 focus:ring-primary/10",
+            value: printerHost,
+            onChange: (event) => setPrinterHost(event.target.value)
+          }
+        ) }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx(FormField, { label: "Port", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+          "input",
+          {
+            className: "h-11 w-full rounded-xl border border-field bg-white px-3 text-sm font-semibold text-espresso outline-none transition focus:border-primary focus:ring-4 focus:ring-primary/10",
+            min: "1",
+            type: "number",
+            value: printerPort,
+            onChange: (event) => setPrinterPort(event.target.value)
+          }
+        ) })
+      ] }) : null,
+      printMode === "device" ? /* @__PURE__ */ jsxRuntimeExports.jsx(FormField, { label: "Device path", hint: "Examples: /dev/usb/lp0, /dev/rfcomm0, COM5, or a shared printer path.", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+        "input",
+        {
+          className: "h-11 w-full rounded-xl border border-field bg-white px-3 text-sm font-semibold text-espresso outline-none transition focus:border-primary focus:ring-4 focus:ring-primary/10",
+          value: printerDevicePath,
+          onChange: (event) => setPrinterDevicePath(event.target.value)
+        }
+      ) }) : null,
+      printMode !== "os" ? /* @__PURE__ */ jsxRuntimeExports.jsxs("label", { className: "flex items-center gap-3 rounded-2xl bg-sage px-4 py-3 text-sm font-bold text-label", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx(
+          "input",
+          {
+            checked: openDrawerAfterPrint,
+            className: "h-4 w-4 accent-primary",
+            type: "checkbox",
+            onChange: (event) => setOpenDrawerAfterPrint(event.target.checked)
+          }
+        ),
+        "Open cash drawer after print"
+      ] }) : null,
       printReceipt.isError ? /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "rounded-xl bg-red-50 px-4 py-3 text-sm font-bold text-red-700", children: "Print failed. Check printer setup." }) : null,
+      kickDrawer.isError ? /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "rounded-xl bg-red-50 px-4 py-3 text-sm font-bold text-red-700", children: "Drawer did not open. Check printer connection." }) : null,
+      printMode !== "os" ? /* @__PURE__ */ jsxRuntimeExports.jsx(
+        Button,
+        {
+          className: "w-full",
+          disabled: kickDrawer.isPending || printMode === "network" && !printerHost.trim() || printMode === "device" && !printerDevicePath.trim(),
+          icon: kickDrawer.isPending ? /* @__PURE__ */ jsxRuntimeExports.jsx(LoaderCircle, { className: "animate-spin", size: 17 }) : /* @__PURE__ */ jsxRuntimeExports.jsx(WalletCards, { size: 17 }),
+          type: "button",
+          variant: "secondary",
+          onClick: () => kickDrawer.mutate(),
+          children: "Open cash drawer"
+        }
+      ) : null,
       /* @__PURE__ */ jsxRuntimeExports.jsx(
         Button,
         {
           className: "w-full",
-          disabled: printReceipt.isPending || cart.length === 0 && !lastOrder,
+          disabled: printReceipt.isPending || cart.length === 0 && !lastOrder || printMode === "network" && !printerHost.trim() || printMode === "device" && !printerDevicePath.trim(),
           icon: printReceipt.isPending ? /* @__PURE__ */ jsxRuntimeExports.jsx(LoaderCircle, { className: "animate-spin", size: 17 }) : /* @__PURE__ */ jsxRuntimeExports.jsx(Printer, { size: 17 }),
           type: "submit",
           children: "Print receipt"
@@ -33920,6 +34030,22 @@ function buildReceiptHtml(order, cart, total) {
       </body>
     </html>
   `;
+}
+function buildReceiptText(order, cart, total) {
+  const rows = cart.map((line) => {
+    const left = `${line.name} x ${line.quantity}`;
+    const right = money$1.format(line.price * line.quantity);
+    return `${left.padEnd(Math.max(1, 32 - right.length), " ")}${right}`;
+  }).join("\n");
+  return [
+    `Order ${order.orderNumber}`,
+    "------------------------------",
+    rows,
+    "------------------------------",
+    `Total ${money$1.format(total || Number(order.grandTotal))}`,
+    "",
+    "Thank you"
+  ].join("\n");
 }
 function escapeHtml(value) {
   return value.replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll('"', "&quot;").replaceAll("'", "&#039;");

@@ -143,7 +143,14 @@ The Shift page includes opening cash, live payment buckets, close drawer workflo
 
 The POS page loads real active menu items, builds a cart, creates priced orders, sends orders to kitchen, records payments, and prints receipts through Electron.
 
-Thermal printer support currently uses OS-installed printers through Electron. This supports common Windows/Linux USB and network thermal printers after they are installed in the operating system. Direct ESC/POS printing for raw USB/LAN/Bluetooth printers is planned as the next hardware layer for printers that should bypass the OS print driver.
+Thermal printer support currently includes:
+
+- Installed Windows/Linux printers through the operating system print driver.
+- Network ESC/POS printers over TCP/IP, usually port `9100`.
+- Local device-path ESC/POS printers, such as `/dev/usb/lp0`, `/dev/rfcomm0`, `COM5`, or a shared printer path when exposed by the OS.
+- Cash drawer kick through the ESC/POS drawer pulse command.
+
+Printer note: some thermal printers need the correct OS driver, code page, paper width, or ESC/POS mode enabled in the printer settings. Future hardware settings should save printer profiles per terminal so staff do not enter IP/device path every time.
 
 The Inventory page includes a purchase receiving popup. Receiving stock creates `PURCHASE` stock movements, updates current stock, updates last purchase cost, recalculates weighted average cost, and increases supplier payable for any unpaid balance.
 
@@ -233,7 +240,9 @@ Current POS visual shortcut hints:
 
 - `F2` - Focus/search item flow.
 - `F5` - Send to kitchen flow.
+- `F6` - Open receipt preview before printing.
 - `F7` - Payment flow.
+- `P` - Print from the receipt preview.
 - `F10` - Open table screen.
 
 Planned POS workflow shortcuts:
@@ -243,13 +252,14 @@ Planned POS workflow shortcuts:
 - `F3` - Hold order.
 - `F4` - Recall held order.
 - `F5` - Send to kitchen.
-- `F6` - Print bill.
-- `F7` - Payment.
+- `F6` - Open receipt preview.
+- `F7` - Open payment popup.
 - `F8` - Customer credit.
 - `F9` - Discount.
 - `F10` - Table screen.
 - `Ctrl + N` - New customer.
-- `Ctrl + P` - Print receipt.
+- `P` - Print receipt when the receipt preview is open.
+- `Ctrl + P` - Open receipt preview from the POS.
 - `Ctrl + S` - Save order.
 - `Ctrl + D` - Delivery mode.
 - `Ctrl + T` - Takeaway mode.
@@ -261,7 +271,7 @@ Planned POS workflow shortcuts:
 - `-` - Decrease quantity.
 - Arrow keys - Navigate grids, tickets, tables, and lists.
 
-Implementation note: POS workflow shortcuts should be wired in a dedicated keyboard workflow phase after the real order, payment, hold/recall, table, and print flows are implemented. Current shortcut labels are UI hints unless listed under current app window shortcuts.
+Implementation note: POS workflow shortcuts should be wired in a dedicated keyboard workflow phase after the real order, payment, hold/recall, table, and print flows are implemented. Printing should always open the receipt preview first; the cashier can then press `P` from the preview to print. Current shortcut labels are UI hints unless listed under current app window shortcuts.
 
 Future admin shortcuts will be documented here as modules are implemented.
 

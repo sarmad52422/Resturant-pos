@@ -575,3 +575,59 @@ Tests:
 - Smoke test cleaned up the temporary order, order item, payment, and related kitchen records.
 - `npm run build --workspaces` passed.
 - `npm audit --audit-level=high` passed with 0 vulnerabilities.
+
+## Phase 12 - Direct Thermal Printer and Cash Drawer Support
+
+Status: Completed
+
+Completed:
+- Added raw ESC/POS printing in the Electron main process without adding older printer libraries.
+- Added network ESC/POS support over TCP/IP with default thermal printer port `9100`.
+- Added local device-path ESC/POS support for Linux USB device paths, Linux Bluetooth serial paths, Windows COM paths, and OS-exposed shared printer paths.
+- Added ESC/POS receipt initialization, plain text receipt body, partial cut command, and optional cash drawer pulse after print.
+- Added standalone cash drawer kick IPC for printer-connected cash drawers.
+- Exposed `restaurantos.printers.printEscPos(...)` and `restaurantos.cashDrawer.kick(...)` through the preload bridge.
+- Expanded the POS print popup with printer type selection: Installed printer, Network ESC/POS, and USB/Bluetooth device path.
+- Added POS fields for printer IP address, port, device path, open drawer after print, and standalone open cash drawer action.
+- Kept installed OS printer support from Phase 11 for printers that work best through Windows/Linux drivers.
+
+Files changed:
+- `apps/desktop/src/main/main.ts`
+- `apps/desktop/src/preload/preload.ts`
+- `apps/desktop/src/renderer/src/vite-env.d.ts`
+- `apps/desktop/src/renderer/src/pages/pos/index.tsx`
+- `README.md`
+- `progress.md`
+
+Database changes:
+- None.
+
+Tests:
+- `npm run typecheck --workspace @restaurantos/desktop` passed.
+- `npm run typecheck --workspaces` passed.
+- `npm run build --workspaces` passed.
+- `npm audit --audit-level=high` passed with 0 vulnerabilities.
+
+Notes:
+- Real printer/drawer firing was not tested because no specific printer hardware was provided in this session.
+- Some printers require a driver, correct code page, paper width setting, or ESC/POS mode enabled on the printer itself.
+- A future terminal hardware settings phase should save printer profiles per terminal so staff do not enter IP addresses or device paths every time.
+
+## POS Receipt Preview and Shortcut Planning
+
+Status: Completed
+
+Completed:
+- Added a receipt preview panel inside the POS print popup so the cashier checks the receipt before sending it to the printer.
+- Added POS shortcut card hints for `F6` receipt preview, `F7` payment, and `P` print from preview.
+- Updated `README.md` so future keyboard shortcut work reserves `F6` for preview, `P` for printing from the preview, and `F7` for payment.
+
+Files changed:
+- `apps/desktop/src/renderer/src/pages/pos/index.tsx`
+- `README.md`
+- `progress.md`
+
+Tests:
+- `npm run typecheck --workspace @restaurantos/desktop` passed.
+- `npm run build --workspaces` passed.
+- `npm audit --audit-level=high` passed with 0 vulnerabilities.

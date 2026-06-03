@@ -1,4 +1,6 @@
 import { app, BrowserWindow, ipcMain } from 'electron';
+import { writeFile } from 'node:fs/promises';
+import { Socket } from 'node:net';
 import { join } from 'node:path';
 import { brandTheme } from '@restaurantos/shared';
 
@@ -13,6 +15,17 @@ interface PrintReceiptInput {
   html: string;
   printerName?: string;
   silent?: boolean;
+}
+
+interface EscPosTargetInput {
+  devicePath?: string;
+  host?: string;
+  port?: number;
+}
+
+interface PrintEscPosInput extends EscPosTargetInput {
+  openDrawer?: boolean;
+  text: string;
 }
 
 function createWindow() {
@@ -133,6 +146,72 @@ async function printReceipt({ html, printerName, silent = true }: PrintReceiptIn
   }
 }
 
+async function printEscPos({ text, openDrawer = false, ...target }: PrintEscPosInput) {
+  await writeRawPrinterBytes(target, buildEscPosReceipt(text, openDrawer));
+  return { success: true };
+}
+
+async function kickCashDrawer(target: EscPosTargetInput) {
+  await writeRawPrinterBytes(target, cashDrawerPulse());
+  return { success: true };
+}
+
+async function writeRawPrinterBytes(target: EscPosTargetInput, payload: Buffer) {
+  if (target.host) {
+    await writeNetworkPrinter(target.host, target.port ?? 9100, payload);
+    return;
+  }
+
+  if (target.devicePath) {
+    await writeFile(target.devicePath, payload);
+    return;
+  }
+
+  throw new Error('Printer host or device path is required');
+}
+
+async function writeNetworkPrinter(host: string, port: number, payload: Buffer) {
+  await new Promise<void>((resolve, reject) => {
+    const socket = new Socket();
+    socket.setTimeout(5000);
+    socket.once('error', reject);
+    socket.once('timeout', () => {
+      socket.destroy();
+      reject(new Error('Printer connection timed out'));
+    });
+    socket.connect(port, host, () => {
+      socket.write(payload, (error) => {
+        if (error) {
+          reject(error);
+          return;
+        }
+        socket.end();
+      });
+    });
+    socket.once('close', (hadError) => {
+      if (!hadError) resolve();
+    });
+  });
+}
+
+function buildEscPosReceipt(text: string, openDrawer: boolean) {
+  const commands = [
+    Buffer.from([0x1b, 0x40]), // Initialize printer
+    Buffer.from([0x1b, 0x61, 0x01]), // Center
+    Buffer.from('RestaurantOS\n', 'utf8'),
+    Buffer.from([0x1b, 0x61, 0x00]), // Left
+    Buffer.from(`${text}\n\n\n`, 'utf8'),
+    openDrawer ? cashDrawerPulse() : Buffer.alloc(0),
+    Buffer.from([0x1d, 0x56, 0x42, 0x00]), // Partial cut
+  ];
+
+  return Buffer.concat(commands);
+}
+
+function cashDrawerPulse() {
+  return Buffer.from([0x1b, 0x70, 0x00, 0x19, 0xfa]);
+}
+
 app.whenReady().then(() => {
   ipcMain.handle('restaurantos:terminal', () => ({
     platform: process.platform,
@@ -140,6 +219,8 @@ app.whenReady().then(() => {
   }));
   ipcMain.handle('restaurantos:printers:list', async () => mainWindow?.webContents.getPrintersAsync() ?? []);
   ipcMain.handle('restaurantos:printers:print-receipt', async (_event, input: PrintReceiptInput) => printReceipt(input));
+  ipcMain.handle('restaurantos:printers:print-escpos', async (_event, input: PrintEscPosInput) => printEscPos(input));
+  ipcMain.handle('restaurantos:cash-drawer:kick', async (_event, input: EscPosTargetInput) => kickCashDrawer(input));
   ipcMain.on('restaurantos:window:minimize', () => mainWindow?.minimize());
   ipcMain.on('restaurantos:window:maximize', () => toggleMaximize());
   ipcMain.on('restaurantos:window:close', () => mainWindow?.close());
