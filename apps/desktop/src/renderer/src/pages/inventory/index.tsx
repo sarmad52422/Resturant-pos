@@ -17,6 +17,7 @@ import { useState } from 'react';
 import type { ReactNode } from 'react';
 import { Badge, Button, Card } from '@restaurantos/ui';
 import { ActionModal } from '../../components/action-modal';
+import { FormField } from '../../components/form-field';
 import { apiFetch } from '../../lib/api';
 import type { FormSubmitEvent } from '../../lib/events';
 import { useAuthStore } from '../../store/use-auth-store';
@@ -554,56 +555,62 @@ export function InventoryPage() {
       </Card>
 
       <ActionModal
-        description="Create an inventory item with units, threshold, average cost, and optional supplier."
+        description="Add an item you keep in stock."
         open={createOpen}
         title="New stock item"
         onClose={() => setCreateOpen(false)}
       >
         <form className="space-y-3" onSubmit={submitItem}>
+          <FormField label="Stock item name">
           <input
             className={fieldClass}
             disabled={!canManageInventory}
-            placeholder="Item name"
             value={name}
             onChange={(event) => setName(event.target.value)}
           />
+          </FormField>
+          <FormField label="Group">
           <input
             className={fieldClass}
             disabled={!canManageInventory}
-            placeholder="Category"
             value={category}
             onChange={(event) => setCategory(event.target.value)}
           />
+          </FormField>
           <div className="grid grid-cols-2 gap-3">
+            <FormField label="Current stock">
             <input
               className={fieldClass}
               disabled={!canManageInventory}
               min="0"
-              placeholder="On hand"
               type="number"
               value={currentStock}
               onChange={(event) => setCurrentStock(event.target.value)}
             />
+            </FormField>
+            <FormField label="Low stock warning">
             <input
               className={fieldClass}
               disabled={!canManageInventory}
               min="0"
-              placeholder="Minimum"
               type="number"
               value={minimumStockLevel}
               onChange={(event) => setMinimumStockLevel(event.target.value)}
             />
+            </FormField>
           </div>
+          <FormField label="Average buy price">
           <input
             className={fieldClass}
             disabled={!canManageInventory}
             min="0"
-            placeholder="Average cost"
             type="number"
             value={averageCost}
             onChange={(event) => setAverageCost(event.target.value)}
           />
+          </FormField>
           <div className="grid grid-cols-2 gap-3">
+            <FormField label="Buy unit">
             <select
               className={fieldClass}
               disabled={!canManageInventory}
@@ -616,6 +623,8 @@ export function InventoryPage() {
                 </option>
               ))}
             </select>
+            </FormField>
+            <FormField label="Use unit">
             <select
               className={fieldClass}
               disabled={!canManageInventory}
@@ -628,7 +637,9 @@ export function InventoryPage() {
                 </option>
               ))}
             </select>
+            </FormField>
           </div>
+          <FormField label="Supplier">
           <select
             className={fieldClass}
             disabled={!canManageInventory}
@@ -642,6 +653,7 @@ export function InventoryPage() {
               </option>
             ))}
           </select>
+          </FormField>
           <Button
             className="w-full"
             disabled={!canManageInventory || !name.trim() || !selectedPurchaseUnitId || createItem.isPending}
@@ -654,58 +666,64 @@ export function InventoryPage() {
       </ActionModal>
 
       <ActionModal
-        description="Create a supplier account with optional contact details and opening payable balance."
+        description="Add a person or company you buy stock from."
         open={supplierOpen}
         title="New supplier"
         onClose={() => setSupplierOpen(false)}
       >
         <form className="space-y-3" onSubmit={submitSupplier}>
+          <FormField label="Supplier name">
           <input
             className={fieldClass}
             disabled={!canManageInventory}
-            placeholder="Supplier name"
             value={supplierName}
             onChange={(event) => setSupplierName(event.target.value)}
           />
+          </FormField>
           <div className="grid grid-cols-2 gap-3">
+            <FormField label="Contact person">
             <input
               className={fieldClass}
               disabled={!canManageInventory}
-              placeholder="Contact person"
               value={supplierContactPerson}
               onChange={(event) => setSupplierContactPerson(event.target.value)}
             />
+            </FormField>
+            <FormField label="Phone number">
             <input
               className={fieldClass}
               disabled={!canManageInventory}
-              placeholder="Phone"
               value={supplierPhone}
               onChange={(event) => setSupplierPhone(event.target.value)}
             />
+            </FormField>
           </div>
+          <FormField label="Address">
           <input
             className={fieldClass}
             disabled={!canManageInventory}
-            placeholder="Address"
             value={supplierAddress}
             onChange={(event) => setSupplierAddress(event.target.value)}
           />
+          </FormField>
+          <FormField label="Money owed now" hint="Put 0 if you do not owe this supplier yet.">
           <input
             className={fieldClass}
             disabled={!canManageInventory}
             min="0"
-            placeholder="Opening payable"
             type="number"
             value={supplierOpeningBalance}
             onChange={(event) => setSupplierOpeningBalance(event.target.value)}
           />
+          </FormField>
+          <FormField label="Notes">
           <textarea
             className={`${fieldClass} min-h-24 py-3`}
             disabled={!canManageInventory}
-            placeholder="Notes"
             value={supplierNotes}
             onChange={(event) => setSupplierNotes(event.target.value)}
           />
+          </FormField>
           {createSupplier.isError ? (
             <div className="rounded-xl bg-red-50 px-4 py-3 text-sm font-bold text-red-700">
               Supplier save failed. Check the name and opening balance.
@@ -723,12 +741,13 @@ export function InventoryPage() {
       </ActionModal>
 
       <ActionModal
-        description="Record a payment to reduce the supplier payable balance and store a ledger movement."
+        description="Enter money paid to a supplier."
         open={paymentOpen}
         title="Pay supplier"
         onClose={() => setPaymentOpen(false)}
       >
         <form className="space-y-3" onSubmit={submitSupplierPayment}>
+          <FormField label="Supplier">
           <select
             className={fieldClass}
             disabled={!canManageInventory}
@@ -741,24 +760,27 @@ export function InventoryPage() {
               </option>
             ))}
           </select>
+          </FormField>
           <div className="rounded-2xl bg-sage p-4">
-            <p className="text-xs font-black uppercase text-muted">Current payable</p>
+            <p className="text-xs font-black uppercase text-muted">Money owed now</p>
             <p className="mt-1 text-2xl font-black text-espresso">
               {money.format(Number(selectedPaymentSupplier?.currentPayable || 0))}
             </p>
           </div>
           <div className="grid grid-cols-2 gap-3">
+            <FormField label="Amount paid">
             <input
               className={fieldClass}
               disabled={!canManageInventory}
               max={selectedPaymentSupplier?.currentPayable ?? undefined}
               min="0.01"
-              placeholder="Payment amount"
               step="0.01"
               type="number"
               value={supplierPaymentAmount}
               onChange={(event) => setSupplierPaymentAmount(event.target.value)}
             />
+            </FormField>
+            <FormField label="How paid">
             <select
               className={fieldClass}
               disabled={!canManageInventory}
@@ -771,21 +793,24 @@ export function InventoryPage() {
               <option value="JAZZCASH_EASYPAISA">Wallet</option>
               <option value="ONLINE">Online</option>
             </select>
+            </FormField>
           </div>
+          <FormField label="Receipt or note number">
           <input
             className={fieldClass}
             disabled={!canManageInventory}
-            placeholder="Reference"
             value={supplierPaymentReference}
             onChange={(event) => setSupplierPaymentReference(event.target.value)}
           />
+          </FormField>
+          <FormField label="Notes">
           <textarea
             className={`${fieldClass} min-h-24 py-3`}
             disabled={!canManageInventory}
-            placeholder="Notes"
             value={supplierPaymentNotes}
             onChange={(event) => setSupplierPaymentNotes(event.target.value)}
           />
+          </FormField>
           {recordSupplierPayment.isError ? (
             <div className="rounded-xl bg-red-50 px-4 py-3 text-sm font-bold text-red-700">
               Payment failed. Amount cannot exceed the supplier payable.
@@ -811,7 +836,7 @@ export function InventoryPage() {
       </ActionModal>
 
       <ActionModal
-        description="Receive purchased stock, update average cost, and create supplier payable for any unpaid amount."
+        description="Add stock that arrived from a supplier."
         open={purchaseOpen}
         title="Receive stock"
         widthClass="max-w-4xl"
@@ -819,6 +844,7 @@ export function InventoryPage() {
       >
         <form className="space-y-4" onSubmit={submitPurchase}>
           <div className="grid grid-cols-4 gap-3">
+            <FormField label="Supplier">
             <select
               className={fieldClass}
               disabled={!canManageInventory}
@@ -831,13 +857,16 @@ export function InventoryPage() {
                 </option>
               ))}
             </select>
+            </FormField>
+            <FormField label="Bill number">
             <input
               className={fieldClass}
               disabled={!canManageInventory}
-              placeholder="Invoice"
               value={invoiceNumber}
               onChange={(event) => setInvoiceNumber(event.target.value)}
             />
+            </FormField>
+            <FormField label="Date">
             <input
               className={fieldClass}
               disabled={!canManageInventory}
@@ -845,6 +874,8 @@ export function InventoryPage() {
               value={purchaseDate}
               onChange={(event) => setPurchaseDate(event.target.value)}
             />
+            </FormField>
+            <FormField label="How paid">
             <select
               className={fieldClass}
               disabled={!canManageInventory}
@@ -857,6 +888,7 @@ export function InventoryPage() {
               <option value="JAZZCASH_EASYPAISA">Wallet</option>
               <option value="ONLINE">Online</option>
             </select>
+            </FormField>
           </div>
 
           <div className="space-y-3">
@@ -875,7 +907,8 @@ export function InventoryPage() {
             </div>
 
             {purchaseRows.map((row) => (
-              <div key={row.id} className="grid grid-cols-[1fr_100px_90px_110px_40px] gap-2">
+              <div key={row.id} className="grid grid-cols-[1fr_120px_100px_120px_40px] gap-2">
+                <FormField label="Stock item">
                 <select
                   className={fieldClass}
                   disabled={!canManageInventory}
@@ -888,6 +921,8 @@ export function InventoryPage() {
                     </option>
                   ))}
                 </select>
+                </FormField>
+                <FormField label="Amount">
                 <input
                   className={fieldClass}
                   disabled={!canManageInventory}
@@ -897,6 +932,8 @@ export function InventoryPage() {
                   value={row.quantity}
                   onChange={(event) => updatePurchaseRow(row.id, { quantity: event.target.value })}
                 />
+                </FormField>
+                <FormField label="Unit">
                 <select
                   className={fieldClass}
                   disabled={!canManageInventory}
@@ -909,6 +946,8 @@ export function InventoryPage() {
                     </option>
                   ))}
                 </select>
+                </FormField>
+                <FormField label="Buy price">
                 <input
                   className={fieldClass}
                   disabled={!canManageInventory}
@@ -918,8 +957,9 @@ export function InventoryPage() {
                   value={row.unitCost}
                   onChange={(event) => updatePurchaseRow(row.id, { unitCost: event.target.value })}
                 />
+                </FormField>
                 <Button
-                  className="h-11 w-10 px-0"
+                  className="mt-[25px] h-11 w-10 px-0"
                   disabled={!canManageInventory || purchaseRows.length === 1}
                   icon={<Trash2 size={15} />}
                   type="button"
@@ -935,15 +975,16 @@ export function InventoryPage() {
               <p className="text-xs font-black uppercase text-muted">Purchase total</p>
               <p className="mt-1 text-2xl font-black text-espresso">{money.format(purchaseTotal)}</p>
             </div>
+            <FormField label="Paid now">
             <input
               className={fieldClass}
               disabled={!canManageInventory}
               min="0"
-              placeholder="Paid"
               type="number"
               value={paidAmount}
               onChange={(event) => setPaidAmount(event.target.value)}
             />
+            </FormField>
             <div>
               <p className="text-xs font-black uppercase text-muted">Remaining</p>
               <p className="mt-2 text-xl font-black text-secondary">

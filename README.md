@@ -106,6 +106,10 @@ Current admin endpoints:
 - `PATCH /users/:id/password` - Sets a new staff password. Requires `user.manage`.
 - `POST /users/roles` - Creates a role with selected permissions. Requires `user.manage`.
 - `PATCH /users/roles/:id` - Updates role details and permission assignment. Requires `user.manage`.
+- `GET /shifts` - Lists shift history, active shift, and shift metrics for the signed-in user.
+- `POST /shifts/open` - Opens the signed-in staff member's cash drawer shift.
+- `PATCH /shifts/:id/close` - Closes a shift with counted cash, expenses, and calculated difference. Closing another user's shift requires `shift.close.other`.
+- `PATCH /shifts/:id/recalculate` - Recalculates payment totals for a shift. Managing another user's shift requires `shift.close.other`.
 - `GET /menu` - Lists menu categories, menu items, kitchen stations, and catalog metrics.
 - `POST /menu/categories` - Creates a menu category. Requires `menu.manage`.
 - `PATCH /menu/categories/:id` - Updates a menu category. Requires `menu.manage`.
@@ -130,6 +134,8 @@ Current admin endpoints:
 The desktop Staff, Menu, Customers, and Inventory pages now use these endpoints for real operational tables, compact popup forms, permission-aware editable states, and active/hidden toggles where applicable.
 
 The Staff page includes staff login creation, role assignment, active/inactive controls, password reset, and role permission editing. The API blocks self-deactivation and prevents removing `user.manage` from your own active role.
+
+The Shift page includes opening cash, live payment buckets, close drawer workflow, counted cash, expenses, expected cash, and difference tracking. Shift totals read `OrderPayment` records between shift open and close times so the later payment workflow can feed the same screen.
 
 The Inventory page includes a purchase receiving popup. Receiving stock creates `PURCHASE` stock movements, updates current stock, updates last purchase cost, recalculates weighted average cost, and increases supplier payable for any unpaid balance.
 
@@ -256,6 +262,8 @@ Planned admin modal shortcuts:
 - Open new staff popup.
 - Open new role popup.
 - Open staff password popup.
+- Open shift popup.
+- Close shift popup.
 - Open new menu item popup.
 - Open new recipe popup.
 - Open new stock item popup.

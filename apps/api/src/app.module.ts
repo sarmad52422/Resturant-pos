@@ -8,6 +8,7 @@ import { MenuModule } from './modules/menu/menu.module';
 import { OrdersModule } from './modules/orders/orders.module';
 import { PrismaModule } from './prisma/prisma.module';
 import { SettingsModule } from './modules/settings/settings.module';
+import { ShiftsModule } from './modules/shifts/shifts.module';
 import { TablesModule } from './modules/tables/tables.module';
 import { UsersModule } from './modules/users/users.module';
 
@@ -21,6 +22,7 @@ import { UsersModule } from './modules/users/users.module';
     OrdersModule,
     InventoryModule,
     TablesModule,
+    ShiftsModule,
     UsersModule,
     KitchenModule,
     SettingsModule,

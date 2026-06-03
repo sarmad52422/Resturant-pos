@@ -15,6 +15,7 @@ import { useEffect, useMemo, useState } from 'react';
 import { useFieldArray, useForm } from 'react-hook-form';
 import { Badge, Button, Card } from '@restaurantos/ui';
 import { ActionModal } from '../../components/action-modal';
+import { FormField } from '../../components/form-field';
 import { apiFetch } from '../../lib/api';
 import type { FormSubmitEvent } from '../../lib/events';
 import { useAuthStore } from '../../store/use-auth-store';
@@ -340,19 +341,21 @@ export function MenuPage() {
       </div>
 
       <ActionModal
-        description="Create a POS grouping and optionally route it to a kitchen station."
+        description="Group similar items, like Burgers, Pizza, or Drinks."
         open={activeModal === 'category'}
         title="New category"
         onClose={() => setActiveModal(null)}
       >
         <form className="space-y-3" onSubmit={submitCategory}>
+          <FormField label="Category name">
           <input
             className={fieldClass}
             disabled={!canManageMenu}
-            placeholder="Category name"
             value={categoryName}
             onChange={(event) => setCategoryName(event.target.value)}
           />
+          </FormField>
+          <FormField label="Kitchen place">
           <select
             className={fieldClass}
             disabled={!canManageMenu}
@@ -366,6 +369,7 @@ export function MenuPage() {
               </option>
             ))}
           </select>
+          </FormField>
           <Button
             className="w-full"
             disabled={!canManageMenu || !categoryName.trim() || createCategory.isPending}
@@ -378,29 +382,32 @@ export function MenuPage() {
       </ActionModal>
 
       <ActionModal
-        description="Add a sellable POS item with price, category, station, and recipe readiness."
+        description="Add an item customers can buy from the POS."
         open={activeModal === 'item'}
         title="New menu item"
         onClose={() => setActiveModal(null)}
       >
         <form className="space-y-3" onSubmit={submitItem}>
+          <FormField label="Item name">
           <input
             className={fieldClass}
             disabled={!canManageMenu}
-            placeholder="Item name"
             value={itemName}
             onChange={(event) => setItemName(event.target.value)}
           />
+          </FormField>
           <div className="grid grid-cols-2 gap-3">
+            <FormField label="Selling price">
             <input
               className={fieldClass}
               disabled={!canManageMenu}
               min="0"
-              placeholder="Price"
               type="number"
               value={itemPrice}
               onChange={(event) => setItemPrice(event.target.value)}
             />
+            </FormField>
+            <FormField label="Category">
             <select
               className={fieldClass}
               disabled={!canManageMenu || categories.length === 0}
@@ -413,7 +420,9 @@ export function MenuPage() {
                 </option>
               ))}
             </select>
+            </FormField>
           </div>
+          <FormField label="Kitchen place">
           <select
             className={fieldClass}
             disabled={!canManageMenu}
@@ -427,6 +436,7 @@ export function MenuPage() {
               </option>
             ))}
           </select>
+          </FormField>
           <Button
             className="w-full"
             disabled={!canManageMenu || !itemName.trim() || !itemPrice || !selectedItemCategoryId || createItem.isPending}
@@ -439,7 +449,7 @@ export function MenuPage() {
       </ActionModal>
 
       <ActionModal
-        description="Build the stock formula that will be deducted when an item is sent to kitchen."
+        description="Choose what stock is used when this item is made."
         open={activeModal === 'recipe'}
         title="New recipe"
         widthClass="max-w-2xl"
@@ -451,6 +461,7 @@ export function MenuPage() {
           </Badge>
         </div>
         <form className="space-y-4" onSubmit={submitRecipe}>
+          <FormField label="Menu item">
           <select
             className={fieldClass}
             disabled={!canManageRecipes || recipeItems.length === 0}
@@ -467,19 +478,21 @@ export function MenuPage() {
               </option>
             ))}
           </select>
+          </FormField>
           {errors.menuItemId ? <p className="text-xs font-bold text-red-600">{errors.menuItemId.message}</p> : null}
 
+          <FormField label="Recipe name">
           <input
             className={fieldClass}
             disabled={!canManageRecipes}
-            placeholder="Recipe name"
             {...register('name')}
           />
+          </FormField>
           {errors.name ? <p className="text-xs font-bold text-red-600">{errors.name.message}</p> : null}
 
           <div className="space-y-3">
             <div className="flex items-center justify-between">
-              <p className="text-xs font-black uppercase tracking-[0.16em] text-muted">Ingredients</p>
+              <p className="text-xs font-black uppercase tracking-[0.16em] text-muted">Ingredients used</p>
               <Button
                 className="h-9 px-3"
                 disabled={!canManageRecipes || inventoryItems.length === 0}
@@ -493,7 +506,8 @@ export function MenuPage() {
             </div>
 
             {ingredientRows.fields.map((field, index) => (
-              <div key={field.id} className="grid grid-cols-[1fr_86px_78px_40px] gap-2">
+              <div key={field.id} className="grid grid-cols-[1fr_120px_100px_40px] gap-2">
+                <FormField label="Stock item">
                 <select
                   className={compactFieldClass}
                   disabled={!canManageRecipes || inventoryItems.length === 0}
@@ -512,6 +526,8 @@ export function MenuPage() {
                     </option>
                   ))}
                 </select>
+                </FormField>
+                <FormField label="Amount">
                 <input
                   className={compactFieldClass}
                   disabled={!canManageRecipes}
@@ -520,6 +536,8 @@ export function MenuPage() {
                   type="number"
                   {...register(`ingredients.${index}.quantity`)}
                 />
+                </FormField>
+                <FormField label="Unit">
                 <select
                   className={compactFieldClass}
                   disabled={!canManageRecipes}
@@ -531,8 +549,9 @@ export function MenuPage() {
                     </option>
                   ))}
                 </select>
+                </FormField>
                 <Button
-                  className="h-10 w-10 px-0"
+                  className="mt-[25px] h-10 w-10 px-0"
                   disabled={!canManageRecipes || ingredientRows.fields.length === 1}
                   icon={<Trash2 size={15} />}
                   type="button"

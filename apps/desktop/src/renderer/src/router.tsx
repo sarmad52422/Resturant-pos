@@ -9,6 +9,7 @@ import { MenuPage } from './pages/menu';
 import { PosPage } from './pages/pos';
 import { ReportsPage } from './pages/reports';
 import { SettingsPage } from './pages/settings';
+import { ShiftsPage } from './pages/shifts';
 import { TablesPage } from './pages/tables';
 import { UsersPage } from './pages/users';
 
@@ -31,6 +32,7 @@ export const router = createBrowserRouter([
           { path: 'customers', element: <CustomersPage /> },
           { path: 'tables', element: <TablesPage /> },
           { path: 'users', element: <UsersPage /> },
+          { path: 'shifts', element: <ShiftsPage /> },
           { path: 'reports', element: <ReportsPage /> },
           { path: 'settings', element: <SettingsPage /> },
         ],

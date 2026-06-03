@@ -468,3 +468,67 @@ Tests:
 - Smoke test cleaned up the temporary staff login, staff profile, role, role permissions, and related audit logs.
 - `npm run build --workspaces` passed.
 - `npm audit --audit-level=high` passed with 0 vulnerabilities.
+
+## Phase 10 - Shift Management
+
+Status: Completed
+
+Completed:
+- Added a `ShiftsModule` API module for cashier drawer sessions.
+- Added shift API support with `GET /shifts`, `POST /shifts/open`, `PATCH /shifts/:id/close`, and `PATCH /shifts/:id/recalculate`.
+- Added validation for opening cash, terminal device, counted cash, expenses, and shift notes.
+- Added automatic staff profile creation for signed-in users that do not yet have a `Staff` record, including the seeded admin user.
+- Added duplicate-open-shift protection per staff member.
+- Added permission-aware shift management: staff can manage their own shift, while closing or recalculating another user's shift requires `shift.close.other`.
+- Added shift close calculations for cash sales, card/wallet sales, customer credit sales, expected cash, counted cash, expenses, and cash difference.
+- Added shift audit logs for open, close, and recalculate actions.
+- Added desktop Shift route and sidebar navigation item.
+- Added Shift Management desktop page with live current-shift summary, cash tiles, shift metrics, open-shift popup, close-shift popup, shift history, close action, and recalculate action.
+
+Files changed:
+- `apps/api/src/app.module.ts`
+- `apps/api/src/modules/shifts/**`
+- `apps/desktop/src/renderer/src/components/app-shell.tsx`
+- `apps/desktop/src/renderer/src/pages/shifts/**`
+- `apps/desktop/src/renderer/src/router.tsx`
+- `README.md`
+- `progress.md`
+
+Database changes:
+- No schema migration required; the existing `Shift`, `Staff`, `OrderPayment`, and `AuditLog` tables support the workflow.
+
+Tests:
+- `npm run typecheck --workspace @restaurantos/api` passed.
+- `npm run typecheck --workspace @restaurantos/desktop` passed.
+- `npm run typecheck --workspaces` passed.
+- Runtime smoke test passed: admin created a temporary staff login, temporary staff logged in, `POST /shifts/open` opened a shift with `2000` opening cash, `GET /shifts` returned it as the active shift, and `PATCH /shifts/:id/close` closed it with `1900` counted cash, `50` expenses, `1950` expected cash, and `-50` difference.
+- Smoke test cleaned up the temporary staff login, staff profile, shift, and related audit logs.
+- `npm run build --workspaces` passed.
+- `npm audit --audit-level=high` passed with 0 vulnerabilities.
+
+## Desktop Form Readability Pass
+
+Status: Completed
+
+Completed:
+- Added a reusable desktop `FormField` component with always-visible labels and optional helper text.
+- Removed placeholder-based labels from desktop pages and popups.
+- Updated Customer, Table, Menu, Inventory, Staff, Shift, and POS search inputs to show labels outside the fields.
+- Simplified user-facing form wording for non-technical restaurant staff, such as `Money owed now`, `Cash at start`, `Cash counted`, `Selling price`, `Stock item`, and `How paid`.
+- Kept existing business logic, API contracts, and database names unchanged.
+
+Files changed:
+- `apps/desktop/src/renderer/src/components/form-field.tsx`
+- `apps/desktop/src/renderer/src/pages/customers/index.tsx`
+- `apps/desktop/src/renderer/src/pages/inventory/index.tsx`
+- `apps/desktop/src/renderer/src/pages/menu/index.tsx`
+- `apps/desktop/src/renderer/src/pages/pos/index.tsx`
+- `apps/desktop/src/renderer/src/pages/shifts/index.tsx`
+- `apps/desktop/src/renderer/src/pages/tables/index.tsx`
+- `apps/desktop/src/renderer/src/pages/users/index.tsx`
+
+Tests:
+- `rg "placeholder=" apps/desktop/src/renderer/src/pages apps/desktop/src/renderer/src/components -n` returned no matches.
+- `npm run typecheck --workspace @restaurantos/desktop` passed.
+- `npm run build --workspaces` passed.
+- `npm audit --audit-level=high` passed with 0 vulnerabilities.

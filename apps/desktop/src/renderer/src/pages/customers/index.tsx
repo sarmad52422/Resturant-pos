@@ -4,6 +4,7 @@ import { useState } from 'react';
 import type { ReactNode } from 'react';
 import { Badge, Button, Card } from '@restaurantos/ui';
 import { ActionModal } from '../../components/action-modal';
+import { FormField } from '../../components/form-field';
 import { apiFetch } from '../../lib/api';
 import type { FormSubmitEvent } from '../../lib/events';
 import { useAuthStore } from '../../store/use-auth-store';
@@ -150,39 +151,42 @@ export function CustomersPage() {
         title="New customer"
         onClose={() => setCreateOpen(false)}
       >
-          <form className="mt-4 space-y-3" onSubmit={submitCustomer}>
+        <form className="mt-4 space-y-3" onSubmit={submitCustomer}>
+          <FormField label="Customer name">
             <input
               className={fieldClass}
               disabled={!canManageCustomers}
-              placeholder="Customer name"
               value={name}
               onChange={(event) => setName(event.target.value)}
             />
+          </FormField>
+          <FormField label="Phone number">
             <input
               className={fieldClass}
               disabled={!canManageCustomers}
-              placeholder="Phone"
               value={phone}
               onChange={(event) => setPhone(event.target.value)}
             />
+          </FormField>
+          <FormField label="Money limit" hint="Maximum amount this customer can owe.">
             <input
               className={fieldClass}
               disabled={!canManageCustomers}
               min="0"
-              placeholder="Credit limit"
               type="number"
               value={creditLimit}
               onChange={(event) => setCreditLimit(event.target.value)}
             />
-            <Button
-              className="w-full"
-              disabled={!canManageCustomers || !name.trim() || !phone.trim() || createCustomer.isPending}
-              icon={createCustomer.isPending ? <Loader2 className="animate-spin" size={17} /> : <Plus size={17} />}
-              type="submit"
-            >
-              Add customer
-            </Button>
-          </form>
+          </FormField>
+          <Button
+            className="w-full"
+            disabled={!canManageCustomers || !name.trim() || !phone.trim() || createCustomer.isPending}
+            icon={createCustomer.isPending ? <Loader2 className="animate-spin" size={17} /> : <Plus size={17} />}
+            type="submit"
+          >
+            Add customer
+          </Button>
+        </form>
       </ActionModal>
     </div>
   );

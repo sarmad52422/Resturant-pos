@@ -61,14 +61,16 @@ export function PosPage() {
         </header>
 
         <div className="mb-5 grid grid-cols-[1fr_220px] gap-4">
-          <div className="flex h-14 items-center gap-3 rounded-2xl bg-white px-4 shadow-[0_16px_42px_rgb(var(--ro-secondary-rgb)/0.06)]">
+          <label className="rounded-2xl bg-white px-4 py-2 shadow-[0_16px_42px_rgb(var(--ro-secondary-rgb)/0.06)]">
+            <span className="block text-xs font-black uppercase tracking-[0.12em] text-muted">Find item</span>
+            <div className="mt-1 flex h-8 items-center gap-3">
             <Search size={22} className="text-primary" />
             <input
-              className="h-full flex-1 bg-transparent text-lg font-semibold outline-none placeholder:text-subtle"
-              placeholder="Search item, SKU, category..."
+              className="h-full flex-1 bg-transparent text-lg font-semibold outline-none"
             />
             <Badge tone="orange">F2</Badge>
           </div>
+          </label>
           <div className="flex h-14 items-center gap-3 rounded-2xl bg-secondary px-4 text-white shadow-[0_18px_44px_rgb(var(--ro-secondary-rgb)/0.2)]">
             <Sparkles size={20} className="text-white" />
             <div>

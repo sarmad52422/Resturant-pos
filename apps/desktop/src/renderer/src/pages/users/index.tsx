@@ -4,6 +4,7 @@ import { useMemo, useState } from 'react';
 import type { ReactNode } from 'react';
 import { Badge, Button, Card } from '@restaurantos/ui';
 import { ActionModal } from '../../components/action-modal';
+import { FormField } from '../../components/form-field';
 import { apiFetch } from '../../lib/api';
 import type { FormSubmitEvent } from '../../lib/events';
 import { useAuthStore } from '../../store/use-auth-store';
@@ -299,32 +300,39 @@ export function UsersPage() {
       </div>
 
       <ActionModal
-        description="Create a staff login and attach it to the matching staff profile."
+        description="Add a person who can sign in to the POS."
         open={userOpen}
         title="New staff"
         onClose={() => setUserOpen(false)}
       >
         <form className="space-y-3" onSubmit={submitUser}>
-          <input className={fieldClass} disabled={!canManageUsers} placeholder="Full name" value={name} onChange={(event) => setName(event.target.value)} />
+          <FormField label="Staff name">
+            <input className={fieldClass} disabled={!canManageUsers} value={name} onChange={(event) => setName(event.target.value)} />
+          </FormField>
           <div className="grid grid-cols-2 gap-3">
+            <FormField label="Login name">
             <input
               className={fieldClass}
               disabled={!canManageUsers}
-              placeholder="Username"
               value={username}
               onChange={(event) => setUsername(event.target.value)}
             />
-            <input className={fieldClass} disabled={!canManageUsers} placeholder="Phone" value={phone} onChange={(event) => setPhone(event.target.value)} />
+            </FormField>
+            <FormField label="Phone number">
+              <input className={fieldClass} disabled={!canManageUsers} value={phone} onChange={(event) => setPhone(event.target.value)} />
+            </FormField>
           </div>
+          <FormField label="Password" hint="Use at least 8 characters.">
           <input
             className={fieldClass}
             disabled={!canManageUsers}
             minLength={8}
-            placeholder="Temporary password"
             type="password"
             value={password}
             onChange={(event) => setPassword(event.target.value)}
           />
+          </FormField>
+          <FormField label="Work role">
           <select className={fieldClass} disabled={!canManageUsers} value={selectedRoleId} onChange={(event) => setRoleId(event.target.value)}>
             {roles.map((role) => (
               <option key={role.id} value={role.id}>
@@ -332,6 +340,7 @@ export function UsersPage() {
               </option>
             ))}
           </select>
+          </FormField>
           {createUser.isError ? (
             <div className="rounded-xl bg-red-50 px-4 py-3 text-sm font-bold text-red-700">
               Staff save failed. Check username, password, and role.
@@ -355,15 +364,16 @@ export function UsersPage() {
         onClose={() => setPasswordOpen(false)}
       >
         <form className="space-y-3" onSubmit={submitPassword}>
+          <FormField label="New password" hint="Use at least 8 characters.">
           <input
             className={fieldClass}
             disabled={!canManageUsers}
             minLength={8}
-            placeholder="New password"
             type="password"
             value={newPassword}
             onChange={(event) => setNewPassword(event.target.value)}
           />
+          </FormField>
           {updatePassword.isError ? (
             <div className="rounded-xl bg-red-50 px-4 py-3 text-sm font-bold text-red-700">
               Password update failed. Use at least 8 characters.
@@ -381,7 +391,7 @@ export function UsersPage() {
       </ActionModal>
 
       <ActionModal
-        description="Choose the permissions this role should grant to assigned staff users."
+        description="Choose what staff with this role can do."
         open={roleOpen}
         title={editingRoleId ? 'Edit role' : 'New role'}
         widthClass="max-w-4xl"
@@ -389,14 +399,17 @@ export function UsersPage() {
       >
         <form className="space-y-4" onSubmit={(event) => { event.preventDefault(); if (roleName.trim() && rolePermissionIds.length) saveRole.mutate(); }}>
           <div className="grid grid-cols-[220px_1fr] gap-3">
-            <input className={fieldClass} disabled={!canManageUsers} placeholder="Role name" value={roleName} onChange={(event) => setRoleName(event.target.value)} />
+            <FormField label="Role name">
+              <input className={fieldClass} disabled={!canManageUsers} value={roleName} onChange={(event) => setRoleName(event.target.value)} />
+            </FormField>
+            <FormField label="Short note">
             <input
               className={fieldClass}
               disabled={!canManageUsers}
-              placeholder="Description"
               value={roleDescription}
               onChange={(event) => setRoleDescription(event.target.value)}
             />
+            </FormField>
           </div>
           <div className="grid grid-cols-2 gap-4">
             {Object.entries(groupedPermissions).map(([group, groupPermissions]) => (

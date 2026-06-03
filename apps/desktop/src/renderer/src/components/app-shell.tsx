@@ -14,6 +14,7 @@ import {
   X,
   LogOut,
   UserCog,
+  Clock3,
 } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { useAuthStore } from '../store/use-auth-store';
@@ -26,6 +27,7 @@ const navItems = [
   { to: '/customers', label: 'Credit', icon: CreditCard },
   { to: '/tables', label: 'Tables', icon: Table2 },
   { to: '/users', label: 'Staff', icon: UserCog },
+  { to: '/shifts', label: 'Shifts', icon: Clock3 },
   { to: '/reports', label: 'Reports', icon: BarChart3 },
   { to: '/settings', label: 'Settings', icon: Settings },
 ];

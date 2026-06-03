@@ -12,6 +12,7 @@ import type { ReactNode } from 'react';
 import { useMemo, useState } from 'react';
 import { Badge, Button, Card } from '@restaurantos/ui';
 import { ActionModal } from '../../components/action-modal';
+import { FormField } from '../../components/form-field';
 import { TableCard, type CurrentOrder, type RestaurantTable, type TableStatus } from '../../components/table-card';
 import { apiFetch } from '../../lib/api';
 import type { FormSubmitEvent } from '../../lib/events';
@@ -187,20 +188,23 @@ export function TablesPage() {
         onClose={() => setCreateOpen(false)}
       >
         <form className="space-y-3" onSubmit={submitTable}>
+          <FormField label="Table name">
           <input
             className={fieldClass}
             disabled={!canManageTables}
-            placeholder="Table name"
             value={tableName}
             onChange={(event) => setTableName(event.target.value)}
           />
+          </FormField>
+          <FormField label="Room or area" hint="Example: Main Hall or Family Room.">
           <input
             className={fieldClass}
             disabled={!canManageTables}
-            placeholder="Area"
             value={tableArea}
             onChange={(event) => setTableArea(event.target.value)}
           />
+          </FormField>
+          <FormField label="Seats">
           <input
             className={fieldClass}
             disabled={!canManageTables}
@@ -209,6 +213,7 @@ export function TablesPage() {
             value={capacity}
             onChange={(event) => setCapacity(event.target.value)}
           />
+          </FormField>
           <Button
             className="w-full"
             disabled={!canManageTables || !tableName.trim() || createTable.isPending}
