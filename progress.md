@@ -532,3 +532,46 @@ Tests:
 - `npm run typecheck --workspace @restaurantos/desktop` passed.
 - `npm run build --workspaces` passed.
 - `npm audit --audit-level=high` passed with 0 vulnerabilities.
+
+## Phase 11 - POS Order Builder, Payment Flow, and OS Printer Bridge
+
+Status: Completed
+
+Completed:
+- Added `GET /menu/pos` for active cashier menu categories and items.
+- Updated order creation to price draft orders from active menu item prices instead of zero-value demo lines.
+- Added cashier user tracking on created orders.
+- Added `POST /orders/:id/payments` for recording order payments.
+- Added payment validation to block overpayment and invalid order states.
+- Added order status updates to `PAYMENT_PENDING` or `COMPLETED` based on paid amount.
+- Added table cleanup transition after a fully paid dine-in table order.
+- Replaced the desktop POS demo item grid with real API-loaded menu categories and menu items.
+- Added POS category filter, search, cart quantity changes, real totals, create order, send to kitchen, payment popup, and receipt print popup.
+- Added Electron printer bridge for OS-installed printers with `restaurantos.printers.list()` and `restaurantos.printers.printReceipt(...)`.
+- Added receipt HTML generation for 80mm thermal receipt printing through Electron.
+- Documented thermal printer scope: OS-installed USB/network thermal printers are supported now; direct ESC/POS raw USB/LAN/Bluetooth support is planned as the next hardware layer.
+
+Files changed:
+- `apps/api/src/modules/menu/menu.controller.ts`
+- `apps/api/src/modules/menu/menu.service.ts`
+- `apps/api/src/modules/orders/orders.controller.ts`
+- `apps/api/src/modules/orders/orders.service.ts`
+- `apps/desktop/src/main/main.ts`
+- `apps/desktop/src/preload/preload.ts`
+- `apps/desktop/src/renderer/src/vite-env.d.ts`
+- `apps/desktop/src/renderer/src/pages/pos/**`
+- `apps/desktop/src/renderer/src/store/use-pos-store.ts`
+- `README.md`
+- `progress.md`
+
+Database changes:
+- No schema migration required; existing `Order`, `OrderItem`, `OrderPayment`, `MenuItem`, and `Table` tables support the workflow.
+
+Tests:
+- `npm run typecheck --workspace @restaurantos/api` passed.
+- `npm run typecheck --workspace @restaurantos/desktop` passed.
+- `npm run typecheck --workspaces` passed.
+- Runtime smoke test passed: admin login returned `201`, `GET /menu/pos` returned active items, `POST /orders` created a priced order for two Smash Beef Burgers with `1900` total, and `POST /orders/:id/payments` recorded one cash payment and returned `COMPLETED`.
+- Smoke test cleaned up the temporary order, order item, payment, and related kitchen records.
+- `npm run build --workspaces` passed.
+- `npm audit --audit-level=high` passed with 0 vulnerabilities.

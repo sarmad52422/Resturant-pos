@@ -77,11 +77,47 @@ function toggleMaximize() {
   }
   mainWindow.maximize();
 }
+async function printReceipt({ html, printerName, silent = true }) {
+  const printWindow = new electron.BrowserWindow({
+    width: 360,
+    height: 640,
+    show: false,
+    webPreferences: {
+      contextIsolation: true,
+      nodeIntegration: false
+    }
+  });
+  try {
+    await printWindow.loadURL(`data:text/html;charset=utf-8,${encodeURIComponent(html)}`);
+    await new Promise((resolve, reject) => {
+      printWindow.webContents.print(
+        {
+          deviceName: printerName,
+          margins: { marginType: "none" },
+          printBackground: true,
+          silent
+        },
+        (success, failureReason) => {
+          if (success) {
+            resolve();
+            return;
+          }
+          reject(new Error(failureReason || "Receipt print failed"));
+        }
+      );
+    });
+    return { success: true };
+  } finally {
+    printWindow.close();
+  }
+}
 electron.app.whenReady().then(() => {
   electron.ipcMain.handle("restaurantos:terminal", () => ({
     platform: process.platform,
     version: electron.app.getVersion()
   }));
+  electron.ipcMain.handle("restaurantos:printers:list", async () => mainWindow?.webContents.getPrintersAsync() ?? []);
+  electron.ipcMain.handle("restaurantos:printers:print-receipt", async (_event, input) => printReceipt(input));
   electron.ipcMain.on("restaurantos:window:minimize", () => mainWindow?.minimize());
   electron.ipcMain.on("restaurantos:window:maximize", () => toggleMaximize());
   electron.ipcMain.on("restaurantos:window:close", () => mainWindow?.close());

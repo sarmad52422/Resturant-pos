@@ -110,6 +110,10 @@ Current admin endpoints:
 - `POST /shifts/open` - Opens the signed-in staff member's cash drawer shift.
 - `PATCH /shifts/:id/close` - Closes a shift with counted cash, expenses, and calculated difference. Closing another user's shift requires `shift.close.other`.
 - `PATCH /shifts/:id/recalculate` - Recalculates payment totals for a shift. Managing another user's shift requires `shift.close.other`.
+- `GET /menu/pos` - Lists active categories and active menu items for the cashier POS.
+- `POST /orders` - Creates a priced draft order from active menu items. Requires `order.create`.
+- `PATCH /orders/:id/send-to-kitchen` - Sends order items to kitchen and deducts recipe stock. Requires `order.send_to_kitchen`.
+- `POST /orders/:id/payments` - Records a payment and completes the order when fully paid. Requires `order.create`.
 - `GET /menu` - Lists menu categories, menu items, kitchen stations, and catalog metrics.
 - `POST /menu/categories` - Creates a menu category. Requires `menu.manage`.
 - `PATCH /menu/categories/:id` - Updates a menu category. Requires `menu.manage`.
@@ -136,6 +140,10 @@ The desktop Staff, Menu, Customers, and Inventory pages now use these endpoints 
 The Staff page includes staff login creation, role assignment, active/inactive controls, password reset, and role permission editing. The API blocks self-deactivation and prevents removing `user.manage` from your own active role.
 
 The Shift page includes opening cash, live payment buckets, close drawer workflow, counted cash, expenses, expected cash, and difference tracking. Shift totals read `OrderPayment` records between shift open and close times so the later payment workflow can feed the same screen.
+
+The POS page loads real active menu items, builds a cart, creates priced orders, sends orders to kitchen, records payments, and prints receipts through Electron.
+
+Thermal printer support currently uses OS-installed printers through Electron. This supports common Windows/Linux USB and network thermal printers after they are installed in the operating system. Direct ESC/POS printing for raw USB/LAN/Bluetooth printers is planned as the next hardware layer for printers that should bypass the OS print driver.
 
 The Inventory page includes a purchase receiving popup. Receiving stock creates `PURCHASE` stock movements, updates current stock, updates last purchase cost, recalculates weighted average cost, and increases supplier payable for any unpaid balance.
 

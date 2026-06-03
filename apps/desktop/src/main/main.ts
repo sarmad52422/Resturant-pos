@@ -9,6 +9,12 @@ if (process.platform === 'linux' && process.env.RESTAURANTOS_ENABLE_GPU !== '1')
 const isDev = !app.isPackaged;
 let mainWindow: BrowserWindow | null = null;
 
+interface PrintReceiptInput {
+  html: string;
+  printerName?: string;
+  silent?: boolean;
+}
+
 function createWindow() {
   mainWindow = new BrowserWindow({
     width: 1440,
@@ -91,11 +97,49 @@ function toggleMaximize() {
   mainWindow.maximize();
 }
 
+async function printReceipt({ html, printerName, silent = true }: PrintReceiptInput) {
+  const printWindow = new BrowserWindow({
+    width: 360,
+    height: 640,
+    show: false,
+    webPreferences: {
+      contextIsolation: true,
+      nodeIntegration: false,
+    },
+  });
+
+  try {
+    await printWindow.loadURL(`data:text/html;charset=utf-8,${encodeURIComponent(html)}`);
+    await new Promise<void>((resolve, reject) => {
+      printWindow.webContents.print(
+        {
+          deviceName: printerName,
+          margins: { marginType: 'none' },
+          printBackground: true,
+          silent,
+        },
+        (success, failureReason) => {
+          if (success) {
+            resolve();
+            return;
+          }
+          reject(new Error(failureReason || 'Receipt print failed'));
+        },
+      );
+    });
+    return { success: true };
+  } finally {
+    printWindow.close();
+  }
+}
+
 app.whenReady().then(() => {
   ipcMain.handle('restaurantos:terminal', () => ({
     platform: process.platform,
     version: app.getVersion(),
   }));
+  ipcMain.handle('restaurantos:printers:list', async () => mainWindow?.webContents.getPrintersAsync() ?? []);
+  ipcMain.handle('restaurantos:printers:print-receipt', async (_event, input: PrintReceiptInput) => printReceipt(input));
   ipcMain.on('restaurantos:window:minimize', () => mainWindow?.minimize());
   ipcMain.on('restaurantos:window:maximize', () => toggleMaximize());
   ipcMain.on('restaurantos:window:close', () => mainWindow?.close());

@@ -75,6 +75,31 @@ export class MenuService {
     };
   }
 
+  async posCatalog() {
+    const [categories, items] = await Promise.all([
+      this.prisma.menuCategory.findMany({
+        where: { active: true },
+        include: { kitchenStation: true },
+        orderBy: [{ displayOrder: 'asc' }, { name: 'asc' }],
+      }),
+      this.prisma.menuItem.findMany({
+        where: { active: true },
+        include: {
+          category: true,
+          kitchenStation: true,
+          variations: { where: { active: true }, orderBy: { name: 'asc' } },
+          _count: { select: { recipes: true } },
+        },
+        orderBy: [{ category: { displayOrder: 'asc' } }, { name: 'asc' }],
+      }),
+    ]);
+
+    return {
+      categories,
+      items,
+    };
+  }
+
   async recipeBuilder() {
     const [recipes, items, inventoryItems, units] = await Promise.all([
       this.prisma.recipe.findMany({

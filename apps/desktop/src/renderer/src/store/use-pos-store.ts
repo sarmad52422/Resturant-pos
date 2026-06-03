@@ -13,6 +13,7 @@ interface PosState {
   cart: CartLine[];
   setOrderType: (orderType: PosState['orderType']) => void;
   addLine: (line: CartLine) => void;
+  changeQuantity: (id: string, delta: number) => void;
   removeLine: (id: string) => void;
   clear: () => void;
 }
@@ -31,6 +32,12 @@ export const usePosStore = create<PosState>((set) => ({
         ),
       };
     }),
+  changeQuantity: (id, delta) =>
+    set((state) => ({
+      cart: state.cart
+        .map((item) => (item.id === id ? { ...item, quantity: Math.max(0, item.quantity + delta) } : item))
+        .filter((item) => item.quantity > 0),
+    })),
   removeLine: (id) => set((state) => ({ cart: state.cart.filter((item) => item.id !== id) })),
   clear: () => set({ cart: [] }),
 }));

@@ -236,6 +236,11 @@ export class MenuController {
     return this.menuService.summary();
   }
 
+  @Get('pos')
+  posCatalog() {
+    return this.menuService.posCatalog();
+  }
+
   @Get('recipes')
   recipes() {
     return this.menuService.recipeBuilder();
