@@ -11,9 +11,10 @@ import {
 import type { FormEvent, ReactNode } from 'react';
 import { useMemo, useState } from 'react';
 import { Badge, Button, Card } from '@restaurantos/ui';
-import { TableCard, type CurrentOrder, type RestaurantTable, type TableStatus } from '../components/table-card';
-import { apiFetch } from '../lib/api';
-import { useAuthStore } from '../store/use-auth-store';
+import { ActionModal } from '../../components/action-modal';
+import { TableCard, type CurrentOrder, type RestaurantTable, type TableStatus } from '../../components/table-card';
+import { apiFetch } from '../../lib/api';
+import { useAuthStore } from '../../store/use-auth-store';
 
 interface TablesResponse {
   areas: string[];
@@ -37,6 +38,7 @@ export function TablesPage() {
   const [tableName, setTableName] = useState('');
   const [tableArea, setTableArea] = useState('Main Hall');
   const [capacity, setCapacity] = useState('4');
+  const [createOpen, setCreateOpen] = useState(false);
 
   const tablesQuery = useQuery({
     queryKey: ['tables-floor'],
@@ -66,6 +68,7 @@ export function TablesPage() {
     onSuccess: () => {
       setTableName('');
       setCapacity('4');
+      setCreateOpen(false);
       void refreshTables();
     },
   });
@@ -102,7 +105,12 @@ export function TablesPage() {
             Open dine-in orders, scan table state, manage capacity, and prepare the foundation for merge and transfer.
           </p>
         </div>
-        <Badge tone={canManageTables ? 'green' : 'orange'}>{canManageTables ? 'Editable' : 'View only'}</Badge>
+        <div className="flex items-center gap-3">
+          <Badge tone={canManageTables ? 'green' : 'orange'}>{canManageTables ? 'Editable' : 'View only'}</Badge>
+          <Button disabled={!canManageTables} icon={<Plus size={17} />} onClick={() => setCreateOpen(true)}>
+            New table
+          </Button>
+        </div>
       </div>
 
       <div className="mt-6 grid grid-cols-4 gap-4">
@@ -112,7 +120,7 @@ export function TablesPage() {
         <Metric icon={<UsersRound size={19} />} label="Covers" value={tablesQuery.data?.metrics.totalCovers ?? 0} />
       </div>
 
-      <div className="mt-5 grid grid-cols-[1fr_360px] gap-5">
+      <div className="mt-5">
         <Card className="min-h-[620px] p-5">
           <div className="flex flex-wrap items-center justify-between gap-3 border-b border-line pb-5">
             <div>
@@ -159,63 +167,67 @@ export function TablesPage() {
             ))}
           </div>
         </Card>
-
-        <div className="space-y-5">
-          <Card className="bg-secondary p-5 text-white">
-            <p className="text-sm font-black uppercase tracking-[0.2em] text-deepBright">Rush workflow</p>
-            <h2 className="mt-4 text-3xl font-black">F10 table screen</h2>
-            <p className="mt-3 text-sm font-semibold leading-6 text-deepFaint">
-              Cashiers can jump from POS to this floor view, open a dine-in order, and return to item entry.
-            </p>
-          </Card>
-
-          <Card className="p-5">
-            <h2 className="text-lg font-black text-espresso">New table</h2>
-            <form className="mt-4 space-y-3" onSubmit={submitTable}>
-              <input
-                className={fieldClass}
-                disabled={!canManageTables}
-                placeholder="Table name"
-                value={tableName}
-                onChange={(event) => setTableName(event.target.value)}
-              />
-              <input
-                className={fieldClass}
-                disabled={!canManageTables}
-                placeholder="Area"
-                value={tableArea}
-                onChange={(event) => setTableArea(event.target.value)}
-              />
-              <input
-                className={fieldClass}
-                disabled={!canManageTables}
-                min="1"
-                type="number"
-                value={capacity}
-                onChange={(event) => setCapacity(event.target.value)}
-              />
-              <Button
-                className="w-full"
-                disabled={!canManageTables || !tableName.trim() || createTable.isPending}
-                icon={createTable.isPending ? <Loader2 className="animate-spin" size={17} /> : <Plus size={17} />}
-                type="submit"
-              >
-                Add table
-              </Button>
-            </form>
-          </Card>
-
-          <Card className="p-5">
-            <h2 className="text-lg font-black text-espresso">Next table tools</h2>
-            <div className="mt-4 grid grid-cols-2 gap-3 text-sm font-bold text-muted">
-              <Planned icon={<Sparkles size={16} />} text="Merge tables" />
-              <Planned icon={<Sparkles size={16} />} text="Transfer order" />
-              <Planned icon={<Sparkles size={16} />} text="Reservations" />
-              <Planned icon={<Sparkles size={16} />} text="Floor designer" />
-            </div>
-          </Card>
-        </div>
       </div>
+
+      <div className="mt-5 grid grid-cols-[1fr_1fr] gap-5">
+        <Card className="bg-secondary p-5 text-white">
+          <p className="text-sm font-black uppercase tracking-[0.2em] text-deepBright">Rush workflow</p>
+          <h2 className="mt-4 text-3xl font-black">F10 table screen</h2>
+          <p className="mt-3 text-sm font-semibold leading-6 text-deepFaint">
+            Cashiers can jump from POS to this floor view, open a dine-in order, and return to item entry.
+          </p>
+        </Card>
+
+        <Card className="p-5">
+          <h2 className="text-lg font-black text-espresso">Next table tools</h2>
+          <div className="mt-4 grid grid-cols-2 gap-3 text-sm font-bold text-muted">
+            <Planned icon={<Sparkles size={16} />} text="Merge tables" />
+            <Planned icon={<Sparkles size={16} />} text="Transfer order" />
+            <Planned icon={<Sparkles size={16} />} text="Reservations" />
+            <Planned icon={<Sparkles size={16} />} text="Floor designer" />
+          </div>
+        </Card>
+      </div>
+
+      <ActionModal
+        description="Add a floor table with area, seating capacity, and ordering position."
+        open={createOpen}
+        title="New table"
+        onClose={() => setCreateOpen(false)}
+      >
+        <form className="space-y-3" onSubmit={submitTable}>
+          <input
+            className={fieldClass}
+            disabled={!canManageTables}
+            placeholder="Table name"
+            value={tableName}
+            onChange={(event) => setTableName(event.target.value)}
+          />
+          <input
+            className={fieldClass}
+            disabled={!canManageTables}
+            placeholder="Area"
+            value={tableArea}
+            onChange={(event) => setTableArea(event.target.value)}
+          />
+          <input
+            className={fieldClass}
+            disabled={!canManageTables}
+            min="1"
+            type="number"
+            value={capacity}
+            onChange={(event) => setCapacity(event.target.value)}
+          />
+          <Button
+            className="w-full"
+            disabled={!canManageTables || !tableName.trim() || createTable.isPending}
+            icon={createTable.isPending ? <Loader2 className="animate-spin" size={17} /> : <Plus size={17} />}
+            type="submit"
+          >
+            Add table
+          </Button>
+        </form>
+      </ActionModal>
     </div>
   );
 }

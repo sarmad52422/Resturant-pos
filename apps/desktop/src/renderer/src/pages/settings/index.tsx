@@ -14,8 +14,8 @@ import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { Badge, Button, Card } from '@restaurantos/ui';
-import { apiFetch } from '../lib/api';
-import { useAuthStore } from '../store/use-auth-store';
+import { apiFetch } from '../../lib/api';
+import { useAuthStore } from '../../store/use-auth-store';
 
 interface SettingRecord {
   id: string;

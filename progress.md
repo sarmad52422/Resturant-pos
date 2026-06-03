@@ -306,5 +306,70 @@ Tests:
 - `npm audit --audit-level=high` passed with 0 vulnerabilities.
 
 Notes:
-- This is the first CRUD admin slice. Recipes, purchases, ledger payments, category/item editing forms, and richer validation workflows remain future specialized phases.
-- Return to Phase 5 - Table System UI after committing this checkpoint.
+- This is the first CRUD admin slice. Purchases, ledger payments, category/item editing forms, and richer validation workflows remain future specialized phases.
+- Phase 24 and Phase 25 were side-track UI/admin checkpoints. The main product sequence continues from Phase 5 into Phase 6.
+
+## Phase 6 - Recipe Builder and Stock Deduction Rules
+
+Status: Completed
+
+Completed:
+- Corrected the roadmap naming so this work is Phase 6, not Phase 26.
+- Added `recipe.manage` to shared permissions and API seed permissions.
+- Added recipe builder API support with `GET /menu/recipes`, `POST /menu/recipes`, and `PATCH /menu/recipes/:id`.
+- Added conversion-aware estimated recipe cost using inventory average cost and usage-unit conversion rate.
+- Seeded demo recipes for Smash Beef Burger and Margherita Pizza.
+- Added idempotent stock deduction for recipe-linked order items when orders are sent to kitchen, including usage-unit to stock-unit conversion.
+- Expanded the desktop Menu page with recipe metrics, recipe cards, and a React Hook Form + Zod recipe creation form.
+
+Files changed:
+- `apps/api/prisma/seed.ts`
+- `apps/api/src/modules/menu/**`
+- `apps/api/src/modules/inventory/inventory.service.ts`
+- `apps/api/src/modules/orders/**`
+- `apps/desktop/src/renderer/src/pages/menu-page.tsx`
+- `packages/shared/src/index.ts`
+- `packages/shared/src/index.js`
+- `README.md`
+- `progress.md`
+
+Tests:
+- `npm run typecheck --workspaces` passed.
+- `npm run build --workspaces` passed.
+- `npm run db:seed` passed against local Docker PostgreSQL.
+- Runtime smoke test passed: admin login returned `201`, `GET /menu/recipes` returned seeded recipes, `POST /menu/recipes` created a temporary recipe, and sending a burger order to kitchen twice deducted stock only once.
+- Smoke test stock deltas were converted correctly: Beef Patty `0.18`, Burger Bun `1`, Mozzarella Cheese `0.035`.
+- Smoke test cleaned up the temporary recipe, order, kitchen ticket records, stock movements, and restored touched stock balances.
+- `npm audit --audit-level=high` passed with 0 vulnerabilities.
+
+## Desktop Page Structure Cleanup
+
+Status: Completed
+
+Completed:
+- Moved desktop renderer pages into page-owned folders with `index.tsx` entry files.
+- Updated router imports to use folder entries such as `./pages/menu` and `./pages/tables`.
+- Split the large Menu page into local `types.ts`, `recipe-form-model.ts`, and `components.tsx` support files.
+- Kept small pages simple with one `index.tsx` to avoid unnecessary file noise.
+
+Tests:
+- `npm run typecheck --workspace @restaurantos/desktop` passed.
+- `npm run build --workspace @restaurantos/desktop` passed.
+
+## Desktop Admin Create Popup UX
+
+Status: Completed
+
+Completed:
+- Added a reusable `ActionModal` component for desktop admin create flows.
+- Added a quick jiggle-in popup animation in the desktop renderer stylesheet.
+- Moved Menu create category, create item, and create recipe forms from side panels into popups.
+- Moved Inventory create stock item form from the side panel into a popup.
+- Moved Customer Credit create customer form from the side panel into a popup.
+- Moved Tables create table form from the side panel into a popup.
+- Expanded Menu, Inventory, Customer Credit, and Tables primary tables/lists to use full page width.
+- Kept modal state named by action so future keyboard shortcuts can open the correct popup cleanly.
+
+Tests:
+- `npm run typecheck --workspace @restaurantos/desktop` passed.
+- `npm run build --workspace @restaurantos/desktop` passed.

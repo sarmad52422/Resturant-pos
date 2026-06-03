@@ -15,6 +15,7 @@ const permissions = [
   'shift.close.other',
   'settings.update',
   'menu.manage',
+  'recipe.manage',
   'customer.manage',
   'inventory.manage',
   'table.manage',
@@ -361,6 +362,54 @@ async function main() {
     } else {
       await prisma.inventoryItem.create({ data: item });
     }
+  }
+
+  const [smashBurger, margheritaPizza, beefPatty, burgerBun, mozzarellaCheese] = await Promise.all([
+    prisma.menuItem.findUniqueOrThrow({ where: { sku: 'BURG-SMASH' } }),
+    prisma.menuItem.findUniqueOrThrow({ where: { sku: 'PIZ-MARG' } }),
+    prisma.inventoryItem.findFirstOrThrow({ where: { name: 'Beef Patty' } }),
+    prisma.inventoryItem.findFirstOrThrow({ where: { name: 'Burger Bun' } }),
+    prisma.inventoryItem.findFirstOrThrow({ where: { name: 'Mozzarella Cheese' } }),
+  ]);
+
+  const demoRecipes = [
+    {
+      menuItemId: smashBurger.id,
+      name: 'Smash Beef Burger Recipe',
+      ingredients: [
+        { inventoryItemId: beefPatty.id, quantity: new Prisma.Decimal(180), unitId: gram.id },
+        { inventoryItemId: burgerBun.id, quantity: new Prisma.Decimal(1), unitId: piece.id },
+        { inventoryItemId: mozzarellaCheese.id, quantity: new Prisma.Decimal(35), unitId: gram.id },
+      ],
+    },
+    {
+      menuItemId: margheritaPizza.id,
+      name: 'Margherita Pizza Recipe',
+      ingredients: [{ inventoryItemId: mozzarellaCheese.id, quantity: new Prisma.Decimal(160), unitId: gram.id }],
+    },
+  ];
+
+  for (const recipe of demoRecipes) {
+    const existing = await prisma.recipe.findFirst({
+      where: { menuItemId: recipe.menuItemId, name: recipe.name },
+    });
+
+    const savedRecipe = existing
+      ? await prisma.recipe.update({
+          where: { id: existing.id },
+          data: { active: true, menuItemId: recipe.menuItemId, name: recipe.name },
+        })
+      : await prisma.recipe.create({
+          data: { active: true, menuItemId: recipe.menuItemId, name: recipe.name },
+        });
+
+    await prisma.recipeIngredient.deleteMany({ where: { recipeId: savedRecipe.id } });
+    await prisma.recipeIngredient.createMany({
+      data: recipe.ingredients.map((ingredient) => ({
+        recipeId: savedRecipe.id,
+        ...ingredient,
+      })),
+    });
   }
 }
 

@@ -71,8 +71,10 @@ Seeded sensitive permissions:
 - `shift.close.other`
 - `settings.update`
 - `menu.manage`
+- `recipe.manage`
 - `customer.manage`
 - `inventory.manage`
+- `table.manage`
 - `user.manage`
 - `report.view.profit`
 
@@ -103,6 +105,9 @@ Current admin endpoints:
 - `PATCH /menu/categories/:id` - Updates a menu category. Requires `menu.manage`.
 - `POST /menu/items` - Creates a menu item. Requires `menu.manage`.
 - `PATCH /menu/items/:id` - Updates a menu item. Requires `menu.manage`.
+- `GET /menu/recipes` - Lists recipe formulas, active menu items, stock items, units, and recipe metrics.
+- `POST /menu/recipes` - Creates a stock recipe for a menu item. Requires `recipe.manage`.
+- `PATCH /menu/recipes/:id` - Replaces a recipe formula and ingredient rows. Requires `recipe.manage`.
 - `GET /customers` - Lists customers with credit and order metrics.
 - `POST /customers` - Creates a customer profile. Requires `customer.manage`.
 - `PATCH /customers/:id` - Updates a customer profile. Requires `customer.manage`.
@@ -111,6 +116,16 @@ Current admin endpoints:
 - `PATCH /inventory/items/:id` - Updates a stock item. Requires `inventory.manage`.
 
 The desktop Menu, Customers, and Inventory pages now use these endpoints for real operational tables, compact create forms, permission-aware editable states, and active/hidden toggles where applicable.
+
+The Menu page includes a recipe builder powered by React Hook Form and Zod. Recipes link sellable menu items to stock ingredients and estimate ingredient cost from inventory average cost and conversion rate.
+
+## Recipe Stock Deduction
+
+Recipe-linked order items deduct stock when an order is sent to kitchen through:
+
+- `PATCH /orders/:id/send-to-kitchen`
+
+The deduction writes `SALE_DEDUCTION` stock movements with `referenceType=OrderItem`. The operation is idempotent per order item, so sending the same order to kitchen again will not double-deduct stock. Ingredient movements keep the recipe unit, while stock balance decrements are converted through the inventory item conversion rate when the recipe uses the item's usage unit.
 
 ## Table System
 
@@ -217,6 +232,14 @@ Planned POS workflow shortcuts:
 Implementation note: POS workflow shortcuts should be wired in a dedicated keyboard workflow phase after the real order, payment, hold/recall, table, and print flows are implemented. Current shortcut labels are UI hints unless listed under current app window shortcuts.
 
 Future admin shortcuts will be documented here as modules are implemented.
+
+Planned admin modal shortcuts:
+
+- Open new menu item popup.
+- Open new recipe popup.
+- Open new stock item popup.
+- Open new customer popup.
+- Open new table popup.
 
 ## Product Direction
 

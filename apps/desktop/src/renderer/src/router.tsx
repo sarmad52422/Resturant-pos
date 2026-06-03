@@ -1,15 +1,15 @@
 import { createBrowserRouter } from 'react-router-dom';
 import { AppShell } from './components/app-shell';
 import { ProtectedRoute } from './components/protected-route';
-import { CustomersPage } from './pages/customers-page';
-import { DashboardPage } from './pages/dashboard-page';
-import { InventoryPage } from './pages/inventory-page';
-import { LoginPage } from './pages/login-page';
-import { MenuPage } from './pages/menu-page';
-import { PosPage } from './pages/pos-page';
-import { ReportsPage } from './pages/reports-page';
-import { SettingsPage } from './pages/settings-page';
-import { TablesPage } from './pages/tables-page';
+import { CustomersPage } from './pages/customers';
+import { DashboardPage } from './pages/dashboard';
+import { InventoryPage } from './pages/inventory';
+import { LoginPage } from './pages/login';
+import { MenuPage } from './pages/menu';
+import { PosPage } from './pages/pos';
+import { ReportsPage } from './pages/reports';
+import { SettingsPage } from './pages/settings';
+import { TablesPage } from './pages/tables';
 
 export const router = createBrowserRouter([
   {

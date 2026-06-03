@@ -12,6 +12,7 @@ export const permissions = [
   'shift.close.other',
   'settings.update',
   'menu.manage',
+  'recipe.manage',
   'customer.manage',
   'inventory.manage',
   'table.manage',

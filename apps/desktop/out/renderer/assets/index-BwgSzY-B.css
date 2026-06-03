@@ -567,6 +567,10 @@ video {
   position: sticky;
 }
 
+.inset-0 {
+  inset: 0px;
+}
+
 .inset-x-0 {
   left: 0px;
   right: 0px;
@@ -612,8 +616,16 @@ video {
   z-index: 50;
 }
 
+.z-\[80\] {
+  z-index: 80;
+}
+
 .col-span-2 {
   grid-column: span 2 / span 2;
+}
+
+.m-0 {
+  margin: 0px;
 }
 
 .m-5 {
@@ -765,8 +777,20 @@ video {
   height: 100vh;
 }
 
+.max-h-\[520px\] {
+  max-height: 520px;
+}
+
 .max-h-\[560px\] {
   max-height: 560px;
+}
+
+.max-h-\[88vh\] {
+  max-height: 88vh;
+}
+
+.max-h-\[calc\(88vh-88px\)\] {
+  max-height: calc(88vh - 88px);
 }
 
 .min-h-0 {
@@ -897,6 +921,10 @@ video {
   animation: spin 1s linear infinite;
 }
 
+.cursor-default {
+  cursor: default;
+}
+
 .resize-none {
   resize: none;
 }
@@ -917,6 +945,10 @@ video {
   grid-template-columns: repeat(4, minmax(0, 1fr));
 }
 
+.grid-cols-5 {
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+}
+
 .grid-cols-\[1\.05fr_0\.95fr\] {
   grid-template-columns: 1.05fr 0.95fr;
 }
@@ -929,20 +961,20 @@ video {
   grid-template-columns: 1.4fr 1fr;
 }
 
+.grid-cols-\[1fr_1fr\] {
+  grid-template-columns: 1fr 1fr;
+}
+
 .grid-cols-\[1fr_220px\] {
   grid-template-columns: 1fr 220px;
 }
 
-.grid-cols-\[1fr_340px\] {
-  grid-template-columns: 1fr 340px;
-}
-
-.grid-cols-\[1fr_360px\] {
-  grid-template-columns: 1fr 360px;
-}
-
 .grid-cols-\[1fr_430px\] {
   grid-template-columns: 1fr 430px;
+}
+
+.grid-cols-\[1fr_86px_78px_40px\] {
+  grid-template-columns: 1fr 86px 78px 40px;
 }
 
 .grid-cols-\[repeat\(auto-fill\2c minmax\(210px\2c 1fr\)\)\] {
@@ -967,6 +999,10 @@ video {
 
 .items-center {
   align-items: center;
+}
+
+.justify-end {
+  justify-content: flex-end;
 }
 
 .justify-center {
@@ -997,6 +1033,12 @@ video {
   gap: 1.25rem;
 }
 
+.space-y-2 > :not([hidden]) ~ :not([hidden]) {
+  --tw-space-y-reverse: 0;
+  margin-top: calc(0.5rem * calc(1 - var(--tw-space-y-reverse)));
+  margin-bottom: calc(0.5rem * var(--tw-space-y-reverse));
+}
+
 .space-y-3 > :not([hidden]) ~ :not([hidden]) {
   --tw-space-y-reverse: 0;
   margin-top: calc(0.75rem * calc(1 - var(--tw-space-y-reverse)));
@@ -1007,12 +1049,6 @@ video {
   --tw-space-y-reverse: 0;
   margin-top: calc(1rem * calc(1 - var(--tw-space-y-reverse)));
   margin-bottom: calc(1rem * var(--tw-space-y-reverse));
-}
-
-.space-y-5 > :not([hidden]) ~ :not([hidden]) {
-  --tw-space-y-reverse: 0;
-  margin-top: calc(1.25rem * calc(1 - var(--tw-space-y-reverse)));
-  margin-bottom: calc(1.25rem * var(--tw-space-y-reverse));
 }
 
 .divide-y > :not([hidden]) ~ :not([hidden]) {
@@ -1247,6 +1283,11 @@ video {
 
 .p-7 {
   padding: 1.75rem;
+}
+
+.px-0 {
+  padding-left: 0px;
+  padding-right: 0px;
 }
 
 .px-2 {
@@ -1601,6 +1642,12 @@ video {
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
 }
 
+.shadow-\[0_32px_90px_rgb\(var\(--ro-secondary-rgb\)\/0\.22\)\] {
+  --tw-shadow: 0 32px 90px rgb(var(--ro-secondary-rgb)/0.22);
+  --tw-shadow-colored: 0 32px 90px var(--tw-shadow-color);
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+}
+
 .shadow-\[0_8px_26px_rgb\(var\(--ro-secondary-rgb\)\/0\.05\)\] {
   --tw-shadow: 0 8px 26px rgb(var(--ro-secondary-rgb)/0.05);
   --tw-shadow-colored: 0 8px 26px var(--tw-shadow-color);
@@ -1688,6 +1735,11 @@ video {
   filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
 }
 
+.backdrop-blur-sm {
+  --tw-backdrop-blur: blur(4px);
+  backdrop-filter: var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia);
+}
+
 .transition {
   transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
@@ -1723,6 +1775,29 @@ input,
 select,
 textarea {
   font: inherit;
+}
+
+.modal-jiggle {
+  animation: ro-modal-jiggle 360ms cubic-bezier(0.18, 0.95, 0.28, 1.1);
+  transform-origin: center;
+}
+
+@keyframes ro-modal-jiggle {
+  0% {
+    opacity: 0;
+    transform: translateY(12px) scale(0.96) rotate(-0.35deg);
+  }
+  58% {
+    opacity: 1;
+    transform: translateY(-3px) scale(1.012) rotate(0.2deg);
+  }
+  78% {
+    transform: translateY(1px) scale(0.997) rotate(-0.08deg);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1) rotate(0);
+  }
 }
 
 .placeholder\:text-subtle::-moz-placeholder {

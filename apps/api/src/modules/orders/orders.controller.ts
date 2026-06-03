@@ -1,5 +1,5 @@
 import { Body, Controller, Get, Param, Patch, Post, UseGuards } from '@nestjs/common';
-import { IsArray, IsEnum, IsOptional, IsString, ValidateNested } from 'class-validator';
+import { IsArray, IsEnum, IsNumber, IsOptional, IsString, Max, Min, ValidateNested } from 'class-validator';
 import { Type } from 'class-transformer';
 import { RequirePermissions } from '../../common/decorators/permissions.decorator';
 import { JwtAuthGuard } from '../../common/guards/jwt-auth.guard';
@@ -20,6 +20,9 @@ class CreateOrderItemDto {
   @IsString()
   variationId?: string;
 
+  @IsNumber()
+  @Min(0.0001)
+  @Max(999999)
   quantity!: number;
 }
 

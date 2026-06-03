@@ -74,14 +74,14 @@ export class InventoryService {
         menuItem: {
           include: {
             recipes: {
-              include: { ingredients: true },
+              include: { ingredients: { include: { inventoryItem: true } } },
             },
           },
         },
         variation: {
           include: {
             recipes: {
-              include: { ingredients: true },
+              include: { ingredients: { include: { inventoryItem: true } } },
             },
           },
         },
@@ -93,8 +93,22 @@ export class InventoryService {
     const recipe = orderItem.variation?.recipes[0] ?? orderItem.menuItem.recipes[0];
     if (!recipe) return;
 
+    const existingDeduction = await tx.stockMovement.count({
+      where: {
+        reason: 'SALE_DEDUCTION',
+        referenceType: 'OrderItem',
+        referenceId: orderItem.id,
+      },
+    });
+    if (existingDeduction > 0) return;
+
     for (const ingredient of recipe.ingredients) {
       const quantityOut = ingredient.quantity.mul(orderItem.quantity);
+      const stockQuantityOut =
+        ingredient.unitId === ingredient.inventoryItem.usageUnitId && !ingredient.inventoryItem.conversionRate.equals(0)
+          ? quantityOut.div(ingredient.inventoryItem.conversionRate)
+          : quantityOut;
+
       await tx.stockMovement.create({
         data: {
           inventoryItemId: ingredient.inventoryItemId,
@@ -112,7 +126,7 @@ export class InventoryService {
         where: { id: ingredient.inventoryItemId },
         data: {
           currentStock: {
-            decrement: quantityOut,
+            decrement: stockQuantityOut,
           },
         },
       });

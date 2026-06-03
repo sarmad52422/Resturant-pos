@@ -1,7 +1,10 @@
 import { Body, Controller, Get, Param, Patch, Post, UseGuards } from '@nestjs/common';
+import { Type } from 'class-transformer';
 import {
+  ArrayMinSize,
   IsBoolean,
   IsInt,
+  IsArray,
   IsNumber,
   IsOptional,
   IsString,
@@ -9,6 +12,7 @@ import {
   MaxLength,
   Min,
   MinLength,
+  ValidateNested,
 } from 'class-validator';
 import { RequirePermissions } from '../../common/decorators/permissions.decorator';
 import { JwtAuthGuard } from '../../common/guards/jwt-auth.guard';
@@ -185,6 +189,43 @@ class UpdateMenuItemDto {
   taxable?: boolean;
 }
 
+class RecipeIngredientDto {
+  @IsString()
+  inventoryItemId!: string;
+
+  @IsNumber()
+  @Min(0.0001)
+  @Max(999999)
+  quantity!: number;
+
+  @IsString()
+  unitId!: string;
+}
+
+class RecipeDto {
+  @IsOptional()
+  @IsBoolean()
+  active?: boolean;
+
+  @IsArray()
+  @ArrayMinSize(1)
+  @ValidateNested({ each: true })
+  @Type(() => RecipeIngredientDto)
+  ingredients!: RecipeIngredientDto[];
+
+  @IsString()
+  menuItemId!: string;
+
+  @IsString()
+  @MinLength(2)
+  @MaxLength(120)
+  name!: string;
+
+  @IsOptional()
+  @IsString()
+  variationId?: string;
+}
+
 @Controller('menu')
 @UseGuards(JwtAuthGuard, PermissionGuard)
 export class MenuController {
@@ -193,6 +234,11 @@ export class MenuController {
   @Get()
   summary() {
     return this.menuService.summary();
+  }
+
+  @Get('recipes')
+  recipes() {
+    return this.menuService.recipeBuilder();
   }
 
   @Post('categories')
@@ -217,5 +263,17 @@ export class MenuController {
   @RequirePermissions('menu.manage')
   updateItem(@Param('id') id: string, @Body() dto: UpdateMenuItemDto) {
     return this.menuService.updateItem(id, dto);
+  }
+
+  @Post('recipes')
+  @RequirePermissions('recipe.manage')
+  createRecipe(@Body() dto: RecipeDto) {
+    return this.menuService.createRecipe(dto);
+  }
+
+  @Patch('recipes/:id')
+  @RequirePermissions('recipe.manage')
+  updateRecipe(@Param('id') id: string, @Body() dto: RecipeDto) {
+    return this.menuService.updateRecipe(id, dto);
   }
 }

@@ -13,7 +13,7 @@ import {
   Trash2,
   WalletCards,
 } from 'lucide-react';
-import { usePosStore } from '../store/use-pos-store';
+import { usePosStore } from '../../store/use-pos-store';
 
 const categories = ['All', 'Burgers', 'Pizza', 'Juice', 'Coffee', 'Deals', 'Sides'];
 const menuItems = [

@@ -2,8 +2,9 @@ import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { AlertCircle, CreditCard, Loader2, Plus, UserRound } from 'lucide-react';
 import { FormEvent, useState } from 'react';
 import { Badge, Button, Card } from '@restaurantos/ui';
-import { apiFetch } from '../lib/api';
-import { useAuthStore } from '../store/use-auth-store';
+import { ActionModal } from '../../components/action-modal';
+import { apiFetch } from '../../lib/api';
+import { useAuthStore } from '../../store/use-auth-store';
 
 interface Customer {
   id: string;
@@ -37,6 +38,7 @@ export function CustomersPage() {
   const [name, setName] = useState('');
   const [phone, setPhone] = useState('');
   const [creditLimit, setCreditLimit] = useState('0');
+  const [createOpen, setCreateOpen] = useState(false);
 
   const customersQuery = useQuery({
     queryKey: ['customers'],
@@ -58,6 +60,7 @@ export function CustomersPage() {
       setName('');
       setPhone('');
       setCreditLimit('0');
+      setCreateOpen(false);
       void queryClient.invalidateQueries({ queryKey: ['customers'] });
     },
   });
@@ -78,9 +81,14 @@ export function CustomersPage() {
             workspace.
           </p>
         </div>
-        <Badge tone={canManageCustomers ? 'green' : 'orange'}>
-          {canManageCustomers ? 'Editable' : 'View only'}
-        </Badge>
+        <div className="flex items-center gap-3">
+          <Badge tone={canManageCustomers ? 'green' : 'orange'}>
+            {canManageCustomers ? 'Editable' : 'View only'}
+          </Badge>
+          <Button disabled={!canManageCustomers} icon={<Plus size={17} />} onClick={() => setCreateOpen(true)}>
+            New customer
+          </Button>
+        </div>
       </div>
 
       <div className="mt-6 grid grid-cols-3 gap-4">
@@ -97,7 +105,7 @@ export function CustomersPage() {
         />
       </div>
 
-      <div className="mt-5 grid grid-cols-[1fr_340px] gap-5">
+      <div className="mt-5">
         <Card className="overflow-hidden">
           <div className="flex items-center justify-between border-b border-line px-6 py-5">
             <div>
@@ -152,9 +160,14 @@ export function CustomersPage() {
             </table>
           </div>
         </Card>
+      </div>
 
-        <Card className="p-5">
-          <h2 className="text-lg font-black text-espresso">New customer</h2>
+      <ActionModal
+        description="Add a regular or credit customer profile for POS billing and account tracking."
+        open={createOpen}
+        title="New customer"
+        onClose={() => setCreateOpen(false)}
+      >
           <form className="mt-4 space-y-3" onSubmit={submitCustomer}>
             <input
               className={fieldClass}
@@ -188,8 +201,7 @@ export function CustomersPage() {
               Add customer
             </Button>
           </form>
-        </Card>
-      </div>
+      </ActionModal>
     </div>
   );
 }

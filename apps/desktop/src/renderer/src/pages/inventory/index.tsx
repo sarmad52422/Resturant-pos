@@ -2,8 +2,9 @@ import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { AlertCircle, Archive, Loader2, PackagePlus, Plus, Power, TrendingDown } from 'lucide-react';
 import { FormEvent, useState } from 'react';
 import { Badge, Button, Card } from '@restaurantos/ui';
-import { apiFetch } from '../lib/api';
-import { useAuthStore } from '../store/use-auth-store';
+import { ActionModal } from '../../components/action-modal';
+import { apiFetch } from '../../lib/api';
+import { useAuthStore } from '../../store/use-auth-store';
 
 interface Unit {
   id: string;
@@ -55,6 +56,7 @@ export function InventoryPage() {
   const [purchaseUnitId, setPurchaseUnitId] = useState('');
   const [usageUnitId, setUsageUnitId] = useState('');
   const [supplierId, setSupplierId] = useState('');
+  const [createOpen, setCreateOpen] = useState(false);
 
   const inventoryQuery = useQuery({
     queryKey: ['inventory'],
@@ -93,6 +95,7 @@ export function InventoryPage() {
       setPurchaseUnitId('');
       setUsageUnitId('');
       setSupplierId('');
+      setCreateOpen(false);
       void queryClient.invalidateQueries({ queryKey: ['inventory'] });
     },
   });
@@ -125,9 +128,18 @@ export function InventoryPage() {
             Monitor stock levels, low-stock thresholds, valuation, usage units, and active purchasing items.
           </p>
         </div>
-        <Badge tone={canManageInventory ? 'green' : 'orange'}>
-          {canManageInventory ? 'Editable' : 'View only'}
-        </Badge>
+        <div className="flex items-center gap-3">
+          <Badge tone={canManageInventory ? 'green' : 'orange'}>
+            {canManageInventory ? 'Editable' : 'View only'}
+          </Badge>
+          <Button
+            disabled={!canManageInventory}
+            icon={<Plus size={17} />}
+            onClick={() => setCreateOpen(true)}
+          >
+            New stock item
+          </Button>
+        </div>
       </div>
 
       <div className="mt-6 grid grid-cols-3 gap-4">
@@ -144,7 +156,7 @@ export function InventoryPage() {
         />
       </div>
 
-      <div className="mt-5 grid grid-cols-[1fr_360px] gap-5">
+      <div className="mt-5">
         <Card className="overflow-hidden">
           <div className="flex items-center justify-between border-b border-line px-6 py-5">
             <div>
@@ -210,9 +222,14 @@ export function InventoryPage() {
             </table>
           </div>
         </Card>
+      </div>
 
-        <Card className="p-5">
-          <h2 className="text-lg font-black text-espresso">New stock item</h2>
+      <ActionModal
+        description="Create an inventory item with units, threshold, average cost, and optional supplier."
+        open={createOpen}
+        title="New stock item"
+        onClose={() => setCreateOpen(false)}
+      >
           <form className="mt-4 space-y-3" onSubmit={submitItem}>
             <input
               className={fieldClass}
@@ -305,8 +322,7 @@ export function InventoryPage() {
               Add stock item
             </Button>
           </form>
-        </Card>
-      </div>
+      </ActionModal>
     </div>
   );
 }

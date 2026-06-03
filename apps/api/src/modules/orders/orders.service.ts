@@ -1,5 +1,6 @@
 import { BadRequestException, Injectable } from '@nestjs/common';
 import { Prisma, OrderStatus } from '@prisma/client';
+import { InventoryService } from '../inventory/inventory.service';
 import { KitchenGateway } from '../kitchen/kitchen.gateway';
 import { PrismaService } from '../../prisma/prisma.service';
 
@@ -17,6 +18,7 @@ interface CreateDraftOrderInput {
 export class OrdersService {
   constructor(
     private readonly prisma: PrismaService,
+    private readonly inventoryService: InventoryService,
     private readonly kitchenGateway: KitchenGateway,
   ) {}
 
@@ -78,6 +80,8 @@ export class OrdersService {
     });
 
     for (const item of order.items) {
+      await this.prisma.$transaction((tx) => this.inventoryService.recordSaleDeduction(tx, item.id));
+
       await this.prisma.kitchenTicket.create({
         data: {
           orderId: order.id,
