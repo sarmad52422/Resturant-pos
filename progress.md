@@ -367,6 +367,7 @@ Completed:
 - Added a quick jiggle-in popup animation in the desktop renderer stylesheet.
 - Moved Menu create category, create item, and create recipe forms from side panels into popups.
 - Moved Inventory create stock item form from the side panel into a popup.
+- Added Inventory supplier and supplier payment popup actions for account workflows.
 - Moved Customer Credit create customer form from the side panel into a popup.
 - Moved Tables create table form from the side panel into a popup.
 - Expanded Menu, Inventory, Customer Credit, and Tables primary tables/lists to use full page width.
@@ -401,3 +402,33 @@ Tests:
 - Runtime smoke test passed: admin login returned `201`, `POST /inventory/purchases` created a temporary purchase, stock increased by `1`, supplier payable increased by `1500`, and one `PURCHASE` stock movement was created.
 - Smoke test cleaned up the temporary purchase, stock movement, supplier ledger entry, and restored touched stock/supplier balances.
 - `npm audit --audit-level=high` passed with 0 vulnerabilities.
+
+## Phase 8 - Supplier Accounts and Payments
+
+Status: Completed
+
+Completed:
+- Added supplier account API support with `GET /inventory/suppliers`, `POST /inventory/suppliers`, `PATCH /inventory/suppliers/:id`, and `POST /inventory/suppliers/:id/payments`.
+- Added DTO validation for supplier contact details, opening payable balance, payment amount, payment method, payment reference, and notes.
+- Added transactional supplier creation with opening payable ledger entry when an opening balance is provided.
+- Added transactional supplier payment recording that prevents overpayment, decrements `currentPayable`, and writes a supplier ledger debit row.
+- Added desktop Inventory supplier payable metric.
+- Added desktop Supplier Accounts table with contact details, purchase count, latest ledger movement, payable balance, and row-level payment action.
+- Added desktop New Supplier popup and Pay Supplier popup using the shared modal UX.
+
+Files changed:
+- `apps/api/src/modules/inventory/inventory.controller.ts`
+- `apps/api/src/modules/inventory/inventory.service.ts`
+- `apps/desktop/src/renderer/src/pages/inventory/index.tsx`
+- `apps/desktop/src/renderer/src/pages/inventory/interfaces.ts`
+- `README.md`
+- `progress.md`
+
+Database changes:
+- No schema migration required; the existing `Supplier` and `SupplierLedger` tables support the workflow.
+
+Tests:
+- `npm run typecheck --workspaces` passed.
+- Runtime smoke test passed: admin login returned `201`, `POST /inventory/suppliers` created a temporary supplier with `5000` opening payable, `POST /inventory/suppliers/:id/payments` recorded a `1200` payment, `GET /inventory/suppliers` showed `3800` current payable and two ledger rows.
+- Smoke test cleaned up the temporary supplier and supplier ledger rows.
+- `npm run build --workspaces` passed.

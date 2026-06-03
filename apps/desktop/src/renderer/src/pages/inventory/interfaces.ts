@@ -5,9 +5,39 @@ export interface Unit {
 }
 
 export interface Supplier {
+  address?: string;
+  contactPerson?: string;
   id: string;
   currentPayable: string;
+  ledgers?: SupplierLedger[];
   name: string;
+  notes?: string;
+  openingBalance?: string;
+  phone?: string;
+  purchases?: SupplierPurchaseSummary[];
+  _count?: {
+    ledgers: number;
+    purchases: number;
+  };
+}
+
+export interface SupplierLedger {
+  id: string;
+  balance: string;
+  createdAt: string;
+  credit: string;
+  debit: string;
+  notes?: string;
+  paymentMethod?: PaymentMethod;
+  reference?: string;
+}
+
+export interface SupplierPurchaseSummary {
+  id: string;
+  invoiceNumber?: string;
+  purchaseDate: string;
+  remainingAmount: string;
+  totalCost: string;
 }
 
 export interface InventoryItem {
@@ -61,4 +91,9 @@ export interface PurchaseRow {
   quantity: string;
   unitCost: string;
   unitId: string;
+}
+
+export interface SupplierPayment {
+  ledger: SupplierLedger;
+  supplier: Supplier;
 }

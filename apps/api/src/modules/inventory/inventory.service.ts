@@ -34,6 +34,22 @@ interface PurchaseInput {
   supplierId: string;
 }
 
+interface SupplierInput {
+  address?: string;
+  contactPerson?: string;
+  name: string;
+  notes?: string;
+  openingBalance?: number;
+  phone?: string;
+}
+
+interface SupplierPaymentInput {
+  amount: number;
+  notes?: string;
+  paymentMethod: 'CASH' | 'CARD' | 'BANK_TRANSFER' | 'JAZZCASH_EASYPAISA' | 'ONLINE' | 'CUSTOMER_CREDIT';
+  reference?: string;
+}
+
 @Injectable()
 export class InventoryService {
   constructor(private readonly prisma: PrismaService) {}
@@ -80,6 +96,27 @@ export class InventoryService {
       },
       orderBy: { createdAt: 'desc' },
       take: 80,
+    });
+  }
+
+  listSuppliers() {
+    return this.prisma.supplier.findMany({
+      include: {
+        ledgers: { orderBy: { createdAt: 'desc' }, take: 20 },
+        purchases: {
+          orderBy: { createdAt: 'desc' },
+          select: {
+            id: true,
+            invoiceNumber: true,
+            purchaseDate: true,
+            remainingAmount: true,
+            totalCost: true,
+          },
+          take: 10,
+        },
+        _count: { select: { ledgers: true, purchases: true } },
+      },
+      orderBy: { name: 'asc' },
     });
   }
 
@@ -195,6 +232,82 @@ export class InventoryService {
           items: { include: { inventoryItem: true, unit: true } },
         },
       });
+    });
+  }
+
+  async createSupplier(input: SupplierInput) {
+    const openingBalance = new Prisma.Decimal(input.openingBalance ?? 0);
+
+    return this.prisma.$transaction(async (tx) => {
+      const supplier = await tx.supplier.create({
+        data: {
+          address: input.address?.trim() || undefined,
+          contactPerson: input.contactPerson?.trim() || undefined,
+          currentPayable: openingBalance,
+          name: input.name.trim(),
+          notes: input.notes?.trim() || undefined,
+          openingBalance,
+          phone: input.phone?.trim() || undefined,
+        },
+      });
+
+      if (openingBalance.gt(0)) {
+        await tx.supplierLedger.create({
+          data: {
+            supplierId: supplier.id,
+            debit: new Prisma.Decimal(0),
+            credit: openingBalance,
+            balance: openingBalance,
+            reference: 'Opening balance',
+            notes: 'Supplier opening payable',
+          },
+        });
+      }
+
+      return supplier;
+    });
+  }
+
+  updateSupplier(id: string, input: Partial<SupplierInput>) {
+    return this.prisma.supplier.update({
+      where: { id },
+      data: {
+        address: input.address?.trim() || undefined,
+        contactPerson: input.contactPerson?.trim() || undefined,
+        name: input.name?.trim(),
+        notes: input.notes?.trim() || undefined,
+        phone: input.phone?.trim() || undefined,
+      },
+    });
+  }
+
+  async recordSupplierPayment(id: string, input: SupplierPaymentInput) {
+    const amount = new Prisma.Decimal(input.amount);
+    if (amount.lte(0)) throw new BadRequestException('Payment amount must be greater than zero');
+
+    return this.prisma.$transaction(async (tx) => {
+      const supplier = await tx.supplier.findUnique({ where: { id } });
+      if (!supplier) throw new BadRequestException('Supplier not found');
+      if (amount.gt(supplier.currentPayable)) throw new BadRequestException('Payment cannot exceed supplier payable');
+
+      const updatedSupplier = await tx.supplier.update({
+        where: { id },
+        data: { currentPayable: { decrement: amount } },
+      });
+
+      const ledger = await tx.supplierLedger.create({
+        data: {
+          supplierId: id,
+          debit: amount,
+          credit: new Prisma.Decimal(0),
+          balance: updatedSupplier.currentPayable,
+          paymentMethod: input.paymentMethod,
+          reference: input.reference?.trim() || undefined,
+          notes: input.notes?.trim() || 'Supplier payment recorded',
+        },
+      });
+
+      return { ledger, supplier: updatedSupplier };
     });
   }
 

@@ -197,6 +197,87 @@ class CreatePurchaseDto {
   supplierId!: string;
 }
 
+class SupplierDto {
+  @IsOptional()
+  @IsString()
+  @MaxLength(160)
+  address?: string;
+
+  @IsOptional()
+  @IsString()
+  @MaxLength(80)
+  contactPerson?: string;
+
+  @IsString()
+  @MinLength(2)
+  @MaxLength(120)
+  name!: string;
+
+  @IsOptional()
+  @IsString()
+  @MaxLength(300)
+  notes?: string;
+
+  @IsOptional()
+  @IsNumber()
+  @Min(0)
+  @Max(999999999)
+  openingBalance?: number;
+
+  @IsOptional()
+  @IsString()
+  @MaxLength(40)
+  phone?: string;
+}
+
+class UpdateSupplierDto {
+  @IsOptional()
+  @IsString()
+  @MaxLength(160)
+  address?: string;
+
+  @IsOptional()
+  @IsString()
+  @MaxLength(80)
+  contactPerson?: string;
+
+  @IsOptional()
+  @IsString()
+  @MinLength(2)
+  @MaxLength(120)
+  name?: string;
+
+  @IsOptional()
+  @IsString()
+  @MaxLength(300)
+  notes?: string;
+
+  @IsOptional()
+  @IsString()
+  @MaxLength(40)
+  phone?: string;
+}
+
+class SupplierPaymentDto {
+  @IsNumber()
+  @Min(0.01)
+  @Max(999999999)
+  amount!: number;
+
+  @IsOptional()
+  @IsString()
+  @MaxLength(300)
+  notes?: string;
+
+  @IsEnum(PaymentMethod)
+  paymentMethod!: PaymentMethod;
+
+  @IsOptional()
+  @IsString()
+  @MaxLength(80)
+  reference?: string;
+}
+
 @Controller('inventory')
 @UseGuards(JwtAuthGuard, PermissionGuard)
 export class InventoryController {
@@ -210,6 +291,11 @@ export class InventoryController {
   @Get('purchases')
   purchases() {
     return this.inventoryService.listPurchases();
+  }
+
+  @Get('suppliers')
+  suppliers() {
+    return this.inventoryService.listSuppliers();
   }
 
   @Post('items')
@@ -228,5 +314,23 @@ export class InventoryController {
   @RequirePermissions('inventory.manage')
   createPurchase(@Body() dto: CreatePurchaseDto) {
     return this.inventoryService.createPurchase(dto);
+  }
+
+  @Post('suppliers')
+  @RequirePermissions('inventory.manage')
+  createSupplier(@Body() dto: SupplierDto) {
+    return this.inventoryService.createSupplier(dto);
+  }
+
+  @Patch('suppliers/:id')
+  @RequirePermissions('inventory.manage')
+  updateSupplier(@Param('id') id: string, @Body() dto: UpdateSupplierDto) {
+    return this.inventoryService.updateSupplier(id, dto);
+  }
+
+  @Post('suppliers/:id/payments')
+  @RequirePermissions('inventory.manage')
+  recordSupplierPayment(@Param('id') id: string, @Body() dto: SupplierPaymentDto) {
+    return this.inventoryService.recordSupplierPayment(id, dto);
   }
 }

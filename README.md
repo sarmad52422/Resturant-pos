@@ -116,10 +116,16 @@ Current admin endpoints:
 - `PATCH /inventory/items/:id` - Updates a stock item. Requires `inventory.manage`.
 - `GET /inventory/purchases` - Lists recent purchase receiving entries with suppliers and stock items.
 - `POST /inventory/purchases` - Receives purchased stock, updates item cost/quantity, and supplier payable. Requires `inventory.manage`.
+- `GET /inventory/suppliers` - Lists supplier accounts with recent ledger and purchase summaries.
+- `POST /inventory/suppliers` - Creates a supplier account with optional opening payable. Requires `inventory.manage`.
+- `PATCH /inventory/suppliers/:id` - Updates supplier contact details. Requires `inventory.manage`.
+- `POST /inventory/suppliers/:id/payments` - Records a supplier payment and reduces payable. Requires `inventory.manage`.
 
 The desktop Menu, Customers, and Inventory pages now use these endpoints for real operational tables, compact create forms, permission-aware editable states, and active/hidden toggles where applicable.
 
 The Inventory page includes a purchase receiving popup. Receiving stock creates `PURCHASE` stock movements, updates current stock, updates last purchase cost, recalculates weighted average cost, and increases supplier payable for any unpaid balance.
+
+The Inventory page also includes supplier account management. Admin users can add suppliers, view payable balances and recent ledger activity, and record supplier payments from a popup.
 
 The Menu page includes a recipe builder powered by React Hook Form and Zod. Recipes link sellable menu items to stock ingredients and estimate ingredient cost from inventory average cost and conversion rate.
 
@@ -242,6 +248,8 @@ Planned admin modal shortcuts:
 - Open new menu item popup.
 - Open new recipe popup.
 - Open new stock item popup.
+- Open new supplier popup.
+- Open supplier payment popup.
 - Open new customer popup.
 - Open new table popup.
 
