@@ -10,6 +10,12 @@ RestaurantOS POS is an in-house restaurant, cafe, juice bar, burger, pizza, and 
 - `packages/shared` - Shared TypeScript contracts, permissions, enums, and domain helpers.
 - `packages/ui` - Shared React UI primitives styled for the RestaurantOS warm premium interface.
 
+## Code Organization
+
+- Keep screen files focused on page state, data loading, and layout.
+- Move reusable builders, formatters, validation helpers, and setting readers into page-local helper files.
+- Keep new and touched source files under 500 lines where practical. If a file must grow beyond that, split forms, modals, tables, and pure helpers before adding new features.
+
 ## Requirements
 
 - Node.js 22+
@@ -93,6 +99,7 @@ Seeded setting groups:
 - Tax defaults: default tax percent and service charge percent.
 - Receipt defaults: footer text and customer copy printing.
 - Operations policy: low stock threshold, kitchen delay timer, and opening cash float requirement.
+- Terminal hardware: cashier terminal name, receipt printer type, installed printer name, network printer IP/port, device path, and cash drawer after-print behavior.
 
 The desktop Settings page uses TanStack Query for loading/saving, React Hook Form with Zod validation for edits, and the current permission model to prevent unauthorized saves.
 
@@ -150,7 +157,7 @@ Thermal printer support currently includes:
 - Local device-path ESC/POS printers, such as `/dev/usb/lp0`, `/dev/rfcomm0`, `COM5`, or a shared printer path when exposed by the OS.
 - Cash drawer kick through the ESC/POS drawer pulse command.
 
-Printer note: some thermal printers need the correct OS driver, code page, paper width, or ESC/POS mode enabled in the printer settings. Future hardware settings should save printer profiles per terminal so staff do not enter IP/device path every time.
+Printer note: some thermal printers need the correct OS driver, code page, paper width, or ESC/POS mode enabled in the printer settings. The Settings page now saves terminal printer defaults so staff do not enter IP/device path every time; a later multi-terminal phase can split this into separate profiles per physical cashier machine.
 
 The Inventory page includes a purchase receiving popup. Receiving stock creates `PURCHASE` stock movements, updates current stock, updates last purchase cost, recalculates weighted average cost, and increases supplier payable for any unpaid balance.
 

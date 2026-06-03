@@ -21,6 +21,18 @@ export interface PosCatalogResponse {
 }
 
 export type PaymentMethod = 'CASH' | 'CARD' | 'BANK_TRANSFER' | 'JAZZCASH_EASYPAISA' | 'ONLINE' | 'CUSTOMER_CREDIT';
+export type PrintMode = 'os' | 'network' | 'device';
+
+export interface ReceiptLine {
+  name: string;
+  price: number;
+  quantity: number;
+}
+
+export interface SettingRecord {
+  key: string;
+  value: unknown;
+}
 
 export interface OrderPayment {
   amount: string;

@@ -25802,7 +25802,7 @@ function FormField({ children, className = "", hint, label }) {
     hint ? /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "mt-1 block text-xs font-semibold text-muted", children: hint }) : null
   ] });
 }
-const fieldClass$6 = "h-11 w-full rounded-xl border border-field bg-white px-3 text-sm font-semibold text-espresso outline-none transition focus:border-primary focus:ring-4 focus:ring-primary/10";
+const fieldClass$7 = "h-11 w-full rounded-xl border border-field bg-white px-3 text-sm font-semibold text-espresso outline-none transition focus:border-primary focus:ring-4 focus:ring-primary/10";
 const money$4 = new Intl.NumberFormat("en-PK", { maximumFractionDigits: 0, style: "currency", currency: "PKR" });
 function CustomersPage() {
   const queryClient2 = useQueryClient();
@@ -25911,7 +25911,7 @@ function CustomersPage() {
           /* @__PURE__ */ jsxRuntimeExports.jsx(FormField, { label: "Customer name", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
             "input",
             {
-              className: fieldClass$6,
+              className: fieldClass$7,
               disabled: !canManageCustomers,
               value: name,
               onChange: (event) => setName(event.target.value)
@@ -25920,7 +25920,7 @@ function CustomersPage() {
           /* @__PURE__ */ jsxRuntimeExports.jsx(FormField, { label: "Phone number", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
             "input",
             {
-              className: fieldClass$6,
+              className: fieldClass$7,
               disabled: !canManageCustomers,
               value: phone,
               onChange: (event) => setPhone(event.target.value)
@@ -25929,7 +25929,7 @@ function CustomersPage() {
           /* @__PURE__ */ jsxRuntimeExports.jsx(FormField, { label: "Money limit", hint: "Maximum amount this customer can owe.", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
             "input",
             {
-              className: fieldClass$6,
+              className: fieldClass$7,
               disabled: !canManageCustomers,
               min: "0",
               type: "number",
@@ -26005,7 +26005,7 @@ function DashboardPage() {
     ] })
   ] });
 }
-const fieldClass$5 = "h-11 w-full rounded-xl border border-field bg-white px-3 text-sm font-semibold text-espresso outline-none transition focus:border-primary focus:ring-4 focus:ring-primary/10";
+const fieldClass$6 = "h-11 w-full rounded-xl border border-field bg-white px-3 text-sm font-semibold text-espresso outline-none transition focus:border-primary focus:ring-4 focus:ring-primary/10";
 const money$3 = new Intl.NumberFormat("en-PK", { maximumFractionDigits: 0, style: "currency", currency: "PKR" });
 const today = (/* @__PURE__ */ new Date()).toISOString().slice(0, 10);
 function InventoryPage() {
@@ -26459,7 +26459,7 @@ function InventoryPage() {
           /* @__PURE__ */ jsxRuntimeExports.jsx(FormField, { label: "Stock item name", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
             "input",
             {
-              className: fieldClass$5,
+              className: fieldClass$6,
               disabled: !canManageInventory,
               value: name,
               onChange: (event) => setName(event.target.value)
@@ -26468,7 +26468,7 @@ function InventoryPage() {
           /* @__PURE__ */ jsxRuntimeExports.jsx(FormField, { label: "Group", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
             "input",
             {
-              className: fieldClass$5,
+              className: fieldClass$6,
               disabled: !canManageInventory,
               value: category,
               onChange: (event) => setCategory(event.target.value)
@@ -26478,7 +26478,7 @@ function InventoryPage() {
             /* @__PURE__ */ jsxRuntimeExports.jsx(FormField, { label: "Current stock", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
               "input",
               {
-                className: fieldClass$5,
+                className: fieldClass$6,
                 disabled: !canManageInventory,
                 min: "0",
                 type: "number",
@@ -26489,7 +26489,7 @@ function InventoryPage() {
             /* @__PURE__ */ jsxRuntimeExports.jsx(FormField, { label: "Low stock warning", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
               "input",
               {
-                className: fieldClass$5,
+                className: fieldClass$6,
                 disabled: !canManageInventory,
                 min: "0",
                 type: "number",
@@ -26501,7 +26501,7 @@ function InventoryPage() {
           /* @__PURE__ */ jsxRuntimeExports.jsx(FormField, { label: "Average buy price", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
             "input",
             {
-              className: fieldClass$5,
+              className: fieldClass$6,
               disabled: !canManageInventory,
               min: "0",
               type: "number",
@@ -26513,7 +26513,7 @@ function InventoryPage() {
             /* @__PURE__ */ jsxRuntimeExports.jsx(FormField, { label: "Buy unit", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
               "select",
               {
-                className: fieldClass$5,
+                className: fieldClass$6,
                 disabled: !canManageInventory,
                 value: selectedPurchaseUnitId,
                 onChange: (event) => setPurchaseUnitId(event.target.value),
@@ -26526,7 +26526,7 @@ function InventoryPage() {
             /* @__PURE__ */ jsxRuntimeExports.jsx(FormField, { label: "Use unit", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
               "select",
               {
-                className: fieldClass$5,
+                className: fieldClass$6,
                 disabled: !canManageInventory,
                 value: selectedUsageUnitId,
                 onChange: (event) => setUsageUnitId(event.target.value),
@@ -26540,7 +26540,7 @@ function InventoryPage() {
           /* @__PURE__ */ jsxRuntimeExports.jsx(FormField, { label: "Supplier", children: /* @__PURE__ */ jsxRuntimeExports.jsxs(
             "select",
             {
-              className: fieldClass$5,
+              className: fieldClass$6,
               disabled: !canManageInventory,
               value: supplierId,
               onChange: (event) => setSupplierId(event.target.value),
@@ -26574,7 +26574,7 @@ function InventoryPage() {
           /* @__PURE__ */ jsxRuntimeExports.jsx(FormField, { label: "Supplier name", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
             "input",
             {
-              className: fieldClass$5,
+              className: fieldClass$6,
               disabled: !canManageInventory,
               value: supplierName,
               onChange: (event) => setSupplierName(event.target.value)
@@ -26584,7 +26584,7 @@ function InventoryPage() {
             /* @__PURE__ */ jsxRuntimeExports.jsx(FormField, { label: "Contact person", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
               "input",
               {
-                className: fieldClass$5,
+                className: fieldClass$6,
                 disabled: !canManageInventory,
                 value: supplierContactPerson,
                 onChange: (event) => setSupplierContactPerson(event.target.value)
@@ -26593,7 +26593,7 @@ function InventoryPage() {
             /* @__PURE__ */ jsxRuntimeExports.jsx(FormField, { label: "Phone number", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
               "input",
               {
-                className: fieldClass$5,
+                className: fieldClass$6,
                 disabled: !canManageInventory,
                 value: supplierPhone,
                 onChange: (event) => setSupplierPhone(event.target.value)
@@ -26603,7 +26603,7 @@ function InventoryPage() {
           /* @__PURE__ */ jsxRuntimeExports.jsx(FormField, { label: "Address", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
             "input",
             {
-              className: fieldClass$5,
+              className: fieldClass$6,
               disabled: !canManageInventory,
               value: supplierAddress,
               onChange: (event) => setSupplierAddress(event.target.value)
@@ -26612,7 +26612,7 @@ function InventoryPage() {
           /* @__PURE__ */ jsxRuntimeExports.jsx(FormField, { label: "Money owed now", hint: "Put 0 if you do not owe this supplier yet.", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
             "input",
             {
-              className: fieldClass$5,
+              className: fieldClass$6,
               disabled: !canManageInventory,
               min: "0",
               type: "number",
@@ -26623,7 +26623,7 @@ function InventoryPage() {
           /* @__PURE__ */ jsxRuntimeExports.jsx(FormField, { label: "Notes", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
             "textarea",
             {
-              className: `${fieldClass$5} min-h-24 py-3`,
+              className: `${fieldClass$6} min-h-24 py-3`,
               disabled: !canManageInventory,
               value: supplierNotes,
               onChange: (event) => setSupplierNotes(event.target.value)
@@ -26654,7 +26654,7 @@ function InventoryPage() {
           /* @__PURE__ */ jsxRuntimeExports.jsx(FormField, { label: "Supplier", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
             "select",
             {
-              className: fieldClass$5,
+              className: fieldClass$6,
               disabled: !canManageInventory,
               value: selectedPaymentSupplierId,
               onChange: (event) => setPaymentSupplierId(event.target.value),
@@ -26673,7 +26673,7 @@ function InventoryPage() {
             /* @__PURE__ */ jsxRuntimeExports.jsx(FormField, { label: "Amount paid", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
               "input",
               {
-                className: fieldClass$5,
+                className: fieldClass$6,
                 disabled: !canManageInventory,
                 max: selectedPaymentSupplier?.currentPayable ?? void 0,
                 min: "0.01",
@@ -26686,7 +26686,7 @@ function InventoryPage() {
             /* @__PURE__ */ jsxRuntimeExports.jsx(FormField, { label: "How paid", children: /* @__PURE__ */ jsxRuntimeExports.jsxs(
               "select",
               {
-                className: fieldClass$5,
+                className: fieldClass$6,
                 disabled: !canManageInventory,
                 value: supplierPaymentMethod,
                 onChange: (event) => setSupplierPaymentMethod(event.target.value),
@@ -26703,7 +26703,7 @@ function InventoryPage() {
           /* @__PURE__ */ jsxRuntimeExports.jsx(FormField, { label: "Receipt or note number", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
             "input",
             {
-              className: fieldClass$5,
+              className: fieldClass$6,
               disabled: !canManageInventory,
               value: supplierPaymentReference,
               onChange: (event) => setSupplierPaymentReference(event.target.value)
@@ -26712,7 +26712,7 @@ function InventoryPage() {
           /* @__PURE__ */ jsxRuntimeExports.jsx(FormField, { label: "Notes", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
             "textarea",
             {
-              className: `${fieldClass$5} min-h-24 py-3`,
+              className: `${fieldClass$6} min-h-24 py-3`,
               disabled: !canManageInventory,
               value: supplierPaymentNotes,
               onChange: (event) => setSupplierPaymentNotes(event.target.value)
@@ -26745,7 +26745,7 @@ function InventoryPage() {
             /* @__PURE__ */ jsxRuntimeExports.jsx(FormField, { label: "Supplier", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
               "select",
               {
-                className: fieldClass$5,
+                className: fieldClass$6,
                 disabled: !canManageInventory,
                 value: selectedPurchaseSupplierId,
                 onChange: (event) => setPurchaseSupplierId(event.target.value),
@@ -26755,7 +26755,7 @@ function InventoryPage() {
             /* @__PURE__ */ jsxRuntimeExports.jsx(FormField, { label: "Bill number", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
               "input",
               {
-                className: fieldClass$5,
+                className: fieldClass$6,
                 disabled: !canManageInventory,
                 value: invoiceNumber,
                 onChange: (event) => setInvoiceNumber(event.target.value)
@@ -26764,7 +26764,7 @@ function InventoryPage() {
             /* @__PURE__ */ jsxRuntimeExports.jsx(FormField, { label: "Date", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
               "input",
               {
-                className: fieldClass$5,
+                className: fieldClass$6,
                 disabled: !canManageInventory,
                 type: "date",
                 value: purchaseDate,
@@ -26774,7 +26774,7 @@ function InventoryPage() {
             /* @__PURE__ */ jsxRuntimeExports.jsx(FormField, { label: "How paid", children: /* @__PURE__ */ jsxRuntimeExports.jsxs(
               "select",
               {
-                className: fieldClass$5,
+                className: fieldClass$6,
                 disabled: !canManageInventory,
                 value: paymentMethod,
                 onChange: (event) => setPaymentMethod(event.target.value),
@@ -26808,7 +26808,7 @@ function InventoryPage() {
               /* @__PURE__ */ jsxRuntimeExports.jsx(FormField, { label: "Stock item", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
                 "select",
                 {
-                  className: fieldClass$5,
+                  className: fieldClass$6,
                   disabled: !canManageInventory,
                   value: row.inventoryItemId,
                   onChange: (event) => updatePurchaseRow(row.id, { inventoryItemId: event.target.value }),
@@ -26818,7 +26818,7 @@ function InventoryPage() {
               /* @__PURE__ */ jsxRuntimeExports.jsx(FormField, { label: "Amount", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
                 "input",
                 {
-                  className: fieldClass$5,
+                  className: fieldClass$6,
                   disabled: !canManageInventory,
                   min: "0.0001",
                   step: "0.0001",
@@ -26830,7 +26830,7 @@ function InventoryPage() {
               /* @__PURE__ */ jsxRuntimeExports.jsx(FormField, { label: "Unit", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
                 "select",
                 {
-                  className: fieldClass$5,
+                  className: fieldClass$6,
                   disabled: !canManageInventory,
                   value: row.unitId,
                   onChange: (event) => updatePurchaseRow(row.id, { unitId: event.target.value }),
@@ -26840,7 +26840,7 @@ function InventoryPage() {
               /* @__PURE__ */ jsxRuntimeExports.jsx(FormField, { label: "Buy price", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
                 "input",
                 {
-                  className: fieldClass$5,
+                  className: fieldClass$6,
                   disabled: !canManageInventory,
                   min: "0",
                   step: "0.01",
@@ -26870,7 +26870,7 @@ function InventoryPage() {
             /* @__PURE__ */ jsxRuntimeExports.jsx(FormField, { label: "Paid now", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
               "input",
               {
-                className: fieldClass$5,
+                className: fieldClass$6,
                 disabled: !canManageInventory,
                 min: "0",
                 type: "number",
@@ -32824,7 +32824,7 @@ const objectType = ZodObject.create;
 ZodUnion.create;
 ZodIntersection.create;
 ZodTuple.create;
-ZodEnum.create;
+const enumType = ZodEnum.create;
 ZodPromise.create;
 ZodOptional.create;
 ZodNullable.create;
@@ -32971,7 +32971,7 @@ const recipeSchema = objectType({
   menuItemId: stringType().min(1, "Choose menu item"),
   name: stringType().min(2, "Recipe name is required").max(120)
 });
-const fieldClass$4 = "h-11 w-full rounded-xl border border-field bg-white px-3 text-sm font-semibold text-espresso outline-none transition focus:border-primary focus:ring-4 focus:ring-primary/10";
+const fieldClass$5 = "h-11 w-full rounded-xl border border-field bg-white px-3 text-sm font-semibold text-espresso outline-none transition focus:border-primary focus:ring-4 focus:ring-primary/10";
 const compactFieldClass = "h-10 w-full rounded-xl border border-field bg-white px-3 text-xs font-bold text-espresso outline-none transition focus:border-primary focus:ring-4 focus:ring-primary/10";
 function defaultRecipeForm(menuItem, inventoryItem) {
   return {
@@ -33269,7 +33269,7 @@ function MenuPage() {
           /* @__PURE__ */ jsxRuntimeExports.jsx(FormField, { label: "Category name", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
             "input",
             {
-              className: fieldClass$4,
+              className: fieldClass$5,
               disabled: !canManageMenu,
               value: categoryName,
               onChange: (event) => setCategoryName(event.target.value)
@@ -33278,7 +33278,7 @@ function MenuPage() {
           /* @__PURE__ */ jsxRuntimeExports.jsx(FormField, { label: "Kitchen place", children: /* @__PURE__ */ jsxRuntimeExports.jsxs(
             "select",
             {
-              className: fieldClass$4,
+              className: fieldClass$5,
               disabled: !canManageMenu,
               value: categoryStationId,
               onChange: (event) => setCategoryStationId(event.target.value),
@@ -33312,7 +33312,7 @@ function MenuPage() {
           /* @__PURE__ */ jsxRuntimeExports.jsx(FormField, { label: "Item name", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
             "input",
             {
-              className: fieldClass$4,
+              className: fieldClass$5,
               disabled: !canManageMenu,
               value: itemName,
               onChange: (event) => setItemName(event.target.value)
@@ -33322,7 +33322,7 @@ function MenuPage() {
             /* @__PURE__ */ jsxRuntimeExports.jsx(FormField, { label: "Selling price", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
               "input",
               {
-                className: fieldClass$4,
+                className: fieldClass$5,
                 disabled: !canManageMenu,
                 min: "0",
                 type: "number",
@@ -33333,7 +33333,7 @@ function MenuPage() {
             /* @__PURE__ */ jsxRuntimeExports.jsx(FormField, { label: "Category", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
               "select",
               {
-                className: fieldClass$4,
+                className: fieldClass$5,
                 disabled: !canManageMenu || categories.length === 0,
                 value: selectedItemCategoryId,
                 onChange: (event) => setItemCategoryId(event.target.value),
@@ -33344,7 +33344,7 @@ function MenuPage() {
           /* @__PURE__ */ jsxRuntimeExports.jsx(FormField, { label: "Kitchen place", children: /* @__PURE__ */ jsxRuntimeExports.jsxs(
             "select",
             {
-              className: fieldClass$4,
+              className: fieldClass$5,
               disabled: !canManageMenu,
               value: itemStationId,
               onChange: (event) => setItemStationId(event.target.value),
@@ -33381,7 +33381,7 @@ function MenuPage() {
             /* @__PURE__ */ jsxRuntimeExports.jsx(FormField, { label: "Menu item", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
               "select",
               {
-                className: fieldClass$4,
+                className: fieldClass$5,
                 disabled: !canManageRecipes || recipeItems.length === 0,
                 ...register("menuItemId", {
                   onChange: (event) => {
@@ -33396,7 +33396,7 @@ function MenuPage() {
             /* @__PURE__ */ jsxRuntimeExports.jsx(FormField, { label: "Recipe name", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
               "input",
               {
-                className: fieldClass$4,
+                className: fieldClass$5,
                 disabled: !canManageRecipes,
                 ...register("name")
               }
@@ -33506,7 +33506,227 @@ const usePosStore = create((set2) => ({
   removeLine: (id) => set2((state) => ({ cart: state.cart.filter((item) => item.id !== id) })),
   clear: () => set2({ cart: [] })
 }));
-const money$1 = new Intl.NumberFormat("en-PK", { maximumFractionDigits: 0, style: "currency", currency: "PKR" });
+const money$1 = new Intl.NumberFormat("en-PK", {
+  currency: "PKR",
+  maximumFractionDigits: 0,
+  style: "currency"
+});
+const fieldClass$4 = "h-11 w-full rounded-xl border border-field bg-white px-3 text-sm font-semibold text-espresso outline-none transition focus:border-primary focus:ring-4 focus:ring-primary/10";
+function PaymentModal({
+  amount,
+  error,
+  method,
+  onAmountChange,
+  onClose,
+  onMethodChange,
+  onReferenceChange,
+  onSubmit,
+  open,
+  pending,
+  reference,
+  total
+}) {
+  return /* @__PURE__ */ jsxRuntimeExports.jsx(ActionModal, { description: "Take payment for this order.", open, title: "Payment", onClose, children: /* @__PURE__ */ jsxRuntimeExports.jsxs("form", { className: "space-y-3", onSubmit, children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "rounded-2xl bg-sage p-4", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs font-black uppercase text-muted", children: "Total to pay" }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mt-1 text-2xl font-black text-espresso", children: money$1.format(total) })
+    ] }),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "grid grid-cols-2 gap-3", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx(FormField, { label: "Amount paid", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+        "input",
+        {
+          className: fieldClass$4,
+          max: total,
+          min: "0.01",
+          step: "0.01",
+          type: "number",
+          value: amount,
+          onChange: (event) => onAmountChange(event.target.value)
+        }
+      ) }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx(FormField, { label: "How paid", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("select", { className: fieldClass$4, value: method, onChange: (event) => onMethodChange(event.target.value), children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("option", { value: "CASH", children: "Cash" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("option", { value: "CARD", children: "Card" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("option", { value: "BANK_TRANSFER", children: "Bank transfer" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("option", { value: "JAZZCASH_EASYPAISA", children: "Wallet" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("option", { value: "ONLINE", children: "Online" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("option", { value: "CUSTOMER_CREDIT", children: "Customer credit" })
+      ] }) })
+    ] }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(FormField, { label: "Receipt or note number", children: /* @__PURE__ */ jsxRuntimeExports.jsx("input", { className: fieldClass$4, value: reference, onChange: (event) => onReferenceChange(event.target.value) }) }),
+    error ? /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "rounded-xl bg-red-50 px-4 py-3 text-sm font-bold text-red-700", children: "Payment failed. Check amount and API connection." }) : null,
+    /* @__PURE__ */ jsxRuntimeExports.jsx(
+      Button,
+      {
+        className: "w-full",
+        disabled: Number(amount || 0) <= 0 || Number(amount || 0) > total || pending,
+        icon: pending ? /* @__PURE__ */ jsxRuntimeExports.jsx(LoaderCircle, { className: "animate-spin", size: 17 }) : /* @__PURE__ */ jsxRuntimeExports.jsx(WalletCards, { size: 17 }),
+        type: "submit",
+        children: "Save payment"
+      }
+    )
+  ] }) });
+}
+function PrintReceiptModal({
+  canPrint,
+  devicePath,
+  drawerError,
+  drawerPending,
+  host,
+  mode,
+  onClose,
+  onDevicePathChange,
+  onDrawerChange,
+  onHostChange,
+  onKickDrawer,
+  onModeChange,
+  onPortChange,
+  onPrinterNameChange,
+  onSubmit,
+  open,
+  openDrawerAfterPrint,
+  port,
+  previewText,
+  printerError,
+  printerName,
+  printerPending,
+  printers
+}) {
+  const missingNetworkPrinter = mode === "network" && !host.trim();
+  const missingDevicePrinter = mode === "device" && !devicePath.trim();
+  const hardwareMissing = missingNetworkPrinter || missingDevicePrinter;
+  return /* @__PURE__ */ jsxRuntimeExports.jsx(ActionModal, { description: "Choose how this receipt printer is connected.", open, title: "Print receipt", onClose, children: /* @__PURE__ */ jsxRuntimeExports.jsxs("form", { className: "space-y-3", onSubmit, children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "rounded-2xl border border-line bg-sage p-4", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mb-3 flex items-center justify-between gap-3", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs font-black uppercase tracking-[0.14em] text-muted", children: "Receipt preview" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mt-1 text-sm font-bold text-label", children: "Check before printing." })
+        ] }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx(Badge, { tone: "orange", children: "P Print" })
+      ] }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("pre", { className: "max-h-64 overflow-y-auto whitespace-pre-wrap rounded-xl bg-white p-4 font-mono text-xs font-semibold leading-5 text-espresso shadow-[inset_0_0_0_1px_rgb(var(--ro-secondary-rgb)/0.08)]", children: previewText })
+    ] }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(FormField, { label: "Printer type", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("select", { className: fieldClass$4, value: mode, onChange: (event) => onModeChange(event.target.value), children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx("option", { value: "os", children: "Installed printer" }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("option", { value: "network", children: "Network ESC/POS" }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("option", { value: "device", children: "USB/Bluetooth device path" })
+    ] }) }),
+    mode === "os" ? /* @__PURE__ */ jsxRuntimeExports.jsx(FormField, { label: "Installed printer", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("select", { className: fieldClass$4, value: printerName, onChange: (event) => onPrinterNameChange(event.target.value), children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx("option", { value: "", children: "Default printer" }),
+      printers.map((printer) => /* @__PURE__ */ jsxRuntimeExports.jsxs("option", { value: printer.name, children: [
+        printer.displayName || printer.name,
+        printer.isDefault ? " (Default)" : ""
+      ] }, printer.name))
+    ] }) }) : null,
+    mode === "network" ? /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "grid grid-cols-[1fr_120px] gap-3", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx(FormField, { label: "Printer IP address", children: /* @__PURE__ */ jsxRuntimeExports.jsx("input", { className: fieldClass$4, value: host, onChange: (event) => onHostChange(event.target.value) }) }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx(FormField, { label: "Port", children: /* @__PURE__ */ jsxRuntimeExports.jsx("input", { className: fieldClass$4, min: "1", type: "number", value: port, onChange: (event) => onPortChange(event.target.value) }) })
+    ] }) : null,
+    mode === "device" ? /* @__PURE__ */ jsxRuntimeExports.jsx(FormField, { label: "Device path", hint: "Examples: /dev/usb/lp0, /dev/rfcomm0, COM5, or a shared printer path.", children: /* @__PURE__ */ jsxRuntimeExports.jsx("input", { className: fieldClass$4, value: devicePath, onChange: (event) => onDevicePathChange(event.target.value) }) }) : null,
+    mode !== "os" ? /* @__PURE__ */ jsxRuntimeExports.jsxs("label", { className: "flex items-center gap-3 rounded-2xl bg-sage px-4 py-3 text-sm font-bold text-label", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx(
+        "input",
+        {
+          checked: openDrawerAfterPrint,
+          className: "h-4 w-4 accent-primary",
+          type: "checkbox",
+          onChange: (event) => onDrawerChange(event.target.checked)
+        }
+      ),
+      "Open cash drawer after print"
+    ] }) : null,
+    printerError ? /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "rounded-xl bg-red-50 px-4 py-3 text-sm font-bold text-red-700", children: "Print failed. Check printer setup." }) : null,
+    drawerError ? /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "rounded-xl bg-red-50 px-4 py-3 text-sm font-bold text-red-700", children: "Drawer did not open. Check printer connection." }) : null,
+    mode !== "os" ? /* @__PURE__ */ jsxRuntimeExports.jsx(
+      Button,
+      {
+        className: "w-full",
+        disabled: drawerPending || hardwareMissing,
+        icon: drawerPending ? /* @__PURE__ */ jsxRuntimeExports.jsx(LoaderCircle, { className: "animate-spin", size: 17 }) : /* @__PURE__ */ jsxRuntimeExports.jsx(WalletCards, { size: 17 }),
+        type: "button",
+        variant: "secondary",
+        onClick: onKickDrawer,
+        children: "Open cash drawer"
+      }
+    ) : null,
+    /* @__PURE__ */ jsxRuntimeExports.jsx(
+      Button,
+      {
+        className: "w-full",
+        disabled: printerPending || !canPrint || hardwareMissing,
+        icon: printerPending ? /* @__PURE__ */ jsxRuntimeExports.jsx(LoaderCircle, { className: "animate-spin", size: 17 }) : /* @__PURE__ */ jsxRuntimeExports.jsx(Printer, { size: 17 }),
+        type: "submit",
+        children: "Print receipt"
+      }
+    )
+  ] }) });
+}
+function buildReceiptHtml(order, cart, total) {
+  const rows = cart.map(
+    (line) => `
+        <tr>
+          <td>${escapeHtml(line.name)} x ${line.quantity}</td>
+          <td style="text-align:right">${money$1.format(line.price * line.quantity)}</td>
+        </tr>
+      `
+  ).join("");
+  return `
+    <!doctype html>
+    <html>
+      <head>
+        <meta charset="utf-8" />
+        <style>
+          @page { margin: 0; size: 80mm auto; }
+          body { margin: 0; padding: 10px; width: 72mm; font-family: Arial, sans-serif; font-size: 12px; color: #000; }
+          h1 { font-size: 18px; margin: 0 0 8px; text-align: center; }
+          table { width: 100%; border-collapse: collapse; }
+          td { padding: 3px 0; vertical-align: top; }
+          .line { border-top: 1px dashed #000; margin: 8px 0; }
+          .total { font-size: 16px; font-weight: 700; }
+          .center { text-align: center; }
+        </style>
+      </head>
+      <body>
+        <h1>RestaurantOS</h1>
+        <p class="center">Order ${escapeHtml(order.orderNumber)}</p>
+        <div class="line"></div>
+        <table>${rows}</table>
+        <div class="line"></div>
+        <table>
+          <tr class="total"><td>Total</td><td style="text-align:right">${money$1.format(total || Number(order.grandTotal))}</td></tr>
+        </table>
+        <p class="center">Thank you</p>
+      </body>
+    </html>
+  `;
+}
+function buildReceiptText(order, cart, total) {
+  const rows = cart.map((line) => {
+    const left = `${line.name} x ${line.quantity}`;
+    const right = money$1.format(line.price * line.quantity);
+    return `${left.padEnd(Math.max(1, 32 - right.length), " ")}${right}`;
+  }).join("\n");
+  return [
+    `Order ${order.orderNumber}`,
+    "------------------------------",
+    rows,
+    "------------------------------",
+    `Total ${money$1.format(total || Number(order.grandTotal))}`,
+    "",
+    "Thank you"
+  ].join("\n");
+}
+function escapeHtml(value) {
+  return value.replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll('"', "&quot;").replaceAll("'", "&#039;");
+}
+function readSetting(settings, key, fallback) {
+  const setting = settings.find((item) => item.key === key);
+  return setting?.value === void 0 ? fallback : setting.value;
+}
+function readPrintMode(settings, key, fallback) {
+  const value = readSetting(settings, key, fallback);
+  return value === "network" || value === "device" || value === "os" ? value : fallback;
+}
 function PosPage() {
   const { cart, addLine, changeQuantity, removeLine, clear, orderType, setOrderType } = usePosStore();
   const [selectedCategoryId, setSelectedCategoryId] = reactExports.useState("all");
@@ -33522,6 +33742,7 @@ function PosPage() {
   const [printerPort, setPrinterPort] = reactExports.useState("9100");
   const [printerDevicePath, setPrinterDevicePath] = reactExports.useState("");
   const [openDrawerAfterPrint, setOpenDrawerAfterPrint] = reactExports.useState(false);
+  const [printerDefaultsApplied, setPrinterDefaultsApplied] = reactExports.useState(false);
   const [lastOrder, setLastOrder] = reactExports.useState();
   const [lastReceiptLines, setLastReceiptLines] = reactExports.useState([]);
   const catalogQuery = useQuery({
@@ -33531,6 +33752,10 @@ function PosPage() {
   const printersQuery = useQuery({
     queryKey: ["desktop-printers"],
     queryFn: () => window.restaurantos.printers.list()
+  });
+  const settingsQuery = useQuery({
+    queryKey: ["settings"],
+    queryFn: () => apiFetch("/settings")
   });
   const total = reactExports.useMemo(() => cart.reduce((sum, item) => sum + item.price * item.quantity, 0), [cart]);
   const receiptPreviewLines = cart.length ? cart : lastReceiptLines;
@@ -33548,6 +33773,16 @@ function PosPage() {
     const matchesSearch = !search || item.name.toLowerCase().includes(search) || item.category.name.toLowerCase().includes(search) || item.kitchenStation?.name.toLowerCase().includes(search);
     return matchesCategory && matchesSearch;
   });
+  reactExports.useEffect(() => {
+    if (!settingsQuery.data || printerDefaultsApplied) return;
+    setPrintMode(readPrintMode(settingsQuery.data, "terminal.receiptPrinterMode", "os"));
+    setSelectedPrinterName(readSetting(settingsQuery.data, "terminal.receiptPrinterName", ""));
+    setPrinterHost(readSetting(settingsQuery.data, "terminal.receiptPrinterHost", ""));
+    setPrinterPort(String(readSetting(settingsQuery.data, "terminal.receiptPrinterPort", 9100)));
+    setPrinterDevicePath(readSetting(settingsQuery.data, "terminal.receiptPrinterDevicePath", ""));
+    setOpenDrawerAfterPrint(Boolean(readSetting(settingsQuery.data, "terminal.openDrawerAfterPrint", false)));
+    setPrinterDefaultsApplied(true);
+  }, [printerDefaultsApplied, settingsQuery.data]);
   const createOrder = useMutation({
     mutationFn: () => apiFetch("/orders", {
       method: "POST",
@@ -33831,224 +34066,52 @@ function PosPage() {
         /* @__PURE__ */ jsxRuntimeExports.jsx(Button, { className: "col-span-2 h-14 text-base", disabled: cart.length === 0 || payOrder.isPending, icon: /* @__PURE__ */ jsxRuntimeExports.jsx(WalletCards, { size: 20 }), onClick: openPayment, children: "Payment F7" })
       ] })
     ] }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx(ActionModal, { description: "Take payment for this order.", open: paymentOpen, title: "Payment", onClose: () => setPaymentOpen(false), children: /* @__PURE__ */ jsxRuntimeExports.jsxs("form", { className: "space-y-3", onSubmit: submitPayment, children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "rounded-2xl bg-sage p-4", children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs font-black uppercase text-muted", children: "Total to pay" }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mt-1 text-2xl font-black text-espresso", children: money$1.format(total) })
-      ] }),
-      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "grid grid-cols-2 gap-3", children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx(FormField, { label: "Amount paid", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
-          "input",
-          {
-            className: "h-11 w-full rounded-xl border border-field bg-white px-3 text-sm font-semibold text-espresso outline-none transition focus:border-primary focus:ring-4 focus:ring-primary/10",
-            max: total,
-            min: "0.01",
-            step: "0.01",
-            type: "number",
-            value: paymentAmount,
-            onChange: (event) => setPaymentAmount(event.target.value)
-          }
-        ) }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx(FormField, { label: "How paid", children: /* @__PURE__ */ jsxRuntimeExports.jsxs(
-          "select",
-          {
-            className: "h-11 w-full rounded-xl border border-field bg-white px-3 text-sm font-semibold text-espresso outline-none transition focus:border-primary focus:ring-4 focus:ring-primary/10",
-            value: paymentMethod,
-            onChange: (event) => setPaymentMethod(event.target.value),
-            children: [
-              /* @__PURE__ */ jsxRuntimeExports.jsx("option", { value: "CASH", children: "Cash" }),
-              /* @__PURE__ */ jsxRuntimeExports.jsx("option", { value: "CARD", children: "Card" }),
-              /* @__PURE__ */ jsxRuntimeExports.jsx("option", { value: "BANK_TRANSFER", children: "Bank transfer" }),
-              /* @__PURE__ */ jsxRuntimeExports.jsx("option", { value: "JAZZCASH_EASYPAISA", children: "Wallet" }),
-              /* @__PURE__ */ jsxRuntimeExports.jsx("option", { value: "ONLINE", children: "Online" }),
-              /* @__PURE__ */ jsxRuntimeExports.jsx("option", { value: "CUSTOMER_CREDIT", children: "Customer credit" })
-            ]
-          }
-        ) })
-      ] }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx(FormField, { label: "Receipt or note number", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
-        "input",
-        {
-          className: "h-11 w-full rounded-xl border border-field bg-white px-3 text-sm font-semibold text-espresso outline-none transition focus:border-primary focus:ring-4 focus:ring-primary/10",
-          value: paymentReference,
-          onChange: (event) => setPaymentReference(event.target.value)
-        }
-      ) }),
-      payOrder.isError ? /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "rounded-xl bg-red-50 px-4 py-3 text-sm font-bold text-red-700", children: "Payment failed. Check amount and API connection." }) : null,
-      /* @__PURE__ */ jsxRuntimeExports.jsx(
-        Button,
-        {
-          className: "w-full",
-          disabled: Number(paymentAmount || 0) <= 0 || Number(paymentAmount || 0) > total || payOrder.isPending,
-          icon: payOrder.isPending ? /* @__PURE__ */ jsxRuntimeExports.jsx(LoaderCircle, { className: "animate-spin", size: 17 }) : /* @__PURE__ */ jsxRuntimeExports.jsx(WalletCards, { size: 17 }),
-          type: "submit",
-          children: "Save payment"
-        }
-      )
-    ] }) }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx(ActionModal, { description: "Choose how this receipt printer is connected.", open: printOpen, title: "Print receipt", onClose: () => setPrintOpen(false), children: /* @__PURE__ */ jsxRuntimeExports.jsxs("form", { className: "space-y-3", onSubmit: submitPrint, children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "rounded-2xl border border-line bg-sage p-4", children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mb-3 flex items-center justify-between gap-3", children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs font-black uppercase tracking-[0.14em] text-muted", children: "Receipt preview" }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mt-1 text-sm font-bold text-label", children: "Check before printing." })
-          ] }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx(Badge, { tone: "orange", children: "P Print" })
-        ] }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx("pre", { className: "max-h-64 overflow-y-auto whitespace-pre-wrap rounded-xl bg-white p-4 font-mono text-xs font-semibold leading-5 text-espresso shadow-[inset_0_0_0_1px_rgb(var(--ro-secondary-rgb)/0.08)]", children: receiptPreviewText })
-      ] }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx(FormField, { label: "Printer type", children: /* @__PURE__ */ jsxRuntimeExports.jsxs(
-        "select",
-        {
-          className: "h-11 w-full rounded-xl border border-field bg-white px-3 text-sm font-semibold text-espresso outline-none transition focus:border-primary focus:ring-4 focus:ring-primary/10",
-          value: printMode,
-          onChange: (event) => setPrintMode(event.target.value),
-          children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx("option", { value: "os", children: "Installed printer" }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx("option", { value: "network", children: "Network ESC/POS" }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx("option", { value: "device", children: "USB/Bluetooth device path" })
-          ]
-        }
-      ) }),
-      printMode === "os" ? /* @__PURE__ */ jsxRuntimeExports.jsx(FormField, { label: "Installed printer", children: /* @__PURE__ */ jsxRuntimeExports.jsxs(
-        "select",
-        {
-          className: "h-11 w-full rounded-xl border border-field bg-white px-3 text-sm font-semibold text-espresso outline-none transition focus:border-primary focus:ring-4 focus:ring-primary/10",
-          value: selectedPrinterName,
-          onChange: (event) => setSelectedPrinterName(event.target.value),
-          children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx("option", { value: "", children: "Default printer" }),
-            (printersQuery.data ?? []).map((printer) => /* @__PURE__ */ jsxRuntimeExports.jsxs("option", { value: printer.name, children: [
-              printer.displayName || printer.name,
-              printer.isDefault ? " (Default)" : ""
-            ] }, printer.name))
-          ]
-        }
-      ) }) : null,
-      printMode === "network" ? /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "grid grid-cols-[1fr_120px] gap-3", children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx(FormField, { label: "Printer IP address", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
-          "input",
-          {
-            className: "h-11 w-full rounded-xl border border-field bg-white px-3 text-sm font-semibold text-espresso outline-none transition focus:border-primary focus:ring-4 focus:ring-primary/10",
-            value: printerHost,
-            onChange: (event) => setPrinterHost(event.target.value)
-          }
-        ) }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx(FormField, { label: "Port", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
-          "input",
-          {
-            className: "h-11 w-full rounded-xl border border-field bg-white px-3 text-sm font-semibold text-espresso outline-none transition focus:border-primary focus:ring-4 focus:ring-primary/10",
-            min: "1",
-            type: "number",
-            value: printerPort,
-            onChange: (event) => setPrinterPort(event.target.value)
-          }
-        ) })
-      ] }) : null,
-      printMode === "device" ? /* @__PURE__ */ jsxRuntimeExports.jsx(FormField, { label: "Device path", hint: "Examples: /dev/usb/lp0, /dev/rfcomm0, COM5, or a shared printer path.", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
-        "input",
-        {
-          className: "h-11 w-full rounded-xl border border-field bg-white px-3 text-sm font-semibold text-espresso outline-none transition focus:border-primary focus:ring-4 focus:ring-primary/10",
-          value: printerDevicePath,
-          onChange: (event) => setPrinterDevicePath(event.target.value)
-        }
-      ) }) : null,
-      printMode !== "os" ? /* @__PURE__ */ jsxRuntimeExports.jsxs("label", { className: "flex items-center gap-3 rounded-2xl bg-sage px-4 py-3 text-sm font-bold text-label", children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx(
-          "input",
-          {
-            checked: openDrawerAfterPrint,
-            className: "h-4 w-4 accent-primary",
-            type: "checkbox",
-            onChange: (event) => setOpenDrawerAfterPrint(event.target.checked)
-          }
-        ),
-        "Open cash drawer after print"
-      ] }) : null,
-      printReceipt.isError ? /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "rounded-xl bg-red-50 px-4 py-3 text-sm font-bold text-red-700", children: "Print failed. Check printer setup." }) : null,
-      kickDrawer.isError ? /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "rounded-xl bg-red-50 px-4 py-3 text-sm font-bold text-red-700", children: "Drawer did not open. Check printer connection." }) : null,
-      printMode !== "os" ? /* @__PURE__ */ jsxRuntimeExports.jsx(
-        Button,
-        {
-          className: "w-full",
-          disabled: kickDrawer.isPending || printMode === "network" && !printerHost.trim() || printMode === "device" && !printerDevicePath.trim(),
-          icon: kickDrawer.isPending ? /* @__PURE__ */ jsxRuntimeExports.jsx(LoaderCircle, { className: "animate-spin", size: 17 }) : /* @__PURE__ */ jsxRuntimeExports.jsx(WalletCards, { size: 17 }),
-          type: "button",
-          variant: "secondary",
-          onClick: () => kickDrawer.mutate(),
-          children: "Open cash drawer"
-        }
-      ) : null,
-      /* @__PURE__ */ jsxRuntimeExports.jsx(
-        Button,
-        {
-          className: "w-full",
-          disabled: printReceipt.isPending || cart.length === 0 && !lastOrder || printMode === "network" && !printerHost.trim() || printMode === "device" && !printerDevicePath.trim(),
-          icon: printReceipt.isPending ? /* @__PURE__ */ jsxRuntimeExports.jsx(LoaderCircle, { className: "animate-spin", size: 17 }) : /* @__PURE__ */ jsxRuntimeExports.jsx(Printer, { size: 17 }),
-          type: "submit",
-          children: "Print receipt"
-        }
-      )
-    ] }) })
+    /* @__PURE__ */ jsxRuntimeExports.jsx(
+      PaymentModal,
+      {
+        amount: paymentAmount,
+        error: payOrder.isError,
+        method: paymentMethod,
+        open: paymentOpen,
+        pending: payOrder.isPending,
+        reference: paymentReference,
+        total,
+        onAmountChange: setPaymentAmount,
+        onClose: () => setPaymentOpen(false),
+        onMethodChange: setPaymentMethod,
+        onReferenceChange: setPaymentReference,
+        onSubmit: submitPayment
+      }
+    ),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(
+      PrintReceiptModal,
+      {
+        canPrint: cart.length > 0 || Boolean(lastOrder),
+        devicePath: printerDevicePath,
+        drawerError: kickDrawer.isError,
+        drawerPending: kickDrawer.isPending,
+        host: printerHost,
+        mode: printMode,
+        open: printOpen,
+        openDrawerAfterPrint,
+        port: printerPort,
+        previewText: receiptPreviewText,
+        printerError: printReceipt.isError,
+        printerName: selectedPrinterName,
+        printerPending: printReceipt.isPending,
+        printers: printersQuery.data ?? [],
+        onClose: () => setPrintOpen(false),
+        onDevicePathChange: setPrinterDevicePath,
+        onDrawerChange: setOpenDrawerAfterPrint,
+        onHostChange: setPrinterHost,
+        onKickDrawer: () => kickDrawer.mutate(),
+        onModeChange: setPrintMode,
+        onPortChange: setPrinterPort,
+        onPrinterNameChange: setSelectedPrinterName,
+        onSubmit: submitPrint
+      }
+    )
   ] });
-}
-function buildReceiptHtml(order, cart, total) {
-  const rows = cart.map(
-    (line) => `
-        <tr>
-          <td>${escapeHtml(line.name)} x ${line.quantity}</td>
-          <td style="text-align:right">${money$1.format(line.price * line.quantity)}</td>
-        </tr>
-      `
-  ).join("");
-  return `
-    <!doctype html>
-    <html>
-      <head>
-        <meta charset="utf-8" />
-        <style>
-          @page { margin: 0; size: 80mm auto; }
-          body { margin: 0; padding: 10px; width: 72mm; font-family: Arial, sans-serif; font-size: 12px; color: #000; }
-          h1 { font-size: 18px; margin: 0 0 8px; text-align: center; }
-          table { width: 100%; border-collapse: collapse; }
-          td { padding: 3px 0; vertical-align: top; }
-          .line { border-top: 1px dashed #000; margin: 8px 0; }
-          .total { font-size: 16px; font-weight: 700; }
-          .center { text-align: center; }
-        </style>
-      </head>
-      <body>
-        <h1>RestaurantOS</h1>
-        <p class="center">Order ${escapeHtml(order.orderNumber)}</p>
-        <div class="line"></div>
-        <table>${rows}</table>
-        <div class="line"></div>
-        <table>
-          <tr class="total"><td>Total</td><td style="text-align:right">${money$1.format(total || Number(order.grandTotal))}</td></tr>
-        </table>
-        <p class="center">Thank you</p>
-      </body>
-    </html>
-  `;
-}
-function buildReceiptText(order, cart, total) {
-  const rows = cart.map((line) => {
-    const left = `${line.name} x ${line.quantity}`;
-    const right = money$1.format(line.price * line.quantity);
-    return `${left.padEnd(Math.max(1, 32 - right.length), " ")}${right}`;
-  }).join("\n");
-  return [
-    `Order ${order.orderNumber}`,
-    "------------------------------",
-    rows,
-    "------------------------------",
-    `Total ${money$1.format(total || Number(order.grandTotal))}`,
-    "",
-    "Thank you"
-  ].join("\n");
-}
-function escapeHtml(value) {
-  return value.replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll('"', "&quot;").replaceAll("'", "&#039;");
 }
 function ReportsPage() {
   return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "h-full overflow-y-auto p-7", children: [
@@ -34069,7 +34132,14 @@ const settingsSchema = objectType({
   printCustomerCopy: booleanType(),
   lowStockThreshold: coerce.number().int().min(0).max(9999),
   kitchenDelayMinutes: coerce.number().int().min(1).max(180),
-  shiftFloatRequired: booleanType()
+  shiftFloatRequired: booleanType(),
+  terminalName: stringType().min(2, "Terminal name is required"),
+  receiptPrinterMode: enumType(["os", "network", "device"]),
+  receiptPrinterName: stringType().max(120),
+  receiptPrinterHost: stringType().max(120),
+  receiptPrinterPort: coerce.number().int().min(1).max(65535),
+  receiptPrinterDevicePath: stringType().max(250),
+  openDrawerAfterPrint: booleanType()
 });
 const fieldClass$3 = "mt-2 h-12 w-full rounded-xl border border-field bg-white px-4 text-sm font-semibold text-espresso outline-none transition focus:border-primary focus:ring-4 focus:ring-primary/10";
 const textareaClass = "mt-2 min-h-24 w-full resize-none rounded-xl border border-field bg-white px-4 py-3 text-sm font-semibold text-espresso outline-none transition focus:border-primary focus:ring-4 focus:ring-primary/10";
@@ -34085,7 +34155,14 @@ const defaultValues = {
   printCustomerCopy: true,
   lowStockThreshold: 10,
   kitchenDelayMinutes: 12,
-  shiftFloatRequired: true
+  shiftFloatRequired: true,
+  terminalName: "Main cashier",
+  receiptPrinterMode: "os",
+  receiptPrinterName: "",
+  receiptPrinterHost: "",
+  receiptPrinterPort: 9100,
+  receiptPrinterDevicePath: "",
+  openDrawerAfterPrint: false
 };
 function getValue(settings, key, fallback) {
   const setting = settings?.find((item) => item.key === key);
@@ -34104,8 +34181,19 @@ function toFormValues(settings) {
     printCustomerCopy: Boolean(getValue(settings, "receipt.printCustomerCopy", defaultValues.printCustomerCopy)),
     lowStockThreshold: Number(getValue(settings, "operations.lowStockThreshold", defaultValues.lowStockThreshold)),
     kitchenDelayMinutes: Number(getValue(settings, "operations.kitchenDelayMinutes", defaultValues.kitchenDelayMinutes)),
-    shiftFloatRequired: Boolean(getValue(settings, "operations.shiftFloatRequired", defaultValues.shiftFloatRequired))
+    shiftFloatRequired: Boolean(getValue(settings, "operations.shiftFloatRequired", defaultValues.shiftFloatRequired)),
+    terminalName: getValue(settings, "terminal.name", defaultValues.terminalName),
+    receiptPrinterMode: readReceiptPrinterMode(settings, "terminal.receiptPrinterMode", defaultValues.receiptPrinterMode),
+    receiptPrinterName: getValue(settings, "terminal.receiptPrinterName", defaultValues.receiptPrinterName),
+    receiptPrinterHost: getValue(settings, "terminal.receiptPrinterHost", defaultValues.receiptPrinterHost),
+    receiptPrinterPort: Number(getValue(settings, "terminal.receiptPrinterPort", defaultValues.receiptPrinterPort)),
+    receiptPrinterDevicePath: getValue(settings, "terminal.receiptPrinterDevicePath", defaultValues.receiptPrinterDevicePath),
+    openDrawerAfterPrint: Boolean(getValue(settings, "terminal.openDrawerAfterPrint", defaultValues.openDrawerAfterPrint))
   };
+}
+function readReceiptPrinterMode(settings, key, fallback) {
+  const value = getValue(settings, key, fallback);
+  return value === "network" || value === "device" || value === "os" ? value : fallback;
 }
 function toPayload(values) {
   return {
@@ -34121,7 +34209,14 @@ function toPayload(values) {
       { key: "receipt.printCustomerCopy", group: "receipt", value: values.printCustomerCopy },
       { key: "operations.lowStockThreshold", group: "operations", value: values.lowStockThreshold },
       { key: "operations.kitchenDelayMinutes", group: "operations", value: values.kitchenDelayMinutes },
-      { key: "operations.shiftFloatRequired", group: "operations", value: values.shiftFloatRequired }
+      { key: "operations.shiftFloatRequired", group: "operations", value: values.shiftFloatRequired },
+      { key: "terminal.name", group: "terminal", value: values.terminalName },
+      { key: "terminal.receiptPrinterMode", group: "terminal", value: values.receiptPrinterMode },
+      { key: "terminal.receiptPrinterName", group: "terminal", value: values.receiptPrinterName },
+      { key: "terminal.receiptPrinterHost", group: "terminal", value: values.receiptPrinterHost },
+      { key: "terminal.receiptPrinterPort", group: "terminal", value: values.receiptPrinterPort },
+      { key: "terminal.receiptPrinterDevicePath", group: "terminal", value: values.receiptPrinterDevicePath },
+      { key: "terminal.openDrawerAfterPrint", group: "terminal", value: values.openDrawerAfterPrint }
     ]
   };
 }
@@ -34237,10 +34332,32 @@ function SettingsPage() {
         ] }),
         /* @__PURE__ */ jsxRuntimeExports.jsx(Toggle, { label: "Require opening cash float for shifts", ...register("shiftFloatRequired") })
       ] }),
+      /* @__PURE__ */ jsxRuntimeExports.jsxs(Card, { className: "p-6", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-3", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "flex h-11 w-11 items-center justify-center rounded-xl bg-mint text-secondary", children: /* @__PURE__ */ jsxRuntimeExports.jsx(Printer, { size: 21 }) }),
+          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "text-xl font-black text-espresso", children: "Terminal hardware" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm font-semibold text-muted", children: "Default printer and drawer setup for the cashier screen." })
+          ] })
+        ] }),
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mt-6 grid grid-cols-2 gap-4", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx(Field, { label: "Terminal name", error: errors.terminalName?.message, children: /* @__PURE__ */ jsxRuntimeExports.jsx("input", { className: fieldClass$3, ...register("terminalName") }) }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx(Field, { label: "Receipt printer type", error: errors.receiptPrinterMode?.message, children: /* @__PURE__ */ jsxRuntimeExports.jsxs("select", { className: fieldClass$3, ...register("receiptPrinterMode"), children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx("option", { value: "os", children: "Installed printer" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("option", { value: "network", children: "Network ESC/POS" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("option", { value: "device", children: "USB/Bluetooth path" })
+          ] }) }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx(Field, { label: "Installed printer name", error: errors.receiptPrinterName?.message, children: /* @__PURE__ */ jsxRuntimeExports.jsx("input", { className: fieldClass$3, ...register("receiptPrinterName") }) }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx(Field, { label: "Printer IP address", error: errors.receiptPrinterHost?.message, children: /* @__PURE__ */ jsxRuntimeExports.jsx("input", { className: fieldClass$3, ...register("receiptPrinterHost") }) }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx(Field, { label: "Port", error: errors.receiptPrinterPort?.message, children: /* @__PURE__ */ jsxRuntimeExports.jsx("input", { className: fieldClass$3, type: "number", ...register("receiptPrinterPort") }) }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx(Field, { label: "Device path", error: errors.receiptPrinterDevicePath?.message, children: /* @__PURE__ */ jsxRuntimeExports.jsx("input", { className: fieldClass$3, ...register("receiptPrinterDevicePath") }) })
+        ] }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx(Toggle, { label: "Open cash drawer after printing", ...register("openDrawerAfterPrint") })
+      ] }),
       /* @__PURE__ */ jsxRuntimeExports.jsxs(Card, { className: "bg-secondary p-6 text-white", children: [
         /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm font-black uppercase tracking-[0.2em] text-deepBright", children: "Phase 4 foundation" }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "mt-4 text-3xl font-black", children: "Ready for table system" }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mt-3 text-sm font-semibold leading-6 text-deepFaint", children: "These settings become the source for POS receipts, tax math, stock warnings, kitchen alert timers, and shift validation. Table and floor layout settings will attach here in the next phase." })
+        /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "mt-4 text-3xl font-black", children: "Ready for cashier terminals" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mt-3 text-sm font-semibold leading-6 text-deepFaint", children: "These settings become the source for POS receipts, tax math, stock warnings, kitchen alert timers, and shift validation. Terminal hardware defaults now feed the POS print popup so staff do not re-enter printer details." })
       ] })
     ] })
   ] });

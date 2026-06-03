@@ -1,5 +1,5 @@
 import { useMutation, useQuery } from '@tanstack/react-query';
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Badge, Button, Card } from '@restaurantos/ui';
 import {
@@ -16,14 +16,14 @@ import {
   Trash2,
   WalletCards,
 } from 'lucide-react';
-import { ActionModal } from '../../components/action-modal';
-import { FormField } from '../../components/form-field';
 import { apiFetch } from '../../lib/api';
 import type { FormSubmitEvent } from '../../lib/events';
 import { usePosStore } from '../../store/use-pos-store';
-import type { PaymentMethod, PosCatalogResponse, PosMenuItem, PosOrder, PrinterInfo } from './interfaces';
-
-const money = new Intl.NumberFormat('en-PK', { maximumFractionDigits: 0, style: 'currency', currency: 'PKR' });
+import { PaymentModal, PrintReceiptModal } from './components';
+import { money } from './formatting';
+import type { PaymentMethod, PosCatalogResponse, PosMenuItem, PosOrder, PrinterInfo, PrintMode, ReceiptLine, SettingRecord } from './interfaces';
+import { buildReceiptHtml, buildReceiptText } from './receipt';
+import { readPrintMode, readSetting } from './settings';
 
 export function PosPage() {
   const { cart, addLine, changeQuantity, removeLine, clear, orderType, setOrderType } = usePosStore();
@@ -34,14 +34,15 @@ export function PosPage() {
   const [paymentMethod, setPaymentMethod] = useState<PaymentMethod>('CASH');
   const [paymentAmount, setPaymentAmount] = useState('');
   const [paymentReference, setPaymentReference] = useState('');
-  const [printMode, setPrintMode] = useState<'os' | 'network' | 'device'>('os');
+  const [printMode, setPrintMode] = useState<PrintMode>('os');
   const [selectedPrinterName, setSelectedPrinterName] = useState('');
   const [printerHost, setPrinterHost] = useState('');
   const [printerPort, setPrinterPort] = useState('9100');
   const [printerDevicePath, setPrinterDevicePath] = useState('');
   const [openDrawerAfterPrint, setOpenDrawerAfterPrint] = useState(false);
+  const [printerDefaultsApplied, setPrinterDefaultsApplied] = useState(false);
   const [lastOrder, setLastOrder] = useState<PosOrder | undefined>();
-  const [lastReceiptLines, setLastReceiptLines] = useState<Array<{ name: string; price: number; quantity: number }>>([]);
+  const [lastReceiptLines, setLastReceiptLines] = useState<ReceiptLine[]>([]);
 
   const catalogQuery = useQuery({
     queryKey: ['pos-catalog'],
@@ -51,6 +52,11 @@ export function PosPage() {
   const printersQuery = useQuery({
     queryKey: ['desktop-printers'],
     queryFn: () => window.restaurantos.printers.list() as Promise<PrinterInfo[]>,
+  });
+
+  const settingsQuery = useQuery({
+    queryKey: ['settings'],
+    queryFn: () => apiFetch<SettingRecord[]>('/settings'),
   });
 
   const total = useMemo(() => cart.reduce((sum, item) => sum + item.price * item.quantity, 0), [cart]);
@@ -73,6 +79,17 @@ export function PosPage() {
       item.kitchenStation?.name.toLowerCase().includes(search);
     return matchesCategory && matchesSearch;
   });
+
+  useEffect(() => {
+    if (!settingsQuery.data || printerDefaultsApplied) return;
+    setPrintMode(readPrintMode(settingsQuery.data, 'terminal.receiptPrinterMode', 'os'));
+    setSelectedPrinterName(readSetting(settingsQuery.data, 'terminal.receiptPrinterName', ''));
+    setPrinterHost(readSetting(settingsQuery.data, 'terminal.receiptPrinterHost', ''));
+    setPrinterPort(String(readSetting(settingsQuery.data, 'terminal.receiptPrinterPort', 9100)));
+    setPrinterDevicePath(readSetting(settingsQuery.data, 'terminal.receiptPrinterDevicePath', ''));
+    setOpenDrawerAfterPrint(Boolean(readSetting(settingsQuery.data, 'terminal.openDrawerAfterPrint', false)));
+    setPrinterDefaultsApplied(true);
+  }, [printerDefaultsApplied, settingsQuery.data]);
 
   const createOrder = useMutation({
     mutationFn: () =>
@@ -401,267 +418,46 @@ export function PosPage() {
         </div>
       </aside>
 
-      <ActionModal description="Take payment for this order." open={paymentOpen} title="Payment" onClose={() => setPaymentOpen(false)}>
-        <form className="space-y-3" onSubmit={submitPayment}>
-          <div className="rounded-2xl bg-sage p-4">
-            <p className="text-xs font-black uppercase text-muted">Total to pay</p>
-            <p className="mt-1 text-2xl font-black text-espresso">{money.format(total)}</p>
-          </div>
-          <div className="grid grid-cols-2 gap-3">
-            <FormField label="Amount paid">
-              <input
-                className="h-11 w-full rounded-xl border border-field bg-white px-3 text-sm font-semibold text-espresso outline-none transition focus:border-primary focus:ring-4 focus:ring-primary/10"
-                max={total}
-                min="0.01"
-                step="0.01"
-                type="number"
-                value={paymentAmount}
-                onChange={(event) => setPaymentAmount(event.target.value)}
-              />
-            </FormField>
-            <FormField label="How paid">
-              <select
-                className="h-11 w-full rounded-xl border border-field bg-white px-3 text-sm font-semibold text-espresso outline-none transition focus:border-primary focus:ring-4 focus:ring-primary/10"
-                value={paymentMethod}
-                onChange={(event) => setPaymentMethod(event.target.value as PaymentMethod)}
-              >
-                <option value="CASH">Cash</option>
-                <option value="CARD">Card</option>
-                <option value="BANK_TRANSFER">Bank transfer</option>
-                <option value="JAZZCASH_EASYPAISA">Wallet</option>
-                <option value="ONLINE">Online</option>
-                <option value="CUSTOMER_CREDIT">Customer credit</option>
-              </select>
-            </FormField>
-          </div>
-          <FormField label="Receipt or note number">
-            <input
-              className="h-11 w-full rounded-xl border border-field bg-white px-3 text-sm font-semibold text-espresso outline-none transition focus:border-primary focus:ring-4 focus:ring-primary/10"
-              value={paymentReference}
-              onChange={(event) => setPaymentReference(event.target.value)}
-            />
-          </FormField>
-          {payOrder.isError ? (
-            <div className="rounded-xl bg-red-50 px-4 py-3 text-sm font-bold text-red-700">
-              Payment failed. Check amount and API connection.
-            </div>
-          ) : null}
-          <Button
-            className="w-full"
-            disabled={Number(paymentAmount || 0) <= 0 || Number(paymentAmount || 0) > total || payOrder.isPending}
-            icon={payOrder.isPending ? <Loader2 className="animate-spin" size={17} /> : <WalletCards size={17} />}
-            type="submit"
-          >
-            Save payment
-          </Button>
-        </form>
-      </ActionModal>
+      <PaymentModal
+        amount={paymentAmount}
+        error={payOrder.isError}
+        method={paymentMethod}
+        open={paymentOpen}
+        pending={payOrder.isPending}
+        reference={paymentReference}
+        total={total}
+        onAmountChange={setPaymentAmount}
+        onClose={() => setPaymentOpen(false)}
+        onMethodChange={setPaymentMethod}
+        onReferenceChange={setPaymentReference}
+        onSubmit={submitPayment}
+      />
 
-      <ActionModal description="Choose how this receipt printer is connected." open={printOpen} title="Print receipt" onClose={() => setPrintOpen(false)}>
-        <form className="space-y-3" onSubmit={submitPrint}>
-          <div className="rounded-2xl border border-line bg-sage p-4">
-            <div className="mb-3 flex items-center justify-between gap-3">
-              <div>
-                <p className="text-xs font-black uppercase tracking-[0.14em] text-muted">Receipt preview</p>
-                <p className="mt-1 text-sm font-bold text-label">Check before printing.</p>
-              </div>
-              <Badge tone="orange">P Print</Badge>
-            </div>
-            <pre className="max-h-64 overflow-y-auto whitespace-pre-wrap rounded-xl bg-white p-4 font-mono text-xs font-semibold leading-5 text-espresso shadow-[inset_0_0_0_1px_rgb(var(--ro-secondary-rgb)/0.08)]">
-              {receiptPreviewText}
-            </pre>
-          </div>
-
-          <FormField label="Printer type">
-            <select
-              className="h-11 w-full rounded-xl border border-field bg-white px-3 text-sm font-semibold text-espresso outline-none transition focus:border-primary focus:ring-4 focus:ring-primary/10"
-              value={printMode}
-              onChange={(event) => setPrintMode(event.target.value as 'os' | 'network' | 'device')}
-            >
-              <option value="os">Installed printer</option>
-              <option value="network">Network ESC/POS</option>
-              <option value="device">USB/Bluetooth device path</option>
-            </select>
-          </FormField>
-
-          {printMode === 'os' ? (
-            <FormField label="Installed printer">
-              <select
-                className="h-11 w-full rounded-xl border border-field bg-white px-3 text-sm font-semibold text-espresso outline-none transition focus:border-primary focus:ring-4 focus:ring-primary/10"
-                value={selectedPrinterName}
-                onChange={(event) => setSelectedPrinterName(event.target.value)}
-              >
-                <option value="">Default printer</option>
-                {(printersQuery.data ?? []).map((printer) => (
-                  <option key={printer.name} value={printer.name}>
-                    {printer.displayName || printer.name}
-                    {printer.isDefault ? ' (Default)' : ''}
-                  </option>
-                ))}
-              </select>
-            </FormField>
-          ) : null}
-
-          {printMode === 'network' ? (
-            <div className="grid grid-cols-[1fr_120px] gap-3">
-              <FormField label="Printer IP address">
-                <input
-                  className="h-11 w-full rounded-xl border border-field bg-white px-3 text-sm font-semibold text-espresso outline-none transition focus:border-primary focus:ring-4 focus:ring-primary/10"
-                  value={printerHost}
-                  onChange={(event) => setPrinterHost(event.target.value)}
-                />
-              </FormField>
-              <FormField label="Port">
-                <input
-                  className="h-11 w-full rounded-xl border border-field bg-white px-3 text-sm font-semibold text-espresso outline-none transition focus:border-primary focus:ring-4 focus:ring-primary/10"
-                  min="1"
-                  type="number"
-                  value={printerPort}
-                  onChange={(event) => setPrinterPort(event.target.value)}
-                />
-              </FormField>
-            </div>
-          ) : null}
-
-          {printMode === 'device' ? (
-            <FormField label="Device path" hint="Examples: /dev/usb/lp0, /dev/rfcomm0, COM5, or a shared printer path.">
-              <input
-                className="h-11 w-full rounded-xl border border-field bg-white px-3 text-sm font-semibold text-espresso outline-none transition focus:border-primary focus:ring-4 focus:ring-primary/10"
-                value={printerDevicePath}
-                onChange={(event) => setPrinterDevicePath(event.target.value)}
-              />
-            </FormField>
-          ) : null}
-
-          {printMode !== 'os' ? (
-            <label className="flex items-center gap-3 rounded-2xl bg-sage px-4 py-3 text-sm font-bold text-label">
-              <input
-                checked={openDrawerAfterPrint}
-                className="h-4 w-4 accent-primary"
-                type="checkbox"
-                onChange={(event) => setOpenDrawerAfterPrint(event.target.checked)}
-              />
-              Open cash drawer after print
-            </label>
-          ) : null}
-
-          {printReceipt.isError ? (
-            <div className="rounded-xl bg-red-50 px-4 py-3 text-sm font-bold text-red-700">
-              Print failed. Check printer setup.
-            </div>
-          ) : null}
-          {kickDrawer.isError ? (
-            <div className="rounded-xl bg-red-50 px-4 py-3 text-sm font-bold text-red-700">
-              Drawer did not open. Check printer connection.
-            </div>
-          ) : null}
-          {printMode !== 'os' ? (
-            <Button
-              className="w-full"
-              disabled={
-                kickDrawer.isPending ||
-                (printMode === 'network' && !printerHost.trim()) ||
-                (printMode === 'device' && !printerDevicePath.trim())
-              }
-              icon={kickDrawer.isPending ? <Loader2 className="animate-spin" size={17} /> : <WalletCards size={17} />}
-              type="button"
-              variant="secondary"
-              onClick={() => kickDrawer.mutate()}
-            >
-              Open cash drawer
-            </Button>
-          ) : null}
-          <Button
-            className="w-full"
-            disabled={
-              printReceipt.isPending ||
-              (cart.length === 0 && !lastOrder) ||
-              (printMode === 'network' && !printerHost.trim()) ||
-              (printMode === 'device' && !printerDevicePath.trim())
-            }
-            icon={printReceipt.isPending ? <Loader2 className="animate-spin" size={17} /> : <Printer size={17} />}
-            type="submit"
-          >
-            Print receipt
-          </Button>
-        </form>
-      </ActionModal>
+      <PrintReceiptModal
+        canPrint={cart.length > 0 || Boolean(lastOrder)}
+        devicePath={printerDevicePath}
+        drawerError={kickDrawer.isError}
+        drawerPending={kickDrawer.isPending}
+        host={printerHost}
+        mode={printMode}
+        open={printOpen}
+        openDrawerAfterPrint={openDrawerAfterPrint}
+        port={printerPort}
+        previewText={receiptPreviewText}
+        printerError={printReceipt.isError}
+        printerName={selectedPrinterName}
+        printerPending={printReceipt.isPending}
+        printers={printersQuery.data ?? []}
+        onClose={() => setPrintOpen(false)}
+        onDevicePathChange={setPrinterDevicePath}
+        onDrawerChange={setOpenDrawerAfterPrint}
+        onHostChange={setPrinterHost}
+        onKickDrawer={() => kickDrawer.mutate()}
+        onModeChange={setPrintMode}
+        onPortChange={setPrinterPort}
+        onPrinterNameChange={setSelectedPrinterName}
+        onSubmit={submitPrint}
+      />
     </div>
   );
-}
-
-function buildReceiptHtml(order: PosOrder, cart: Array<{ name: string; price: number; quantity: number }>, total: number) {
-  const rows = cart
-    .map(
-      (line) => `
-        <tr>
-          <td>${escapeHtml(line.name)} x ${line.quantity}</td>
-          <td style="text-align:right">${money.format(line.price * line.quantity)}</td>
-        </tr>
-      `,
-    )
-    .join('');
-
-  return `
-    <!doctype html>
-    <html>
-      <head>
-        <meta charset="utf-8" />
-        <style>
-          @page { margin: 0; size: 80mm auto; }
-          body { margin: 0; padding: 10px; width: 72mm; font-family: Arial, sans-serif; font-size: 12px; color: #000; }
-          h1 { font-size: 18px; margin: 0 0 8px; text-align: center; }
-          table { width: 100%; border-collapse: collapse; }
-          td { padding: 3px 0; vertical-align: top; }
-          .line { border-top: 1px dashed #000; margin: 8px 0; }
-          .total { font-size: 16px; font-weight: 700; }
-          .center { text-align: center; }
-        </style>
-      </head>
-      <body>
-        <h1>RestaurantOS</h1>
-        <p class="center">Order ${escapeHtml(order.orderNumber)}</p>
-        <div class="line"></div>
-        <table>${rows}</table>
-        <div class="line"></div>
-        <table>
-          <tr class="total"><td>Total</td><td style="text-align:right">${money.format(total || Number(order.grandTotal))}</td></tr>
-        </table>
-        <p class="center">Thank you</p>
-      </body>
-    </html>
-  `;
-}
-
-function buildReceiptText(
-  order: Pick<PosOrder, 'grandTotal' | 'orderNumber'>,
-  cart: Array<{ name: string; price: number; quantity: number }>,
-  total: number,
-) {
-  const rows = cart
-    .map((line) => {
-      const left = `${line.name} x ${line.quantity}`;
-      const right = money.format(line.price * line.quantity);
-      return `${left.padEnd(Math.max(1, 32 - right.length), ' ')}${right}`;
-    })
-    .join('\n');
-
-  return [
-    `Order ${order.orderNumber}`,
-    '------------------------------',
-    rows,
-    '------------------------------',
-    `Total ${money.format(total || Number(order.grandTotal))}`,
-    '',
-    'Thank you',
-  ].join('\n');
-}
-
-function escapeHtml(value: string) {
-  return value
-    .replaceAll('&', '&amp;')
-    .replaceAll('<', '&lt;')
-    .replaceAll('>', '&gt;')
-    .replaceAll('"', '&quot;')
-    .replaceAll("'", '&#039;');
 }

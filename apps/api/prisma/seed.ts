@@ -139,6 +139,13 @@ async function main() {
     ['operations.lowStockThreshold', 'operations', 10],
     ['operations.kitchenDelayMinutes', 'operations', 12],
     ['operations.shiftFloatRequired', 'operations', true],
+    ['terminal.name', 'terminal', 'Main cashier'],
+    ['terminal.receiptPrinterMode', 'terminal', 'os'],
+    ['terminal.receiptPrinterName', 'terminal', ''],
+    ['terminal.receiptPrinterHost', 'terminal', ''],
+    ['terminal.receiptPrinterPort', 'terminal', 9100],
+    ['terminal.receiptPrinterDevicePath', 'terminal', ''],
+    ['terminal.openDrawerAfterPrint', 'terminal', false],
   ] as const;
 
   for (const [key, group, value] of settings) {

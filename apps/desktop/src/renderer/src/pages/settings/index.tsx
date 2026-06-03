@@ -4,6 +4,7 @@ import {
   AlertCircle,
   CheckCircle2,
   Loader2,
+  Printer,
   ReceiptText,
   Save,
   SlidersHorizontal,
@@ -30,9 +31,17 @@ const settingsSchema = z.object({
   lowStockThreshold: z.coerce.number().int().min(0).max(9999),
   kitchenDelayMinutes: z.coerce.number().int().min(1).max(180),
   shiftFloatRequired: z.boolean(),
+  terminalName: z.string().min(2, 'Terminal name is required'),
+  receiptPrinterMode: z.enum(['os', 'network', 'device']),
+  receiptPrinterName: z.string().max(120),
+  receiptPrinterHost: z.string().max(120),
+  receiptPrinterPort: z.coerce.number().int().min(1).max(65535),
+  receiptPrinterDevicePath: z.string().max(250),
+  openDrawerAfterPrint: z.boolean(),
 });
 
 type SettingsForm = z.infer<typeof settingsSchema>;
+type ReceiptPrinterMode = SettingsForm['receiptPrinterMode'];
 
 const fieldClass =
   'mt-2 h-12 w-full rounded-xl border border-field bg-white px-4 text-sm font-semibold text-espresso outline-none transition focus:border-primary focus:ring-4 focus:ring-primary/10';
@@ -53,6 +62,13 @@ const defaultValues: SettingsForm = {
   lowStockThreshold: 10,
   kitchenDelayMinutes: 12,
   shiftFloatRequired: true,
+  terminalName: 'Main cashier',
+  receiptPrinterMode: 'os',
+  receiptPrinterName: '',
+  receiptPrinterHost: '',
+  receiptPrinterPort: 9100,
+  receiptPrinterDevicePath: '',
+  openDrawerAfterPrint: false,
 };
 
 function getValue<T>(settings: SettingRecord[] | undefined, key: string, fallback: T): T {
@@ -74,7 +90,23 @@ function toFormValues(settings: SettingRecord[] | undefined): SettingsForm {
     lowStockThreshold: Number(getValue(settings, 'operations.lowStockThreshold', defaultValues.lowStockThreshold)),
     kitchenDelayMinutes: Number(getValue(settings, 'operations.kitchenDelayMinutes', defaultValues.kitchenDelayMinutes)),
     shiftFloatRequired: Boolean(getValue(settings, 'operations.shiftFloatRequired', defaultValues.shiftFloatRequired)),
+    terminalName: getValue(settings, 'terminal.name', defaultValues.terminalName),
+    receiptPrinterMode: readReceiptPrinterMode(settings, 'terminal.receiptPrinterMode', defaultValues.receiptPrinterMode),
+    receiptPrinterName: getValue(settings, 'terminal.receiptPrinterName', defaultValues.receiptPrinterName),
+    receiptPrinterHost: getValue(settings, 'terminal.receiptPrinterHost', defaultValues.receiptPrinterHost),
+    receiptPrinterPort: Number(getValue(settings, 'terminal.receiptPrinterPort', defaultValues.receiptPrinterPort)),
+    receiptPrinterDevicePath: getValue(settings, 'terminal.receiptPrinterDevicePath', defaultValues.receiptPrinterDevicePath),
+    openDrawerAfterPrint: Boolean(getValue(settings, 'terminal.openDrawerAfterPrint', defaultValues.openDrawerAfterPrint)),
   };
+}
+
+function readReceiptPrinterMode(
+  settings: SettingRecord[] | undefined,
+  key: string,
+  fallback: ReceiptPrinterMode,
+): ReceiptPrinterMode {
+  const value = getValue(settings, key, fallback);
+  return value === 'network' || value === 'device' || value === 'os' ? value : fallback;
 }
 
 function toPayload(values: SettingsForm) {
@@ -92,6 +124,13 @@ function toPayload(values: SettingsForm) {
       { key: 'operations.lowStockThreshold', group: 'operations', value: values.lowStockThreshold },
       { key: 'operations.kitchenDelayMinutes', group: 'operations', value: values.kitchenDelayMinutes },
       { key: 'operations.shiftFloatRequired', group: 'operations', value: values.shiftFloatRequired },
+      { key: 'terminal.name', group: 'terminal', value: values.terminalName },
+      { key: 'terminal.receiptPrinterMode', group: 'terminal', value: values.receiptPrinterMode },
+      { key: 'terminal.receiptPrinterName', group: 'terminal', value: values.receiptPrinterName },
+      { key: 'terminal.receiptPrinterHost', group: 'terminal', value: values.receiptPrinterHost },
+      { key: 'terminal.receiptPrinterPort', group: 'terminal', value: values.receiptPrinterPort },
+      { key: 'terminal.receiptPrinterDevicePath', group: 'terminal', value: values.receiptPrinterDevicePath },
+      { key: 'terminal.openDrawerAfterPrint', group: 'terminal', value: values.openDrawerAfterPrint },
     ],
   };
 }
@@ -267,12 +306,51 @@ export function SettingsPage() {
           <Toggle label="Require opening cash float for shifts" {...register('shiftFloatRequired')} />
         </Card>
 
+        <Card className="p-6">
+          <div className="flex items-center gap-3">
+            <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-mint text-secondary">
+              <Printer size={21} />
+            </span>
+            <div>
+              <h2 className="text-xl font-black text-espresso">Terminal hardware</h2>
+              <p className="text-sm font-semibold text-muted">Default printer and drawer setup for the cashier screen.</p>
+            </div>
+          </div>
+
+          <div className="mt-6 grid grid-cols-2 gap-4">
+            <Field label="Terminal name" error={errors.terminalName?.message}>
+              <input className={fieldClass} {...register('terminalName')} />
+            </Field>
+            <Field label="Receipt printer type" error={errors.receiptPrinterMode?.message}>
+              <select className={fieldClass} {...register('receiptPrinterMode')}>
+                <option value="os">Installed printer</option>
+                <option value="network">Network ESC/POS</option>
+                <option value="device">USB/Bluetooth path</option>
+              </select>
+            </Field>
+            <Field label="Installed printer name" error={errors.receiptPrinterName?.message}>
+              <input className={fieldClass} {...register('receiptPrinterName')} />
+            </Field>
+            <Field label="Printer IP address" error={errors.receiptPrinterHost?.message}>
+              <input className={fieldClass} {...register('receiptPrinterHost')} />
+            </Field>
+            <Field label="Port" error={errors.receiptPrinterPort?.message}>
+              <input className={fieldClass} type="number" {...register('receiptPrinterPort')} />
+            </Field>
+            <Field label="Device path" error={errors.receiptPrinterDevicePath?.message}>
+              <input className={fieldClass} {...register('receiptPrinterDevicePath')} />
+            </Field>
+          </div>
+
+          <Toggle label="Open cash drawer after printing" {...register('openDrawerAfterPrint')} />
+        </Card>
+
         <Card className="bg-secondary p-6 text-white">
           <p className="text-sm font-black uppercase tracking-[0.2em] text-deepBright">Phase 4 foundation</p>
-          <h2 className="mt-4 text-3xl font-black">Ready for table system</h2>
+          <h2 className="mt-4 text-3xl font-black">Ready for cashier terminals</h2>
           <p className="mt-3 text-sm font-semibold leading-6 text-deepFaint">
             These settings become the source for POS receipts, tax math, stock warnings, kitchen alert timers, and shift
-            validation. Table and floor layout settings will attach here in the next phase.
+            validation. Terminal hardware defaults now feed the POS print popup so staff do not re-enter printer details.
           </p>
         </Card>
       </div>

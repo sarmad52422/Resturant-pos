@@ -631,3 +631,63 @@ Tests:
 - `npm run typecheck --workspace @restaurantos/desktop` passed.
 - `npm run build --workspaces` passed.
 - `npm audit --audit-level=high` passed with 0 vulnerabilities.
+
+## Phase 13 - Terminal Hardware Settings
+
+Status: Completed
+
+Completed:
+- Added terminal hardware settings to the desktop Settings page for terminal name, receipt printer type, installed printer name, network IP/port, device path, and opening the cash drawer after printing.
+- Saved terminal hardware values through the existing authenticated settings API, without a database migration.
+- Seeded default terminal hardware settings for fresh development installs.
+- Updated the POS print popup to load saved printer defaults once on screen load.
+- Documented terminal hardware settings in `README.md`.
+
+Files changed:
+- `apps/api/prisma/seed.ts`
+- `apps/desktop/src/renderer/src/pages/settings/index.tsx`
+- `apps/desktop/src/renderer/src/pages/pos/index.tsx`
+- `README.md`
+- `progress.md`
+
+Database changes:
+- No schema migration required; uses existing `Setting` key/value records.
+
+Tests:
+- `npm run typecheck --workspace @restaurantos/desktop` passed.
+- `npm run typecheck --workspace @restaurantos/api` passed.
+- `npm run build --workspaces` passed.
+- `npm audit --audit-level=high` passed with 0 vulnerabilities.
+
+Notes:
+- This phase stores one default terminal hardware profile. Later, a multi-terminal/device phase can add separate profiles per physical cashier machine.
+
+## POS Module Cleanup
+
+Status: Completed
+
+Completed:
+- Split POS receipt HTML/text builders into `apps/desktop/src/renderer/src/pages/pos/receipt.ts`.
+- Moved shared POS money formatting into `apps/desktop/src/renderer/src/pages/pos/formatting.ts`.
+- Moved printer setting readers into `apps/desktop/src/renderer/src/pages/pos/settings.ts`.
+- Moved POS payment and print receipt modals into `apps/desktop/src/renderer/src/pages/pos/components.tsx`.
+- Reduced `apps/desktop/src/renderer/src/pages/pos/index.tsx` from 696 lines to under 500 lines.
+- Added a code organization rule in `README.md` to keep new and touched files under 500 lines where practical.
+
+Files changed:
+- `apps/desktop/src/renderer/src/pages/pos/index.tsx`
+- `apps/desktop/src/renderer/src/pages/pos/components.tsx`
+- `apps/desktop/src/renderer/src/pages/pos/formatting.ts`
+- `apps/desktop/src/renderer/src/pages/pos/interfaces.ts`
+- `apps/desktop/src/renderer/src/pages/pos/receipt.ts`
+- `apps/desktop/src/renderer/src/pages/pos/settings.ts`
+- `README.md`
+- `progress.md`
+
+Tests:
+- `npm run typecheck --workspace @restaurantos/desktop` passed.
+- `npm run build --workspaces` passed.
+- `npm audit --audit-level=high` passed with 0 vulnerabilities.
+
+Notes:
+- Existing older desktop files still above 500 lines: `apps/desktop/src/renderer/src/pages/inventory/index.tsx` and `apps/desktop/src/renderer/src/pages/menu/index.tsx`. These should be split when we next touch those modules.
