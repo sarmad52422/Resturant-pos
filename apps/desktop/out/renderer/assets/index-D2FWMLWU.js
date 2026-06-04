@@ -134,7 +134,7 @@ function requireReact_production() {
   var isArrayImpl = Array.isArray;
   function noop2() {
   }
-  var ReactSharedInternals = { H: null, A: null, T: null, S: null }, hasOwnProperty = Object.prototype.hasOwnProperty;
+  var ReactSharedInternals = { H: null, A: null, T: null, S: null }, hasOwnProperty2 = Object.prototype.hasOwnProperty;
   function ReactElement(type, key, props) {
     var refProp = props.ref;
     return {
@@ -361,7 +361,7 @@ function requireReact_production() {
     var props = assign({}, element.props), key = element.key;
     if (null != config2)
       for (propName in void 0 !== config2.key && (key = "" + config2.key), config2)
-        !hasOwnProperty.call(config2, propName) || "key" === propName || "__self" === propName || "__source" === propName || "ref" === propName && void 0 === config2.ref || (props[propName] = config2[propName]);
+        !hasOwnProperty2.call(config2, propName) || "key" === propName || "__self" === propName || "__source" === propName || "ref" === propName && void 0 === config2.ref || (props[propName] = config2[propName]);
     var propName = arguments.length - 2;
     if (1 === propName) props.children = children;
     else if (1 < propName) {
@@ -391,7 +391,7 @@ function requireReact_production() {
     var propName, props = {}, key = null;
     if (null != config2)
       for (propName in void 0 !== config2.key && (key = "" + config2.key), config2)
-        hasOwnProperty.call(config2, propName) && "key" !== propName && "__self" !== propName && "__source" !== propName && (props[propName] = config2[propName]);
+        hasOwnProperty2.call(config2, propName) && "key" !== propName && "__self" !== propName && "__source" !== propName && (props[propName] = config2[propName]);
     var childrenLength = arguments.length - 2;
     if (1 === childrenLength) props.children = children;
     else if (1 < childrenLength) {
@@ -1362,7 +1362,7 @@ function requireReactDomClient_production() {
       return "\nError generating stack: " + x.message + "\n" + x.stack;
     }
   }
-  var hasOwnProperty = Object.prototype.hasOwnProperty, scheduleCallback$3 = Scheduler.unstable_scheduleCallback, cancelCallback$1 = Scheduler.unstable_cancelCallback, shouldYield = Scheduler.unstable_shouldYield, requestPaint = Scheduler.unstable_requestPaint, now = Scheduler.unstable_now, getCurrentPriorityLevel = Scheduler.unstable_getCurrentPriorityLevel, ImmediatePriority = Scheduler.unstable_ImmediatePriority, UserBlockingPriority = Scheduler.unstable_UserBlockingPriority, NormalPriority$1 = Scheduler.unstable_NormalPriority, LowPriority = Scheduler.unstable_LowPriority, IdlePriority = Scheduler.unstable_IdlePriority, log$1 = Scheduler.log, unstable_setDisableYieldValue = Scheduler.unstable_setDisableYieldValue, rendererID = null, injectedHook = null;
+  var hasOwnProperty2 = Object.prototype.hasOwnProperty, scheduleCallback$3 = Scheduler.unstable_scheduleCallback, cancelCallback$1 = Scheduler.unstable_cancelCallback, shouldYield = Scheduler.unstable_shouldYield, requestPaint = Scheduler.unstable_requestPaint, now = Scheduler.unstable_now, getCurrentPriorityLevel = Scheduler.unstable_getCurrentPriorityLevel, ImmediatePriority = Scheduler.unstable_ImmediatePriority, UserBlockingPriority = Scheduler.unstable_UserBlockingPriority, NormalPriority$1 = Scheduler.unstable_NormalPriority, LowPriority = Scheduler.unstable_LowPriority, IdlePriority = Scheduler.unstable_IdlePriority, log$1 = Scheduler.log, unstable_setDisableYieldValue = Scheduler.unstable_setDisableYieldValue, rendererID = null, injectedHook = null;
   function setIsStrictModeForDevtools(newIsStrictMode) {
     "function" === typeof log$1 && unstable_setDisableYieldValue(newIsStrictMode);
     if (injectedHook && "function" === typeof injectedHook.setStrictMode)
@@ -1663,9 +1663,9 @@ function requireReactDomClient_production() {
     "^[:A-Z_a-z\\u00C0-\\u00D6\\u00D8-\\u00F6\\u00F8-\\u02FF\\u0370-\\u037D\\u037F-\\u1FFF\\u200C-\\u200D\\u2070-\\u218F\\u2C00-\\u2FEF\\u3001-\\uD7FF\\uF900-\\uFDCF\\uFDF0-\\uFFFD][:A-Z_a-z\\u00C0-\\u00D6\\u00D8-\\u00F6\\u00F8-\\u02FF\\u0370-\\u037D\\u037F-\\u1FFF\\u200C-\\u200D\\u2070-\\u218F\\u2C00-\\u2FEF\\u3001-\\uD7FF\\uF900-\\uFDCF\\uFDF0-\\uFFFD\\-.0-9\\u00B7\\u0300-\\u036F\\u203F-\\u2040]*$"
   ), illegalAttributeNameCache = {}, validatedAttributeNameCache = {};
   function isAttributeNameSafe(attributeName) {
-    if (hasOwnProperty.call(validatedAttributeNameCache, attributeName))
+    if (hasOwnProperty2.call(validatedAttributeNameCache, attributeName))
       return true;
-    if (hasOwnProperty.call(illegalAttributeNameCache, attributeName)) return false;
+    if (hasOwnProperty2.call(illegalAttributeNameCache, attributeName)) return false;
     if (VALID_ATTRIBUTE_NAME_REGEX.test(attributeName))
       return validatedAttributeNameCache[attributeName] = true;
     illegalAttributeNameCache[attributeName] = true;
@@ -2026,7 +2026,7 @@ function requireReactDomClient_production() {
   function sanitizeURL(url) {
     return isJavaScriptProtocol.test("" + url) ? "javascript:throw new Error('React has blocked a javascript: URL as a security precaution.')" : url;
   }
-  function noop$1() {
+  function noop$12() {
   }
   var currentReplayingEvent = null;
   function getEventTarget(nativeEvent) {
@@ -2518,7 +2518,7 @@ function requireReactDomClient_production() {
     if (keysA.length !== keysB.length) return false;
     for (keysB = 0; keysB < keysA.length; keysB++) {
       var currentKey = keysA[keysB];
-      if (!hasOwnProperty.call(objB, currentKey) || !objectIs(objA[currentKey], objB[currentKey]))
+      if (!hasOwnProperty2.call(objB, currentKey) || !objectIs(objA[currentKey], objB[currentKey]))
         return false;
     }
     return true;
@@ -2956,7 +2956,7 @@ function requireReactDomClient_production() {
         listenToNonDelegatedEvent("invalid", instance), initTextarea(instance, props.value, props.defaultValue, props.children);
     }
     type = props.children;
-    "string" !== typeof type && "number" !== typeof type && "bigint" !== typeof type || instance.textContent === "" + type || true === props.suppressHydrationWarning || checkForUnmatchedText(instance.textContent, type) ? (null != props.popover && (listenToNonDelegatedEvent("beforetoggle", instance), listenToNonDelegatedEvent("toggle", instance)), null != props.onScroll && listenToNonDelegatedEvent("scroll", instance), null != props.onScrollEnd && listenToNonDelegatedEvent("scrollend", instance), null != props.onClick && (instance.onclick = noop$1), instance = true) : instance = false;
+    "string" !== typeof type && "number" !== typeof type && "bigint" !== typeof type || instance.textContent === "" + type || true === props.suppressHydrationWarning || checkForUnmatchedText(instance.textContent, type) ? (null != props.popover && (listenToNonDelegatedEvent("beforetoggle", instance), listenToNonDelegatedEvent("toggle", instance)), null != props.onScroll && listenToNonDelegatedEvent("scroll", instance), null != props.onScrollEnd && listenToNonDelegatedEvent("scrollend", instance), null != props.onClick && (instance.onclick = noop$12), instance = true) : instance = false;
     instance || throwOnHydrationMismatch(fiber, true);
   }
   function popToNextHostParent(fiber) {
@@ -3262,14 +3262,14 @@ function requireReactDomClient_production() {
   }
   function trackUsedThenable(thenableState2, thenable, index2) {
     index2 = thenableState2[index2];
-    void 0 === index2 ? thenableState2.push(thenable) : index2 !== thenable && (thenable.then(noop$1, noop$1), thenable = index2);
+    void 0 === index2 ? thenableState2.push(thenable) : index2 !== thenable && (thenable.then(noop$12, noop$12), thenable = index2);
     switch (thenable.status) {
       case "fulfilled":
         return thenable.value;
       case "rejected":
         throw thenableState2 = thenable.reason, checkIfUseWrappedInAsyncCatch(thenableState2), thenableState2;
       default:
-        if ("string" === typeof thenable.status) thenable.then(noop$1, noop$1);
+        if ("string" === typeof thenable.status) thenable.then(noop$12, noop$12);
         else {
           thenableState2 = workInProgressRoot;
           if (null !== thenableState2 && 100 < thenableState2.shellSuspendCounter)
@@ -7169,7 +7169,7 @@ function requireReactDomClient_production() {
   function insertOrAppendPlacementNodeIntoContainer(node, before, parent) {
     var tag = node.tag;
     if (5 === tag || 6 === tag)
-      node = node.stateNode, before ? (9 === parent.nodeType ? parent.body : "HTML" === parent.nodeName ? parent.ownerDocument.body : parent).insertBefore(node, before) : (before = 9 === parent.nodeType ? parent.body : "HTML" === parent.nodeName ? parent.ownerDocument.body : parent, before.appendChild(node), parent = parent._reactRootContainer, null !== parent && void 0 !== parent || null !== before.onclick || (before.onclick = noop$1));
+      node = node.stateNode, before ? (9 === parent.nodeType ? parent.body : "HTML" === parent.nodeName ? parent.ownerDocument.body : parent).insertBefore(node, before) : (before = 9 === parent.nodeType ? parent.body : "HTML" === parent.nodeName ? parent.ownerDocument.body : parent, before.appendChild(node), parent = parent._reactRootContainer, null !== parent && void 0 !== parent || null !== before.onclick || (before.onclick = noop$12));
     else if (4 !== tag && (27 === tag && isSingletonScope(node.type) && (parent = node.stateNode, before = null), node = node.child, null !== node))
       for (insertOrAppendPlacementNodeIntoContainer(node, before, parent), node = node.sibling; null !== node; )
         insertOrAppendPlacementNodeIntoContainer(node, before, parent), node = node.sibling;
@@ -8730,7 +8730,7 @@ function requireReactDomClient_production() {
         suspenseyImages: [],
         waitingForImages: true,
         waitingForViewTransition: false,
-        unsuspend: noop$1
+        unsuspend: noop$12
       };
       accumulateSuspenseyCommitOnFiber(
         finishedWork,
@@ -10292,7 +10292,7 @@ function requireReactDomClient_production() {
         domElement.setAttribute(key, value);
         break;
       case "onClick":
-        null != value && (domElement.onclick = noop$1);
+        null != value && (domElement.onclick = noop$12);
         break;
       case "onScroll":
         null != value && listenToNonDelegatedEvent("scroll", domElement);
@@ -10501,7 +10501,7 @@ function requireReactDomClient_production() {
         null != value && listenToNonDelegatedEvent("scrollend", domElement);
         break;
       case "onClick":
-        null != value && (domElement.onclick = noop$1);
+        null != value && (domElement.onclick = noop$12);
         break;
       case "suppressContentEditableWarning":
       case "suppressHydrationWarning":
@@ -12650,7 +12650,7 @@ function systemSetTimeoutZero(callback) {
   setTimeout(callback, 0);
 }
 var isServer = typeof window === "undefined" || "Deno" in globalThis;
-function noop() {
+function noop$1() {
 }
 function functionalUpdate(updater, input) {
   return typeof updater === "function" ? updater(input) : updater;
@@ -12734,7 +12734,7 @@ function hashQueryKeyByOptions(queryKey, options) {
 function hashKey(queryKey) {
   return JSON.stringify(
     queryKey,
-    (_, val) => isPlainObject$2(val) ? Object.keys(val).sort().reduce((result, key) => {
+    (_, val) => isPlainObject$3(val) ? Object.keys(val).sort().reduce((result, key) => {
       result[key] = val[key];
       return result;
     }, {}) : val
@@ -12759,7 +12759,7 @@ function replaceEqualDeep(a2, b, depth = 0) {
   }
   if (depth > 500) return b;
   const array = isPlainArray(a2) && isPlainArray(b);
-  if (!array && !(isPlainObject$2(a2) && isPlainObject$2(b))) return b;
+  if (!array && !(isPlainObject$3(a2) && isPlainObject$3(b))) return b;
   const aItems = array ? a2 : Object.keys(a2);
   const aSize = aItems.length;
   const bItems = array ? b : Object.keys(b);
@@ -12799,7 +12799,7 @@ function shallowEqualObjects(a2, b) {
 function isPlainArray(value) {
   return Array.isArray(value) && value.length === Object.keys(value).length;
 }
-function isPlainObject$2(o2) {
+function isPlainObject$3(o2) {
   if (!hasObjectPrototype(o2)) {
     return false;
   }
@@ -13368,7 +13368,7 @@ var Query = class extends Removable {
   cancel(options) {
     const promise = this.#retryer?.promise;
     this.#retryer?.cancel(options);
-    return promise ? promise.then(noop).catch(noop) : Promise.resolve();
+    return promise ? promise.then(noop$1).catch(noop$1) : Promise.resolve();
   }
   destroy() {
     super.destroy();
@@ -13889,7 +13889,7 @@ var QueryObserver = class extends Subscribable {
       fetchOptions
     );
     if (!fetchOptions?.throwOnError) {
-      promise = promise.catch(noop);
+      promise = promise.catch(noop$1);
     }
     return promise;
   }
@@ -14553,7 +14553,7 @@ var MutationCache = class extends Subscribable {
     const pausedMutations = this.getAll().filter((x) => x.state.isPaused);
     return notifyManager.batch(
       () => Promise.all(
-        pausedMutations.map((mutation) => mutation.continue().catch(noop))
+        pausedMutations.map((mutation) => mutation.continue().catch(noop$1))
       )
     );
   }
@@ -14910,7 +14910,7 @@ var QueryClient = class {
     const promises = notifyManager.batch(
       () => this.#queryCache.findAll(filters).map((query) => query.cancel(defaultedCancelOptions))
     );
-    return Promise.all(promises).then(noop).catch(noop);
+    return Promise.all(promises).then(noop$1).catch(noop$1);
   }
   invalidateQueries(filters, options = {}) {
     return notifyManager.batch(() => {
@@ -14938,12 +14938,12 @@ var QueryClient = class {
       () => this.#queryCache.findAll(filters).filter((query) => !query.isDisabled() && !query.isStatic()).map((query) => {
         let promise = query.fetch(void 0, fetchOptions);
         if (!fetchOptions.throwOnError) {
-          promise = promise.catch(noop);
+          promise = promise.catch(noop$1);
         }
         return query.state.fetchStatus === "paused" ? Promise.resolve() : promise;
       })
     );
-    return Promise.all(promises).then(noop);
+    return Promise.all(promises).then(noop$1);
   }
   fetchQuery(options) {
     const defaultedOptions = this.defaultQueryOptions(options);
@@ -14956,14 +14956,14 @@ var QueryClient = class {
     ) ? query.fetch(defaultedOptions) : Promise.resolve(query.state.data);
   }
   prefetchQuery(options) {
-    return this.fetchQuery(options).then(noop).catch(noop);
+    return this.fetchQuery(options).then(noop$1).catch(noop$1);
   }
   fetchInfiniteQuery(options) {
     options._type = "infinite";
     return this.fetchQuery(options);
   }
   prefetchInfiniteQuery(options) {
-    return this.fetchInfiniteQuery(options).then(noop).catch(noop);
+    return this.fetchInfiniteQuery(options).then(noop$1).catch(noop$1);
   }
   ensureInfiniteQueryData(options) {
     options._type = "infinite";
@@ -14994,9 +14994,9 @@ var QueryClient = class {
     });
   }
   getQueryDefaults(queryKey) {
-    const defaults = [...this.#queryDefaults.values()];
+    const defaults2 = [...this.#queryDefaults.values()];
     const result = {};
-    defaults.forEach((queryDefault) => {
+    defaults2.forEach((queryDefault) => {
       if (partialMatchKey(queryKey, queryDefault.queryKey)) {
         Object.assign(result, queryDefault.defaultOptions);
       }
@@ -15010,9 +15010,9 @@ var QueryClient = class {
     });
   }
   getMutationDefaults(mutationKey) {
-    const defaults = [...this.#mutationDefaults.values()];
+    const defaults2 = [...this.#mutationDefaults.values()];
     const result = {};
-    defaults.forEach((queryDefault) => {
+    defaults2.forEach((queryDefault) => {
       if (partialMatchKey(mutationKey, queryDefault.mutationKey)) {
         Object.assign(result, queryDefault.defaultOptions);
       }
@@ -15173,7 +15173,7 @@ function useBaseQuery(options, Observer, queryClient2) {
   reactExports.useSyncExternalStore(
     reactExports.useCallback(
       (onStoreChange) => {
-        const unsubscribe = shouldSubscribe ? observer.subscribe(notifyManager.batchCalls(onStoreChange)) : noop;
+        const unsubscribe = shouldSubscribe ? observer.subscribe(notifyManager.batchCalls(onStoreChange)) : noop$1;
         observer.updateResult();
         return unsubscribe;
       },
@@ -15209,7 +15209,7 @@ function useBaseQuery(options, Observer, queryClient2) {
       // subscribe to the "cache promise" so that we can finalize the currentThenable once data comes in
       query?.promise
     );
-    promise?.catch(noop).finally(() => {
+    promise?.catch(noop$1).finally(() => {
       observer.updateResult();
     });
   }
@@ -15239,7 +15239,7 @@ function useMutation(options, queryClient2) {
   );
   const mutate = reactExports.useCallback(
     (variables, mutateOptions) => {
-      observer.mutate(variables, mutateOptions).catch(noop);
+      observer.mutate(variables, mutateOptions).catch(noop$1);
     },
     [observer]
   );
@@ -16286,7 +16286,7 @@ function getReadonlyRequest(request) {
   };
 }
 function getReadonlyContext(context) {
-  if (isPlainObject$1(context)) {
+  if (isPlainObject$2(context)) {
     let frozen = { ...context };
     Object.freeze(frozen);
     return frozen;
@@ -16297,7 +16297,7 @@ function getReadonlyContext(context) {
   }
 }
 var objectProtoNames = Object.getOwnPropertyNames(Object.prototype).sort().join("\0");
-function isPlainObject$1(thing) {
+function isPlainObject$2(thing) {
   if (thing === null || typeof thing !== "object") {
     return false;
   }
@@ -19397,7 +19397,7 @@ async function parseResponseBody(response) {
 }
 async function convertDataStrategyResultToDataResult(dataStrategyResult) {
   let { result, type } = dataStrategyResult;
-  if (isResponse(result)) {
+  if (isResponse$1(result)) {
     let data2;
     try {
       data2 = await parseResponseBody(result);
@@ -19782,7 +19782,7 @@ function isDataStrategyResult(result) {
   return result != null && typeof result === "object" && "type" in result && "result" in result && (result.type === "data" || result.type === "error");
 }
 function isRedirectDataStrategyResult(result) {
-  return isResponse(result.result) && redirectStatusCodes.has(result.result.status);
+  return isResponse$1(result.result) && redirectStatusCodes.has(result.result.status);
 }
 function isErrorResult(result) {
   return result.type === "error";
@@ -19793,14 +19793,14 @@ function isRedirectResult(result) {
 function isDataWithResponseInit(value) {
   return typeof value === "object" && value != null && "type" in value && "data" in value && "init" in value && value.type === "DataWithResponseInit";
 }
-function isResponse(value) {
+function isResponse$1(value) {
   return value != null && typeof value.status === "number" && typeof value.statusText === "string" && typeof value.headers === "object" && typeof value.body !== "undefined";
 }
 function isRedirectStatusCode(statusCode) {
   return redirectStatusCodes.has(statusCode);
 }
 function isRedirectResponse(result) {
-  return isResponse(result) && isRedirectStatusCode(result.status) && result.headers.has("Location");
+  return isResponse$1(result) && isRedirectStatusCode(result.status) && result.headers.has("Location");
 }
 function isValidMethod(method) {
   return validRequestMethods.has(method.toUpperCase());
@@ -22883,7 +22883,7 @@ const createImpl = (createState) => {
   Object.assign(useBoundStore, api);
   return useBoundStore;
 };
-const create = ((createState) => createState ? createImpl(createState) : createImpl);
+const create$1 = ((createState) => createState ? createImpl(createState) : createImpl);
 function createJSONStorage(getStorage, options) {
   let storage;
   try {
@@ -23081,7 +23081,3060 @@ const persistImpl = (config2, baseOptions) => (set2, get2, api) => {
   return stateFromStorage || configResult;
 };
 const persist = persistImpl;
+function bind(fn, thisArg) {
+  return function wrap() {
+    return fn.apply(thisArg, arguments);
+  };
+}
+const { toString } = Object.prototype;
+const { getPrototypeOf } = Object;
+const { iterator, toStringTag } = Symbol;
+const kindOf = /* @__PURE__ */ ((cache) => (thing) => {
+  const str = toString.call(thing);
+  return cache[str] || (cache[str] = str.slice(8, -1).toLowerCase());
+})(/* @__PURE__ */ Object.create(null));
+const kindOfTest = (type) => {
+  type = type.toLowerCase();
+  return (thing) => kindOf(thing) === type;
+};
+const typeOfTest = (type) => (thing) => typeof thing === type;
+const { isArray } = Array;
+const isUndefined$1 = typeOfTest("undefined");
+function isBuffer(val) {
+  return val !== null && !isUndefined$1(val) && val.constructor !== null && !isUndefined$1(val.constructor) && isFunction$2(val.constructor.isBuffer) && val.constructor.isBuffer(val);
+}
+const isArrayBuffer = kindOfTest("ArrayBuffer");
+function isArrayBufferView(val) {
+  let result;
+  if (typeof ArrayBuffer !== "undefined" && ArrayBuffer.isView) {
+    result = ArrayBuffer.isView(val);
+  } else {
+    result = val && val.buffer && isArrayBuffer(val.buffer);
+  }
+  return result;
+}
+const isString$1 = typeOfTest("string");
+const isFunction$2 = typeOfTest("function");
+const isNumber$1 = typeOfTest("number");
+const isObject$1 = (thing) => thing !== null && typeof thing === "object";
+const isBoolean$1 = (thing) => thing === true || thing === false;
+const isPlainObject$1 = (val) => {
+  if (kindOf(val) !== "object") {
+    return false;
+  }
+  const prototype2 = getPrototypeOf(val);
+  return (prototype2 === null || prototype2 === Object.prototype || Object.getPrototypeOf(prototype2) === null) && !(toStringTag in val) && !(iterator in val);
+};
+const isEmptyObject$1 = (val) => {
+  if (!isObject$1(val) || isBuffer(val)) {
+    return false;
+  }
+  try {
+    return Object.keys(val).length === 0 && Object.getPrototypeOf(val) === Object.prototype;
+  } catch (e) {
+    return false;
+  }
+};
+const isDate = kindOfTest("Date");
+const isFile = kindOfTest("File");
+const isReactNativeBlob = (value) => {
+  return !!(value && typeof value.uri !== "undefined");
+};
+const isReactNative = (formData) => formData && typeof formData.getParts !== "undefined";
+const isBlob = kindOfTest("Blob");
+const isFileList = kindOfTest("FileList");
+const isStream = (val) => isObject$1(val) && isFunction$2(val.pipe);
+function getGlobal() {
+  if (typeof globalThis !== "undefined") return globalThis;
+  if (typeof self !== "undefined") return self;
+  if (typeof window !== "undefined") return window;
+  if (typeof global !== "undefined") return global;
+  return {};
+}
+const G = getGlobal();
+const FormDataCtor = typeof G.FormData !== "undefined" ? G.FormData : void 0;
+const isFormData = (thing) => {
+  if (!thing) return false;
+  if (FormDataCtor && thing instanceof FormDataCtor) return true;
+  const proto = getPrototypeOf(thing);
+  if (!proto || proto === Object.prototype) return false;
+  if (!isFunction$2(thing.append)) return false;
+  const kind = kindOf(thing);
+  return kind === "formdata" || // detect form-data instance
+  kind === "object" && isFunction$2(thing.toString) && thing.toString() === "[object FormData]";
+};
+const isURLSearchParams = kindOfTest("URLSearchParams");
+const [isReadableStream, isRequest, isResponse, isHeaders] = [
+  "ReadableStream",
+  "Request",
+  "Response",
+  "Headers"
+].map(kindOfTest);
+const trim = (str) => {
+  return str.trim ? str.trim() : str.replace(/^[\s\uFEFF\xA0]+|[\s\uFEFF\xA0]+$/g, "");
+};
+function forEach(obj, fn, { allOwnKeys = false } = {}) {
+  if (obj === null || typeof obj === "undefined") {
+    return;
+  }
+  let i2;
+  let l;
+  if (typeof obj !== "object") {
+    obj = [obj];
+  }
+  if (isArray(obj)) {
+    for (i2 = 0, l = obj.length; i2 < l; i2++) {
+      fn.call(null, obj[i2], i2, obj);
+    }
+  } else {
+    if (isBuffer(obj)) {
+      return;
+    }
+    const keys = allOwnKeys ? Object.getOwnPropertyNames(obj) : Object.keys(obj);
+    const len = keys.length;
+    let key;
+    for (i2 = 0; i2 < len; i2++) {
+      key = keys[i2];
+      fn.call(null, obj[key], key, obj);
+    }
+  }
+}
+function findKey(obj, key) {
+  if (isBuffer(obj)) {
+    return null;
+  }
+  key = key.toLowerCase();
+  const keys = Object.keys(obj);
+  let i2 = keys.length;
+  let _key;
+  while (i2-- > 0) {
+    _key = keys[i2];
+    if (key === _key.toLowerCase()) {
+      return _key;
+    }
+  }
+  return null;
+}
+const _global = (() => {
+  if (typeof globalThis !== "undefined") return globalThis;
+  return typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : global;
+})();
+const isContextDefined = (context) => !isUndefined$1(context) && context !== _global;
+function merge(...objs) {
+  const { caseless, skipUndefined } = isContextDefined(this) && this || {};
+  const result = {};
+  const assignValue = (val, key) => {
+    if (key === "__proto__" || key === "constructor" || key === "prototype") {
+      return;
+    }
+    const targetKey = caseless && typeof key === "string" && findKey(result, key) || key;
+    const existing = hasOwnProperty(result, targetKey) ? result[targetKey] : void 0;
+    if (isPlainObject$1(existing) && isPlainObject$1(val)) {
+      result[targetKey] = merge(existing, val);
+    } else if (isPlainObject$1(val)) {
+      result[targetKey] = merge({}, val);
+    } else if (isArray(val)) {
+      result[targetKey] = val.slice();
+    } else if (!skipUndefined || !isUndefined$1(val)) {
+      result[targetKey] = val;
+    }
+  };
+  for (let i2 = 0, l = objs.length; i2 < l; i2++) {
+    const source = objs[i2];
+    if (!source || isBuffer(source)) {
+      continue;
+    }
+    forEach(source, assignValue);
+    if (typeof source !== "object" || isArray(source)) {
+      continue;
+    }
+    const symbols = Object.getOwnPropertySymbols(source);
+    for (let j = 0; j < symbols.length; j++) {
+      const symbol = symbols[j];
+      if (propertyIsEnumerable.call(source, symbol)) {
+        assignValue(source[symbol], symbol);
+      }
+    }
+  }
+  return result;
+}
+const extend = (a2, b, thisArg, { allOwnKeys } = {}) => {
+  forEach(
+    b,
+    (val, key) => {
+      if (thisArg && isFunction$2(val)) {
+        Object.defineProperty(a2, key, {
+          // Null-proto descriptor so a polluted Object.prototype.get cannot
+          // hijack defineProperty's accessor-vs-data resolution.
+          __proto__: null,
+          value: bind(val, thisArg),
+          writable: true,
+          enumerable: true,
+          configurable: true
+        });
+      } else {
+        Object.defineProperty(a2, key, {
+          __proto__: null,
+          value: val,
+          writable: true,
+          enumerable: true,
+          configurable: true
+        });
+      }
+    },
+    { allOwnKeys }
+  );
+  return a2;
+};
+const stripBOM = (content) => {
+  if (content.charCodeAt(0) === 65279) {
+    content = content.slice(1);
+  }
+  return content;
+};
+const inherits = (constructor, superConstructor, props, descriptors) => {
+  constructor.prototype = Object.create(superConstructor.prototype, descriptors);
+  Object.defineProperty(constructor.prototype, "constructor", {
+    __proto__: null,
+    value: constructor,
+    writable: true,
+    enumerable: false,
+    configurable: true
+  });
+  Object.defineProperty(constructor, "super", {
+    __proto__: null,
+    value: superConstructor.prototype
+  });
+  props && Object.assign(constructor.prototype, props);
+};
+const toFlatObject = (sourceObj, destObj, filter2, propFilter) => {
+  let props;
+  let i2;
+  let prop;
+  const merged = {};
+  destObj = destObj || {};
+  if (sourceObj == null) return destObj;
+  do {
+    props = Object.getOwnPropertyNames(sourceObj);
+    i2 = props.length;
+    while (i2-- > 0) {
+      prop = props[i2];
+      if ((!propFilter || propFilter(prop, sourceObj, destObj)) && !merged[prop]) {
+        destObj[prop] = sourceObj[prop];
+        merged[prop] = true;
+      }
+    }
+    sourceObj = filter2 !== false && getPrototypeOf(sourceObj);
+  } while (sourceObj && (!filter2 || filter2(sourceObj, destObj)) && sourceObj !== Object.prototype);
+  return destObj;
+};
+const endsWith = (str, searchString, position) => {
+  str = String(str);
+  if (position === void 0 || position > str.length) {
+    position = str.length;
+  }
+  position -= searchString.length;
+  const lastIndex = str.indexOf(searchString, position);
+  return lastIndex !== -1 && lastIndex === position;
+};
+const toArray = (thing) => {
+  if (!thing) return null;
+  if (isArray(thing)) return thing;
+  let i2 = thing.length;
+  if (!isNumber$1(i2)) return null;
+  const arr = new Array(i2);
+  while (i2-- > 0) {
+    arr[i2] = thing[i2];
+  }
+  return arr;
+};
+const isTypedArray = /* @__PURE__ */ ((TypedArray) => {
+  return (thing) => {
+    return TypedArray && thing instanceof TypedArray;
+  };
+})(typeof Uint8Array !== "undefined" && getPrototypeOf(Uint8Array));
+const forEachEntry = (obj, fn) => {
+  const generator = obj && obj[iterator];
+  const _iterator = generator.call(obj);
+  let result;
+  while ((result = _iterator.next()) && !result.done) {
+    const pair = result.value;
+    fn.call(obj, pair[0], pair[1]);
+  }
+};
+const matchAll = (regExp, str) => {
+  let matches;
+  const arr = [];
+  while ((matches = regExp.exec(str)) !== null) {
+    arr.push(matches);
+  }
+  return arr;
+};
+const isHTMLForm = kindOfTest("HTMLFormElement");
+const toCamelCase = (str) => {
+  return str.toLowerCase().replace(/[-_\s]([a-z\d])(\w*)/g, function replacer(m, p1, p2) {
+    return p1.toUpperCase() + p2;
+  });
+};
+const hasOwnProperty = (({ hasOwnProperty: hasOwnProperty2 }) => (obj, prop) => hasOwnProperty2.call(obj, prop))(Object.prototype);
+const { propertyIsEnumerable } = Object.prototype;
+const isRegExp = kindOfTest("RegExp");
+const reduceDescriptors = (obj, reducer) => {
+  const descriptors = Object.getOwnPropertyDescriptors(obj);
+  const reducedDescriptors = {};
+  forEach(descriptors, (descriptor, name) => {
+    let ret;
+    if ((ret = reducer(descriptor, name, obj)) !== false) {
+      reducedDescriptors[name] = ret || descriptor;
+    }
+  });
+  Object.defineProperties(obj, reducedDescriptors);
+};
+const freezeMethods = (obj) => {
+  reduceDescriptors(obj, (descriptor, name) => {
+    if (isFunction$2(obj) && ["arguments", "caller", "callee"].includes(name)) {
+      return false;
+    }
+    const value = obj[name];
+    if (!isFunction$2(value)) return;
+    descriptor.enumerable = false;
+    if ("writable" in descriptor) {
+      descriptor.writable = false;
+      return;
+    }
+    if (!descriptor.set) {
+      descriptor.set = () => {
+        throw Error("Can not rewrite read-only method '" + name + "'");
+      };
+    }
+  });
+};
+const toObjectSet = (arrayOrString, delimiter) => {
+  const obj = {};
+  const define = (arr) => {
+    arr.forEach((value) => {
+      obj[value] = true;
+    });
+  };
+  isArray(arrayOrString) ? define(arrayOrString) : define(String(arrayOrString).split(delimiter));
+  return obj;
+};
+const noop = () => {
+};
+const toFiniteNumber = (value, defaultValue) => {
+  return value != null && Number.isFinite(value = +value) ? value : defaultValue;
+};
+function isSpecCompliantForm(thing) {
+  return !!(thing && isFunction$2(thing.append) && thing[toStringTag] === "FormData" && thing[iterator]);
+}
+const toJSONObject = (obj) => {
+  const visited = /* @__PURE__ */ new WeakSet();
+  const visit = (source) => {
+    if (isObject$1(source)) {
+      if (visited.has(source)) {
+        return;
+      }
+      if (isBuffer(source)) {
+        return source;
+      }
+      if (!("toJSON" in source)) {
+        visited.add(source);
+        const target = isArray(source) ? [] : {};
+        forEach(source, (value, key) => {
+          const reducedValue = visit(value);
+          !isUndefined$1(reducedValue) && (target[key] = reducedValue);
+        });
+        visited.delete(source);
+        return target;
+      }
+    }
+    return source;
+  };
+  return visit(obj);
+};
+const isAsyncFn = kindOfTest("AsyncFunction");
+const isThenable = (thing) => thing && (isObject$1(thing) || isFunction$2(thing)) && isFunction$2(thing.then) && isFunction$2(thing.catch);
+const _setImmediate = ((setImmediateSupported, postMessageSupported) => {
+  if (setImmediateSupported) {
+    return setImmediate;
+  }
+  return postMessageSupported ? ((token, callbacks) => {
+    _global.addEventListener(
+      "message",
+      ({ source, data }) => {
+        if (source === _global && data === token) {
+          callbacks.length && callbacks.shift()();
+        }
+      },
+      false
+    );
+    return (cb) => {
+      callbacks.push(cb);
+      _global.postMessage(token, "*");
+    };
+  })(`axios@${Math.random()}`, []) : (cb) => setTimeout(cb);
+})(typeof setImmediate === "function", isFunction$2(_global.postMessage));
+const asap = typeof queueMicrotask !== "undefined" ? queueMicrotask.bind(_global) : typeof process !== "undefined" && process.nextTick || _setImmediate;
+const isIterable = (thing) => thing != null && isFunction$2(thing[iterator]);
+const utils$1 = {
+  isArray,
+  isArrayBuffer,
+  isBuffer,
+  isFormData,
+  isArrayBufferView,
+  isString: isString$1,
+  isNumber: isNumber$1,
+  isBoolean: isBoolean$1,
+  isObject: isObject$1,
+  isPlainObject: isPlainObject$1,
+  isEmptyObject: isEmptyObject$1,
+  isReadableStream,
+  isRequest,
+  isResponse,
+  isHeaders,
+  isUndefined: isUndefined$1,
+  isDate,
+  isFile,
+  isReactNativeBlob,
+  isReactNative,
+  isBlob,
+  isRegExp,
+  isFunction: isFunction$2,
+  isStream,
+  isURLSearchParams,
+  isTypedArray,
+  isFileList,
+  forEach,
+  merge,
+  extend,
+  trim,
+  stripBOM,
+  inherits,
+  toFlatObject,
+  kindOf,
+  kindOfTest,
+  endsWith,
+  toArray,
+  forEachEntry,
+  matchAll,
+  isHTMLForm,
+  hasOwnProperty,
+  hasOwnProp: hasOwnProperty,
+  // an alias to avoid ESLint no-prototype-builtins detection
+  reduceDescriptors,
+  freezeMethods,
+  toObjectSet,
+  toCamelCase,
+  noop,
+  toFiniteNumber,
+  findKey,
+  global: _global,
+  isContextDefined,
+  isSpecCompliantForm,
+  toJSONObject,
+  isAsyncFn,
+  isThenable,
+  setImmediate: _setImmediate,
+  asap,
+  isIterable
+};
+const ignoreDuplicateOf = utils$1.toObjectSet([
+  "age",
+  "authorization",
+  "content-length",
+  "content-type",
+  "etag",
+  "expires",
+  "from",
+  "host",
+  "if-modified-since",
+  "if-unmodified-since",
+  "last-modified",
+  "location",
+  "max-forwards",
+  "proxy-authorization",
+  "referer",
+  "retry-after",
+  "user-agent"
+]);
+const parseHeaders = (rawHeaders) => {
+  const parsed = {};
+  let key;
+  let val;
+  let i2;
+  rawHeaders && rawHeaders.split("\n").forEach(function parser(line) {
+    i2 = line.indexOf(":");
+    key = line.substring(0, i2).trim().toLowerCase();
+    val = line.substring(i2 + 1).trim();
+    if (!key || parsed[key] && ignoreDuplicateOf[key]) {
+      return;
+    }
+    if (key === "set-cookie") {
+      if (parsed[key]) {
+        parsed[key].push(val);
+      } else {
+        parsed[key] = [val];
+      }
+    } else {
+      parsed[key] = parsed[key] ? parsed[key] + ", " + val : val;
+    }
+  });
+  return parsed;
+};
+function trimSPorHTAB(str) {
+  let start = 0;
+  let end = str.length;
+  while (start < end) {
+    const code = str.charCodeAt(start);
+    if (code !== 9 && code !== 32) {
+      break;
+    }
+    start += 1;
+  }
+  while (end > start) {
+    const code = str.charCodeAt(end - 1);
+    if (code !== 9 && code !== 32) {
+      break;
+    }
+    end -= 1;
+  }
+  return start === 0 && end === str.length ? str : str.slice(start, end);
+}
+const INVALID_UNICODE_HEADER_VALUE_CHARS = new RegExp("[\\u0000-\\u0008\\u000a-\\u001f\\u007f]+", "g");
+const INVALID_BYTE_STRING_HEADER_VALUE_CHARS = new RegExp("[^\\u0009\\u0020-\\u007e\\u0080-\\u00ff]+", "g");
+function sanitizeValue(value, invalidChars) {
+  if (utils$1.isArray(value)) {
+    return value.map((item) => sanitizeValue(item, invalidChars));
+  }
+  return trimSPorHTAB(String(value).replace(invalidChars, ""));
+}
+const sanitizeHeaderValue = (value) => sanitizeValue(value, INVALID_UNICODE_HEADER_VALUE_CHARS);
+const sanitizeByteStringHeaderValue = (value) => sanitizeValue(value, INVALID_BYTE_STRING_HEADER_VALUE_CHARS);
+function toByteStringHeaderObject(headers) {
+  const byteStringHeaders = /* @__PURE__ */ Object.create(null);
+  utils$1.forEach(headers.toJSON(), (value, header) => {
+    byteStringHeaders[header] = sanitizeByteStringHeaderValue(value);
+  });
+  return byteStringHeaders;
+}
+const $internals = Symbol("internals");
+function normalizeHeader(header) {
+  return header && String(header).trim().toLowerCase();
+}
+function normalizeValue(value) {
+  if (value === false || value == null) {
+    return value;
+  }
+  return utils$1.isArray(value) ? value.map(normalizeValue) : sanitizeHeaderValue(String(value));
+}
+function parseTokens(str) {
+  const tokens = /* @__PURE__ */ Object.create(null);
+  const tokensRE = /([^\s,;=]+)\s*(?:=\s*([^,;]+))?/g;
+  let match;
+  while (match = tokensRE.exec(str)) {
+    tokens[match[1]] = match[2];
+  }
+  return tokens;
+}
+const isValidHeaderName = (str) => /^[-_a-zA-Z0-9^`|~,!#$%&'*+.]+$/.test(str.trim());
+function matchHeaderValue(context, value, header, filter2, isHeaderNameFilter) {
+  if (utils$1.isFunction(filter2)) {
+    return filter2.call(this, value, header);
+  }
+  if (isHeaderNameFilter) {
+    value = header;
+  }
+  if (!utils$1.isString(value)) return;
+  if (utils$1.isString(filter2)) {
+    return value.indexOf(filter2) !== -1;
+  }
+  if (utils$1.isRegExp(filter2)) {
+    return filter2.test(value);
+  }
+}
+function formatHeader(header) {
+  return header.trim().toLowerCase().replace(/([a-z\d])(\w*)/g, (w, char, str) => {
+    return char.toUpperCase() + str;
+  });
+}
+function buildAccessors(obj, header) {
+  const accessorName = utils$1.toCamelCase(" " + header);
+  ["get", "set", "has"].forEach((methodName) => {
+    Object.defineProperty(obj, methodName + accessorName, {
+      // Null-proto descriptor so a polluted Object.prototype.get cannot turn
+      // this data descriptor into an accessor descriptor on the way in.
+      __proto__: null,
+      value: function(arg1, arg2, arg3) {
+        return this[methodName].call(this, header, arg1, arg2, arg3);
+      },
+      configurable: true
+    });
+  });
+}
+let AxiosHeaders$1 = class AxiosHeaders {
+  constructor(headers) {
+    headers && this.set(headers);
+  }
+  set(header, valueOrRewrite, rewrite) {
+    const self2 = this;
+    function setHeader(_value, _header, _rewrite) {
+      const lHeader = normalizeHeader(_header);
+      if (!lHeader) {
+        return;
+      }
+      const key = utils$1.findKey(self2, lHeader);
+      if (!key || self2[key] === void 0 || _rewrite === true || _rewrite === void 0 && self2[key] !== false) {
+        self2[key || _header] = normalizeValue(_value);
+      }
+    }
+    const setHeaders = (headers, _rewrite) => utils$1.forEach(headers, (_value, _header) => setHeader(_value, _header, _rewrite));
+    if (utils$1.isPlainObject(header) || header instanceof this.constructor) {
+      setHeaders(header, valueOrRewrite);
+    } else if (utils$1.isString(header) && (header = header.trim()) && !isValidHeaderName(header)) {
+      setHeaders(parseHeaders(header), valueOrRewrite);
+    } else if (utils$1.isObject(header) && utils$1.isIterable(header)) {
+      let obj = {}, dest, key;
+      for (const entry of header) {
+        if (!utils$1.isArray(entry)) {
+          throw new TypeError("Object iterator must return a key-value pair");
+        }
+        obj[key = entry[0]] = (dest = obj[key]) ? utils$1.isArray(dest) ? [...dest, entry[1]] : [dest, entry[1]] : entry[1];
+      }
+      setHeaders(obj, valueOrRewrite);
+    } else {
+      header != null && setHeader(valueOrRewrite, header, rewrite);
+    }
+    return this;
+  }
+  get(header, parser) {
+    header = normalizeHeader(header);
+    if (header) {
+      const key = utils$1.findKey(this, header);
+      if (key) {
+        const value = this[key];
+        if (!parser) {
+          return value;
+        }
+        if (parser === true) {
+          return parseTokens(value);
+        }
+        if (utils$1.isFunction(parser)) {
+          return parser.call(this, value, key);
+        }
+        if (utils$1.isRegExp(parser)) {
+          return parser.exec(value);
+        }
+        throw new TypeError("parser must be boolean|regexp|function");
+      }
+    }
+  }
+  has(header, matcher) {
+    header = normalizeHeader(header);
+    if (header) {
+      const key = utils$1.findKey(this, header);
+      return !!(key && this[key] !== void 0 && (!matcher || matchHeaderValue(this, this[key], key, matcher)));
+    }
+    return false;
+  }
+  delete(header, matcher) {
+    const self2 = this;
+    let deleted = false;
+    function deleteHeader(_header) {
+      _header = normalizeHeader(_header);
+      if (_header) {
+        const key = utils$1.findKey(self2, _header);
+        if (key && (!matcher || matchHeaderValue(self2, self2[key], key, matcher))) {
+          delete self2[key];
+          deleted = true;
+        }
+      }
+    }
+    if (utils$1.isArray(header)) {
+      header.forEach(deleteHeader);
+    } else {
+      deleteHeader(header);
+    }
+    return deleted;
+  }
+  clear(matcher) {
+    const keys = Object.keys(this);
+    let i2 = keys.length;
+    let deleted = false;
+    while (i2--) {
+      const key = keys[i2];
+      if (!matcher || matchHeaderValue(this, this[key], key, matcher, true)) {
+        delete this[key];
+        deleted = true;
+      }
+    }
+    return deleted;
+  }
+  normalize(format) {
+    const self2 = this;
+    const headers = {};
+    utils$1.forEach(this, (value, header) => {
+      const key = utils$1.findKey(headers, header);
+      if (key) {
+        self2[key] = normalizeValue(value);
+        delete self2[header];
+        return;
+      }
+      const normalized = format ? formatHeader(header) : String(header).trim();
+      if (normalized !== header) {
+        delete self2[header];
+      }
+      self2[normalized] = normalizeValue(value);
+      headers[normalized] = true;
+    });
+    return this;
+  }
+  concat(...targets) {
+    return this.constructor.concat(this, ...targets);
+  }
+  toJSON(asStrings) {
+    const obj = /* @__PURE__ */ Object.create(null);
+    utils$1.forEach(this, (value, header) => {
+      value != null && value !== false && (obj[header] = asStrings && utils$1.isArray(value) ? value.join(", ") : value);
+    });
+    return obj;
+  }
+  [Symbol.iterator]() {
+    return Object.entries(this.toJSON())[Symbol.iterator]();
+  }
+  toString() {
+    return Object.entries(this.toJSON()).map(([header, value]) => header + ": " + value).join("\n");
+  }
+  getSetCookie() {
+    return this.get("set-cookie") || [];
+  }
+  get [Symbol.toStringTag]() {
+    return "AxiosHeaders";
+  }
+  static from(thing) {
+    return thing instanceof this ? thing : new this(thing);
+  }
+  static concat(first, ...targets) {
+    const computed = new this(first);
+    targets.forEach((target) => computed.set(target));
+    return computed;
+  }
+  static accessor(header) {
+    const internals = this[$internals] = this[$internals] = {
+      accessors: {}
+    };
+    const accessors = internals.accessors;
+    const prototype2 = this.prototype;
+    function defineAccessor(_header) {
+      const lHeader = normalizeHeader(_header);
+      if (!accessors[lHeader]) {
+        buildAccessors(prototype2, _header);
+        accessors[lHeader] = true;
+      }
+    }
+    utils$1.isArray(header) ? header.forEach(defineAccessor) : defineAccessor(header);
+    return this;
+  }
+};
+AxiosHeaders$1.accessor([
+  "Content-Type",
+  "Content-Length",
+  "Accept",
+  "Accept-Encoding",
+  "User-Agent",
+  "Authorization"
+]);
+utils$1.reduceDescriptors(AxiosHeaders$1.prototype, ({ value }, key) => {
+  let mapped = key[0].toUpperCase() + key.slice(1);
+  return {
+    get: () => value,
+    set(headerValue) {
+      this[mapped] = headerValue;
+    }
+  };
+});
+utils$1.freezeMethods(AxiosHeaders$1);
+const REDACTED = "[REDACTED ****]";
+function hasOwnOrPrototypeToJSON(source) {
+  if (utils$1.hasOwnProp(source, "toJSON")) {
+    return true;
+  }
+  let prototype2 = Object.getPrototypeOf(source);
+  while (prototype2 && prototype2 !== Object.prototype) {
+    if (utils$1.hasOwnProp(prototype2, "toJSON")) {
+      return true;
+    }
+    prototype2 = Object.getPrototypeOf(prototype2);
+  }
+  return false;
+}
+function redactConfig(config2, redactKeys) {
+  const lowerKeys = new Set(redactKeys.map((k) => String(k).toLowerCase()));
+  const seen = [];
+  const visit = (source) => {
+    if (source === null || typeof source !== "object") return source;
+    if (utils$1.isBuffer(source)) return source;
+    if (seen.indexOf(source) !== -1) return void 0;
+    if (source instanceof AxiosHeaders$1) {
+      source = source.toJSON();
+    }
+    seen.push(source);
+    let result;
+    if (utils$1.isArray(source)) {
+      result = [];
+      source.forEach((v, i2) => {
+        const reducedValue = visit(v);
+        if (!utils$1.isUndefined(reducedValue)) {
+          result[i2] = reducedValue;
+        }
+      });
+    } else {
+      if (!utils$1.isPlainObject(source) && hasOwnOrPrototypeToJSON(source)) {
+        seen.pop();
+        return source;
+      }
+      result = /* @__PURE__ */ Object.create(null);
+      for (const [key, value] of Object.entries(source)) {
+        const reducedValue = lowerKeys.has(key.toLowerCase()) ? REDACTED : visit(value);
+        if (!utils$1.isUndefined(reducedValue)) {
+          result[key] = reducedValue;
+        }
+      }
+    }
+    seen.pop();
+    return result;
+  };
+  return visit(config2);
+}
+let AxiosError$1 = class AxiosError extends Error {
+  static from(error, code, config2, request, response, customProps) {
+    const axiosError = new AxiosError(error.message, code || error.code, config2, request, response);
+    axiosError.cause = error;
+    axiosError.name = error.name;
+    if (error.status != null && axiosError.status == null) {
+      axiosError.status = error.status;
+    }
+    customProps && Object.assign(axiosError, customProps);
+    return axiosError;
+  }
+  /**
+   * Create an Error with the specified message, config, error code, request and response.
+   *
+   * @param {string} message The error message.
+   * @param {string} [code] The error code (for example, 'ECONNABORTED').
+   * @param {Object} [config] The config.
+   * @param {Object} [request] The request.
+   * @param {Object} [response] The response.
+   *
+   * @returns {Error} The created error.
+   */
+  constructor(message, code, config2, request, response) {
+    super(message);
+    Object.defineProperty(this, "message", {
+      // Null-proto descriptor so a polluted Object.prototype.get cannot turn
+      // this data descriptor into an accessor descriptor on the way in.
+      __proto__: null,
+      value: message,
+      enumerable: true,
+      writable: true,
+      configurable: true
+    });
+    this.name = "AxiosError";
+    this.isAxiosError = true;
+    code && (this.code = code);
+    config2 && (this.config = config2);
+    request && (this.request = request);
+    if (response) {
+      this.response = response;
+      this.status = response.status;
+    }
+  }
+  toJSON() {
+    const config2 = this.config;
+    const redactKeys = config2 && utils$1.hasOwnProp(config2, "redact") ? config2.redact : void 0;
+    const serializedConfig = utils$1.isArray(redactKeys) && redactKeys.length > 0 ? redactConfig(config2, redactKeys) : utils$1.toJSONObject(config2);
+    return {
+      // Standard
+      message: this.message,
+      name: this.name,
+      // Microsoft
+      description: this.description,
+      number: this.number,
+      // Mozilla
+      fileName: this.fileName,
+      lineNumber: this.lineNumber,
+      columnNumber: this.columnNumber,
+      stack: this.stack,
+      // Axios
+      config: serializedConfig,
+      code: this.code,
+      status: this.status
+    };
+  }
+};
+AxiosError$1.ERR_BAD_OPTION_VALUE = "ERR_BAD_OPTION_VALUE";
+AxiosError$1.ERR_BAD_OPTION = "ERR_BAD_OPTION";
+AxiosError$1.ECONNABORTED = "ECONNABORTED";
+AxiosError$1.ETIMEDOUT = "ETIMEDOUT";
+AxiosError$1.ECONNREFUSED = "ECONNREFUSED";
+AxiosError$1.ERR_NETWORK = "ERR_NETWORK";
+AxiosError$1.ERR_FR_TOO_MANY_REDIRECTS = "ERR_FR_TOO_MANY_REDIRECTS";
+AxiosError$1.ERR_DEPRECATED = "ERR_DEPRECATED";
+AxiosError$1.ERR_BAD_RESPONSE = "ERR_BAD_RESPONSE";
+AxiosError$1.ERR_BAD_REQUEST = "ERR_BAD_REQUEST";
+AxiosError$1.ERR_CANCELED = "ERR_CANCELED";
+AxiosError$1.ERR_NOT_SUPPORT = "ERR_NOT_SUPPORT";
+AxiosError$1.ERR_INVALID_URL = "ERR_INVALID_URL";
+AxiosError$1.ERR_FORM_DATA_DEPTH_EXCEEDED = "ERR_FORM_DATA_DEPTH_EXCEEDED";
+const httpAdapter = null;
+function isVisitable(thing) {
+  return utils$1.isPlainObject(thing) || utils$1.isArray(thing);
+}
+function removeBrackets(key) {
+  return utils$1.endsWith(key, "[]") ? key.slice(0, -2) : key;
+}
+function renderKey(path, key, dots) {
+  if (!path) return key;
+  return path.concat(key).map(function each(token, i2) {
+    token = removeBrackets(token);
+    return !dots && i2 ? "[" + token + "]" : token;
+  }).join(dots ? "." : "");
+}
+function isFlatArray(arr) {
+  return utils$1.isArray(arr) && !arr.some(isVisitable);
+}
+const predicates = utils$1.toFlatObject(utils$1, {}, null, function filter(prop) {
+  return /^is[A-Z]/.test(prop);
+});
+function toFormData$1(obj, formData, options) {
+  if (!utils$1.isObject(obj)) {
+    throw new TypeError("target must be an object");
+  }
+  formData = formData || new FormData();
+  options = utils$1.toFlatObject(
+    options,
+    {
+      metaTokens: true,
+      dots: false,
+      indexes: false
+    },
+    false,
+    function defined(option, source) {
+      return !utils$1.isUndefined(source[option]);
+    }
+  );
+  const metaTokens = options.metaTokens;
+  const visitor = options.visitor || defaultVisitor;
+  const dots = options.dots;
+  const indexes = options.indexes;
+  const _Blob = options.Blob || typeof Blob !== "undefined" && Blob;
+  const maxDepth = options.maxDepth === void 0 ? 100 : options.maxDepth;
+  const useBlob = _Blob && utils$1.isSpecCompliantForm(formData);
+  if (!utils$1.isFunction(visitor)) {
+    throw new TypeError("visitor must be a function");
+  }
+  function convertValue(value) {
+    if (value === null) return "";
+    if (utils$1.isDate(value)) {
+      return value.toISOString();
+    }
+    if (utils$1.isBoolean(value)) {
+      return value.toString();
+    }
+    if (!useBlob && utils$1.isBlob(value)) {
+      throw new AxiosError$1("Blob is not supported. Use a Buffer instead.");
+    }
+    if (utils$1.isArrayBuffer(value) || utils$1.isTypedArray(value)) {
+      return useBlob && typeof Blob === "function" ? new Blob([value]) : Buffer.from(value);
+    }
+    return value;
+  }
+  function defaultVisitor(value, key, path) {
+    let arr = value;
+    if (utils$1.isReactNative(formData) && utils$1.isReactNativeBlob(value)) {
+      formData.append(renderKey(path, key, dots), convertValue(value));
+      return false;
+    }
+    if (value && !path && typeof value === "object") {
+      if (utils$1.endsWith(key, "{}")) {
+        key = metaTokens ? key : key.slice(0, -2);
+        value = JSON.stringify(value);
+      } else if (utils$1.isArray(value) && isFlatArray(value) || (utils$1.isFileList(value) || utils$1.endsWith(key, "[]")) && (arr = utils$1.toArray(value))) {
+        key = removeBrackets(key);
+        arr.forEach(function each(el, index) {
+          !(utils$1.isUndefined(el) || el === null) && formData.append(
+            // eslint-disable-next-line no-nested-ternary
+            indexes === true ? renderKey([key], index, dots) : indexes === null ? key : key + "[]",
+            convertValue(el)
+          );
+        });
+        return false;
+      }
+    }
+    if (isVisitable(value)) {
+      return true;
+    }
+    formData.append(renderKey(path, key, dots), convertValue(value));
+    return false;
+  }
+  const stack = [];
+  const exposedHelpers = Object.assign(predicates, {
+    defaultVisitor,
+    convertValue,
+    isVisitable
+  });
+  function build(value, path, depth = 0) {
+    if (utils$1.isUndefined(value)) return;
+    if (depth > maxDepth) {
+      throw new AxiosError$1(
+        "Object is too deeply nested (" + depth + " levels). Max depth: " + maxDepth,
+        AxiosError$1.ERR_FORM_DATA_DEPTH_EXCEEDED
+      );
+    }
+    if (stack.indexOf(value) !== -1) {
+      throw new Error("Circular reference detected in " + path.join("."));
+    }
+    stack.push(value);
+    utils$1.forEach(value, function each(el, key) {
+      const result = !(utils$1.isUndefined(el) || el === null) && visitor.call(formData, el, utils$1.isString(key) ? key.trim() : key, path, exposedHelpers);
+      if (result === true) {
+        build(el, path ? path.concat(key) : [key], depth + 1);
+      }
+    });
+    stack.pop();
+  }
+  if (!utils$1.isObject(obj)) {
+    throw new TypeError("data must be an object");
+  }
+  build(obj);
+  return formData;
+}
+function encode$1(str) {
+  const charMap = {
+    "!": "%21",
+    "'": "%27",
+    "(": "%28",
+    ")": "%29",
+    "~": "%7E",
+    "%20": "+"
+  };
+  return encodeURIComponent(str).replace(/[!'()~]|%20/g, function replacer(match) {
+    return charMap[match];
+  });
+}
+function AxiosURLSearchParams(params, options) {
+  this._pairs = [];
+  params && toFormData$1(params, this, options);
+}
+const prototype = AxiosURLSearchParams.prototype;
+prototype.append = function append(name, value) {
+  this._pairs.push([name, value]);
+};
+prototype.toString = function toString2(encoder) {
+  const _encode = encoder ? function(value) {
+    return encoder.call(this, value, encode$1);
+  } : encode$1;
+  return this._pairs.map(function each(pair) {
+    return _encode(pair[0]) + "=" + _encode(pair[1]);
+  }, "").join("&");
+};
+function encode(val) {
+  return encodeURIComponent(val).replace(/%3A/gi, ":").replace(/%24/g, "$").replace(/%2C/gi, ",").replace(/%20/g, "+");
+}
+function buildURL(url, params, options) {
+  if (!params) {
+    return url;
+  }
+  const _encode = options && options.encode || encode;
+  const _options = utils$1.isFunction(options) ? {
+    serialize: options
+  } : options;
+  const serializeFn = _options && _options.serialize;
+  let serializedParams;
+  if (serializeFn) {
+    serializedParams = serializeFn(params, _options);
+  } else {
+    serializedParams = utils$1.isURLSearchParams(params) ? params.toString() : new AxiosURLSearchParams(params, _options).toString(_encode);
+  }
+  if (serializedParams) {
+    const hashmarkIndex = url.indexOf("#");
+    if (hashmarkIndex !== -1) {
+      url = url.slice(0, hashmarkIndex);
+    }
+    url += (url.indexOf("?") === -1 ? "?" : "&") + serializedParams;
+  }
+  return url;
+}
+class InterceptorManager {
+  constructor() {
+    this.handlers = [];
+  }
+  /**
+   * Add a new interceptor to the stack
+   *
+   * @param {Function} fulfilled The function to handle `then` for a `Promise`
+   * @param {Function} rejected The function to handle `reject` for a `Promise`
+   * @param {Object} options The options for the interceptor, synchronous and runWhen
+   *
+   * @return {Number} An ID used to remove interceptor later
+   */
+  use(fulfilled, rejected, options) {
+    this.handlers.push({
+      fulfilled,
+      rejected,
+      synchronous: options ? options.synchronous : false,
+      runWhen: options ? options.runWhen : null
+    });
+    return this.handlers.length - 1;
+  }
+  /**
+   * Remove an interceptor from the stack
+   *
+   * @param {Number} id The ID that was returned by `use`
+   *
+   * @returns {void}
+   */
+  eject(id) {
+    if (this.handlers[id]) {
+      this.handlers[id] = null;
+    }
+  }
+  /**
+   * Clear all interceptors from the stack
+   *
+   * @returns {void}
+   */
+  clear() {
+    if (this.handlers) {
+      this.handlers = [];
+    }
+  }
+  /**
+   * Iterate over all the registered interceptors
+   *
+   * This method is particularly useful for skipping over any
+   * interceptors that may have become `null` calling `eject`.
+   *
+   * @param {Function} fn The function to call for each interceptor
+   *
+   * @returns {void}
+   */
+  forEach(fn) {
+    utils$1.forEach(this.handlers, function forEachHandler(h) {
+      if (h !== null) {
+        fn(h);
+      }
+    });
+  }
+}
+const transitionalDefaults = {
+  silentJSONParsing: true,
+  forcedJSONParsing: true,
+  clarifyTimeoutError: false,
+  legacyInterceptorReqResOrdering: true,
+  advertiseZstdAcceptEncoding: false
+};
+const URLSearchParams$1 = typeof URLSearchParams !== "undefined" ? URLSearchParams : AxiosURLSearchParams;
+const FormData$1 = typeof FormData !== "undefined" ? FormData : null;
+const Blob$1 = typeof Blob !== "undefined" ? Blob : null;
+const platform$1 = {
+  isBrowser: true,
+  classes: {
+    URLSearchParams: URLSearchParams$1,
+    FormData: FormData$1,
+    Blob: Blob$1
+  },
+  protocols: ["http", "https", "file", "blob", "url", "data"]
+};
+const hasBrowserEnv = typeof window !== "undefined" && typeof document !== "undefined";
+const _navigator = typeof navigator === "object" && navigator || void 0;
+const hasStandardBrowserEnv = hasBrowserEnv && (!_navigator || ["ReactNative", "NativeScript", "NS"].indexOf(_navigator.product) < 0);
+const hasStandardBrowserWebWorkerEnv = (() => {
+  return typeof WorkerGlobalScope !== "undefined" && // eslint-disable-next-line no-undef
+  self instanceof WorkerGlobalScope && typeof self.importScripts === "function";
+})();
+const origin = hasBrowserEnv && window.location.href || "http://localhost";
+const utils = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+  __proto__: null,
+  hasBrowserEnv,
+  hasStandardBrowserEnv,
+  hasStandardBrowserWebWorkerEnv,
+  navigator: _navigator,
+  origin
+}, Symbol.toStringTag, { value: "Module" }));
+const platform = {
+  ...utils,
+  ...platform$1
+};
+function toURLEncodedForm(data, options) {
+  return toFormData$1(data, new platform.classes.URLSearchParams(), {
+    visitor: function(value, key, path, helpers) {
+      if (platform.isNode && utils$1.isBuffer(value)) {
+        this.append(key, value.toString("base64"));
+        return false;
+      }
+      return helpers.defaultVisitor.apply(this, arguments);
+    },
+    ...options
+  });
+}
+function parsePropPath(name) {
+  return utils$1.matchAll(/\w+|\[(\w*)]/g, name).map((match) => {
+    return match[0] === "[]" ? "" : match[1] || match[0];
+  });
+}
+function arrayToObject(arr) {
+  const obj = {};
+  const keys = Object.keys(arr);
+  let i2;
+  const len = keys.length;
+  let key;
+  for (i2 = 0; i2 < len; i2++) {
+    key = keys[i2];
+    obj[key] = arr[key];
+  }
+  return obj;
+}
+function formDataToJSON(formData) {
+  function buildPath(path, value, target, index) {
+    let name = path[index++];
+    if (name === "__proto__") return true;
+    const isNumericKey = Number.isFinite(+name);
+    const isLast = index >= path.length;
+    name = !name && utils$1.isArray(target) ? target.length : name;
+    if (isLast) {
+      if (utils$1.hasOwnProp(target, name)) {
+        target[name] = utils$1.isArray(target[name]) ? target[name].concat(value) : [target[name], value];
+      } else {
+        target[name] = value;
+      }
+      return !isNumericKey;
+    }
+    if (!utils$1.hasOwnProp(target, name) || !utils$1.isObject(target[name])) {
+      target[name] = [];
+    }
+    const result = buildPath(path, value, target[name], index);
+    if (result && utils$1.isArray(target[name])) {
+      target[name] = arrayToObject(target[name]);
+    }
+    return !isNumericKey;
+  }
+  if (utils$1.isFormData(formData) && utils$1.isFunction(formData.entries)) {
+    const obj = {};
+    utils$1.forEachEntry(formData, (name, value) => {
+      buildPath(parsePropPath(name), value, obj, 0);
+    });
+    return obj;
+  }
+  return null;
+}
+const own = (obj, key) => obj != null && utils$1.hasOwnProp(obj, key) ? obj[key] : void 0;
+function stringifySafely(rawValue, parser, encoder) {
+  if (utils$1.isString(rawValue)) {
+    try {
+      (parser || JSON.parse)(rawValue);
+      return utils$1.trim(rawValue);
+    } catch (e) {
+      if (e.name !== "SyntaxError") {
+        throw e;
+      }
+    }
+  }
+  return (encoder || JSON.stringify)(rawValue);
+}
+const defaults = {
+  transitional: transitionalDefaults,
+  adapter: ["xhr", "http", "fetch"],
+  transformRequest: [
+    function transformRequest(data, headers) {
+      const contentType = headers.getContentType() || "";
+      const hasJSONContentType = contentType.indexOf("application/json") > -1;
+      const isObjectPayload = utils$1.isObject(data);
+      if (isObjectPayload && utils$1.isHTMLForm(data)) {
+        data = new FormData(data);
+      }
+      const isFormData2 = utils$1.isFormData(data);
+      if (isFormData2) {
+        return hasJSONContentType ? JSON.stringify(formDataToJSON(data)) : data;
+      }
+      if (utils$1.isArrayBuffer(data) || utils$1.isBuffer(data) || utils$1.isStream(data) || utils$1.isFile(data) || utils$1.isBlob(data) || utils$1.isReadableStream(data)) {
+        return data;
+      }
+      if (utils$1.isArrayBufferView(data)) {
+        return data.buffer;
+      }
+      if (utils$1.isURLSearchParams(data)) {
+        headers.setContentType("application/x-www-form-urlencoded;charset=utf-8", false);
+        return data.toString();
+      }
+      let isFileList2;
+      if (isObjectPayload) {
+        const formSerializer = own(this, "formSerializer");
+        if (contentType.indexOf("application/x-www-form-urlencoded") > -1) {
+          return toURLEncodedForm(data, formSerializer).toString();
+        }
+        if ((isFileList2 = utils$1.isFileList(data)) || contentType.indexOf("multipart/form-data") > -1) {
+          const env = own(this, "env");
+          const _FormData = env && env.FormData;
+          return toFormData$1(
+            isFileList2 ? { "files[]": data } : data,
+            _FormData && new _FormData(),
+            formSerializer
+          );
+        }
+      }
+      if (isObjectPayload || hasJSONContentType) {
+        headers.setContentType("application/json", false);
+        return stringifySafely(data);
+      }
+      return data;
+    }
+  ],
+  transformResponse: [
+    function transformResponse(data) {
+      const transitional2 = own(this, "transitional") || defaults.transitional;
+      const forcedJSONParsing = transitional2 && transitional2.forcedJSONParsing;
+      const responseType = own(this, "responseType");
+      const JSONRequested = responseType === "json";
+      if (utils$1.isResponse(data) || utils$1.isReadableStream(data)) {
+        return data;
+      }
+      if (data && utils$1.isString(data) && (forcedJSONParsing && !responseType || JSONRequested)) {
+        const silentJSONParsing = transitional2 && transitional2.silentJSONParsing;
+        const strictJSONParsing = !silentJSONParsing && JSONRequested;
+        try {
+          return JSON.parse(data, own(this, "parseReviver"));
+        } catch (e) {
+          if (strictJSONParsing) {
+            if (e.name === "SyntaxError") {
+              throw AxiosError$1.from(e, AxiosError$1.ERR_BAD_RESPONSE, this, null, own(this, "response"));
+            }
+            throw e;
+          }
+        }
+      }
+      return data;
+    }
+  ],
+  /**
+   * A timeout in milliseconds to abort a request. If set to 0 (default) a
+   * timeout is not created.
+   */
+  timeout: 0,
+  xsrfCookieName: "XSRF-TOKEN",
+  xsrfHeaderName: "X-XSRF-TOKEN",
+  maxContentLength: -1,
+  maxBodyLength: -1,
+  env: {
+    FormData: platform.classes.FormData,
+    Blob: platform.classes.Blob
+  },
+  validateStatus: function validateStatus(status) {
+    return status >= 200 && status < 300;
+  },
+  headers: {
+    common: {
+      Accept: "application/json, text/plain, */*",
+      "Content-Type": void 0
+    }
+  }
+};
+utils$1.forEach(["delete", "get", "head", "post", "put", "patch", "query"], (method) => {
+  defaults.headers[method] = {};
+});
+function transformData(fns, response) {
+  const config2 = this || defaults;
+  const context = response || config2;
+  const headers = AxiosHeaders$1.from(context.headers);
+  let data = context.data;
+  utils$1.forEach(fns, function transform(fn) {
+    data = fn.call(config2, data, headers.normalize(), response ? response.status : void 0);
+  });
+  headers.normalize();
+  return data;
+}
+function isCancel$1(value) {
+  return !!(value && value.__CANCEL__);
+}
+let CanceledError$1 = class CanceledError extends AxiosError$1 {
+  /**
+   * A `CanceledError` is an object that is thrown when an operation is canceled.
+   *
+   * @param {string=} message The message.
+   * @param {Object=} config The config.
+   * @param {Object=} request The request.
+   *
+   * @returns {CanceledError} The created error.
+   */
+  constructor(message, config2, request) {
+    super(message == null ? "canceled" : message, AxiosError$1.ERR_CANCELED, config2, request);
+    this.name = "CanceledError";
+    this.__CANCEL__ = true;
+  }
+};
+function settle(resolve, reject, response) {
+  const validateStatus2 = response.config.validateStatus;
+  if (!response.status || !validateStatus2 || validateStatus2(response.status)) {
+    resolve(response);
+  } else {
+    reject(new AxiosError$1(
+      "Request failed with status code " + response.status,
+      response.status >= 400 && response.status < 500 ? AxiosError$1.ERR_BAD_REQUEST : AxiosError$1.ERR_BAD_RESPONSE,
+      response.config,
+      response.request,
+      response
+    ));
+  }
+}
+function parseProtocol(url) {
+  const match = /^([-+\w]{1,25}):(?:\/\/)?/.exec(url);
+  return match && match[1] || "";
+}
+function speedometer(samplesCount, min) {
+  samplesCount = samplesCount || 10;
+  const bytes = new Array(samplesCount);
+  const timestamps = new Array(samplesCount);
+  let head = 0;
+  let tail = 0;
+  let firstSampleTS;
+  min = min !== void 0 ? min : 1e3;
+  return function push(chunkLength) {
+    const now = Date.now();
+    const startedAt = timestamps[tail];
+    if (!firstSampleTS) {
+      firstSampleTS = now;
+    }
+    bytes[head] = chunkLength;
+    timestamps[head] = now;
+    let i2 = tail;
+    let bytesCount = 0;
+    while (i2 !== head) {
+      bytesCount += bytes[i2++];
+      i2 = i2 % samplesCount;
+    }
+    head = (head + 1) % samplesCount;
+    if (head === tail) {
+      tail = (tail + 1) % samplesCount;
+    }
+    if (now - firstSampleTS < min) {
+      return;
+    }
+    const passed = startedAt && now - startedAt;
+    return passed ? Math.round(bytesCount * 1e3 / passed) : void 0;
+  };
+}
+function throttle(fn, freq) {
+  let timestamp = 0;
+  let threshold = 1e3 / freq;
+  let lastArgs;
+  let timer;
+  const invoke = (args, now = Date.now()) => {
+    timestamp = now;
+    lastArgs = null;
+    if (timer) {
+      clearTimeout(timer);
+      timer = null;
+    }
+    fn(...args);
+  };
+  const throttled = (...args) => {
+    const now = Date.now();
+    const passed = now - timestamp;
+    if (passed >= threshold) {
+      invoke(args, now);
+    } else {
+      lastArgs = args;
+      if (!timer) {
+        timer = setTimeout(() => {
+          timer = null;
+          invoke(lastArgs);
+        }, threshold - passed);
+      }
+    }
+  };
+  const flush = () => lastArgs && invoke(lastArgs);
+  return [throttled, flush];
+}
+const progressEventReducer = (listener, isDownloadStream, freq = 3) => {
+  let bytesNotified = 0;
+  const _speedometer = speedometer(50, 250);
+  return throttle((e) => {
+    if (!e || typeof e.loaded !== "number") {
+      return;
+    }
+    const rawLoaded = e.loaded;
+    const total = e.lengthComputable ? e.total : void 0;
+    const loaded = total != null ? Math.min(rawLoaded, total) : rawLoaded;
+    const progressBytes = Math.max(0, loaded - bytesNotified);
+    const rate = _speedometer(progressBytes);
+    bytesNotified = Math.max(bytesNotified, loaded);
+    const data = {
+      loaded,
+      total,
+      progress: total ? loaded / total : void 0,
+      bytes: progressBytes,
+      rate: rate ? rate : void 0,
+      estimated: rate && total ? (total - loaded) / rate : void 0,
+      event: e,
+      lengthComputable: total != null,
+      [isDownloadStream ? "download" : "upload"]: true
+    };
+    listener(data);
+  }, freq);
+};
+const progressEventDecorator = (total, throttled) => {
+  const lengthComputable = total != null;
+  return [
+    (loaded) => throttled[0]({
+      lengthComputable,
+      total,
+      loaded
+    }),
+    throttled[1]
+  ];
+};
+const asyncDecorator = (fn) => (...args) => utils$1.asap(() => fn(...args));
+const isURLSameOrigin = platform.hasStandardBrowserEnv ? /* @__PURE__ */ ((origin2, isMSIE) => (url) => {
+  url = new URL(url, platform.origin);
+  return origin2.protocol === url.protocol && origin2.host === url.host && (isMSIE || origin2.port === url.port);
+})(
+  new URL(platform.origin),
+  platform.navigator && /(msie|trident)/i.test(platform.navigator.userAgent)
+) : () => true;
+const cookies = platform.hasStandardBrowserEnv ? (
+  // Standard browser envs support document.cookie
+  {
+    write(name, value, expires, path, domain, secure, sameSite) {
+      if (typeof document === "undefined") return;
+      const cookie = [`${name}=${encodeURIComponent(value)}`];
+      if (utils$1.isNumber(expires)) {
+        cookie.push(`expires=${new Date(expires).toUTCString()}`);
+      }
+      if (utils$1.isString(path)) {
+        cookie.push(`path=${path}`);
+      }
+      if (utils$1.isString(domain)) {
+        cookie.push(`domain=${domain}`);
+      }
+      if (secure === true) {
+        cookie.push("secure");
+      }
+      if (utils$1.isString(sameSite)) {
+        cookie.push(`SameSite=${sameSite}`);
+      }
+      document.cookie = cookie.join("; ");
+    },
+    read(name) {
+      if (typeof document === "undefined") return null;
+      const cookies2 = document.cookie.split(";");
+      for (let i2 = 0; i2 < cookies2.length; i2++) {
+        const cookie = cookies2[i2].replace(/^\s+/, "");
+        const eq = cookie.indexOf("=");
+        if (eq !== -1 && cookie.slice(0, eq) === name) {
+          return decodeURIComponent(cookie.slice(eq + 1));
+        }
+      }
+      return null;
+    },
+    remove(name) {
+      this.write(name, "", Date.now() - 864e5, "/");
+    }
+  }
+) : (
+  // Non-standard browser env (web workers, react-native) lack needed support.
+  {
+    write() {
+    },
+    read() {
+      return null;
+    },
+    remove() {
+    }
+  }
+);
+function isAbsoluteURL(url) {
+  if (typeof url !== "string") {
+    return false;
+  }
+  return /^([a-z][a-z\d+\-.]*:)?\/\//i.test(url);
+}
+function combineURLs(baseURL, relativeURL) {
+  return relativeURL ? baseURL.replace(/\/?\/$/, "") + "/" + relativeURL.replace(/^\/+/, "") : baseURL;
+}
+function buildFullPath(baseURL, requestedURL, allowAbsoluteUrls) {
+  let isRelativeUrl = !isAbsoluteURL(requestedURL);
+  if (baseURL && (isRelativeUrl || allowAbsoluteUrls === false)) {
+    return combineURLs(baseURL, requestedURL);
+  }
+  return requestedURL;
+}
+const headersToObject = (thing) => thing instanceof AxiosHeaders$1 ? { ...thing } : thing;
+function mergeConfig$1(config1, config2) {
+  config2 = config2 || {};
+  const config3 = /* @__PURE__ */ Object.create(null);
+  Object.defineProperty(config3, "hasOwnProperty", {
+    // Null-proto descriptor so a polluted Object.prototype.get cannot turn
+    // this data descriptor into an accessor descriptor on the way in.
+    __proto__: null,
+    value: Object.prototype.hasOwnProperty,
+    enumerable: false,
+    writable: true,
+    configurable: true
+  });
+  function getMergedValue(target, source, prop, caseless) {
+    if (utils$1.isPlainObject(target) && utils$1.isPlainObject(source)) {
+      return utils$1.merge.call({ caseless }, target, source);
+    } else if (utils$1.isPlainObject(source)) {
+      return utils$1.merge({}, source);
+    } else if (utils$1.isArray(source)) {
+      return source.slice();
+    }
+    return source;
+  }
+  function mergeDeepProperties(a2, b, prop, caseless) {
+    if (!utils$1.isUndefined(b)) {
+      return getMergedValue(a2, b, prop, caseless);
+    } else if (!utils$1.isUndefined(a2)) {
+      return getMergedValue(void 0, a2, prop, caseless);
+    }
+  }
+  function valueFromConfig2(a2, b) {
+    if (!utils$1.isUndefined(b)) {
+      return getMergedValue(void 0, b);
+    }
+  }
+  function defaultToConfig2(a2, b) {
+    if (!utils$1.isUndefined(b)) {
+      return getMergedValue(void 0, b);
+    } else if (!utils$1.isUndefined(a2)) {
+      return getMergedValue(void 0, a2);
+    }
+  }
+  function mergeDirectKeys(a2, b, prop) {
+    if (utils$1.hasOwnProp(config2, prop)) {
+      return getMergedValue(a2, b);
+    } else if (utils$1.hasOwnProp(config1, prop)) {
+      return getMergedValue(void 0, a2);
+    }
+  }
+  const mergeMap = {
+    url: valueFromConfig2,
+    method: valueFromConfig2,
+    data: valueFromConfig2,
+    baseURL: defaultToConfig2,
+    transformRequest: defaultToConfig2,
+    transformResponse: defaultToConfig2,
+    paramsSerializer: defaultToConfig2,
+    timeout: defaultToConfig2,
+    timeoutMessage: defaultToConfig2,
+    withCredentials: defaultToConfig2,
+    withXSRFToken: defaultToConfig2,
+    adapter: defaultToConfig2,
+    responseType: defaultToConfig2,
+    xsrfCookieName: defaultToConfig2,
+    xsrfHeaderName: defaultToConfig2,
+    onUploadProgress: defaultToConfig2,
+    onDownloadProgress: defaultToConfig2,
+    decompress: defaultToConfig2,
+    maxContentLength: defaultToConfig2,
+    maxBodyLength: defaultToConfig2,
+    beforeRedirect: defaultToConfig2,
+    transport: defaultToConfig2,
+    httpAgent: defaultToConfig2,
+    httpsAgent: defaultToConfig2,
+    cancelToken: defaultToConfig2,
+    socketPath: defaultToConfig2,
+    allowedSocketPaths: defaultToConfig2,
+    responseEncoding: defaultToConfig2,
+    validateStatus: mergeDirectKeys,
+    headers: (a2, b, prop) => mergeDeepProperties(headersToObject(a2), headersToObject(b), prop, true)
+  };
+  utils$1.forEach(Object.keys({ ...config1, ...config2 }), function computeConfigValue(prop) {
+    if (prop === "__proto__" || prop === "constructor" || prop === "prototype") return;
+    const merge2 = utils$1.hasOwnProp(mergeMap, prop) ? mergeMap[prop] : mergeDeepProperties;
+    const a2 = utils$1.hasOwnProp(config1, prop) ? config1[prop] : void 0;
+    const b = utils$1.hasOwnProp(config2, prop) ? config2[prop] : void 0;
+    const configValue = merge2(a2, b, prop);
+    utils$1.isUndefined(configValue) && merge2 !== mergeDirectKeys || (config3[prop] = configValue);
+  });
+  return config3;
+}
+const FORM_DATA_CONTENT_HEADERS = ["content-type", "content-length"];
+function setFormDataHeaders(headers, formHeaders, policy) {
+  if (policy !== "content-only") {
+    headers.set(formHeaders);
+    return;
+  }
+  Object.entries(formHeaders).forEach(([key, val]) => {
+    if (FORM_DATA_CONTENT_HEADERS.includes(key.toLowerCase())) {
+      headers.set(key, val);
+    }
+  });
+}
+const encodeUTF8$1 = (str) => encodeURIComponent(str).replace(
+  /%([0-9A-F]{2})/gi,
+  (_, hex) => String.fromCharCode(parseInt(hex, 16))
+);
+function resolveConfig(config2) {
+  const newConfig = mergeConfig$1({}, config2);
+  const own2 = (key) => utils$1.hasOwnProp(newConfig, key) ? newConfig[key] : void 0;
+  const data = own2("data");
+  let withXSRFToken = own2("withXSRFToken");
+  const xsrfHeaderName = own2("xsrfHeaderName");
+  const xsrfCookieName = own2("xsrfCookieName");
+  let headers = own2("headers");
+  const auth = own2("auth");
+  const baseURL = own2("baseURL");
+  const allowAbsoluteUrls = own2("allowAbsoluteUrls");
+  const url = own2("url");
+  newConfig.headers = headers = AxiosHeaders$1.from(headers);
+  newConfig.url = buildURL(
+    buildFullPath(baseURL, url, allowAbsoluteUrls),
+    own2("params"),
+    own2("paramsSerializer")
+  );
+  if (auth) {
+    headers.set(
+      "Authorization",
+      "Basic " + btoa((auth.username || "") + ":" + (auth.password ? encodeUTF8$1(auth.password) : ""))
+    );
+  }
+  if (utils$1.isFormData(data)) {
+    if (platform.hasStandardBrowserEnv || platform.hasStandardBrowserWebWorkerEnv || utils$1.isReactNative(data)) {
+      headers.setContentType(void 0);
+    } else if (utils$1.isFunction(data.getHeaders)) {
+      setFormDataHeaders(headers, data.getHeaders(), own2("formDataHeaderPolicy"));
+    }
+  }
+  if (platform.hasStandardBrowserEnv) {
+    if (utils$1.isFunction(withXSRFToken)) {
+      withXSRFToken = withXSRFToken(newConfig);
+    }
+    const shouldSendXSRF = withXSRFToken === true || withXSRFToken == null && isURLSameOrigin(newConfig.url);
+    if (shouldSendXSRF) {
+      const xsrfValue = xsrfHeaderName && xsrfCookieName && cookies.read(xsrfCookieName);
+      if (xsrfValue) {
+        headers.set(xsrfHeaderName, xsrfValue);
+      }
+    }
+  }
+  return newConfig;
+}
+const isXHRAdapterSupported = typeof XMLHttpRequest !== "undefined";
+const xhrAdapter = isXHRAdapterSupported && function(config2) {
+  return new Promise(function dispatchXhrRequest(resolve, reject) {
+    const _config = resolveConfig(config2);
+    let requestData = _config.data;
+    const requestHeaders = AxiosHeaders$1.from(_config.headers).normalize();
+    let { responseType, onUploadProgress, onDownloadProgress } = _config;
+    let onCanceled;
+    let uploadThrottled, downloadThrottled;
+    let flushUpload, flushDownload;
+    function done() {
+      flushUpload && flushUpload();
+      flushDownload && flushDownload();
+      _config.cancelToken && _config.cancelToken.unsubscribe(onCanceled);
+      _config.signal && _config.signal.removeEventListener("abort", onCanceled);
+    }
+    let request = new XMLHttpRequest();
+    request.open(_config.method.toUpperCase(), _config.url, true);
+    request.timeout = _config.timeout;
+    function onloadend() {
+      if (!request) {
+        return;
+      }
+      const responseHeaders = AxiosHeaders$1.from(
+        "getAllResponseHeaders" in request && request.getAllResponseHeaders()
+      );
+      const responseData = !responseType || responseType === "text" || responseType === "json" ? request.responseText : request.response;
+      const response = {
+        data: responseData,
+        status: request.status,
+        statusText: request.statusText,
+        headers: responseHeaders,
+        config: config2,
+        request
+      };
+      settle(
+        function _resolve(value) {
+          resolve(value);
+          done();
+        },
+        function _reject(err) {
+          reject(err);
+          done();
+        },
+        response
+      );
+      request = null;
+    }
+    if ("onloadend" in request) {
+      request.onloadend = onloadend;
+    } else {
+      request.onreadystatechange = function handleLoad() {
+        if (!request || request.readyState !== 4) {
+          return;
+        }
+        if (request.status === 0 && !(request.responseURL && request.responseURL.startsWith("file:"))) {
+          return;
+        }
+        setTimeout(onloadend);
+      };
+    }
+    request.onabort = function handleAbort() {
+      if (!request) {
+        return;
+      }
+      reject(new AxiosError$1("Request aborted", AxiosError$1.ECONNABORTED, config2, request));
+      done();
+      request = null;
+    };
+    request.onerror = function handleError(event) {
+      const msg = event && event.message ? event.message : "Network Error";
+      const err = new AxiosError$1(msg, AxiosError$1.ERR_NETWORK, config2, request);
+      err.event = event || null;
+      reject(err);
+      done();
+      request = null;
+    };
+    request.ontimeout = function handleTimeout() {
+      let timeoutErrorMessage = _config.timeout ? "timeout of " + _config.timeout + "ms exceeded" : "timeout exceeded";
+      const transitional2 = _config.transitional || transitionalDefaults;
+      if (_config.timeoutErrorMessage) {
+        timeoutErrorMessage = _config.timeoutErrorMessage;
+      }
+      reject(
+        new AxiosError$1(
+          timeoutErrorMessage,
+          transitional2.clarifyTimeoutError ? AxiosError$1.ETIMEDOUT : AxiosError$1.ECONNABORTED,
+          config2,
+          request
+        )
+      );
+      done();
+      request = null;
+    };
+    requestData === void 0 && requestHeaders.setContentType(null);
+    if ("setRequestHeader" in request) {
+      utils$1.forEach(toByteStringHeaderObject(requestHeaders), function setRequestHeader(val, key) {
+        request.setRequestHeader(key, val);
+      });
+    }
+    if (!utils$1.isUndefined(_config.withCredentials)) {
+      request.withCredentials = !!_config.withCredentials;
+    }
+    if (responseType && responseType !== "json") {
+      request.responseType = _config.responseType;
+    }
+    if (onDownloadProgress) {
+      [downloadThrottled, flushDownload] = progressEventReducer(onDownloadProgress, true);
+      request.addEventListener("progress", downloadThrottled);
+    }
+    if (onUploadProgress && request.upload) {
+      [uploadThrottled, flushUpload] = progressEventReducer(onUploadProgress);
+      request.upload.addEventListener("progress", uploadThrottled);
+      request.upload.addEventListener("loadend", flushUpload);
+    }
+    if (_config.cancelToken || _config.signal) {
+      onCanceled = (cancel) => {
+        if (!request) {
+          return;
+        }
+        reject(!cancel || cancel.type ? new CanceledError$1(null, config2, request) : cancel);
+        request.abort();
+        done();
+        request = null;
+      };
+      _config.cancelToken && _config.cancelToken.subscribe(onCanceled);
+      if (_config.signal) {
+        _config.signal.aborted ? onCanceled() : _config.signal.addEventListener("abort", onCanceled);
+      }
+    }
+    const protocol = parseProtocol(_config.url);
+    if (protocol && !platform.protocols.includes(protocol)) {
+      reject(
+        new AxiosError$1(
+          "Unsupported protocol " + protocol + ":",
+          AxiosError$1.ERR_BAD_REQUEST,
+          config2
+        )
+      );
+      return;
+    }
+    request.send(requestData || null);
+  });
+};
+const composeSignals = (signals, timeout) => {
+  signals = signals ? signals.filter(Boolean) : [];
+  if (!timeout && !signals.length) {
+    return;
+  }
+  const controller = new AbortController();
+  let aborted = false;
+  const onabort = function(reason) {
+    if (!aborted) {
+      aborted = true;
+      unsubscribe();
+      const err = reason instanceof Error ? reason : this.reason;
+      controller.abort(
+        err instanceof AxiosError$1 ? err : new CanceledError$1(err instanceof Error ? err.message : err)
+      );
+    }
+  };
+  let timer = timeout && setTimeout(() => {
+    timer = null;
+    onabort(new AxiosError$1(`timeout of ${timeout}ms exceeded`, AxiosError$1.ETIMEDOUT));
+  }, timeout);
+  const unsubscribe = () => {
+    if (!signals) {
+      return;
+    }
+    timer && clearTimeout(timer);
+    timer = null;
+    signals.forEach((signal2) => {
+      signal2.unsubscribe ? signal2.unsubscribe(onabort) : signal2.removeEventListener("abort", onabort);
+    });
+    signals = null;
+  };
+  signals.forEach((signal2) => signal2.addEventListener("abort", onabort));
+  const { signal } = controller;
+  signal.unsubscribe = () => utils$1.asap(unsubscribe);
+  return signal;
+};
+const streamChunk = function* (chunk, chunkSize) {
+  let len = chunk.byteLength;
+  if (len < chunkSize) {
+    yield chunk;
+    return;
+  }
+  let pos = 0;
+  let end;
+  while (pos < len) {
+    end = pos + chunkSize;
+    yield chunk.slice(pos, end);
+    pos = end;
+  }
+};
+const readBytes = async function* (iterable, chunkSize) {
+  for await (const chunk of readStream(iterable)) {
+    yield* streamChunk(chunk, chunkSize);
+  }
+};
+const readStream = async function* (stream) {
+  if (stream[Symbol.asyncIterator]) {
+    yield* stream;
+    return;
+  }
+  const reader = stream.getReader();
+  try {
+    for (; ; ) {
+      const { done, value } = await reader.read();
+      if (done) {
+        break;
+      }
+      yield value;
+    }
+  } finally {
+    await reader.cancel();
+  }
+};
+const trackStream = (stream, chunkSize, onProgress, onFinish) => {
+  const iterator2 = readBytes(stream, chunkSize);
+  let bytes = 0;
+  let done;
+  let _onFinish = (e) => {
+    if (!done) {
+      done = true;
+      onFinish && onFinish(e);
+    }
+  };
+  return new ReadableStream(
+    {
+      async pull(controller) {
+        try {
+          const { done: done2, value } = await iterator2.next();
+          if (done2) {
+            _onFinish();
+            controller.close();
+            return;
+          }
+          let len = value.byteLength;
+          if (onProgress) {
+            let loadedBytes = bytes += len;
+            onProgress(loadedBytes);
+          }
+          controller.enqueue(new Uint8Array(value));
+        } catch (err) {
+          _onFinish(err);
+          throw err;
+        }
+      },
+      cancel(reason) {
+        _onFinish(reason);
+        return iterator2.return();
+      }
+    },
+    {
+      highWaterMark: 2
+    }
+  );
+};
+function estimateDataURLDecodedBytes(url) {
+  if (!url || typeof url !== "string") return 0;
+  if (!url.startsWith("data:")) return 0;
+  const comma = url.indexOf(",");
+  if (comma < 0) return 0;
+  const meta = url.slice(5, comma);
+  const body = url.slice(comma + 1);
+  const isBase64 = /;base64/i.test(meta);
+  if (isBase64) {
+    let effectiveLen = body.length;
+    const len = body.length;
+    for (let i2 = 0; i2 < len; i2++) {
+      if (body.charCodeAt(i2) === 37 && i2 + 2 < len) {
+        const a2 = body.charCodeAt(i2 + 1);
+        const b = body.charCodeAt(i2 + 2);
+        const isHex = (a2 >= 48 && a2 <= 57 || a2 >= 65 && a2 <= 70 || a2 >= 97 && a2 <= 102) && (b >= 48 && b <= 57 || b >= 65 && b <= 70 || b >= 97 && b <= 102);
+        if (isHex) {
+          effectiveLen -= 2;
+          i2 += 2;
+        }
+      }
+    }
+    let pad = 0;
+    let idx = len - 1;
+    const tailIsPct3D = (j) => j >= 2 && body.charCodeAt(j - 2) === 37 && // '%'
+    body.charCodeAt(j - 1) === 51 && // '3'
+    (body.charCodeAt(j) === 68 || body.charCodeAt(j) === 100);
+    if (idx >= 0) {
+      if (body.charCodeAt(idx) === 61) {
+        pad++;
+        idx--;
+      } else if (tailIsPct3D(idx)) {
+        pad++;
+        idx -= 3;
+      }
+    }
+    if (pad === 1 && idx >= 0) {
+      if (body.charCodeAt(idx) === 61) {
+        pad++;
+      } else if (tailIsPct3D(idx)) {
+        pad++;
+      }
+    }
+    const groups = Math.floor(effectiveLen / 4);
+    const bytes2 = groups * 3 - (pad || 0);
+    return bytes2 > 0 ? bytes2 : 0;
+  }
+  if (typeof Buffer !== "undefined" && typeof Buffer.byteLength === "function") {
+    return Buffer.byteLength(body, "utf8");
+  }
+  let bytes = 0;
+  for (let i2 = 0, len = body.length; i2 < len; i2++) {
+    const c = body.charCodeAt(i2);
+    if (c < 128) {
+      bytes += 1;
+    } else if (c < 2048) {
+      bytes += 2;
+    } else if (c >= 55296 && c <= 56319 && i2 + 1 < len) {
+      const next = body.charCodeAt(i2 + 1);
+      if (next >= 56320 && next <= 57343) {
+        bytes += 4;
+        i2++;
+      } else {
+        bytes += 3;
+      }
+    } else {
+      bytes += 3;
+    }
+  }
+  return bytes;
+}
+const VERSION$1 = "1.17.0";
+const DEFAULT_CHUNK_SIZE = 64 * 1024;
+const { isFunction: isFunction$1 } = utils$1;
+const encodeUTF8 = (str) => encodeURIComponent(str).replace(
+  /%([0-9A-F]{2})/gi,
+  (_, hex) => String.fromCharCode(parseInt(hex, 16))
+);
+const decodeURIComponentSafe = (value) => {
+  if (!utils$1.isString(value)) {
+    return value;
+  }
+  try {
+    return decodeURIComponent(value);
+  } catch (error) {
+    return value;
+  }
+};
+const test = (fn, ...args) => {
+  try {
+    return !!fn(...args);
+  } catch (e) {
+    return false;
+  }
+};
+const maybeWithAuthCredentials = (url) => {
+  const protocolIndex = url.indexOf("://");
+  let urlToCheck = url;
+  if (protocolIndex !== -1) {
+    urlToCheck = urlToCheck.slice(protocolIndex + 3);
+  }
+  return urlToCheck.includes("@") || urlToCheck.includes(":");
+};
+const factory = (env) => {
+  const globalObject = utils$1.global !== void 0 && utils$1.global !== null ? utils$1.global : globalThis;
+  const { ReadableStream: ReadableStream2, TextEncoder } = globalObject;
+  env = utils$1.merge.call(
+    {
+      skipUndefined: true
+    },
+    {
+      Request: globalObject.Request,
+      Response: globalObject.Response
+    },
+    env
+  );
+  const { fetch: envFetch, Request: Request2, Response } = env;
+  const isFetchSupported = envFetch ? isFunction$1(envFetch) : typeof fetch === "function";
+  const isRequestSupported = isFunction$1(Request2);
+  const isResponseSupported = isFunction$1(Response);
+  if (!isFetchSupported) {
+    return false;
+  }
+  const isReadableStreamSupported = isFetchSupported && isFunction$1(ReadableStream2);
+  const encodeText = isFetchSupported && (typeof TextEncoder === "function" ? /* @__PURE__ */ ((encoder) => (str) => encoder.encode(str))(new TextEncoder()) : async (str) => new Uint8Array(await new Request2(str).arrayBuffer()));
+  const supportsRequestStream = isRequestSupported && isReadableStreamSupported && test(() => {
+    let duplexAccessed = false;
+    const request = new Request2(platform.origin, {
+      body: new ReadableStream2(),
+      method: "POST",
+      get duplex() {
+        duplexAccessed = true;
+        return "half";
+      }
+    });
+    const hasContentType = request.headers.has("Content-Type");
+    if (request.body != null) {
+      request.body.cancel();
+    }
+    return duplexAccessed && !hasContentType;
+  });
+  const supportsResponseStream = isResponseSupported && isReadableStreamSupported && test(() => utils$1.isReadableStream(new Response("").body));
+  const resolvers = {
+    stream: supportsResponseStream && ((res) => res.body)
+  };
+  isFetchSupported && (() => {
+    ["text", "arrayBuffer", "blob", "formData", "stream"].forEach((type) => {
+      !resolvers[type] && (resolvers[type] = (res, config2) => {
+        let method = res && res[type];
+        if (method) {
+          return method.call(res);
+        }
+        throw new AxiosError$1(
+          `Response type '${type}' is not supported`,
+          AxiosError$1.ERR_NOT_SUPPORT,
+          config2
+        );
+      });
+    });
+  })();
+  const getBodyLength = async (body) => {
+    if (body == null) {
+      return 0;
+    }
+    if (utils$1.isBlob(body)) {
+      return body.size;
+    }
+    if (utils$1.isSpecCompliantForm(body)) {
+      const _request = new Request2(platform.origin, {
+        method: "POST",
+        body
+      });
+      return (await _request.arrayBuffer()).byteLength;
+    }
+    if (utils$1.isArrayBufferView(body) || utils$1.isArrayBuffer(body)) {
+      return body.byteLength;
+    }
+    if (utils$1.isURLSearchParams(body)) {
+      body = body + "";
+    }
+    if (utils$1.isString(body)) {
+      return (await encodeText(body)).byteLength;
+    }
+  };
+  const resolveBodyLength = async (headers, body) => {
+    const length = utils$1.toFiniteNumber(headers.getContentLength());
+    return length == null ? getBodyLength(body) : length;
+  };
+  return async (config2) => {
+    let {
+      url,
+      method,
+      data,
+      signal,
+      cancelToken,
+      timeout,
+      onDownloadProgress,
+      onUploadProgress,
+      responseType,
+      headers,
+      withCredentials = "same-origin",
+      fetchOptions,
+      maxContentLength,
+      maxBodyLength
+    } = resolveConfig(config2);
+    const hasMaxContentLength = utils$1.isNumber(maxContentLength) && maxContentLength > -1;
+    const hasMaxBodyLength = utils$1.isNumber(maxBodyLength) && maxBodyLength > -1;
+    const own2 = (key) => utils$1.hasOwnProp(config2, key) ? config2[key] : void 0;
+    let _fetch = envFetch || fetch;
+    responseType = responseType ? (responseType + "").toLowerCase() : "text";
+    let composedSignal = composeSignals(
+      [signal, cancelToken && cancelToken.toAbortSignal()],
+      timeout
+    );
+    let request = null;
+    const unsubscribe = composedSignal && composedSignal.unsubscribe && (() => {
+      composedSignal.unsubscribe();
+    });
+    let requestContentLength;
+    try {
+      let auth = void 0;
+      const configAuth = own2("auth");
+      if (configAuth) {
+        const username = configAuth.username || "";
+        const password = configAuth.password || "";
+        auth = {
+          username,
+          password
+        };
+      }
+      if (maybeWithAuthCredentials(url)) {
+        const parsedURL = new URL(url, platform.origin);
+        if (!auth && (parsedURL.username || parsedURL.password)) {
+          const urlUsername = decodeURIComponentSafe(parsedURL.username);
+          const urlPassword = decodeURIComponentSafe(parsedURL.password);
+          auth = {
+            username: urlUsername,
+            password: urlPassword
+          };
+        }
+        if (parsedURL.username || parsedURL.password) {
+          parsedURL.username = "";
+          parsedURL.password = "";
+          url = parsedURL.href;
+        }
+      }
+      if (auth) {
+        headers.delete("authorization");
+        headers.set(
+          "Authorization",
+          "Basic " + btoa(encodeUTF8((auth.username || "") + ":" + (auth.password || "")))
+        );
+      }
+      if (hasMaxContentLength && typeof url === "string" && url.startsWith("data:")) {
+        const estimated = estimateDataURLDecodedBytes(url);
+        if (estimated > maxContentLength) {
+          throw new AxiosError$1(
+            "maxContentLength size of " + maxContentLength + " exceeded",
+            AxiosError$1.ERR_BAD_RESPONSE,
+            config2,
+            request
+          );
+        }
+      }
+      if (hasMaxBodyLength && method !== "get" && method !== "head") {
+        const outboundLength = await resolveBodyLength(headers, data);
+        if (typeof outboundLength === "number" && isFinite(outboundLength) && outboundLength > maxBodyLength) {
+          throw new AxiosError$1(
+            "Request body larger than maxBodyLength limit",
+            AxiosError$1.ERR_BAD_REQUEST,
+            config2,
+            request
+          );
+        }
+      }
+      if (onUploadProgress && supportsRequestStream && method !== "get" && method !== "head" && (requestContentLength = await resolveBodyLength(headers, data)) !== 0) {
+        let _request = new Request2(url, {
+          method: "POST",
+          body: data,
+          duplex: "half"
+        });
+        let contentTypeHeader;
+        if (utils$1.isFormData(data) && (contentTypeHeader = _request.headers.get("content-type"))) {
+          headers.setContentType(contentTypeHeader);
+        }
+        if (_request.body) {
+          const [onProgress, flush] = progressEventDecorator(
+            requestContentLength,
+            progressEventReducer(asyncDecorator(onUploadProgress))
+          );
+          data = trackStream(_request.body, DEFAULT_CHUNK_SIZE, onProgress, flush);
+        }
+      }
+      if (!utils$1.isString(withCredentials)) {
+        withCredentials = withCredentials ? "include" : "omit";
+      }
+      const isCredentialsSupported = isRequestSupported && "credentials" in Request2.prototype;
+      if (utils$1.isFormData(data)) {
+        const contentType = headers.getContentType();
+        if (contentType && /^multipart\/form-data/i.test(contentType) && !/boundary=/i.test(contentType)) {
+          headers.delete("content-type");
+        }
+      }
+      headers.set("User-Agent", "axios/" + VERSION$1, false);
+      const resolvedOptions = {
+        ...fetchOptions,
+        signal: composedSignal,
+        method: method.toUpperCase(),
+        headers: toByteStringHeaderObject(headers.normalize()),
+        body: data,
+        duplex: "half",
+        credentials: isCredentialsSupported ? withCredentials : void 0
+      };
+      request = isRequestSupported && new Request2(url, resolvedOptions);
+      let response = await (isRequestSupported ? _fetch(request, fetchOptions) : _fetch(url, resolvedOptions));
+      if (hasMaxContentLength) {
+        const declaredLength = utils$1.toFiniteNumber(response.headers.get("content-length"));
+        if (declaredLength != null && declaredLength > maxContentLength) {
+          throw new AxiosError$1(
+            "maxContentLength size of " + maxContentLength + " exceeded",
+            AxiosError$1.ERR_BAD_RESPONSE,
+            config2,
+            request
+          );
+        }
+      }
+      const isStreamResponse = supportsResponseStream && (responseType === "stream" || responseType === "response");
+      if (supportsResponseStream && response.body && (onDownloadProgress || hasMaxContentLength || isStreamResponse && unsubscribe)) {
+        const options = {};
+        ["status", "statusText", "headers"].forEach((prop) => {
+          options[prop] = response[prop];
+        });
+        const responseContentLength = utils$1.toFiniteNumber(response.headers.get("content-length"));
+        const [onProgress, flush] = onDownloadProgress && progressEventDecorator(
+          responseContentLength,
+          progressEventReducer(asyncDecorator(onDownloadProgress), true)
+        ) || [];
+        let bytesRead = 0;
+        const onChunkProgress = (loadedBytes) => {
+          if (hasMaxContentLength) {
+            bytesRead = loadedBytes;
+            if (bytesRead > maxContentLength) {
+              throw new AxiosError$1(
+                "maxContentLength size of " + maxContentLength + " exceeded",
+                AxiosError$1.ERR_BAD_RESPONSE,
+                config2,
+                request
+              );
+            }
+          }
+          onProgress && onProgress(loadedBytes);
+        };
+        response = new Response(
+          trackStream(response.body, DEFAULT_CHUNK_SIZE, onChunkProgress, () => {
+            flush && flush();
+            unsubscribe && unsubscribe();
+          }),
+          options
+        );
+      }
+      responseType = responseType || "text";
+      let responseData = await resolvers[utils$1.findKey(resolvers, responseType) || "text"](
+        response,
+        config2
+      );
+      if (hasMaxContentLength && !supportsResponseStream && !isStreamResponse) {
+        let materializedSize;
+        if (responseData != null) {
+          if (typeof responseData.byteLength === "number") {
+            materializedSize = responseData.byteLength;
+          } else if (typeof responseData.size === "number") {
+            materializedSize = responseData.size;
+          } else if (typeof responseData === "string") {
+            materializedSize = typeof TextEncoder === "function" ? new TextEncoder().encode(responseData).byteLength : responseData.length;
+          }
+        }
+        if (typeof materializedSize === "number" && materializedSize > maxContentLength) {
+          throw new AxiosError$1(
+            "maxContentLength size of " + maxContentLength + " exceeded",
+            AxiosError$1.ERR_BAD_RESPONSE,
+            config2,
+            request
+          );
+        }
+      }
+      !isStreamResponse && unsubscribe && unsubscribe();
+      return await new Promise((resolve, reject) => {
+        settle(resolve, reject, {
+          data: responseData,
+          headers: AxiosHeaders$1.from(response.headers),
+          status: response.status,
+          statusText: response.statusText,
+          config: config2,
+          request
+        });
+      });
+    } catch (err) {
+      unsubscribe && unsubscribe();
+      if (composedSignal && composedSignal.aborted && composedSignal.reason instanceof AxiosError$1) {
+        const canceledError = composedSignal.reason;
+        canceledError.config = config2;
+        request && (canceledError.request = request);
+        err !== canceledError && (canceledError.cause = err);
+        throw canceledError;
+      }
+      if (err && err.name === "TypeError" && /Load failed|fetch/i.test(err.message)) {
+        throw Object.assign(
+          new AxiosError$1(
+            "Network Error",
+            AxiosError$1.ERR_NETWORK,
+            config2,
+            request,
+            err && err.response
+          ),
+          {
+            cause: err.cause || err
+          }
+        );
+      }
+      throw AxiosError$1.from(err, err && err.code, config2, request, err && err.response);
+    }
+  };
+};
+const seedCache = /* @__PURE__ */ new Map();
+const getFetch = (config2) => {
+  let env = config2 && config2.env || {};
+  const { fetch: fetch2, Request: Request2, Response } = env;
+  const seeds = [Request2, Response, fetch2];
+  let len = seeds.length, i2 = len, seed, target, map = seedCache;
+  while (i2--) {
+    seed = seeds[i2];
+    target = map.get(seed);
+    target === void 0 && map.set(seed, target = i2 ? /* @__PURE__ */ new Map() : factory(env));
+    map = target;
+  }
+  return target;
+};
+getFetch();
+const knownAdapters = {
+  http: httpAdapter,
+  xhr: xhrAdapter,
+  fetch: {
+    get: getFetch
+  }
+};
+utils$1.forEach(knownAdapters, (fn, value) => {
+  if (fn) {
+    try {
+      Object.defineProperty(fn, "name", { __proto__: null, value });
+    } catch (e) {
+    }
+    Object.defineProperty(fn, "adapterName", { __proto__: null, value });
+  }
+});
+const renderReason = (reason) => `- ${reason}`;
+const isResolvedHandle = (adapter) => utils$1.isFunction(adapter) || adapter === null || adapter === false;
+function getAdapter$1(adapters2, config2) {
+  adapters2 = utils$1.isArray(adapters2) ? adapters2 : [adapters2];
+  const { length } = adapters2;
+  let nameOrAdapter;
+  let adapter;
+  const rejectedReasons = {};
+  for (let i2 = 0; i2 < length; i2++) {
+    nameOrAdapter = adapters2[i2];
+    let id;
+    adapter = nameOrAdapter;
+    if (!isResolvedHandle(nameOrAdapter)) {
+      adapter = knownAdapters[(id = String(nameOrAdapter)).toLowerCase()];
+      if (adapter === void 0) {
+        throw new AxiosError$1(`Unknown adapter '${id}'`);
+      }
+    }
+    if (adapter && (utils$1.isFunction(adapter) || (adapter = adapter.get(config2)))) {
+      break;
+    }
+    rejectedReasons[id || "#" + i2] = adapter;
+  }
+  if (!adapter) {
+    const reasons = Object.entries(rejectedReasons).map(
+      ([id, state]) => `adapter ${id} ` + (state === false ? "is not supported by the environment" : "is not available in the build")
+    );
+    let s2 = length ? reasons.length > 1 ? "since :\n" + reasons.map(renderReason).join("\n") : " " + renderReason(reasons[0]) : "as no adapter specified";
+    throw new AxiosError$1(
+      `There is no suitable adapter to dispatch the request ` + s2,
+      "ERR_NOT_SUPPORT"
+    );
+  }
+  return adapter;
+}
+const adapters = {
+  /**
+   * Resolve an adapter from a list of adapter names or functions.
+   * @type {Function}
+   */
+  getAdapter: getAdapter$1,
+  /**
+   * Exposes all known adapters
+   * @type {Object<string, Function|Object>}
+   */
+  adapters: knownAdapters
+};
+function throwIfCancellationRequested(config2) {
+  if (config2.cancelToken) {
+    config2.cancelToken.throwIfRequested();
+  }
+  if (config2.signal && config2.signal.aborted) {
+    throw new CanceledError$1(null, config2);
+  }
+}
+function dispatchRequest(config2) {
+  throwIfCancellationRequested(config2);
+  config2.headers = AxiosHeaders$1.from(config2.headers);
+  config2.data = transformData.call(config2, config2.transformRequest);
+  if (["post", "put", "patch"].indexOf(config2.method) !== -1) {
+    config2.headers.setContentType("application/x-www-form-urlencoded", false);
+  }
+  const adapter = adapters.getAdapter(config2.adapter || defaults.adapter, config2);
+  return adapter(config2).then(
+    function onAdapterResolution(response) {
+      throwIfCancellationRequested(config2);
+      config2.response = response;
+      try {
+        response.data = transformData.call(config2, config2.transformResponse, response);
+      } finally {
+        delete config2.response;
+      }
+      response.headers = AxiosHeaders$1.from(response.headers);
+      return response;
+    },
+    function onAdapterRejection(reason) {
+      if (!isCancel$1(reason)) {
+        throwIfCancellationRequested(config2);
+        if (reason && reason.response) {
+          config2.response = reason.response;
+          try {
+            reason.response.data = transformData.call(
+              config2,
+              config2.transformResponse,
+              reason.response
+            );
+          } finally {
+            delete config2.response;
+          }
+          reason.response.headers = AxiosHeaders$1.from(reason.response.headers);
+        }
+      }
+      return Promise.reject(reason);
+    }
+  );
+}
+const validators$1 = {};
+["object", "boolean", "number", "function", "string", "symbol"].forEach((type, i2) => {
+  validators$1[type] = function validator2(thing) {
+    return typeof thing === type || "a" + (i2 < 1 ? "n " : " ") + type;
+  };
+});
+const deprecatedWarnings = {};
+validators$1.transitional = function transitional(validator2, version, message) {
+  function formatMessage(opt, desc) {
+    return "[Axios v" + VERSION$1 + "] Transitional option '" + opt + "'" + desc + (message ? ". " + message : "");
+  }
+  return (value, opt, opts) => {
+    if (validator2 === false) {
+      throw new AxiosError$1(
+        formatMessage(opt, " has been removed" + (version ? " in " + version : "")),
+        AxiosError$1.ERR_DEPRECATED
+      );
+    }
+    if (version && !deprecatedWarnings[opt]) {
+      deprecatedWarnings[opt] = true;
+      console.warn(
+        formatMessage(
+          opt,
+          " has been deprecated since v" + version + " and will be removed in the near future"
+        )
+      );
+    }
+    return validator2 ? validator2(value, opt, opts) : true;
+  };
+};
+validators$1.spelling = function spelling(correctSpelling) {
+  return (value, opt) => {
+    console.warn(`${opt} is likely a misspelling of ${correctSpelling}`);
+    return true;
+  };
+};
+function assertOptions(options, schema, allowUnknown) {
+  if (typeof options !== "object") {
+    throw new AxiosError$1("options must be an object", AxiosError$1.ERR_BAD_OPTION_VALUE);
+  }
+  const keys = Object.keys(options);
+  let i2 = keys.length;
+  while (i2-- > 0) {
+    const opt = keys[i2];
+    const validator2 = Object.prototype.hasOwnProperty.call(schema, opt) ? schema[opt] : void 0;
+    if (validator2) {
+      const value = options[opt];
+      const result = value === void 0 || validator2(value, opt, options);
+      if (result !== true) {
+        throw new AxiosError$1(
+          "option " + opt + " must be " + result,
+          AxiosError$1.ERR_BAD_OPTION_VALUE
+        );
+      }
+      continue;
+    }
+    if (allowUnknown !== true) {
+      throw new AxiosError$1("Unknown option " + opt, AxiosError$1.ERR_BAD_OPTION);
+    }
+  }
+}
+const validator = {
+  assertOptions,
+  validators: validators$1
+};
+const validators = validator.validators;
+let Axios$1 = class Axios {
+  constructor(instanceConfig) {
+    this.defaults = instanceConfig || {};
+    this.interceptors = {
+      request: new InterceptorManager(),
+      response: new InterceptorManager()
+    };
+  }
+  /**
+   * Dispatch a request
+   *
+   * @param {String|Object} configOrUrl The config specific for this request (merged with this.defaults)
+   * @param {?Object} config
+   *
+   * @returns {Promise} The Promise to be fulfilled
+   */
+  async request(configOrUrl, config2) {
+    try {
+      return await this._request(configOrUrl, config2);
+    } catch (err) {
+      if (err instanceof Error) {
+        let dummy = {};
+        Error.captureStackTrace ? Error.captureStackTrace(dummy) : dummy = new Error();
+        const stack = (() => {
+          if (!dummy.stack) {
+            return "";
+          }
+          const firstNewlineIndex = dummy.stack.indexOf("\n");
+          return firstNewlineIndex === -1 ? "" : dummy.stack.slice(firstNewlineIndex + 1);
+        })();
+        try {
+          if (!err.stack) {
+            err.stack = stack;
+          } else if (stack) {
+            const firstNewlineIndex = stack.indexOf("\n");
+            const secondNewlineIndex = firstNewlineIndex === -1 ? -1 : stack.indexOf("\n", firstNewlineIndex + 1);
+            const stackWithoutTwoTopLines = secondNewlineIndex === -1 ? "" : stack.slice(secondNewlineIndex + 1);
+            if (!String(err.stack).endsWith(stackWithoutTwoTopLines)) {
+              err.stack += "\n" + stack;
+            }
+          }
+        } catch (e) {
+        }
+      }
+      throw err;
+    }
+  }
+  _request(configOrUrl, config2) {
+    if (typeof configOrUrl === "string") {
+      config2 = config2 || {};
+      config2.url = configOrUrl;
+    } else {
+      config2 = configOrUrl || {};
+    }
+    config2 = mergeConfig$1(this.defaults, config2);
+    const { transitional: transitional2, paramsSerializer, headers } = config2;
+    if (transitional2 !== void 0) {
+      validator.assertOptions(
+        transitional2,
+        {
+          silentJSONParsing: validators.transitional(validators.boolean),
+          forcedJSONParsing: validators.transitional(validators.boolean),
+          clarifyTimeoutError: validators.transitional(validators.boolean),
+          legacyInterceptorReqResOrdering: validators.transitional(validators.boolean),
+          advertiseZstdAcceptEncoding: validators.transitional(validators.boolean)
+        },
+        false
+      );
+    }
+    if (paramsSerializer != null) {
+      if (utils$1.isFunction(paramsSerializer)) {
+        config2.paramsSerializer = {
+          serialize: paramsSerializer
+        };
+      } else {
+        validator.assertOptions(
+          paramsSerializer,
+          {
+            encode: validators.function,
+            serialize: validators.function
+          },
+          true
+        );
+      }
+    }
+    if (config2.allowAbsoluteUrls !== void 0) ;
+    else if (this.defaults.allowAbsoluteUrls !== void 0) {
+      config2.allowAbsoluteUrls = this.defaults.allowAbsoluteUrls;
+    } else {
+      config2.allowAbsoluteUrls = true;
+    }
+    validator.assertOptions(
+      config2,
+      {
+        baseUrl: validators.spelling("baseURL"),
+        withXsrfToken: validators.spelling("withXSRFToken")
+      },
+      true
+    );
+    config2.method = (config2.method || this.defaults.method || "get").toLowerCase();
+    let contextHeaders = headers && utils$1.merge(headers.common, headers[config2.method]);
+    headers && utils$1.forEach(["delete", "get", "head", "post", "put", "patch", "query", "common"], (method) => {
+      delete headers[method];
+    });
+    config2.headers = AxiosHeaders$1.concat(contextHeaders, headers);
+    const requestInterceptorChain = [];
+    let synchronousRequestInterceptors = true;
+    this.interceptors.request.forEach(function unshiftRequestInterceptors(interceptor) {
+      if (typeof interceptor.runWhen === "function" && interceptor.runWhen(config2) === false) {
+        return;
+      }
+      synchronousRequestInterceptors = synchronousRequestInterceptors && interceptor.synchronous;
+      const transitional3 = config2.transitional || transitionalDefaults;
+      const legacyInterceptorReqResOrdering = transitional3 && transitional3.legacyInterceptorReqResOrdering;
+      if (legacyInterceptorReqResOrdering) {
+        requestInterceptorChain.unshift(interceptor.fulfilled, interceptor.rejected);
+      } else {
+        requestInterceptorChain.push(interceptor.fulfilled, interceptor.rejected);
+      }
+    });
+    const responseInterceptorChain = [];
+    this.interceptors.response.forEach(function pushResponseInterceptors(interceptor) {
+      responseInterceptorChain.push(interceptor.fulfilled, interceptor.rejected);
+    });
+    let promise;
+    let i2 = 0;
+    let len;
+    if (!synchronousRequestInterceptors) {
+      const chain = [dispatchRequest.bind(this), void 0];
+      chain.unshift(...requestInterceptorChain);
+      chain.push(...responseInterceptorChain);
+      len = chain.length;
+      promise = Promise.resolve(config2);
+      while (i2 < len) {
+        promise = promise.then(chain[i2++], chain[i2++]);
+      }
+      return promise;
+    }
+    len = requestInterceptorChain.length;
+    let newConfig = config2;
+    while (i2 < len) {
+      const onFulfilled = requestInterceptorChain[i2++];
+      const onRejected = requestInterceptorChain[i2++];
+      try {
+        newConfig = onFulfilled(newConfig);
+      } catch (error) {
+        onRejected.call(this, error);
+        break;
+      }
+    }
+    try {
+      promise = dispatchRequest.call(this, newConfig);
+    } catch (error) {
+      return Promise.reject(error);
+    }
+    i2 = 0;
+    len = responseInterceptorChain.length;
+    while (i2 < len) {
+      promise = promise.then(responseInterceptorChain[i2++], responseInterceptorChain[i2++]);
+    }
+    return promise;
+  }
+  getUri(config2) {
+    config2 = mergeConfig$1(this.defaults, config2);
+    const fullPath = buildFullPath(config2.baseURL, config2.url, config2.allowAbsoluteUrls);
+    return buildURL(fullPath, config2.params, config2.paramsSerializer);
+  }
+};
+utils$1.forEach(["delete", "get", "head", "options"], function forEachMethodNoData(method) {
+  Axios$1.prototype[method] = function(url, config2) {
+    return this.request(
+      mergeConfig$1(config2 || {}, {
+        method,
+        url,
+        data: (config2 || {}).data
+      })
+    );
+  };
+});
+utils$1.forEach(["post", "put", "patch", "query"], function forEachMethodWithData(method) {
+  function generateHTTPMethod(isForm) {
+    return function httpMethod(url, data, config2) {
+      return this.request(
+        mergeConfig$1(config2 || {}, {
+          method,
+          headers: isForm ? {
+            "Content-Type": "multipart/form-data"
+          } : {},
+          url,
+          data
+        })
+      );
+    };
+  }
+  Axios$1.prototype[method] = generateHTTPMethod();
+  if (method !== "query") {
+    Axios$1.prototype[method + "Form"] = generateHTTPMethod(true);
+  }
+});
+let CancelToken$1 = class CancelToken {
+  constructor(executor) {
+    if (typeof executor !== "function") {
+      throw new TypeError("executor must be a function.");
+    }
+    let resolvePromise;
+    this.promise = new Promise(function promiseExecutor(resolve) {
+      resolvePromise = resolve;
+    });
+    const token = this;
+    this.promise.then((cancel) => {
+      if (!token._listeners) return;
+      let i2 = token._listeners.length;
+      while (i2-- > 0) {
+        token._listeners[i2](cancel);
+      }
+      token._listeners = null;
+    });
+    this.promise.then = (onfulfilled) => {
+      let _resolve;
+      const promise = new Promise((resolve) => {
+        token.subscribe(resolve);
+        _resolve = resolve;
+      }).then(onfulfilled);
+      promise.cancel = function reject() {
+        token.unsubscribe(_resolve);
+      };
+      return promise;
+    };
+    executor(function cancel(message, config2, request) {
+      if (token.reason) {
+        return;
+      }
+      token.reason = new CanceledError$1(message, config2, request);
+      resolvePromise(token.reason);
+    });
+  }
+  /**
+   * Throws a `CanceledError` if cancellation has been requested.
+   */
+  throwIfRequested() {
+    if (this.reason) {
+      throw this.reason;
+    }
+  }
+  /**
+   * Subscribe to the cancel signal
+   */
+  subscribe(listener) {
+    if (this.reason) {
+      listener(this.reason);
+      return;
+    }
+    if (this._listeners) {
+      this._listeners.push(listener);
+    } else {
+      this._listeners = [listener];
+    }
+  }
+  /**
+   * Unsubscribe from the cancel signal
+   */
+  unsubscribe(listener) {
+    if (!this._listeners) {
+      return;
+    }
+    const index = this._listeners.indexOf(listener);
+    if (index !== -1) {
+      this._listeners.splice(index, 1);
+    }
+  }
+  toAbortSignal() {
+    const controller = new AbortController();
+    const abort = (err) => {
+      controller.abort(err);
+    };
+    this.subscribe(abort);
+    controller.signal.unsubscribe = () => this.unsubscribe(abort);
+    return controller.signal;
+  }
+  /**
+   * Returns an object that contains a new `CancelToken` and a function that, when called,
+   * cancels the `CancelToken`.
+   */
+  static source() {
+    let cancel;
+    const token = new CancelToken(function executor(c) {
+      cancel = c;
+    });
+    return {
+      token,
+      cancel
+    };
+  }
+};
+function spread$1(callback) {
+  return function wrap(arr) {
+    return callback.apply(null, arr);
+  };
+}
+function isAxiosError$1(payload) {
+  return utils$1.isObject(payload) && payload.isAxiosError === true;
+}
+const HttpStatusCode$1 = {
+  Continue: 100,
+  SwitchingProtocols: 101,
+  Processing: 102,
+  EarlyHints: 103,
+  Ok: 200,
+  Created: 201,
+  Accepted: 202,
+  NonAuthoritativeInformation: 203,
+  NoContent: 204,
+  ResetContent: 205,
+  PartialContent: 206,
+  MultiStatus: 207,
+  AlreadyReported: 208,
+  ImUsed: 226,
+  MultipleChoices: 300,
+  MovedPermanently: 301,
+  Found: 302,
+  SeeOther: 303,
+  NotModified: 304,
+  UseProxy: 305,
+  Unused: 306,
+  TemporaryRedirect: 307,
+  PermanentRedirect: 308,
+  BadRequest: 400,
+  Unauthorized: 401,
+  PaymentRequired: 402,
+  Forbidden: 403,
+  NotFound: 404,
+  MethodNotAllowed: 405,
+  NotAcceptable: 406,
+  ProxyAuthenticationRequired: 407,
+  RequestTimeout: 408,
+  Conflict: 409,
+  Gone: 410,
+  LengthRequired: 411,
+  PreconditionFailed: 412,
+  PayloadTooLarge: 413,
+  UriTooLong: 414,
+  UnsupportedMediaType: 415,
+  RangeNotSatisfiable: 416,
+  ExpectationFailed: 417,
+  ImATeapot: 418,
+  MisdirectedRequest: 421,
+  UnprocessableEntity: 422,
+  Locked: 423,
+  FailedDependency: 424,
+  TooEarly: 425,
+  UpgradeRequired: 426,
+  PreconditionRequired: 428,
+  TooManyRequests: 429,
+  RequestHeaderFieldsTooLarge: 431,
+  UnavailableForLegalReasons: 451,
+  InternalServerError: 500,
+  NotImplemented: 501,
+  BadGateway: 502,
+  ServiceUnavailable: 503,
+  GatewayTimeout: 504,
+  HttpVersionNotSupported: 505,
+  VariantAlsoNegotiates: 506,
+  InsufficientStorage: 507,
+  LoopDetected: 508,
+  NotExtended: 510,
+  NetworkAuthenticationRequired: 511,
+  WebServerIsDown: 521,
+  ConnectionTimedOut: 522,
+  OriginIsUnreachable: 523,
+  TimeoutOccurred: 524,
+  SslHandshakeFailed: 525,
+  InvalidSslCertificate: 526
+};
+Object.entries(HttpStatusCode$1).forEach(([key, value]) => {
+  HttpStatusCode$1[value] = key;
+});
+function createInstance(defaultConfig) {
+  const context = new Axios$1(defaultConfig);
+  const instance = bind(Axios$1.prototype.request, context);
+  utils$1.extend(instance, Axios$1.prototype, context, { allOwnKeys: true });
+  utils$1.extend(instance, context, null, { allOwnKeys: true });
+  instance.create = function create2(instanceConfig) {
+    return createInstance(mergeConfig$1(defaultConfig, instanceConfig));
+  };
+  return instance;
+}
+const axios = createInstance(defaults);
+axios.Axios = Axios$1;
+axios.CanceledError = CanceledError$1;
+axios.CancelToken = CancelToken$1;
+axios.isCancel = isCancel$1;
+axios.VERSION = VERSION$1;
+axios.toFormData = toFormData$1;
+axios.AxiosError = AxiosError$1;
+axios.Cancel = axios.CanceledError;
+axios.all = function all(promises) {
+  return Promise.all(promises);
+};
+axios.spread = spread$1;
+axios.isAxiosError = isAxiosError$1;
+axios.mergeConfig = mergeConfig$1;
+axios.AxiosHeaders = AxiosHeaders$1;
+axios.formToJSON = (thing) => formDataToJSON(utils$1.isHTMLForm(thing) ? new FormData(thing) : thing);
+axios.getAdapter = adapters.getAdapter;
+axios.HttpStatusCode = HttpStatusCode$1;
+axios.default = axios;
+const {
+  Axios: Axios2,
+  AxiosError: AxiosError2,
+  CanceledError: CanceledError2,
+  isCancel,
+  CancelToken: CancelToken2,
+  VERSION,
+  all: all2,
+  Cancel,
+  isAxiosError,
+  spread,
+  toFormData,
+  AxiosHeaders: AxiosHeaders2,
+  HttpStatusCode,
+  formToJSON,
+  getAdapter,
+  mergeConfig,
+  create
+} = axios;
 const apiUrl = "http://localhost:4300";
+const apiClient = axios.create({
+  baseURL: apiUrl,
+  headers: {
+    "Content-Type": "application/json"
+  }
+});
+apiClient.interceptors.request.use((config2) => {
+  const token = readStoredToken();
+  if (token) config2.headers.Authorization = `Bearer ${token}`;
+  return config2;
+});
+async function apiRequest(config2) {
+  const response = await apiClient.request(config2);
+  return response.data;
+}
 function readStoredToken() {
   try {
     const raw = localStorage.getItem("restaurantos-auth");
@@ -23092,35 +26145,31 @@ function readStoredToken() {
     return void 0;
   }
 }
-async function apiFetch(path, init, accessToken = readStoredToken()) {
-  const headers = new Headers(init?.headers);
-  headers.set("Content-Type", "application/json");
-  if (accessToken) headers.set("Authorization", `Bearer ${accessToken}`);
-  const response = await fetch(`${apiUrl}${path}`, {
-    headers,
-    ...init
-  });
-  if (!response.ok) {
-    const message = await response.text();
-    throw new Error(message || `RestaurantOS API error ${response.status}`);
-  }
-  return response.json();
-}
-const useAuthStore = create()(
+const authService = {
+  login: (username, password) => apiRequest({
+    data: { password, username },
+    method: "POST",
+    url: "/auth/login"
+  }),
+  logout: (accessToken) => apiRequest({
+    headers: accessToken ? { Authorization: `Bearer ${accessToken}` } : void 0,
+    method: "POST",
+    url: "/auth/logout"
+  }),
+  me: (accessToken) => apiRequest({
+    headers: accessToken ? { Authorization: `Bearer ${accessToken}` } : void 0,
+    method: "GET",
+    url: "/auth/me"
+  })
+};
+const useAuthStore = create$1()(
   persist(
     (set2, get2) => ({
       loading: false,
       login: async (username, password) => {
         set2({ loading: true });
         try {
-          const result = await apiFetch(
-            "/auth/login",
-            {
-              method: "POST",
-              body: JSON.stringify({ username, password })
-            },
-            void 0
-          );
+          const result = await authService.login(username, password);
           set2({ accessToken: result.accessToken, user: result.user, loading: false });
         } catch (error) {
           set2({ loading: false });
@@ -23132,7 +26181,7 @@ const useAuthStore = create()(
         if (!accessToken) return;
         set2({ loading: true });
         try {
-          const result = await apiFetch("/auth/me", void 0, accessToken);
+          const result = await authService.me(accessToken);
           set2({ user: result.user, loading: false });
         } catch (error) {
           set2({ accessToken: void 0, user: void 0, loading: false });
@@ -23142,9 +26191,7 @@ const useAuthStore = create()(
       logout: async () => {
         const { accessToken } = get2();
         try {
-          if (accessToken) {
-            await apiFetch("/auth/logout", { method: "POST" }, accessToken);
-          }
+          if (accessToken) await authService.logout(accessToken);
         } finally {
           set2({ accessToken: void 0, user: void 0, loading: false });
         }
@@ -23162,6 +26209,7 @@ const useAuthStore = create()(
 );
 const navItems = [
   { to: "/", label: "POS", icon: ShoppingBag },
+  { to: "/orders", label: "Orders", icon: ClipboardList },
   { to: "/dashboard", label: "Dashboard", icon: LayoutDashboard },
   { to: "/menu", label: "Menu", icon: ChefHat },
   { to: "/inventory", label: "Inventory", icon: Boxes },
@@ -23322,8 +26370,8 @@ const getGroupRecursive = (classParts, classPartObject) => {
   }
   const classRest = classParts.join(CLASS_PART_SEPARATOR);
   return classPartObject.validators.find(({
-    validator
-  }) => validator(classRest))?.classGroupId;
+    validator: validator2
+  }) => validator2(classRest))?.classGroupId;
 };
 const arbitraryPropertyRegex = /^\[(.+)\]$/;
 const getGroupIdForArbitraryProperty = (className) => {
@@ -25860,7 +28908,11 @@ function FormField({ children, className = "", hint, label }) {
     hint ? /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "mt-1 block text-xs font-semibold text-muted", children: hint }) : null
   ] });
 }
-const fieldClass$7 = "h-11 w-full rounded-xl border border-field bg-white px-3 text-sm font-semibold text-espresso outline-none transition focus:border-primary focus:ring-4 focus:ring-primary/10";
+const customersService = {
+  create: (input) => apiRequest({ data: input, method: "POST", url: "/customers" }),
+  list: () => apiRequest({ method: "GET", url: "/customers" })
+};
+const fieldClass$8 = "h-11 w-full rounded-xl border border-field bg-white px-3 text-sm font-semibold text-espresso outline-none transition focus:border-primary focus:ring-4 focus:ring-primary/10";
 const money$4 = new Intl.NumberFormat("en-PK", { maximumFractionDigits: 0, style: "currency", currency: "PKR" });
 function CustomersPage() {
   const queryClient2 = useQueryClient();
@@ -25871,17 +28923,14 @@ function CustomersPage() {
   const [createOpen, setCreateOpen] = reactExports.useState(false);
   const customersQuery = useQuery({
     queryKey: ["customers"],
-    queryFn: () => apiFetch("/customers")
+    queryFn: customersService.list
   });
   const createCustomer = useMutation({
-    mutationFn: () => apiFetch("/customers", {
-      method: "POST",
-      body: JSON.stringify({
-        name: name.trim(),
-        phone: phone.trim(),
-        creditLimit: Number(creditLimit || 0),
-        customerType: Number(creditLimit || 0) > 0 ? "CREDIT" : "REGULAR"
-      })
+    mutationFn: () => customersService.create({
+      name: name.trim(),
+      phone: phone.trim(),
+      creditLimit: Number(creditLimit || 0),
+      customerType: Number(creditLimit || 0) > 0 ? "CREDIT" : "REGULAR"
     }),
     onSuccess: () => {
       setName("");
@@ -25908,9 +28957,9 @@ function CustomersPage() {
       ] })
     ] }),
     /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mt-6 grid grid-cols-3 gap-4", children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsx(Metric$5, { icon: /* @__PURE__ */ jsxRuntimeExports.jsx(UserRound, { size: 19 }), label: "Customers", value: customersQuery.data?.metrics.totalCustomers ?? 0 }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx(Metric$7, { icon: /* @__PURE__ */ jsxRuntimeExports.jsx(UserRound, { size: 19 }), label: "Customers", value: customersQuery.data?.metrics.totalCustomers ?? 0 }),
       /* @__PURE__ */ jsxRuntimeExports.jsx(
-        Metric$5,
+        Metric$7,
         {
           icon: /* @__PURE__ */ jsxRuntimeExports.jsx(CreditCard, { size: 19 }),
           label: "Credit accounts",
@@ -25918,7 +28967,7 @@ function CustomersPage() {
         }
       ),
       /* @__PURE__ */ jsxRuntimeExports.jsx(
-        Metric$5,
+        Metric$7,
         {
           icon: /* @__PURE__ */ jsxRuntimeExports.jsx(CreditCard, { size: 19 }),
           label: "Receivable",
@@ -25969,7 +29018,7 @@ function CustomersPage() {
           /* @__PURE__ */ jsxRuntimeExports.jsx(FormField, { label: "Customer name", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
             "input",
             {
-              className: fieldClass$7,
+              className: fieldClass$8,
               disabled: !canManageCustomers,
               value: name,
               onChange: (event) => setName(event.target.value)
@@ -25978,7 +29027,7 @@ function CustomersPage() {
           /* @__PURE__ */ jsxRuntimeExports.jsx(FormField, { label: "Phone number", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
             "input",
             {
-              className: fieldClass$7,
+              className: fieldClass$8,
               disabled: !canManageCustomers,
               value: phone,
               onChange: (event) => setPhone(event.target.value)
@@ -25987,7 +29036,7 @@ function CustomersPage() {
           /* @__PURE__ */ jsxRuntimeExports.jsx(FormField, { label: "Money limit", hint: "Maximum amount this customer can owe.", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
             "input",
             {
-              className: fieldClass$7,
+              className: fieldClass$8,
               disabled: !canManageCustomers,
               min: "0",
               type: "number",
@@ -26010,7 +29059,7 @@ function CustomersPage() {
     )
   ] });
 }
-function Metric$5({ icon, label, value }) {
+function Metric$7({ icon, label, value }) {
   return /* @__PURE__ */ jsxRuntimeExports.jsxs(Card, { className: "flex items-center justify-between p-5", children: [
     /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
       /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm font-black text-muted", children: label }),
@@ -26102,6 +29151,7 @@ const tips = [
   "Receipt printing opens a preview first so the cashier can check the bill.",
   "Use the trash button to fix cart mistakes before sending the order.",
   "After an order exists, corrections need a reason and are saved in the audit log.",
+  "Use Orders to find created orders later, reprint receipts, or correct unpaid orders.",
   "Save printer details in Settings > Terminal hardware before rush hours.",
   "Keep payment and print popups closed when using item quick-add shortcuts.",
   "Table shortcuts and selected-line quantity controls will become safer after selected state is added."
@@ -26140,7 +29190,21 @@ function HelpPage() {
     ] })
   ] });
 }
-const fieldClass$6 = "h-11 w-full rounded-xl border border-field bg-white px-3 text-sm font-semibold text-espresso outline-none transition focus:border-primary focus:ring-4 focus:ring-primary/10";
+const inventoryService = {
+  createItem: (input) => apiRequest({ data: input, method: "POST", url: "/inventory/items" }),
+  createPurchase: (input) => apiRequest({ data: input, method: "POST", url: "/inventory/purchases" }),
+  createSupplier: (input) => apiRequest({ data: input, method: "POST", url: "/inventory/suppliers" }),
+  list: () => apiRequest({ method: "GET", url: "/inventory" }),
+  purchases: () => apiRequest({ method: "GET", url: "/inventory/purchases" }),
+  recordSupplierPayment: (supplierId, input) => apiRequest({
+    data: input,
+    method: "POST",
+    url: `/inventory/suppliers/${supplierId}/payments`
+  }),
+  suppliers: () => apiRequest({ method: "GET", url: "/inventory/suppliers" }),
+  updateItem: (itemId, patch) => apiRequest({ data: patch, method: "PATCH", url: `/inventory/items/${itemId}` })
+};
+const fieldClass$7 = "h-11 w-full rounded-xl border border-field bg-white px-3 text-sm font-semibold text-espresso outline-none transition focus:border-primary focus:ring-4 focus:ring-primary/10";
 const money$3 = new Intl.NumberFormat("en-PK", { maximumFractionDigits: 0, style: "currency", currency: "PKR" });
 const today = (/* @__PURE__ */ new Date()).toISOString().slice(0, 10);
 function InventoryPage() {
@@ -26177,15 +29241,15 @@ function InventoryPage() {
   const [supplierPaymentNotes, setSupplierPaymentNotes] = reactExports.useState("");
   const inventoryQuery = useQuery({
     queryKey: ["inventory"],
-    queryFn: () => apiFetch("/inventory")
+    queryFn: inventoryService.list
   });
   const purchasesQuery = useQuery({
     queryKey: ["inventory-purchases"],
-    queryFn: () => apiFetch("/inventory/purchases")
+    queryFn: inventoryService.purchases
   });
   const suppliersQuery = useQuery({
     queryKey: ["inventory-suppliers"],
-    queryFn: () => apiFetch("/inventory/suppliers")
+    queryFn: inventoryService.suppliers
   });
   const units = inventoryQuery.data?.units ?? [];
   const suppliers = suppliersQuery.data ?? inventoryQuery.data?.suppliers ?? [];
@@ -26202,20 +29266,17 @@ function InventoryPage() {
   );
   const supplierPayableTotal = suppliers.reduce((total, supplier) => total + Number(supplier.currentPayable || 0), 0);
   const createItem = useMutation({
-    mutationFn: () => apiFetch("/inventory/items", {
-      method: "POST",
-      body: JSON.stringify({
-        name: name.trim(),
-        category: category.trim() || void 0,
-        currentStock: Number(currentStock || 0),
-        minimumStockLevel: Number(minimumStockLevel || 0),
-        averageCost: Number(averageCost || 0),
-        lastPurchaseCost: Number(averageCost || 0),
-        conversionRate: selectedPurchaseUnitId === selectedUsageUnitId ? 1 : 1,
-        purchaseUnitId: selectedPurchaseUnitId,
-        usageUnitId: selectedUsageUnitId,
-        supplierId: supplierId || void 0
-      })
+    mutationFn: () => inventoryService.createItem({
+      name: name.trim(),
+      category: category.trim() || void 0,
+      currentStock: Number(currentStock || 0),
+      minimumStockLevel: Number(minimumStockLevel || 0),
+      averageCost: Number(averageCost || 0),
+      lastPurchaseCost: Number(averageCost || 0),
+      conversionRate: selectedPurchaseUnitId === selectedUsageUnitId ? 1 : 1,
+      purchaseUnitId: selectedPurchaseUnitId,
+      usageUnitId: selectedUsageUnitId,
+      supplierId: supplierId || void 0
     }),
     onSuccess: () => {
       setName("");
@@ -26232,21 +29293,18 @@ function InventoryPage() {
     }
   });
   const createPurchase = useMutation({
-    mutationFn: () => apiFetch("/inventory/purchases", {
-      method: "POST",
-      body: JSON.stringify({
-        supplierId: selectedPurchaseSupplierId,
-        invoiceNumber: invoiceNumber.trim() || void 0,
-        purchaseDate,
-        paidAmount: Number(paidAmount || 0),
-        paymentMethod,
-        items: purchaseRows.map((row) => ({
-          inventoryItemId: row.inventoryItemId,
-          quantity: Number(row.quantity || 0),
-          unitId: row.unitId,
-          unitCost: Number(row.unitCost || 0)
-        }))
-      })
+    mutationFn: () => inventoryService.createPurchase({
+      supplierId: selectedPurchaseSupplierId,
+      invoiceNumber: invoiceNumber.trim() || void 0,
+      purchaseDate,
+      paidAmount: Number(paidAmount || 0),
+      paymentMethod,
+      items: purchaseRows.map((row) => ({
+        inventoryItemId: row.inventoryItemId,
+        quantity: Number(row.quantity || 0),
+        unitId: row.unitId,
+        unitCost: Number(row.unitCost || 0)
+      }))
     }),
     onSuccess: () => {
       setInvoiceNumber("");
@@ -26262,16 +29320,13 @@ function InventoryPage() {
     }
   });
   const createSupplier = useMutation({
-    mutationFn: () => apiFetch("/inventory/suppliers", {
-      method: "POST",
-      body: JSON.stringify({
-        name: supplierName.trim(),
-        phone: supplierPhone.trim() || void 0,
-        contactPerson: supplierContactPerson.trim() || void 0,
-        address: supplierAddress.trim() || void 0,
-        openingBalance: Number(supplierOpeningBalance || 0),
-        notes: supplierNotes.trim() || void 0
-      })
+    mutationFn: () => inventoryService.createSupplier({
+      name: supplierName.trim(),
+      phone: supplierPhone.trim() || void 0,
+      contactPerson: supplierContactPerson.trim() || void 0,
+      address: supplierAddress.trim() || void 0,
+      openingBalance: Number(supplierOpeningBalance || 0),
+      notes: supplierNotes.trim() || void 0
     }),
     onSuccess: () => {
       setSupplierName("");
@@ -26286,14 +29341,11 @@ function InventoryPage() {
     }
   });
   const recordSupplierPayment = useMutation({
-    mutationFn: () => apiFetch(`/inventory/suppliers/${selectedPaymentSupplierId}/payments`, {
-      method: "POST",
-      body: JSON.stringify({
-        amount: Number(supplierPaymentAmount || 0),
-        paymentMethod: supplierPaymentMethod,
-        reference: supplierPaymentReference.trim() || void 0,
-        notes: supplierPaymentNotes.trim() || void 0
-      })
+    mutationFn: () => inventoryService.recordSupplierPayment(selectedPaymentSupplierId, {
+      amount: Number(supplierPaymentAmount || 0),
+      paymentMethod: supplierPaymentMethod,
+      reference: supplierPaymentReference.trim() || void 0,
+      notes: supplierPaymentNotes.trim() || void 0
     }),
     onSuccess: () => {
       setPaymentSupplierId("");
@@ -26308,10 +29360,7 @@ function InventoryPage() {
     }
   });
   const toggleItem = useMutation({
-    mutationFn: (item) => apiFetch(`/inventory/items/${item.id}`, {
-      method: "PATCH",
-      body: JSON.stringify({ active: !item.active })
-    }),
+    mutationFn: (item) => inventoryService.updateItem(item.id, { active: !item.active }),
     onSuccess: () => queryClient2.invalidateQueries({ queryKey: ["inventory"] })
   });
   function submitItem(event) {
@@ -26420,9 +29469,9 @@ function InventoryPage() {
       ] })
     ] }),
     /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mt-6 grid grid-cols-4 gap-4", children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsx(Metric$4, { icon: /* @__PURE__ */ jsxRuntimeExports.jsx(Archive, { size: 19 }), label: "Active stock items", value: inventoryQuery.data?.metrics.activeItems ?? 0 }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx(Metric$6, { icon: /* @__PURE__ */ jsxRuntimeExports.jsx(Archive, { size: 19 }), label: "Active stock items", value: inventoryQuery.data?.metrics.activeItems ?? 0 }),
       /* @__PURE__ */ jsxRuntimeExports.jsx(
-        Metric$4,
+        Metric$6,
         {
           icon: /* @__PURE__ */ jsxRuntimeExports.jsx(TrendingDown, { size: 19 }),
           label: "Low stock",
@@ -26430,14 +29479,14 @@ function InventoryPage() {
         }
       ),
       /* @__PURE__ */ jsxRuntimeExports.jsx(
-        Metric$4,
+        Metric$6,
         {
           icon: /* @__PURE__ */ jsxRuntimeExports.jsx(PackagePlus, { size: 19 }),
           label: "Stock value",
           value: money$3.format(Number(inventoryQuery.data?.metrics.totalStockValue ?? 0))
         }
       ),
-      /* @__PURE__ */ jsxRuntimeExports.jsx(Metric$4, { icon: /* @__PURE__ */ jsxRuntimeExports.jsx(WalletCards, { size: 19 }), label: "Supplier payable", value: money$3.format(supplierPayableTotal) })
+      /* @__PURE__ */ jsxRuntimeExports.jsx(Metric$6, { icon: /* @__PURE__ */ jsxRuntimeExports.jsx(WalletCards, { size: 19 }), label: "Supplier payable", value: money$3.format(supplierPayableTotal) })
     ] }),
     /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mt-5", children: /* @__PURE__ */ jsxRuntimeExports.jsxs(Card, { className: "overflow-hidden", children: [
       /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center justify-between border-b border-line px-6 py-5", children: [
@@ -26594,7 +29643,7 @@ function InventoryPage() {
           /* @__PURE__ */ jsxRuntimeExports.jsx(FormField, { label: "Stock item name", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
             "input",
             {
-              className: fieldClass$6,
+              className: fieldClass$7,
               disabled: !canManageInventory,
               value: name,
               onChange: (event) => setName(event.target.value)
@@ -26603,7 +29652,7 @@ function InventoryPage() {
           /* @__PURE__ */ jsxRuntimeExports.jsx(FormField, { label: "Group", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
             "input",
             {
-              className: fieldClass$6,
+              className: fieldClass$7,
               disabled: !canManageInventory,
               value: category,
               onChange: (event) => setCategory(event.target.value)
@@ -26613,7 +29662,7 @@ function InventoryPage() {
             /* @__PURE__ */ jsxRuntimeExports.jsx(FormField, { label: "Current stock", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
               "input",
               {
-                className: fieldClass$6,
+                className: fieldClass$7,
                 disabled: !canManageInventory,
                 min: "0",
                 type: "number",
@@ -26624,7 +29673,7 @@ function InventoryPage() {
             /* @__PURE__ */ jsxRuntimeExports.jsx(FormField, { label: "Low stock warning", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
               "input",
               {
-                className: fieldClass$6,
+                className: fieldClass$7,
                 disabled: !canManageInventory,
                 min: "0",
                 type: "number",
@@ -26636,7 +29685,7 @@ function InventoryPage() {
           /* @__PURE__ */ jsxRuntimeExports.jsx(FormField, { label: "Average buy price", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
             "input",
             {
-              className: fieldClass$6,
+              className: fieldClass$7,
               disabled: !canManageInventory,
               min: "0",
               type: "number",
@@ -26648,7 +29697,7 @@ function InventoryPage() {
             /* @__PURE__ */ jsxRuntimeExports.jsx(FormField, { label: "Buy unit", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
               "select",
               {
-                className: fieldClass$6,
+                className: fieldClass$7,
                 disabled: !canManageInventory,
                 value: selectedPurchaseUnitId,
                 onChange: (event) => setPurchaseUnitId(event.target.value),
@@ -26661,7 +29710,7 @@ function InventoryPage() {
             /* @__PURE__ */ jsxRuntimeExports.jsx(FormField, { label: "Use unit", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
               "select",
               {
-                className: fieldClass$6,
+                className: fieldClass$7,
                 disabled: !canManageInventory,
                 value: selectedUsageUnitId,
                 onChange: (event) => setUsageUnitId(event.target.value),
@@ -26675,7 +29724,7 @@ function InventoryPage() {
           /* @__PURE__ */ jsxRuntimeExports.jsx(FormField, { label: "Supplier", children: /* @__PURE__ */ jsxRuntimeExports.jsxs(
             "select",
             {
-              className: fieldClass$6,
+              className: fieldClass$7,
               disabled: !canManageInventory,
               value: supplierId,
               onChange: (event) => setSupplierId(event.target.value),
@@ -26709,7 +29758,7 @@ function InventoryPage() {
           /* @__PURE__ */ jsxRuntimeExports.jsx(FormField, { label: "Supplier name", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
             "input",
             {
-              className: fieldClass$6,
+              className: fieldClass$7,
               disabled: !canManageInventory,
               value: supplierName,
               onChange: (event) => setSupplierName(event.target.value)
@@ -26719,7 +29768,7 @@ function InventoryPage() {
             /* @__PURE__ */ jsxRuntimeExports.jsx(FormField, { label: "Contact person", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
               "input",
               {
-                className: fieldClass$6,
+                className: fieldClass$7,
                 disabled: !canManageInventory,
                 value: supplierContactPerson,
                 onChange: (event) => setSupplierContactPerson(event.target.value)
@@ -26728,7 +29777,7 @@ function InventoryPage() {
             /* @__PURE__ */ jsxRuntimeExports.jsx(FormField, { label: "Phone number", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
               "input",
               {
-                className: fieldClass$6,
+                className: fieldClass$7,
                 disabled: !canManageInventory,
                 value: supplierPhone,
                 onChange: (event) => setSupplierPhone(event.target.value)
@@ -26738,7 +29787,7 @@ function InventoryPage() {
           /* @__PURE__ */ jsxRuntimeExports.jsx(FormField, { label: "Address", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
             "input",
             {
-              className: fieldClass$6,
+              className: fieldClass$7,
               disabled: !canManageInventory,
               value: supplierAddress,
               onChange: (event) => setSupplierAddress(event.target.value)
@@ -26747,7 +29796,7 @@ function InventoryPage() {
           /* @__PURE__ */ jsxRuntimeExports.jsx(FormField, { label: "Money owed now", hint: "Put 0 if you do not owe this supplier yet.", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
             "input",
             {
-              className: fieldClass$6,
+              className: fieldClass$7,
               disabled: !canManageInventory,
               min: "0",
               type: "number",
@@ -26758,7 +29807,7 @@ function InventoryPage() {
           /* @__PURE__ */ jsxRuntimeExports.jsx(FormField, { label: "Notes", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
             "textarea",
             {
-              className: `${fieldClass$6} min-h-24 py-3`,
+              className: `${fieldClass$7} min-h-24 py-3`,
               disabled: !canManageInventory,
               value: supplierNotes,
               onChange: (event) => setSupplierNotes(event.target.value)
@@ -26789,7 +29838,7 @@ function InventoryPage() {
           /* @__PURE__ */ jsxRuntimeExports.jsx(FormField, { label: "Supplier", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
             "select",
             {
-              className: fieldClass$6,
+              className: fieldClass$7,
               disabled: !canManageInventory,
               value: selectedPaymentSupplierId,
               onChange: (event) => setPaymentSupplierId(event.target.value),
@@ -26808,7 +29857,7 @@ function InventoryPage() {
             /* @__PURE__ */ jsxRuntimeExports.jsx(FormField, { label: "Amount paid", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
               "input",
               {
-                className: fieldClass$6,
+                className: fieldClass$7,
                 disabled: !canManageInventory,
                 max: selectedPaymentSupplier?.currentPayable ?? void 0,
                 min: "0.01",
@@ -26821,7 +29870,7 @@ function InventoryPage() {
             /* @__PURE__ */ jsxRuntimeExports.jsx(FormField, { label: "How paid", children: /* @__PURE__ */ jsxRuntimeExports.jsxs(
               "select",
               {
-                className: fieldClass$6,
+                className: fieldClass$7,
                 disabled: !canManageInventory,
                 value: supplierPaymentMethod,
                 onChange: (event) => setSupplierPaymentMethod(event.target.value),
@@ -26838,7 +29887,7 @@ function InventoryPage() {
           /* @__PURE__ */ jsxRuntimeExports.jsx(FormField, { label: "Receipt or note number", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
             "input",
             {
-              className: fieldClass$6,
+              className: fieldClass$7,
               disabled: !canManageInventory,
               value: supplierPaymentReference,
               onChange: (event) => setSupplierPaymentReference(event.target.value)
@@ -26847,7 +29896,7 @@ function InventoryPage() {
           /* @__PURE__ */ jsxRuntimeExports.jsx(FormField, { label: "Notes", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
             "textarea",
             {
-              className: `${fieldClass$6} min-h-24 py-3`,
+              className: `${fieldClass$7} min-h-24 py-3`,
               disabled: !canManageInventory,
               value: supplierPaymentNotes,
               onChange: (event) => setSupplierPaymentNotes(event.target.value)
@@ -26880,7 +29929,7 @@ function InventoryPage() {
             /* @__PURE__ */ jsxRuntimeExports.jsx(FormField, { label: "Supplier", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
               "select",
               {
-                className: fieldClass$6,
+                className: fieldClass$7,
                 disabled: !canManageInventory,
                 value: selectedPurchaseSupplierId,
                 onChange: (event) => setPurchaseSupplierId(event.target.value),
@@ -26890,7 +29939,7 @@ function InventoryPage() {
             /* @__PURE__ */ jsxRuntimeExports.jsx(FormField, { label: "Bill number", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
               "input",
               {
-                className: fieldClass$6,
+                className: fieldClass$7,
                 disabled: !canManageInventory,
                 value: invoiceNumber,
                 onChange: (event) => setInvoiceNumber(event.target.value)
@@ -26899,7 +29948,7 @@ function InventoryPage() {
             /* @__PURE__ */ jsxRuntimeExports.jsx(FormField, { label: "Date", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
               "input",
               {
-                className: fieldClass$6,
+                className: fieldClass$7,
                 disabled: !canManageInventory,
                 type: "date",
                 value: purchaseDate,
@@ -26909,7 +29958,7 @@ function InventoryPage() {
             /* @__PURE__ */ jsxRuntimeExports.jsx(FormField, { label: "How paid", children: /* @__PURE__ */ jsxRuntimeExports.jsxs(
               "select",
               {
-                className: fieldClass$6,
+                className: fieldClass$7,
                 disabled: !canManageInventory,
                 value: paymentMethod,
                 onChange: (event) => setPaymentMethod(event.target.value),
@@ -26943,7 +29992,7 @@ function InventoryPage() {
               /* @__PURE__ */ jsxRuntimeExports.jsx(FormField, { label: "Stock item", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
                 "select",
                 {
-                  className: fieldClass$6,
+                  className: fieldClass$7,
                   disabled: !canManageInventory,
                   value: row.inventoryItemId,
                   onChange: (event) => updatePurchaseRow(row.id, { inventoryItemId: event.target.value }),
@@ -26953,7 +30002,7 @@ function InventoryPage() {
               /* @__PURE__ */ jsxRuntimeExports.jsx(FormField, { label: "Amount", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
                 "input",
                 {
-                  className: fieldClass$6,
+                  className: fieldClass$7,
                   disabled: !canManageInventory,
                   min: "0.0001",
                   step: "0.0001",
@@ -26965,7 +30014,7 @@ function InventoryPage() {
               /* @__PURE__ */ jsxRuntimeExports.jsx(FormField, { label: "Unit", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
                 "select",
                 {
-                  className: fieldClass$6,
+                  className: fieldClass$7,
                   disabled: !canManageInventory,
                   value: row.unitId,
                   onChange: (event) => updatePurchaseRow(row.id, { unitId: event.target.value }),
@@ -26975,7 +30024,7 @@ function InventoryPage() {
               /* @__PURE__ */ jsxRuntimeExports.jsx(FormField, { label: "Buy price", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
                 "input",
                 {
-                  className: fieldClass$6,
+                  className: fieldClass$7,
                   disabled: !canManageInventory,
                   min: "0",
                   step: "0.01",
@@ -27005,7 +30054,7 @@ function InventoryPage() {
             /* @__PURE__ */ jsxRuntimeExports.jsx(FormField, { label: "Paid now", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
               "input",
               {
-                className: fieldClass$6,
+                className: fieldClass$7,
                 disabled: !canManageInventory,
                 min: "0",
                 type: "number",
@@ -27047,7 +30096,7 @@ function defaultPurchaseRow(items) {
     unitId: item?.purchaseUnitId ?? ""
   };
 }
-function Metric$4({ icon, label, value }) {
+function Metric$6({ icon, label, value }) {
   return /* @__PURE__ */ jsxRuntimeExports.jsxs(Card, { className: "flex items-center justify-between p-5", children: [
     /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
       /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm font-black text-muted", children: label }),
@@ -27076,11 +30125,11 @@ function cloneObject(data) {
   if (isWeb && (data instanceof Blob || isFileListInstance)) {
     return data;
   }
-  const isArray = Array.isArray(data);
-  if (!isArray && !(isObject(data) && isPlainObject(data))) {
+  const isArray2 = Array.isArray(data);
+  if (!isArray2 && !(isObject(data) && isPlainObject(data))) {
     return data;
   }
-  const copy = isArray ? [] : Object.create(Object.getPrototypeOf(data));
+  const copy = isArray2 ? [] : Object.create(Object.getPrototypeOf(data));
   for (const key in data) {
     if (Object.prototype.hasOwnProperty.call(data, key)) {
       copy[key] = cloneObject(data[key]);
@@ -28876,7 +31925,7 @@ function useFieldArray(props) {
     _actioned.current = true;
     control._setFieldArray(name, updatedFieldArrayValues);
   }, [control, name]);
-  const append = (value, options) => {
+  const append2 = (value, options) => {
     const appendValue = convertToArrayPayload(cloneObject(value));
     const updatedFieldArrayValues = appendAt(control._getFieldArray(name), appendValue);
     control._names.focus = getFocusFieldName(name, updatedFieldArrayValues.length - 1, options);
@@ -29026,7 +32075,7 @@ function useFieldArray(props) {
     swap: React.useCallback(swap, [updateValues, name, control]),
     move: React.useCallback(move, [updateValues, name, control]),
     prepend: React.useCallback(prepend, [updateValues, name, control]),
-    append: React.useCallback(append, [updateValues, name, control]),
+    append: React.useCallback(append2, [updateValues, name, control]),
     remove: React.useCallback(remove, [updateValues, name, control]),
     insert: React.useCallback(insert$1, [updateValues, name, control]),
     update: React.useCallback(update, [updateValues, name, control]),
@@ -32973,6 +36022,36 @@ const coerce = {
   bigint: ((arg) => ZodBigInt.create({ ...arg, coerce: true })),
   date: ((arg) => ZodDate.create({ ...arg, coerce: true }))
 };
+function normalizeApiError(error, fallback = "Request failed. Please try again.") {
+  if (error instanceof AxiosError2) {
+    const body = error.response?.data;
+    return {
+      message: messageFromBody(body) || error.message || fallback,
+      status: error.response?.status
+    };
+  }
+  if (error instanceof Error) {
+    return { message: messageFromError(error.message) || fallback };
+  }
+  return { message: fallback };
+}
+function apiErrorMessage(error, fallback = "Request failed. Please try again.") {
+  return normalizeApiError(error, fallback).message;
+}
+function messageFromBody(body) {
+  if (!body) return void 0;
+  if (typeof body === "string") return messageFromError(body);
+  if (Array.isArray(body.message)) return body.message.join(" ");
+  return body.message || body.error;
+}
+function messageFromError(message) {
+  try {
+    const parsed = JSON.parse(message);
+    return messageFromBody(parsed);
+  } catch {
+    return message;
+  }
+}
 const loginSchema = objectType({
   username: stringType().min(1, "Username is required"),
   password: stringType().min(8, "Password must be at least 8 characters")
@@ -32999,8 +36078,8 @@ function LoginPage() {
     try {
       await login(values.username, values.password);
       navigate("/", { replace: true });
-    } catch {
-      setError("Login failed. Check username, password, and API connection.");
+    } catch (caught) {
+      setError(apiErrorMessage(caught, "Login failed. Check username, password, and API connection."));
     }
   };
   return /* @__PURE__ */ jsxRuntimeExports.jsxs("main", { className: "grid min-h-screen grid-cols-[1.05fr_0.95fr] bg-white", children: [
@@ -33073,7 +36152,15 @@ function LoginPage() {
     ] }) })
   ] });
 }
-function Metric$3({ icon, label, value }) {
+const menuService = {
+  createCategory: (input) => apiRequest({ data: input, method: "POST", url: "/menu/categories" }),
+  createItem: (input) => apiRequest({ data: input, method: "POST", url: "/menu/items" }),
+  createRecipe: (input) => apiRequest({ data: input, method: "POST", url: "/menu/recipes" }),
+  recipeBuilder: () => apiRequest({ method: "GET", url: "/menu/recipes" }),
+  summary: () => apiRequest({ method: "GET", url: "/menu" }),
+  updateItem: (itemId, patch) => apiRequest({ data: patch, method: "PATCH", url: `/menu/items/${itemId}` })
+};
+function Metric$5({ icon, label, value }) {
   return /* @__PURE__ */ jsxRuntimeExports.jsxs(Card, { className: "flex items-center justify-between p-5", children: [
     /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
       /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm font-black text-muted", children: label }),
@@ -33106,7 +36193,7 @@ const recipeSchema = objectType({
   menuItemId: stringType().min(1, "Choose menu item"),
   name: stringType().min(2, "Recipe name is required").max(120)
 });
-const fieldClass$5 = "h-11 w-full rounded-xl border border-field bg-white px-3 text-sm font-semibold text-espresso outline-none transition focus:border-primary focus:ring-4 focus:ring-primary/10";
+const fieldClass$6 = "h-11 w-full rounded-xl border border-field bg-white px-3 text-sm font-semibold text-espresso outline-none transition focus:border-primary focus:ring-4 focus:ring-primary/10";
 const compactFieldClass = "h-10 w-full rounded-xl border border-field bg-white px-3 text-xs font-bold text-espresso outline-none transition focus:border-primary focus:ring-4 focus:ring-primary/10";
 function defaultRecipeForm(menuItem, inventoryItem) {
   return {
@@ -33136,11 +36223,11 @@ function MenuPage() {
   const [activeModal, setActiveModal] = reactExports.useState(null);
   const menuQuery = useQuery({
     queryKey: ["menu-summary"],
-    queryFn: () => apiFetch("/menu")
+    queryFn: menuService.summary
   });
   const recipeQuery = useQuery({
     queryKey: ["recipe-builder"],
-    queryFn: () => apiFetch("/menu/recipes")
+    queryFn: menuService.recipeBuilder
   });
   const categories = menuQuery.data?.categories ?? [];
   const stations = menuQuery.data?.stations ?? [];
@@ -33181,13 +36268,10 @@ function MenuPage() {
     void queryClient2.invalidateQueries({ queryKey: ["recipe-builder"] });
   };
   const createCategory = useMutation({
-    mutationFn: () => apiFetch("/menu/categories", {
-      method: "POST",
-      body: JSON.stringify({
-        name: categoryName.trim(),
-        kitchenStationId: categoryStationId || void 0,
-        displayOrder: categories.length * 10 + 10
-      })
+    mutationFn: () => menuService.createCategory({
+      name: categoryName.trim(),
+      kitchenStationId: categoryStationId || void 0,
+      displayOrder: categories.length * 10 + 10
     }),
     onSuccess: () => {
       setCategoryName("");
@@ -33197,17 +36281,14 @@ function MenuPage() {
     }
   });
   const createItem = useMutation({
-    mutationFn: () => apiFetch("/menu/items", {
-      method: "POST",
-      body: JSON.stringify({
-        name: itemName.trim(),
-        basePrice: Number(itemPrice),
-        categoryId: selectedItemCategoryId,
-        kitchenStationId: itemStationId || categoriesById.get(selectedItemCategoryId)?.kitchenStation?.id || void 0,
-        preparationMinutes: 10,
-        recipeRequired: false,
-        taxable: true
-      })
+    mutationFn: () => menuService.createItem({
+      name: itemName.trim(),
+      basePrice: Number(itemPrice),
+      categoryId: selectedItemCategoryId,
+      kitchenStationId: itemStationId || categoriesById.get(selectedItemCategoryId)?.kitchenStation?.id || void 0,
+      preparationMinutes: 10,
+      recipeRequired: false,
+      taxable: true
     }),
     onSuccess: () => {
       setItemName("");
@@ -33219,10 +36300,7 @@ function MenuPage() {
     }
   });
   const createRecipe = useMutation({
-    mutationFn: (values) => apiFetch("/menu/recipes", {
-      method: "POST",
-      body: JSON.stringify(values)
-    }),
+    mutationFn: (values) => menuService.createRecipe(values),
     onSuccess: () => {
       reset(defaultRecipeForm(recipeItems[0], inventoryItems[0]));
       setActiveModal(null);
@@ -33230,10 +36308,7 @@ function MenuPage() {
     }
   });
   const toggleItem = useMutation({
-    mutationFn: (item) => apiFetch(`/menu/items/${item.id}`, {
-      method: "PATCH",
-      body: JSON.stringify({ active: !item.active })
-    }),
+    mutationFn: (item) => menuService.updateItem(item.id, { active: !item.active }),
     onSuccess: refreshMenu
   });
   function submitCategory(event) {
@@ -33285,19 +36360,19 @@ function MenuPage() {
       ] })
     ] }),
     /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mt-6 grid grid-cols-5 gap-4", children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsx(Metric$3, { icon: /* @__PURE__ */ jsxRuntimeExports.jsx(Boxes, { size: 19 }), label: "Active categories", value: menuQuery.data?.metrics.activeCategories ?? 0 }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx(Metric$3, { icon: /* @__PURE__ */ jsxRuntimeExports.jsx(Utensils, { size: 19 }), label: "Active items", value: menuQuery.data?.metrics.activeItems ?? 0 }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx(Metric$5, { icon: /* @__PURE__ */ jsxRuntimeExports.jsx(Boxes, { size: 19 }), label: "Active categories", value: menuQuery.data?.metrics.activeCategories ?? 0 }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx(Metric$5, { icon: /* @__PURE__ */ jsxRuntimeExports.jsx(Utensils, { size: 19 }), label: "Active items", value: menuQuery.data?.metrics.activeItems ?? 0 }),
       /* @__PURE__ */ jsxRuntimeExports.jsx(
-        Metric$3,
+        Metric$5,
         {
           icon: /* @__PURE__ */ jsxRuntimeExports.jsx(CircleCheck, { size: 19 }),
           label: "Recipe linked",
           value: recipeQuery.data?.metrics.recipeLinkedItems ?? menuQuery.data?.metrics.recipeLinkedItems ?? 0
         }
       ),
-      /* @__PURE__ */ jsxRuntimeExports.jsx(Metric$3, { icon: /* @__PURE__ */ jsxRuntimeExports.jsx(ChefHat, { size: 19 }), label: "Active recipes", value: recipeQuery.data?.metrics.activeRecipes ?? 0 }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx(Metric$5, { icon: /* @__PURE__ */ jsxRuntimeExports.jsx(ChefHat, { size: 19 }), label: "Active recipes", value: recipeQuery.data?.metrics.activeRecipes ?? 0 }),
       /* @__PURE__ */ jsxRuntimeExports.jsx(
-        Metric$3,
+        Metric$5,
         {
           icon: /* @__PURE__ */ jsxRuntimeExports.jsx(CircleAlert, { size: 19 }),
           label: "Missing recipes",
@@ -33404,7 +36479,7 @@ function MenuPage() {
           /* @__PURE__ */ jsxRuntimeExports.jsx(FormField, { label: "Category name", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
             "input",
             {
-              className: fieldClass$5,
+              className: fieldClass$6,
               disabled: !canManageMenu,
               value: categoryName,
               onChange: (event) => setCategoryName(event.target.value)
@@ -33413,7 +36488,7 @@ function MenuPage() {
           /* @__PURE__ */ jsxRuntimeExports.jsx(FormField, { label: "Kitchen place", children: /* @__PURE__ */ jsxRuntimeExports.jsxs(
             "select",
             {
-              className: fieldClass$5,
+              className: fieldClass$6,
               disabled: !canManageMenu,
               value: categoryStationId,
               onChange: (event) => setCategoryStationId(event.target.value),
@@ -33447,7 +36522,7 @@ function MenuPage() {
           /* @__PURE__ */ jsxRuntimeExports.jsx(FormField, { label: "Item name", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
             "input",
             {
-              className: fieldClass$5,
+              className: fieldClass$6,
               disabled: !canManageMenu,
               value: itemName,
               onChange: (event) => setItemName(event.target.value)
@@ -33457,7 +36532,7 @@ function MenuPage() {
             /* @__PURE__ */ jsxRuntimeExports.jsx(FormField, { label: "Selling price", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
               "input",
               {
-                className: fieldClass$5,
+                className: fieldClass$6,
                 disabled: !canManageMenu,
                 min: "0",
                 type: "number",
@@ -33468,7 +36543,7 @@ function MenuPage() {
             /* @__PURE__ */ jsxRuntimeExports.jsx(FormField, { label: "Category", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
               "select",
               {
-                className: fieldClass$5,
+                className: fieldClass$6,
                 disabled: !canManageMenu || categories.length === 0,
                 value: selectedItemCategoryId,
                 onChange: (event) => setItemCategoryId(event.target.value),
@@ -33479,7 +36554,7 @@ function MenuPage() {
           /* @__PURE__ */ jsxRuntimeExports.jsx(FormField, { label: "Kitchen place", children: /* @__PURE__ */ jsxRuntimeExports.jsxs(
             "select",
             {
-              className: fieldClass$5,
+              className: fieldClass$6,
               disabled: !canManageMenu,
               value: itemStationId,
               onChange: (event) => setItemStationId(event.target.value),
@@ -33516,7 +36591,7 @@ function MenuPage() {
             /* @__PURE__ */ jsxRuntimeExports.jsx(FormField, { label: "Menu item", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
               "select",
               {
-                className: fieldClass$5,
+                className: fieldClass$6,
                 disabled: !canManageRecipes || recipeItems.length === 0,
                 ...register("menuItemId", {
                   onChange: (event) => {
@@ -33531,7 +36606,7 @@ function MenuPage() {
             /* @__PURE__ */ jsxRuntimeExports.jsx(FormField, { label: "Recipe name", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
               "input",
               {
-                className: fieldClass$5,
+                className: fieldClass$6,
                 disabled: !canManageRecipes,
                 ...register("name")
               }
@@ -33622,31 +36697,12 @@ function MenuPage() {
     )
   ] });
 }
-const usePosStore = create((set2) => ({
-  orderType: "DINE_IN",
-  cart: [],
-  setOrderType: (orderType) => set2({ orderType }),
-  addLine: (line) => set2((state) => {
-    const existing = state.cart.find((item) => item.id === line.id);
-    if (!existing) return { cart: [...state.cart, line] };
-    return {
-      cart: state.cart.map(
-        (item) => item.id === line.id ? { ...item, quantity: item.quantity + line.quantity } : item
-      )
-    };
-  }),
-  changeQuantity: (id, delta) => set2((state) => ({
-    cart: state.cart.map((item) => item.id === id ? { ...item, quantity: Math.max(0, item.quantity + delta) } : item).filter((item) => item.quantity > 0)
-  })),
-  removeLine: (id) => set2((state) => ({ cart: state.cart.filter((item) => item.id !== id) })),
-  clear: () => set2({ cart: [] })
-}));
 const money$1 = new Intl.NumberFormat("en-PK", {
   currency: "PKR",
   maximumFractionDigits: 0,
   style: "currency"
 });
-const fieldClass$4 = "h-11 w-full rounded-xl border border-field bg-white px-3 text-sm font-semibold text-espresso outline-none transition focus:border-primary focus:ring-4 focus:ring-primary/10";
+const fieldClass$5 = "h-11 w-full rounded-xl border border-field bg-white px-3 text-sm font-semibold text-espresso outline-none transition focus:border-primary focus:ring-4 focus:ring-primary/10";
 function QuickAddConfirmModal({
   item,
   number,
@@ -33674,6 +36730,7 @@ function PosTicketPanel({
   kitchenPending,
   lastOrder,
   paymentPending,
+  selectedTableName,
   total,
   onChangeQuantity,
   onCorrectItem,
@@ -33687,7 +36744,11 @@ function PosTicketPanel({
     /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mb-4 flex items-center justify-between", children: [
       /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
         /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm font-black uppercase tracking-[0.24em] text-subtle", children: "Ticket" }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "mt-1 text-2xl font-black", children: lastOrder ? `Order #${lastOrder.orderNumber}` : "Order #Draft" })
+        /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "mt-1 text-2xl font-black", children: lastOrder ? `Order #${lastOrder.orderNumber}` : "Order #Draft" }),
+        selectedTableName ? /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { className: "mt-2 inline-flex rounded-xl bg-mint px-3 py-1 text-xs font-black uppercase tracking-[0.12em] text-secondary", children: [
+          "Table ",
+          selectedTableName
+        ] }) : null
       ] }),
       /* @__PURE__ */ jsxRuntimeExports.jsx(Badge, { tone: lastOrder?.status === "COMPLETED" ? "green" : "orange", children: lastOrder?.status === "COMPLETED" ? "Paid" : "Open" })
     ] }),
@@ -33771,6 +36832,7 @@ function CorrectionModal({
 function PaymentModal({
   amount,
   error,
+  errorMessage,
   method,
   onAmountChange,
   onClose,
@@ -33791,7 +36853,7 @@ function PaymentModal({
       /* @__PURE__ */ jsxRuntimeExports.jsx(FormField, { label: "Amount paid", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
         "input",
         {
-          className: fieldClass$4,
+          className: fieldClass$5,
           max: total,
           min: "0.01",
           step: "0.01",
@@ -33800,7 +36862,7 @@ function PaymentModal({
           onChange: (event) => onAmountChange(event.target.value)
         }
       ) }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx(FormField, { label: "How paid", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("select", { className: fieldClass$4, value: method, onChange: (event) => onMethodChange(event.target.value), children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx(FormField, { label: "How paid", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("select", { className: fieldClass$5, value: method, onChange: (event) => onMethodChange(event.target.value), children: [
         /* @__PURE__ */ jsxRuntimeExports.jsx("option", { value: "CASH", children: "Cash" }),
         /* @__PURE__ */ jsxRuntimeExports.jsx("option", { value: "CARD", children: "Card" }),
         /* @__PURE__ */ jsxRuntimeExports.jsx("option", { value: "BANK_TRANSFER", children: "Bank transfer" }),
@@ -33809,8 +36871,8 @@ function PaymentModal({
         /* @__PURE__ */ jsxRuntimeExports.jsx("option", { value: "CUSTOMER_CREDIT", children: "Customer credit" })
       ] }) })
     ] }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx(FormField, { label: "Receipt or note number", children: /* @__PURE__ */ jsxRuntimeExports.jsx("input", { className: fieldClass$4, value: reference, onChange: (event) => onReferenceChange(event.target.value) }) }),
-    error ? /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "rounded-xl bg-red-50 px-4 py-3 text-sm font-bold text-red-700", children: "Payment failed. Check amount and API connection." }) : null,
+    /* @__PURE__ */ jsxRuntimeExports.jsx(FormField, { label: "Receipt or note number", children: /* @__PURE__ */ jsxRuntimeExports.jsx("input", { className: fieldClass$5, value: reference, onChange: (event) => onReferenceChange(event.target.value) }) }),
+    error ? /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "rounded-xl bg-red-50 px-4 py-3 text-sm font-bold text-red-700", children: errorMessage || "Payment failed. Check amount and API connection." }) : null,
     /* @__PURE__ */ jsxRuntimeExports.jsx(
       Button,
       {
@@ -33862,12 +36924,12 @@ function PrintReceiptModal({
       ] }),
       /* @__PURE__ */ jsxRuntimeExports.jsx("pre", { className: "max-h-64 overflow-y-auto whitespace-pre-wrap rounded-xl bg-white p-4 font-mono text-xs font-semibold leading-5 text-espresso shadow-[inset_0_0_0_1px_rgb(var(--ro-secondary-rgb)/0.08)]", children: previewText })
     ] }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx(FormField, { label: "Printer type", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("select", { className: fieldClass$4, value: mode, onChange: (event) => onModeChange(event.target.value), children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx(FormField, { label: "Printer type", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("select", { className: fieldClass$5, value: mode, onChange: (event) => onModeChange(event.target.value), children: [
       /* @__PURE__ */ jsxRuntimeExports.jsx("option", { value: "os", children: "Installed printer" }),
       /* @__PURE__ */ jsxRuntimeExports.jsx("option", { value: "network", children: "Network ESC/POS" }),
       /* @__PURE__ */ jsxRuntimeExports.jsx("option", { value: "device", children: "USB/Bluetooth device path" })
     ] }) }),
-    mode === "os" ? /* @__PURE__ */ jsxRuntimeExports.jsx(FormField, { label: "Installed printer", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("select", { className: fieldClass$4, value: printerName, onChange: (event) => onPrinterNameChange(event.target.value), children: [
+    mode === "os" ? /* @__PURE__ */ jsxRuntimeExports.jsx(FormField, { label: "Installed printer", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("select", { className: fieldClass$5, value: printerName, onChange: (event) => onPrinterNameChange(event.target.value), children: [
       /* @__PURE__ */ jsxRuntimeExports.jsx("option", { value: "", children: "Default printer" }),
       printers.map((printer) => /* @__PURE__ */ jsxRuntimeExports.jsxs("option", { value: printer.name, children: [
         printer.displayName || printer.name,
@@ -33875,10 +36937,10 @@ function PrintReceiptModal({
       ] }, printer.name))
     ] }) }) : null,
     mode === "network" ? /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "grid grid-cols-[1fr_120px] gap-3", children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsx(FormField, { label: "Printer IP address", children: /* @__PURE__ */ jsxRuntimeExports.jsx("input", { className: fieldClass$4, value: host, onChange: (event) => onHostChange(event.target.value) }) }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx(FormField, { label: "Port", children: /* @__PURE__ */ jsxRuntimeExports.jsx("input", { className: fieldClass$4, min: "1", type: "number", value: port, onChange: (event) => onPortChange(event.target.value) }) })
+      /* @__PURE__ */ jsxRuntimeExports.jsx(FormField, { label: "Printer IP address", children: /* @__PURE__ */ jsxRuntimeExports.jsx("input", { className: fieldClass$5, value: host, onChange: (event) => onHostChange(event.target.value) }) }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx(FormField, { label: "Port", children: /* @__PURE__ */ jsxRuntimeExports.jsx("input", { className: fieldClass$5, min: "1", type: "number", value: port, onChange: (event) => onPortChange(event.target.value) }) })
     ] }) : null,
-    mode === "device" ? /* @__PURE__ */ jsxRuntimeExports.jsx(FormField, { label: "Device path", hint: "Examples: /dev/usb/lp0, /dev/rfcomm0, COM5, or a shared printer path.", children: /* @__PURE__ */ jsxRuntimeExports.jsx("input", { className: fieldClass$4, value: devicePath, onChange: (event) => onDevicePathChange(event.target.value) }) }) : null,
+    mode === "device" ? /* @__PURE__ */ jsxRuntimeExports.jsx(FormField, { label: "Device path", hint: "Examples: /dev/usb/lp0, /dev/rfcomm0, COM5, or a shared printer path.", children: /* @__PURE__ */ jsxRuntimeExports.jsx("input", { className: fieldClass$5, value: devicePath, onChange: (event) => onDevicePathChange(event.target.value) }) }) : null,
     mode !== "os" ? /* @__PURE__ */ jsxRuntimeExports.jsxs("label", { className: "flex items-center gap-3 rounded-2xl bg-sage px-4 py-3 text-sm font-bold text-label", children: [
       /* @__PURE__ */ jsxRuntimeExports.jsx(
         "input",
@@ -33945,6 +37007,7 @@ function buildReceiptHtml(order, cart, total) {
       <body>
         <h1>RestaurantOS</h1>
         <p class="center">Order ${escapeHtml(order.orderNumber)}</p>
+        ${order.table?.name ? `<p class="center">Table ${escapeHtml(order.table.name)}</p>` : ""}
         <div class="line"></div>
         <table>${rows}</table>
         <div class="line"></div>
@@ -33964,16 +37027,472 @@ function buildReceiptText(order, cart, total) {
   }).join("\n");
   return [
     `Order ${order.orderNumber}`,
+    order.table?.name ? `Table ${order.table.name}` : void 0,
     "------------------------------",
     rows,
     "------------------------------",
     `Total ${money$1.format(total || Number(order.grandTotal))}`,
     "",
     "Thank you"
-  ].join("\n");
+  ].filter(Boolean).join("\n");
 }
 function escapeHtml(value) {
   return value.replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll('"', "&quot;").replaceAll("'", "&#039;");
+}
+const ordersService = {
+  detail: (orderId) => apiRequest({ method: "GET", url: `/orders/${orderId}` }),
+  list: (input) => apiRequest({
+    method: "GET",
+    url: ordersPath(input.dateScope, input.search, input.status)
+  }),
+  voidItem: (orderId, itemId, reason) => apiRequest({
+    data: { reason },
+    method: "PATCH",
+    url: `/orders/${orderId}/items/${itemId}/void`
+  }),
+  voidOrder: (orderId, reason) => apiRequest({ data: { reason }, method: "PATCH", url: `/orders/${orderId}/void` })
+};
+function ordersPath(dateScope, search, status) {
+  const params = new URLSearchParams();
+  params.set("date", dateScope);
+  if (search.trim()) params.set("search", search.trim());
+  if (status !== "ALL") params.set("status", status);
+  return `/orders?${params.toString()}`;
+}
+const fieldClass$4 = "h-11 rounded-xl border border-field bg-white px-3 text-sm font-semibold text-espresso outline-none transition focus:border-primary focus:ring-4 focus:ring-primary/10";
+const statusOptions = [
+  "ALL",
+  "DRAFT",
+  "SENT_TO_KITCHEN",
+  "PAYMENT_PENDING",
+  "COMPLETED",
+  "CANCELLED",
+  "VOIDED"
+];
+function OrdersToolbar({
+  dateScope,
+  search,
+  status,
+  onDateScopeChange,
+  onSearchChange,
+  onStatusChange
+}) {
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs(Card, { className: "mt-6 grid grid-cols-[1fr_180px_220px] gap-3 p-4", children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("label", { className: "flex h-11 items-center gap-3 rounded-xl border border-field bg-white px-3", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx(Search, { size: 18, className: "text-primary" }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx(
+        "input",
+        {
+          className: "h-full flex-1 bg-transparent text-sm font-semibold text-espresso outline-none",
+          value: search,
+          onChange: (event) => onSearchChange(event.target.value)
+        }
+      )
+    ] }),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("select", { className: fieldClass$4, value: dateScope, onChange: (event) => onDateScopeChange(event.target.value), children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx("option", { value: "today", children: "Today" }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("option", { value: "all", children: "All orders" })
+    ] }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("select", { className: fieldClass$4, value: status, onChange: (event) => onStatusChange(event.target.value), children: statusOptions.map((option) => /* @__PURE__ */ jsxRuntimeExports.jsx("option", { value: option, children: option === "ALL" ? "All statuses" : option.replaceAll("_", " ") }, option)) })
+  ] });
+}
+function OrdersList({
+  loading,
+  orders,
+  selectedId,
+  onSelect
+}) {
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs(Card, { className: "min-h-0 overflow-hidden", children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center justify-between border-b border-line px-5 py-4", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "text-lg font-black text-espresso", children: "Order list" }),
+      loading ? /* @__PURE__ */ jsxRuntimeExports.jsx(LoaderCircle, { className: "animate-spin text-primary", size: 18 }) : null
+    ] }),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "max-h-[calc(100vh-310px)] overflow-y-auto", children: [
+      orders.map((order) => /* @__PURE__ */ jsxRuntimeExports.jsxs(
+        "button",
+        {
+          className: [
+            "block w-full border-b border-line px-5 py-4 text-left transition hover:bg-sage",
+            selectedId === order.id ? "bg-mint" : "bg-white"
+          ].join(" "),
+          onClick: () => onSelect(order),
+          children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-start justify-between gap-3", children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+                /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-lg font-black text-espresso", children: order.orderNumber }),
+                /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mt-1 text-xs font-bold text-muted", children: new Date(order.createdAt).toLocaleString() })
+              ] }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx(Badge, { tone: statusTone$1(order.status), children: order.status.replaceAll("_", " ") })
+            ] }),
+            /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mt-3 flex items-center justify-between text-sm font-bold text-label", children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { children: [
+                order.type.replace("_", " "),
+                " ",
+                order.table ? `- ${order.table.name}` : ""
+              ] }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: money$1.format(Number(order.grandTotal)) })
+            ] })
+          ]
+        },
+        order.id
+      )),
+      orders.length === 0 ? /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "p-6 text-sm font-bold text-muted", children: "No orders found." }) : null
+    ] })
+  ] });
+}
+function OrderDetail({
+  canVoid,
+  order,
+  printing,
+  onPrint,
+  onVoidItem,
+  onVoidOrder
+}) {
+  if (!order) {
+    return /* @__PURE__ */ jsxRuntimeExports.jsx(Card, { className: "flex min-h-80 items-center justify-center p-6 text-sm font-bold text-muted", children: "Select an order." });
+  }
+  const correctionAllowed = canVoid && !["COMPLETED", "PAID", "CANCELLED", "VOIDED", "REFUNDED"].includes(order.status);
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs(Card, { className: "min-h-0 overflow-hidden", children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-start justify-between gap-4 border-b border-line px-6 py-5", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm font-black uppercase tracking-[0.18em] text-primary", children: "Order detail" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "mt-2 text-3xl font-black text-espresso", children: order.orderNumber }),
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { className: "mt-1 text-sm font-bold text-muted", children: [
+          order.type.replace("_", " "),
+          " ",
+          order.table ? `- ${order.table.name}` : "",
+          " ",
+          order.customer ? `- ${order.customer.name}` : ""
+        ] })
+      ] }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx(Badge, { tone: statusTone$1(order.status), children: order.status.replaceAll("_", " ") })
+    ] }),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "max-h-[calc(100vh-260px)] overflow-y-auto p-6", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "grid grid-cols-3 gap-3", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx(Metric$4, { label: "Items", value: order.items.length }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx(Metric$4, { label: "Paid", value: money$1.format(order.payments.reduce((sum, payment) => sum + Number(payment.amount), 0)) }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx(Metric$4, { label: "Total", value: money$1.format(Number(order.grandTotal)) })
+      ] }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mt-5 divide-y divide-line rounded-2xl border border-line", children: order.items.map((item) => /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "grid grid-cols-[1fr_90px_120px_44px] items-center gap-3 px-4 py-3", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-black text-espresso", children: item.menuItem.name }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs font-bold text-muted", children: item.status })
+        ] }),
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { className: "text-right text-sm font-black text-label", children: [
+          "x ",
+          Number(item.quantity)
+        ] }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-right text-sm font-black text-espresso", children: money$1.format(Number(item.totalPrice)) }),
+        correctionAllowed && item.status !== "CANCELLED" ? /* @__PURE__ */ jsxRuntimeExports.jsx("button", { className: "flex h-9 w-9 items-center justify-center rounded-xl text-red-600 hover:bg-red-50", onClick: () => onVoidItem(item.id, item.menuItem.name), children: /* @__PURE__ */ jsxRuntimeExports.jsx(CircleX, { size: 17 }) }) : null
+      ] }, item.id)) }),
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mt-5 grid grid-cols-2 gap-3", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx(Button, { disabled: printing, icon: printing ? /* @__PURE__ */ jsxRuntimeExports.jsx(LoaderCircle, { className: "animate-spin", size: 17 }) : /* @__PURE__ */ jsxRuntimeExports.jsx(Printer, { size: 17 }), variant: "secondary", onClick: onPrint, children: "Reprint receipt" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx(Button, { disabled: !correctionAllowed, icon: /* @__PURE__ */ jsxRuntimeExports.jsx(CircleX, { size: 17 }), variant: "secondary", onClick: onVoidOrder, children: "Void order" })
+      ] })
+    ] })
+  ] });
+}
+function Metric$4({ label, value }) {
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "rounded-2xl bg-sage p-4", children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs font-black uppercase tracking-[0.14em] text-muted", children: label }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mt-2 text-xl font-black text-espresso", children: value })
+  ] });
+}
+function statusTone$1(status) {
+  if (status === "COMPLETED" || status === "PAID") return "green";
+  if (status === "CANCELLED" || status === "VOIDED" || status === "REFUNDED") return "red";
+  if (status === "SENT_TO_KITCHEN" || status === "PREPARING" || status === "READY") return "blue";
+  if (status === "PAYMENT_PENDING") return "orange";
+  return "gray";
+}
+function OrdersPage() {
+  const queryClient2 = useQueryClient();
+  const canVoidOrders = useAuthStore((state) => state.hasPermission("order.void"));
+  const [dateScope, setDateScope] = reactExports.useState("today");
+  const [search, setSearch] = reactExports.useState("");
+  const [status, setStatus] = reactExports.useState("ALL");
+  const [selectedId, setSelectedId] = reactExports.useState();
+  const [correctionTarget, setCorrectionTarget] = reactExports.useState();
+  const [correctionReason, setCorrectionReason] = reactExports.useState("");
+  const ordersQuery = useQuery({
+    queryKey: ["orders-history", dateScope, search, status],
+    queryFn: () => ordersService.list({ dateScope, search, status })
+  });
+  const selectedOrderQuery = useQuery({
+    enabled: Boolean(selectedId),
+    queryKey: ["orders-detail", selectedId],
+    queryFn: () => ordersService.detail(selectedId ?? "")
+  });
+  const selectedOrder = selectedOrderQuery.data;
+  const orders = ordersQuery.data?.orders ?? [];
+  reactExports.useEffect(() => {
+    if (!selectedId && orders[0]) setSelectedId(orders[0].id);
+  }, [orders, selectedId]);
+  const reprintReceipt = useMutation({
+    mutationFn: async () => {
+      if (!selectedOrder) return void 0;
+      const lines = selectedOrder.items.filter((item) => item.status !== "CANCELLED").map((item) => ({
+        id: item.menuItemId,
+        name: item.menuItem.name,
+        price: Number(item.unitPrice),
+        quantity: Number(item.quantity)
+      }));
+      return window.restaurantos.printers.printReceipt({
+        html: buildReceiptHtml(selectedOrder, lines, Number(selectedOrder.grandTotal))
+      });
+    }
+  });
+  const voidOrder = useMutation({
+    mutationFn: () => ordersService.voidOrder(selectedOrder?.id ?? "", correctionReason.trim()),
+    onSuccess: (order) => afterCorrection(order)
+  });
+  const voidItem = useMutation({
+    mutationFn: (itemId) => ordersService.voidItem(selectedOrder?.id ?? "", itemId, correctionReason.trim()),
+    onSuccess: (order) => afterCorrection(order)
+  });
+  const metrics2 = ordersQuery.data?.metrics;
+  function afterCorrection(order) {
+    queryClient2.setQueryData(["orders-detail", order.id], order);
+    void queryClient2.invalidateQueries({ queryKey: ["orders-history"] });
+    setCorrectionTarget(void 0);
+    setCorrectionReason("");
+  }
+  function submitCorrection(event) {
+    event.preventDefault();
+    if (!correctionTarget || correctionReason.trim().length < 3) return;
+    if (correctionTarget.type === "order") voidOrder.mutate();
+    if (correctionTarget.type === "item") voidItem.mutate(correctionTarget.itemId);
+  }
+  const correctionPending = voidOrder.isPending || voidItem.isPending;
+  const correctionError = voidOrder.isError || voidItem.isError;
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "h-full overflow-y-auto bg-white p-7", children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex flex-wrap items-start justify-between gap-4", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm font-black uppercase tracking-[0.22em] text-primary", children: "Order lookup" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("h1", { className: "mt-2 text-4xl font-black text-espresso", children: "Orders history" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mt-3 max-w-2xl text-sm font-semibold text-muted", children: "Find created orders, reprint receipts, and correct unpaid orders with an audit reason." })
+      ] }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx(Badge, { tone: canVoidOrders ? "green" : "orange", children: canVoidOrders ? "Corrections enabled" : "View only" })
+    ] }),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mt-6 grid grid-cols-4 gap-4", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx(Metric$3, { label: "Orders", value: metrics2?.total ?? 0 }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx(Metric$3, { label: "Open", value: metrics2?.open ?? 0 }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx(Metric$3, { label: "Completed", value: metrics2?.completed ?? 0 }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx(Metric$3, { label: "Cancelled", value: metrics2?.cancelled ?? 0 })
+    ] }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(
+      OrdersToolbar,
+      {
+        dateScope,
+        search,
+        status,
+        onDateScopeChange: setDateScope,
+        onSearchChange: setSearch,
+        onStatusChange: setStatus
+      }
+    ),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mt-5 grid min-h-0 grid-cols-[420px_1fr] gap-5", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx(
+        OrdersList,
+        {
+          loading: ordersQuery.isLoading,
+          orders,
+          selectedId,
+          onSelect: (order) => setSelectedId(order.id)
+        }
+      ),
+      /* @__PURE__ */ jsxRuntimeExports.jsx(
+        OrderDetail,
+        {
+          canVoid: canVoidOrders,
+          order: selectedOrder,
+          printing: reprintReceipt.isPending,
+          onPrint: () => reprintReceipt.mutate(),
+          onVoidItem: (itemId, label) => {
+            setCorrectionReason("");
+            setCorrectionTarget({ type: "item", itemId, label });
+          },
+          onVoidOrder: () => {
+            if (!selectedOrder) return;
+            setCorrectionReason("");
+            setCorrectionTarget({ type: "order", label: `Order #${selectedOrder.orderNumber}` });
+          }
+        }
+      )
+    ] }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(
+      CorrectionModal,
+      {
+        error: correctionError,
+        open: Boolean(correctionTarget),
+        pending: correctionPending,
+        reason: correctionReason,
+        targetLabel: correctionTarget?.label ?? "",
+        title: correctionTarget?.type === "order" ? "Void order" : "Void item",
+        onClose: () => setCorrectionTarget(void 0),
+        onReasonChange: setCorrectionReason,
+        onSubmit: submitCorrection
+      }
+    )
+  ] });
+}
+function Metric$3({ label, value }) {
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs(Card, { className: "flex items-center justify-between p-5", children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm font-black text-muted", children: label }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mt-3 text-3xl font-black text-espresso", children: value })
+    ] }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "flex h-11 w-11 items-center justify-center rounded-xl bg-mint text-secondary", children: /* @__PURE__ */ jsxRuntimeExports.jsx(ClipboardList, { size: 19 }) })
+  ] });
+}
+const posService = {
+  catalog: () => apiRequest({ method: "GET", url: "/menu/pos" }),
+  createOrder: (input) => apiRequest({ data: input, method: "POST", url: "/orders" }),
+  floor: () => apiRequest({ method: "GET", url: "/tables" }),
+  payOrder: (orderId, input) => apiRequest({ data: input, method: "POST", url: `/orders/${orderId}/payments` }),
+  settings: () => apiRequest({ method: "GET", url: "/settings" }),
+  sendToKitchen: (orderId) => apiRequest({ method: "PATCH", url: `/orders/${orderId}/send-to-kitchen` }),
+  voidItem: (orderId, itemId, reason) => apiRequest({
+    data: { reason },
+    method: "PATCH",
+    url: `/orders/${orderId}/items/${itemId}/void`
+  }),
+  voidOrder: (orderId, reason) => apiRequest({ data: { reason }, method: "PATCH", url: `/orders/${orderId}/void` })
+};
+const usePosStore = create$1((set2) => ({
+  orderType: "DINE_IN",
+  cart: [],
+  setOrderType: (orderType) => set2({ orderType }),
+  addLine: (line) => set2((state) => {
+    const existing = state.cart.find((item) => item.id === line.id);
+    if (!existing) return { cart: [...state.cart, line] };
+    return {
+      cart: state.cart.map(
+        (item) => item.id === line.id ? { ...item, quantity: item.quantity + line.quantity } : item
+      )
+    };
+  }),
+  changeQuantity: (id, delta) => set2((state) => ({
+    cart: state.cart.map((item) => item.id === id ? { ...item, quantity: Math.max(0, item.quantity + delta) } : item).filter((item) => item.quantity > 0)
+  })),
+  removeLine: (id) => set2((state) => ({ cart: state.cart.filter((item) => item.id !== id) })),
+  clear: () => set2({ cart: [] })
+}));
+function MenuBoard({
+  catalogError,
+  catalogLoading,
+  categories,
+  filteredItems,
+  orderType,
+  searchInputRef,
+  searchText,
+  selectedCategoryId,
+  onAddItem,
+  onCategoryChange,
+  onOrderTypeChange,
+  onSearchChange
+}) {
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { className: "flex min-w-0 flex-col overflow-hidden rounded-[28px] bg-white px-6 py-5 shadow-[0_28px_70px_rgb(var(--ro-secondary-rgb)/0.08)]", children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("header", { className: "mb-5 flex items-center justify-between", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm font-black uppercase tracking-[0.28em] text-subtle", children: "Cashier terminal" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("h1", { className: "mt-1 text-4xl font-black text-espresso", children: "Build order" })
+      ] }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex rounded-2xl bg-sage p-1 shadow-sm", children: ["DINE_IN", "TAKEAWAY", "DELIVERY"].map((type) => /* @__PURE__ */ jsxRuntimeExports.jsx(
+        "button",
+        {
+          className: [
+            "h-10 rounded-xl px-4 text-sm font-bold transition",
+            orderType === type ? "bg-secondary text-white shadow-sm" : "text-muted hover:bg-white"
+          ].join(" "),
+          onClick: () => onOrderTypeChange(type),
+          children: type === "DINE_IN" ? "Dine in" : type === "TAKEAWAY" ? "Takeaway" : "Delivery"
+        },
+        type
+      )) })
+    ] }),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mb-5 grid grid-cols-[1fr_220px] gap-4", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("label", { className: "rounded-2xl bg-white px-4 py-2 shadow-[0_16px_42px_rgb(var(--ro-secondary-rgb)/0.06)]", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "block text-xs font-black uppercase tracking-[0.12em] text-muted", children: "Find item" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mt-1 flex h-8 items-center gap-3", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx(Search, { size: 22, className: "text-primary" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx(
+            "input",
+            {
+              ref: searchInputRef,
+              className: "h-full flex-1 bg-transparent text-lg font-semibold outline-none",
+              value: searchText,
+              onChange: (event) => onSearchChange(event.target.value)
+            }
+          ),
+          /* @__PURE__ */ jsxRuntimeExports.jsx(Badge, { tone: "orange", children: "F2" })
+        ] })
+      ] }),
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex h-14 items-center gap-3 rounded-2xl bg-secondary px-4 text-white shadow-[0_18px_44px_rgb(var(--ro-secondary-rgb)/0.2)]", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx(Sparkles, { size: 20, className: "text-white" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs font-bold uppercase tracking-[0.18em] text-deepSoft", children: "Rush mode" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm font-black", children: "Keyboard ready" })
+        ] })
+      ] })
+    ] }),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mb-5 flex gap-2 overflow-x-auto pb-1", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx(CategoryButton, { active: selectedCategoryId === "all", label: "All", onClick: () => onCategoryChange("all") }),
+      categories.map((category) => /* @__PURE__ */ jsxRuntimeExports.jsx(
+        CategoryButton,
+        {
+          active: selectedCategoryId === category.id,
+          label: category.name,
+          onClick: () => onCategoryChange(category.id)
+        },
+        category.id
+      ))
+    ] }),
+    catalogError ? /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-3 rounded-xl bg-red-50 px-4 py-3 text-sm font-bold text-red-700", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx(CircleAlert, { size: 17 }),
+      "Menu could not load. Check the API connection."
+    ] }) : null,
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "grid flex-1 auto-rows-[168px] grid-cols-3 gap-4 overflow-y-auto pb-2", children: [
+      catalogLoading ? /* @__PURE__ */ jsxRuntimeExports.jsxs(Card, { className: "col-span-3 flex items-center justify-center gap-3 p-6 text-sm font-bold text-muted", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx(LoaderCircle, { className: "animate-spin text-primary", size: 18 }),
+        "Loading menu"
+      ] }) : null,
+      filteredItems.map((item, index) => /* @__PURE__ */ jsxRuntimeExports.jsxs(
+        "button",
+        {
+          className: "group relative rounded-2xl bg-white p-4 text-left shadow-[0_14px_38px_rgb(var(--ro-secondary-rgb)/0.07)] transition hover:-translate-y-0.5 hover:shadow-[0_22px_48px_rgb(var(--ro-secondary-rgb)/0.12)]",
+          onClick: () => onAddItem(item),
+          children: [
+            index < 9 ? /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "absolute right-3 top-3 flex h-7 min-w-7 items-center justify-center rounded-lg bg-secondary px-2 text-xs font-black text-white", children: index + 1 }) : null,
+            /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex h-full flex-col justify-between", children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsx(Badge, { tone: "blue", children: item.kitchenStation?.name ?? item.category.name }),
+              /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+                /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "text-lg font-black text-espresso", children: item.shortName || item.name }),
+                /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mt-3 flex items-end justify-between", children: [
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-2xl font-black text-secondary", children: money$1.format(Number(item.basePrice)) }),
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "flex h-9 w-9 items-center justify-center rounded-xl bg-primary text-white transition group-hover:scale-105", children: /* @__PURE__ */ jsxRuntimeExports.jsx(Plus, { size: 18 }) })
+                ] })
+              ] })
+            ] })
+          ]
+        },
+        item.id
+      ))
+    ] })
+  ] });
+}
+function CategoryButton({ active, label, onClick }) {
+  return /* @__PURE__ */ jsxRuntimeExports.jsx(
+    "button",
+    {
+      className: [
+        "h-11 shrink-0 rounded-xl px-4 text-sm font-bold transition",
+        active ? "bg-primary text-white shadow-[0_10px_22px_rgb(var(--ro-primary-rgb)/0.24)]" : "bg-white text-muted shadow-[inset_0_0_0_1px_rgb(var(--ro-secondary-rgb)/0.08)] hover:bg-sage hover:text-secondary"
+      ].join(" "),
+      onClick,
+      children: label
+    }
+  );
 }
 function readSetting(settings, key, fallback) {
   const setting = settings.find((item) => item.key === key);
@@ -34120,6 +37639,81 @@ function getQuickAddIndex(event) {
   }
   return void 0;
 }
+function TableSelectionModal({
+  loading,
+  open,
+  selectedTableId,
+  tables,
+  onClose,
+  onSelect
+}) {
+  const groupedTables = groupTables(tables);
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs(
+    ActionModal,
+    {
+      description: "Choose a free table before sending, paying, or printing this dine-in order.",
+      open,
+      title: "Select table",
+      widthClass: "max-w-3xl",
+      onClose,
+      children: [
+        loading ? /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex h-40 items-center justify-center gap-3 rounded-2xl bg-sage text-sm font-black text-muted", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx(LoaderCircle, { className: "animate-spin text-primary", size: 18 }),
+          "Loading free tables"
+        ] }) : null,
+        !loading && tables.length === 0 ? /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "rounded-2xl bg-red-50 px-5 py-4 text-sm font-bold text-red-700", children: "No free tables are available. Free or clean a table from the Tables screen first." }) : null,
+        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "space-y-5", children: groupedTables.map(([area, areaTables]) => /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mb-3 flex items-center justify-between", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "text-sm font-black uppercase tracking-[0.16em] text-muted", children: area }),
+            /* @__PURE__ */ jsxRuntimeExports.jsxs(Badge, { tone: "green", children: [
+              areaTables.length,
+              " free"
+            ] })
+          ] }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "grid grid-cols-3 gap-3", children: areaTables.map((table) => {
+            const selected = table.id === selectedTableId;
+            return /* @__PURE__ */ jsxRuntimeExports.jsxs(
+              "button",
+              {
+                className: [
+                  "rounded-2xl border p-4 text-left transition hover:-translate-y-0.5 hover:shadow-[0_18px_42px_rgb(var(--ro-secondary-rgb)/0.12)]",
+                  selected ? "border-primary bg-mint" : "border-line bg-white"
+                ].join(" "),
+                type: "button",
+                onClick: () => onSelect(table),
+                children: [
+                  /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-start justify-between gap-3", children: [
+                    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+                      /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs font-black uppercase tracking-[0.14em] text-muted", children: "Table" }),
+                      /* @__PURE__ */ jsxRuntimeExports.jsx("h4", { className: "mt-1 text-2xl font-black text-espresso", children: table.name })
+                    ] }),
+                    /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "flex h-10 w-10 items-center justify-center rounded-xl bg-primary text-white", children: /* @__PURE__ */ jsxRuntimeExports.jsx(Armchair, { size: 18 }) })
+                  ] }),
+                  /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mt-4 grid grid-cols-2 gap-2 text-xs font-black text-label", children: [
+                    /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { className: "rounded-xl bg-sage px-3 py-2", children: [
+                      "Seats ",
+                      table.capacity
+                    ] }),
+                    /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "rounded-xl bg-sage px-3 py-2", children: "Free" })
+                  ] })
+                ]
+              },
+              table.id
+            );
+          }) })
+        ] }, area)) })
+      ]
+    }
+  );
+}
+function groupTables(tables) {
+  const groups = /* @__PURE__ */ new Map();
+  for (const table of tables) {
+    const area = table.area || "Main Floor";
+    groups.set(area, [...groups.get(area) ?? [], table]);
+  }
+  return [...groups.entries()];
+}
 function PosPage() {
   const navigate = useNavigate();
   const { cart, addLine, changeQuantity, removeLine, clear, orderType, setOrderType } = usePosStore();
@@ -34143,9 +37737,12 @@ function PosPage() {
   const [quickAddIndex, setQuickAddIndex] = reactExports.useState();
   const [correctionTarget, setCorrectionTarget] = reactExports.useState();
   const [correctionReason, setCorrectionReason] = reactExports.useState("");
+  const [selectedTable, setSelectedTable] = reactExports.useState();
+  const [tablePickerOpen, setTablePickerOpen] = reactExports.useState(false);
+  const [pendingTableAction, setPendingTableAction] = reactExports.useState();
   const catalogQuery = useQuery({
     queryKey: ["pos-catalog"],
-    queryFn: () => apiFetch("/menu/pos")
+    queryFn: posService.catalog
   });
   const printersQuery = useQuery({
     queryKey: ["desktop-printers"],
@@ -34153,13 +37750,22 @@ function PosPage() {
   });
   const settingsQuery = useQuery({
     queryKey: ["settings"],
-    queryFn: () => apiFetch("/settings")
+    queryFn: posService.settings
+  });
+  const tablesQuery = useQuery({
+    queryKey: ["tables-floor"],
+    queryFn: posService.floor
   });
   const total = reactExports.useMemo(() => cart.reduce((sum, item) => sum + item.price * item.quantity, 0), [cart]);
+  const selectedTableName = lastOrder?.table?.name ?? selectedTable?.name;
   const receiptPreviewLines = cart.length ? cart : lastReceiptLines;
   const receiptPreviewTotal = receiptPreviewLines.reduce((sum, line) => sum + line.price * line.quantity, 0);
   const receiptPreviewText = buildReceiptText(
-    { grandTotal: String(receiptPreviewTotal || total), orderNumber: lastOrder?.orderNumber ?? "Draft" },
+    {
+      grandTotal: String(receiptPreviewTotal || total),
+      orderNumber: lastOrder?.orderNumber ?? "Draft",
+      table: selectedTableName ? { name: selectedTableName } : void 0
+    },
     receiptPreviewLines,
     receiptPreviewTotal || total
   );
@@ -34173,6 +37779,10 @@ function PosPage() {
   });
   const quickAddItems = filteredItems.slice(0, 9);
   const quickAddItem = quickAddIndex === void 0 ? void 0 : quickAddItems[quickAddIndex];
+  const freeTables = reactExports.useMemo(
+    () => (tablesQuery.data?.tables ?? []).filter((table) => table.active && table.status === "FREE" && !table.currentOrder),
+    [tablesQuery.data?.tables]
+  );
   reactExports.useEffect(() => {
     if (!settingsQuery.data || printerDefaultsApplied) return;
     setPrintMode(readPrintMode(settingsQuery.data, "terminal.receiptPrinterMode", "os"));
@@ -34183,16 +37793,20 @@ function PosPage() {
     setOpenDrawerAfterPrint(Boolean(readSetting(settingsQuery.data, "terminal.openDrawerAfterPrint", false)));
     setPrinterDefaultsApplied(true);
   }, [printerDefaultsApplied, settingsQuery.data]);
+  reactExports.useEffect(() => {
+    if (orderType === "DINE_IN") return;
+    setSelectedTable(void 0);
+    setTablePickerOpen(false);
+    setPendingTableAction(void 0);
+  }, [orderType]);
   const createOrder = useMutation({
-    mutationFn: () => apiFetch("/orders", {
-      method: "POST",
-      body: JSON.stringify({
-        type: orderType,
-        items: cart.map((line) => ({
-          menuItemId: line.id,
-          quantity: line.quantity
-        }))
-      })
+    mutationFn: (tableId) => posService.createOrder({
+      type: orderType,
+      tableId: orderType === "DINE_IN" ? tableId : void 0,
+      items: cart.map((line) => ({
+        menuItemId: line.id,
+        quantity: line.quantity
+      }))
     }),
     onSuccess: (order) => {
       setLastOrder(order);
@@ -34200,22 +37814,19 @@ function PosPage() {
     }
   });
   const sendToKitchen = useMutation({
-    mutationFn: async () => {
-      const order = lastOrder ?? await createOrder.mutateAsync();
-      return apiFetch(`/orders/${order.id}/send-to-kitchen`, { method: "PATCH" });
+    mutationFn: async (tableId) => {
+      const order = lastOrder ?? await createOrder.mutateAsync(tableId);
+      return posService.sendToKitchen(order.id);
     },
     onSuccess: (order) => setLastOrder(order)
   });
   const payOrder = useMutation({
-    mutationFn: async () => {
-      const order = lastOrder ?? await createOrder.mutateAsync();
-      return apiFetch(`/orders/${order.id}/payments`, {
-        method: "POST",
-        body: JSON.stringify({
-          amount: Number(paymentAmount || total),
-          method: paymentMethod,
-          reference: paymentReference.trim() || void 0
-        })
+    mutationFn: async (tableId) => {
+      const order = lastOrder ?? await createOrder.mutateAsync(tableId);
+      return posService.payOrder(order.id, {
+        amount: Number(paymentAmount || total),
+        method: paymentMethod,
+        reference: paymentReference.trim() || void 0
       });
     },
     onSuccess: (order) => {
@@ -34224,12 +37835,13 @@ function PosPage() {
       setPaymentOpen(false);
       setPaymentAmount("");
       setPaymentReference("");
+      setSelectedTable(void 0);
       clear();
     }
   });
   const printReceipt = useMutation({
-    mutationFn: async () => {
-      const order = lastOrder ?? await createOrder.mutateAsync();
+    mutationFn: async (tableId) => {
+      const order = lastOrder ?? await createOrder.mutateAsync(tableId);
       const receiptLines = cart.length ? cart : lastReceiptLines;
       const receiptTotal = receiptLines.reduce((sum, line) => sum + line.price * line.quantity, 0);
       if (printMode === "network") {
@@ -34262,23 +37874,18 @@ function PosPage() {
     )
   });
   const voidOrder = useMutation({
-    mutationFn: () => apiFetch(`/orders/${lastOrder?.id}/void`, {
-      method: "PATCH",
-      body: JSON.stringify({ reason: correctionReason.trim() })
-    }),
+    mutationFn: () => posService.voidOrder(lastOrder?.id ?? "", correctionReason.trim()),
     onSuccess: (order) => {
       setLastOrder(order);
       setLastReceiptLines([]);
       setCorrectionTarget(void 0);
       setCorrectionReason("");
+      setSelectedTable(void 0);
       clear();
     }
   });
   const voidOrderItem = useMutation({
-    mutationFn: ({ itemId }) => apiFetch(`/orders/${lastOrder?.id}/items/${itemId}/void`, {
-      method: "PATCH",
-      body: JSON.stringify({ reason: correctionReason.trim() })
-    }),
+    mutationFn: ({ itemId }) => posService.voidItem(lastOrder?.id ?? "", itemId, correctionReason.trim()),
     onSuccess: (order) => {
       const cartLineId = correctionTarget?.type === "item" ? correctionTarget.cartLineId : void 0;
       setLastOrder(order);
@@ -34296,6 +37903,11 @@ function PosPage() {
   const canOpenPayment = cart.length > 0 && !payOrder.isPending;
   const canSendToKitchen = cart.length > 0 && !sendToKitchen.isPending;
   function addMenuItem(item) {
+    if (cart.length === 0 && lastOrder?.status === "COMPLETED") {
+      setLastOrder(void 0);
+      setLastReceiptLines([]);
+      setSelectedTable(void 0);
+    }
     addLine({
       id: item.id,
       name: item.name,
@@ -34310,9 +37922,37 @@ function PosPage() {
     if (quickAddItem) addMenuItem(quickAddItem);
     setQuickAddIndex(void 0);
   }, [quickAddItem]);
+  const requiresTable = reactExports.useCallback((action) => {
+    if (orderType !== "DINE_IN" || lastOrder?.table?.id || selectedTable?.id) return false;
+    void tablesQuery.refetch();
+    setPendingTableAction(action);
+    setTablePickerOpen(true);
+    return true;
+  }, [lastOrder?.table?.id, orderType, selectedTable?.id, tablesQuery]);
   function openPayment() {
+    if (requiresTable("payment")) return;
     setPaymentAmount(String(total));
     setPaymentOpen(true);
+  }
+  function openPrintPreview() {
+    if (requiresTable("print")) return;
+    setPrintOpen(true);
+  }
+  function sendKitchenNow() {
+    if (requiresTable("kitchen")) return;
+    sendToKitchen.mutate(selectedTable?.id ?? lastOrder?.table?.id);
+  }
+  function selectTable(table) {
+    setSelectedTable(table);
+    setTablePickerOpen(false);
+    const action = pendingTableAction;
+    setPendingTableAction(void 0);
+    if (action === "payment") {
+      setPaymentAmount(String(total));
+      setPaymentOpen(true);
+    }
+    if (action === "print") setPrintOpen(true);
+    if (action === "kitchen") sendToKitchen.mutate(table.id);
   }
   function openItemCorrection(line) {
     if (!lastOrder) {
@@ -34338,12 +37978,12 @@ function PosPage() {
     voidOrderItem.mutate({ itemId: orderItem.id });
   }
   const printReceiptNow = reactExports.useCallback(() => {
-    if (canPrintReceipt) printReceipt.mutate();
-  }, [canPrintReceipt, printReceipt]);
+    if (canPrintReceipt && !requiresTable("print")) printReceipt.mutate(selectedTable?.id ?? lastOrder?.table?.id);
+  }, [canPrintReceipt, lastOrder?.table?.id, printReceipt, requiresTable, selectedTable?.id]);
   function submitPayment(event) {
     event.preventDefault();
     if (cart.length > 0 && Number(paymentAmount || 0) > 0 && Number(paymentAmount || 0) <= total) {
-      payOrder.mutate();
+      if (!requiresTable("payment")) payOrder.mutate(selectedTable?.id ?? lastOrder?.table?.id);
     }
   }
   function submitPrint(event) {
@@ -34360,7 +38000,7 @@ function PosPage() {
     quickAddCount: quickAddItems.length,
     quickAddEnabled: !paymentOpen && !printOpen && !quickAddItem,
     searchInputRef,
-    sendToKitchen: () => sendToKitchen.mutate(),
+    sendToKitchen: sendKitchenNow,
     setOrderType,
     onClosePayment: () => setPaymentOpen(false),
     onClosePrint: () => {
@@ -34370,112 +38010,28 @@ function PosPage() {
     onConfirmQuickAdd: confirmQuickAdd,
     onNavigateTables: () => navigate("/tables"),
     onOpenPayment: openPayment,
-    onOpenPrint: () => setPrintOpen(true),
+    onOpenPrint: openPrintPreview,
     onPrintReceipt: printReceiptNow,
     onQuickAddItem: addQuickItem
   });
   return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "grid h-full grid-cols-[1fr_430px] gap-5 overflow-hidden bg-white p-5", children: [
-    /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { className: "flex min-w-0 flex-col overflow-hidden rounded-[28px] bg-white px-6 py-5 shadow-[0_28px_70px_rgb(var(--ro-secondary-rgb)/0.08)]", children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsxs("header", { className: "mb-5 flex items-center justify-between", children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm font-black uppercase tracking-[0.28em] text-subtle", children: "Cashier terminal" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("h1", { className: "mt-1 text-4xl font-black text-espresso", children: "Build order" })
-        ] }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex rounded-2xl bg-sage p-1 shadow-sm", children: ["DINE_IN", "TAKEAWAY", "DELIVERY"].map((type) => /* @__PURE__ */ jsxRuntimeExports.jsx(
-          "button",
-          {
-            className: [
-              "h-10 rounded-xl px-4 text-sm font-bold transition",
-              orderType === type ? "bg-secondary text-white shadow-sm" : "text-muted hover:bg-white"
-            ].join(" "),
-            onClick: () => setOrderType(type),
-            children: type === "DINE_IN" ? "Dine in" : type === "TAKEAWAY" ? "Takeaway" : "Delivery"
-          },
-          type
-        )) })
-      ] }),
-      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mb-5 grid grid-cols-[1fr_220px] gap-4", children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsxs("label", { className: "rounded-2xl bg-white px-4 py-2 shadow-[0_16px_42px_rgb(var(--ro-secondary-rgb)/0.06)]", children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "block text-xs font-black uppercase tracking-[0.12em] text-muted", children: "Find item" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mt-1 flex h-8 items-center gap-3", children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx(Search, { size: 22, className: "text-primary" }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx(
-              "input",
-              {
-                ref: searchInputRef,
-                className: "h-full flex-1 bg-transparent text-lg font-semibold outline-none",
-                value: searchText,
-                onChange: (event) => setSearchText(event.target.value)
-              }
-            ),
-            /* @__PURE__ */ jsxRuntimeExports.jsx(Badge, { tone: "orange", children: "F2" })
-          ] })
-        ] }),
-        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex h-14 items-center gap-3 rounded-2xl bg-secondary px-4 text-white shadow-[0_18px_44px_rgb(var(--ro-secondary-rgb)/0.2)]", children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx(Sparkles, { size: 20, className: "text-white" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs font-bold uppercase tracking-[0.18em] text-deepSoft", children: "Rush mode" }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm font-black", children: "Keyboard ready" })
-          ] })
-        ] })
-      ] }),
-      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mb-5 flex gap-2 overflow-x-auto pb-1", children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx(
-          "button",
-          {
-            className: [
-              "h-11 shrink-0 rounded-xl px-4 text-sm font-bold transition",
-              selectedCategoryId === "all" ? "bg-primary text-white shadow-[0_10px_22px_rgb(var(--ro-primary-rgb)/0.24)]" : "bg-white text-muted shadow-[inset_0_0_0_1px_rgb(var(--ro-secondary-rgb)/0.08)] hover:bg-sage hover:text-secondary"
-            ].join(" "),
-            onClick: () => setSelectedCategoryId("all"),
-            children: "All"
-          }
-        ),
-        categories.map((category) => /* @__PURE__ */ jsxRuntimeExports.jsx(
-          "button",
-          {
-            className: [
-              "h-11 shrink-0 rounded-xl px-4 text-sm font-bold transition",
-              selectedCategoryId === category.id ? "bg-primary text-white shadow-[0_10px_22px_rgb(var(--ro-primary-rgb)/0.24)]" : "bg-white text-muted shadow-[inset_0_0_0_1px_rgb(var(--ro-secondary-rgb)/0.08)] hover:bg-sage hover:text-secondary"
-            ].join(" "),
-            onClick: () => setSelectedCategoryId(category.id),
-            children: category.name
-          },
-          category.id
-        ))
-      ] }),
-      catalogQuery.isError ? /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-3 rounded-xl bg-red-50 px-4 py-3 text-sm font-bold text-red-700", children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx(CircleAlert, { size: 17 }),
-        "Menu could not load. Check the API connection."
-      ] }) : null,
-      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "grid flex-1 auto-rows-[168px] grid-cols-3 gap-4 overflow-y-auto pb-2", children: [
-        catalogQuery.isLoading ? /* @__PURE__ */ jsxRuntimeExports.jsxs(Card, { className: "col-span-3 flex items-center justify-center gap-3 p-6 text-sm font-bold text-muted", children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx(LoaderCircle, { className: "animate-spin text-primary", size: 18 }),
-          "Loading menu"
-        ] }) : null,
-        filteredItems.map((item, index) => /* @__PURE__ */ jsxRuntimeExports.jsxs(
-          "button",
-          {
-            className: "group relative rounded-2xl bg-white p-4 text-left shadow-[0_14px_38px_rgb(var(--ro-secondary-rgb)/0.07)] transition hover:-translate-y-0.5 hover:shadow-[0_22px_48px_rgb(var(--ro-secondary-rgb)/0.12)]",
-            onClick: () => addMenuItem(item),
-            children: [
-              index < 9 ? /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "absolute right-3 top-3 flex h-7 min-w-7 items-center justify-center rounded-lg bg-secondary px-2 text-xs font-black text-white", children: index + 1 }) : null,
-              /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex h-full flex-col justify-between", children: [
-                /* @__PURE__ */ jsxRuntimeExports.jsx(Badge, { tone: "blue", children: item.kitchenStation?.name ?? item.category.name }),
-                /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
-                  /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "text-lg font-black text-espresso", children: item.shortName || item.name }),
-                  /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mt-3 flex items-end justify-between", children: [
-                    /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-2xl font-black text-secondary", children: money$1.format(Number(item.basePrice)) }),
-                    /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "flex h-9 w-9 items-center justify-center rounded-xl bg-primary text-white transition group-hover:scale-105", children: /* @__PURE__ */ jsxRuntimeExports.jsx(Plus, { size: 18 }) })
-                  ] })
-                ] })
-              ] })
-            ]
-          },
-          item.id
-        ))
-      ] })
-    ] }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(
+      MenuBoard,
+      {
+        catalogError: catalogQuery.isError,
+        catalogLoading: catalogQuery.isLoading,
+        categories,
+        filteredItems,
+        orderType,
+        searchInputRef,
+        searchText,
+        selectedCategoryId,
+        onAddItem: addMenuItem,
+        onCategoryChange: setSelectedCategoryId,
+        onOrderTypeChange: setOrderType,
+        onSearchChange: setSearchText
+      }
+    ),
     /* @__PURE__ */ jsxRuntimeExports.jsx(
       PosTicketPanel,
       {
@@ -34483,12 +38039,13 @@ function PosPage() {
         kitchenPending: sendToKitchen.isPending,
         lastOrder,
         paymentPending: payOrder.isPending,
+        selectedTableName,
         total,
         onChangeQuantity: changeQuantity,
         onCorrectItem: openItemCorrection,
         onOpenPayment: openPayment,
-        onOpenPrint: () => setPrintOpen(true),
-        onSendToKitchen: () => sendToKitchen.mutate(),
+        onOpenPrint: openPrintPreview,
+        onSendToKitchen: sendKitchenNow,
         onVoidOrder: () => lastOrder && (setCorrectionReason(""), setCorrectionTarget({ type: "order", label: `Order #${lastOrder.orderNumber}` }))
       }
     ),
@@ -34497,6 +38054,7 @@ function PosPage() {
       {
         amount: paymentAmount,
         error: payOrder.isError,
+        errorMessage: apiErrorMessage(payOrder.error, "Payment failed. Check amount and API connection."),
         method: paymentMethod,
         open: paymentOpen,
         pending: payOrder.isPending,
@@ -34531,6 +38089,20 @@ function PosPage() {
         onClose: () => setCorrectionTarget(void 0),
         onReasonChange: setCorrectionReason,
         onSubmit: submitCorrection
+      }
+    ),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(
+      TableSelectionModal,
+      {
+        loading: tablesQuery.isLoading,
+        open: tablePickerOpen,
+        selectedTableId: selectedTable?.id,
+        tables: freeTables,
+        onClose: () => {
+          setTablePickerOpen(false);
+          setPendingTableAction(void 0);
+        },
+        onSelect: selectTable
       }
     ),
     /* @__PURE__ */ jsxRuntimeExports.jsx(
@@ -34570,6 +38142,10 @@ function ReportsPage() {
     /* @__PURE__ */ jsxRuntimeExports.jsx(Card, { className: "mt-7 p-6", children: /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-semibold text-subtle", children: "Sales, stock, purchase, credit, supplier payable, shift, and profit estimate reports." }) })
   ] });
 }
+const settingsService = {
+  list: () => apiRequest({ method: "GET", url: "/settings" }),
+  update: (input) => apiRequest({ data: input, method: "PATCH", url: "/settings" })
+};
 const settingsSchema = objectType({
   businessName: stringType().min(2, "Business name is required"),
   branchName: stringType().min(2, "Branch name is required"),
@@ -34675,7 +38251,7 @@ function SettingsPage() {
   const canUpdateSettings = useAuthStore((state) => state.hasPermission("settings.update"));
   const settingsQuery = useQuery({
     queryKey: ["settings"],
-    queryFn: () => apiFetch("/settings")
+    queryFn: settingsService.list
   });
   const {
     register,
@@ -34690,10 +38266,7 @@ function SettingsPage() {
     if (settingsQuery.data) reset(toFormValues(settingsQuery.data));
   }, [reset, settingsQuery.data]);
   const updateSettings = useMutation({
-    mutationFn: (values) => apiFetch("/settings", {
-      method: "PATCH",
-      body: JSON.stringify(toPayload(values))
-    }),
+    mutationFn: (values) => settingsService.update(toPayload(values)),
     onSuccess: (records) => {
       queryClient2.setQueryData(["settings"], records);
       reset(toFormValues(records));
@@ -34832,6 +38405,12 @@ function Toggle({ label, ...props }) {
     )
   ] });
 }
+const shiftsService = {
+  close: (shiftId, input) => apiRequest({ data: input, method: "PATCH", url: `/shifts/${shiftId}/close` }),
+  list: () => apiRequest({ method: "GET", url: "/shifts" }),
+  open: (input) => apiRequest({ data: input, method: "POST", url: "/shifts/open" }),
+  recalculate: (shiftId) => apiRequest({ method: "PATCH", url: `/shifts/${shiftId}/recalculate` })
+};
 const fieldClass$2 = "h-11 w-full rounded-xl border border-field bg-white px-3 text-sm font-semibold text-espresso outline-none transition focus:border-primary focus:ring-4 focus:ring-primary/10";
 const money = new Intl.NumberFormat("en-PK", { maximumFractionDigits: 0, style: "currency", currency: "PKR" });
 function ShiftsPage() {
@@ -34848,7 +38427,7 @@ function ShiftsPage() {
   const [closeNotes, setCloseNotes] = reactExports.useState("");
   const shiftsQuery = useQuery({
     queryKey: ["shifts"],
-    queryFn: () => apiFetch("/shifts")
+    queryFn: shiftsService.list
   });
   const activeShift = shiftsQuery.data?.activeShift;
   const shifts = shiftsQuery.data?.shifts ?? [];
@@ -34856,13 +38435,10 @@ function ShiftsPage() {
   const expectedCash = selectedClosingShift ? Number(selectedClosingShift.openingCash) + Number(selectedClosingShift.liveTotals.cashSales) - Number(selectedClosingShift.liveTotals.refunds) - Number(expenses || 0) : 0;
   const difference = Number(countedCash || 0) - expectedCash;
   const openShift = useMutation({
-    mutationFn: () => apiFetch("/shifts/open", {
-      method: "POST",
-      body: JSON.stringify({
-        openingCash: Number(openingCash || 0),
-        terminalDevice: terminalDevice.trim() || void 0,
-        notes: openNotes.trim() || void 0
-      })
+    mutationFn: () => shiftsService.open({
+      openingCash: Number(openingCash || 0),
+      terminalDevice: terminalDevice.trim() || void 0,
+      notes: openNotes.trim() || void 0
     }),
     onSuccess: () => {
       setOpeningCash("0");
@@ -34873,13 +38449,10 @@ function ShiftsPage() {
     }
   });
   const closeShift = useMutation({
-    mutationFn: () => apiFetch(`/shifts/${selectedClosingShift?.id}/close`, {
-      method: "PATCH",
-      body: JSON.stringify({
-        countedCash: Number(countedCash || 0),
-        expenses: Number(expenses || 0),
-        notes: closeNotes.trim() || void 0
-      })
+    mutationFn: () => shiftsService.close(selectedClosingShift?.id ?? "", {
+      countedCash: Number(countedCash || 0),
+      expenses: Number(expenses || 0),
+      notes: closeNotes.trim() || void 0
     }),
     onSuccess: () => {
       setClosingShiftId("");
@@ -34891,9 +38464,7 @@ function ShiftsPage() {
     }
   });
   const recalculateShift = useMutation({
-    mutationFn: (shiftId) => apiFetch(`/shifts/${shiftId}/recalculate`, {
-      method: "PATCH"
-    }),
+    mutationFn: shiftsService.recalculate,
     onSuccess: () => queryClient2.invalidateQueries({ queryKey: ["shifts"] })
   });
   function submitOpenShift(event) {
@@ -35381,6 +38952,12 @@ function formatOrderAge(createdAt) {
   const rest = minutes % 60;
   return rest ? `${hours}h ${rest}m` : `${hours}h`;
 }
+const tablesService = {
+  create: (input) => apiRequest({ data: input, method: "POST", url: "/tables" }),
+  floor: () => apiRequest({ method: "GET", url: "/tables" }),
+  setStatus: (tableId, status) => apiRequest({ data: { status }, method: "PATCH", url: `/tables/${tableId}/status` }),
+  startOrder: (tableId) => apiRequest({ method: "POST", url: `/tables/${tableId}/start-order` })
+};
 const fieldClass$1 = "h-11 w-full rounded-xl border border-field bg-white px-3 text-sm font-semibold text-espresso outline-none transition focus:border-primary focus:ring-4 focus:ring-primary/10";
 function TablesPage() {
   const queryClient2 = useQueryClient();
@@ -35393,7 +38970,7 @@ function TablesPage() {
   const [createOpen, setCreateOpen] = reactExports.useState(false);
   const tablesQuery = useQuery({
     queryKey: ["tables-floor"],
-    queryFn: () => apiFetch("/tables")
+    queryFn: tablesService.floor
   });
   const areas = tablesQuery.data?.areas ?? [];
   const tables = tablesQuery.data?.tables ?? [];
@@ -35403,14 +38980,11 @@ function TablesPage() {
   );
   const refreshTables = () => queryClient2.invalidateQueries({ queryKey: ["tables-floor"] });
   const createTable = useMutation({
-    mutationFn: () => apiFetch("/tables", {
-      method: "POST",
-      body: JSON.stringify({
-        name: tableName.trim(),
-        area: tableArea.trim() || "Main Floor",
-        capacity: Number(capacity || 1),
-        displayOrder: tables.length * 10 + 10
-      })
+    mutationFn: () => tablesService.create({
+      name: tableName.trim(),
+      area: tableArea.trim() || "Main Floor",
+      capacity: Number(capacity || 1),
+      displayOrder: tables.length * 10 + 10
     }),
     onSuccess: () => {
       setTableName("");
@@ -35420,16 +38994,11 @@ function TablesPage() {
     }
   });
   const updateStatus = useMutation({
-    mutationFn: ({ table, status }) => apiFetch(`/tables/${table.id}/status`, {
-      method: "PATCH",
-      body: JSON.stringify({ status })
-    }),
+    mutationFn: ({ table, status }) => tablesService.setStatus(table.id, status),
     onSuccess: refreshTables
   });
   const startOrder = useMutation({
-    mutationFn: (table) => apiFetch(`/tables/${table.id}/start-order`, {
-      method: "POST"
-    }),
+    mutationFn: (table) => tablesService.startOrder(table.id),
     onSuccess: refreshTables
   });
   function submitTable(event) {
@@ -35571,6 +39140,17 @@ function Planned({ icon, text }) {
     text
   ] });
 }
+const usersService = {
+  create: (input) => apiRequest({ data: input, method: "POST", url: "/users" }),
+  list: () => apiRequest({ method: "GET", url: "/users" }),
+  saveRole: (input, roleId) => apiRequest({
+    data: input,
+    method: roleId ? "PATCH" : "POST",
+    url: roleId ? `/users/roles/${roleId}` : "/users/roles"
+  }),
+  update: (userId, patch) => apiRequest({ data: patch, method: "PATCH", url: `/users/${userId}` }),
+  updatePassword: (userId, password) => apiRequest({ data: { password }, method: "PATCH", url: `/users/${userId}/password` })
+};
 const fieldClass = "h-11 w-full rounded-xl border border-field bg-white px-3 text-sm font-semibold text-espresso outline-none transition focus:border-primary focus:ring-4 focus:ring-primary/10";
 function UsersPage() {
   const queryClient2 = useQueryClient();
@@ -35592,7 +39172,7 @@ function UsersPage() {
   const [rolePermissionIds, setRolePermissionIds] = reactExports.useState([]);
   const usersQuery = useQuery({
     queryKey: ["users"],
-    queryFn: () => apiFetch("/users")
+    queryFn: usersService.list
   });
   const users = usersQuery.data?.users ?? [];
   const roles = usersQuery.data?.roles ?? [];
@@ -35607,16 +39187,13 @@ function UsersPage() {
     }, {});
   }, [permissions]);
   const createUser = useMutation({
-    mutationFn: () => apiFetch("/users", {
-      method: "POST",
-      body: JSON.stringify({
-        name: name.trim(),
-        username: username.trim(),
-        phone: phone.trim() || void 0,
-        password,
-        roleId: selectedRoleId,
-        active: true
-      })
+    mutationFn: () => usersService.create({
+      name: name.trim(),
+      username: username.trim(),
+      phone: phone.trim() || void 0,
+      password,
+      roleId: selectedRoleId,
+      active: true
     }),
     onSuccess: () => {
       setName("");
@@ -35629,17 +39206,11 @@ function UsersPage() {
     }
   });
   const updateUser = useMutation({
-    mutationFn: ({ id, patch }) => apiFetch(`/users/${id}`, {
-      method: "PATCH",
-      body: JSON.stringify(patch)
-    }),
+    mutationFn: ({ id, patch }) => usersService.update(id, patch),
     onSuccess: () => queryClient2.invalidateQueries({ queryKey: ["users"] })
   });
   const updatePassword = useMutation({
-    mutationFn: () => apiFetch(`/users/${passwordUserId}/password`, {
-      method: "PATCH",
-      body: JSON.stringify({ password: newPassword })
-    }),
+    mutationFn: () => usersService.updatePassword(passwordUserId, newPassword),
     onSuccess: () => {
       setPasswordUserId("");
       setNewPassword("");
@@ -35648,14 +39219,11 @@ function UsersPage() {
     }
   });
   const saveRole = useMutation({
-    mutationFn: () => apiFetch(editingRoleId ? `/users/roles/${editingRoleId}` : "/users/roles", {
-      method: editingRoleId ? "PATCH" : "POST",
-      body: JSON.stringify({
-        name: roleName.trim(),
-        description: roleDescription.trim() || void 0,
-        permissionIds: rolePermissionIds
-      })
-    }),
+    mutationFn: () => usersService.saveRole({
+      name: roleName.trim(),
+      description: roleDescription.trim() || void 0,
+      permissionIds: rolePermissionIds
+    }, editingRoleId || void 0),
     onSuccess: () => {
       resetRoleForm();
       void queryClient2.invalidateQueries({ queryKey: ["users"] });
@@ -35970,6 +39538,7 @@ const router = createBrowserRouter([
         element: /* @__PURE__ */ jsxRuntimeExports.jsx(AppShell, {}),
         children: [
           { index: true, element: /* @__PURE__ */ jsxRuntimeExports.jsx(PosPage, {}) },
+          { path: "orders", element: /* @__PURE__ */ jsxRuntimeExports.jsx(OrdersPage, {}) },
           { path: "dashboard", element: /* @__PURE__ */ jsxRuntimeExports.jsx(DashboardPage, {}) },
           { path: "menu", element: /* @__PURE__ */ jsxRuntimeExports.jsx(MenuPage, {}) },
           { path: "inventory", element: /* @__PURE__ */ jsxRuntimeExports.jsx(InventoryPage, {}) },

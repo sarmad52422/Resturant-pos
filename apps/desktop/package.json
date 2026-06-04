@@ -15,6 +15,7 @@
     "@restaurantos/shared": "*",
     "@restaurantos/ui": "*",
     "@tanstack/react-query": "^5.80.6",
+    "axios": "^1.17.0",
     "electron-updater": "^6.6.2",
     "lucide-react": "^0.468.0",
     "react": "^19.1.0",

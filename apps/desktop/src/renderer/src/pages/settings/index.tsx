@@ -14,7 +14,7 @@ import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { Badge, Button, Card } from '@restaurantos/ui';
-import { apiFetch } from '../../lib/api';
+import { settingsService } from '../../services/settings-service';
 import { useAuthStore } from '../../store/use-auth-store';
 import type { FieldProps, SettingRecord, ToggleProps } from './interfaces';
 
@@ -141,7 +141,7 @@ export function SettingsPage() {
 
   const settingsQuery = useQuery({
     queryKey: ['settings'],
-    queryFn: () => apiFetch<SettingRecord[]>('/settings'),
+    queryFn: settingsService.list,
   });
 
   const {
@@ -159,11 +159,7 @@ export function SettingsPage() {
   }, [reset, settingsQuery.data]);
 
   const updateSettings = useMutation({
-    mutationFn: (values: SettingsForm) =>
-      apiFetch<SettingRecord[]>('/settings', {
-        method: 'PATCH',
-        body: JSON.stringify(toPayload(values)),
-      }),
+    mutationFn: (values: SettingsForm) => settingsService.update(toPayload(values)),
     onSuccess: (records) => {
       queryClient.setQueryData(['settings'], records);
       reset(toFormValues(records));

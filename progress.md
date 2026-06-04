@@ -821,45 +821,130 @@ Tests:
 Notes:
 - Paid/completed orders are intentionally blocked from this flow. They need a separate refund flow.
 
+## Phase 16 - Orders History and Order Lookup
+
+Status: Completed
+
+Goal:
+- Make created orders visible and searchable after they leave the active POS ticket.
+
+Completed:
+- Added `GET /orders` with today/all date scope, status filter, and order-number search.
+- Added `GET /orders/:id` for order detail with items, payments, table, customer, and delivery context.
+- Added a desktop Orders section in the sidebar.
+- Show today's orders first, with an option to view all orders.
+- Added status filters for draft, sent to kitchen, payment pending, completed, cancelled, and voided.
+- Added order detail with items, payment state, table/customer/delivery context, and correction status.
+- Added receipt reprint from order detail using the Electron printer bridge.
+- Reused Phase 15 correction endpoints from order detail for unpaid orders/items.
+- Kept paid/completed order corrections blocked until refund flow exists.
+
+Reason:
+- Phase 15 added correction APIs and POS correction UI, but cashiers still need a proper place to find already-created orders later.
+
+Files changed:
+- `apps/api/src/modules/orders/orders.controller.ts`
+- `apps/api/src/modules/orders/orders.service.ts`
+- `apps/desktop/src/renderer/src/components/app-shell.tsx`
+- `apps/desktop/src/renderer/src/pages/help/index.tsx`
+- `apps/desktop/src/renderer/src/pages/orders/**`
+- `apps/desktop/src/renderer/src/router.tsx`
+- `README.md`
+- `progress.md`
+
+Database changes:
+- No schema migration required.
+
+Tests:
+- `npm run typecheck --workspace @restaurantos/api` passed.
+- `npm run typecheck --workspace @restaurantos/desktop` passed.
+- `npm run build --workspaces` passed.
+- `npm audit --audit-level=high` passed with 0 vulnerabilities.
+
+## Phase 17 - Dine-In Table Selection in POS
+
+Status: Completed
+
+Goal:
+- Make dine-in orders table-aware before send/payment/print.
+
+Completed:
+- Added a fast POS table-selection popup that lists free active tables grouped by area.
+- Required table selection before `F5` kitchen send, `F6`/`Ctrl + P` receipt preview, or `F7` payment for dine-in orders.
+- Added selected table visibility on the POS ticket panel.
+- Added the selected table name to receipt preview and printed receipt output.
+- Linked the selected table to the created order through `POST /orders`.
+- Updated order creation validation so dine-in orders require a free active table, while takeaway/delivery orders cannot carry a table.
+- Updated table lifecycle from POS orders: waiting for order on draft creation, sent to kitchen on kitchen send, cleaning required after full payment, and free again after unpaid void.
+- Hardened table availability so stale `FREE` tables with an open order are hidden from POS selection and counted as occupied in floor metrics.
+- Replaced the generic payment failure text with the real API validation message when one is available.
+- Split the POS menu board and table picker into page-local component files so the main POS page stays under 500 lines.
+
+Files changed:
+- `apps/api/src/modules/orders/orders.service.ts`
+- `apps/api/src/modules/tables/tables.service.ts`
+- `apps/desktop/src/renderer/src/pages/pos/index.tsx`
+- `apps/desktop/src/renderer/src/pages/pos/components.tsx`
+- `apps/desktop/src/renderer/src/pages/pos/errors.ts`
+- `apps/desktop/src/renderer/src/pages/pos/interfaces.ts`
+- `apps/desktop/src/renderer/src/pages/pos/menu-board.tsx`
+- `apps/desktop/src/renderer/src/pages/pos/receipt.ts`
+- `apps/desktop/src/renderer/src/pages/pos/table-selection.tsx`
+- `README.md`
+- `progress.md`
+
+Database changes:
+- No schema migration required.
+
+Tests:
+- `npm run typecheck --workspace @restaurantos/api` passed.
+- `npm run typecheck --workspace @restaurantos/desktop` passed.
+- `npm run build --workspaces` passed.
+- `npm audit --audit-level=high` passed with 0 vulnerabilities.
+
+## Frontend API Layer Refactor
+
+Status: Completed
+
+Goal:
+- Move desktop API logic out of page components before the project grows further.
+
+Completed:
+- Added Axios to the desktop workspace.
+- Added a centralized Axios client with API base URL and saved-token auth interceptor.
+- Added backend-aware error parsing for NestJS response shapes such as `{ message, error, statusCode }`.
+- Added reusable `useAxios` hook with `loading`, `error`, `errorMessage`, typed request helpers, and a `useAxious` alias.
+- Added domain service files for auth, POS, orders, tables, customers, inventory, menu, shifts, settings, and users.
+- Migrated desktop pages and auth store away from inline `apiFetch` URL/method/body calls.
+- Updated login and payment flows to display parsed backend error messages instead of only generic text.
+- Kept the old `apiFetch` wrapper backed by Axios for compatibility, but removed page-level usage.
+
+Files changed:
+- `apps/desktop/package.json`
+- `package-lock.json`
+- `apps/desktop/src/renderer/src/lib/api.ts`
+- `apps/desktop/src/renderer/src/lib/api-client.ts`
+- `apps/desktop/src/renderer/src/lib/api-error.ts`
+- `apps/desktop/src/renderer/src/hooks/use-axios.ts`
+- `apps/desktop/src/renderer/src/services/**`
+- `apps/desktop/src/renderer/src/pages/**`
+- `apps/desktop/src/renderer/src/store/use-auth-store.ts`
+- `README.md`
+- `progress.md`
+
+Database changes:
+- None.
+
+Tests:
+- `npm run typecheck --workspace @restaurantos/desktop` passed.
+- `npm run build --workspaces` passed.
+- `npm audit --audit-level=high` passed with 0 vulnerabilities.
+
 ## Planned Next Phases
 
 Status: Planned
 
 Recommended sequence:
-
-### Phase 16 - Orders History and Order Lookup
-
-Goal:
-- Make created orders visible and searchable after they leave the active POS ticket.
-
-Scope:
-- Add a desktop Orders section in the sidebar.
-- Show today's orders first.
-- Filter by status: draft, sent to kitchen, payment pending, completed, cancelled, and voided.
-- Search by order number.
-- Open order detail with items, payment state, table/customer/delivery context, and correction status.
-- Reprint bill or receipt from order detail.
-- Use the Phase 15 correction endpoints from order detail for unpaid orders/items.
-- Keep paid/completed order corrections blocked until refund flow exists.
-
-Reason:
-- Phase 15 added correction APIs and POS correction UI, but cashiers still need a proper place to find already-created orders later.
-
-### Phase 17 - Dine-In Table Selection in POS
-
-Goal:
-- Make dine-in orders table-aware before send/payment.
-
-Scope:
-- When `DINE_IN` is selected, require table selection before kitchen send or payment.
-- Show free tables in a fast picker from the POS.
-- Link selected table to the order.
-- Show selected table on the POS ticket, receipt, order detail, and kitchen ticket.
-- Update table status through the order lifecycle.
-- Allow manager override later if a dine-in order truly has no table.
-
-Reason:
-- Dine-in payment without a table makes floor operations and later corrections hard to track.
 
 ### Phase 18 - Delivery Assignment
 

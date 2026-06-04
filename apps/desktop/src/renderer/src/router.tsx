@@ -7,6 +7,7 @@ import { HelpPage } from './pages/help';
 import { InventoryPage } from './pages/inventory';
 import { LoginPage } from './pages/login';
 import { MenuPage } from './pages/menu';
+import { OrdersPage } from './pages/orders';
 import { PosPage } from './pages/pos';
 import { ReportsPage } from './pages/reports';
 import { SettingsPage } from './pages/settings';
@@ -27,6 +28,7 @@ export const router = createBrowserRouter([
         element: <AppShell />,
         children: [
           { index: true, element: <PosPage /> },
+          { path: 'orders', element: <OrdersPage /> },
           { path: 'dashboard', element: <DashboardPage /> },
           { path: 'menu', element: <MenuPage /> },
           { path: 'inventory', element: <InventoryPage /> },

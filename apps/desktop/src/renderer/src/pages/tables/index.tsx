@@ -14,8 +14,8 @@ import { Badge, Button, Card } from '@restaurantos/ui';
 import { ActionModal } from '../../components/action-modal';
 import { FormField } from '../../components/form-field';
 import { TableCard, type CurrentOrder, type RestaurantTable, type TableStatus } from '../../components/table-card';
-import { apiFetch } from '../../lib/api';
 import type { FormSubmitEvent } from '../../lib/events';
+import { tablesService } from '../../services/tables-service';
 import { useAuthStore } from '../../store/use-auth-store';
 import type { TablesResponse } from './interfaces';
 
@@ -34,7 +34,7 @@ export function TablesPage() {
 
   const tablesQuery = useQuery({
     queryKey: ['tables-floor'],
-    queryFn: () => apiFetch<TablesResponse>('/tables'),
+    queryFn: tablesService.floor,
   });
 
   const areas = tablesQuery.data?.areas ?? [];
@@ -48,14 +48,11 @@ export function TablesPage() {
 
   const createTable = useMutation({
     mutationFn: () =>
-      apiFetch<RestaurantTable>('/tables', {
-        method: 'POST',
-        body: JSON.stringify({
-          name: tableName.trim(),
-          area: tableArea.trim() || 'Main Floor',
-          capacity: Number(capacity || 1),
-          displayOrder: tables.length * 10 + 10,
-        }),
+      tablesService.create({
+        name: tableName.trim(),
+        area: tableArea.trim() || 'Main Floor',
+        capacity: Number(capacity || 1),
+        displayOrder: tables.length * 10 + 10,
       }),
     onSuccess: () => {
       setTableName('');
@@ -67,18 +64,12 @@ export function TablesPage() {
 
   const updateStatus = useMutation({
     mutationFn: ({ table, status }: { table: RestaurantTable; status: TableStatus }) =>
-      apiFetch<RestaurantTable>(`/tables/${table.id}/status`, {
-        method: 'PATCH',
-        body: JSON.stringify({ status }),
-      }),
+      tablesService.setStatus(table.id, status),
     onSuccess: refreshTables,
   });
 
   const startOrder = useMutation({
-    mutationFn: (table: RestaurantTable) =>
-      apiFetch<CurrentOrder>(`/tables/${table.id}/start-order`, {
-        method: 'POST',
-      }),
+    mutationFn: (table: RestaurantTable) => tablesService.startOrder(table.id),
     onSuccess: refreshTables,
   });
 

@@ -1,5 +1,5 @@
 import { BadRequestException, Injectable } from '@nestjs/common';
-import { OrderStatus, Prisma } from '@prisma/client';
+import { OrderStatus, Prisma, TableStatus } from '@prisma/client';
 import { InventoryService } from '../inventory/inventory.service';
 import { KitchenGateway } from '../kitchen/kitchen.gateway';
 import { PrismaService } from '../../prisma/prisma.service';
@@ -25,6 +25,21 @@ interface VoidInput {
   reason: string;
 }
 
+interface ListOrdersInput {
+  date?: 'today' | 'all';
+  search?: string;
+  status?: OrderStatus;
+}
+
+const openTableOrderStatuses = [
+  OrderStatus.DRAFT,
+  OrderStatus.SENT_TO_KITCHEN,
+  OrderStatus.PREPARING,
+  OrderStatus.READY,
+  OrderStatus.SERVED,
+  OrderStatus.PAYMENT_PENDING,
+] as const;
+
 @Injectable()
 export class OrdersService {
   constructor(
@@ -33,20 +48,85 @@ export class OrdersService {
     private readonly kitchenGateway: KitchenGateway,
   ) {}
 
-  listOpenOrders() {
-    return this.prisma.order.findMany({
-      where: { status: { notIn: [OrderStatus.COMPLETED, OrderStatus.CANCELLED, OrderStatus.VOIDED] } },
-      include: { items: true, table: true, customer: true },
+  async listOrders(input: ListOrdersInput = {}) {
+    const where: Prisma.OrderWhereInput = {};
+    if (input.date !== 'all') {
+      const start = new Date();
+      start.setHours(0, 0, 0, 0);
+      where.createdAt = { gte: start };
+    }
+    if (input.status) where.status = input.status;
+    if (input.search?.trim()) where.orderNumber = { contains: input.search.trim(), mode: 'insensitive' };
+
+    const orders = await this.prisma.order.findMany({
+      where,
+      include: {
+        customer: true,
+        items: { include: { menuItem: true }, orderBy: { id: 'asc' } },
+        payments: true,
+        table: true,
+      },
       orderBy: { createdAt: 'desc' },
+    });
+
+    const closedStatuses: OrderStatus[] = [OrderStatus.COMPLETED, OrderStatus.PAID, OrderStatus.CANCELLED, OrderStatus.VOIDED];
+    return {
+      orders,
+      metrics: {
+        cancelled: orders.filter((order) => order.status === OrderStatus.CANCELLED || order.status === OrderStatus.VOIDED).length,
+        completed: orders.filter((order) => order.status === OrderStatus.COMPLETED || order.status === OrderStatus.PAID).length,
+        open: orders.filter((order) => !closedStatuses.includes(order.status)).length,
+        total: orders.length,
+      },
+    };
+  }
+
+  getOrder(orderId: string) {
+    return this.prisma.order.findUniqueOrThrow({
+      where: { id: orderId },
+      include: {
+        customer: true,
+        deliveryAssignment: true,
+        items: { include: { menuItem: true, variation: true }, orderBy: { id: 'asc' } },
+        payments: true,
+        table: true,
+      },
     });
   }
 
   async createDraft(input: CreateDraftOrderInput, cashierId?: string) {
     if (!input.items.length) throw new BadRequestException('Order must include at least one item');
+    if (input.type === 'DINE_IN' && !input.tableId) throw new BadRequestException('Dine-in orders need a table');
+    if (input.type !== 'DINE_IN' && input.tableId) throw new BadRequestException('Only dine-in orders can use a table');
 
     return this.prisma.$transaction(async (tx) => {
       const count = await tx.order.count();
       const orderNumber = `A-${String(count + 1).padStart(4, '0')}`;
+      let tableId: string | undefined;
+
+      if (input.tableId) {
+        const table = await tx.table.findUnique({
+          where: { id: input.tableId },
+          include: {
+            orders: {
+              where: { status: { in: [...openTableOrderStatuses] } },
+              take: 1,
+            },
+          },
+        });
+
+        if (!table || !table.active) throw new BadRequestException('Table not found or inactive');
+        if (table.status === TableStatus.RESERVED) throw new BadRequestException('Reserved table must be released first');
+        if (table.orders[0]) throw new BadRequestException('Table already has an open order');
+        if (table.status !== TableStatus.FREE) throw new BadRequestException('Table is not free');
+
+        tableId = table.id;
+        await tx.table.update({
+          where: { id: table.id },
+          data: { status: TableStatus.WAITING_FOR_ORDER },
+        });
+      }
+
       const menuItems = await tx.menuItem.findMany({
         where: { id: { in: input.items.map((item) => item.menuItemId) }, active: true },
       });
@@ -73,7 +153,7 @@ export class OrdersService {
           status: OrderStatus.DRAFT,
           cashierId,
           customerId: input.customerId || undefined,
-          tableId: input.tableId,
+          tableId,
           subtotal,
           discountTotal: new Prisma.Decimal(0),
           taxTotal: new Prisma.Decimal(0),
@@ -109,6 +189,13 @@ export class OrdersService {
         table: true,
       },
     });
+
+    if (order.tableId) {
+      await this.prisma.table.update({
+        where: { id: order.tableId },
+        data: { status: TableStatus.SENT_TO_KITCHEN },
+      });
+    }
 
     for (const item of order.items) {
       await this.prisma.$transaction((tx) => this.inventoryService.recordSaleDeduction(tx, item.id));

@@ -5,6 +5,7 @@ import { useForm } from 'react-hook-form';
 import { Navigate, useNavigate } from 'react-router-dom';
 import { z } from 'zod';
 import { Button, Card } from '@restaurantos/ui';
+import { apiErrorMessage } from '../../lib/api-error';
 import { useAuthStore } from '../../store/use-auth-store';
 
 const loginSchema = z.object({
@@ -39,8 +40,8 @@ export function LoginPage() {
     try {
       await login(values.username, values.password);
       navigate('/', { replace: true });
-    } catch {
-      setError('Login failed. Check username, password, and API connection.');
+    } catch (caught) {
+      setError(apiErrorMessage(caught, 'Login failed. Check username, password, and API connection.'));
     }
   };
 

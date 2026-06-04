@@ -12,6 +12,7 @@ const fieldClass =
 interface PaymentModalProps {
   amount: string;
   error: boolean;
+  errorMessage?: string;
   method: PaymentMethod;
   onAmountChange: (value: string) => void;
   onClose: () => void;
@@ -36,6 +37,7 @@ interface PosTicketPanelProps {
   kitchenPending: boolean;
   lastOrder?: PosOrder;
   paymentPending: boolean;
+  selectedTableName?: string;
   total: number;
   onChangeQuantity: (id: string, delta: number) => void;
   onCorrectItem: (line: TicketLine) => void;
@@ -93,6 +95,7 @@ export function PosTicketPanel({
   kitchenPending,
   lastOrder,
   paymentPending,
+  selectedTableName,
   total,
   onChangeQuantity,
   onCorrectItem,
@@ -109,6 +112,11 @@ export function PosTicketPanel({
         <div>
           <p className="text-sm font-black uppercase tracking-[0.24em] text-subtle">Ticket</p>
           <h2 className="mt-1 text-2xl font-black">{lastOrder ? `Order #${lastOrder.orderNumber}` : 'Order #Draft'}</h2>
+          {selectedTableName ? (
+            <p className="mt-2 inline-flex rounded-xl bg-mint px-3 py-1 text-xs font-black uppercase tracking-[0.12em] text-secondary">
+              Table {selectedTableName}
+            </p>
+          ) : null}
         </div>
         <Badge tone={lastOrder?.status === 'COMPLETED' ? 'green' : 'orange'}>
           {lastOrder?.status === 'COMPLETED' ? 'Paid' : 'Open'}
@@ -237,6 +245,7 @@ export function CorrectionModal({
 export function PaymentModal({
   amount,
   error,
+  errorMessage,
   method,
   onAmountChange,
   onClose,
@@ -285,7 +294,7 @@ export function PaymentModal({
         </FormField>
         {error ? (
           <div className="rounded-xl bg-red-50 px-4 py-3 text-sm font-bold text-red-700">
-            Payment failed. Check amount and API connection.
+            {errorMessage || 'Payment failed. Check amount and API connection.'}
           </div>
         ) : null}
         <Button

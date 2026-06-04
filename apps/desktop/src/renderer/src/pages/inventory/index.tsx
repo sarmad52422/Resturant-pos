@@ -18,17 +18,14 @@ import type { ReactNode } from 'react';
 import { Badge, Button, Card } from '@restaurantos/ui';
 import { ActionModal } from '../../components/action-modal';
 import { FormField } from '../../components/form-field';
-import { apiFetch } from '../../lib/api';
 import type { FormSubmitEvent } from '../../lib/events';
+import { inventoryService } from '../../services/inventory-service';
 import { useAuthStore } from '../../store/use-auth-store';
 import type {
   InventoryItem,
-  InventoryResponse,
   PaymentMethod,
-  Purchase,
   PurchaseRow,
   Supplier,
-  SupplierPayment,
 } from './interfaces';
 
 const fieldClass =
@@ -72,17 +69,17 @@ export function InventoryPage() {
 
   const inventoryQuery = useQuery({
     queryKey: ['inventory'],
-    queryFn: () => apiFetch<InventoryResponse>('/inventory'),
+    queryFn: inventoryService.list,
   });
 
   const purchasesQuery = useQuery({
     queryKey: ['inventory-purchases'],
-    queryFn: () => apiFetch<Purchase[]>('/inventory/purchases'),
+    queryFn: inventoryService.purchases,
   });
 
   const suppliersQuery = useQuery({
     queryKey: ['inventory-suppliers'],
-    queryFn: () => apiFetch<Supplier[]>('/inventory/suppliers'),
+    queryFn: inventoryService.suppliers,
   });
 
   const units = inventoryQuery.data?.units ?? [];
@@ -102,20 +99,17 @@ export function InventoryPage() {
 
   const createItem = useMutation({
     mutationFn: () =>
-      apiFetch<InventoryItem>('/inventory/items', {
-        method: 'POST',
-        body: JSON.stringify({
-          name: name.trim(),
-          category: category.trim() || undefined,
-          currentStock: Number(currentStock || 0),
-          minimumStockLevel: Number(minimumStockLevel || 0),
-          averageCost: Number(averageCost || 0),
-          lastPurchaseCost: Number(averageCost || 0),
-          conversionRate: selectedPurchaseUnitId === selectedUsageUnitId ? 1 : 1,
-          purchaseUnitId: selectedPurchaseUnitId,
-          usageUnitId: selectedUsageUnitId,
-          supplierId: supplierId || undefined,
-        }),
+      inventoryService.createItem({
+        name: name.trim(),
+        category: category.trim() || undefined,
+        currentStock: Number(currentStock || 0),
+        minimumStockLevel: Number(minimumStockLevel || 0),
+        averageCost: Number(averageCost || 0),
+        lastPurchaseCost: Number(averageCost || 0),
+        conversionRate: selectedPurchaseUnitId === selectedUsageUnitId ? 1 : 1,
+        purchaseUnitId: selectedPurchaseUnitId,
+        usageUnitId: selectedUsageUnitId,
+        supplierId: supplierId || undefined,
       }),
     onSuccess: () => {
       setName('');
@@ -134,21 +128,18 @@ export function InventoryPage() {
 
   const createPurchase = useMutation({
     mutationFn: () =>
-      apiFetch<Purchase>('/inventory/purchases', {
-        method: 'POST',
-        body: JSON.stringify({
-          supplierId: selectedPurchaseSupplierId,
-          invoiceNumber: invoiceNumber.trim() || undefined,
-          purchaseDate,
-          paidAmount: Number(paidAmount || 0),
-          paymentMethod,
-          items: purchaseRows.map((row) => ({
-            inventoryItemId: row.inventoryItemId,
-            quantity: Number(row.quantity || 0),
-            unitId: row.unitId,
-            unitCost: Number(row.unitCost || 0),
-          })),
-        }),
+      inventoryService.createPurchase({
+        supplierId: selectedPurchaseSupplierId,
+        invoiceNumber: invoiceNumber.trim() || undefined,
+        purchaseDate,
+        paidAmount: Number(paidAmount || 0),
+        paymentMethod,
+        items: purchaseRows.map((row) => ({
+          inventoryItemId: row.inventoryItemId,
+          quantity: Number(row.quantity || 0),
+          unitId: row.unitId,
+          unitCost: Number(row.unitCost || 0),
+        })),
       }),
     onSuccess: () => {
       setInvoiceNumber('');
@@ -166,16 +157,13 @@ export function InventoryPage() {
 
   const createSupplier = useMutation({
     mutationFn: () =>
-      apiFetch<Supplier>('/inventory/suppliers', {
-        method: 'POST',
-        body: JSON.stringify({
-          name: supplierName.trim(),
-          phone: supplierPhone.trim() || undefined,
-          contactPerson: supplierContactPerson.trim() || undefined,
-          address: supplierAddress.trim() || undefined,
-          openingBalance: Number(supplierOpeningBalance || 0),
-          notes: supplierNotes.trim() || undefined,
-        }),
+      inventoryService.createSupplier({
+        name: supplierName.trim(),
+        phone: supplierPhone.trim() || undefined,
+        contactPerson: supplierContactPerson.trim() || undefined,
+        address: supplierAddress.trim() || undefined,
+        openingBalance: Number(supplierOpeningBalance || 0),
+        notes: supplierNotes.trim() || undefined,
       }),
     onSuccess: () => {
       setSupplierName('');
@@ -192,14 +180,11 @@ export function InventoryPage() {
 
   const recordSupplierPayment = useMutation({
     mutationFn: () =>
-      apiFetch<SupplierPayment>(`/inventory/suppliers/${selectedPaymentSupplierId}/payments`, {
-        method: 'POST',
-        body: JSON.stringify({
-          amount: Number(supplierPaymentAmount || 0),
-          paymentMethod: supplierPaymentMethod,
-          reference: supplierPaymentReference.trim() || undefined,
-          notes: supplierPaymentNotes.trim() || undefined,
-        }),
+      inventoryService.recordSupplierPayment(selectedPaymentSupplierId, {
+        amount: Number(supplierPaymentAmount || 0),
+        paymentMethod: supplierPaymentMethod,
+        reference: supplierPaymentReference.trim() || undefined,
+        notes: supplierPaymentNotes.trim() || undefined,
       }),
     onSuccess: () => {
       setPaymentSupplierId('');
@@ -215,11 +200,7 @@ export function InventoryPage() {
   });
 
   const toggleItem = useMutation({
-    mutationFn: (item: InventoryItem) =>
-      apiFetch<InventoryItem>(`/inventory/items/${item.id}`, {
-        method: 'PATCH',
-        body: JSON.stringify({ active: !item.active }),
-      }),
+    mutationFn: (item: InventoryItem) => inventoryService.updateItem(item.id, { active: !item.active }),
     onSuccess: () => queryClient.invalidateQueries({ queryKey: ['inventory'] }),
   });
 

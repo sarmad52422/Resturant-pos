@@ -5,10 +5,10 @@ import type { ReactNode } from 'react';
 import { Badge, Button, Card } from '@restaurantos/ui';
 import { ActionModal } from '../../components/action-modal';
 import { FormField } from '../../components/form-field';
-import { apiFetch } from '../../lib/api';
 import type { FormSubmitEvent } from '../../lib/events';
+import { shiftsService } from '../../services/shifts-service';
 import { useAuthStore } from '../../store/use-auth-store';
-import type { Shift, ShiftsResponse } from './interfaces';
+import type { Shift } from './interfaces';
 
 const fieldClass =
   'h-11 w-full rounded-xl border border-field bg-white px-3 text-sm font-semibold text-espresso outline-none transition focus:border-primary focus:ring-4 focus:ring-primary/10';
@@ -30,7 +30,7 @@ export function ShiftsPage() {
 
   const shiftsQuery = useQuery({
     queryKey: ['shifts'],
-    queryFn: () => apiFetch<ShiftsResponse>('/shifts'),
+    queryFn: shiftsService.list,
   });
 
   const activeShift = shiftsQuery.data?.activeShift;
@@ -46,13 +46,10 @@ export function ShiftsPage() {
 
   const openShift = useMutation({
     mutationFn: () =>
-      apiFetch<Shift>('/shifts/open', {
-        method: 'POST',
-        body: JSON.stringify({
-          openingCash: Number(openingCash || 0),
-          terminalDevice: terminalDevice.trim() || undefined,
-          notes: openNotes.trim() || undefined,
-        }),
+      shiftsService.open({
+        openingCash: Number(openingCash || 0),
+        terminalDevice: terminalDevice.trim() || undefined,
+        notes: openNotes.trim() || undefined,
       }),
     onSuccess: () => {
       setOpeningCash('0');
@@ -65,13 +62,10 @@ export function ShiftsPage() {
 
   const closeShift = useMutation({
     mutationFn: () =>
-      apiFetch<Shift>(`/shifts/${selectedClosingShift?.id}/close`, {
-        method: 'PATCH',
-        body: JSON.stringify({
-          countedCash: Number(countedCash || 0),
-          expenses: Number(expenses || 0),
-          notes: closeNotes.trim() || undefined,
-        }),
+      shiftsService.close(selectedClosingShift?.id ?? '', {
+        countedCash: Number(countedCash || 0),
+        expenses: Number(expenses || 0),
+        notes: closeNotes.trim() || undefined,
       }),
     onSuccess: () => {
       setClosingShiftId('');
@@ -84,10 +78,7 @@ export function ShiftsPage() {
   });
 
   const recalculateShift = useMutation({
-    mutationFn: (shiftId: string) =>
-      apiFetch<Shift>(`/shifts/${shiftId}/recalculate`, {
-        method: 'PATCH',
-      }),
+    mutationFn: shiftsService.recalculate,
     onSuccess: () => queryClient.invalidateQueries({ queryKey: ['shifts'] }),
   });
 

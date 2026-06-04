@@ -32,6 +32,7 @@ export function buildReceiptHtml(order: PosOrder, cart: ReceiptLine[], total: nu
       <body>
         <h1>RestaurantOS</h1>
         <p class="center">Order ${escapeHtml(order.orderNumber)}</p>
+        ${order.table?.name ? `<p class="center">Table ${escapeHtml(order.table.name)}</p>` : ''}
         <div class="line"></div>
         <table>${rows}</table>
         <div class="line"></div>
@@ -45,7 +46,7 @@ export function buildReceiptHtml(order: PosOrder, cart: ReceiptLine[], total: nu
 }
 
 export function buildReceiptText(
-  order: Pick<PosOrder, 'grandTotal' | 'orderNumber'>,
+  order: Pick<PosOrder, 'grandTotal' | 'orderNumber' | 'table'>,
   cart: ReceiptLine[],
   total: number,
 ) {
@@ -59,13 +60,14 @@ export function buildReceiptText(
 
   return [
     `Order ${order.orderNumber}`,
+    order.table?.name ? `Table ${order.table.name}` : undefined,
     '------------------------------',
     rows,
     '------------------------------',
     `Total ${money.format(total || Number(order.grandTotal))}`,
     '',
     'Thank you',
-  ].join('\n');
+  ].filter(Boolean).join('\n');
 }
 
 function escapeHtml(value: string) {

@@ -5,10 +5,9 @@ import type { ReactNode } from 'react';
 import { Badge, Button, Card } from '@restaurantos/ui';
 import { ActionModal } from '../../components/action-modal';
 import { FormField } from '../../components/form-field';
-import { apiFetch } from '../../lib/api';
 import type { FormSubmitEvent } from '../../lib/events';
+import { customersService } from '../../services/customers-service';
 import { useAuthStore } from '../../store/use-auth-store';
-import type { Customer, CustomersResponse } from './interfaces';
 
 const fieldClass =
   'h-11 w-full rounded-xl border border-field bg-white px-3 text-sm font-semibold text-espresso outline-none transition focus:border-primary focus:ring-4 focus:ring-primary/10';
@@ -25,19 +24,16 @@ export function CustomersPage() {
 
   const customersQuery = useQuery({
     queryKey: ['customers'],
-    queryFn: () => apiFetch<CustomersResponse>('/customers'),
+    queryFn: customersService.list,
   });
 
   const createCustomer = useMutation({
     mutationFn: () =>
-      apiFetch<Customer>('/customers', {
-        method: 'POST',
-        body: JSON.stringify({
-          name: name.trim(),
-          phone: phone.trim(),
-          creditLimit: Number(creditLimit || 0),
-          customerType: Number(creditLimit || 0) > 0 ? 'CREDIT' : 'REGULAR',
-        }),
+      customersService.create({
+        name: name.trim(),
+        phone: phone.trim(),
+        creditLimit: Number(creditLimit || 0),
+        customerType: Number(creditLimit || 0) > 0 ? 'CREDIT' : 'REGULAR',
       }),
     onSuccess: () => {
       setName('');

@@ -15,6 +15,18 @@ RestaurantOS POS is an in-house restaurant, cafe, juice bar, burger, pizza, and 
 - Keep screen files focused on page state, data loading, and layout.
 - Move reusable builders, formatters, validation helpers, and setting readers into page-local helper files.
 - Keep new and touched source files under 500 lines where practical. If a file must grow beyond that, split forms, modals, tables, and pure helpers before adding new features.
+- Keep desktop server calls inside `apps/desktop/src/renderer/src/services`. Pages should use service methods with TanStack Query or the shared Axios hook instead of building URLs and request bodies inline.
+
+## Desktop API Layer
+
+Desktop API access is centralized around Axios:
+
+- `apps/desktop/src/renderer/src/lib/api-client.ts` - Axios instance, API base URL, auth-token interceptor, and typed request helper.
+- `apps/desktop/src/renderer/src/lib/api-error.ts` - Backend-aware error normalization for NestJS validation and `BadRequestException` responses.
+- `apps/desktop/src/renderer/src/hooks/use-axios.ts` - Reusable `useAxios` hook for manual requests with `loading`, `error`, and `errorMessage`.
+- `apps/desktop/src/renderer/src/services/*-service.ts` - Domain services for auth, POS, orders, tables, menu, inventory, customers, users, shifts, and settings.
+
+Rule for new UI work: add or reuse a service method first, then call that service from the page/hook. Keep raw Axios details out of page components.
 
 ## Requirements
 
@@ -118,8 +130,10 @@ Current admin endpoints:
 - `PATCH /shifts/:id/close` - Closes a shift with counted cash, expenses, and calculated difference. Closing another user's shift requires `shift.close.other`.
 - `PATCH /shifts/:id/recalculate` - Recalculates payment totals for a shift. Managing another user's shift requires `shift.close.other`.
 - `GET /menu/pos` - Lists active categories and active menu items for the cashier POS.
-- `POST /orders` - Creates a priced draft order from active menu items. Requires `order.create`.
-- `PATCH /orders/:id/send-to-kitchen` - Sends order items to kitchen and deducts recipe stock. Requires `order.send_to_kitchen`.
+- `GET /orders` - Lists today's or all orders with optional status/search filters.
+- `GET /orders/:id` - Returns order detail with items, payments, table, customer, and delivery context.
+- `POST /orders` - Creates a priced draft order from active menu items. Dine-in orders require a free active table. Requires `order.create`.
+- `PATCH /orders/:id/send-to-kitchen` - Sends order items to kitchen, deducts recipe stock, and marks the attached dine-in table as sent to kitchen. Requires `order.send_to_kitchen`.
 - `POST /orders/:id/payments` - Records a payment and completes the order when fully paid. Requires `order.create`.
 - `PATCH /orders/:id/void` - Cancels or voids an unpaid order with a required reason. Requires `order.void`.
 - `PATCH /orders/:id/items/:itemId/void` - Voids one unpaid order item with a required reason. Requires `order.void`.
@@ -144,15 +158,17 @@ Current admin endpoints:
 - `PATCH /inventory/suppliers/:id` - Updates supplier contact details. Requires `inventory.manage`.
 - `POST /inventory/suppliers/:id/payments` - Records a supplier payment and reduces payable. Requires `inventory.manage`.
 
-The desktop Staff, Menu, Customers, and Inventory pages now use these endpoints for real operational tables, compact popup forms, permission-aware editable states, and active/hidden toggles where applicable.
+The desktop Staff, Menu, Customers, Inventory, and Orders pages now use these endpoints for real operational tables, compact popup forms, permission-aware editable states, lookup/detail workflows, and active/hidden toggles where applicable.
 
 The Staff page includes staff login creation, role assignment, active/inactive controls, password reset, and role permission editing. The API blocks self-deactivation and prevents removing `user.manage` from your own active role.
 
 The POS correction flow lets cashiers remove local cart lines before an order is created. Once an order exists, voiding an item or the full order requires a reason, writes an audit log, restores recipe stock for already-sent kitchen items, and removes cancelled kitchen tickets from the kitchen screen.
 
+The Orders page lets cashiers search created orders, filter by date/status, view order detail, reprint receipts, and use unpaid order/item correction actions from a dedicated lookup workspace.
+
 The Shift page includes opening cash, live payment buckets, close drawer workflow, counted cash, expenses, expected cash, and difference tracking. Shift totals read `OrderPayment` records between shift open and close times so the later payment workflow can feed the same screen.
 
-The POS page loads real active menu items, builds a cart, creates priced orders, sends orders to kitchen, records payments, and prints receipts through Electron.
+The POS page loads real active menu items, builds a cart, creates priced orders, sends orders to kitchen, records payments, and prints receipts through Electron. Dine-in orders open a free-table picker before kitchen, payment, or receipt creation if no table is attached yet.
 
 Thermal printer support currently includes:
 
@@ -194,6 +210,13 @@ Seeded table areas:
 - Patio
 
 The desktop Tables page provides area filters, top-down visual table cards with chairs, covers/availability metrics, quick clean/free/reserve controls, dine-in order start, and a compact create-table form.
+
+Dine-in lifecycle:
+
+- Selecting a free table from POS attaches it to the order and marks it as waiting for order.
+- Sending the order to kitchen marks the attached table as sent to kitchen.
+- Fully paid dine-in orders mark the table as cleaning required.
+- Voiding an unpaid dine-in order frees the table again.
 
 ## Brand Theme
 
@@ -255,9 +278,9 @@ Current POS keyboard shortcuts:
 - `Shift + 1..9` - Preview the matching numbered visible menu item while search is focused.
 - `Ctrl + 1..9` - Preview the matching numbered visible menu item.
 - `Enter` - Add the item when the item preview popup is open.
-- `F5` - Send the current cart/order to kitchen.
-- `F6` - Open receipt preview before printing.
-- `F7` - Open payment popup.
+- `F5` - Send the current cart/order to kitchen. Dine-in opens table selection first when needed.
+- `F6` - Open receipt preview before printing. Dine-in opens table selection first when needed.
+- `F7` - Open payment popup. Dine-in opens table selection first when needed.
 - `F10` - Open table screen.
 - `Ctrl + P` - Open receipt preview before printing.
 - `P` - Print from the receipt preview when the preview is open and the cashier is not typing in a field.

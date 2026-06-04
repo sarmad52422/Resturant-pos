@@ -44,20 +44,25 @@ export class TablesService {
 
     const activeTables = tables.filter((table) => table.active);
     const areas = [...new Set(activeTables.map((table) => table.area ?? 'Main Floor'))].sort();
+    const freeTables = activeTables.filter((table) => table.status === TableStatus.FREE && !table.orders[0]);
 
     return {
       areas,
-      tables: tables.map((table) => ({
-        ...table,
-        currentOrder: table.orders[0] ?? null,
-        nextReservation: table.reservations[0] ?? null,
-        orders: undefined,
-        reservations: undefined,
-      })),
+      tables: tables.map((table) => {
+        const currentOrder = table.orders[0] ?? null;
+        return {
+          ...table,
+          status: currentOrder && table.status === TableStatus.FREE ? TableStatus.WAITING_FOR_ORDER : table.status,
+          currentOrder,
+          nextReservation: table.reservations[0] ?? null,
+          orders: undefined,
+          reservations: undefined,
+        };
+      }),
       metrics: {
         activeTables: activeTables.length,
-        freeTables: activeTables.filter((table) => table.status === TableStatus.FREE).length,
-        occupiedTables: activeTables.filter((table) => table.status !== TableStatus.FREE).length,
+        freeTables: freeTables.length,
+        occupiedTables: activeTables.length - freeTables.length,
         totalCovers: activeTables.reduce((total, table) => total + table.capacity, 0),
       },
     };

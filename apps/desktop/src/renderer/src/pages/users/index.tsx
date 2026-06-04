@@ -5,10 +5,10 @@ import type { ReactNode } from 'react';
 import { Badge, Button, Card } from '@restaurantos/ui';
 import { ActionModal } from '../../components/action-modal';
 import { FormField } from '../../components/form-field';
-import { apiFetch } from '../../lib/api';
 import type { FormSubmitEvent } from '../../lib/events';
+import { usersService, type UpdateUserInput } from '../../services/users-service';
 import { useAuthStore } from '../../store/use-auth-store';
-import type { Role, StaffUser, UsersResponse } from './interfaces';
+import type { Role, StaffUser } from './interfaces';
 
 const fieldClass =
   'h-11 w-full rounded-xl border border-field bg-white px-3 text-sm font-semibold text-espresso outline-none transition focus:border-primary focus:ring-4 focus:ring-primary/10';
@@ -34,7 +34,7 @@ export function UsersPage() {
 
   const usersQuery = useQuery({
     queryKey: ['users'],
-    queryFn: () => apiFetch<UsersResponse>('/users'),
+    queryFn: usersService.list,
   });
 
   const users = usersQuery.data?.users ?? [];
@@ -53,16 +53,13 @@ export function UsersPage() {
 
   const createUser = useMutation({
     mutationFn: () =>
-      apiFetch<StaffUser>('/users', {
-        method: 'POST',
-        body: JSON.stringify({
-          name: name.trim(),
-          username: username.trim(),
-          phone: phone.trim() || undefined,
-          password,
-          roleId: selectedRoleId,
-          active: true,
-        }),
+      usersService.create({
+        name: name.trim(),
+        username: username.trim(),
+        phone: phone.trim() || undefined,
+        password,
+        roleId: selectedRoleId,
+        active: true,
       }),
     onSuccess: () => {
       setName('');
@@ -76,20 +73,12 @@ export function UsersPage() {
   });
 
   const updateUser = useMutation({
-    mutationFn: ({ id, patch }: { id: string; patch: Partial<Pick<StaffUser, 'active' | 'name' | 'roleId' | 'username'>> & { phone?: string } }) =>
-      apiFetch<StaffUser>(`/users/${id}`, {
-        method: 'PATCH',
-        body: JSON.stringify(patch),
-      }),
+    mutationFn: ({ id, patch }: { id: string; patch: UpdateUserInput }) => usersService.update(id, patch),
     onSuccess: () => queryClient.invalidateQueries({ queryKey: ['users'] }),
   });
 
   const updatePassword = useMutation({
-    mutationFn: () =>
-      apiFetch<StaffUser>(`/users/${passwordUserId}/password`, {
-        method: 'PATCH',
-        body: JSON.stringify({ password: newPassword }),
-      }),
+    mutationFn: () => usersService.updatePassword(passwordUserId, newPassword),
     onSuccess: () => {
       setPasswordUserId('');
       setNewPassword('');
@@ -100,14 +89,11 @@ export function UsersPage() {
 
   const saveRole = useMutation({
     mutationFn: () =>
-      apiFetch<Role>(editingRoleId ? `/users/roles/${editingRoleId}` : '/users/roles', {
-        method: editingRoleId ? 'PATCH' : 'POST',
-        body: JSON.stringify({
-          name: roleName.trim(),
-          description: roleDescription.trim() || undefined,
-          permissionIds: rolePermissionIds,
-        }),
-      }),
+      usersService.saveRole({
+        name: roleName.trim(),
+        description: roleDescription.trim() || undefined,
+        permissionIds: rolePermissionIds,
+      }, editingRoleId || undefined),
     onSuccess: () => {
       resetRoleForm();
       void queryClient.invalidateQueries({ queryKey: ['users'] });

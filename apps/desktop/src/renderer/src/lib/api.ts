@@ -1,34 +1,38 @@
-const apiUrl = import.meta.env.VITE_API_URL ?? 'http://localhost:4300';
-
-function readStoredToken() {
-  try {
-    const raw = localStorage.getItem('restaurantos-auth');
-    if (!raw) return undefined;
-    const parsed = JSON.parse(raw) as { state?: { accessToken?: string } };
-    return parsed.state?.accessToken;
-  } catch {
-    return undefined;
-  }
-}
+import type { AxiosRequestConfig } from 'axios';
+import { apiClient, apiRequest } from './api-client';
 
 export async function apiFetch<T>(
   path: string,
   init?: RequestInit,
-  accessToken = readStoredToken(),
+  accessToken?: string,
 ): Promise<T> {
   const headers = new Headers(init?.headers);
-  headers.set('Content-Type', 'application/json');
-  if (accessToken) headers.set('Authorization', `Bearer ${accessToken}`);
+  const config: AxiosRequestConfig = {
+    data: bodyToData(init?.body),
+    headers: Object.fromEntries(headers.entries()),
+    method: init?.method ?? 'GET',
+    url: path,
+  };
 
-  const response = await fetch(`${apiUrl}${path}`, {
-    headers,
-    ...init,
-  });
+  if (accessToken) config.headers = { ...config.headers, Authorization: `Bearer ${accessToken}` };
+  return apiRequest<T>(config);
+}
 
-  if (!response.ok) {
-    const message = await response.text();
-    throw new Error(message || `RestaurantOS API error ${response.status}`);
+export const http = {
+  delete: <T>(url: string) => apiRequest<T>({ method: 'DELETE', url }),
+  get: <T>(url: string) => apiRequest<T>({ method: 'GET', url }),
+  patch: <T, B = unknown>(url: string, data?: B) => apiRequest<T>({ data, method: 'PATCH', url }),
+  post: <T, B = unknown>(url: string, data?: B) => apiRequest<T>({ data, method: 'POST', url }),
+  put: <T, B = unknown>(url: string, data?: B) => apiRequest<T>({ data, method: 'PUT', url }),
+};
+
+export { apiClient };
+
+function bodyToData(body: BodyInit | null | undefined) {
+  if (!body || typeof body !== 'string') return body;
+  try {
+    return JSON.parse(body) as unknown;
+  } catch {
+    return body;
   }
-
-  return response.json() as Promise<T>;
 }

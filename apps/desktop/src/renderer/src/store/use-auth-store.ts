@@ -1,6 +1,6 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
-import { apiFetch } from '../lib/api';
+import { authService } from '../services/auth-service';
 
 export interface AuthUser {
   id: string;
@@ -9,11 +9,6 @@ export interface AuthUser {
   roleId: string;
   role: string;
   permissions: string[];
-}
-
-interface LoginResponse {
-  accessToken: string;
-  user: AuthUser;
 }
 
 interface AuthState {
@@ -33,14 +28,7 @@ export const useAuthStore = create<AuthState>()(
       login: async (username, password) => {
         set({ loading: true });
         try {
-          const result = await apiFetch<LoginResponse>(
-            '/auth/login',
-            {
-              method: 'POST',
-              body: JSON.stringify({ username, password }),
-            },
-            undefined,
-          );
+          const result = await authService.login(username, password);
           set({ accessToken: result.accessToken, user: result.user, loading: false });
         } catch (error) {
           set({ loading: false });
@@ -52,7 +40,7 @@ export const useAuthStore = create<AuthState>()(
         if (!accessToken) return;
         set({ loading: true });
         try {
-          const result = await apiFetch<{ user: AuthUser }>('/auth/me', undefined, accessToken);
+          const result = await authService.me(accessToken);
           set({ user: result.user, loading: false });
         } catch (error) {
           set({ accessToken: undefined, user: undefined, loading: false });
@@ -62,9 +50,7 @@ export const useAuthStore = create<AuthState>()(
       logout: async () => {
         const { accessToken } = get();
         try {
-          if (accessToken) {
-            await apiFetch('/auth/logout', { method: 'POST' }, accessToken);
-          }
+          if (accessToken) await authService.logout(accessToken);
         } finally {
           set({ accessToken: undefined, user: undefined, loading: false });
         }

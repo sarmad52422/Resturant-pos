@@ -65,6 +65,14 @@ export interface PosOrder {
   payments: OrderPayment[];
   status: string;
   subtotal: string;
+  table?: {
+    area?: string;
+    capacity?: number;
+    id?: string;
+    name: string;
+    status?: string;
+  } | null;
+  tableId?: string;
 }
 
 export interface PrinterInfo {

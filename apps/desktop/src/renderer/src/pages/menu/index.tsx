@@ -16,12 +16,12 @@ import { useFieldArray, useForm } from 'react-hook-form';
 import { Badge, Button, Card } from '@restaurantos/ui';
 import { ActionModal } from '../../components/action-modal';
 import { FormField } from '../../components/form-field';
-import { apiFetch } from '../../lib/api';
 import type { FormSubmitEvent } from '../../lib/events';
+import { menuService } from '../../services/menu-service';
 import { useAuthStore } from '../../store/use-auth-store';
 import { InlineState, Metric } from './components';
 import { compactFieldClass, defaultRecipeForm, fieldClass, recipeSchema, type RecipeForm } from './recipe-form-model';
-import type { MenuCategory, MenuItem, MenuSummary, Recipe, RecipeBuilderSummary } from './interfaces';
+import type { MenuItem } from './interfaces';
 
 const money = new Intl.NumberFormat('en-PK', { maximumFractionDigits: 0, style: 'currency', currency: 'PKR' });
 type MenuActionModal = 'category' | 'item' | 'recipe' | null;
@@ -40,12 +40,12 @@ export function MenuPage() {
 
   const menuQuery = useQuery({
     queryKey: ['menu-summary'],
-    queryFn: () => apiFetch<MenuSummary>('/menu'),
+    queryFn: menuService.summary,
   });
 
   const recipeQuery = useQuery({
     queryKey: ['recipe-builder'],
-    queryFn: () => apiFetch<RecipeBuilderSummary>('/menu/recipes'),
+    queryFn: menuService.recipeBuilder,
   });
 
   const categories = menuQuery.data?.categories ?? [];
@@ -96,13 +96,10 @@ export function MenuPage() {
 
   const createCategory = useMutation({
     mutationFn: () =>
-      apiFetch<MenuCategory>('/menu/categories', {
-        method: 'POST',
-        body: JSON.stringify({
-          name: categoryName.trim(),
-          kitchenStationId: categoryStationId || undefined,
-          displayOrder: categories.length * 10 + 10,
-        }),
+      menuService.createCategory({
+        name: categoryName.trim(),
+        kitchenStationId: categoryStationId || undefined,
+        displayOrder: categories.length * 10 + 10,
       }),
     onSuccess: () => {
       setCategoryName('');
@@ -114,18 +111,15 @@ export function MenuPage() {
 
   const createItem = useMutation({
     mutationFn: () =>
-      apiFetch<MenuItem>('/menu/items', {
-        method: 'POST',
-        body: JSON.stringify({
-          name: itemName.trim(),
-          basePrice: Number(itemPrice),
-          categoryId: selectedItemCategoryId,
-          kitchenStationId:
-            itemStationId || categoriesById.get(selectedItemCategoryId)?.kitchenStation?.id || undefined,
-          preparationMinutes: 10,
-          recipeRequired: false,
-          taxable: true,
-        }),
+      menuService.createItem({
+        name: itemName.trim(),
+        basePrice: Number(itemPrice),
+        categoryId: selectedItemCategoryId,
+        kitchenStationId:
+          itemStationId || categoriesById.get(selectedItemCategoryId)?.kitchenStation?.id || undefined,
+        preparationMinutes: 10,
+        recipeRequired: false,
+        taxable: true,
       }),
     onSuccess: () => {
       setItemName('');
@@ -138,11 +132,7 @@ export function MenuPage() {
   });
 
   const createRecipe = useMutation({
-    mutationFn: (values: RecipeForm) =>
-      apiFetch<Recipe>('/menu/recipes', {
-        method: 'POST',
-        body: JSON.stringify(values),
-      }),
+    mutationFn: (values: RecipeForm) => menuService.createRecipe(values),
     onSuccess: () => {
       reset(defaultRecipeForm(recipeItems[0], inventoryItems[0]));
       setActiveModal(null);
@@ -151,11 +141,7 @@ export function MenuPage() {
   });
 
   const toggleItem = useMutation({
-    mutationFn: (item: MenuItem) =>
-      apiFetch<MenuItem>(`/menu/items/${item.id}`, {
-        method: 'PATCH',
-        body: JSON.stringify({ active: !item.active }),
-      }),
+    mutationFn: (item: MenuItem) => menuService.updateItem(item.id, { active: !item.active }),
     onSuccess: refreshMenu,
   });
 

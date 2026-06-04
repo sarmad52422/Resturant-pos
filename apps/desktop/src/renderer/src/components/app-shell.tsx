@@ -5,6 +5,7 @@ import {
   ChefHat,
   CircleHelp,
   CreditCard,
+  ClipboardList,
   LayoutDashboard,
   Settings,
   ShoppingBag,
@@ -22,6 +23,7 @@ import { useAuthStore } from '../store/use-auth-store';
 
 const navItems = [
   { to: '/', label: 'POS', icon: ShoppingBag },
+  { to: '/orders', label: 'Orders', icon: ClipboardList },
   { to: '/dashboard', label: 'Dashboard', icon: LayoutDashboard },
   { to: '/menu', label: 'Menu', icon: ChefHat },
   { to: '/inventory', label: 'Inventory', icon: Boxes },

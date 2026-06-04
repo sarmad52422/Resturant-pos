@@ -725,6 +725,10 @@ video {
   display: inline-flex;
 }
 
+.\!table {
+  display: table !important;
+}
+
 .table {
   display: table;
 }
@@ -767,6 +771,10 @@ video {
 
 .h-4 {
   height: 1rem;
+}
+
+.h-40 {
+  height: 10rem;
 }
 
 .h-44 {
@@ -825,6 +833,14 @@ video {
   max-height: 88vh;
 }
 
+.max-h-\[calc\(100vh-260px\)\] {
+  max-height: calc(100vh - 260px);
+}
+
+.max-h-\[calc\(100vh-310px\)\] {
+  max-height: calc(100vh - 310px);
+}
+
 .max-h-\[calc\(88vh-88px\)\] {
   max-height: calc(88vh - 88px);
 }
@@ -839,6 +855,10 @@ video {
 
 .min-h-72 {
   min-height: 18rem;
+}
+
+.min-h-80 {
+  min-height: 20rem;
 }
 
 .min-h-9 {
@@ -915,6 +935,10 @@ video {
 
 .max-w-2xl {
   max-width: 42rem;
+}
+
+.max-w-3xl {
+  max-width: 48rem;
 }
 
 .max-w-4xl {
@@ -1041,6 +1065,10 @@ video {
   grid-template-columns: 1fr 180px 180px;
 }
 
+.grid-cols-\[1fr_180px_220px\] {
+  grid-template-columns: 1fr 180px 220px;
+}
+
 .grid-cols-\[1fr_1fr\] {
   grid-template-columns: 1fr 1fr;
 }
@@ -1053,8 +1081,16 @@ video {
   grid-template-columns: 1fr 430px;
 }
 
+.grid-cols-\[1fr_90px_120px_44px\] {
+  grid-template-columns: 1fr 90px 120px 44px;
+}
+
 .grid-cols-\[220px_1fr\] {
   grid-template-columns: 220px 1fr;
+}
+
+.grid-cols-\[420px_1fr\] {
+  grid-template-columns: 420px 1fr;
 }
 
 .grid-cols-\[repeat\(auto-fill\2c minmax\(210px\2c 1fr\)\)\] {
@@ -1407,6 +1443,11 @@ video {
 .px-6 {
   padding-left: 1.5rem;
   padding-right: 1.5rem;
+}
+
+.py-1 {
+  padding-top: 0.25rem;
+  padding-bottom: 0.25rem;
 }
 
 .py-2 {
@@ -1956,6 +1997,12 @@ textarea {
 .hover\:text-secondary:hover {
   --tw-text-opacity: 1;
   color: rgb(var(--ro-secondary-rgb) / var(--tw-text-opacity, 1));
+}
+
+.hover\:shadow-\[0_18px_42px_rgb\(var\(--ro-secondary-rgb\)\/0\.12\)\]:hover {
+  --tw-shadow: 0 18px 42px rgb(var(--ro-secondary-rgb)/0.12);
+  --tw-shadow-colored: 0 18px 42px var(--tw-shadow-color);
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
 }
 
 .hover\:shadow-\[0_22px_48px_rgb\(var\(--ro-secondary-rgb\)\/0\.12\)\]:hover {

@@ -1,7 +1,7 @@
-import { Body, Controller, Get, Param, Patch, Post, UseGuards } from '@nestjs/common';
+import { Body, Controller, Get, Param, Patch, Post, Query, UseGuards } from '@nestjs/common';
 import { IsArray, IsEnum, IsNumber, IsOptional, IsString, Max, Min, ValidateNested } from 'class-validator';
 import { Type } from 'class-transformer';
-import { PaymentMethod } from '@prisma/client';
+import { OrderStatus, PaymentMethod } from '@prisma/client';
 import { CurrentUser, type RequestUser } from '../../common/decorators/current-user.decorator';
 import { RequirePermissions } from '../../common/decorators/permissions.decorator';
 import { JwtAuthGuard } from '../../common/guards/jwt-auth.guard';
@@ -71,8 +71,17 @@ export class OrdersController {
   constructor(private readonly ordersService: OrdersService) {}
 
   @Get()
-  list() {
-    return this.ordersService.listOpenOrders();
+  list(
+    @Query('date') date?: 'today' | 'all',
+    @Query('search') search?: string,
+    @Query('status') status?: OrderStatus,
+  ) {
+    return this.ordersService.listOrders({ date, search, status });
+  }
+
+  @Get(':id')
+  get(@Param('id') id: string) {
+    return this.ordersService.getOrder(id);
   }
 
   @Post()

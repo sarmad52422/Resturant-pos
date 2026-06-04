@@ -41,6 +41,7 @@ const tips = [
   'Receipt printing opens a preview first so the cashier can check the bill.',
   'Use the trash button to fix cart mistakes before sending the order.',
   'After an order exists, corrections need a reason and are saved in the audit log.',
+  'Use Orders to find created orders later, reprint receipts, or correct unpaid orders.',
   'Save printer details in Settings > Terminal hardware before rush hours.',
   'Keep payment and print popups closed when using item quick-add shortcuts.',
   'Table shortcuts and selected-line quantity controls will become safer after selected state is added.',
