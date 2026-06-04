@@ -28912,7 +28912,7 @@ const customersService = {
   create: (input) => apiRequest({ data: input, method: "POST", url: "/customers" }),
   list: () => apiRequest({ method: "GET", url: "/customers" })
 };
-const fieldClass$8 = "h-11 w-full rounded-xl border border-field bg-white px-3 text-sm font-semibold text-espresso outline-none transition focus:border-primary focus:ring-4 focus:ring-primary/10";
+const fieldClass$9 = "h-11 w-full rounded-xl border border-field bg-white px-3 text-sm font-semibold text-espresso outline-none transition focus:border-primary focus:ring-4 focus:ring-primary/10";
 const money$4 = new Intl.NumberFormat("en-PK", { maximumFractionDigits: 0, style: "currency", currency: "PKR" });
 function CustomersPage() {
   const queryClient2 = useQueryClient();
@@ -29018,7 +29018,7 @@ function CustomersPage() {
           /* @__PURE__ */ jsxRuntimeExports.jsx(FormField, { label: "Customer name", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
             "input",
             {
-              className: fieldClass$8,
+              className: fieldClass$9,
               disabled: !canManageCustomers,
               value: name,
               onChange: (event) => setName(event.target.value)
@@ -29027,7 +29027,7 @@ function CustomersPage() {
           /* @__PURE__ */ jsxRuntimeExports.jsx(FormField, { label: "Phone number", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
             "input",
             {
-              className: fieldClass$8,
+              className: fieldClass$9,
               disabled: !canManageCustomers,
               value: phone,
               onChange: (event) => setPhone(event.target.value)
@@ -29036,7 +29036,7 @@ function CustomersPage() {
           /* @__PURE__ */ jsxRuntimeExports.jsx(FormField, { label: "Money limit", hint: "Maximum amount this customer can owe.", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
             "input",
             {
-              className: fieldClass$8,
+              className: fieldClass$9,
               disabled: !canManageCustomers,
               min: "0",
               type: "number",
@@ -29204,7 +29204,7 @@ const inventoryService = {
   suppliers: () => apiRequest({ method: "GET", url: "/inventory/suppliers" }),
   updateItem: (itemId, patch) => apiRequest({ data: patch, method: "PATCH", url: `/inventory/items/${itemId}` })
 };
-const fieldClass$7 = "h-11 w-full rounded-xl border border-field bg-white px-3 text-sm font-semibold text-espresso outline-none transition focus:border-primary focus:ring-4 focus:ring-primary/10";
+const fieldClass$8 = "h-11 w-full rounded-xl border border-field bg-white px-3 text-sm font-semibold text-espresso outline-none transition focus:border-primary focus:ring-4 focus:ring-primary/10";
 const money$3 = new Intl.NumberFormat("en-PK", { maximumFractionDigits: 0, style: "currency", currency: "PKR" });
 const today = (/* @__PURE__ */ new Date()).toISOString().slice(0, 10);
 function InventoryPage() {
@@ -29643,7 +29643,7 @@ function InventoryPage() {
           /* @__PURE__ */ jsxRuntimeExports.jsx(FormField, { label: "Stock item name", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
             "input",
             {
-              className: fieldClass$7,
+              className: fieldClass$8,
               disabled: !canManageInventory,
               value: name,
               onChange: (event) => setName(event.target.value)
@@ -29652,7 +29652,7 @@ function InventoryPage() {
           /* @__PURE__ */ jsxRuntimeExports.jsx(FormField, { label: "Group", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
             "input",
             {
-              className: fieldClass$7,
+              className: fieldClass$8,
               disabled: !canManageInventory,
               value: category,
               onChange: (event) => setCategory(event.target.value)
@@ -29662,7 +29662,7 @@ function InventoryPage() {
             /* @__PURE__ */ jsxRuntimeExports.jsx(FormField, { label: "Current stock", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
               "input",
               {
-                className: fieldClass$7,
+                className: fieldClass$8,
                 disabled: !canManageInventory,
                 min: "0",
                 type: "number",
@@ -29673,7 +29673,7 @@ function InventoryPage() {
             /* @__PURE__ */ jsxRuntimeExports.jsx(FormField, { label: "Low stock warning", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
               "input",
               {
-                className: fieldClass$7,
+                className: fieldClass$8,
                 disabled: !canManageInventory,
                 min: "0",
                 type: "number",
@@ -29685,7 +29685,7 @@ function InventoryPage() {
           /* @__PURE__ */ jsxRuntimeExports.jsx(FormField, { label: "Average buy price", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
             "input",
             {
-              className: fieldClass$7,
+              className: fieldClass$8,
               disabled: !canManageInventory,
               min: "0",
               type: "number",
@@ -29697,7 +29697,7 @@ function InventoryPage() {
             /* @__PURE__ */ jsxRuntimeExports.jsx(FormField, { label: "Buy unit", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
               "select",
               {
-                className: fieldClass$7,
+                className: fieldClass$8,
                 disabled: !canManageInventory,
                 value: selectedPurchaseUnitId,
                 onChange: (event) => setPurchaseUnitId(event.target.value),
@@ -29710,7 +29710,7 @@ function InventoryPage() {
             /* @__PURE__ */ jsxRuntimeExports.jsx(FormField, { label: "Use unit", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
               "select",
               {
-                className: fieldClass$7,
+                className: fieldClass$8,
                 disabled: !canManageInventory,
                 value: selectedUsageUnitId,
                 onChange: (event) => setUsageUnitId(event.target.value),
@@ -29724,7 +29724,7 @@ function InventoryPage() {
           /* @__PURE__ */ jsxRuntimeExports.jsx(FormField, { label: "Supplier", children: /* @__PURE__ */ jsxRuntimeExports.jsxs(
             "select",
             {
-              className: fieldClass$7,
+              className: fieldClass$8,
               disabled: !canManageInventory,
               value: supplierId,
               onChange: (event) => setSupplierId(event.target.value),
@@ -29758,7 +29758,7 @@ function InventoryPage() {
           /* @__PURE__ */ jsxRuntimeExports.jsx(FormField, { label: "Supplier name", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
             "input",
             {
-              className: fieldClass$7,
+              className: fieldClass$8,
               disabled: !canManageInventory,
               value: supplierName,
               onChange: (event) => setSupplierName(event.target.value)
@@ -29768,7 +29768,7 @@ function InventoryPage() {
             /* @__PURE__ */ jsxRuntimeExports.jsx(FormField, { label: "Contact person", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
               "input",
               {
-                className: fieldClass$7,
+                className: fieldClass$8,
                 disabled: !canManageInventory,
                 value: supplierContactPerson,
                 onChange: (event) => setSupplierContactPerson(event.target.value)
@@ -29777,7 +29777,7 @@ function InventoryPage() {
             /* @__PURE__ */ jsxRuntimeExports.jsx(FormField, { label: "Phone number", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
               "input",
               {
-                className: fieldClass$7,
+                className: fieldClass$8,
                 disabled: !canManageInventory,
                 value: supplierPhone,
                 onChange: (event) => setSupplierPhone(event.target.value)
@@ -29787,7 +29787,7 @@ function InventoryPage() {
           /* @__PURE__ */ jsxRuntimeExports.jsx(FormField, { label: "Address", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
             "input",
             {
-              className: fieldClass$7,
+              className: fieldClass$8,
               disabled: !canManageInventory,
               value: supplierAddress,
               onChange: (event) => setSupplierAddress(event.target.value)
@@ -29796,7 +29796,7 @@ function InventoryPage() {
           /* @__PURE__ */ jsxRuntimeExports.jsx(FormField, { label: "Money owed now", hint: "Put 0 if you do not owe this supplier yet.", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
             "input",
             {
-              className: fieldClass$7,
+              className: fieldClass$8,
               disabled: !canManageInventory,
               min: "0",
               type: "number",
@@ -29807,7 +29807,7 @@ function InventoryPage() {
           /* @__PURE__ */ jsxRuntimeExports.jsx(FormField, { label: "Notes", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
             "textarea",
             {
-              className: `${fieldClass$7} min-h-24 py-3`,
+              className: `${fieldClass$8} min-h-24 py-3`,
               disabled: !canManageInventory,
               value: supplierNotes,
               onChange: (event) => setSupplierNotes(event.target.value)
@@ -29838,7 +29838,7 @@ function InventoryPage() {
           /* @__PURE__ */ jsxRuntimeExports.jsx(FormField, { label: "Supplier", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
             "select",
             {
-              className: fieldClass$7,
+              className: fieldClass$8,
               disabled: !canManageInventory,
               value: selectedPaymentSupplierId,
               onChange: (event) => setPaymentSupplierId(event.target.value),
@@ -29857,7 +29857,7 @@ function InventoryPage() {
             /* @__PURE__ */ jsxRuntimeExports.jsx(FormField, { label: "Amount paid", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
               "input",
               {
-                className: fieldClass$7,
+                className: fieldClass$8,
                 disabled: !canManageInventory,
                 max: selectedPaymentSupplier?.currentPayable ?? void 0,
                 min: "0.01",
@@ -29870,7 +29870,7 @@ function InventoryPage() {
             /* @__PURE__ */ jsxRuntimeExports.jsx(FormField, { label: "How paid", children: /* @__PURE__ */ jsxRuntimeExports.jsxs(
               "select",
               {
-                className: fieldClass$7,
+                className: fieldClass$8,
                 disabled: !canManageInventory,
                 value: supplierPaymentMethod,
                 onChange: (event) => setSupplierPaymentMethod(event.target.value),
@@ -29887,7 +29887,7 @@ function InventoryPage() {
           /* @__PURE__ */ jsxRuntimeExports.jsx(FormField, { label: "Receipt or note number", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
             "input",
             {
-              className: fieldClass$7,
+              className: fieldClass$8,
               disabled: !canManageInventory,
               value: supplierPaymentReference,
               onChange: (event) => setSupplierPaymentReference(event.target.value)
@@ -29896,7 +29896,7 @@ function InventoryPage() {
           /* @__PURE__ */ jsxRuntimeExports.jsx(FormField, { label: "Notes", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
             "textarea",
             {
-              className: `${fieldClass$7} min-h-24 py-3`,
+              className: `${fieldClass$8} min-h-24 py-3`,
               disabled: !canManageInventory,
               value: supplierPaymentNotes,
               onChange: (event) => setSupplierPaymentNotes(event.target.value)
@@ -29929,7 +29929,7 @@ function InventoryPage() {
             /* @__PURE__ */ jsxRuntimeExports.jsx(FormField, { label: "Supplier", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
               "select",
               {
-                className: fieldClass$7,
+                className: fieldClass$8,
                 disabled: !canManageInventory,
                 value: selectedPurchaseSupplierId,
                 onChange: (event) => setPurchaseSupplierId(event.target.value),
@@ -29939,7 +29939,7 @@ function InventoryPage() {
             /* @__PURE__ */ jsxRuntimeExports.jsx(FormField, { label: "Bill number", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
               "input",
               {
-                className: fieldClass$7,
+                className: fieldClass$8,
                 disabled: !canManageInventory,
                 value: invoiceNumber,
                 onChange: (event) => setInvoiceNumber(event.target.value)
@@ -29948,7 +29948,7 @@ function InventoryPage() {
             /* @__PURE__ */ jsxRuntimeExports.jsx(FormField, { label: "Date", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
               "input",
               {
-                className: fieldClass$7,
+                className: fieldClass$8,
                 disabled: !canManageInventory,
                 type: "date",
                 value: purchaseDate,
@@ -29958,7 +29958,7 @@ function InventoryPage() {
             /* @__PURE__ */ jsxRuntimeExports.jsx(FormField, { label: "How paid", children: /* @__PURE__ */ jsxRuntimeExports.jsxs(
               "select",
               {
-                className: fieldClass$7,
+                className: fieldClass$8,
                 disabled: !canManageInventory,
                 value: paymentMethod,
                 onChange: (event) => setPaymentMethod(event.target.value),
@@ -29992,7 +29992,7 @@ function InventoryPage() {
               /* @__PURE__ */ jsxRuntimeExports.jsx(FormField, { label: "Stock item", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
                 "select",
                 {
-                  className: fieldClass$7,
+                  className: fieldClass$8,
                   disabled: !canManageInventory,
                   value: row.inventoryItemId,
                   onChange: (event) => updatePurchaseRow(row.id, { inventoryItemId: event.target.value }),
@@ -30002,7 +30002,7 @@ function InventoryPage() {
               /* @__PURE__ */ jsxRuntimeExports.jsx(FormField, { label: "Amount", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
                 "input",
                 {
-                  className: fieldClass$7,
+                  className: fieldClass$8,
                   disabled: !canManageInventory,
                   min: "0.0001",
                   step: "0.0001",
@@ -30014,7 +30014,7 @@ function InventoryPage() {
               /* @__PURE__ */ jsxRuntimeExports.jsx(FormField, { label: "Unit", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
                 "select",
                 {
-                  className: fieldClass$7,
+                  className: fieldClass$8,
                   disabled: !canManageInventory,
                   value: row.unitId,
                   onChange: (event) => updatePurchaseRow(row.id, { unitId: event.target.value }),
@@ -30024,7 +30024,7 @@ function InventoryPage() {
               /* @__PURE__ */ jsxRuntimeExports.jsx(FormField, { label: "Buy price", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
                 "input",
                 {
-                  className: fieldClass$7,
+                  className: fieldClass$8,
                   disabled: !canManageInventory,
                   min: "0",
                   step: "0.01",
@@ -30054,7 +30054,7 @@ function InventoryPage() {
             /* @__PURE__ */ jsxRuntimeExports.jsx(FormField, { label: "Paid now", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
               "input",
               {
-                className: fieldClass$7,
+                className: fieldClass$8,
                 disabled: !canManageInventory,
                 min: "0",
                 type: "number",
@@ -36193,7 +36193,7 @@ const recipeSchema = objectType({
   menuItemId: stringType().min(1, "Choose menu item"),
   name: stringType().min(2, "Recipe name is required").max(120)
 });
-const fieldClass$6 = "h-11 w-full rounded-xl border border-field bg-white px-3 text-sm font-semibold text-espresso outline-none transition focus:border-primary focus:ring-4 focus:ring-primary/10";
+const fieldClass$7 = "h-11 w-full rounded-xl border border-field bg-white px-3 text-sm font-semibold text-espresso outline-none transition focus:border-primary focus:ring-4 focus:ring-primary/10";
 const compactFieldClass = "h-10 w-full rounded-xl border border-field bg-white px-3 text-xs font-bold text-espresso outline-none transition focus:border-primary focus:ring-4 focus:ring-primary/10";
 function defaultRecipeForm(menuItem, inventoryItem) {
   return {
@@ -36479,7 +36479,7 @@ function MenuPage() {
           /* @__PURE__ */ jsxRuntimeExports.jsx(FormField, { label: "Category name", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
             "input",
             {
-              className: fieldClass$6,
+              className: fieldClass$7,
               disabled: !canManageMenu,
               value: categoryName,
               onChange: (event) => setCategoryName(event.target.value)
@@ -36488,7 +36488,7 @@ function MenuPage() {
           /* @__PURE__ */ jsxRuntimeExports.jsx(FormField, { label: "Kitchen place", children: /* @__PURE__ */ jsxRuntimeExports.jsxs(
             "select",
             {
-              className: fieldClass$6,
+              className: fieldClass$7,
               disabled: !canManageMenu,
               value: categoryStationId,
               onChange: (event) => setCategoryStationId(event.target.value),
@@ -36522,7 +36522,7 @@ function MenuPage() {
           /* @__PURE__ */ jsxRuntimeExports.jsx(FormField, { label: "Item name", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
             "input",
             {
-              className: fieldClass$6,
+              className: fieldClass$7,
               disabled: !canManageMenu,
               value: itemName,
               onChange: (event) => setItemName(event.target.value)
@@ -36532,7 +36532,7 @@ function MenuPage() {
             /* @__PURE__ */ jsxRuntimeExports.jsx(FormField, { label: "Selling price", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
               "input",
               {
-                className: fieldClass$6,
+                className: fieldClass$7,
                 disabled: !canManageMenu,
                 min: "0",
                 type: "number",
@@ -36543,7 +36543,7 @@ function MenuPage() {
             /* @__PURE__ */ jsxRuntimeExports.jsx(FormField, { label: "Category", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
               "select",
               {
-                className: fieldClass$6,
+                className: fieldClass$7,
                 disabled: !canManageMenu || categories.length === 0,
                 value: selectedItemCategoryId,
                 onChange: (event) => setItemCategoryId(event.target.value),
@@ -36554,7 +36554,7 @@ function MenuPage() {
           /* @__PURE__ */ jsxRuntimeExports.jsx(FormField, { label: "Kitchen place", children: /* @__PURE__ */ jsxRuntimeExports.jsxs(
             "select",
             {
-              className: fieldClass$6,
+              className: fieldClass$7,
               disabled: !canManageMenu,
               value: itemStationId,
               onChange: (event) => setItemStationId(event.target.value),
@@ -36591,7 +36591,7 @@ function MenuPage() {
             /* @__PURE__ */ jsxRuntimeExports.jsx(FormField, { label: "Menu item", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
               "select",
               {
-                className: fieldClass$6,
+                className: fieldClass$7,
                 disabled: !canManageRecipes || recipeItems.length === 0,
                 ...register("menuItemId", {
                   onChange: (event) => {
@@ -36606,7 +36606,7 @@ function MenuPage() {
             /* @__PURE__ */ jsxRuntimeExports.jsx(FormField, { label: "Recipe name", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
               "input",
               {
-                className: fieldClass$6,
+                className: fieldClass$7,
                 disabled: !canManageRecipes,
                 ...register("name")
               }
@@ -36702,7 +36702,7 @@ const money$1 = new Intl.NumberFormat("en-PK", {
   maximumFractionDigits: 0,
   style: "currency"
 });
-const fieldClass$5 = "h-11 w-full rounded-xl border border-field bg-white px-3 text-sm font-semibold text-espresso outline-none transition focus:border-primary focus:ring-4 focus:ring-primary/10";
+const fieldClass$6 = "h-11 w-full rounded-xl border border-field bg-white px-3 text-sm font-semibold text-espresso outline-none transition focus:border-primary focus:ring-4 focus:ring-primary/10";
 function QuickAddConfirmModal({
   item,
   number,
@@ -36831,6 +36831,8 @@ function CorrectionModal({
 }
 function PaymentModal({
   amount,
+  canSubmit = true,
+  customerSection,
   error,
   errorMessage,
   method,
@@ -36849,11 +36851,12 @@ function PaymentModal({
       /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs font-black uppercase text-muted", children: "Total to pay" }),
       /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mt-1 text-2xl font-black text-espresso", children: money$1.format(total) })
     ] }),
+    customerSection,
     /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "grid grid-cols-2 gap-3", children: [
       /* @__PURE__ */ jsxRuntimeExports.jsx(FormField, { label: "Amount paid", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
         "input",
         {
-          className: fieldClass$5,
+          className: fieldClass$6,
           max: total,
           min: "0.01",
           step: "0.01",
@@ -36862,7 +36865,7 @@ function PaymentModal({
           onChange: (event) => onAmountChange(event.target.value)
         }
       ) }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx(FormField, { label: "How paid", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("select", { className: fieldClass$5, value: method, onChange: (event) => onMethodChange(event.target.value), children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx(FormField, { label: "How paid", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("select", { className: fieldClass$6, value: method, onChange: (event) => onMethodChange(event.target.value), children: [
         /* @__PURE__ */ jsxRuntimeExports.jsx("option", { value: "CASH", children: "Cash" }),
         /* @__PURE__ */ jsxRuntimeExports.jsx("option", { value: "CARD", children: "Card" }),
         /* @__PURE__ */ jsxRuntimeExports.jsx("option", { value: "BANK_TRANSFER", children: "Bank transfer" }),
@@ -36871,13 +36874,13 @@ function PaymentModal({
         /* @__PURE__ */ jsxRuntimeExports.jsx("option", { value: "CUSTOMER_CREDIT", children: "Customer credit" })
       ] }) })
     ] }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx(FormField, { label: "Receipt or note number", children: /* @__PURE__ */ jsxRuntimeExports.jsx("input", { className: fieldClass$5, value: reference, onChange: (event) => onReferenceChange(event.target.value) }) }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(FormField, { label: "Receipt or note number", children: /* @__PURE__ */ jsxRuntimeExports.jsx("input", { className: fieldClass$6, value: reference, onChange: (event) => onReferenceChange(event.target.value) }) }),
     error ? /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "rounded-xl bg-red-50 px-4 py-3 text-sm font-bold text-red-700", children: errorMessage || "Payment failed. Check amount and API connection." }) : null,
     /* @__PURE__ */ jsxRuntimeExports.jsx(
       Button,
       {
         className: "w-full",
-        disabled: Number(amount || 0) <= 0 || Number(amount || 0) > total || pending,
+        disabled: Number(amount || 0) <= 0 || Number(amount || 0) > total || pending || !canSubmit,
         icon: pending ? /* @__PURE__ */ jsxRuntimeExports.jsx(LoaderCircle, { className: "animate-spin", size: 17 }) : /* @__PURE__ */ jsxRuntimeExports.jsx(WalletCards, { size: 17 }),
         type: "submit",
         children: "Save payment"
@@ -36924,12 +36927,12 @@ function PrintReceiptModal({
       ] }),
       /* @__PURE__ */ jsxRuntimeExports.jsx("pre", { className: "max-h-64 overflow-y-auto whitespace-pre-wrap rounded-xl bg-white p-4 font-mono text-xs font-semibold leading-5 text-espresso shadow-[inset_0_0_0_1px_rgb(var(--ro-secondary-rgb)/0.08)]", children: previewText })
     ] }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx(FormField, { label: "Printer type", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("select", { className: fieldClass$5, value: mode, onChange: (event) => onModeChange(event.target.value), children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx(FormField, { label: "Printer type", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("select", { className: fieldClass$6, value: mode, onChange: (event) => onModeChange(event.target.value), children: [
       /* @__PURE__ */ jsxRuntimeExports.jsx("option", { value: "os", children: "Installed printer" }),
       /* @__PURE__ */ jsxRuntimeExports.jsx("option", { value: "network", children: "Network ESC/POS" }),
       /* @__PURE__ */ jsxRuntimeExports.jsx("option", { value: "device", children: "USB/Bluetooth device path" })
     ] }) }),
-    mode === "os" ? /* @__PURE__ */ jsxRuntimeExports.jsx(FormField, { label: "Installed printer", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("select", { className: fieldClass$5, value: printerName, onChange: (event) => onPrinterNameChange(event.target.value), children: [
+    mode === "os" ? /* @__PURE__ */ jsxRuntimeExports.jsx(FormField, { label: "Installed printer", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("select", { className: fieldClass$6, value: printerName, onChange: (event) => onPrinterNameChange(event.target.value), children: [
       /* @__PURE__ */ jsxRuntimeExports.jsx("option", { value: "", children: "Default printer" }),
       printers.map((printer) => /* @__PURE__ */ jsxRuntimeExports.jsxs("option", { value: printer.name, children: [
         printer.displayName || printer.name,
@@ -36937,10 +36940,10 @@ function PrintReceiptModal({
       ] }, printer.name))
     ] }) }) : null,
     mode === "network" ? /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "grid grid-cols-[1fr_120px] gap-3", children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsx(FormField, { label: "Printer IP address", children: /* @__PURE__ */ jsxRuntimeExports.jsx("input", { className: fieldClass$5, value: host, onChange: (event) => onHostChange(event.target.value) }) }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx(FormField, { label: "Port", children: /* @__PURE__ */ jsxRuntimeExports.jsx("input", { className: fieldClass$5, min: "1", type: "number", value: port, onChange: (event) => onPortChange(event.target.value) }) })
+      /* @__PURE__ */ jsxRuntimeExports.jsx(FormField, { label: "Printer IP address", children: /* @__PURE__ */ jsxRuntimeExports.jsx("input", { className: fieldClass$6, value: host, onChange: (event) => onHostChange(event.target.value) }) }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx(FormField, { label: "Port", children: /* @__PURE__ */ jsxRuntimeExports.jsx("input", { className: fieldClass$6, min: "1", type: "number", value: port, onChange: (event) => onPortChange(event.target.value) }) })
     ] }) : null,
-    mode === "device" ? /* @__PURE__ */ jsxRuntimeExports.jsx(FormField, { label: "Device path", hint: "Examples: /dev/usb/lp0, /dev/rfcomm0, COM5, or a shared printer path.", children: /* @__PURE__ */ jsxRuntimeExports.jsx("input", { className: fieldClass$5, value: devicePath, onChange: (event) => onDevicePathChange(event.target.value) }) }) : null,
+    mode === "device" ? /* @__PURE__ */ jsxRuntimeExports.jsx(FormField, { label: "Device path", hint: "Examples: /dev/usb/lp0, /dev/rfcomm0, COM5, or a shared printer path.", children: /* @__PURE__ */ jsxRuntimeExports.jsx("input", { className: fieldClass$6, value: devicePath, onChange: (event) => onDevicePathChange(event.target.value) }) }) : null,
     mode !== "os" ? /* @__PURE__ */ jsxRuntimeExports.jsxs("label", { className: "flex items-center gap-3 rounded-2xl bg-sage px-4 py-3 text-sm font-bold text-label", children: [
       /* @__PURE__ */ jsxRuntimeExports.jsx(
         "input",
@@ -37008,6 +37011,7 @@ function buildReceiptHtml(order, cart, total) {
         <h1>RestaurantOS</h1>
         <p class="center">Order ${escapeHtml(order.orderNumber)}</p>
         ${order.table?.name ? `<p class="center">Table ${escapeHtml(order.table.name)}</p>` : ""}
+        ${order.customer?.name ? `<p class="center">${escapeHtml(order.customer.name)}${order.customer.phone ? ` - ${escapeHtml(order.customer.phone)}` : ""}</p>` : ""}
         <div class="line"></div>
         <table>${rows}</table>
         <div class="line"></div>
@@ -37028,6 +37032,7 @@ function buildReceiptText(order, cart, total) {
   return [
     `Order ${order.orderNumber}`,
     order.table?.name ? `Table ${order.table.name}` : void 0,
+    order.customer?.name ? `${order.customer.name}${order.customer.phone ? ` - ${order.customer.phone}` : ""}` : void 0,
     "------------------------------",
     rows,
     "------------------------------",
@@ -37059,7 +37064,7 @@ function ordersPath(dateScope, search, status) {
   if (status !== "ALL") params.set("status", status);
   return `/orders?${params.toString()}`;
 }
-const fieldClass$4 = "h-11 rounded-xl border border-field bg-white px-3 text-sm font-semibold text-espresso outline-none transition focus:border-primary focus:ring-4 focus:ring-primary/10";
+const fieldClass$5 = "h-11 rounded-xl border border-field bg-white px-3 text-sm font-semibold text-espresso outline-none transition focus:border-primary focus:ring-4 focus:ring-primary/10";
 const statusOptions = [
   "ALL",
   "DRAFT",
@@ -37089,11 +37094,11 @@ function OrdersToolbar({
         }
       )
     ] }),
-    /* @__PURE__ */ jsxRuntimeExports.jsxs("select", { className: fieldClass$4, value: dateScope, onChange: (event) => onDateScopeChange(event.target.value), children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("select", { className: fieldClass$5, value: dateScope, onChange: (event) => onDateScopeChange(event.target.value), children: [
       /* @__PURE__ */ jsxRuntimeExports.jsx("option", { value: "today", children: "Today" }),
       /* @__PURE__ */ jsxRuntimeExports.jsx("option", { value: "all", children: "All orders" })
     ] }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx("select", { className: fieldClass$4, value: status, onChange: (event) => onStatusChange(event.target.value), children: statusOptions.map((option) => /* @__PURE__ */ jsxRuntimeExports.jsx("option", { value: option, children: option === "ALL" ? "All statuses" : option.replaceAll("_", " ") }, option)) })
+    /* @__PURE__ */ jsxRuntimeExports.jsx("select", { className: fieldClass$5, value: status, onChange: (event) => onStatusChange(event.target.value), children: statusOptions.map((option) => /* @__PURE__ */ jsxRuntimeExports.jsx("option", { value: option, children: option === "ALL" ? "All statuses" : option.replaceAll("_", " ") }, option)) })
   ] });
 }
 function OrdersList({
@@ -37494,6 +37499,339 @@ function CategoryButton({ active, label, onClick }) {
     }
   );
 }
+const fieldClass$4 = "h-10 w-full rounded-xl border border-field bg-white px-3 text-sm font-semibold text-espresso outline-none transition focus:border-primary focus:ring-4 focus:ring-primary/10";
+function CustomerSelector({
+  customers,
+  errorMessage,
+  loading,
+  pending,
+  selectedCustomer,
+  onClear,
+  onCreate,
+  onSelect
+}) {
+  const [search, setSearch] = reactExports.useState("");
+  const [name, setName] = reactExports.useState("");
+  const [phone, setPhone] = reactExports.useState("");
+  const [creditLimit, setCreditLimit] = reactExports.useState("0");
+  const matches = reactExports.useMemo(() => {
+    const query = search.trim().toLowerCase();
+    if (!query) return customers.slice(0, 5);
+    return customers.filter((customer) => customer.name.toLowerCase().includes(query) || customer.phone.toLowerCase().includes(query)).slice(0, 5);
+  }, [customers, search]);
+  function submitCustomer(event) {
+    event.preventDefault();
+    if (!name.trim() || !phone.trim()) return;
+    onCreate({ creditLimit: Number(creditLimit || 0), name: name.trim(), phone: phone.trim() });
+    setName("");
+    setPhone("");
+    setCreditLimit("0");
+    setSearch("");
+  }
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "rounded-2xl border border-line bg-sage p-4", children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mb-3 flex items-center justify-between gap-3", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs font-black uppercase tracking-[0.14em] text-muted", children: "Customer" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mt-1 text-sm font-bold text-label", children: "Search by phone or name." })
+      ] }),
+      loading ? /* @__PURE__ */ jsxRuntimeExports.jsx(LoaderCircle, { className: "animate-spin text-primary", size: 18 }) : null
+    ] }),
+    selectedCustomer ? /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "rounded-2xl bg-white p-4 shadow-[inset_0_0_0_1px_rgb(var(--ro-secondary-rgb)/0.08)]", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-start justify-between gap-3", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "text-lg font-black text-espresso", children: selectedCustomer.name }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mt-1 text-sm font-bold text-muted", children: selectedCustomer.phone })
+        ] }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("button", { className: "rounded-xl p-2 text-muted hover:bg-mint hover:text-secondary", type: "button", onClick: onClear, children: /* @__PURE__ */ jsxRuntimeExports.jsx(X, { size: 16 }) })
+      ] }),
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mt-3 grid grid-cols-3 gap-2 text-xs font-black", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx(Info, { label: "Owes", value: money$1.format(Number(selectedCustomer.currentBalance || 0)) }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx(Info, { label: "Limit", value: money$1.format(Number(selectedCustomer.creditLimit || 0)) }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx(Info, { label: "Orders", value: String(selectedCustomer.totalOrders || selectedCustomer._count?.orders || 0) })
+      ] })
+    ] }) : /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "space-y-3", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("label", { className: "flex h-11 items-center gap-2 rounded-xl bg-white px-3 shadow-[inset_0_0_0_1px_rgb(var(--ro-secondary-rgb)/0.08)]", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx(Search, { size: 16, className: "text-primary" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx(
+          "input",
+          {
+            className: "h-full flex-1 bg-transparent text-sm font-semibold outline-none",
+            value: search,
+            onChange: (event) => setSearch(event.target.value)
+          }
+        )
+      ] }),
+      matches.length ? /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "grid gap-2", children: matches.map((customer) => /* @__PURE__ */ jsxRuntimeExports.jsxs(
+        "button",
+        {
+          className: "rounded-xl bg-white px-3 py-2 text-left shadow-[inset_0_0_0_1px_rgb(var(--ro-secondary-rgb)/0.08)] hover:bg-mint",
+          type: "button",
+          onClick: () => onSelect(customer),
+          children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center justify-between gap-3", children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "font-black text-espresso", children: customer.name }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx(Badge, { tone: Number(customer.currentBalance) > 0 ? "orange" : "green", children: money$1.format(Number(customer.currentBalance || 0)) })
+            ] }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mt-1 text-xs font-bold text-muted", children: customer.phone })
+          ]
+        },
+        customer.id
+      )) }) : null
+    ] }),
+    !selectedCustomer ? /* @__PURE__ */ jsxRuntimeExports.jsxs("form", { className: "mt-4 grid grid-cols-[1fr_140px] gap-3", onSubmit: submitCustomer, children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx(FormField, { label: "New customer name", children: /* @__PURE__ */ jsxRuntimeExports.jsx("input", { className: fieldClass$4, value: name, onChange: (event) => setName(event.target.value) }) }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx(FormField, { label: "Phone", children: /* @__PURE__ */ jsxRuntimeExports.jsx("input", { className: fieldClass$4, value: phone, onChange: (event) => setPhone(event.target.value) }) }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx(FormField, { label: "Credit limit", children: /* @__PURE__ */ jsxRuntimeExports.jsx("input", { className: fieldClass$4, min: "0", type: "number", value: creditLimit, onChange: (event) => setCreditLimit(event.target.value) }) }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx(Button, { className: "mt-6 h-10", disabled: pending || !name.trim() || !phone.trim(), icon: pending ? /* @__PURE__ */ jsxRuntimeExports.jsx(LoaderCircle, { className: "animate-spin", size: 16 }) : /* @__PURE__ */ jsxRuntimeExports.jsx(Plus, { size: 16 }), type: "submit", children: "Add" })
+    ] }) : null,
+    errorMessage ? /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mt-3 rounded-xl bg-red-50 px-3 py-2 text-xs font-bold text-red-700", children: errorMessage }) : null,
+    !selectedCustomer ? /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { className: "mt-3 flex items-center gap-2 text-xs font-bold text-muted", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx(UserRound, { size: 14 }),
+      "Phone is the customer business key; the system keeps an internal id for safe order links."
+    ] }) : null
+  ] });
+}
+function Info({ label, value }) {
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "rounded-xl bg-sage px-3 py-2", children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "block text-[10px] uppercase tracking-[0.14em] text-muted", children: label }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-label", children: value })
+  ] });
+}
+function TableSelectionModal({
+  loading,
+  open,
+  selectedTableId,
+  tables,
+  onClose,
+  onSelect
+}) {
+  const groupedTables = groupTables(tables);
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs(
+    ActionModal,
+    {
+      description: "Choose a free table before sending, paying, or printing this dine-in order.",
+      open,
+      title: "Select table",
+      widthClass: "max-w-3xl",
+      onClose,
+      children: [
+        loading ? /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex h-40 items-center justify-center gap-3 rounded-2xl bg-sage text-sm font-black text-muted", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx(LoaderCircle, { className: "animate-spin text-primary", size: 18 }),
+          "Loading free tables"
+        ] }) : null,
+        !loading && tables.length === 0 ? /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "rounded-2xl bg-red-50 px-5 py-4 text-sm font-bold text-red-700", children: "No free tables are available. Free or clean a table from the Tables screen first." }) : null,
+        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "space-y-5", children: groupedTables.map(([area, areaTables]) => /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mb-3 flex items-center justify-between", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "text-sm font-black uppercase tracking-[0.16em] text-muted", children: area }),
+            /* @__PURE__ */ jsxRuntimeExports.jsxs(Badge, { tone: "green", children: [
+              areaTables.length,
+              " free"
+            ] })
+          ] }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "grid grid-cols-3 gap-3", children: areaTables.map((table) => {
+            const selected = table.id === selectedTableId;
+            return /* @__PURE__ */ jsxRuntimeExports.jsxs(
+              "button",
+              {
+                className: [
+                  "rounded-2xl border p-4 text-left transition hover:-translate-y-0.5 hover:shadow-[0_18px_42px_rgb(var(--ro-secondary-rgb)/0.12)]",
+                  selected ? "border-primary bg-mint" : "border-line bg-white"
+                ].join(" "),
+                type: "button",
+                onClick: () => onSelect(table),
+                children: [
+                  /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-start justify-between gap-3", children: [
+                    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+                      /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs font-black uppercase tracking-[0.14em] text-muted", children: "Table" }),
+                      /* @__PURE__ */ jsxRuntimeExports.jsx("h4", { className: "mt-1 text-2xl font-black text-espresso", children: table.name })
+                    ] }),
+                    /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "flex h-10 w-10 items-center justify-center rounded-xl bg-primary text-white", children: /* @__PURE__ */ jsxRuntimeExports.jsx(Armchair, { size: 18 }) })
+                  ] }),
+                  /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mt-4 grid grid-cols-2 gap-2 text-xs font-black text-label", children: [
+                    /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { className: "rounded-xl bg-sage px-3 py-2", children: [
+                      "Seats ",
+                      table.capacity
+                    ] }),
+                    /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "rounded-xl bg-sage px-3 py-2", children: "Free" })
+                  ] })
+                ]
+              },
+              table.id
+            );
+          }) })
+        ] }, area)) })
+      ]
+    }
+  );
+}
+function groupTables(tables) {
+  const groups = /* @__PURE__ */ new Map();
+  for (const table of tables) {
+    const area = table.area || "Main Floor";
+    groups.set(area, [...groups.get(area) ?? [], table]);
+  }
+  return [...groups.entries()];
+}
+function PosModals({
+  correctionError,
+  correctionPending,
+  correctionReason,
+  correctionTarget,
+  createCustomerError,
+  createCustomerPending,
+  customers,
+  customersLoading,
+  devicePath,
+  drawerError,
+  drawerPending,
+  host,
+  paymentAmount,
+  paymentError,
+  paymentErrorObject,
+  paymentMethod,
+  paymentOpen,
+  paymentPending,
+  paymentReference,
+  port,
+  previewText,
+  printCanOpen,
+  printError,
+  printMode,
+  printOpen,
+  printPending,
+  printerName,
+  printers,
+  quickAddIndex,
+  quickAddItem,
+  selectedCustomer,
+  selectedTableId,
+  tablePickerOpen,
+  tablePickerLoading,
+  tables,
+  total,
+  openDrawerAfterPrint,
+  onAmountChange,
+  onCloseCorrection,
+  onClosePayment,
+  onClosePrint,
+  onCloseQuickAdd,
+  onCloseTablePicker,
+  onConfirmQuickAdd,
+  onCreateCustomer,
+  onCustomerClear,
+  onCustomerSelect,
+  onDevicePathChange,
+  onDrawerChange,
+  onHostChange,
+  onKickDrawer,
+  onModeChange,
+  onPaymentMethodChange,
+  onPortChange,
+  onPrinterNameChange,
+  onReasonChange,
+  onReferenceChange,
+  onSelectTable,
+  onSubmitCorrection,
+  onSubmitPayment,
+  onSubmitPrint
+}) {
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx(
+      PaymentModal,
+      {
+        amount: paymentAmount,
+        customerSection: /* @__PURE__ */ jsxRuntimeExports.jsx(
+          CustomerSelector,
+          {
+            customers,
+            errorMessage: apiErrorMessage(createCustomerError, ""),
+            loading: customersLoading,
+            pending: createCustomerPending,
+            selectedCustomer,
+            onClear: onCustomerClear,
+            onCreate: onCreateCustomer,
+            onSelect: onCustomerSelect
+          }
+        ),
+        error: paymentError,
+        errorMessage: apiErrorMessage(paymentErrorObject, "Payment failed. Check amount and API connection."),
+        method: paymentMethod,
+        open: paymentOpen,
+        pending: paymentPending,
+        reference: paymentReference,
+        total,
+        onAmountChange,
+        onClose: onClosePayment,
+        onMethodChange: onPaymentMethodChange,
+        onReferenceChange,
+        onSubmit: onSubmitPayment
+      }
+    ),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(
+      QuickAddConfirmModal,
+      {
+        item: quickAddItem,
+        number: quickAddIndex === void 0 ? void 0 : quickAddIndex + 1,
+        open: Boolean(quickAddItem),
+        onClose: onCloseQuickAdd,
+        onConfirm: onConfirmQuickAdd
+      }
+    ),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(
+      CorrectionModal,
+      {
+        error: correctionError,
+        open: Boolean(correctionTarget),
+        pending: correctionPending,
+        reason: correctionReason,
+        targetLabel: correctionTarget?.label ?? "",
+        title: correctionTarget?.type === "order" ? "Void order" : "Void item",
+        onClose: onCloseCorrection,
+        onReasonChange,
+        onSubmit: onSubmitCorrection
+      }
+    ),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(
+      TableSelectionModal,
+      {
+        loading: tablePickerLoading,
+        open: tablePickerOpen,
+        selectedTableId,
+        tables,
+        onClose: onCloseTablePicker,
+        onSelect: onSelectTable
+      }
+    ),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(
+      PrintReceiptModal,
+      {
+        canPrint: printCanOpen,
+        devicePath,
+        drawerError,
+        drawerPending,
+        host,
+        mode: printMode,
+        open: printOpen,
+        openDrawerAfterPrint,
+        port,
+        previewText,
+        printerError: printError,
+        printerName,
+        printerPending: printPending,
+        printers,
+        onClose: onClosePrint,
+        onDevicePathChange,
+        onDrawerChange,
+        onHostChange,
+        onKickDrawer,
+        onModeChange,
+        onPortChange,
+        onPrinterNameChange,
+        onSubmit: onSubmitPrint
+      }
+    )
+  ] });
+}
 function readSetting(settings, key, fallback) {
   const setting = settings.find((item) => item.key === key);
   return setting?.value === void 0 ? fallback : setting.value;
@@ -37639,83 +37977,9 @@ function getQuickAddIndex(event) {
   }
   return void 0;
 }
-function TableSelectionModal({
-  loading,
-  open,
-  selectedTableId,
-  tables,
-  onClose,
-  onSelect
-}) {
-  const groupedTables = groupTables(tables);
-  return /* @__PURE__ */ jsxRuntimeExports.jsxs(
-    ActionModal,
-    {
-      description: "Choose a free table before sending, paying, or printing this dine-in order.",
-      open,
-      title: "Select table",
-      widthClass: "max-w-3xl",
-      onClose,
-      children: [
-        loading ? /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex h-40 items-center justify-center gap-3 rounded-2xl bg-sage text-sm font-black text-muted", children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx(LoaderCircle, { className: "animate-spin text-primary", size: 18 }),
-          "Loading free tables"
-        ] }) : null,
-        !loading && tables.length === 0 ? /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "rounded-2xl bg-red-50 px-5 py-4 text-sm font-bold text-red-700", children: "No free tables are available. Free or clean a table from the Tables screen first." }) : null,
-        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "space-y-5", children: groupedTables.map(([area, areaTables]) => /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mb-3 flex items-center justify-between", children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "text-sm font-black uppercase tracking-[0.16em] text-muted", children: area }),
-            /* @__PURE__ */ jsxRuntimeExports.jsxs(Badge, { tone: "green", children: [
-              areaTables.length,
-              " free"
-            ] })
-          ] }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "grid grid-cols-3 gap-3", children: areaTables.map((table) => {
-            const selected = table.id === selectedTableId;
-            return /* @__PURE__ */ jsxRuntimeExports.jsxs(
-              "button",
-              {
-                className: [
-                  "rounded-2xl border p-4 text-left transition hover:-translate-y-0.5 hover:shadow-[0_18px_42px_rgb(var(--ro-secondary-rgb)/0.12)]",
-                  selected ? "border-primary bg-mint" : "border-line bg-white"
-                ].join(" "),
-                type: "button",
-                onClick: () => onSelect(table),
-                children: [
-                  /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-start justify-between gap-3", children: [
-                    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
-                      /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs font-black uppercase tracking-[0.14em] text-muted", children: "Table" }),
-                      /* @__PURE__ */ jsxRuntimeExports.jsx("h4", { className: "mt-1 text-2xl font-black text-espresso", children: table.name })
-                    ] }),
-                    /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "flex h-10 w-10 items-center justify-center rounded-xl bg-primary text-white", children: /* @__PURE__ */ jsxRuntimeExports.jsx(Armchair, { size: 18 }) })
-                  ] }),
-                  /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mt-4 grid grid-cols-2 gap-2 text-xs font-black text-label", children: [
-                    /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { className: "rounded-xl bg-sage px-3 py-2", children: [
-                      "Seats ",
-                      table.capacity
-                    ] }),
-                    /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "rounded-xl bg-sage px-3 py-2", children: "Free" })
-                  ] })
-                ]
-              },
-              table.id
-            );
-          }) })
-        ] }, area)) })
-      ]
-    }
-  );
-}
-function groupTables(tables) {
-  const groups = /* @__PURE__ */ new Map();
-  for (const table of tables) {
-    const area = table.area || "Main Floor";
-    groups.set(area, [...groups.get(area) ?? [], table]);
-  }
-  return [...groups.entries()];
-}
 function PosPage() {
   const navigate = useNavigate();
+  const queryClient2 = useQueryClient();
   const { cart, addLine, changeQuantity, removeLine, clear, orderType, setOrderType } = usePosStore();
   const searchInputRef = reactExports.useRef(null);
   const [selectedCategoryId, setSelectedCategoryId] = reactExports.useState("all");
@@ -37738,24 +38002,17 @@ function PosPage() {
   const [correctionTarget, setCorrectionTarget] = reactExports.useState();
   const [correctionReason, setCorrectionReason] = reactExports.useState("");
   const [selectedTable, setSelectedTable] = reactExports.useState();
+  const [selectedCustomer, setSelectedCustomer] = reactExports.useState();
   const [tablePickerOpen, setTablePickerOpen] = reactExports.useState(false);
   const [pendingTableAction, setPendingTableAction] = reactExports.useState();
-  const catalogQuery = useQuery({
-    queryKey: ["pos-catalog"],
-    queryFn: posService.catalog
-  });
+  const catalogQuery = useQuery({ queryKey: ["pos-catalog"], queryFn: posService.catalog });
   const printersQuery = useQuery({
     queryKey: ["desktop-printers"],
     queryFn: () => window.restaurantos.printers.list()
   });
-  const settingsQuery = useQuery({
-    queryKey: ["settings"],
-    queryFn: posService.settings
-  });
-  const tablesQuery = useQuery({
-    queryKey: ["tables-floor"],
-    queryFn: posService.floor
-  });
+  const settingsQuery = useQuery({ queryKey: ["settings"], queryFn: posService.settings });
+  const tablesQuery = useQuery({ queryKey: ["tables-floor"], queryFn: posService.floor });
+  const customersQuery = useQuery({ queryKey: ["customers"], queryFn: customersService.list });
   const total = reactExports.useMemo(() => cart.reduce((sum, item) => sum + item.price * item.quantity, 0), [cart]);
   const selectedTableName = lastOrder?.table?.name ?? selectedTable?.name;
   const receiptPreviewLines = cart.length ? cart : lastReceiptLines;
@@ -37763,6 +38020,7 @@ function PosPage() {
   const receiptPreviewText = buildReceiptText(
     {
       grandTotal: String(receiptPreviewTotal || total),
+      customer: selectedCustomer ? { name: selectedCustomer.name, phone: selectedCustomer.phone } : void 0,
       orderNumber: lastOrder?.orderNumber ?? "Draft",
       table: selectedTableName ? { name: selectedTableName } : void 0
     },
@@ -37780,9 +38038,12 @@ function PosPage() {
   const quickAddItems = filteredItems.slice(0, 9);
   const quickAddItem = quickAddIndex === void 0 ? void 0 : quickAddItems[quickAddIndex];
   const freeTables = reactExports.useMemo(
-    () => (tablesQuery.data?.tables ?? []).filter((table) => table.active && table.status === "FREE" && !table.currentOrder),
+    () => (tablesQuery.data?.tables ?? []).filter(
+      (table) => table.active && table.status === "FREE" && !table.currentOrder
+    ),
     [tablesQuery.data?.tables]
   );
+  const customers = customersQuery.data?.customers ?? [];
   reactExports.useEffect(() => {
     if (!settingsQuery.data || printerDefaultsApplied) return;
     setPrintMode(readPrintMode(settingsQuery.data, "terminal.receiptPrinterMode", "os"));
@@ -37790,7 +38051,9 @@ function PosPage() {
     setPrinterHost(readSetting(settingsQuery.data, "terminal.receiptPrinterHost", ""));
     setPrinterPort(String(readSetting(settingsQuery.data, "terminal.receiptPrinterPort", 9100)));
     setPrinterDevicePath(readSetting(settingsQuery.data, "terminal.receiptPrinterDevicePath", ""));
-    setOpenDrawerAfterPrint(Boolean(readSetting(settingsQuery.data, "terminal.openDrawerAfterPrint", false)));
+    setOpenDrawerAfterPrint(
+      Boolean(readSetting(settingsQuery.data, "terminal.openDrawerAfterPrint", false))
+    );
     setPrinterDefaultsApplied(true);
   }, [printerDefaultsApplied, settingsQuery.data]);
   reactExports.useEffect(() => {
@@ -37802,6 +38065,7 @@ function PosPage() {
   const createOrder = useMutation({
     mutationFn: (tableId) => posService.createOrder({
       type: orderType,
+      customerId: selectedCustomer?.id,
       tableId: orderType === "DINE_IN" ? tableId : void 0,
       items: cart.map((line) => ({
         menuItemId: line.id,
@@ -37811,6 +38075,17 @@ function PosPage() {
     onSuccess: (order) => {
       setLastOrder(order);
       setLastReceiptLines(cart);
+      if (order.customer) setSelectedCustomer(order.customer);
+    }
+  });
+  const createCustomer = useMutation({
+    mutationFn: (input) => customersService.create({
+      ...input,
+      customerType: input.creditLimit > 0 ? "CREDIT" : "REGULAR"
+    }),
+    onSuccess: (customer) => {
+      setSelectedCustomer(customer);
+      void queryClient2.invalidateQueries({ queryKey: ["customers"] });
     }
   });
   const sendToKitchen = useMutation({
@@ -37836,30 +38111,32 @@ function PosPage() {
       setPaymentAmount("");
       setPaymentReference("");
       setSelectedTable(void 0);
+      setSelectedCustomer(void 0);
       clear();
     }
   });
   const printReceipt = useMutation({
     mutationFn: async (tableId) => {
       const order = lastOrder ?? await createOrder.mutateAsync(tableId);
+      const receiptOrder = { ...order, customer: order.customer ?? selectedCustomer };
       const receiptLines = cart.length ? cart : lastReceiptLines;
       const receiptTotal = receiptLines.reduce((sum, line) => sum + line.price * line.quantity, 0);
       if (printMode === "network") {
         return window.restaurantos.printers.printEscPos({
           host: printerHost.trim(),
           port: Number(printerPort || 9100),
-          text: buildReceiptText(order, receiptLines, receiptTotal || total),
+          text: buildReceiptText(receiptOrder, receiptLines, receiptTotal || total),
           openDrawer: openDrawerAfterPrint
         });
       }
       if (printMode === "device") {
         return window.restaurantos.printers.printEscPos({
           devicePath: printerDevicePath.trim(),
-          text: buildReceiptText(order, receiptLines, receiptTotal || total),
+          text: buildReceiptText(receiptOrder, receiptLines, receiptTotal || total),
           openDrawer: openDrawerAfterPrint
         });
       }
-      const html = buildReceiptHtml(order, receiptLines, receiptTotal || total);
+      const html = buildReceiptHtml(receiptOrder, receiptLines, receiptTotal || total);
       return window.restaurantos.printers.printReceipt({
         html,
         printerName: selectedPrinterName || void 0,
@@ -37881,6 +38158,7 @@ function PosPage() {
       setCorrectionTarget(void 0);
       setCorrectionReason("");
       setSelectedTable(void 0);
+      setSelectedCustomer(void 0);
       clear();
     }
   });
@@ -37907,6 +38185,7 @@ function PosPage() {
       setLastOrder(void 0);
       setLastReceiptLines([]);
       setSelectedTable(void 0);
+      setSelectedCustomer(void 0);
     }
     addLine({
       id: item.id,
@@ -37915,20 +38194,26 @@ function PosPage() {
       quantity: 1
     });
   }
-  const addQuickItem = reactExports.useCallback((index) => {
-    if (quickAddItems[index]) setQuickAddIndex(index);
-  }, [quickAddItems]);
+  const addQuickItem = reactExports.useCallback(
+    (index) => {
+      if (quickAddItems[index]) setQuickAddIndex(index);
+    },
+    [quickAddItems]
+  );
   const confirmQuickAdd = reactExports.useCallback(() => {
     if (quickAddItem) addMenuItem(quickAddItem);
     setQuickAddIndex(void 0);
   }, [quickAddItem]);
-  const requiresTable = reactExports.useCallback((action) => {
-    if (orderType !== "DINE_IN" || lastOrder?.table?.id || selectedTable?.id) return false;
-    void tablesQuery.refetch();
-    setPendingTableAction(action);
-    setTablePickerOpen(true);
-    return true;
-  }, [lastOrder?.table?.id, orderType, selectedTable?.id, tablesQuery]);
+  const requiresTable = reactExports.useCallback(
+    (action) => {
+      if (orderType !== "DINE_IN" || lastOrder?.table?.id || selectedTable?.id) return false;
+      void tablesQuery.refetch();
+      setPendingTableAction(action);
+      setTablePickerOpen(true);
+      return true;
+    },
+    [lastOrder?.table?.id, orderType, selectedTable?.id, tablesQuery]
+  );
   function openPayment() {
     if (requiresTable("payment")) return;
     setPaymentAmount(String(total));
@@ -37969,7 +38254,9 @@ function PosPage() {
       voidOrder.mutate();
       return;
     }
-    const orderItem = lastOrder?.items?.find((item) => item.menuItemId === correctionTarget.cartLineId && item.status !== "CANCELLED");
+    const orderItem = lastOrder?.items?.find(
+      (item) => item.menuItemId === correctionTarget.cartLineId && item.status !== "CANCELLED"
+    );
     if (!orderItem) {
       removeLine(correctionTarget.cartLineId);
       setCorrectionTarget(void 0);
@@ -37978,7 +38265,8 @@ function PosPage() {
     voidOrderItem.mutate({ itemId: orderItem.id });
   }
   const printReceiptNow = reactExports.useCallback(() => {
-    if (canPrintReceipt && !requiresTable("print")) printReceipt.mutate(selectedTable?.id ?? lastOrder?.table?.id);
+    if (canPrintReceipt && !requiresTable("print"))
+      printReceipt.mutate(selectedTable?.id ?? lastOrder?.table?.id);
   }, [canPrintReceipt, lastOrder?.table?.id, printReceipt, requiresTable, selectedTable?.id]);
   function submitPayment(event) {
     event.preventDefault();
@@ -38050,87 +38338,72 @@ function PosPage() {
       }
     ),
     /* @__PURE__ */ jsxRuntimeExports.jsx(
-      PaymentModal,
+      PosModals,
       {
-        amount: paymentAmount,
-        error: payOrder.isError,
-        errorMessage: apiErrorMessage(payOrder.error, "Payment failed. Check amount and API connection."),
-        method: paymentMethod,
-        open: paymentOpen,
-        pending: payOrder.isPending,
-        reference: paymentReference,
-        total,
-        onAmountChange: setPaymentAmount,
-        onClose: () => setPaymentOpen(false),
-        onMethodChange: setPaymentMethod,
-        onReferenceChange: setPaymentReference,
-        onSubmit: submitPayment
-      }
-    ),
-    /* @__PURE__ */ jsxRuntimeExports.jsx(
-      QuickAddConfirmModal,
-      {
-        item: quickAddItem,
-        number: quickAddIndex === void 0 ? void 0 : quickAddIndex + 1,
-        open: Boolean(quickAddItem),
-        onClose: () => setQuickAddIndex(void 0),
-        onConfirm: confirmQuickAdd
-      }
-    ),
-    /* @__PURE__ */ jsxRuntimeExports.jsx(
-      CorrectionModal,
-      {
-        error: voidOrder.isError || voidOrderItem.isError,
-        open: Boolean(correctionTarget),
-        pending: voidOrder.isPending || voidOrderItem.isPending,
-        reason: correctionReason,
-        targetLabel: correctionTarget?.label ?? "",
-        title: correctionTarget?.type === "order" ? "Void order" : "Void item",
-        onClose: () => setCorrectionTarget(void 0),
-        onReasonChange: setCorrectionReason,
-        onSubmit: submitCorrection
-      }
-    ),
-    /* @__PURE__ */ jsxRuntimeExports.jsx(
-      TableSelectionModal,
-      {
-        loading: tablesQuery.isLoading,
-        open: tablePickerOpen,
-        selectedTableId: selectedTable?.id,
-        tables: freeTables,
-        onClose: () => {
-          setTablePickerOpen(false);
-          setPendingTableAction(void 0);
-        },
-        onSelect: selectTable
-      }
-    ),
-    /* @__PURE__ */ jsxRuntimeExports.jsx(
-      PrintReceiptModal,
-      {
-        canPrint: cart.length > 0 || Boolean(lastOrder),
+        correctionError: voidOrder.isError || voidOrderItem.isError,
+        correctionPending: voidOrder.isPending || voidOrderItem.isPending,
+        correctionReason,
+        correctionTarget,
+        createCustomerError: createCustomer.error,
+        createCustomerPending: createCustomer.isPending,
+        customers,
+        customersLoading: customersQuery.isLoading,
         devicePath: printerDevicePath,
         drawerError: kickDrawer.isError,
         drawerPending: kickDrawer.isPending,
         host: printerHost,
-        mode: printMode,
-        open: printOpen,
         openDrawerAfterPrint,
+        paymentAmount,
+        paymentError: payOrder.isError,
+        paymentErrorObject: payOrder.error,
+        paymentMethod,
+        paymentOpen,
+        paymentPending: payOrder.isPending,
+        paymentReference,
         port: printerPort,
         previewText: receiptPreviewText,
-        printerError: printReceipt.isError,
+        printCanOpen: cart.length > 0 || Boolean(lastOrder),
+        printError: printReceipt.isError,
+        printMode,
+        printOpen,
+        printPending: printReceipt.isPending,
         printerName: selectedPrinterName,
-        printerPending: printReceipt.isPending,
         printers: printersQuery.data ?? [],
-        onClose: () => setPrintOpen(false),
+        quickAddIndex,
+        quickAddItem,
+        selectedCustomer,
+        selectedTableId: selectedTable?.id,
+        tablePickerLoading: tablesQuery.isLoading,
+        tablePickerOpen,
+        tables: freeTables,
+        total,
+        onAmountChange: setPaymentAmount,
+        onCloseCorrection: () => setCorrectionTarget(void 0),
+        onClosePayment: () => setPaymentOpen(false),
+        onClosePrint: () => setPrintOpen(false),
+        onCloseQuickAdd: () => setQuickAddIndex(void 0),
+        onCloseTablePicker: () => {
+          setTablePickerOpen(false);
+          setPendingTableAction(void 0);
+        },
+        onConfirmQuickAdd: confirmQuickAdd,
+        onCreateCustomer: (input) => createCustomer.mutate(input),
+        onCustomerClear: () => setSelectedCustomer(void 0),
+        onCustomerSelect: setSelectedCustomer,
         onDevicePathChange: setPrinterDevicePath,
         onDrawerChange: setOpenDrawerAfterPrint,
         onHostChange: setPrinterHost,
         onKickDrawer: () => kickDrawer.mutate(),
         onModeChange: setPrintMode,
+        onPaymentMethodChange: setPaymentMethod,
         onPortChange: setPrinterPort,
         onPrinterNameChange: setSelectedPrinterName,
-        onSubmit: submitPrint
+        onReasonChange: setCorrectionReason,
+        onReferenceChange: setPaymentReference,
+        onSelectTable: selectTable,
+        onSubmitCorrection: submitCorrection,
+        onSubmitPayment: submitPayment,
+        onSubmitPrint: submitPrint
       }
     )
   ] });
@@ -38714,7 +38987,7 @@ function Metric$2({ icon, label, value }) {
 }
 const statusLabels = {
   FREE: "Free",
-  OCCUPIED: "Occupied",
+  OCCUPIED: "Booked",
   RESERVED: "Reserved",
   WAITING_FOR_ORDER: "Waiting",
   SENT_TO_KITCHEN: "Kitchen",
@@ -38723,7 +38996,7 @@ const statusLabels = {
   SERVED: "Served",
   BILL_REQUESTED: "Bill",
   PAYMENT_PENDING: "Payment",
-  CLEANING_REQUIRED: "Cleaning"
+  CLEANING_REQUIRED: "Booked"
 };
 const busyStatuses = /* @__PURE__ */ new Set([
   "OCCUPIED",
@@ -38796,8 +39069,8 @@ function TableCard({
               className: "h-10 px-2",
               disabled: !canManageTables || loading,
               variant: "secondary",
-              onClick: () => onStatus(table.status === "CLEANING_REQUIRED" ? "FREE" : "CLEANING_REQUIRED"),
-              children: "Clean"
+              onClick: () => onStatus(table.status === "OCCUPIED" ? "FREE" : "OCCUPIED"),
+              children: "Booked"
             }
           )
         ] }),
@@ -38886,35 +39159,30 @@ function ChairSvg({ className, strokeClassName }) {
 function statusTone(status) {
   if (status === "FREE") return "green";
   if (status === "RESERVED") return "blue";
-  if (status === "CLEANING_REQUIRED") return "red";
   if (status === "PAYMENT_PENDING" || status === "BILL_REQUESTED") return "orange";
   return "gray";
 }
 function statusSurface(status) {
   if (status === "FREE") return "bg-white";
   if (status === "RESERVED") return "bg-sky-50";
-  if (status === "CLEANING_REQUIRED") return "bg-red-50";
   if (status === "PAYMENT_PENDING" || status === "BILL_REQUESTED") return "bg-mint";
   return "bg-sage";
 }
 function statusBorder(status) {
   if (status === "FREE") return "border-successRing";
   if (status === "RESERVED") return "border-sky-200";
-  if (status === "CLEANING_REQUIRED") return "border-red-200";
   if (status === "PAYMENT_PENDING" || status === "BILL_REQUESTED") return "border-accentSoft";
   return "border-line";
 }
 function statusBar(status) {
   if (status === "FREE") return "bg-primary";
   if (status === "RESERVED") return "bg-sky-500";
-  if (status === "CLEANING_REQUIRED") return "bg-red-500";
   if (status === "PAYMENT_PENDING" || status === "BILL_REQUESTED") return "bg-amber-500";
   return "bg-secondary";
 }
 function tableTopColor(status) {
   if (status === "FREE") return "border-primary bg-white text-secondary";
   if (status === "RESERVED") return "border-sky-500 bg-white text-sky-700";
-  if (status === "CLEANING_REQUIRED") return "border-red-500 bg-white text-red-700";
   if (status === "PAYMENT_PENDING" || status === "BILL_REQUESTED") {
     return "border-amber-500 bg-white text-amber-700";
   }
@@ -38923,7 +39191,6 @@ function tableTopColor(status) {
 function chairTone(status) {
   if (status === "FREE") return "text-successRing";
   if (status === "RESERVED") return "text-sky-200";
-  if (status === "CLEANING_REQUIRED") return "text-red-200";
   if (status === "PAYMENT_PENDING" || status === "BILL_REQUESTED") return "text-amber-200";
   return "text-deepSoft";
 }
@@ -39044,6 +39311,7 @@ function TablesPage() {
         area
       )) }),
       tablesQuery.isError ? /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mt-5 rounded-xl bg-red-50 px-4 py-3 text-sm font-bold text-red-700", children: "Tables could not load. Check the API session." }) : null,
+      updateStatus.isError ? /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mt-5 rounded-xl bg-red-50 px-4 py-3 text-sm font-bold text-red-700", children: apiErrorMessage(updateStatus.error, "Table status could not be changed.") }) : null,
       /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mt-5 grid grid-cols-[repeat(auto-fill,minmax(210px,1fr))] gap-5", children: visibleTables.map((table) => /* @__PURE__ */ jsxRuntimeExports.jsx(
         TableCard,
         {

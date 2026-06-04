@@ -3,11 +3,11 @@ import { AlertCircle, KeyRound, Loader2, Plus, Power, ShieldCheck, UserCog, User
 import { useMemo, useState } from 'react';
 import type { ReactNode } from 'react';
 import { Badge, Button, Card } from '@restaurantos/ui';
-import { ActionModal } from '../../components/action-modal';
-import { FormField } from '../../components/form-field';
-import type { FormSubmitEvent } from '../../lib/events';
-import { usersService, type UpdateUserInput } from '../../services/users-service';
-import { useAuthStore } from '../../store/use-auth-store';
+import { ActionModal } from '@/components/action-modal';
+import { FormField } from '@/components/form-field';
+import type { FormSubmitEvent } from '@/lib/events';
+import { usersService, type UpdateUserInput } from '@/services/users-service';
+import { useAuthStore } from '@/store/use-auth-store';
 import type { Role, StaffUser } from './interfaces';
 
 const fieldClass =

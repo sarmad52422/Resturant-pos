@@ -11,12 +11,13 @@ import {
 import type { ReactNode } from 'react';
 import { useMemo, useState } from 'react';
 import { Badge, Button, Card } from '@restaurantos/ui';
-import { ActionModal } from '../../components/action-modal';
-import { FormField } from '../../components/form-field';
-import { TableCard, type CurrentOrder, type RestaurantTable, type TableStatus } from '../../components/table-card';
-import type { FormSubmitEvent } from '../../lib/events';
-import { tablesService } from '../../services/tables-service';
-import { useAuthStore } from '../../store/use-auth-store';
+import { ActionModal } from '@/components/action-modal';
+import { FormField } from '@/components/form-field';
+import { TableCard, type CurrentOrder, type RestaurantTable, type TableStatus } from '@/components/table-card';
+import { apiErrorMessage } from '@/lib/api-error';
+import type { FormSubmitEvent } from '@/lib/events';
+import { tablesService } from '@/services/tables-service';
+import { useAuthStore } from '@/store/use-auth-store';
 import type { TablesResponse } from './interfaces';
 
 const fieldClass =
@@ -133,6 +134,11 @@ export function TablesPage() {
           {tablesQuery.isError ? (
             <div className="mt-5 rounded-xl bg-red-50 px-4 py-3 text-sm font-bold text-red-700">
               Tables could not load. Check the API session.
+            </div>
+          ) : null}
+          {updateStatus.isError ? (
+            <div className="mt-5 rounded-xl bg-red-50 px-4 py-3 text-sm font-bold text-red-700">
+              {apiErrorMessage(updateStatus.error, 'Table status could not be changed.')}
             </div>
           ) : null}
 

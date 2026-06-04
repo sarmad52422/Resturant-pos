@@ -1,5 +1,5 @@
-import { apiRequest } from '../lib/api-client';
-import type { Role, StaffUser, UsersResponse } from '../pages/users/interfaces';
+import { apiRequest } from '@/lib/api-client';
+import type { Role, StaffUser, UsersResponse } from '@/pages/users/interfaces';
 
 interface CreateUserInput {
   active: boolean;

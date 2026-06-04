@@ -16,6 +16,7 @@ RestaurantOS POS is an in-house restaurant, cafe, juice bar, burger, pizza, and 
 - Move reusable builders, formatters, validation helpers, and setting readers into page-local helper files.
 - Keep new and touched source files under 500 lines where practical. If a file must grow beyond that, split forms, modals, tables, and pure helpers before adding new features.
 - Keep desktop server calls inside `apps/desktop/src/renderer/src/services`. Pages should use service methods with TanStack Query or the shared Axios hook instead of building URLs and request bodies inline.
+- In the desktop renderer, use the `@/...` alias for cross-folder imports. Keep `./...` only for same-folder page-local files.
 
 ## Desktop API Layer
 
@@ -170,6 +171,15 @@ The Shift page includes opening cash, live payment buckets, close drawer workflo
 
 The POS page loads real active menu items, builds a cart, creates priced orders, sends orders to kitchen, records payments, and prints receipts through Electron. Dine-in orders open a free-table picker before kitchen, payment, or receipt creation if no table is attached yet.
 
+POS customer handling:
+
+- Cashiers can search customers by name or phone inside the payment popup.
+- Cashiers can create a basic customer by name and phone from the same popup.
+- Phone number is the customer business key and is unique; the database still keeps an internal `id` for safe order relations.
+- Selected customers are attached to the order through `customerId`.
+- Existing balance, credit limit, and order count are shown before payment.
+- Customer credit data is display/history context only in the POS payment flow; selecting a customer is helpful but not required for payment.
+
 Thermal printer support currently includes:
 
 - Installed Windows/Linux printers through the operating system print driver.
@@ -215,7 +225,7 @@ Dine-in lifecycle:
 
 - Selecting a free table from POS attaches it to the order and marks it as waiting for order.
 - Sending the order to kitchen marks the attached table as sent to kitchen.
-- Fully paid dine-in orders mark the table as cleaning required.
+- Fully paid dine-in orders keep the table booked/occupied until staff free it.
 - Voiding an unpaid dine-in order frees the table again.
 
 ## Brand Theme

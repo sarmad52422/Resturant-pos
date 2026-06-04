@@ -1,5 +1,5 @@
-import { apiRequest } from '../lib/api-client';
-import type { OrderStatus, OrderView, OrdersResponse } from '../pages/orders/interfaces';
+import { apiRequest } from '@/lib/api-client';
+import type { OrderStatus, OrderView, OrdersResponse } from '@/pages/orders/interfaces';
 
 interface OrdersListInput {
   dateScope: 'today' | 'all';

@@ -1,41 +1,25 @@
-import { useMutation, useQuery } from '@tanstack/react-query';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import type { RestaurantTable } from '../../components/table-card';
-import type { FormSubmitEvent } from '../../lib/events';
-import { apiErrorMessage } from '../../lib/api-error';
-import { posService } from '../../services/pos-service';
-import { usePosStore } from '../../store/use-pos-store';
-import {
-  CorrectionModal,
-  PaymentModal,
-  PosTicketPanel,
-  PrintReceiptModal,
-  QuickAddConfirmModal,
-} from './components';
-import type {
-  PaymentMethod,
-  PosMenuItem,
-  PosOrder,
-  PrinterInfo,
-  PrintMode,
-  ReceiptLine,
-} from './interfaces';
+import type { RestaurantTable } from '@/components/table-card';
+import type { FormSubmitEvent } from '@/lib/events';
+import { customersService } from '@/services/customers-service';
+import { posService } from '@/services/pos-service';
+import { usePosStore } from '@/store/use-pos-store';
+import { PosTicketPanel } from './components';
+import type { CorrectionTarget, PaymentMethod, PosCustomer, PosMenuItem, PosOrder, PrinterInfo, PrintMode, ReceiptLine } from './interfaces';
 import { MenuBoard } from './menu-board';
+import { PosModals } from './modals';
 import { buildReceiptHtml, buildReceiptText } from './receipt';
 import { readPrintMode, readSetting } from './settings';
 import { usePosShortcuts } from './shortcuts';
-import { TableSelectionModal } from './table-selection';
 
-type CorrectionTarget =
-  | { type: 'order'; label: string }
-  | { type: 'item'; cartLineId: string; label: string };
 type PendingTableAction = 'kitchen' | 'payment' | 'print';
 
 export function PosPage() {
   const navigate = useNavigate();
-  const { cart, addLine, changeQuantity, removeLine, clear, orderType, setOrderType } =
-    usePosStore();
+  const queryClient = useQueryClient();
+  const { cart, addLine, changeQuantity, removeLine, clear, orderType, setOrderType } = usePosStore();
   const searchInputRef = useRef<HTMLInputElement>(null);
   const [selectedCategoryId, setSelectedCategoryId] = useState('all');
   const [searchText, setSearchText] = useState('');
@@ -57,42 +41,31 @@ export function PosPage() {
   const [correctionTarget, setCorrectionTarget] = useState<CorrectionTarget | undefined>();
   const [correctionReason, setCorrectionReason] = useState('');
   const [selectedTable, setSelectedTable] = useState<RestaurantTable | undefined>();
+  const [selectedCustomer, setSelectedCustomer] = useState<PosCustomer | undefined>();
   const [tablePickerOpen, setTablePickerOpen] = useState(false);
   const [pendingTableAction, setPendingTableAction] = useState<PendingTableAction | undefined>();
 
-  const catalogQuery = useQuery({
-    queryKey: ['pos-catalog'],
-    queryFn: posService.catalog,
-  });
+  const catalogQuery = useQuery({ queryKey: ['pos-catalog'], queryFn: posService.catalog });
 
   const printersQuery = useQuery({
     queryKey: ['desktop-printers'],
     queryFn: () => window.restaurantos.printers.list() as Promise<PrinterInfo[]>,
   });
 
-  const settingsQuery = useQuery({
-    queryKey: ['settings'],
-    queryFn: posService.settings,
-  });
+  const settingsQuery = useQuery({ queryKey: ['settings'], queryFn: posService.settings });
 
-  const tablesQuery = useQuery({
-    queryKey: ['tables-floor'],
-    queryFn: posService.floor,
-  });
+  const tablesQuery = useQuery({ queryKey: ['tables-floor'], queryFn: posService.floor });
 
-  const total = useMemo(
-    () => cart.reduce((sum, item) => sum + item.price * item.quantity, 0),
-    [cart],
-  );
+  const customersQuery = useQuery({ queryKey: ['customers'], queryFn: customersService.list });
+
+  const total = useMemo(() => cart.reduce((sum, item) => sum + item.price * item.quantity, 0), [cart]);
   const selectedTableName = lastOrder?.table?.name ?? selectedTable?.name;
   const receiptPreviewLines = cart.length ? cart : lastReceiptLines;
-  const receiptPreviewTotal = receiptPreviewLines.reduce(
-    (sum, line) => sum + line.price * line.quantity,
-    0,
-  );
+  const receiptPreviewTotal = receiptPreviewLines.reduce((sum, line) => sum + line.price * line.quantity, 0);
   const receiptPreviewText = buildReceiptText(
     {
       grandTotal: String(receiptPreviewTotal || total),
+      customer: selectedCustomer ? { name: selectedCustomer.name, phone: selectedCustomer.phone } : undefined,
       orderNumber: lastOrder?.orderNumber ?? 'Draft',
       table: selectedTableName ? { name: selectedTableName } : undefined,
     },
@@ -120,6 +93,7 @@ export function PosPage() {
       ),
     [tablesQuery.data?.tables],
   );
+  const customers = customersQuery.data?.customers ?? [];
 
   useEffect(() => {
     if (!settingsQuery.data || printerDefaultsApplied) return;
@@ -145,6 +119,7 @@ export function PosPage() {
     mutationFn: (tableId?: string) =>
       posService.createOrder({
         type: orderType,
+        customerId: selectedCustomer?.id,
         tableId: orderType === 'DINE_IN' ? tableId : undefined,
         items: cart.map((line) => ({
           menuItemId: line.id,
@@ -154,6 +129,19 @@ export function PosPage() {
     onSuccess: (order) => {
       setLastOrder(order);
       setLastReceiptLines(cart);
+      if (order.customer) setSelectedCustomer(order.customer);
+    },
+  });
+
+  const createCustomer = useMutation({
+    mutationFn: (input: { creditLimit: number; name: string; phone: string }) =>
+      customersService.create({
+        ...input,
+        customerType: input.creditLimit > 0 ? 'CREDIT' : 'REGULAR',
+      }),
+    onSuccess: (customer) => {
+      setSelectedCustomer(customer);
+      void queryClient.invalidateQueries({ queryKey: ['customers'] });
     },
   });
 
@@ -181,6 +169,7 @@ export function PosPage() {
       setPaymentAmount('');
       setPaymentReference('');
       setSelectedTable(undefined);
+      setSelectedCustomer(undefined);
       clear();
     },
   });
@@ -188,24 +177,25 @@ export function PosPage() {
   const printReceipt = useMutation({
     mutationFn: async (tableId?: string) => {
       const order = lastOrder ?? (await createOrder.mutateAsync(tableId));
+      const receiptOrder = { ...order, customer: order.customer ?? selectedCustomer };
       const receiptLines = cart.length ? cart : lastReceiptLines;
       const receiptTotal = receiptLines.reduce((sum, line) => sum + line.price * line.quantity, 0);
       if (printMode === 'network') {
         return window.restaurantos.printers.printEscPos({
           host: printerHost.trim(),
           port: Number(printerPort || 9100),
-          text: buildReceiptText(order, receiptLines, receiptTotal || total),
+          text: buildReceiptText(receiptOrder, receiptLines, receiptTotal || total),
           openDrawer: openDrawerAfterPrint,
         });
       }
       if (printMode === 'device') {
         return window.restaurantos.printers.printEscPos({
           devicePath: printerDevicePath.trim(),
-          text: buildReceiptText(order, receiptLines, receiptTotal || total),
+          text: buildReceiptText(receiptOrder, receiptLines, receiptTotal || total),
           openDrawer: openDrawerAfterPrint,
         });
       }
-      const html = buildReceiptHtml(order, receiptLines, receiptTotal || total);
+      const html = buildReceiptHtml(receiptOrder, receiptLines, receiptTotal || total);
       return window.restaurantos.printers.printReceipt({
         html,
         printerName: selectedPrinterName || undefined,
@@ -232,6 +222,7 @@ export function PosPage() {
       setCorrectionTarget(undefined);
       setCorrectionReason('');
       setSelectedTable(undefined);
+      setSelectedCustomer(undefined);
       clear();
     },
   });
@@ -266,6 +257,7 @@ export function PosPage() {
       setLastOrder(undefined);
       setLastReceiptLines([]);
       setSelectedTable(undefined);
+      setSelectedCustomer(undefined);
     }
     addLine({
       id: item.id,
@@ -433,81 +425,71 @@ export function PosPage() {
         }
       />
 
-      <PaymentModal
-        amount={paymentAmount}
-        error={payOrder.isError}
-        errorMessage={apiErrorMessage(
-          payOrder.error,
-          'Payment failed. Check amount and API connection.',
-        )}
-        method={paymentMethod}
-        open={paymentOpen}
-        pending={payOrder.isPending}
-        reference={paymentReference}
-        total={total}
-        onAmountChange={setPaymentAmount}
-        onClose={() => setPaymentOpen(false)}
-        onMethodChange={setPaymentMethod}
-        onReferenceChange={setPaymentReference}
-        onSubmit={submitPayment}
-      />
-
-      <QuickAddConfirmModal
-        item={quickAddItem}
-        number={quickAddIndex === undefined ? undefined : quickAddIndex + 1}
-        open={Boolean(quickAddItem)}
-        onClose={() => setQuickAddIndex(undefined)}
-        onConfirm={confirmQuickAdd}
-      />
-
-      <CorrectionModal
-        error={voidOrder.isError || voidOrderItem.isError}
-        open={Boolean(correctionTarget)}
-        pending={voidOrder.isPending || voidOrderItem.isPending}
-        reason={correctionReason}
-        targetLabel={correctionTarget?.label ?? ''}
-        title={correctionTarget?.type === 'order' ? 'Void order' : 'Void item'}
-        onClose={() => setCorrectionTarget(undefined)}
-        onReasonChange={setCorrectionReason}
-        onSubmit={submitCorrection}
-      />
-
-      <TableSelectionModal
-        loading={tablesQuery.isLoading}
-        open={tablePickerOpen}
-        selectedTableId={selectedTable?.id}
-        tables={freeTables}
-        onClose={() => {
-          setTablePickerOpen(false);
-          setPendingTableAction(undefined);
-        }}
-        onSelect={selectTable}
-      />
-
-      <PrintReceiptModal
-        canPrint={cart.length > 0 || Boolean(lastOrder)}
+      <PosModals
+        correctionError={voidOrder.isError || voidOrderItem.isError}
+        correctionPending={voidOrder.isPending || voidOrderItem.isPending}
+        correctionReason={correctionReason}
+        correctionTarget={correctionTarget}
+        createCustomerError={createCustomer.error}
+        createCustomerPending={createCustomer.isPending}
+        customers={customers}
+        customersLoading={customersQuery.isLoading}
         devicePath={printerDevicePath}
         drawerError={kickDrawer.isError}
         drawerPending={kickDrawer.isPending}
         host={printerHost}
-        mode={printMode}
-        open={printOpen}
         openDrawerAfterPrint={openDrawerAfterPrint}
+        paymentAmount={paymentAmount}
+        paymentError={payOrder.isError}
+        paymentErrorObject={payOrder.error}
+        paymentMethod={paymentMethod}
+        paymentOpen={paymentOpen}
+        paymentPending={payOrder.isPending}
+        paymentReference={paymentReference}
         port={printerPort}
         previewText={receiptPreviewText}
-        printerError={printReceipt.isError}
+        printCanOpen={cart.length > 0 || Boolean(lastOrder)}
+        printError={printReceipt.isError}
+        printMode={printMode}
+        printOpen={printOpen}
+        printPending={printReceipt.isPending}
         printerName={selectedPrinterName}
-        printerPending={printReceipt.isPending}
         printers={printersQuery.data ?? []}
-        onClose={() => setPrintOpen(false)}
+        quickAddIndex={quickAddIndex}
+        quickAddItem={quickAddItem}
+        selectedCustomer={selectedCustomer}
+        selectedTableId={selectedTable?.id}
+        tablePickerLoading={tablesQuery.isLoading}
+        tablePickerOpen={tablePickerOpen}
+        tables={freeTables}
+        total={total}
+        onAmountChange={setPaymentAmount}
+        onCloseCorrection={() => setCorrectionTarget(undefined)}
+        onClosePayment={() => setPaymentOpen(false)}
+        onClosePrint={() => setPrintOpen(false)}
+        onCloseQuickAdd={() => setQuickAddIndex(undefined)}
+        onCloseTablePicker={() => {
+          setTablePickerOpen(false);
+          setPendingTableAction(undefined);
+        }}
+        onConfirmQuickAdd={confirmQuickAdd}
+        onCreateCustomer={(input) => createCustomer.mutate(input)}
+        onCustomerClear={() => setSelectedCustomer(undefined)}
+        onCustomerSelect={setSelectedCustomer}
         onDevicePathChange={setPrinterDevicePath}
         onDrawerChange={setOpenDrawerAfterPrint}
         onHostChange={setPrinterHost}
         onKickDrawer={() => kickDrawer.mutate()}
         onModeChange={setPrintMode}
+        onPaymentMethodChange={setPaymentMethod}
         onPortChange={setPrinterPort}
         onPrinterNameChange={setSelectedPrinterName}
-        onSubmit={submitPrint}
+        onReasonChange={setCorrectionReason}
+        onReferenceChange={setPaymentReference}
+        onSelectTable={selectTable}
+        onSubmitCorrection={submitCorrection}
+        onSubmitPayment={submitPayment}
+        onSubmitPrint={submitPrint}
       />
     </div>
   );

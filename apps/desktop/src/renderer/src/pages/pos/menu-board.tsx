@@ -1,7 +1,7 @@
 import { Badge, Card } from '@restaurantos/ui';
 import { AlertCircle, Loader2, Plus, Search, Sparkles } from 'lucide-react';
 import type { RefObject } from 'react';
-import type { OrderType } from '../../store/use-pos-store';
+import type { OrderType } from '@/store/use-pos-store';
 import { money } from './formatting';
 import type { PosCategory, PosMenuItem } from './interfaces';
 

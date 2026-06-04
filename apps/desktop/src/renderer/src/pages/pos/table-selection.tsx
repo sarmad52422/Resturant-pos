@@ -1,7 +1,7 @@
 import { Badge } from '@restaurantos/ui';
 import { Armchair, Loader2 } from 'lucide-react';
-import { ActionModal } from '../../components/action-modal';
-import type { RestaurantTable } from '../../components/table-card';
+import { ActionModal } from '@/components/action-modal';
+import type { RestaurantTable } from '@/components/table-card';
 
 interface TableSelectionModalProps {
   loading: boolean;

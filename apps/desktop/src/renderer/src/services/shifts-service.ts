@@ -1,5 +1,5 @@
-import { apiRequest } from '../lib/api-client';
-import type { Shift, ShiftsResponse } from '../pages/shifts/interfaces';
+import { apiRequest } from '@/lib/api-client';
+import type { Shift, ShiftsResponse } from '@/pages/shifts/interfaces';
 
 interface OpenShiftInput {
   notes?: string;

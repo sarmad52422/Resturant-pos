@@ -1,10 +1,11 @@
-import { apiRequest } from '../lib/api-client';
-import type { PosCatalogResponse, PosOrder, SettingRecord } from '../pages/pos/interfaces';
-import type { TablesResponse } from '../pages/tables/interfaces';
-import type { PaymentMethod } from '../pages/pos/interfaces';
-import type { OrderType } from '../store/use-pos-store';
+import { apiRequest } from '@/lib/api-client';
+import type { PosCatalogResponse, PosOrder, SettingRecord } from '@/pages/pos/interfaces';
+import type { TablesResponse } from '@/pages/tables/interfaces';
+import type { PaymentMethod } from '@/pages/pos/interfaces';
+import type { OrderType } from '@/store/use-pos-store';
 
 interface CreateOrderInput {
+  customerId?: string;
   items: Array<{ menuItemId: string; quantity: number }>;
   tableId?: string;
   type: OrderType;

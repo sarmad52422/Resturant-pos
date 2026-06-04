@@ -1,5 +1,5 @@
-import { apiRequest } from '../lib/api-client';
-import type { SettingRecord } from '../pages/settings/interfaces';
+import { apiRequest } from '@/lib/api-client';
+import type { SettingRecord } from '@/pages/settings/interfaces';
 
 interface SettingsPayload {
   settings: Array<{

@@ -1,5 +1,5 @@
 import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
-import { OrderStatus, Prisma, TableStatus } from '@prisma/client';
+import { OrderItemStatus, OrderStatus, Prisma, TableStatus } from '@prisma/client';
 import { PrismaService } from '../../prisma/prisma.service';
 
 const openOrderStatuses = [
@@ -52,7 +52,7 @@ export class TablesService {
         const currentOrder = table.orders[0] ?? null;
         return {
           ...table,
-          status: currentOrder && table.status === TableStatus.FREE ? TableStatus.WAITING_FOR_ORDER : table.status,
+          status: visibleTableStatus(table.status, Boolean(currentOrder)),
           currentOrder,
           nextReservation: table.reservations[0] ?? null,
           orders: undefined,
@@ -98,7 +98,40 @@ export class TablesService {
   }
 
   async setStatus(id: string, status: TableStatus) {
-    await this.ensureTable(id);
+    const table = await this.prisma.table.findUnique({
+      where: { id },
+      include: {
+        orders: {
+          where: { status: { in: [...openOrderStatuses] } },
+          orderBy: { createdAt: 'desc' },
+          take: 1,
+          include: { payments: true },
+        },
+      },
+    });
+    if (!table) throw new NotFoundException('Table not found');
+
+    const openOrder = table.orders[0];
+    if (status === TableStatus.FREE && openOrder) {
+      if (openOrder.status !== OrderStatus.DRAFT || openOrder.payments.length) {
+        throw new BadRequestException('Table has an open order. Void or complete the order first.');
+      }
+
+      return this.prisma.$transaction(async (tx) => {
+        await tx.orderItem.updateMany({
+          where: { orderId: openOrder.id },
+          data: { status: OrderItemStatus.CANCELLED },
+        });
+        await tx.order.update({
+          where: { id: openOrder.id },
+          data: { cancelledAt: new Date(), status: OrderStatus.CANCELLED },
+        });
+        return tx.table.update({
+          where: { id },
+          data: { status: TableStatus.FREE },
+        });
+      });
+    }
 
     return this.prisma.table.update({
       where: { id },
@@ -156,4 +189,10 @@ export class TablesService {
     const table = await this.prisma.table.findUnique({ where: { id }, select: { id: true } });
     if (!table) throw new NotFoundException('Table not found');
   }
+}
+
+function visibleTableStatus(status: TableStatus, hasCurrentOrder: boolean) {
+  if (hasCurrentOrder && status === TableStatus.FREE) return TableStatus.WAITING_FOR_ORDER;
+  if (status === TableStatus.CLEANING_REQUIRED) return TableStatus.OCCUPIED;
+  return status;
 }

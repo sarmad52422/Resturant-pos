@@ -3,11 +3,11 @@ import { AlertCircle, Banknote, CalendarCheck, Clock3, Loader2, LockKeyhole, Plu
 import { useState } from 'react';
 import type { ReactNode } from 'react';
 import { Badge, Button, Card } from '@restaurantos/ui';
-import { ActionModal } from '../../components/action-modal';
-import { FormField } from '../../components/form-field';
-import type { FormSubmitEvent } from '../../lib/events';
-import { shiftsService } from '../../services/shifts-service';
-import { useAuthStore } from '../../store/use-auth-store';
+import { ActionModal } from '@/components/action-modal';
+import { FormField } from '@/components/form-field';
+import type { FormSubmitEvent } from '@/lib/events';
+import { shiftsService } from '@/services/shifts-service';
+import { useAuthStore } from '@/store/use-auth-store';
 import type { Shift } from './interfaces';
 
 const fieldClass =

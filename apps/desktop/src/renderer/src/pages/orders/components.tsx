@@ -1,6 +1,6 @@
 import { Badge, Button, Card } from '@restaurantos/ui';
 import { Loader2, Printer, Search, XCircle } from 'lucide-react';
-import { money } from '../pos/formatting';
+import { money } from '@/pages/pos/formatting';
 import type { OrderStatus, OrderView } from './interfaces';
 
 interface OrdersToolbarProps {

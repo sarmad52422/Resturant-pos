@@ -1,6 +1,6 @@
-import { apiRequest } from '../lib/api-client';
-import type { MenuCategory, MenuItem, MenuSummary, Recipe, RecipeBuilderSummary } from '../pages/menu/interfaces';
-import type { RecipeForm } from '../pages/menu/recipe-form-model';
+import { apiRequest } from '@/lib/api-client';
+import type { MenuCategory, MenuItem, MenuSummary, Recipe, RecipeBuilderSummary } from '@/pages/menu/interfaces';
+import type { RecipeForm } from '@/pages/menu/recipe-form-model';
 
 interface CategoryInput {
   displayOrder: number;

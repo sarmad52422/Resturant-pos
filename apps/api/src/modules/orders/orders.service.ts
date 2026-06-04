@@ -248,7 +248,6 @@ export class OrdersService {
       if (blockedStatuses.includes(order.status)) {
         throw new BadRequestException('This order cannot be paid');
       }
-
       const alreadyPaid = order.payments.reduce(
         (total, payment) => total.add(payment.amount),
         new Prisma.Decimal(0),
@@ -285,7 +284,7 @@ export class OrdersService {
       if (order.tableId && fullyPaid) {
         await tx.table.update({
           where: { id: order.tableId },
-          data: { status: 'CLEANING_REQUIRED' },
+          data: { status: TableStatus.OCCUPIED },
         });
       }
 

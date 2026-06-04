@@ -1,8 +1,12 @@
 {
   "extends": "../../tsconfig.base.json",
   "compilerOptions": {
+    "baseUrl": ".",
     "module": "ESNext",
     "moduleResolution": "Bundler",
+    "paths": {
+      "@/*": ["src/renderer/src/*"]
+    },
     "types": ["node", "vite/client"]
   },
   "include": ["src", "electron.vite.config.ts"]

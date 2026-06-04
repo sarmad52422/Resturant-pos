@@ -2,11 +2,11 @@ import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { ClipboardList } from 'lucide-react';
 import { useEffect, useMemo, useState } from 'react';
 import { Badge, Card } from '@restaurantos/ui';
-import { CorrectionModal } from '../pos/components';
-import { buildReceiptHtml } from '../pos/receipt';
-import type { FormSubmitEvent } from '../../lib/events';
-import { ordersService } from '../../services/orders-service';
-import { useAuthStore } from '../../store/use-auth-store';
+import { CorrectionModal } from '@/pages/pos/components';
+import { buildReceiptHtml } from '@/pages/pos/receipt';
+import type { FormSubmitEvent } from '@/lib/events';
+import { ordersService } from '@/services/orders-service';
+import { useAuthStore } from '@/store/use-auth-store';
 import { OrderDetail, OrdersList, OrdersToolbar } from './components';
 import type { OrderStatus, OrderView } from './interfaces';
 

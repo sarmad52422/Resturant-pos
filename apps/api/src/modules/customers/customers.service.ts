@@ -1,4 +1,4 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
 import { Prisma } from '@prisma/client';
 import { PrismaService } from '../../prisma/prisma.service';
 
@@ -37,18 +37,23 @@ export class CustomersService {
     };
   }
 
-  create(input: CustomerInput) {
-    return this.prisma.customer.create({
-      data: {
-        creditLimit: new Prisma.Decimal(input.creditLimit ?? 0),
-        customerType: input.customerType ?? 'REGULAR',
-        email: input.email,
-        name: input.name,
-        notes: input.notes,
-        phone: input.phone,
-      },
-      include: { addresses: true, _count: { select: { ledgers: true, orders: true } } },
-    });
+  async create(input: CustomerInput) {
+    try {
+      return await this.prisma.customer.create({
+        data: {
+          creditLimit: new Prisma.Decimal(input.creditLimit ?? 0),
+          customerType: input.customerType ?? 'REGULAR',
+          email: input.email,
+          name: input.name,
+          notes: input.notes,
+          phone: input.phone.trim(),
+        },
+        include: { addresses: true, _count: { select: { ledgers: true, orders: true } } },
+      });
+    } catch (error) {
+      if (isUniqueError(error)) throw new BadRequestException('Customer phone already exists');
+      throw error;
+    }
   }
 
   async update(id: string, input: Partial<CustomerInput>) {
@@ -72,4 +77,8 @@ export class CustomersService {
     const customer = await this.prisma.customer.findUnique({ where: { id }, select: { id: true } });
     if (!customer) throw new NotFoundException('Customer not found');
   }
+}
+
+function isUniqueError(error: unknown) {
+  return error instanceof Prisma.PrismaClientKnownRequestError && error.code === 'P2002';
 }

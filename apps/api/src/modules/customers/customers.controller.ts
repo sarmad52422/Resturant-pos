@@ -84,7 +84,6 @@ export class CustomersController {
   }
 
   @Post()
-  @RequirePermissions('customer.manage')
   create(@Body() dto: CustomerDto) {
     return this.customersService.create(dto);
   }

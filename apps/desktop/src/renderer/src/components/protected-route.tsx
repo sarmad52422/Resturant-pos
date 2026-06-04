@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { Navigate, Outlet } from 'react-router-dom';
-import { useAuthStore } from '../store/use-auth-store';
+import { useAuthStore } from '@/store/use-auth-store';
 
 export function ProtectedRoute() {
   const { accessToken, user, loading, refreshProfile } = useAuthStore();

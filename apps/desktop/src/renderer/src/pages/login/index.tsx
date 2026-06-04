@@ -5,8 +5,8 @@ import { useForm } from 'react-hook-form';
 import { Navigate, useNavigate } from 'react-router-dom';
 import { z } from 'zod';
 import { Button, Card } from '@restaurantos/ui';
-import { apiErrorMessage } from '../../lib/api-error';
-import { useAuthStore } from '../../store/use-auth-store';
+import { apiErrorMessage } from '@/lib/api-error';
+import { useAuthStore } from '@/store/use-auth-store';
 
 const loginSchema = z.object({
   username: z.string().min(1, 'Username is required'),

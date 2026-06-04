@@ -45,7 +45,7 @@ interface TableCardProps {
 
 const statusLabels: Record<TableStatus, string> = {
   FREE: 'Free',
-  OCCUPIED: 'Occupied',
+  OCCUPIED: 'Booked',
   RESERVED: 'Reserved',
   WAITING_FOR_ORDER: 'Waiting',
   SENT_TO_KITCHEN: 'Kitchen',
@@ -54,7 +54,7 @@ const statusLabels: Record<TableStatus, string> = {
   SERVED: 'Served',
   BILL_REQUESTED: 'Bill',
   PAYMENT_PENDING: 'Payment',
-  CLEANING_REQUIRED: 'Cleaning',
+  CLEANING_REQUIRED: 'Booked',
 };
 
 const busyStatuses = new Set<TableStatus>([
@@ -131,9 +131,9 @@ export function TableCard({
           className="h-10 px-2"
           disabled={!canManageTables || loading}
           variant="secondary"
-          onClick={() => onStatus(table.status === 'CLEANING_REQUIRED' ? 'FREE' : 'CLEANING_REQUIRED')}
+          onClick={() => onStatus(table.status === 'OCCUPIED' ? 'FREE' : 'OCCUPIED')}
         >
-          Clean
+          Booked
         </Button>
       </div>
 
@@ -213,7 +213,6 @@ function ChairSvg({ className, strokeClassName }: { className: string; strokeCla
 function statusTone(status: TableStatus): 'green' | 'orange' | 'blue' | 'red' | 'gray' {
   if (status === 'FREE') return 'green';
   if (status === 'RESERVED') return 'blue';
-  if (status === 'CLEANING_REQUIRED') return 'red';
   if (status === 'PAYMENT_PENDING' || status === 'BILL_REQUESTED') return 'orange';
   return 'gray';
 }
@@ -221,7 +220,6 @@ function statusTone(status: TableStatus): 'green' | 'orange' | 'blue' | 'red' | 
 function statusSurface(status: TableStatus) {
   if (status === 'FREE') return 'bg-white';
   if (status === 'RESERVED') return 'bg-sky-50';
-  if (status === 'CLEANING_REQUIRED') return 'bg-red-50';
   if (status === 'PAYMENT_PENDING' || status === 'BILL_REQUESTED') return 'bg-mint';
   return 'bg-sage';
 }
@@ -229,7 +227,6 @@ function statusSurface(status: TableStatus) {
 function statusBorder(status: TableStatus) {
   if (status === 'FREE') return 'border-successRing';
   if (status === 'RESERVED') return 'border-sky-200';
-  if (status === 'CLEANING_REQUIRED') return 'border-red-200';
   if (status === 'PAYMENT_PENDING' || status === 'BILL_REQUESTED') return 'border-accentSoft';
   return 'border-line';
 }
@@ -237,7 +234,6 @@ function statusBorder(status: TableStatus) {
 function statusBar(status: TableStatus) {
   if (status === 'FREE') return 'bg-primary';
   if (status === 'RESERVED') return 'bg-sky-500';
-  if (status === 'CLEANING_REQUIRED') return 'bg-red-500';
   if (status === 'PAYMENT_PENDING' || status === 'BILL_REQUESTED') return 'bg-amber-500';
   return 'bg-secondary';
 }
@@ -245,7 +241,6 @@ function statusBar(status: TableStatus) {
 function tableTopColor(status: TableStatus) {
   if (status === 'FREE') return 'border-primary bg-white text-secondary';
   if (status === 'RESERVED') return 'border-sky-500 bg-white text-sky-700';
-  if (status === 'CLEANING_REQUIRED') return 'border-red-500 bg-white text-red-700';
   if (status === 'PAYMENT_PENDING' || status === 'BILL_REQUESTED') {
     return 'border-amber-500 bg-white text-amber-700';
   }
@@ -255,7 +250,6 @@ function tableTopColor(status: TableStatus) {
 function chairTone(status: TableStatus) {
   if (status === 'FREE') return 'text-successRing';
   if (status === 'RESERVED') return 'text-sky-200';
-  if (status === 'CLEANING_REQUIRED') return 'text-red-200';
   if (status === 'PAYMENT_PENDING' || status === 'BILL_REQUESTED') return 'text-amber-200';
   return 'text-deepSoft';
 }

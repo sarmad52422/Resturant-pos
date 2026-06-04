@@ -14,8 +14,8 @@ import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { Badge, Button, Card } from '@restaurantos/ui';
-import { settingsService } from '../../services/settings-service';
-import { useAuthStore } from '../../store/use-auth-store';
+import { settingsService } from '@/services/settings-service';
+import { useAuthStore } from '@/store/use-auth-store';
 import type { FieldProps, SettingRecord, ToggleProps } from './interfaces';
 
 const settingsSchema = z.object({

@@ -1,5 +1,5 @@
-import { apiRequest } from '../lib/api-client';
-import type { Customer, CustomersResponse } from '../pages/customers/interfaces';
+import { apiRequest } from '@/lib/api-client';
+import type { Customer, CustomersResponse } from '@/pages/customers/interfaces';
 
 interface CreateCustomerInput {
   creditLimit: number;

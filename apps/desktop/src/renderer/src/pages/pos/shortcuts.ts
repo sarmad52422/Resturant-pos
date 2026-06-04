@@ -1,5 +1,5 @@
 import { useEffect, type RefObject } from 'react';
-import type { OrderType } from '../../store/use-pos-store';
+import type { OrderType } from '@/store/use-pos-store';
 
 interface PosShortcutOptions {
   canOpenPayment: boolean;

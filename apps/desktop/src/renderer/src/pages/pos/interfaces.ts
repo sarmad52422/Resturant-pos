@@ -3,6 +3,10 @@ export interface PosCategory {
   name: string;
 }
 
+export type CorrectionTarget =
+  | { type: 'order'; label: string }
+  | { type: 'item'; cartLineId: string; label: string };
+
 export interface PosMenuItem {
   basePrice: string;
   category: PosCategory;
@@ -65,6 +69,8 @@ export interface PosOrder {
   payments: OrderPayment[];
   status: string;
   subtotal: string;
+  customer?: PosCustomer | null;
+  customerId?: string;
   table?: {
     area?: string;
     capacity?: number;
@@ -73,6 +79,17 @@ export interface PosOrder {
     status?: string;
   } | null;
   tableId?: string;
+}
+
+export interface PosCustomer {
+  creditLimit?: string;
+  currentBalance?: string;
+  customerType?: string;
+  id?: string;
+  name: string;
+  phone: string;
+  totalOrders?: number;
+  _count?: { ledgers: number; orders: number };
 }
 
 export interface PrinterInfo {

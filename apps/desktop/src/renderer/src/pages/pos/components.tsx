@@ -1,8 +1,9 @@
 import { Badge, Button, Card } from '@restaurantos/ui';
 import { Check, Loader2, Minus, Plus, Printer, Send, Trash2, WalletCards, XCircle } from 'lucide-react';
-import { ActionModal } from '../../components/action-modal';
-import { FormField } from '../../components/form-field';
-import type { FormSubmitEvent } from '../../lib/events';
+import type { ReactNode } from 'react';
+import { ActionModal } from '@/components/action-modal';
+import { FormField } from '@/components/form-field';
+import type { FormSubmitEvent } from '@/lib/events';
 import { money } from './formatting';
 import type { PaymentMethod, PosMenuItem, PosOrder, PrinterInfo, PrintMode } from './interfaces';
 
@@ -11,6 +12,8 @@ const fieldClass =
 
 interface PaymentModalProps {
   amount: string;
+  canSubmit?: boolean;
+  customerSection?: ReactNode;
   error: boolean;
   errorMessage?: string;
   method: PaymentMethod;
@@ -244,6 +247,8 @@ export function CorrectionModal({
 
 export function PaymentModal({
   amount,
+  canSubmit = true,
+  customerSection,
   error,
   errorMessage,
   method,
@@ -266,6 +271,7 @@ export function PaymentModal({
             {money.format(total)}
           </p>
         </div>
+        {customerSection}
         <div className="grid grid-cols-2 gap-3">
           <FormField label="Amount paid">
             <input
@@ -299,7 +305,7 @@ export function PaymentModal({
         ) : null}
         <Button
           className="w-full"
-          disabled={Number(amount || 0) <= 0 || Number(amount || 0) > total || pending}
+          disabled={Number(amount || 0) <= 0 || Number(amount || 0) > total || pending || !canSubmit}
           icon={pending ? <Loader2 className="animate-spin" size={17} /> : <WalletCards size={17} />}
           type="submit"
         >

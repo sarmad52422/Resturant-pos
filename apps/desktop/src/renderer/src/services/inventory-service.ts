@@ -1,4 +1,4 @@
-import { apiRequest } from '../lib/api-client';
+import { apiRequest } from '@/lib/api-client';
 import type {
   InventoryItem,
   InventoryResponse,
@@ -6,7 +6,7 @@ import type {
   Purchase,
   Supplier,
   SupplierPayment,
-} from '../pages/inventory/interfaces';
+} from '@/pages/inventory/interfaces';
 
 interface CreateItemInput {
   active?: boolean;

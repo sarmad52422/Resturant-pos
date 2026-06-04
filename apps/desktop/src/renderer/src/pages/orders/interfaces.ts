@@ -1,4 +1,4 @@
-import type { PaymentMethod } from '../pos/interfaces';
+import type { PaymentMethod } from '@/pages/pos/interfaces';
 
 export type OrderStatus =
   | 'DRAFT'

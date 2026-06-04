@@ -14,11 +14,11 @@ import {
 import { useEffect, useMemo, useState } from 'react';
 import { useFieldArray, useForm } from 'react-hook-form';
 import { Badge, Button, Card } from '@restaurantos/ui';
-import { ActionModal } from '../../components/action-modal';
-import { FormField } from '../../components/form-field';
-import type { FormSubmitEvent } from '../../lib/events';
-import { menuService } from '../../services/menu-service';
-import { useAuthStore } from '../../store/use-auth-store';
+import { ActionModal } from '@/components/action-modal';
+import { FormField } from '@/components/form-field';
+import type { FormSubmitEvent } from '@/lib/events';
+import { menuService } from '@/services/menu-service';
+import { useAuthStore } from '@/store/use-auth-store';
 import { InlineState, Metric } from './components';
 import { compactFieldClass, defaultRecipeForm, fieldClass, recipeSchema, type RecipeForm } from './recipe-form-model';
 import type { MenuItem } from './interfaces';

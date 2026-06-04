@@ -1,4 +1,4 @@
-import type { RestaurantTable } from '../../components/table-card';
+import type { RestaurantTable } from '@/components/table-card';
 
 export interface TablesResponse {
   areas: string[];

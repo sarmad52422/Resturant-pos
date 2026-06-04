@@ -1,6 +1,6 @@
-import { apiRequest } from '../lib/api-client';
-import type { CurrentOrder, RestaurantTable, TableStatus } from '../components/table-card';
-import type { TablesResponse } from '../pages/tables/interfaces';
+import { apiRequest } from '@/lib/api-client';
+import type { CurrentOrder, RestaurantTable, TableStatus } from '@/components/table-card';
+import type { TablesResponse } from '@/pages/tables/interfaces';
 
 interface CreateTableInput {
   area: string;

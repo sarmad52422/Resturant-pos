@@ -33,6 +33,7 @@ export function buildReceiptHtml(order: PosOrder, cart: ReceiptLine[], total: nu
         <h1>RestaurantOS</h1>
         <p class="center">Order ${escapeHtml(order.orderNumber)}</p>
         ${order.table?.name ? `<p class="center">Table ${escapeHtml(order.table.name)}</p>` : ''}
+        ${order.customer?.name ? `<p class="center">${escapeHtml(order.customer.name)}${order.customer.phone ? ` - ${escapeHtml(order.customer.phone)}` : ''}</p>` : ''}
         <div class="line"></div>
         <table>${rows}</table>
         <div class="line"></div>
@@ -46,7 +47,7 @@ export function buildReceiptHtml(order: PosOrder, cart: ReceiptLine[], total: nu
 }
 
 export function buildReceiptText(
-  order: Pick<PosOrder, 'grandTotal' | 'orderNumber' | 'table'>,
+  order: Pick<PosOrder, 'customer' | 'grandTotal' | 'orderNumber' | 'table'>,
   cart: ReceiptLine[],
   total: number,
 ) {
@@ -61,6 +62,7 @@ export function buildReceiptText(
   return [
     `Order ${order.orderNumber}`,
     order.table?.name ? `Table ${order.table.name}` : undefined,
+    order.customer?.name ? `${order.customer.name}${order.customer.phone ? ` - ${order.customer.phone}` : ''}` : undefined,
     '------------------------------',
     rows,
     '------------------------------',

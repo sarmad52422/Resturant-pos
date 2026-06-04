@@ -875,7 +875,7 @@ Completed:
 - Added the selected table name to receipt preview and printed receipt output.
 - Linked the selected table to the created order through `POST /orders`.
 - Updated order creation validation so dine-in orders require a free active table, while takeaway/delivery orders cannot carry a table.
-- Updated table lifecycle from POS orders: waiting for order on draft creation, sent to kitchen on kitchen send, cleaning required after full payment, and free again after unpaid void.
+- Updated table lifecycle from POS orders: waiting for order on draft creation, sent to kitchen on kitchen send, booked/occupied after full payment, and free again after unpaid void.
 - Hardened table availability so stale `FREE` tables with an open order are hidden from POS selection and counted as occupied in floor metrics.
 - Replaced the generic payment failure text with the real API validation message when one is available.
 - Split the POS menu board and table picker into page-local component files so the main POS page stays under 500 lines.
@@ -936,6 +936,103 @@ Database changes:
 - None.
 
 Tests:
+- `npm run typecheck --workspace @restaurantos/desktop` passed.
+- `npm run build --workspaces` passed.
+- `npm audit --audit-level=high` passed with 0 vulnerabilities.
+
+## Desktop Import Alias and POS Customer Attachment
+
+Status: Completed
+
+Goal:
+- Clean up desktop renderer imports and attach customer context to POS orders/payments.
+
+Completed:
+- Added desktop renderer `@/...` alias in TypeScript and Electron Vite config.
+- Migrated renderer cross-folder imports away from deep `../../` paths.
+- Added POS customer search/create/select UI inside the payment popup.
+- Kept phone number as the unique customer business key while retaining the internal database `id` as the technical primary key.
+- Attached selected customers to newly created POS orders through `customerId`.
+- Added selected customer name/phone to receipt preview and printed receipts.
+- Displayed customer balance, credit limit, and order count before payment.
+- Allowed authenticated POS users to create basic customer profiles; customer updates remain permission protected.
+- Made duplicate customer phone errors user-friendly.
+- Kept customer credit as display/history context only in POS payment; selecting a customer attaches order context but does not change payment behavior or customer balance automatically.
+- Split the POS modal stack and customer selector into separate files so the main POS page stays under 500 lines.
+
+Files changed:
+- `apps/desktop/tsconfig.json`
+- `apps/desktop/electron.vite.config.ts`
+- `apps/desktop/src/renderer/src/**`
+- `apps/api/src/modules/customers/**`
+- `apps/api/src/modules/orders/orders.service.ts`
+- `README.md`
+- `progress.md`
+
+Database changes:
+- No schema migration required. `Customer.phone` was already unique.
+
+Tests:
+- `npm run typecheck --workspace @restaurantos/api` passed.
+- `npm run typecheck --workspace @restaurantos/desktop` passed.
+- `npm run build --workspaces` passed.
+- `npm audit --audit-level=high` passed with 0 vulnerabilities.
+
+## Table Status Free Action Repair
+
+Status: Completed
+
+Goal:
+- Make the Tables screen `Free` action behave correctly when stale draft dine-in orders keep tables stuck in `Waiting`.
+
+Completed:
+- Updated table status handling so setting a table to `FREE` cancels an attached unpaid `DRAFT` order and cancels its order items.
+- Kept safety guard for real open table work: sent/preparing/payment orders must be voided, completed, or paid through the correct flow before the table can be freed.
+- Added a visible Tables screen error banner for blocked status changes.
+
+Files changed:
+- `apps/api/src/modules/tables/tables.service.ts`
+- `apps/desktop/src/renderer/src/pages/tables/index.tsx`
+- `progress.md`
+
+Database changes:
+- No schema migration required.
+
+Tests:
+- `npm run typecheck --workspace @restaurantos/api` passed.
+- `npm run typecheck --workspace @restaurantos/desktop` passed.
+- `npm run build --workspaces` passed.
+- `npm audit --audit-level=high` passed with 0 vulnerabilities.
+
+## POS Credit and Booked Table Semantics Correction
+
+Status: Completed
+
+Goal:
+- Correct customer credit and table status behavior to match the intended business flow.
+
+Completed:
+- Removed POS customer-credit payment enforcement.
+- Removed automatic customer ledger/current-balance updates from order payment.
+- Kept POS customer selection as optional order/receipt context only.
+- Changed fully paid dine-in tables from `Cleaning` to booked/occupied.
+- Normalized existing `CLEANING_REQUIRED` table rows to display as booked/occupied in the floor API.
+- Replaced the Tables card cleaning action with a booked/occupied action.
+- Updated docs to describe customer credit as display/history context, not POS payment functionality.
+
+Files changed:
+- `apps/api/src/modules/orders/orders.service.ts`
+- `apps/api/src/modules/tables/tables.service.ts`
+- `apps/desktop/src/renderer/src/components/table-card.tsx`
+- `apps/desktop/src/renderer/src/pages/pos/**`
+- `README.md`
+- `progress.md`
+
+Database changes:
+- No schema migration required.
+
+Tests:
+- `npm run typecheck --workspace @restaurantos/api` passed.
 - `npm run typecheck --workspace @restaurantos/desktop` passed.
 - `npm run build --workspaces` passed.
 - `npm audit --audit-level=high` passed with 0 vulnerabilities.

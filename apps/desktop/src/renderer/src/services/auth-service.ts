@@ -1,5 +1,5 @@
-import { apiRequest } from '../lib/api-client';
-import type { AuthUser } from '../store/use-auth-store';
+import { apiRequest } from '@/lib/api-client';
+import type { AuthUser } from '@/store/use-auth-store';
 
 export interface LoginResponse {
   accessToken: string;

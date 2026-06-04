@@ -19,7 +19,7 @@ import {
   Clock3,
 } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
-import { useAuthStore } from '../store/use-auth-store';
+import { useAuthStore } from '@/store/use-auth-store';
 
 const navItems = [
   { to: '/', label: 'POS', icon: ShoppingBag },

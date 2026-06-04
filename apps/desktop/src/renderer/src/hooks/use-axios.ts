@@ -1,7 +1,7 @@
 import type { AxiosRequestConfig } from 'axios';
 import { useCallback, useMemo, useState } from 'react';
-import { apiRequest } from '../lib/api-client';
-import { normalizeApiError, type AppApiError } from '../lib/api-error';
+import { apiRequest } from '@/lib/api-client';
+import { normalizeApiError, type AppApiError } from '@/lib/api-error';
 
 export function useAxios() {
   const [error, setError] = useState<AppApiError | undefined>();
